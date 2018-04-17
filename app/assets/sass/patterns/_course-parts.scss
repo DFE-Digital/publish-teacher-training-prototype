@@ -3,12 +3,12 @@
 // Spacing to the left of the task list
 $course-parts-indent: 35px;
 
-.course-parts {
-  margin-top: $gutter;
-  @include media(tablet) {
-    margin-top: ($gutter * 1.5);
-  }
-}
+// .course-parts {
+//   margin-top: $gutter;
+//   @include media(tablet) {
+//     margin-top: ($gutter * 1.5);
+//   }
+// }
 
 .course-parts-section {
   display: table;
@@ -48,11 +48,12 @@ $course-parts-indent: 35px;
   padding-top: 3px;
 }
 
-.course-part-task-part {
+.course-part-tasks {
   margin-top: 60px;
 
   @include media(desktop) {
     display: table;
+    width: 100%;
   }
 
   > * {

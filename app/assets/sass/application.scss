@@ -91,3 +91,31 @@ $path: "/public/images/";
 .filter-link {
   padding-top: 10px;
 }
+
+.tabs {
+  padding-left: 0;
+  border-bottom: 1px solid $border-colour;
+  font-size: 19px;
+  margin-bottom: $gutter;
+
+  li {
+    margin-bottom: -1px;
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+    padding: 15px 20px;
+  }
+
+  .active a {
+    border: 1px solid $border-colour;
+    border-bottom-color: #fff;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+      color: $text-colour;
+    }
+  }
+}

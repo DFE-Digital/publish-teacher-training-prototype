@@ -12,8 +12,17 @@
   </div>
 
   <h1 class="heading-xlarge">
-    Sculpture
+    {{ data['subject'] or 'Sculpture' }}
   </h1>
+
+  <!-- <ul class="tabs">
+    <li class="active">
+      <a href="/course">Edit course</a>
+    </li>
+    <li>
+      <a href="#">Applications (10)</a>
+    </li>
+  </ul> -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -22,16 +31,16 @@
           <ul class="course-parts-items">
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Subject and description
+                Title and description
               </h3>
               <a class="course-part-task-action" href="/course/subject-description">Change</a>
-              <dl class="course-part-task-part">
+              <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
-                    Subject
+                    Title
                   </dt>
                   <dd class="course-part-value">
-                    Sculpture
+                    {{ data['title'] or 'Sculpture' }}
                   </dd>
                 </div>
                 <div>
@@ -39,18 +48,9 @@
                     Description
                   </dt>
                   <dd class="course-part-value">
-                    {{ data['about'] }}
+                    {{ data['description'] }}
                   </dd>
                 </div>
-
-                <!-- <div>
-                  <dt class="course-part-label">
-                    Body
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div> -->
               </dl>
             </li>
             <li class="course-parts-item">
@@ -58,10 +58,44 @@
                 About this course
               </h3>
               <a class="course-part-task-action" href="/course/about-this-course">Add</a>
+              <dl class="course-part-tasks">
+                <div>
+                  <dt class="course-part-label">
+                    Study type
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Course start date
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Course duration
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Applications open
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Course requirements
+                Requirements and qualifications
               </h3>
               <a class="course-part-task-action" href="/course/requirements">Add</a>
             </li>
@@ -69,7 +103,7 @@
               <h3 class="course-part-task">
                 School placements
               </h3>
-              <a class="course-part-task-action" href="/course/school-placements">Add</a>
+              <a class="course-part-task-action" href="/course/school-placements">Add school</a>
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">
@@ -80,7 +114,9 @@
           </ul>
         </li>
       </ol>
-
+    </div>
+    <div class="column-one-third">
+      <a href="#" class="button">Preview course</a>
     </div>
   </div>
 </main>
