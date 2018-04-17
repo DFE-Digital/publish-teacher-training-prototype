@@ -9,6 +9,7 @@ $path: "/public/images/";
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 @import 'patterns/check-your-answers';
 @import 'patterns/task-list';
+@import 'patterns/course-parts';
 
 // Related items
 // (These styles will be moved to GOV.UK elements, duplicating here for now.)
@@ -29,3 +30,64 @@ $path: "/public/images/";
 }
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
+.remove-top-margin {
+  margin-top: 0;
+}
+
+.remove-bottom-margin {
+  margin-bottom: 0;
+}
+
+.add-bottom-margin {
+  margin-bottom: $gutter / 2;
+}
+
+.add-double-bottom-margin {
+  margin-bottom: $gutter;
+}
+
+.add-top-margin {
+  margin-top: $gutter / 2;
+}
+
+.form-control-full {
+  width: 100%;
+}
+
+.results-item {
+  margin-bottom: $gutter * 2;
+}
+
+.metadata dt,
+.metadata dd {
+  display: inline-block;
+}
+
+.metadata dt {
+  width: 20%;
+}
+
+.metadata dd {
+  width: 79%;
+  margin-left: 0;
+}
+
+.filter-category {
+  background-color: $grey-3;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.filters {
+  background-color: $white;
+  padding: 10px;
+}
+
+.filter-heading {
+  margin-top: 3px;
+}
+
+.filter-link {
+  padding-top: 10px;
+}

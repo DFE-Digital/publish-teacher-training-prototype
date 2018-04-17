@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block page_title %}School placements{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/courses">St Martin’s College teacher training courses</a></li>
+      <li><a href="/course">Sculpture</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    School placements
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/course">
+        {{ macros.textarea('placements', 'School placements', 10) }}
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="button" value="Save" />
+        </div>
+
+        <a href="/course">Cancel changes</a>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

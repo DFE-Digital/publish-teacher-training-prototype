@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block page_title %}Your courses{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-xlarge">
+    St Martin’s College teacher training courses
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-one-third">
+      <div class="filter-category">
+        <h4 class="heading-small filter-heading">Something to filter</h4>
+        <div class="filters">
+          Some filter
+        </div>
+        <div class="filter-link">
+          <a href="#">Change filter</a>
+        </div>
+      </div>
+      <div class="filter-category">
+        <h4 class="heading-small filter-heading">Something to filter</h4>
+        <div class="filters">
+          Some filter
+        </div>
+        <div class="filter-link">
+          <a href="#">Change filter</a>
+        </div>
+      </div>
+    </div>
+    <div class="column-two-thirds">
+
+      {% set results = [
+          {
+            'url': '/course',
+            'subject': 'Sculpture',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'None'
+          },
+          {
+            'url': '/course',
+            'subject': 'Secondary maths',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'Salary'
+          },
+          {
+            'url': '/course',
+            'subject': 'Secondary physics',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'Salary'
+          },
+          {
+            'url': '/course',
+            'subject': 'Secondary chemistry',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'Salary'
+          },
+          {
+            'url': '/course',
+            'subject': 'Secondary history',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'Salary'
+          },
+          {
+            'url': '/course',
+            'subject': 'Secondary geography',
+            'studyType': '1 year, school-led, full time',
+            'vacancies': 'Yes',
+            'financialSupport': 'Salary'
+          }
+          ]
+        %}
+
+      <ul class="results">
+        {% for result in results %}
+          <li class="results-item">
+            <h3 class="heading-medium remove-top-margin">
+              <a href="{{ result.url }}">{{ result.subject }}</a>
+            </h3>
+
+            <dl class="metadata add-bottom-margin">
+              <dt>Study type:</dt>
+              <dd>{{result.studyType}}</dd>
+              <dt>Vacancies:</dt>
+              <dd>{{result.vacancies}}</dd>
+              <dt>Funding:</dt>
+              <dd>{{result.financialSupport}}</dd>
+            </dl>
+
+            <a href="#">View on website</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

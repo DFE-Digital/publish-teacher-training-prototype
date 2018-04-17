@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block page_title %}Your courses{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/courses">St Martin’s College teacher training courses</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    Sculpture
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <ol class="course-parts course-parts--large">
+        <li>
+          <ul class="course-parts-items">
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                Subject and description
+              </h3>
+              <a class="course-part-task-action" href="/course/subject-description">Change</a>
+              <dl class="course-part-task-part">
+                <div>
+                  <dt class="course-part-label">
+                    Subject
+                  </dt>
+                  <dd class="course-part-value">
+                    Sculpture
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Description
+                  </dt>
+                  <dd class="course-part-value">
+                    {{ data['about'] }}
+                  </dd>
+                </div>
+
+                <!-- <div>
+                  <dt class="course-part-label">
+                    Body
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div> -->
+              </dl>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                About this course
+              </h3>
+              <a class="course-part-task-action" href="/course/about-this-course">Add</a>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                Course requirements
+              </h3>
+              <a class="course-part-task-action" href="/course/requirements">Add</a>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                School placements
+              </h3>
+              <a class="course-part-task-action" href="/course/school-placements">Add</a>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                Application codes
+              </h3>
+              <a class="course-part-task-action" href="/course/application-codes">Add</a>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}
