@@ -1,0 +1,26 @@
+{% set title = 'What codes should candidates use to apply?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/applications-open" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <form action="/new/duration" method="post">
+    {{ macros.textbox('provider-code-name', 'Training provider code name', false, 'form-control-1-4') }}
+    {{ macros.textbox('provider-code', 'Training provider code', false, 'form-control-1-4') }}
+    {{ macros.textbox('programme-code', 'Training programme code', false, 'form-control-1-4') }}
+    {{ macros.textbox('campus-code', 'Training location or campus code', false, 'form-control-1-4') }}
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Continue" />
+    </div>
+  </form>
+</main>
+
+{% endblock %}

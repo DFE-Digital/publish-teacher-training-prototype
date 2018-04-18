@@ -1,0 +1,23 @@
+{% set title = 'When do applications open?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/duration" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <form action="/new/application-codes" method="post">
+    {{ macros.datefields('applications-open', 'Applications open') }}
+
+    <div class="form-group">
+      <input type="submit" class="button" value="Continue" />
+    </div>
+  </form>
+</main>
+
+{% endblock %}

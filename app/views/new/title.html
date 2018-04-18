@@ -1,0 +1,23 @@
+{% set title = 'What is the course title?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="#" class="link-back">Back</a>
+  <form action="/new/qualifications" method="post">
+    {% set label %}
+      <h1 class="heading-xlarge add-bottom-margin">
+        {{ title }}
+      </h1>
+    {% endset %}
+
+    {{ macros.textbox('title', label) }}
+
+    <input type="submit" class="button" value="Continue" />
+  </form>
+</main>
+
+{% endblock %}

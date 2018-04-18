@@ -1,0 +1,40 @@
+{% set title = 'What qualifications does this course offer?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/title" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/start-date" method="post">
+        {% set fields = [
+            {
+              name: 'Postgraduate certificate in education with qualified teacher status',
+              text: '<p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to
+    teach in England, Scotland, Wales and Northern Ireland. This qualification is also recognised internationally.
+    Many PGCE courses include credits that count towards a Master’s degree.</p>'
+            },
+            {
+              name: 'Qualified teacher status',
+              text: '<p>Qualified teacher status (QTS) allows you to teach in state schools in England.
+    If you want to teach in the rest of the UK or internationally, consider a ‘PGCE with QTS’ qualification instead.</p>'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('qualification', fields) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
