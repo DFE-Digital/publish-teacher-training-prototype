@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% set title = 'Design history' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h2 class="heading-large">Exploratory designs</h2>
+
+      <h3 class="heading-small">
+        <a href="/history/original-onboarding">Original onboarding</a>
+      </h3>
+      <p>
+        The spreadsheet sent to providers rendered as a single page form.
+      </p>
+    </div>
+  </div>
+</main>
+{% endblock %}
