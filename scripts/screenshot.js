@@ -37,7 +37,13 @@ var options = {
 }
 
 var paths = [
-  { path: '/onboarding', name: 'spreadsheet-as-a-form' }
+  { path: '/courses', name: 'courses' },
+  { path: '/course', name: 'course' },
+  { path: '/course/subject-description', name: 'course-subject-and-description' },
+  { path: '/course/about-this-course', name: 'about-this-course' },
+  { path: '/course/requirements', name: 'requirements-and-qualifications' },
+  { path: '/course/school-placements', name: 'school-placements' },
+  { path: '/course/application-codes', name: 'application-codes' }
 ]
 
 var template = '';
@@ -55,7 +61,6 @@ paths.forEach(function(item, index) {
   `
 
   webshot('http://localhost:3000' + item.path, screenshot, options, function(err) {
-    console.log(err);
     console.log(screenshot);
     sharp(screenshot).resize(630, null).toFile(thumbnail);
   });

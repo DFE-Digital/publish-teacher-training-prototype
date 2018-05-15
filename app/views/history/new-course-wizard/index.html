@@ -1,0 +1,28 @@
+
+{% extends "layout.html" %}
+{% set title = 'New course wizard' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('Title', 'title', '/public/images/history/new-course-wizard/thumbnails/01-title.png', '/public/images/history/new-course-wizard/01-title.png', '') }}
+  
+  {{ macros.screenshot('Qualifications', 'qualifications', '/public/images/history/new-course-wizard/thumbnails/02-qualifications.png', '/public/images/history/new-course-wizard/02-qualifications.png', '') }}
+  
+  {{ macros.screenshot('Start date', 'start-date', '/public/images/history/new-course-wizard/thumbnails/03-start-date.png', '/public/images/history/new-course-wizard/03-start-date.png', '') }}
+  
+  {{ macros.screenshot('Duration', 'duration', '/public/images/history/new-course-wizard/thumbnails/04-duration.png', '/public/images/history/new-course-wizard/04-duration.png', '') }}
+  
+  {{ macros.screenshot('Applications open', 'applications-open', '/public/images/history/new-course-wizard/thumbnails/05-applications-open.png', '/public/images/history/new-course-wizard/05-applications-open.png', '') }}
+  
+  {{ macros.screenshot('Application codes', 'application-codes', '/public/images/history/new-course-wizard/thumbnails/06-application-codes.png', '/public/images/history/new-course-wizard/06-application-codes.png', '') }}
+  
+</main>
+{% endblock %}
