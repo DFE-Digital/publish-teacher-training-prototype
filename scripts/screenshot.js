@@ -38,12 +38,9 @@ var options = {
 
 var paths = [
   { path: '/courses', name: 'courses' },
-  { path: '/course', name: 'course' },
-  { path: '/course/subject-description', name: 'course-subject-and-description' },
-  { path: '/course/about-this-course', name: 'about-this-course' },
-  { path: '/course/requirements', name: 'requirements-and-qualifications' },
-  { path: '/course/school-placements', name: 'school-placements' },
-  { path: '/course/application-codes', name: 'application-codes' }
+  { path: '/organisation', name: 'organisation' },
+  { path: '/your-organisation', name: 'edit-organisation' },
+  { path: '/schools', name: 'schools' }
 ]
 
 var template = '';

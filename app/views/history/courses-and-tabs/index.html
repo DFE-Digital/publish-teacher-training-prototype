@@ -1,0 +1,47 @@
+
+{% extends "layout.html" %}
+{% set title = 'Courses and tabs' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <p>This is a visualisation of course information structured by:</p>
+  <ul class="list list-bullet">
+    <li>training provider metadata (eg provider name, contact details)</li>
+    <li>common course information (eg about this provider or interview process)</li>
+    <li>schools an organisation is associated with</li>
+    <li>courses the organisation offers – full detailed comprised of all of the above</li>
+  </ul>
+
+  {{ macros.screenshot('Courses', 'courses', '/public/images/history/courses-and-tabs/thumbnails/01-courses.png', '/public/images/history/courses-and-tabs/01-courses.png', '
+    <p>A significantly different view to the <a href="/history/course-with-parts#courses">previous courses index</a>. Created alongside <a href="https://search-and-compare-beta.herokuapp.com/history/variants">course variants in search and compare</a>.</p>
+
+    <p>Use tabs to split up key information around courses, schools, default course information and the organisation’s metadata.</p>
+
+    <h3 class="heading-medium">Course breakdown</h3>
+
+    <p>Use tables to show each study option with availability by school.</p>
+
+    <p>Design breaks down when there are many schools and options per course. eg United Teaching National SCITT has about 10 schools with 4 variants (PGCE, QTS, salaried, no salary) which would be a table of 40 rows per course.</p>
+
+    <h3 class="heading-medium">Questions</h3>
+
+    <p>Should the page be paginated?</p>
+    <p>When there are many courses, how do you find them?</p>
+  ') }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/courses-and-tabs/thumbnails/02-organisation.png', '/public/images/history/courses-and-tabs/02-organisation.png', '') }}
+
+  {{ macros.screenshot('Edit organisation', 'edit-organisation', '/public/images/history/courses-and-tabs/thumbnails/03-edit-organisation.png', '/public/images/history/courses-and-tabs/03-edit-organisation.png', '') }}
+
+  {{ macros.screenshot('Schools', 'schools', '/public/images/history/courses-and-tabs/thumbnails/04-schools.png', '/public/images/history/courses-and-tabs/04-schools.png', '') }}
+
+</main>
+{% endblock %}
