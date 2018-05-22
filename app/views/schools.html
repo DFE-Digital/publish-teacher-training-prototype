@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block page_title %}Organisation{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-xlarge">
+    {{ data['training-provider-name'] }}
+  </h1>
+
+  <ul class="tabs">
+    <li>
+      <a href="/courses">Courses</a>
+    </li>
+    <li class="active">
+      <a href="/schools">Schools</a>
+    </li>
+    <li>
+      <a href="#">Default course</a>
+    </li>
+    <li>
+      <a href="/organisation">Organisation</a>
+    </li>
+  </ul>
+
+  <h2 class="heading-large">Schools</h2>
+
+  {% set schools = [
+      {
+        name: 'The Mosslands School'
+      },
+      {
+        name: 'Weatherhead High School'
+      },
+      {
+        name: 'Wirral Grammar School for Boys'
+      },
+      {
+        name: 'Wirral Grammar School for Girls'
+      }
+    ] %}
+
+  <ul class="list">
+    {% for school in schools %}
+    <li>
+      <a href="#">{{ school.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</main>
+
+{% endblock %}

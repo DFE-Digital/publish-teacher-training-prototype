@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block page_title %}Your organisation{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/organisation" method="post">
+        <legend>
+          <h1 class="heading-xlarge">
+            {{ data['training-provider-name'] }}
+          </h1>
+        </legend>
+
+        {{ macros.textbox('training-provider-name', 'Name', 'The name of your educational institution.')}}
+
+        <h2 class="heading-medium">Address</h2>
+        {{ macros.textbox('address-line-1', 'Address line 1')}}
+        {{ macros.textbox('address-line-2', 'Address line 2')}}
+        {{ macros.textbox('town', 'City or town', false, 'form-control-small')}}
+        {{ macros.textbox('postcode', 'Postcode', false, 'form-control-xsmall')}}
+
+        <h2 class="heading-medium">Contact details</h2>
+        {{ macros.textbox('email', 'Email')}}
+        {{ macros.textbox('telephone', 'Telephone')}}
+
+        <h2 class="heading-medium">Website</h2>
+
+        {{ macros.textbox('website', 'Website')}}
+
+        <input type="submit" class="button" value="Save">
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block footer_support_links %}
+<ul>
+  <li>
+    <a href="https://paper.dropbox.com/doc/Addresses-xcDkm780z2Uy97CsC9BtK">Address guidance</a>
+  </li>
+  <li>
+    <a href="/prototype-admin/clear-data">Clear data</a>
+  </li>
+</ul>
+{% endblock %}

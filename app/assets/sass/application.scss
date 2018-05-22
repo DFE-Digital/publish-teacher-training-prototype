@@ -56,7 +56,7 @@ $path: "/public/images/";
 }
 
 .results-item {
-  margin-bottom: $gutter * 2;
+  margin-bottom: $gutter;
 }
 
 .metadata dt,
@@ -116,6 +116,69 @@ $path: "/public/images/";
     &:link,
     &:visited {
       color: $text-colour;
+    }
+  }
+}
+
+.form-control-xsmall {
+  width: 120px;
+}
+
+.form-control-small {
+  width: 200px;
+}
+
+dt, dd {
+    display: inline;
+    line-height: 30px;
+}
+
+dt {
+    margin-right: 0.25em;
+}
+dt::after {
+    content: ':';
+}
+dd::after {
+    display: block;
+    content: '';
+}
+
+dl.aligned dt {
+    width: 30%;
+    float: left;
+    margin: 0;
+    clear: both;
+}
+
+dl.aligned dd {
+    width: 70%;
+    float: right;
+}
+
+.tabs {
+  padding-left: 0;
+  border-bottom: 1px solid $govuk-border-colour;
+  font-size: 19px;
+
+  li {
+    margin-bottom: -1px;
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+    padding: 15px 20px;
+  }
+
+  .active a {
+    border: 1px solid $govuk-border-colour;
+    border-bottom-color: #fff;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+      color: $govuk-text-colour;
     }
   }
 }

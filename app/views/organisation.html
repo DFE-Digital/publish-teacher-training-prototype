@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block page_title %}Organisation{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-xlarge">
+    {{ data['training-provider-name'] }}
+  </h1>
+
+  <ul class="tabs">
+    <li>
+      <a href="/courses">Courses</a>
+    </li>
+    <li>
+      <a href="/schools">Schools</a>
+    </li>
+    <li>
+      <a href="#">Default course</a>
+    </li>
+    <li class="active">
+      <a href="/organisation">Organisation</a>
+    </li>
+  </ul>
+
+  <h2 class="heading-large">Organisation details</h2>
+  <p>
+    <b>{{ data['training-provider-name'] }}</b><br />
+    {{ data['address-line-1'] }}<br />
+    {{ data['town'] }}<br />
+    {{ data['postcode'] }}
+  </p>
+
+  <p>
+    <a href="#">admissions@stmartinscollege.net</a><br />
+    <a href="#">https://www.stmartinscollege.net</a>
+  </p>
+
+  <p>Courses accredited by University of Sussex</p>
+
+  <p>
+    <a href="/your-organisation">Edit organisation</a>
+  </p>
+</main>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block page_title %}Sign in{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form>
+        <legend>
+          <h1 class="heading-xlarge">
+            Where do students spend their time?
+          </h1>
+        </legend>
+
+        <p class="lede">We use this information to help candidates find<br />courses close to them.</p>
+
+        {{ macros.textbox('uni-days', 'Days spent on University campus', 'Liverpool John Moores University')}}
+
+        {{ macros.textbox('school-days', 'Days spent at their ‘home’ school')}}
+
+        {{ macros.textbox('placement-school-days', 'Days spent at placement school(s)')}}
+
+        <input type="submit" class="button" value="Save">
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

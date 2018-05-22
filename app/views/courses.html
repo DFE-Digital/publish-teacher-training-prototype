@@ -1,106 +1,199 @@
 {% extends "layout.html" %}
-{% block page_title %}Your courses{% endblock %}
+{% block page_title %}Courses{% endblock %}
 
 {% block content %}
+<style>
+  .listing-example li {
+    overflow: hidden;
+  }
+
+  .multiple-options li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs"></div>
 
   <h1 class="heading-xlarge">
-    St Martin’s College teacher training courses
+    {{ data['training-provider-name'] }}
   </h1>
 
-  <div class="add-double-bottom-margin">
-    <a href="#" class="button">New course</a>
-  </div>
+  <ul class="tabs">
+    <li class="active">
+      <a href="/courses">Courses</a>
+    </li>
+    <li>
+      <a href="/schools">Schools</a>
+    </li>
+    <li>
+      <a href="#">Default course</a>
+    </li>
+    <li>
+      <a href="/organisation">Organisation</a>
+    </li>
+  </ul>
+
+  <!-- <p>
+    <b>{{ data['training-provider-name'] }}</b><br />
+    {{ data['address-line-1'] }}<br />
+    {{ data['town'] }}<br />
+    {{ data['postcode'] }}
+  </p>
+
+  <p>
+    <a href="#">admissions@stmartinscollege.net</a><br />
+    <a href="#">https://www.stmartinscollege.net</a>
+  </p>
+
+  <p>Courses accredited by University of Sussex</p> -->
+
+  <!-- <p>
+    <a href="/your-organisation">Edit organisation</a>
+  </p>
 
   <div class="grid-row">
-    <div class="column-one-third">
-      <div class="filter-category">
-        <h4 class="heading-small filter-heading">Something to filter</h4>
-        <div class="filters">
-          Some filter
-        </div>
-        <div class="filter-link">
-          <a href="#">Change filter</a>
-        </div>
-      </div>
-      <div class="filter-category">
-        <h4 class="heading-small filter-heading">Something to filter</h4>
-        <div class="filters">
-          Some filter
-        </div>
-        <div class="filter-link">
-          <a href="#">Change filter</a>
-        </div>
-      </div>
-    </div>
     <div class="column-two-thirds">
+
+      <h2 class="heading-large">Schools</h2>
+
+      {% set schools = [
+          {
+            name: 'The Mosslands School'
+          },
+          {
+            name: 'Weatherhead High School'
+          },
+          {
+            name: 'Wirral Grammar School for Boys'
+          },
+          {
+            name: 'Wirral Grammar School for Girls'
+          }
+        ] %}
+
+      <ul class="list">
+        {% for school in schools %}
+        <li>
+          <a href="#">{{ school.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <hr />
+
+      <h2 class="heading-large">Default course details</h2>
+
+      <div class="add-double-bottom-margin">
+        <ul class="list">
+          <li><a href="#">About this course</a></li>
+          <li><a href="#">Eligibility</a></li>
+          <li><a href="#">Interview process</a></li>
+          <li><a href="#">Disabled access</a></li>
+          <li><a href="#">Course dates</a></li>
+          <li><a href="#">Study options</a></li>
+        </ul>
+      </div>
+
+      <hr />
+    </div>
+  </div> -->
+
+      <h2 class="heading-large">Courses</h2>
 
       {% set results = [
           {
-            'url': '/course',
-            'subject': 'Sculpture',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'None'
+            url: '/course',
+            subject: 'Maths',
+            variants: [
+              {
+                school: 'The Mosslands School',
+                options: 'PGCE with QTS, 1 year full time',
+                code: '1B23',
+                vacancies: 'Vacancies'
+              }
+            ]
           },
           {
-            'url': '/course',
-            'subject': 'Secondary maths',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'Salary'
+            url: '/course',
+            subject: 'Chemistry',
+            variants: [
+              {
+                school: 'Weatherhead High School',
+                options: 'PGCE with QTS, 1 year full time',
+                code: 'BA3D',
+                vacancies: 'Vacancies'
+              },
+              {
+                school: 'Weatherhead High School',
+                options: 'PGCE with QTS, 1 year full time with salary',
+                code: 'BA4A',
+                vacancies: 'No vacancies'
+              }
+            ]
           },
           {
-            'url': '/course',
-            'subject': 'Secondary physics',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'Salary'
-          },
-          {
-            'url': '/course',
-            'subject': 'Secondary chemistry',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'Salary'
-          },
-          {
-            'url': '/course',
-            'subject': 'Secondary history',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'Salary'
-          },
-          {
-            'url': '/course',
-            'subject': 'Secondary geography',
-            'studyType': '1 year, school-led, full time',
-            'vacancies': 'Yes',
-            'financialSupport': 'Salary'
+            url: '/course',
+            subject: 'Geography',
+            variants: [
+              {
+                school: 'The Mosslands School',
+                options: 'PGCE with QTS, 1 year full time',
+                code: '2XDD',
+                vacancies: 'Vacancies'
+              },
+              {
+                school: 'Weatherhead High School',
+                options: 'PGCE with QTS, 1 year full time',
+                code: '2XDD',
+                vacancies: 'Vacancies'
+              },
+              {
+                school: 'Wirral Grammar School for Boys',
+                options: 'PGCE with QTS, 1 year full time',
+                code: '2XDD',
+                vacancies: 'Vacancies'
+              },
+              {
+                school: 'Wirral Grammar School for Girls',
+                options: 'PGCE with QTS, 1 year full time',
+                code: '2XDD',
+                vacancies: 'Vacancies'
+              }
+            ]
           }
-          ]
-        %}
+        ]
+      %}
 
-      <ul class="results">
+      <ul class="listing-example">
         {% for result in results %}
-          <li class="results-item">
-            <h3 class="heading-medium remove-top-margin">
-              <a href="{{ result.url }}">{{ result.subject }}</a>
+          <li>
+            <h3 class="heading-medium">
+              <a href="{{ result.url }}">{{ result.subject }} at {{ data['training-provider-name']}}</a>
             </h3>
 
-            <dl class="metadata add-bottom-margin">
-              <dt>Study type:</dt>
-              <dd>{{result.studyType}}</dd>
-              <dt>Vacancies:</dt>
-              <dd>{{result.vacancies}}</dd>
-              <dt>Funding:</dt>
-              <dd>{{result.financialSupport}}</dd>
-            </dl>
-
-            <a href="#">View on website</a>
+            <table>
+              <thead>
+                <tr>
+                  <th>School</th>
+                  <th>Study options</th>
+                  <th>Course code</th>
+                  <th>Vacancies</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for variant in result.variants %}
+                <tr>
+                  <td>{{ variant.school }}</td>
+                  <td>{{ variant.options }}</td>
+                  <td>{{ variant.code }}</td>
+                  <td>{{ variant.vacancies }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </li>
         {% endfor %}
       </ul>
