@@ -11,6 +11,10 @@
     margin-bottom: 5px;
     border-bottom: 1px solid #ccc;
   }
+
+  th {
+    background: #eee;
+  }
 </style>
 
 <main id="content" role="main">
@@ -109,10 +113,14 @@
             subject: 'Maths',
             variants: [
               {
-                school: 'The Mosslands School',
-                options: 'PGCE with QTS, 1 year full time',
+                title: 'PGCE with QTS, 1 year full time',
                 code: '1B23',
-                vacancies: 'Vacancies'
+                schools: [
+                  {
+                    name: 'The Mosslands School',
+                    vacancies: 'Vacancies'
+                  }
+                ]
               }
             ]
           },
@@ -121,16 +129,26 @@
             subject: 'Chemistry',
             variants: [
               {
-                school: 'Weatherhead High School',
-                options: 'PGCE with QTS, 1 year full time',
+                title: 'PGCE with QTS, 1 year full time',
                 code: 'BA3D',
-                vacancies: 'Vacancies'
+                schools: [
+                  {
+                    name: 'Weatherhead High School',
+                    vacancies: 'Vacancies'
+                  }
+                ]
               },
               {
-                school: 'Weatherhead High School',
-                options: 'PGCE with QTS, 1 year full time with salary',
+                title: 'PGCE with QTS, 1 year full time with salary',
                 code: 'BA4A',
-                vacancies: 'No vacancies'
+                schools: [
+                  {
+                    name: 'Weatherhead High School',
+                    options: 'PGCE with QTS, 1 year full time with salary',
+                    code: 'BA4A',
+                    vacancies: 'No vacancies'
+                  }
+                ]
               }
             ]
           },
@@ -139,28 +157,26 @@
             subject: 'Geography',
             variants: [
               {
-                school: 'The Mosslands School',
-                options: 'PGCE with QTS, 1 year full time',
+                title: 'PGCE with QTS, 1 year full time',
                 code: '2XDD',
-                vacancies: 'Vacancies'
-              },
-              {
-                school: 'Weatherhead High School',
-                options: 'PGCE with QTS, 1 year full time',
-                code: '2XDD',
-                vacancies: 'Vacancies'
-              },
-              {
-                school: 'Wirral Grammar School for Boys',
-                options: 'PGCE with QTS, 1 year full time',
-                code: '2XDD',
-                vacancies: 'Vacancies'
-              },
-              {
-                school: 'Wirral Grammar School for Girls',
-                options: 'PGCE with QTS, 1 year full time',
-                code: '2XDD',
-                vacancies: 'Vacancies'
+                schools: [
+                  {
+                    name: 'The Mosslands School',
+                    vacancies: 'Vacancies'
+                  },
+                  {
+                    name: 'Weatherhead High School',
+                    vacancies: 'Vacancies'
+                  },
+                  {
+                    name: 'Wirral Grammar School for Boys',
+                    vacancies: 'Vacancies'
+                  },
+                  {
+                    name: 'Wirral Grammar School for Girls',
+                    vacancies: 'Vacancies'
+                  }
+                ]
               }
             ]
           }
@@ -174,26 +190,29 @@
               <a href="{{ result.url }}">{{ result.subject }} at {{ data['training-provider-name']}}</a>
             </h3>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>School</th>
-                  <th>Study options</th>
-                  <th>Course code</th>
-                  <th>Vacancies</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for variant in result.variants %}
-                <tr>
-                  <td>{{ variant.school }}</td>
-                  <td>{{ variant.options }}</td>
-                  <td>{{ variant.code }}</td>
-                  <td>{{ variant.vacancies }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+            {% for variant in result.variants %}
+              <h4 class="heading-small add-bottom-margin add-top-margin">
+                {{ variant.title }}
+              </h4>
+              <table class="add-double-bottom-margin">
+                <thead>
+                  <tr>
+                    <th>School</th>
+                    <th>Course code</th>
+                    <th>Vacancies</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for school in variant.schools %}
+                  <tr>
+                    <td>{{ school.name }}</td>
+                    <td>{{ variant.code }}</td>
+                    <td>{{ school.vacancies }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% endfor %}
           </li>
         {% endfor %}
       </ul>
