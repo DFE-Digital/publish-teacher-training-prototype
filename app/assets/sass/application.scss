@@ -158,7 +158,7 @@ dl.aligned dd {
 
 .tabs {
   padding-left: 0;
-  border-bottom: 1px solid $govuk-border-colour;
+  border-bottom: 1px solid $border-colour;
   font-size: 19px;
 
   li {
@@ -172,13 +172,13 @@ dl.aligned dd {
   }
 
   .active a {
-    border: 1px solid $govuk-border-colour;
+    border: 1px solid $border-colour;
     border-bottom-color: #fff;
     text-decoration: none;
 
     &:link,
     &:visited {
-      color: $govuk-text-colour;
+      color: $text-colour;
     }
   }
 }
