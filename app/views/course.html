@@ -7,22 +7,33 @@
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
     <ol>
-      <li><a href="/courses">St Martin’s College teacher training courses</a></li>
+      <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
     </ol>
   </div>
 
   <h1 class="heading-xlarge">
-    {{ data['subject'] or 'Sculpture' }}
+    {{ data['subject'] or 'Maths' }} at {{ data['training-provider-name'] }}
   </h1>
 
-  <!-- <ul class="tabs">
-    <li class="active">
-      <a href="/course">Edit course</a>
-    </li>
-    <li>
-      <a href="#">Applications (10)</a>
-    </li>
-  </ul> -->
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <dl class="aligned add-double-bottom-margin">
+        <dt>Apply from</dt>
+        <dd>26 October 2017</dd>
+        <dt>Start date</dt>
+        <dd>September 2018</dd>
+        <dt>Study options</dt>
+        <dd>
+          <ul class="multiple-options">
+            <li><a href="#">PGCE with QTS, 1 year full time</a></li>
+            <li><a href="#">PGCE with QTS, 1 year full time with salary</a></li>
+            <li><a href="#">QTS, 1 year full time</a></li>
+            <li><a href="#">QTS, 1 year full time with salary</a></li>
+          </ul>
+        </dd>
+      </dl>
+    </div>
+  </div>
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -31,37 +42,13 @@
           <ul class="course-parts-items">
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Title and description
-              </h3>
-              <a class="course-part-task-action" href="/course/subject-description">Change</a>
-              <dl class="course-part-tasks">
-                <div>
-                  <dt class="course-part-label">
-                    Title
-                  </dt>
-                  <dd class="course-part-value">
-                    {{ data['title'] or 'Sculpture' }}
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Description
-                  </dt>
-                  <dd class="course-part-value">
-                    {{ data['description'] }}
-                  </dd>
-                </div>
-              </dl>
-            </li>
-            <li class="course-parts-item">
-              <h3 class="course-part-task">
                 About this course
               </h3>
-              <a class="course-part-task-action" href="/course/about-this-course">Add</a>
+              <a class="course-part-task-action" href="/course/about-this-course">Edit</a>
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
-                    Study type
+                    About this course
                   </dt>
                   <dd class="course-part-value course-part-value--empty">
                     This field is empty
@@ -69,7 +56,7 @@
                 </div>
                 <div>
                   <dt class="course-part-label">
-                    Course start date
+                    About this subject ({{ data['subject'] or 'Maths' }})
                   </dt>
                   <dd class="course-part-value course-part-value--empty">
                     This field is empty
@@ -77,7 +64,7 @@
                 </div>
                 <div>
                   <dt class="course-part-label">
-                    Course duration
+                    Training with a disability
                   </dt>
                   <dd class="course-part-value course-part-value--empty">
                     This field is empty
@@ -85,7 +72,7 @@
                 </div>
                 <div>
                   <dt class="course-part-label">
-                    Applications open
+                    Interview process
                   </dt>
                   <dd class="course-part-value course-part-value--empty">
                     This field is empty
@@ -95,28 +82,106 @@
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Requirements and qualifications
+                Course requirements
               </h3>
-              <a class="course-part-task-action" href="/course/requirements">Add</a>
+              <a class="course-part-task-action" href="/course/requirements">Edit</a>
+
+              <dl class="course-part-tasks">
+                <div>
+                  <dt class="course-part-label">
+                    Qualifications
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Personal qualities
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Other requirements
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                School placements
+                Qualification options
               </h3>
-              <a class="course-part-task-action" href="/course/school-placements">Add school</a>
+              <a class="course-part-task-action" href="/course/qualification-options">Edit</a>
+              <dl class="course-part-tasks">
+                <div>
+                  <dt class="course-part-label">
+                    PGCE with QTS
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    QTS
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Application codes
+                Salary options
               </h3>
-              <a class="course-part-task-action" href="/course/application-codes">Add</a>
+              <a class="course-part-task-action" href="/course/salary-options">Edit</a>
+              <dl class="course-part-tasks">
+                <div>
+                  <dt class="course-part-label">
+                    Salaried teacher training
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="course-part-label">
+                    Salary
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                Schools
+              </h3>
+              <a class="course-part-task-action" href="/course/requirements">Edit</a>
+              <dl class="course-part-tasks">
+                <div>
+                  <dt class="course-part-label">
+                    Placement school policy
+                  </dt>
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
             </li>
           </ul>
         </li>
       </ol>
-    </div>
-    <div class="column-one-third">
-      <a href="#" class="button">Preview course</a>
+
+      <a href="#" class="button">Send to DfE</a>
     </div>
   </div>
 </main>

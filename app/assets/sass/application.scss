@@ -136,12 +136,16 @@ dt, dd {
 dt {
     margin-right: 0.25em;
 }
-dt::after {
-    content: ':';
-}
-dd::after {
-    display: block;
-    content: '';
+// dt::after {
+//     content: ':';
+// }
+// dd::after {
+//     display: block;
+//     content: '';
+// }
+
+dl.aligned {
+  overflow: hidden;
 }
 
 dl.aligned dt {
@@ -181,4 +185,12 @@ dl.aligned dd {
       color: $text-colour;
     }
   }
+}
+
+.study-options-table-code {
+  width: 120px;
+}
+
+.study-options-table-vacancies {
+  width: 120px;
 }

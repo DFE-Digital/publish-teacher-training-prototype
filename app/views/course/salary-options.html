@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block page_title %}About this course{% endblock %}
+{% block page_title %}Your courses{% endblock %}
 
 {% block content %}
 
@@ -13,25 +13,22 @@
   </div>
 
   <h1 class="heading-xlarge">
-    About this course
+    Salary options
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
+      <p class="lede">
+        Help candidates understand how a salaried course is different to an unsalaried one.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
       <form action="/course">
-        {{ macros.textbox('course-website', 'Course website') }}
-
-        {{ macros.textarea('about-this-course', 'About this course', 7) }}
-
-        {% set subject %}
-          About this subject ({{ data['subject'] or 'Maths' }})
-        {% endset %}
-        {{ macros.textarea('about-this-subject', subject, 7) }}
-
-        {{ macros.textarea('training-with-a-disability', 'Training with a disability', 7) }}
-
-        {{ macros.textarea('interview-process', 'Interview process', 7) }}
-
+        {{ macros.textarea('salaried', 'Salaried teacher training', 5) }}
+        {{ macros.textbox('salary', 'Salary', 'Salary available to candidates', 'form-control-xsmall') }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
