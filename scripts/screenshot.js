@@ -37,10 +37,11 @@ var options = {
 }
 
 var paths = [
-  { path: '/courses', name: 'courses' },
-  { path: '/organisation', name: 'organisation' },
-  { path: '/your-organisation', name: 'edit-organisation' },
-  { path: '/schools', name: 'schools' }
+  { path: '/course', name: 'course' },
+  { path: '/course/about-this-course', name: 'about-this-course' },
+  { path: '/course/requirements', name: 'course-requirements' },
+  { path: '/course/qualification-options', name: 'qualification-options' },
+  { path: '/course/salary-options', name: 'salary-options' }
 ]
 
 var template = '';

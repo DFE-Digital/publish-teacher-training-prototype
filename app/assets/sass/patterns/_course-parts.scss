@@ -81,12 +81,14 @@ $course-parts-indent: 35px;
   }
 
   .course-part-label {
+    float: none;
+    display: block;
     font-weight: bold;
-    margin: em(12, 19) 4em em(4,19) 0;
+    padding-bottom: 0;
 
-    @include media(desktop) {
-      width: 30%;
-    }
+    // @include media(desktop) {
+    //   width: 30%;
+    // }
   }
 
   > *:first-child .course-part-label {
@@ -94,7 +96,9 @@ $course-parts-indent: 35px;
   }
 
   .course-part-value {
-    padding-bottom: em(9, 19);
+    float: none;
+    display: block;
+    padding: 0;
 
     &--empty {
       color: $grey-1;
