@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block page_title %}Schools{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/schools">Schools</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ data['training-provider-name'] }}</span>
+    {{ school.name }}
+  </h1>
+
+  <p class="lede">{{ school.description }}</p>
+
+  <p>
+    <b>{{ school.name }}</b><br />
+    {{ school['address-line-1'] }}<br />
+    {{ school['town'] }}<br />
+    {{ school['postcode'] }}
+  </p>
+
+  <p>
+    <a href="#">{{ school['website'] }}</a>
+  </p>
+
+  <p>
+    <a href="/school/{{ school.id }}/edit">Edit school</a>
+  </p>
+</main>
+
+{% endblock %}

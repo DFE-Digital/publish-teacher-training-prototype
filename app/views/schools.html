@@ -11,25 +11,15 @@
     Schools
   </h1>
 
-  {% set schools = [
-      {
-        name: 'The Mosslands School'
-      },
-      {
-        name: 'Weatherhead High School'
-      },
-      {
-        name: 'Wirral Grammar School for Boys'
-      },
-      {
-        name: 'Wirral Grammar School for Girls'
-      }
-    ] %}
+  {% set schools = data['schools'] %}
 
   <ul class="list">
     {% for school in schools %}
     <li>
-      <a href="#">{{ school.name }}</a>
+      <h3 class="heading-medium">
+        <a href="/school/{{ school.id }}">{{ school.name }}</a>
+      </h3>
+      <p>{{ school.description }}</p>
     </li>
     {% endfor %}
   </ul>
