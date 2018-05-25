@@ -1,0 +1,22 @@
+
+{% extends "layout.html" %}
+{% set title = 'Ucas course examples' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('UCAS – Bath spa', 'UCAS-bath-spa', '/public/images/history/ucas-course-examples/thumbnails/01-UCAS-bath-spa.png', '/public/images/history/ucas-course-examples/01-UCAS-bath-spa.png', '') }}
+
+  {{ macros.screenshot('UCAS – Bishop stortford', 'UCAS-bishop-stortford', '/public/images/history/ucas-course-examples/thumbnails/02-UCAS-bishop-stortford.png', '/public/images/history/ucas-course-examples/02-UCAS-bishop-stortford.png', '') }}
+
+  {{ macros.screenshot('UCAS – 3 rivers', 'UCAS-3-rivers', '/public/images/history/ucas-course-examples/thumbnails/03-UCAS-3-rivers.png', '/public/images/history/ucas-course-examples/03-UCAS-3-rivers.png', '') }}
+
+</main>
+{% endblock %}
