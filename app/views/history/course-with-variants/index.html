@@ -12,15 +12,61 @@
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
 
-  {{ macros.screenshot('Course', 'course', '/public/images/history/course-with-variants/thumbnails/01-course.png', '/public/images/history/course-with-variants/01-course.png', '') }}
-  
-  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/course-with-variants/thumbnails/02-about-this-course.png', '/public/images/history/course-with-variants/02-about-this-course.png', '') }}
-  
-  {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/course-with-variants/thumbnails/03-course-requirements.png', '/public/images/history/course-with-variants/03-course-requirements.png', '') }}
-  
-  {{ macros.screenshot('Qualification options', 'qualification-options', '/public/images/history/course-with-variants/thumbnails/04-qualification-options.png', '/public/images/history/course-with-variants/04-qualification-options.png', '') }}
-  
-  {{ macros.screenshot('Salary options', 'salary-options', '/public/images/history/course-with-variants/thumbnails/05-salary-options.png', '/public/images/history/course-with-variants/05-salary-options.png', '') }}
-  
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Exploration of a course page with fields to capture variants of a course and the differences between them. It’s unclear how courses vary between qualification, funding, subject and accrediting provider – use fields on a course page to allow providers to help candidates make an informed choice.</p>
+    </div>
+  </div>
+
+  {{ macros.screenshot('Course', 'course', '/public/images/history/course-with-variants/thumbnails/01-course.png', '/public/images/history/course-with-variants/01-course.png', '
+    <h3 class="heading-medium remove-top-margin">Qualification variants</h3>
+
+    <p>Providers set up courses with the following qualifications in UCAS:</p>
+    <ul class="list list-bullet">
+      <li>QTS, Postgraduate, Professional: 4661 courses</li>
+      <li>QTS, Postgraduate: 3919 courses</li>
+      <li>QTS: 3098 courses</li>
+      <li>QTS, Professional: 95 courses</li>
+    </ul>
+
+    <p>Some providers have separate courses for their QTS and PGCE variants. Some use only QTS – apparently by mistake, others use only PGCE with QTS but highlight at interview or application stage that candidates can opt for the QTS only route if appropriate. We cannot infer the variants available from the UCAS data.</p>
+
+    <h3 class="heading-medium">Salary variants</h3>
+
+    <p>Salaried courses appear to always have their own course and are defined by the route:</p>
+
+    <ul class="list list-bullet">
+      <li>School Direct: 7033</li>
+      <li>School Direct (salaried): 1910</li>
+      <li>SCITT: 1603</li>
+      <li>Higher Education: 1235</li>
+    </ul>
+
+    <p>When a salary variant is available, include the "Salary options" field. Use these fields to explain how this variant is different – eg more time in school, limited places, more experience needed.</p>
+
+    <h3 class="heading-medium">Schools</h3>
+
+    <p>Schools (campus/location in UCAS) will be imported with the course and associated with the training provider. Each school should have its own information: description, address and type. When a candidate can express a preference for a school, this information can be shown on the course page.</p>
+  ') }}
+
+  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/course-with-variants/thumbnails/02-about-this-course.png', '/public/images/history/course-with-variants/02-about-this-course.png', '
+    <p>Course information that does not change between variants. Add a specific field to indicate how this course differs from other subjects offered by the same provider.</p>
+
+    <p>Some of these fields may end up being associated with the training provider or some sort of default course detail so they can be easily shared across courses.</p>
+  ') }}
+
+  {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/course-with-variants/thumbnails/03-course-requirements.png', '/public/images/history/course-with-variants/03-course-requirements.png', '
+    <p>Fields copied from the <a href="/history/original-onboarding">spreadsheet onboarding</a>. These may also be shared between courses.</p>
+  ') }}
+
+  {{ macros.screenshot('Qualification options', 'qualification-options', '/public/images/history/course-with-variants/thumbnails/04-qualification-options.png', '/public/images/history/course-with-variants/04-qualification-options.png', '
+    <p>Allow training providers to describe a QTS only course, and then point out the differences in a PGCE with QTS course. A key difference is the fee which can be noted separately.</p>
+    <p>Fee fields might need to be standardised.</p>
+  ') }}
+
+  {{ macros.screenshot('Salary options', 'salary-options', '/public/images/history/course-with-variants/thumbnails/05-salary-options.png', '/public/images/history/course-with-variants/05-salary-options.png', '
+    <p>Allow training providers to explain how this variant is different – eg more time in school, limited places, more experience needed. Note the salary provided – this is important for comparison with fees and financial support such as bursaries and scholarships.</p>
+  ') }}
+
 </main>
 {% endblock %}
