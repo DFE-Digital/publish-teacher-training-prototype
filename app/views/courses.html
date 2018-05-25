@@ -3,15 +3,6 @@
 
 {% block content %}
 <style>
-  .listing-example li {
-    overflow: hidden;
-  }
-
-  .multiple-options li {
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ccc;
-  }
-
   th {
     background: #eee;
   }
@@ -22,90 +13,9 @@
   <div class="breadcrumbs"></div>
 
   <h1 class="heading-xlarge">
-    {{ data['training-provider-name'] }}
+    <span class="heading-secondary">{{ data['training-provider-name'] }}</span>
+    Courses
   </h1>
-
-  <ul class="tabs">
-    <li class="active">
-      <a href="/courses">Courses</a>
-    </li>
-    <li>
-      <a href="/schools">Schools</a>
-    </li>
-    <li>
-      <a href="#">Default course</a>
-    </li>
-    <li>
-      <a href="/organisation">Organisation</a>
-    </li>
-  </ul>
-
-  <!-- <p>
-    <b>{{ data['training-provider-name'] }}</b><br />
-    {{ data['address-line-1'] }}<br />
-    {{ data['town'] }}<br />
-    {{ data['postcode'] }}
-  </p>
-
-  <p>
-    <a href="#">admissions@stmartinscollege.net</a><br />
-    <a href="#">https://www.stmartinscollege.net</a>
-  </p>
-
-  <p>Courses accredited by University of Sussex</p> -->
-
-  <!-- <p>
-    <a href="/your-organisation">Edit organisation</a>
-  </p>
-
-  <div class="grid-row">
-    <div class="column-two-thirds">
-
-      <h2 class="heading-large">Schools</h2>
-
-      {% set schools = [
-          {
-            name: 'The Mosslands School'
-          },
-          {
-            name: 'Weatherhead High School'
-          },
-          {
-            name: 'Wirral Grammar School for Boys'
-          },
-          {
-            name: 'Wirral Grammar School for Girls'
-          }
-        ] %}
-
-      <ul class="list">
-        {% for school in schools %}
-        <li>
-          <a href="#">{{ school.name }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-
-      <hr />
-
-      <h2 class="heading-large">Default course details</h2>
-
-      <div class="add-double-bottom-margin">
-        <ul class="list">
-          <li><a href="#">About this course</a></li>
-          <li><a href="#">Eligibility</a></li>
-          <li><a href="#">Interview process</a></li>
-          <li><a href="#">Disabled access</a></li>
-          <li><a href="#">Course dates</a></li>
-          <li><a href="#">Study options</a></li>
-        </ul>
-      </div>
-
-      <hr />
-    </div>
-  </div> -->
-
-      <h2 class="heading-large">Courses</h2>
 
       {% set results = [
           {

@@ -7,25 +7,9 @@
   <div class="breadcrumbs"></div>
 
   <h1 class="heading-xlarge">
-    {{ data['training-provider-name'] }}
+    <span class="heading-secondary">{{ data['training-provider-name'] }}</span>
+    Schools
   </h1>
-
-  <ul class="tabs">
-    <li>
-      <a href="/courses">Courses</a>
-    </li>
-    <li class="active">
-      <a href="/schools">Schools</a>
-    </li>
-    <li>
-      <a href="#">Default course</a>
-    </li>
-    <li>
-      <a href="/organisation">Organisation</a>
-    </li>
-  </ul>
-
-  <h2 class="heading-large">Schools</h2>
 
   {% set schools = [
       {

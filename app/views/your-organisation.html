@@ -8,6 +8,8 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
+      <a href="/organisation" class="link-back">Back</a>
+
       <form action="/organisation" method="post">
         <legend>
           <h1 class="heading-xlarge">
@@ -31,7 +33,13 @@
 
         {{ macros.textbox('website', 'Website')}}
 
-        <input type="submit" class="button" value="Save">
+        <div class="form-group">
+          <input type="submit" class="button" value="Save">
+        </div>
+
+        <div class="form-group">
+          <a href="/organisation">Cancel changes</a>
+        </p>
       </form>
     </div>
   </div>
