@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% set title = 'Sign-in: Self serve registration' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+{{ macros.screenshot('Register', 'register', '/public/images/history/sign-in-self-serve-registration/thumbnails/01-register.png', '/public/images/history/sign-in-self-serve-registration/01-register.png', '') }}
+
+{{ macros.screenshot('Verify', 'verify', '/public/images/history/sign-in-self-serve-registration/thumbnails/02-verify.png', '/public/images/history/sign-in-self-serve-registration/02-verify.png', '') }}
+
+{{ macros.screenshot('Receive verify email', 'receive-verify-email', '/public/images/history/sign-in-self-serve-registration/thumbnails/03-receive-verify-email.png', '/public/images/history/sign-in-self-serve-registration/03-receive-verify-email.png', '') }}
+
+{{ macros.screenshot('Choose password', 'choose-password', '/public/images/history/sign-in-self-serve-registration/thumbnails/04-choose-password.png', '/public/images/history/sign-in-self-serve-registration/04-choose-password.png', '') }}
+
+{{ macros.screenshot('Success and return', 'success-and-return', '/public/images/history/sign-in-self-serve-registration/thumbnails/05-success-and-return.png', '/public/images/history/sign-in-self-serve-registration/05-success-and-return.png', '') }}
+
+</main>
+{% endblock %}
