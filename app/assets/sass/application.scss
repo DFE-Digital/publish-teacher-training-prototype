@@ -29,6 +29,12 @@ $path: "/public/images/";
   }
 }
 
+.doc-image {
+  max-width: 100%;
+  border: 1px solid $border-colour;
+  margin-bottom: $gutter * 2;
+}
+
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
 .remove-top-margin {
