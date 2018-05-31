@@ -25,7 +25,8 @@ var template = '';
 
 fs.readdir(directory, (err, files) => {
   files.forEach(file => {
-    if (file == "thumbnails") {
+    if (!(/^\d{2}/.test(file) && /\.png$/.test(file))) {
+      console.log('Ignoring: ' + file);
       return;
     }
 
