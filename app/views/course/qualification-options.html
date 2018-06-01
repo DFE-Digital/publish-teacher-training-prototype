@@ -13,35 +13,52 @@
   </div>
 
   <h1 class="heading-xlarge">
-    Qualification options
+    Qualification
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <p class="lede">
-        Help candidates compare courses. What are the differences between the PGCE with QTS course and the QTS only course?
+        Candidates can apply for a PGCE with QTS course or a QTS only one.
       </p>
     </div>
   </div>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <form action="/course/{{ subject.slug }}" method="post">
-        {{ macros.textarea(subject.slug + '-qts-qual', 'QTS course', 5) }}
-        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'QTS course fee', false, 'form-control-xsmall') }}
-        <hr />
 
+  <form action="/course/{{ subject.slug }}" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
         {{ macros.textarea(subject.slug + '-pgce-with-qts-qual', 'PGCE with QTS course', 5) }}
-        {{ macros.textbox(subject.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee', false, 'form-control-xsmall') }}
-
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Save" />
-        </div>
-
-        <a href="/course/{{ subject.slug }}">Cancel changes</a>
-      </form>
+        {{ macros.textbox(subject.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee', 'Fee in £', 'form-control-xsmall') }}
+      </div>
+      <div class="column-one-third add-margin-for-label">
+        <p>It could include:</p>
+        <ul class="list list-bullet">
+          <li>details about the PGCE aspect of the course</li>
+          <li>how your experience changes when choosing a PGCE</li>
+        </ul>
+      </div>
     </div>
-  </div>
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-qts-qual', 'QTS only course', 5) }}
+        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'QTS course fee', 'Fee in £', 'form-control-xsmall') }}
+      </div>
+      <div class="column-one-third add-margin-for-label">
+        <p>It could include:</p>
+        <ul class="list list-bullet">
+          <li>who is best suited to a QTS only course</li>
+          <li>how your experience changes without a PGCE</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+  </form>
 </main>
 
 {% endblock %}

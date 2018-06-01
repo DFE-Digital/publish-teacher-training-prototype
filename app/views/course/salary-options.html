@@ -13,31 +13,37 @@
   </div>
 
   <h1 class="heading-xlarge">
-    Salary options
+    Salary
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <p class="lede">
-        Help candidates understand how a salaried course is different to an unsalaried one.
+        Candidates can apply for this course with or without a salary.
       </p>
     </div>
   </div>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <form action="/course/{{ subject.slug }}" method="post">
-        {{ macros.textarea(subject.slug + '-salaried', 'Salaried teacher training', 5) }}
-        {{ macros.textbox(subject.slug + '-salary', 'Salary', 'Salary available to candidates', 'form-control-xsmall') }}
-
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Save" />
-        </div>
-
-        <a href="/course/{{ subject.slug }}">Cancel changes</a>
-      </form>
+  <form action="/course/{{ subject.slug }}" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-salaried', 'Salaried teacher training', 7, 'Help candidates understand how a course with salary differs to one without.') }}
+        {{ macros.textbox(subject.slug + '-salary', 'Salary', 'Salary in £', 'form-control-xsmall') }}
+      </div>
+      <div class="column-one-third add-margin-for-label-with-help">
+        <p>It should include:</p>
+        <ul class="list list-bullet">
+          <li>details about the PGCE aspect of the course</li>
+          <li>how your experience changes when choosing a PGCE</li>
+        </ul>
+      </div>
     </div>
-  </div>
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+  </form>
 </main>
 
 {% endblock %}

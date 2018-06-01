@@ -19,8 +19,8 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="/course/{{ subject.slug }}" method="post">
-        {{ macros.textarea(subject.slug + '-qualifications-required', 'Qualifications', 3) }}
-        {{ macros.textarea(subject.slug + '-other-requirements', 'Other requirements', 3) }}
+        {{ macros.textarea(subject.slug + '-qualifications-required', 'Qualifications needed', 3, 'The minimum academic qualifications required for this course.') }}
+        {{ macros.textarea(subject.slug + '-other-requirements', 'Other requirements', 3, 'Non-academic requirements, eg DBS checks or work experience, if relevant.') }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />

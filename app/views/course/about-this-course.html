@@ -17,31 +17,66 @@
     {{ title }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <form action="/course/{{ subject.slug }}" method="post">
-        {{ macros.textbox(subject.slug + '-course-website', 'Course website') }}
-
-        {{ macros.textarea(subject.slug + '-about-this-course', 'About this course', 7) }}
-
-        {% set subjectText %}
-          About this subject ({{ subject.name }})
-        {% endset %}
-        {# macros.textarea(subject.slug + '-about-this-subject', subjectText, 7) #}
-
-        {{ macros.textarea(subject.slug + '-training-with-a-disability', 'Training with a disability', 7) }}
-
-        {{ macros.textarea(subject.slug + '-interview-process', 'Interview process', 7) }}
-
-
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Save" />
-        </div>
-
-        <a href="/course/{{ subject.slug }}">Cancel changes</a>
-      </form>
+  <form action="/course/{{ subject.slug }}" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textbox(subject.slug + '-course-website', 'Course website', 'The page on your website with details about this course', 'form-control-full') }}
+      </div>
     </div>
-  </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-about-this-course', 'About this course', 14, 'A short summary of the course. Be concise and use plain language.') }}
+
+        <a href="#">Add another ‘About this course’ section</a>
+      </div>
+      <div class="column-one-third add-margin-for-label-with-help">
+        <p>It should include:</p>
+        <ul class="list list-bullet">
+          <li>what types of things you’ll be learning</li>
+          <li>overall experience (eg whether it’s hands-on classroom experience from day one)</li>
+          <li>how the course will be structured</li>
+          <li>locations that you’ll need to attend (eg if you have to attend classes at an accrediting provider as well as the training provider)</li>
+        </ul>
+
+        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-training-with-a-disability', 'Training with a disability', 14) }}
+      </div>
+      <div class="column-one-third add-margin-for-label">
+        <p>It should include:</p>
+        <ul class="list list-bullet">
+          <li>accessibility provisions for disabled people</li>
+          <li>how your course accommodates those with disabilities</li>
+        </ul>
+
+        <p>Consider candidates with different disabilities and accessibility needs. For example those with hearing or visual impairments as well as wheelchair users or people with dyslexia.</p>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-interview-process', 'Interview process', 7) }}
+      </div>
+      <div class="column-one-third add-margin-for-label">
+        <p>It should include:</p>
+        <ul class="list list-bullet">
+          <li>the number of interviews</li>
+          <li>the types of test they’ll undergo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+  </form>
 </main>
 
 {% endblock %}
