@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block page_title %}About this course{% endblock %}
+{% set title = 'About this course' %}
+{% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
 
@@ -13,7 +14,7 @@
   </div>
 
   <h1 class="heading-xlarge">
-    About this course
+    {{ title }}
   </h1>
 
   <div class="grid-row">

@@ -135,20 +135,13 @@ $path: "/public/images/";
 }
 
 dt, dd {
-    display: inline;
-    line-height: 30px;
+  display: inline;
+  line-height: 30px;
 }
 
 dt {
-    margin-right: 0.25em;
+  margin-right: 0.25em;
 }
-// dt::after {
-//     content: ':';
-// }
-// dd::after {
-//     display: block;
-//     content: '';
-// }
 
 dl.aligned {
   overflow: hidden;
