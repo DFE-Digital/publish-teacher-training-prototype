@@ -12,7 +12,7 @@
   </div>
 
   <h1 class="heading-xlarge">
-    {{ subject or 'Maths' }} at {{ data['training-provider-name'] }}
+    {{ subject.name or 'Maths' }} at {{ data['training-provider-name'] }}
   </h1>
 
   <div class="grid-row">
@@ -44,7 +44,7 @@
               <h3 class="course-part-task">
                 About this course
               </h3>
-              <a class="course-part-task-action" href="/course/about-this-course">Edit</a>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/about-this-course">Edit</a>
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
@@ -84,7 +84,7 @@
               <h3 class="course-part-task">
                 Course requirements
               </h3>
-              <a class="course-part-task-action" href="/course/requirements">Edit</a>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/requirements">Edit</a>
 
               <dl class="course-part-tasks">
                 <div>
@@ -117,7 +117,7 @@
               <h3 class="course-part-task">
                 Qualification options
               </h3>
-              <a class="course-part-task-action" href="/course/qualification-options">Edit</a>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/qualification-options">Edit</a>
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
@@ -141,7 +141,7 @@
               <h3 class="course-part-task">
                 Salary options
               </h3>
-              <a class="course-part-task-action" href="/course/salary-options">Edit</a>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/salary-options">Edit</a>
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
@@ -165,7 +165,7 @@
               <h3 class="course-part-task">
                 Schools
               </h3>
-              <a class="course-part-task-action" href="/course/requirements">Edit</a>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/requirements">Edit</a>
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">

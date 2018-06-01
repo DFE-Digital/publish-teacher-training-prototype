@@ -7,8 +7,12 @@ router.get('/', function (req, res) {
 })
 
 router.get('/course/:subject', function (req, res) {
-  var subject = req.params.subject;
-  res.render('course', { subject: subject.charAt(0).toUpperCase() + subject.slice(1) })
+  res.render('course', { subject: subject(req) })
+})
+
+router.get('/course/:subject/:view', function (req, res) {
+  var view = req.params.view;
+  res.render(`course/${view}`, { subject: subject(req) })
 })
 
 router.get('/school/:id', function (req, res) {
@@ -28,5 +32,14 @@ router.get('/school/:id/edit', function (req, res) {
 })
 
 // add your routes here
+
+function subject(req) {
+  var subject = req.params.subject;
+
+  return {
+    name: subject.charAt(0).toUpperCase() + subject.slice(1),
+    slug: subject
+  };
+}
 
 module.exports = router

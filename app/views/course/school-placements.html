@@ -18,14 +18,14 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course">
-        {{ macros.textarea('placements', 'School placements', 10) }}
+      <form action="/course/{{ subject.slug }}" method="post">
+        {{ macros.textarea(subject.slug + '-placements', 'School placements', 10) }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
         </div>
 
-        <a href="/course">Cancel changes</a>
+        <a href="/course/{{ subject.slug }}">Cancel changes</a>
       </form>
     </div>
   </div>

@@ -8,7 +8,7 @@
   <div class="breadcrumbs">
     <ol>
       <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course">{{ data['subject'] or 'Maths' }}</a></li>
+      <li><a href="/course/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }}</a></li>
     </ol>
   </div>
 
@@ -26,15 +26,15 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course">
-        {{ macros.textarea('salaried', 'Salaried teacher training', 5) }}
-        {{ macros.textbox('salary', 'Salary', 'Salary available to candidates', 'form-control-xsmall') }}
+      <form action="/course/{{ subject.slug }}" method="post">
+        {{ macros.textarea(subject.slug + '-salaried', 'Salaried teacher training', 5) }}
+        {{ macros.textbox(subject.slug + '-salary', 'Salary', 'Salary available to candidates', 'form-control-xsmall') }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
         </div>
 
-        <a href="/course">Cancel changes</a>
+        <a href="/course/{{ subject.slug }}">Cancel changes</a>
       </form>
     </div>
   </div>

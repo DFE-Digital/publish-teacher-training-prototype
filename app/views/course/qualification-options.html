@@ -8,7 +8,7 @@
   <div class="breadcrumbs">
     <ol>
       <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course">{{ data['subject'] or 'Maths' }}</a></li>
+      <li><a href="/course/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }}</a></li>
     </ol>
   </div>
 
@@ -26,19 +26,19 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course">
-        {{ macros.textarea('qts-qual', 'QTS course', 5) }}
-        {{ macros.textbox('qts-qual-fee', 'QTS course fee', false, 'form-control-xsmall') }}
+      <form action="/course/{{ subject.slug }}" method="post">
+        {{ macros.textarea(subject.slug + '-qts-qual', 'QTS course', 5) }}
+        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'QTS course fee', false, 'form-control-xsmall') }}
         <hr />
 
-        {{ macros.textarea('pgce-with-qts-qual', 'PGCE with QTS course', 5) }}
-        {{ macros.textbox('pgce-with-qts-qual-fee', 'PGCE with QTS course fee', false, 'form-control-xsmall') }}
+        {{ macros.textarea(subject.slug + '-pgce-with-qts-qual', 'PGCE with QTS course', 5) }}
+        {{ macros.textbox(subject.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee', false, 'form-control-xsmall') }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
         </div>
 
-        <a href="/course">Cancel changes</a>
+        <a href="/course/{{ subject.slug }}">Cancel changes</a>
       </form>
     </div>
   </div>
