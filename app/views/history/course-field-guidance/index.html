@@ -1,0 +1,23 @@
+
+{% extends "layout.html" %}
+{% set title = 'Contextual guidance on course fields' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/course-field-guidance/thumbnails/02-about-this-course.png', '/public/images/history/course-field-guidance/02-about-this-course.png', '') }}
+
+  {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/course-field-guidance/thumbnails/03-course-requirements.png', '/public/images/history/course-field-guidance/03-course-requirements.png', '') }}
+
+  {{ macros.screenshot('Qualification', 'qualification', '/public/images/history/course-field-guidance/thumbnails/04-qualification.png', '/public/images/history/course-field-guidance/04-qualification.png', '') }}
+
+  {{ macros.screenshot('Salary', 'salary', '/public/images/history/course-field-guidance/thumbnails/05-salary.png', '/public/images/history/course-field-guidance/05-salary.png', '') }}
+</main>
+{% endblock %}
