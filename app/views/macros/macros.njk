@@ -139,3 +139,13 @@
   {% endif %}
 </div>
 {% endmacro %}
+
+{% macro previewPart(id) %}
+  {% if (value(id)) %}
+    <p>{{ value(id) }}</p>
+  {% else %}
+    <p>
+      These details are missing.
+    </p>
+  {% endif %}
+{% endmacro %}

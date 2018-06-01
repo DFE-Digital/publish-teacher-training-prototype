@@ -6,6 +6,10 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.get('/preview/:subject', function (req, res) {
+  res.render('preview', { subject: subject(req) })
+})
+
 router.get('/course/:subject', function (req, res) {
   res.render('course', { subject: subject(req) })
 })
