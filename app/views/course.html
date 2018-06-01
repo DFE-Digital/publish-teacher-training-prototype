@@ -18,7 +18,6 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large">
-
           <ul class="course-parts-items">
             <li class="course-parts-item">
               <h3 class="course-part-task">
@@ -79,38 +78,10 @@
               </h3>
               <a class="course-part-task-action" href="/course/{{ subject.slug }}/about-this-course">Edit</a>
               <dl class="course-part-tasks">
-                <div>
-                  <dt class="course-part-label">
-                    About this course
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    About this subject ({{ data['subject'] or 'Maths' }})
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Training with a disability
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Interview process
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {{ macros.coursePart(subject.slug + '-course-website', 'Course website') }}
+                {{ macros.coursePart(subject.slug + '-about-this-course', 'About this course') }}
+                {{ macros.coursePart(subject.slug + '-training-with-a-disability', 'Training with a disability') }}
+                {{ macros.coursePart(subject.slug + '-interview-process', 'Interview process') }}
               </dl>
             </li>
             <li class="course-parts-item">
@@ -120,30 +91,8 @@
               <a class="course-part-task-action" href="/course/{{ subject.slug }}/requirements">Edit</a>
 
               <dl class="course-part-tasks">
-                <div>
-                  <dt class="course-part-label">
-                    Qualifications
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Personal qualities
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Other requirements
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {{ macros.coursePart(subject.slug + '-qualifications-required', 'Qualifications') }}
+                {{ macros.coursePart(subject.slug + '-other-requirements', 'Other requirements') }}
               </dl>
             </li>
             <li class="course-parts-item">
@@ -152,22 +101,10 @@
               </h3>
               <a class="course-part-task-action" href="/course/{{ subject.slug }}/qualification-options">Edit</a>
               <dl class="course-part-tasks">
-                <div>
-                  <dt class="course-part-label">
-                    PGCE with QTS
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    QTS
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {{ macros.coursePart(subject.slug + '-pgce-with-qts-qual', 'PGCE with QTS') }}
+                {{ macros.coursePart(subject.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee') }}
+                {{ macros.coursePart(subject.slug + '-qts-qual', 'QTS') }}
+                {{ macros.coursePart(subject.slug + '-qts-qual-fee', 'QTS course fee') }}
               </dl>
             </li>
             <li class="course-parts-item">
@@ -176,25 +113,11 @@
               </h3>
               <a class="course-part-task-action" href="/course/{{ subject.slug }}/salary-options">Edit</a>
               <dl class="course-part-tasks">
-                <div>
-                  <dt class="course-part-label">
-                    Salaried teacher training
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="course-part-label">
-                    Salary
-                  </dt>
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {{ macros.coursePart(subject.slug + '-salaried', 'Salaried teacher training') }}
+                {{ macros.coursePart(subject.slug + '-salary', 'Salary available') }}
               </dl>
             </li>
-            <li class="course-parts-item">
+            <!-- <li class="course-parts-item">
               <h3 class="course-part-task">
                 Schools
               </h3>
@@ -209,11 +132,9 @@
                   </dd>
                 </div>
               </dl>
-            </li>
+            </li> -->
           </ul>
-
       </div>
-
       <a href="#" class="button">Send to DfE</a>
     </div>
   </div>

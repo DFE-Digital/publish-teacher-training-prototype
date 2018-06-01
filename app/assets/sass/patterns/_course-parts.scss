@@ -84,7 +84,7 @@ $course-parts-indent: 35px;
     float: none;
     display: block;
     font-weight: bold;
-    padding-bottom: 0;
+    padding-bottom: 5px;
 
     // @include media(desktop) {
     //   width: 30%;
@@ -99,6 +99,7 @@ $course-parts-indent: 35px;
     float: none;
     display: block;
     padding: 0;
+    margin-bottom: 10px;
 
     &--empty {
       color: $grey-1;

@@ -122,3 +122,20 @@
   </fieldset>
 </div>
 {% endmacro %}
+
+{% macro coursePart(id, label) %}
+<div>
+  <dt class="course-part-label">
+    {{ label }}
+  </dt>
+  {% if (value(id)) %}
+    <dd class="course-part-value">
+      {{ value(id) }}
+    </dd>
+  {% else %}
+    <dd class="course-part-value course-part-value--empty">
+      This field is empty
+    </dd>
+  {% endif %}
+</div>
+{% endmacro %}
