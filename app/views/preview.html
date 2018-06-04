@@ -42,9 +42,10 @@
           <li><a href="#section-about">About the course</a></li>
           <li><a href="#section-entry">Requirements</a></li>
           <li><a href="#section-qualification-options">Qualification options</a></li>
-          <li><a href="#section-schools">Placement schools</a></li>
+          <li><a href="#section-salary-options">Salary</a></li>
           <li><a href="#section-fees">Fees</a></li>
           <li><a href="#section-financial-support">Financial support</a></li>
+          <li><a href="#section-schools">Schools</a></li>
           <li><a href="#section-about-provider">About the training provider</a></li>
           <li><a href="#section-contact">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
@@ -73,7 +74,7 @@
         <h3 class="heading-small">QTS only course</h3>
         <p>Qualified teacher status (QTS) allows you to teach in state schools in England. If you want to teach in the rest of the UK or internationally, then you’ll need a PGCE.</p>
 
-        <h2 class="heading-medium" id="section-study-options">Earn a salary while you train</h2>
+        <h2 class="heading-medium" id="section-salary-options">Earn a salary while you train</h2>
 
         <p>You can choose to apply to earn a salary of £{{ data[subject.slug + '-salary'] }} for this course.</p>
 
@@ -127,8 +128,25 @@
         </div>
         {% endif %}
 
-        <h2 class="heading-medium">Financial support</h3>
+        <h2 class="heading-medium" id="section-financial-support">Financial support</h3>
         <p>Not available in this prototype yet.</p>
+
+        <h2 class="heading-medium" id="section-schools">Schools</h3>
+        <p></p>
+
+        {% set schools = data['schools'] %}
+
+        <ul class="list">
+          {% for school in schools %}
+          <li>
+            <h3 class="heading-small">
+              {{ school.name }}
+            </h3>
+            <a href="#">https://www.school-website.com</a>
+            <p>{{ school.description }}</p>
+          </li>
+          {% endfor %}
+        </ul>
 
         <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
 
