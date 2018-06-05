@@ -42,7 +42,7 @@ function subject(req) {
   var name = subject.charAt(0).toUpperCase() + subject.slice(1);
 
   return {
-    name: name.replace(/-/,' '),
+    name: name.replace(/-/g,' '),
     slug: subject
   };
 }
