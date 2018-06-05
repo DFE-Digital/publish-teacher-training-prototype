@@ -12,7 +12,7 @@
   </div>
 
   <h1 class="heading-xlarge">
-    {{ subject.name or 'Maths' }} at {{ data['training-provider-name'] }}
+    {{ subject.name or 'Maths' }}
   </h1>
 
   <p>
@@ -84,8 +84,17 @@
               <dl class="course-part-tasks">
                 {{ macros.coursePart(subject.slug + '-course-website', 'Course website') }}
                 {{ macros.coursePart(subject.slug + '-about-this-course', 'About this course') }}
+              </dl>
+            </li>
+            <li class="course-parts-item">
+              <h3 class="course-part-task">
+                About this training provider
+              </h3>
+              <a class="course-part-task-action" href="/course/{{ subject.slug }}/about-this-provider">Edit</a>
+              <dl class="course-part-tasks">
                 {{ macros.coursePart(subject.slug + '-training-with-a-disability', 'Training with a disability') }}
                 {{ macros.coursePart(subject.slug + '-interview-process', 'Interview process') }}
+                {{ macros.coursePart(subject.slug + '-placement-school-policy', 'Placement school policy') }}
               </dl>
             </li>
             <li class="course-parts-item">

@@ -96,10 +96,11 @@
       <ul class="listing-example">
         {% for result in results %}
           <li>
-            <h3 class="heading-medium">
-              <a href="{{ result.url }}">{{ result.subject }} at {{ data['training-provider-name']}}</a>
+            <h3 class="heading-medium remove-top-margin">
+              <a href="{{ result.url }}">{{ result.subject }}</a>
             </h3>
 
+            {#
             {% for variant in result.variants %}
               <h4 class="heading-small add-bottom-margin add-top-margin">
                 {{ variant.title }}
@@ -123,6 +124,7 @@
                 </tbody>
               </table>
             {% endfor %}
+            #}
           </li>
         {% endfor %}
       </ul>
