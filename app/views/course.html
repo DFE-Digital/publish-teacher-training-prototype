@@ -3,14 +3,6 @@
 
 {% block content %}
 
-{% set folded_course = '' %}
-
-{% for folded_course_data in data['folded_courses'] %}
-  {% if folded_course_data['name'] == subject['name'] %}
-    {% set folded_course = folded_course_data %}
-  {% endif %}
-{% endfor %}
-
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
@@ -43,10 +35,10 @@
                     UCAS {{ subject.name }} courses
                   </dt>
                   <dd class="course-part-value">
-                    {% if folded_course.courses == 1 %}
+                    {% if subject.folded_course.courses == 1 %}
                       1 course
                     {% else %}
-                      {{ folded_course.courses }} courses combined
+                      {{ subject.folded_course.courses }} courses combined
                     {% endif %}
                   </dd>
                 </div>
@@ -55,7 +47,7 @@
                     Applications open from
                   </dt>
                   <dd class="course-part-value">
-                    {{ folded_course.applicationsOpen }}
+                    {{ subject.folded_course.applicationsOpen }}
                   </dd>
                 </div>
                 <div>
@@ -63,7 +55,7 @@
                     Accrediting provider
                   </dt>
                   <dd class="course-part-value">
-                    {{ folded_course.accrediting }}
+                    {{ subject.folded_course.accrediting }}
                   </dd>
                 </div>
                 <div>
@@ -71,7 +63,7 @@
                     Study options
                   </dt>
                   <dd class="course-part-value">
-                    {% for option in folded_course.options %}
+                    {% for option in subject.folded_course.options %}
                       {{ option }}<br />
                     {% endfor %}
                   </dd>
@@ -82,7 +74,7 @@
                   </dt>
                   <dd class="course-part-value">
                     <ul class="list list-bullet">
-                      {% for school in folded_course.schoolsWithVacancies %}
+                      {% for school in subject.folded_course.schoolsWithVacancies %}
                         <li>{{ school }}</li>
                       {% endfor %}
                     </ul>
@@ -122,7 +114,7 @@
                 {{ macros.coursePart(subject.slug + '-other-requirements', 'Other requirements') }}
               </dl>
             </li>
-            {% if folded_course.flags.qualifications %}
+            {% if subject.folded_course.flags.qualifications %}
             <li class="course-parts-item">
               <h3 class="course-part-task">
                 Qualification
@@ -136,7 +128,7 @@
               </dl>
             </li>
             {% endif %}
-            {% if folded_course.flags.salary %}
+            {% if subject.folded_course.flags.salary %}
             <li class="course-parts-item">
               <h3 class="course-part-task">
                 Salary

@@ -40,10 +40,14 @@ router.get('/school/:id/edit', function (req, res) {
 function subject(req) {
   var subject = req.params.subject;
   var name = subject.charAt(0).toUpperCase() + subject.slice(1);
+  var folded_course = req.session.data['folded_courses'].find(function(folded_course) {
+    return folded_course.name == name;
+  });
 
   return {
     name: name.replace(/-/g,' '),
-    slug: subject
+    slug: subject,
+    folded_course: folded_course
   };
 }
 

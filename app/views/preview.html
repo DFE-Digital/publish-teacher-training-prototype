@@ -26,10 +26,9 @@
     <dt>Study options:</dt>
     <dd>
       <ul class="list">
-        <li>PGCE with QTS, 1 year full time</li>
-        <li>PGCE with QTS, 1 year full time with salary</li>
-        <li>QTS, 1 year full time</li>
-        <li>QTS, 1 year full time with salary</li>
+        {% for option in subject.folded_course.options %}
+          <li>{{ option }}</li>
+        {% endfor %}
       </ul>
     </dd>
   </dl>
