@@ -17,84 +17,8 @@
     Courses
   </h1>
 
-      {% set results = [
-          {
-            url: '/course/maths',
-            subject: 'Maths',
-            variants: [
-              {
-                title: 'PGCE with QTS, 1 year full time',
-                code: '1B23',
-                schools: [
-                  {
-                    name: 'The Mosslands School',
-                    vacancies: 'Vacancies'
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            url: '/course/chemistry',
-            subject: 'Chemistry',
-            variants: [
-              {
-                title: 'PGCE with QTS, 1 year full time',
-                code: 'BA3D',
-                schools: [
-                  {
-                    name: 'Weatherhead High School',
-                    vacancies: 'Vacancies'
-                  }
-                ]
-              },
-              {
-                title: 'PGCE with QTS, 1 year full time with salary',
-                code: 'BA4A',
-                schools: [
-                  {
-                    name: 'Weatherhead High School',
-                    options: 'PGCE with QTS, 1 year full time with salary',
-                    code: 'BA4A',
-                    vacancies: 'No vacancies'
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            url: '/course/geography',
-            subject: 'Geography',
-            variants: [
-              {
-                title: 'PGCE with QTS, 1 year full time',
-                code: '2XDD',
-                schools: [
-                  {
-                    name: 'The Mosslands School',
-                    vacancies: 'Vacancies'
-                  },
-                  {
-                    name: 'Weatherhead High School',
-                    vacancies: 'Vacancies'
-                  },
-                  {
-                    name: 'Wirral Grammar School for Boys',
-                    vacancies: 'Vacancies'
-                  },
-                  {
-                    name: 'Wirral Grammar School for Girls',
-                    vacancies: 'Vacancies'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      %}
-
       <ul class="listing-example">
-        {% for result in results %}
+        {% for result in data['subjects'] %}
           <li>
             <h3 class="heading-medium remove-top-margin">
               <a href="{{ result.url }}">{{ result.subject }}</a>
