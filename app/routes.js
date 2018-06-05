@@ -39,9 +39,10 @@ router.get('/school/:id/edit', function (req, res) {
 
 function subject(req) {
   var subject = req.params.subject;
+  var name = subject.charAt(0).toUpperCase() + subject.slice(1);
 
   return {
-    name: subject.charAt(0).toUpperCase() + subject.slice(1),
+    name: name.replace(/-/,' '),
     slug: subject
   };
 }
