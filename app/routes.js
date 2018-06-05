@@ -21,7 +21,7 @@ router.get('/course/:subject/:view', function (req, res) {
 
 router.get('/school/:id', function (req, res) {
   var school = req.session.data['schools'].find(function(school) {
-    return school.id == req.params.id;
+    return school.code == req.params.id;
   });
 
   res.render('school', { school: school })
