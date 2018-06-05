@@ -3,6 +3,14 @@
 
 {% block content %}
 
+{% set folded_course = '' %}
+
+{% for folded_course_data in data['folded_courses'] %}
+  {% if folded_course_data['name'] == subject['name'] %}
+    {% set folded_course = folded_course_data %}
+  {% endif %}
+{% endfor %}
+
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
@@ -32,10 +40,14 @@
               <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
-                    UCAS {{ subject.name }} courses found
+                    UCAS {{ subject.name }} courses
                   </dt>
                   <dd class="course-part-value">
-                    3 courses combined
+                    {% if folded_course.courses == 1 %}
+                      1 course
+                    {% else %}
+                      {{ folded_course.courses }} courses combined
+                    {% endif %}
                   </dd>
                 </div>
                 <div>
@@ -43,7 +55,7 @@
                     Applications open from
                   </dt>
                   <dd class="course-part-value">
-                    26 October 2018
+                    {{ folded_course.applicationsOpen }}
                   </dd>
                 </div>
                 <div>
@@ -51,7 +63,7 @@
                     Accrediting provider
                   </dt>
                   <dd class="course-part-value">
-                    The University of Reading
+                    {{ folded_course.accrediting }}
                   </dd>
                 </div>
                 <div>
@@ -59,7 +71,9 @@
                     Study options
                   </dt>
                   <dd class="course-part-value">
-                    PGCE with QTS, 1 year full time
+                    {% for option in folded_course.options %}
+                      {{ option }}<br />
+                    {% endfor %}
                   </dd>
                 </div>
                 <div>
@@ -68,9 +82,9 @@
                   </dt>
                   <dd class="course-part-value">
                     <ul class="list list-bullet">
-                      <li>Calthorpe Park School</li>
-                      <li>Court Moor School</li>
-                      <li>Yateley School</li>
+                      {% for school in folded_course.schoolsWithVacancies %}
+                        <li>{{ school }}</li>
+                      {% endfor %}
                     </ul>
                   </dd>
                 </div>
@@ -108,6 +122,7 @@
                 {{ macros.coursePart(subject.slug + '-other-requirements', 'Other requirements') }}
               </dl>
             </li>
+            {% if folded_course.flags.qualifications %}
             <li class="course-parts-item">
               <h3 class="course-part-task">
                 Qualification
@@ -120,6 +135,8 @@
                 {{ macros.coursePart(subject.slug + '-qts-qual-fee', 'QTS course fee') }}
               </dl>
             </li>
+            {% endif %}
+            {% if folded_course.flags.salary %}
             <li class="course-parts-item">
               <h3 class="course-part-task">
                 Salary
@@ -130,6 +147,7 @@
                 {{ macros.coursePart(subject.slug + '-salary', 'Salary available') }}
               </dl>
             </li>
+            {% endif %}
             <!-- <li class="course-parts-item">
               <h3 class="course-part-task">
                 Schools
