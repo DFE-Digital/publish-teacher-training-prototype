@@ -1,6 +1,6 @@
 
 {% extends "layout.html" %}
-{% set title = 'Simplified university view' %}
+{% set title = 'A university’s view' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -12,19 +12,32 @@
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
 
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>
+        Universities are the simplest provider. There are no schools to apply to and <a href="/history/imported-from-ucas">no course folding</a>.
+      </p>
+      <ul class="list list-bullet">
+        <li>remove schools link in header</li>
+        <li>hide accrediting provider</li>
+        <li>don’t show any of the qualification or salary study option fields</li>
+      </ul>
+    </div>
+  </div>
+
   {{ macros.screenshot('Courses', 'courses', '/public/images/history/simplified-university-view/thumbnails/01-courses.png', '/public/images/history/simplified-university-view/01-courses.png', '') }}
-  
+
   {{ macros.screenshot('Course', 'course', '/public/images/history/simplified-university-view/thumbnails/02-course.png', '/public/images/history/simplified-university-view/02-course.png', '') }}
-  
+
   {{ macros.screenshot('Course details from ucas', 'course-details-from-ucas', '/public/images/history/simplified-university-view/thumbnails/03-course-details-from-ucas.png', '/public/images/history/simplified-university-view/03-course-details-from-ucas.png', '') }}
-  
+
   {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/simplified-university-view/thumbnails/04-about-this-course.png', '/public/images/history/simplified-university-view/04-about-this-course.png', '') }}
-  
+
   {{ macros.screenshot('About this training provider', 'about-this-training-provider', '/public/images/history/simplified-university-view/thumbnails/05-about-this-training-provider.png', '/public/images/history/simplified-university-view/05-about-this-training-provider.png', '') }}
-  
+
   {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/simplified-university-view/thumbnails/06-course-requirements.png', '/public/images/history/simplified-university-view/06-course-requirements.png', '') }}
-  
+
   {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/simplified-university-view/thumbnails/07-organisation.png', '/public/images/history/simplified-university-view/07-organisation.png', '') }}
-  
+
 </main>
 {% endblock %}
