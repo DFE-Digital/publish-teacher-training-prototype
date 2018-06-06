@@ -610,9 +610,9 @@
   ],
   "schools": [
     {
-      "name": "Fulham College Boys' School SW6 6SN",
-      "address": "Kingswood Road, London, SW6 6SN",
-      "code": "4"
+      "name": "Chelsea Academy SW10 0AB",
+      "address": "Lots Road, Chelsea, London, SW10 0AB",
+      "code": "C"
     },
     {
       "name": "Drayton Manor High School",
@@ -620,29 +620,9 @@
       "code": "D"
     },
     {
-      "name": "The Fulham Boys' School",
-      "address": "Mund Street, Gibbs Green, London, W14 9LY",
-      "code": "F"
-    },
-    {
-      "name": "St Mark's Roman Catholic School",
-      "address": "106 Bath Road, Hounslow, TW3 3EJ",
-      "code": "M"
-    },
-    {
-      "name": "William Morris Sixth Form",
-      "address": "St Dunstan's Road, London, W6 8RB",
-      "code": "W"
-    },
-    {
-      "name": "Sacred Heart High School",
-      "address": "212 Hammersmith Road, London, W6 7DG",
-      "code": "1"
-    },
-    {
-      "name": "Lady Margaret School SW6 4UN",
-      "address": "Parsons Green, London, SW6 4UN",
-      "code": "L"
+      "name": "Fulham College Boys' School SW6 6SN",
+      "address": "Kingswood Road, London, SW6 6SN",
+      "code": "4"
     },
     {
       "name": "Fulham Cross Girls' School",
@@ -650,14 +630,34 @@
       "code": "3"
     },
     {
-      "name": "Chelsea Academy SW10 0AB",
-      "address": "Lots Road, Chelsea, London, SW10 0AB",
-      "code": "C"
-    },
-    {
       "name": "Hammersmith Academy W12 9JD",
       "address": "25 Cathnor Road, Hammersmith, London, W12 9JD",
       "code": "H"
+    },
+    {
+      "name": "Lady Margaret School SW6 4UN",
+      "address": "Parsons Green, London, SW6 4UN",
+      "code": "L"
+    },
+    {
+      "name": "Sacred Heart High School",
+      "address": "212 Hammersmith Road, London, W6 7DG",
+      "code": "1"
+    },
+    {
+      "name": "St Mark's Roman Catholic School",
+      "address": "106 Bath Road, Hounslow, TW3 3EJ",
+      "code": "M"
+    },
+    {
+      "name": "The Fulham Boys' School",
+      "address": "Mund Street, Gibbs Green, London, W14 9LY",
+      "code": "F"
+    },
+    {
+      "name": "William Morris Sixth Form",
+      "address": "St Dunstan's Road, London, W6 8RB",
+      "code": "W"
     }
   ],
   "subjects": [
@@ -726,7 +726,9 @@
     {
       "name": "Biology",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -750,7 +752,9 @@
     {
       "name": "Business Studies",
       "courses": 1,
-      "accrediting": "UCL, University College London (University of London",
+      "accrediting": [
+        "UCL, University College London (University of London"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -769,7 +773,9 @@
     {
       "name": "Chemistry",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -794,7 +800,9 @@
     {
       "name": "Computing",
       "courses": 1,
-      "accrediting": "Roehampton University",
+      "accrediting": [
+        "Roehampton University"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -813,7 +821,9 @@
     {
       "name": "Design and Technology",
       "courses": 1,
-      "accrediting": "Roehampton University",
+      "accrediting": [
+        "Roehampton University"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -833,7 +843,9 @@
     {
       "name": "Drama",
       "courses": 1,
-      "accrediting": "Roehampton University",
+      "accrediting": [
+        "Roehampton University"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -853,7 +865,9 @@
     {
       "name": "English",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -881,7 +895,9 @@
     {
       "name": "Geography",
       "courses": 1,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017",
         "07 Dec 2017"
@@ -905,7 +921,9 @@
     {
       "name": "History",
       "courses": 1,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -925,7 +943,9 @@
     {
       "name": "Mathematics",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -953,7 +973,9 @@
     {
       "name": "Modern Languages (French and Spanish)",
       "courses": 1,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -974,7 +996,9 @@
     {
       "name": "Physical Education",
       "courses": 1,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -993,7 +1017,9 @@
     {
       "name": "Physics",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -1019,7 +1045,9 @@
     {
       "name": "Psychology",
       "courses": 1,
-      "accrediting": "UCL, University College London (University of London",
+      "accrediting": [
+        "UCL, University College London (University of London"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
@@ -1038,7 +1066,9 @@
     {
       "name": "Religious Education",
       "courses": 2,
-      "accrediting": "St Mary's University, Twickenham",
+      "accrediting": [
+        "St Mary's University, Twickenham"
+      ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
