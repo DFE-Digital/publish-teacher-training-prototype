@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block page_title %}Your courses{% endblock %}
+{% set title %}{{ subject.name or 'Maths' }}{% endset %}
+{% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
 
@@ -11,8 +12,19 @@
     </ol>
   </div>
 
+  {% if data[subject.slug + '-qa'] == 'true' %}
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
+      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+        {{ title }} has been sent to DfE for review
+      </h3>
+      <p>
+        You will receive an email when the course is published or if changes are needed.
+      </p>
+    </div>
+  {% endif %}
+
   <h1 class="heading-xlarge">
-    {{ subject.name or 'Maths' }}
+    {{ title }}
   </h1>
 
   <p>
@@ -162,7 +174,10 @@
             </li> -->
           </ul>
       </div>
-      <a href="#" class="button">Send to DfE</a>
+      <form action="/course/{{ subject.slug }}" method="post">
+        <input type="hidden" name="{{ subject.slug }}-qa" value="true" />
+        <input type="submit" value="Send to DfE" class="button" />
+      </form>
     </div>
   </div>
 </main>

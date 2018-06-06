@@ -2,11 +2,6 @@
 {% block page_title %}Courses{% endblock %}
 
 {% block content %}
-<style>
-  th {
-    background: #eee;
-  }
-</style>
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
@@ -20,9 +15,9 @@
       <ul class="listing-example">
         {% for result in data['subjects'] %}
           <li>
-            <h3 class="heading-medium remove-top-margin">
+            <div class="heading-medium remove-top-margin">
               <a href="/course/{{ result.slug }}">{{ result.name }}</a>
-            </h3>
+            </div>
 
             {#
             {% for variant in result.variants %}
