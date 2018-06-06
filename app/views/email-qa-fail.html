@@ -1,0 +1,37 @@
+{% extends "email-layout.html" %}
+{% block page_title %}Email: QA passed{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-large">Email received</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds fake-email">
+      <h1 class="heading-small add-double-bottom-margin">
+        Your {{ subject.name | lower }} course needs changes
+      </h1>
+
+      <p>
+        DfE has requested changes to your {{ subject.name | lower }} course.
+      </p>
+
+      <p>Before your course will be published you must:</p>
+      <ul class="list list-bullet">
+        <li>remove unsubstantiated claims</li>
+        <li>fix spelling mistakes</li>
+        <li>complete missing sections</li>
+      </ul>
+
+      <p>Edit your course here:</p>
+
+      <a href="/course/{{ subject.slug }}">https://publish-teacher-training-courses.education.gov.uk/course/{{ subject.slug }}</a>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

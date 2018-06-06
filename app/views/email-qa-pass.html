@@ -1,0 +1,28 @@
+{% extends "email-layout.html" %}
+{% block page_title %}Email: QA passed{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-large">Email received</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds fake-email">
+      <h1 class="heading-small add-double-bottom-margin">
+        Your {{ subject.name | lower }} course has been published
+      </h1>
+
+      <p>
+        DfE has published your {{ subject.name | lower }} course:
+      </p>
+
+      <a href="/preview/{{ subject.slug }}">https://find-postgraduate-teacher-training.education.gov.uk/course/49504</a>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

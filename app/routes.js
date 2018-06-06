@@ -10,6 +10,14 @@ router.get('/preview/:subject', function (req, res) {
   res.render('preview', { subject: subject(req) })
 })
 
+router.get('/email-qa-pass/:subject', function (req, res) {
+  res.render('email-qa-pass', { subject: subject(req) })
+})
+
+router.get('/email-qa-fail/:subject', function (req, res) {
+  res.render('email-qa-fail', { subject: subject(req) })
+})
+
 router.get('/course/:subject', function (req, res) {
   res.render('course', { subject: subject(req) })
 })
