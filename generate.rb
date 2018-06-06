@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # Grab courses-clean.json from search-and-compare-data repo
 # Run irb
 # load './generate.rb'
