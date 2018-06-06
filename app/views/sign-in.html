@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "email-layout.html" %}
 {% block page_title %}Sign in{% endblock %}
 
 {% block content %}
@@ -8,7 +8,7 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form>
+      <form action="/courses" method="post">
         <legend>
           <h1 class="heading-xlarge">
             Sign in

@@ -1,0 +1,46 @@
+{% extends "email-layout.html" %}
+{% block page_title %}Email: Sign up{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <h1 class="heading-large">Email received</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds fake-email">
+      <h1 class="heading-small add-double-bottom-margin">
+        Publish teacher training courses - get started
+      </h1>
+
+      <p>Hello,</p>
+
+      <p>To start using the new service for managing and publishing teacher training courses, you’ll need to create a new account.</p>
+
+      <p class="bold">How to create a new account</p>
+
+      <ol class="list list-number">
+        <li>
+          <p>You’ll shortly receive an email from DfE Sign-in. This email will include a verification code, and a link to a page where you will need to enter this code and create a password for your new account.</p>
+        </li>
+        <li>
+          <p>Once you’ve created your account, you’ll get an email from DfE Sign-in that tells you it’s been created successfully. </p>
+        </li>
+        <li>
+          <p>You can then <a href="/sign-in">sign in to the new service</a>.</p>
+        </li>
+      </ol>
+
+      <p>Email <a href="#">becomingateacher@digital.education.gov.uk</a> if you have any questions.</p>
+
+      <p>Regards,</p>
+
+      <p>The Becoming a Teacher team</p>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
