@@ -52,10 +52,16 @@
                 </div>
                 <div>
                   <dt class="course-part-label">
-                    Accrediting provider
+                    {% if subject.folded_course.accrediting | length == 1 %}
+                      Accrediting provider
+                    {% else %}
+                      Accrediting providers
+                    {% endif %}
                   </dt>
                   <dd class="course-part-value">
-                    {{ subject.folded_course.accrediting }}
+                    {% for ac in subject.folded_course.accrediting %}
+                      {{ ac }}<br />
+                    {% endfor %}
                   </dd>
                 </div>
                 <div>
@@ -73,11 +79,9 @@
                     Schools with vacancies
                   </dt>
                   <dd class="course-part-value">
-                    <ul class="list list-bullet">
-                      {% for school in subject.folded_course.schoolsWithVacancies %}
-                        <li>{{ school }}</li>
-                      {% endfor %}
-                    </ul>
+                    {% for school in subject.folded_course.schoolsWithVacancies %}
+                      {{ school }}<br />
+                    {% endfor %}
                   </dd>
                 </div>
               </dl>

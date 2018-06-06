@@ -38,6 +38,7 @@ end
 
 # Find all schools across all courses and flatten into array of schools
 prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
+prototype_data['schools'].sort_by! { |k| k[:name] }
 
 # Create a list of subjects
 prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
@@ -79,7 +80,7 @@ courses_by_subject.to_a.each do |s|
   folded_course = {
    name: subject,
    courses: subject_courses.count,
-   accrediting: subject_courses.map {|c| c['accrediting']}.uniq.join(', '),
+   accrediting: subject_courses.map {|c| c['accrediting']}.uniq.sort,
    applicationsOpen: subject_courses.map {|c| c['campuses'].map {|g| g['applyFrom'] }}.flatten.uniq.reject {|r| r == "n/a"},
    schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq.sort,
    options: options.uniq.sort,
