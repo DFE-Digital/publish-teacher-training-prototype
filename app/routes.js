@@ -38,17 +38,17 @@ router.get('/school/:id/edit', function (req, res) {
 // add your routes here
 
 function subject(req) {
-  var subject = req.params.subject;
-  var name = subject.charAt(0).toUpperCase() + subject.slice(1);
-  name = name.replace(/-/g,' ');
+  var subject = req.session.data['subjects'].find(function(s) {
+    return s.slug == req.params.subject;
+  })
 
   var folded_course = req.session.data['folded_courses'].find(function(folded_course) {
-    return folded_course.name == name;
+    return folded_course.name == subject.name;
   });
 
   return {
-    name: name,
-    slug: subject,
+    name: subject.name,
+    slug: subject.slug,
     folded_course: folded_course
   };
 }

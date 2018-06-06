@@ -21,7 +21,7 @@
         {% for result in data['subjects'] %}
           <li>
             <h3 class="heading-medium remove-top-margin">
-              <a href="{{ result.url }}">{{ result.subject }}</a>
+              <a href="/course/{{ result.slug }}">{{ result.name }}</a>
             </h3>
 
             {#
