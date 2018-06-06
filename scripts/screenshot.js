@@ -37,12 +37,17 @@ var options = {
 }
 
 var paths = [
-  { path: '/course/chemistry', name: 'course' },
-  { path: '/course/chemistry/about-this-course', name: 'about-this-course' },
-  { path: '/course/chemistry/requirements', name: 'course-requirements' },
-  { path: '/course/chemistry/qualification-options', name: 'qualification' },
-  { path: '/course/chemistry/salary-options', name: 'salary' },
-  { path: '/course/chemistry/from-ucas', name: 'course-details-from-ucas' }
+  { path: '/courses', name: 'courses' },
+  { path: '/course/biology', name: 'course' },
+  { path: '/course/biology/from-ucas', name: 'course-details-from-ucas' },
+  { path: '/course/biology/about-this-course', name: 'about-this-course' },
+  { path: '/course/biology/about-this-provider', name: 'about-this-training-provider' },
+  { path: '/course/biology/requirements', name: 'course-requirements' },
+  { path: '/course/biology/qualification-options', name: 'qualification' },
+  { path: '/course/biology/salary-options', name: 'salary' },
+  { path: '/preview/chemistry', name: 'preview' },
+  { path: '/schools', name: 'schools' },
+  { path: '/organisation', name: 'organisation' },
 ]
 
 var template = '';
