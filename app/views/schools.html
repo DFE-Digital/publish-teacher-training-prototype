@@ -16,10 +16,10 @@
   <ul class="list">
     {% for school in schools %}
     <li>
-      <h3 class="heading-medium">
-        <a href="/school/{{ school.id }}">{{ school.name }}</a>
+      <h3 class="heading-medium remove-bottom-margin">
+        {{ school.name }}
       </h3>
-      <p>{{ school.description }}</p>
+      <p>{{ school.address }}<br />Training location code: {{ school.code }}</p>
     </li>
     {% endfor %}
   </ul>

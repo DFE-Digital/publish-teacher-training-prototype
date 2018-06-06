@@ -28,149 +28,58 @@
   </div>
 
   <ul>
-    <li>
-      <h2 class="heading-large">Chemistry</h2>
-      <dl class="aligned">
-        <dt>Name:</dt>
-        <dd>Chemistry</dd>
-        <dt>Training provider code:</dt>
-        <dd>1UH</dd>
-        <dt>Training programme code:</dt>
-        <dd>2T9D</dd>
-        <dt>Accrediting provider:</dt>
-        <dd>The University of Reading</dd>
-        <dt>Route:</dt>
-        <dd>School Direct training programme</dd>
-        <dt>Subjects:</dt>
-        <dd>Chemistry, Secondary, Science</dd>
-        <dt>Age range:</dt>
-        <dd>Secondary (11+ years)</dd>
-        <dt>Qualification:</dt>
-        <dd>Professional and Postgraduate training programme</dd>
-        <dt>Regions</dt>
-        <dd>South East</dd>
-      </dl>
+    {% for course in data['ucasCourses'] %}
+      {% if course.name == subject.name %}
+        <h2 class="heading-large">{{ course.name }}</h2>
 
-      <h3 class="heading-medium">Training locations</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Location name</th>
-            <th>Address</th>
-            <th>Code</th>
-            <th>Full time vacancies</th>
-            <th>Part time vacancies</th>
-            <th>Applications accepted from</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Main Site</td>
-            <td>Hitches Lane, Fleet, Hampshire, GU51 5JA</td>
-            <td>-</td>
-            <td>Vacancies</td>
-            <td>Not applicable</td>
-            <td>26 Oct 2018</td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
+        <dl class="aligned">
+          <dt>Name:</dt>
+          <dd>{{ course.name }}</dd>
+          <dt>Training provider code:</dt>
+          <dd>{{ course.providerCode }}</dd>
+          <dt>Training programme code:</dt>
+          <dd>{{ course.programmeCode }}</dd>
+          <dt>Accrediting provider:</dt>
+          <dd>{{ course.accrediting }}</dd>
+          <dt>Route:</dt>
+          <dd>{{ course.route }}</dd>
+          <dt>Subjects:</dt>
+          <dd>{{ course.subjects }}</dd>
+          <dt>Age range:</dt>
+          <dd>{{ course.ageRange }}</dd>
+          <dt>Qualification:</dt>
+          <dd>{{ course.qualifications }}</dd>
+          <dt>Regions:</dt>
+          <dd>{{ course.regions }}</dd>
+        </dl>
 
-    <li>
-      <h2 class="heading-large">Chemistry</h2>
-      <dl class="aligned">
-        <dt>Name:</dt>
-        <dd>Chemistry</dd>
-        <dt>Training provider code:</dt>
-        <dd>1UH</dd>
-        <dt>Training programme code:</dt>
-        <dd>2XDS</dd>
-        <dt>Accrediting provider:</dt>
-        <dd>The University of Reading</dd>
-        <dt>Route:</dt>
-        <dd>School Direct training programme</dd>
-        <dt>Subjects:</dt>
-        <dd>Chemistry, Secondary, Science</dd>
-        <dt>Age range:</dt>
-        <dd>Secondary (11+ years)</dd>
-        <dt>Qualification:</dt>
-        <dd>Professional and Postgraduate training programme</dd>
-        <dt>Regions</dt>
-        <dd>South East</dd>
-      </dl>
-
-      <h3 class="heading-medium">Training locations</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Location name</th>
-            <th>Address</th>
-            <th>Code</th>
-            <th>Full time vacancies</th>
-            <th>Part time vacancies</th>
-            <th>Applications accepted from</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Court Moor School</td>
-            <td>Spring Woods, Fleet, Hampshire, GU52 7RY</td>
-            <td>M</td>
-            <td>Vacancies</td>
-            <td>Not applicable</td>
-            <td>26 Oct 2018</td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
-
-    <li>
-      <h2 class="heading-large">Chemistry</h2>
-      <dl class="aligned">
-        <dt>Name:</dt>
-        <dd>Chemistry</dd>
-        <dt>Training provider code:</dt>
-        <dd>1UH</dd>
-        <dt>Training programme code:</dt>
-        <dd>3567</dd>
-        <dt>Accrediting provider:</dt>
-        <dd>The University of Reading</dd>
-        <dt>Route:</dt>
-        <dd>School Direct training programme</dd>
-        <dt>Subjects:</dt>
-        <dd>Chemistry, Secondary, Science</dd>
-        <dt>Age range:</dt>
-        <dd>Secondary (11+ years)</dd>
-        <dt>Qualification:</dt>
-        <dd>Professional and Postgraduate training programme</dd>
-        <dt>Regions</dt>
-        <dd>South East</dd>
-      </dl>
-
-      <h3 class="heading-medium">Training locations</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Location name</th>
-            <th>Address</th>
-            <th>Code</th>
-            <th>Full time vacancies</th>
-            <th>Part time vacancies</th>
-            <th>Applications accepted from</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Yateley School</td>
-            <td>School Lane, Yateley, Hampshire, GU46 6NW</td>
-            <td>Y</td>
-            <td>Vacancies</td>
-            <td>Not applicable</td>
-            <td>26 Oct 2018</td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
+        <h3 class="heading-medium">Training locations</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Location name</th>
+              <th>Address</th>
+              <th>Code</th>
+              <th>Full time vacancies</th>
+              <th>Part time vacancies</th>
+              <th>Applications accepted from</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for school in course.schools %}
+            <tr>
+              <td>{{ school.name }}</td>
+              <td>{{ school.address }}</td>
+              <td>{{ school.code }}</td>
+              <td>Vacancies</td>
+              <td>Not applicable</td>
+              <td>26 Oct 2018</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    {% endfor %}
   </ul>
 </main>
 

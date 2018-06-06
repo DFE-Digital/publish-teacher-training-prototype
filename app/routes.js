@@ -21,7 +21,7 @@ router.get('/course/:subject/:view', function (req, res) {
 
 router.get('/school/:id', function (req, res) {
   var school = req.session.data['schools'].find(function(school) {
-    return school.id == req.params.id;
+    return school.code == req.params.id;
   });
 
   res.render('school', { school: school })
@@ -38,11 +38,18 @@ router.get('/school/:id/edit', function (req, res) {
 // add your routes here
 
 function subject(req) {
-  var subject = req.params.subject;
+  var subject = req.session.data['subjects'].find(function(s) {
+    return s.slug == req.params.subject;
+  })
+
+  var folded_course = req.session.data['folded_courses'].find(function(folded_course) {
+    return folded_course.name == subject.name;
+  });
 
   return {
-    name: subject.charAt(0).toUpperCase() + subject.slice(1),
-    slug: subject
+    name: subject.name,
+    slug: subject.slug,
+    folded_course: folded_course
   };
 }
 
