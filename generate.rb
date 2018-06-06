@@ -95,4 +95,5 @@ courses_by_subject.to_a.each do |s|
 end
 
 # Output to copy and paste into prototype
+puts "#{courses.count} courses folded into #{prototype_data['folded_courses'].count}"
 File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data)) }
