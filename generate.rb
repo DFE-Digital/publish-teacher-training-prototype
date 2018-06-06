@@ -1,5 +1,27 @@
-courses = data.select {|c| c['provider'] == 'West London Teaching School Alliance (Secondary)' }
-courses_mapped = courses.map do |c|
+# Grab courses-clean.json from search-and-compare-data repo
+# Run irb
+# load './generate.rb'
+require 'json'
+
+file = File.read('courses-clean.json')
+data = JSON.parse(file)
+provider = 'West London Teaching School Alliance (Secondary)'
+courses = data.select {|c| c['provider'] == provider }
+
+prototype_data = {
+  'training-provider-name': provider,
+  'provider-code-name': courses.first['providerCodeName'],
+  'provider-code': courses.first['providerCode'],
+  'address-line-1': '123 Baker Street',
+  'town': 'London',
+  'postcode': 'SW1 1AA',
+  'telephone': '0208 123 4567',
+  'email': 'someemail@not-an-email.com',
+  'website': 'http://www.a-provider-website.org.uk/',
+}
+
+# Map course data for the `imported from UCAS` view
+prototype_data['ucasCourses'] = courses.map do |c|
   {
     regions: c['regions'].join(', '),
     accrediting: c['accrediting'],
@@ -14,14 +36,26 @@ courses_mapped = courses.map do |c|
   }
 end
 
-puts JSON.pretty_generate(courses_mapped)
+# Find all schools across all courses and flatten into array of schools
+prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
 
-subjects = courses.uniq {|c| c['name'] }.map {|c| c['name'] }
+# Create a list of subjects
+prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
+  {
+    name: c['name'],
+    slug: c['name'].downcase.gsub(' ', '-')
+  }
+end
+
+prototype_data['subjects'].sort_by! { |k| k[:name] }
+
+# Group courses by subject
 courses_by_subject = {}
-subjects.each { |c| courses_by_subject[c] = [] }
+prototype_data['subjects'].each { |c| courses_by_subject[c[:name]] = [] }
 courses.each { |c| courses_by_subject[c['name']] << c }
 
-folded_courses = []
+# Fold courses
+prototype_data['folded_courses'] = []
 courses_by_subject.to_a.each do |s|
   subject = s[0]
   subject_courses = s[1]
@@ -42,15 +76,13 @@ courses_by_subject.to_a.each do |s|
     end
   end
 
-  puts options
-
   folded_course = {
    name: subject,
    courses: subject_courses.count,
    accrediting: subject_courses.map {|c| c['accrediting']}.uniq.join(', '),
    applicationsOpen: subject_courses.map {|c| c['campuses'].map {|g| g['applyFrom'] }}.flatten.uniq.reject {|r| r == "n/a"},
-   schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq,
-   options: options,
+   schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq.sort,
+   options: options.uniq.sort,
    flags: {
      partTime: subject_courses.map {|c| c['campuses'].map {|g| g['partTime'] }}.flatten.uniq.reject {|r| r == "n/a"}.count > 1,
      salary: subject_courses.map {|c| c['route'] }.flatten.uniq.include?("School Direct training programme (salaried)"),
@@ -58,7 +90,8 @@ courses_by_subject.to_a.each do |s|
    }
   }
 
-  folded_courses << folded_course
-end; nil
+  prototype_data['folded_courses'] << folded_course
+end
 
-puts JSON.pretty_generate(folded_courses)
+# Output to copy and paste into prototype
+File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data)) }
