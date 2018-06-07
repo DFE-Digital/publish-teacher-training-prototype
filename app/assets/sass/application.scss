@@ -214,3 +214,8 @@ dl.aligned dd {
   border: 5px solid $border-colour;
   padding: 60px;
 }
+
+.missing-section {
+  border: 5px solid $border-colour;
+  padding: $gutter / 2;
+}

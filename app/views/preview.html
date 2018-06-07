@@ -18,7 +18,7 @@
       {% if (data[subject.slug + '-course-website']) %}
         <a href="{{ data[subject.slug + '-course-website'] }}">{{ data[subject.slug + '-course-website'] }}</a>
       {% else %}
-        Course website is missing
+        <a href="{{ data[subject.slug + '-course-website'] }}">{{ data['website'] }}</a>
       {% endif %}
     </dd>
     <dt>Date you can apply from:</dt>
@@ -58,6 +58,9 @@
         <h3 class="heading-small">Qualifications</h3>
         {{ macros.previewPart(subject.slug + '-qualifications-required') }}
 
+        <h3 class="heading-small">Personal qualities</h3>
+        {{ macros.previewPart(subject.slug + '-personal-qualities') }}
+
         <h3 class="heading-small">Other requirements</h3>
         {{ macros.previewPart(subject.slug + '-other-requirements') }}
 
@@ -66,12 +69,10 @@
         <p>You can choose to apply for one of two qualifications with this course.</p>
 
         <h3 class="heading-small">PGCE with QTS course</h3>
-        <p>
-          With a postgraduate certificate in education (PGCE) with qualified teacher status (QTS) you’ll be able to teach in England, Scotland, Wales and Northern Ireland. This qualification is also recognised internationally.
-        </p>
+        {{ macros.previewPart(subject.slug + '-pgce-with-qts-qual') }}
 
         <h3 class="heading-small">QTS only course</h3>
-        <p>Qualified teacher status (QTS) allows you to teach in state schools in England. If you want to teach in the rest of the UK or internationally, then you’ll need a PGCE.</p>
+        {{ macros.previewPart(subject.slug + '-qts-qual') }}
 
         <h2 class="heading-medium" id="section-salary-options">Earn a salary while you train</h2>
 
@@ -146,12 +147,16 @@
         </ul> -->
 
         <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
+        {{ macros.previewPart(subject.slug + '-about-organisation') }}
 
         <h3 class="heading-small">Training with a disability</h3>
         {{ macros.previewPart(subject.slug + '-training-with-a-disability') }}
 
         <h3 class="heading-small">Interview process</h3>
         {{ macros.previewPart(subject.slug + '-interview-process') }}
+
+        <h3 class="heading-small">Schools you’ll be placed at</h3>
+        {{ macros.previewPart(subject.slug + '-placement-school-policy') }}
 
         <h2 class="heading-medium" id="section-contact">Contact details</h2>
 

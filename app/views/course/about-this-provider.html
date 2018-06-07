@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'About this training provider' %}
+{% set title = 'About your organisation' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -20,16 +20,16 @@
   <form action="/course/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
+        {{ macros.textarea(subject.slug + '-about-organisation', 'About your organisation', 14) }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
         {{ macros.textarea(subject.slug + '-training-with-a-disability', 'Training with a disability', 14) }}
       </div>
       <div class="column-one-third add-margin-for-label">
-        <p>It should include:</p>
-        <ul class="list list-bullet">
-          <li>accessibility provisions for disabled people</li>
-          <li>how your course accommodates those with disabilities</li>
-        </ul>
-
-        <p>Consider candidates with different disabilities and accessibility needs. For example those with hearing or visual impairments as well as wheelchair users or people with dyslexia.</p>
+        <p>Summarise how this course is accessible for disabled people. Think about the broad range of disabilities that people can have - for example, dyslexia or physical, hearing or visual impairments. </p>
       </div>
     </div>
 
@@ -38,17 +38,26 @@
         {{ macros.textarea(subject.slug + '-interview-process', 'Interview process', 7) }}
       </div>
       <div class="column-one-third add-margin-for-label">
-        <p>It should include:</p>
+        <p>Summarise the interview process that the applicant can expect. For example:</p>
         <ul class="list list-bullet">
-          <li>the number of interviews</li>
-          <li>the types of test they’ll undergo</li>
+          <li>who’ll be interviewing them</li>
+          <li>the number of interviews they can expect</li>
+          <li>the types of tests they'll have</li>
         </ul>
       </div>
     </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-placement-school-policy', 'Placement school policy', 7) }}
+        {{ macros.textarea(subject.slug + '-placement-school-policy', 'Schools you’ll be placed at', 7) }}
+      </div>
+      <div class="column-one-third add-margin-for-label">
+        <p>Summarise:</p>
+        <ul class="list list-bullet">
+          <li>how a candidate’s placement schools will be selected</li>
+          <li>how they’ll spend their time (for example, 3 days per week in a placement, 2 days a week at the training location)</li>
+          <li>the number of schools to choose from (can be approximate if there are more than a dozen)</li>
+        </ul>
       </div>
     </div>
 
