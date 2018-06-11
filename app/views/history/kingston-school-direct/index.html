@@ -1,0 +1,38 @@
+
+{% extends "layout.html" %}
+{% set title = 'Kingston School Direct' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('Courses', 'courses', '/public/images/history/kingston-school-direct/thumbnails/01-courses.png', '/public/images/history/kingston-school-direct/01-courses.png', '') }}
+
+  {{ macros.screenshot('Course', 'course', '/public/images/history/kingston-school-direct/thumbnails/02-course.png', '/public/images/history/kingston-school-direct/02-course.png', '') }}
+
+  {{ macros.screenshot('Course details from ucas', 'course-details-from-ucas', '/public/images/history/kingston-school-direct/thumbnails/03-course-details-from-ucas.png', '/public/images/history/kingston-school-direct/03-course-details-from-ucas.png', '') }}
+
+  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/kingston-school-direct/thumbnails/04-about-this-course.png', '/public/images/history/kingston-school-direct/04-about-this-course.png', '') }}
+
+  {{ macros.screenshot('About this training provider', 'about-this-training-provider', '/public/images/history/kingston-school-direct/thumbnails/05-about-this-training-provider.png', '/public/images/history/kingston-school-direct/05-about-this-training-provider.png', '') }}
+
+  {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/kingston-school-direct/thumbnails/06-course-requirements.png', '/public/images/history/kingston-school-direct/06-course-requirements.png', '') }}
+
+  {{ macros.screenshot('Qualification', 'qualification', '/public/images/history/kingston-school-direct/thumbnails/07-qualification.png', '/public/images/history/kingston-school-direct/07-qualification.png', '') }}
+
+  {{ macros.screenshot('Salary', 'salary', '/public/images/history/kingston-school-direct/thumbnails/08-salary.png', '/public/images/history/kingston-school-direct/08-salary.png', '') }}
+
+  {{ macros.screenshot('Preview', 'preview', '/public/images/history/kingston-school-direct/thumbnails/09-preview.png', '/public/images/history/kingston-school-direct/09-preview.png', '') }}
+
+  {{ macros.screenshot('Schools', 'schools', '/public/images/history/kingston-school-direct/thumbnails/10-schools.png', '/public/images/history/kingston-school-direct/10-schools.png', '') }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/kingston-school-direct/thumbnails/11-organisation.png', '/public/images/history/kingston-school-direct/11-organisation.png', '') }}
+
+</main>
+{% endblock %}

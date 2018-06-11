@@ -45,7 +45,7 @@ var paths = [
   { path: '/course/biology/requirements', name: 'course-requirements' },
   { path: '/course/biology/qualification-options', name: 'qualification' },
   { path: '/course/biology/salary-options', name: 'salary' },
-  { path: '/preview/chemistry', name: 'preview' },
+  { path: '/preview/biology', name: 'preview' },
   { path: '/schools', name: 'schools' },
   { path: '/organisation', name: 'organisation' },
 ]
