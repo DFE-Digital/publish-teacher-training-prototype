@@ -1,7 +1,7 @@
 {
-  "training-provider-name": "Kingston School Direct",
-  "provider-code-name": "A1556",
-  "provider-code": "1FM",
+  "training-provider-name": "Swiss Cottage Teaching School Alliance",
+  "provider-code-name": "A1632",
+  "provider-code": "1HU",
   "address-line-1": "123 Baker Street",
   "town": "London",
   "postcode": "SW1 1AA",
@@ -15,61 +15,75 @@
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
       "name": "Primary",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "2FPZ",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "1HU",
+      "programmeCode": "25WQ",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
+          "address": "80 Avenue Road, London, NW8 6HX",
           "code": "-"
         }
       ],
       "options": [
-        "QTS, 1 year full time with salary"
+        "PGCE with QTS, 1 year full time"
       ]
     },
     {
       "regions": "London",
-      "accrediting": "Roehampton University",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
       "name": "Primary",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "2RP7",
+      "route": "School Direct training programme (salaried)",
+      "qualifications": "QTS",
+      "providerCode": "1HU",
+      "programmeCode": "25WS",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
+          "address": "80 Avenue Road, London, NW8 6HX",
           "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Art / art & design, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Art and Design",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26ZF",
-      "schools": [
+        },
         {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
+          "name": "Beckford School",
+          "address": "NW6 1QL",
+          "code": "B"
+        },
+        {
+          "name": "Frank Barnes School for Deaf Children",
+          "address": "N1C 4PF",
+          "code": "E"
+        },
+        {
+          "name": "Paddock School",
+          "address": "Wandsworth, SW15 5RT",
+          "code": "H"
+        },
+        {
+          "name": "Woodend Academy",
+          "address": "UB6 0EQ",
+          "code": "I"
+        },
+        {
+          "name": "Woodlands Special School",
+          "address": "HA8 6JP",
+          "code": "J"
+        },
+        {
+          "name": "Hackney New Primary School",
+          "address": "1-9 Downham Road, N1 5AA",
+          "code": "S"
+        },
+        {
+          "name": "Waverley School",
+          "address": "105 The Ride Enfield, EN3 7DL",
+          "code": "V"
         }
       ],
       "options": [
-        "PGCE with QTS, 1 year full time"
+        "QTS, 1 year full time with salary"
       ]
     },
     {
@@ -78,611 +92,82 @@
       "subjects": "Biology, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Biology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26ZB",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Biology, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Biology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1FM",
-      "programmeCode": "373G",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Business education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Business Studies",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26ZH",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26ZC",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
       "route": "School Direct training programme (salaried)",
       "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "2RP8",
+      "providerCode": "1HU",
+      "programmeCode": "32Q7",
       "schools": [
         {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
+          "name": "Haverstock School",
+          "address": "24 Haverstock Hill, NW3 2BQ",
+          "code": "U"
         }
       ],
       "options": [
         "QTS, 1 year full time with salary"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1FM",
-      "programmeCode": "373F",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Computer studies, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Computing",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "273K",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Computer studies, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Computing",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "2FPV",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "QTS, 1 year full time with salary"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Design and technology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Design and Technology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "334Q",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Drama and theatre studies, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Drama",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1FM",
-      "programmeCode": "273J",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "English, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "English",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26YZ",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "English, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "English",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "2N4M",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "QTS, 1 year full time with salary"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Geography, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Geography",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26Z5",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "History, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "History",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26Z6",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Languages, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26Z3",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26Z2",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "273Q",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "QTS, 1 year full time with salary"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Music, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Music",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26Z7",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Physical education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physical Education",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "334R",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Physics, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "26ZD",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Physics, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physics",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1FM",
-      "programmeCode": "273W",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "QTS, 1 year full time with salary"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Roehampton University",
-      "subjects": "Religious education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Religious Education",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "2FPS",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Secondary, Social science",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Social Sciences",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1FM",
-      "programmeCode": "2FPT",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
       ]
     }
   ],
   "schools": [
     {
+      "name": "Beckford School",
+      "address": "NW6 1QL",
+      "code": "B"
+    },
+    {
+      "name": "Frank Barnes School for Deaf Children",
+      "address": "N1C 4PF",
+      "code": "E"
+    },
+    {
+      "name": "Hackney New Primary School",
+      "address": "1-9 Downham Road, N1 5AA",
+      "code": "S"
+    },
+    {
+      "name": "Haverstock School",
+      "address": "24 Haverstock Hill, NW3 2BQ",
+      "code": "U"
+    },
+    {
       "name": "Main Site",
-      "address": "Coombe Girls' School, Clarence Avenue, New Malden, Kingston-Upon-Thames, KT3 3TU",
+      "address": "80 Avenue Road, London, NW8 6HX",
       "code": "-"
+    },
+    {
+      "name": "Paddock School",
+      "address": "Wandsworth, SW15 5RT",
+      "code": "H"
+    },
+    {
+      "name": "Waverley School",
+      "address": "105 The Ride Enfield, EN3 7DL",
+      "code": "V"
+    },
+    {
+      "name": "Woodend Academy",
+      "address": "UB6 0EQ",
+      "code": "I"
+    },
+    {
+      "name": "Woodlands Special School",
+      "address": "HA8 6JP",
+      "code": "J"
     }
   ],
   "subjects": [
-    {
-      "name": "Art and Design",
-      "slug": "art-and-design"
-    },
     {
       "name": "Biology",
       "slug": "biology"
     },
     {
-      "name": "Business Studies",
-      "slug": "business-studies"
-    },
-    {
-      "name": "Chemistry",
-      "slug": "chemistry"
-    },
-    {
-      "name": "Computing",
-      "slug": "computing"
-    },
-    {
-      "name": "Design and Technology",
-      "slug": "design-and-technology"
-    },
-    {
-      "name": "Drama",
-      "slug": "drama"
-    },
-    {
-      "name": "English",
-      "slug": "english"
-    },
-    {
-      "name": "Geography",
-      "slug": "geography"
-    },
-    {
-      "name": "History",
-      "slug": "history"
-    },
-    {
-      "name": "Mathematics",
-      "slug": "mathematics"
-    },
-    {
-      "name": "Modern Languages",
-      "slug": "modern-languages"
-    },
-    {
-      "name": "Music",
-      "slug": "music"
-    },
-    {
-      "name": "Physical Education",
-      "slug": "physical-education"
-    },
-    {
-      "name": "Physics",
-      "slug": "physics"
-    },
-    {
       "name": "Primary",
       "slug": "primary"
-    },
-    {
-      "name": "Religious Education",
-      "slug": "religious-education"
-    },
-    {
-      "name": "Social Sciences",
-      "slug": "social-sciences"
     }
   ],
   "folded_courses": [
     {
-      "name": "Art and Design",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
       "name": "Biology",
-      "courses": 2,
-      "accrediting": [
-        "Roehampton University",
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": true
-      }
-    },
-    {
-      "name": "Business Studies",
       "courses": 1,
       "accrediting": [
         "UCL, University College London (University of London"
@@ -691,287 +176,35 @@
         "26 Oct 2017"
       ],
       "schoolsWithVacancies": [
-        "Main Site"
+        "Haverstock School"
       ],
       "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Chemistry",
-      "courses": 3,
-      "accrediting": [
-        "Roehampton University",
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time",
         "QTS, 1 year full time with salary"
       ],
       "flags": {
         "partTime": false,
         "salary": true,
-        "qualifications": true
-      }
-    },
-    {
-      "name": "Computing",
-      "courses": 2,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time",
-        "QTS, 1 year full time with salary"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": true,
-        "qualifications": true
-      }
-    },
-    {
-      "name": "Design and Technology",
-      "courses": 1,
-      "accrediting": [
-        "Roehampton University"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
         "qualifications": false
-      }
-    },
-    {
-      "name": "Drama",
-      "courses": 1,
-      "accrediting": [
-        "Roehampton University"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "English",
-      "courses": 2,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time",
-        "QTS, 1 year full time with salary"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": true,
-        "qualifications": true
-      }
-    },
-    {
-      "name": "Geography",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "History",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Mathematics",
-      "courses": 2,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time",
-        "QTS, 1 year full time with salary"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": true,
-        "qualifications": true
-      }
-    },
-    {
-      "name": "Modern Languages",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Music",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Physical Education",
-      "courses": 1,
-      "accrediting": [
-        "Roehampton University"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Physics",
-      "courses": 2,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time",
-        "QTS, 1 year full time with salary"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": true,
-        "qualifications": true
       }
     },
     {
       "name": "Primary",
       "courses": 2,
       "accrediting": [
-        "Roehampton University",
         "UCL, University College London (University of London"
       ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
       "schoolsWithVacancies": [
-        "Main Site"
+        "Beckford School",
+        "Frank Barnes School for Deaf Children",
+        "Hackney New Primary School",
+        "Main Site",
+        "Paddock School",
+        "Waverley School",
+        "Woodend Academy",
+        "Woodlands Special School"
       ],
       "options": [
         "PGCE with QTS, 1 year full time",
@@ -981,48 +214,6 @@
         "partTime": false,
         "salary": true,
         "qualifications": true
-      }
-    },
-    {
-      "name": "Religious Education",
-      "courses": 1,
-      "accrediting": [
-        "Roehampton University"
-      ],
-      "applicationsOpen": [
-        "26 Oct 2017"
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
-      }
-    },
-    {
-      "name": "Social Sciences",
-      "courses": 1,
-      "accrediting": [
-        "UCL, University College London (University of London"
-      ],
-      "applicationsOpen": [
-
-      ],
-      "schoolsWithVacancies": [
-        "Main Site"
-      ],
-      "options": [
-        "PGCE with QTS, 1 year full time"
-      ],
-      "flags": {
-        "partTime": false,
-        "salary": false,
-        "qualifications": false
       }
     }
   ]
