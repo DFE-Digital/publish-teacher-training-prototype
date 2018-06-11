@@ -30,7 +30,10 @@
   <ul>
     {% for course in data['ucasCourses'] %}
       {% if course.name == subject.name %}
-        <h2 class="heading-large" id="{{ course.programmeCode }}">{{ course.name }}</h2>
+        <h2 class="heading-large" id="{{ course.programmeCode }}">
+          {{ course.name }}
+          <span class="heading-secondary">{{ course.options }}</span>
+        </h2>
 
         <dl class="aligned">
           <dt>Name:</dt>
