@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% set title = 'QA draft' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('Sent to QA', 'sent-to-qa', '/public/images/history/qa-draft/thumbnails/01-sent-to-qa.png', '/public/images/history/qa-draft/01-sent-to-qa.png', '') }}
+
+  {{ macros.screenshot('QA passed email', 'qa-passed-email', '/public/images/history/qa-draft/thumbnails/02-qa-passed-email.png', '/public/images/history/qa-draft/02-qa-passed-email.png', '') }}
+
+  {{ macros.screenshot('QA failed email', 'qa-failed-email', '/public/images/history/qa-draft/thumbnails/03-qa-failed-email.png', '/public/images/history/qa-draft/03-qa-failed-email.png', '') }}
+
+</main>
+{% endblock %}
