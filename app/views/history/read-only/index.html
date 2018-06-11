@@ -1,0 +1,40 @@
+
+{% extends "layout.html" %}
+{% set title = 'Read only' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('We imported', 'we-imported', '/public/images/history/read-only/thumbnails/01-we-imported.png', '/public/images/history/read-only/01-we-imported.png', '') }}
+  
+  {{ macros.screenshot('Courses', 'courses', '/public/images/history/read-only/thumbnails/02-courses.png', '/public/images/history/read-only/02-courses.png', '') }}
+  
+  {{ macros.screenshot('Course', 'course', '/public/images/history/read-only/thumbnails/03-course.png', '/public/images/history/read-only/03-course.png', '') }}
+  
+  {{ macros.screenshot('Course details from ucas', 'course-details-from-ucas', '/public/images/history/read-only/thumbnails/04-course-details-from-ucas.png', '/public/images/history/read-only/04-course-details-from-ucas.png', '') }}
+  
+  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/read-only/thumbnails/05-about-this-course.png', '/public/images/history/read-only/05-about-this-course.png', '') }}
+  
+  {{ macros.screenshot('About this training provider', 'about-this-training-provider', '/public/images/history/read-only/thumbnails/06-about-this-training-provider.png', '/public/images/history/read-only/06-about-this-training-provider.png', '') }}
+  
+  {{ macros.screenshot('Course requirements', 'course-requirements', '/public/images/history/read-only/thumbnails/07-course-requirements.png', '/public/images/history/read-only/07-course-requirements.png', '') }}
+  
+  {{ macros.screenshot('Qualification', 'qualification', '/public/images/history/read-only/thumbnails/08-qualification.png', '/public/images/history/read-only/08-qualification.png', '') }}
+  
+  {{ macros.screenshot('Salary', 'salary', '/public/images/history/read-only/thumbnails/09-salary.png', '/public/images/history/read-only/09-salary.png', '') }}
+  
+  {{ macros.screenshot('Preview', 'preview', '/public/images/history/read-only/thumbnails/10-preview.png', '/public/images/history/read-only/10-preview.png', '') }}
+  
+  {{ macros.screenshot('Schools', 'schools', '/public/images/history/read-only/thumbnails/11-schools.png', '/public/images/history/read-only/11-schools.png', '') }}
+  
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/read-only/thumbnails/12-organisation.png', '/public/images/history/read-only/12-organisation.png', '') }}
+  
+</main>
+{% endblock %}
