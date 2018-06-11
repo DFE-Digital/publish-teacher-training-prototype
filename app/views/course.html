@@ -39,9 +39,37 @@
               <h3 class="course-part-task">
                 Details from UCAS
               </h3>
-              <a class="course-part-task-action" href="/course/{{ subject.slug }}/from-ucas">View</a>
+              <!-- <a class="course-part-task-action" href="/course/{{ subject.slug }}/from-ucas">View</a> -->
 
-              <dl class="course-part-tasks">
+              <div style="clear: left; padding-top: 20px" class="add-top-margin">
+                <p>Course information that we’ve received from UCAS based on your submissions to them. If you want to change these you’ll need to use UCAS web-link.</p>
+                <p>Multiple UCAS courses for the same subject are combined into a single subject page with different course options.</p>
+              </div>
+
+              <table class="ucas-info-table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Type</th>
+                    <th>Code</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for course in data['ucasCourses'] %}
+                    {% if course.name == subject.name %}
+                      <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.options }}</td>
+                        <td>{{ course.programmeCode }}</td>
+                        <td><a href="/course/{{ subject.slug }}/from-ucas#{{ course.programmeCode }}">View</a></td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              <!-- <dl class="course-part-tasks">
                 <div>
                   <dt class="course-part-label">
                     UCAS {{ subject.name }} courses
@@ -96,7 +124,7 @@
                     {% endfor %}
                   </dd>
                 </div>
-              </dl>
+              </dl> -->
             </li>
             <li class="course-parts-item">
               <h3 class="course-part-task">

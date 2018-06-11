@@ -23,6 +23,21 @@ prototype_data = {
 
 # Map course data for the `imported from UCAS` view
 prototype_data['ucasCourses'] = courses.map do |c|
+
+  options = []
+  qual = c['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+  partTime = c['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+  fullTime = c['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+  salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
+
+  if partTime
+    options << "#{qual}, 1 year part time#{salaried}"
+  end
+
+  if fullTime
+    options << "#{qual}, 1 year full time#{salaried}"
+  end
+
   {
     regions: c['regions'].join(', '),
     accrediting: c['accrediting'],
@@ -33,7 +48,8 @@ prototype_data['ucasCourses'] = courses.map do |c|
     qualifications: c['qualifications'].join(', '),
     providerCode: c['providerCode'],
     programmeCode: c['programmeCode'],
-    schools: c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } }
+    schools: c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } },
+    options: options
   }
 end
 

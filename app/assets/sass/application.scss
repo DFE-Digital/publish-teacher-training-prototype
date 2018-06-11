@@ -215,6 +215,10 @@ dl.aligned dd {
   padding: 60px;
 }
 
+.ucas-info-table tr:last-child td {
+  border-bottom: 0;
+}
+
 .missing-section {
   border: 5px solid $border-colour;
   padding: $gutter / 2;
