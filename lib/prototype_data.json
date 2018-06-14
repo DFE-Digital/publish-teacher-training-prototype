@@ -1,7 +1,7 @@
 {
-  "training-provider-name": "Swiss Cottage Teaching School Alliance",
-  "provider-code-name": "A1632",
-  "provider-code": "1HU",
+  "training-provider-name": "Bromley Schools Collegiate",
+  "provider-code-name": "BROM",
+  "provider-code": "B91",
   "address-line-1": "123 Baker Street",
   "town": "London",
   "postcode": "SW1 1AA",
@@ -11,19 +11,19 @@
   "ucasCourses": [
     {
       "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
+      "accrediting": null,
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1HU",
-      "programmeCode": "25WQ",
+      "name": "Primary (5-11)",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "X105",
       "schools": [
         {
           "name": "Main Site",
-          "address": "80 Avenue Road, London, NW8 6HX",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -32,188 +32,544 @@
     },
     {
       "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Primary",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1HU",
-      "programmeCode": "25WS",
+      "accrediting": null,
+      "subjects": "Computer studies, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Computer Science",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "IX99",
       "schools": [
         {
           "name": "Main Site",
-          "address": "80 Avenue Road, London, NW8 6HX",
-          "code": "-"
-        },
-        {
-          "name": "Beckford School",
-          "address": "NW6 1QL",
-          "code": "B"
-        },
-        {
-          "name": "Frank Barnes School for Deaf Children",
-          "address": "N1C 4PF",
-          "code": "E"
-        },
-        {
-          "name": "Paddock School",
-          "address": "Wandsworth, SW15 5RT",
-          "code": "H"
-        },
-        {
-          "name": "Woodend Academy",
-          "address": "UB6 0EQ",
-          "code": "I"
-        },
-        {
-          "name": "Woodlands Special School",
-          "address": "HA8 6JP",
-          "code": "J"
-        },
-        {
-          "name": "Hackney New Primary School",
-          "address": "1-9 Downham Road, N1 5AA",
-          "code": "S"
-        },
-        {
-          "name": "Waverley School",
-          "address": "105 The Ride Enfield, EN3 7DL",
-          "code": "V"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
-        "QTS, 1 year full time with salary"
+        "PGCE with QTS, 1 year full time"
       ]
     },
     {
       "regions": "London",
-      "accrediting": "UCL, University College London (University of London",
-      "subjects": "Biology, Science, Secondary",
+      "accrediting": null,
+      "subjects": "Drama and theatre studies, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Biology",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "1HU",
-      "programmeCode": "32Q7",
+      "name": "Drama",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "2YDF",
       "schools": [
         {
-          "name": "Haverstock School",
-          "address": "24 Haverstock Hill, NW3 2BQ",
-          "code": "U"
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
-        "QTS, 1 year full time with salary"
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "English, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "English",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "Q3X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Geography, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Geography",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "2YDH",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "History, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "History",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "V1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Languages, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "2YDJ",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Mathematics, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Mathematics",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "G1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Music, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Music",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "2YDK",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Physical education, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Physical Education",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "2YDL",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Physics, Science, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Physics",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "F3X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ]
+    },
+    {
+      "regions": "London",
+      "accrediting": null,
+      "subjects": "Religious education, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Religious Education",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "33YX",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
       ]
     }
   ],
   "schools": [
     {
-      "name": "Beckford School",
-      "address": "NW6 1QL",
-      "code": "B"
-    },
-    {
-      "name": "Frank Barnes School for Deaf Children",
-      "address": "N1C 4PF",
-      "code": "E"
-    },
-    {
-      "name": "Hackney New Primary School",
-      "address": "1-9 Downham Road, N1 5AA",
-      "code": "S"
-    },
-    {
-      "name": "Haverstock School",
-      "address": "24 Haverstock Hill, NW3 2BQ",
-      "code": "U"
-    },
-    {
       "name": "Main Site",
-      "address": "80 Avenue Road, London, NW8 6HX",
-      "code": "-"
-    },
-    {
-      "name": "Paddock School",
-      "address": "Wandsworth, SW15 5RT",
-      "code": "H"
-    },
-    {
-      "name": "Waverley School",
-      "address": "105 The Ride Enfield, EN3 7DL",
-      "code": "V"
-    },
-    {
-      "name": "Woodend Academy",
-      "address": "UB6 0EQ",
-      "code": "I"
-    },
-    {
-      "name": "Woodlands Special School",
-      "address": "HA8 6JP",
-      "code": "J"
+      "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+      "code": ""
     }
   ],
   "subjects": [
     {
-      "name": "Biology",
-      "slug": "biology"
+      "name": "Computer Science",
+      "slug": "computer-science"
     },
     {
-      "name": "Primary",
-      "slug": "primary"
+      "name": "Drama",
+      "slug": "drama"
+    },
+    {
+      "name": "English",
+      "slug": "english"
+    },
+    {
+      "name": "Geography",
+      "slug": "geography"
+    },
+    {
+      "name": "History",
+      "slug": "history"
+    },
+    {
+      "name": "Mathematics",
+      "slug": "mathematics"
+    },
+    {
+      "name": "Modern Languages",
+      "slug": "modern-languages"
+    },
+    {
+      "name": "Music",
+      "slug": "music"
+    },
+    {
+      "name": "Physical Education",
+      "slug": "physical-education"
+    },
+    {
+      "name": "Physics",
+      "slug": "physics"
+    },
+    {
+      "name": "Primary (5-11)",
+      "slug": "primary-(5-11)"
+    },
+    {
+      "name": "Religious Education",
+      "slug": "religious-education"
     }
   ],
   "folded_courses": [
     {
-      "name": "Biology",
+      "name": "Computer Science",
       "courses": 1,
       "accrediting": [
-        "UCL, University College London (University of London"
+        null
       ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
       "schoolsWithVacancies": [
-        "Haverstock School"
+        "Main Site"
       ],
       "options": [
-        "QTS, 1 year full time with salary"
+        "PGCE with QTS, 1 year full time"
       ],
       "flags": {
         "partTime": false,
-        "salary": true,
+        "salary": false,
         "qualifications": false
       }
     },
     {
-      "name": "Primary",
-      "courses": 2,
+      "name": "Drama",
+      "courses": 1,
       "accrediting": [
-        "UCL, University College London (University of London"
+        null
       ],
       "applicationsOpen": [
         "26 Oct 2017"
       ],
       "schoolsWithVacancies": [
-        "Beckford School",
-        "Frank Barnes School for Deaf Children",
-        "Hackney New Primary School",
-        "Main Site",
-        "Paddock School",
-        "Waverley School",
-        "Woodend Academy",
-        "Woodlands Special School"
+        "Main Site"
       ],
       "options": [
-        "PGCE with QTS, 1 year full time",
-        "QTS, 1 year full time with salary"
+        "PGCE with QTS, 1 year full time"
       ],
       "flags": {
         "partTime": false,
-        "salary": true,
-        "qualifications": true
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "English",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Geography",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "History",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Mathematics",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Modern Languages",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Music",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Physical Education",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Physics",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Primary (5-11)",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
+      }
+    },
+    {
+      "name": "Religious Education",
+      "courses": 1,
+      "accrediting": [
+        null
+      ],
+      "applicationsOpen": [
+        "26 Oct 2017"
+      ],
+      "schoolsWithVacancies": [
+        "Main Site"
+      ],
+      "options": [
+        "PGCE with QTS, 1 year full time"
+      ],
+      "flags": {
+        "partTime": false,
+        "salary": false,
+        "qualifications": false
       }
     }
   ]
