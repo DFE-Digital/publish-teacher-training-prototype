@@ -1477,10 +1477,6 @@
       "slug": "goldsmiths--university-of-london",
       "subjects": [
         {
-          "name": "Primary",
-          "slug": "primary"
-        },
-        {
           "name": "Art and Design",
           "slug": "art-and-design"
         },
@@ -1495,6 +1491,10 @@
         {
           "name": "English",
           "slug": "english"
+        },
+        {
+          "name": "Primary",
+          "slug": "primary"
         }
       ]
     },
@@ -1523,12 +1523,12 @@
           "slug": "english"
         },
         {
-          "name": "Modern Languages",
-          "slug": "modern-languages"
-        },
-        {
           "name": "Mathematics",
           "slug": "mathematics"
+        },
+        {
+          "name": "Modern Languages",
+          "slug": "modern-languages"
         },
         {
           "name": "Physics",
@@ -1545,10 +1545,6 @@
       "slug": "st-mary-s-university--twickenham",
       "subjects": [
         {
-          "name": "Primary",
-          "slug": "primary"
-        },
-        {
           "name": "Biology",
           "slug": "biology"
         },
@@ -1559,10 +1555,6 @@
         {
           "name": "English",
           "slug": "english"
-        },
-        {
-          "name": "Modern Languages (French with Spanish)",
-          "slug": "modern-languages-(french-with-spanish)"
         },
         {
           "name": "Geography",
@@ -1577,6 +1569,10 @@
           "slug": "mathematics"
         },
         {
+          "name": "Modern Languages (French with Spanish)",
+          "slug": "modern-languages-(french-with-spanish)"
+        },
+        {
           "name": "Physical Education",
           "slug": "physical-education"
         },
@@ -1585,12 +1581,16 @@
           "slug": "physics"
         },
         {
-          "name": "Religious Education",
-          "slug": "religious-education"
+          "name": "Primary",
+          "slug": "primary"
         },
         {
           "name": "Primary Physical Education Specialist",
           "slug": "primary-physical-education-specialist"
+        },
+        {
+          "name": "Religious Education",
+          "slug": "religious-education"
         }
       ]
     },
@@ -1598,10 +1598,6 @@
       "name": "UCL, University College London (University of London",
       "slug": "ucl--university-college-london--university-of-london",
       "subjects": [
-        {
-          "name": "Primary",
-          "slug": "primary"
-        },
         {
           "name": "Biology",
           "slug": "biology"
@@ -1623,12 +1619,20 @@
           "slug": "english"
         },
         {
+          "name": "English (with Drama)",
+          "slug": "english-(with-drama)"
+        },
+        {
           "name": "Geography",
           "slug": "geography"
         },
         {
           "name": "Mathematics",
           "slug": "mathematics"
+        },
+        {
+          "name": "Modern Languages",
+          "slug": "modern-languages"
         },
         {
           "name": "Music",
@@ -1639,20 +1643,16 @@
           "slug": "physics"
         },
         {
-          "name": "Psychology",
-          "slug": "psychology"
+          "name": "Primary",
+          "slug": "primary"
         },
         {
           "name": "Primary Mathematics Specialist",
           "slug": "primary-mathematics-specialist"
         },
         {
-          "name": "English (with Drama)",
-          "slug": "english-(with-drama)"
-        },
-        {
-          "name": "Modern Languages",
-          "slug": "modern-languages"
+          "name": "Psychology",
+          "slug": "psychology"
         },
         {
           "name": "Religious Education",

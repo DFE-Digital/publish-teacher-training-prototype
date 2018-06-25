@@ -100,7 +100,7 @@ courses.each do |course|
   prototype_data['accreditors'].find { |a| a[:name] == course['accrediting']}[:subjects] << subject
 end
 
-prototype_data['accreditors'].each {|a| a[:subjects].uniq! }
+prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
 
 prototype_data['folded_courses'] = {}
 
