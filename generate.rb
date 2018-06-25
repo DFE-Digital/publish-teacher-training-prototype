@@ -30,11 +30,11 @@ prototype_data['ucasCourses'] = courses.map do |c|
   salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
 
   if partTime
-    options << "#{qual}, 1 year part time#{salaried}"
+    options << "#{qual} part time#{salaried}"
   end
 
   if fullTime
-    options << "#{qual}, 1 year full time#{salaried}"
+    options << "#{qual} full time#{salaried}"
   end
 
   {
@@ -55,6 +55,14 @@ end
 # Find all schools across all courses and flatten into array of schools
 prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
+
+# Create a list of accreditors
+prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
+  {
+    name: c['accrediting'],
+    slug: c['accrediting'].downcase.gsub(/[^a-zA-Z0-9]/, '-')
+  }
+end
 
 # Create a list of subjects
 prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
@@ -85,11 +93,11 @@ courses_by_subject.to_a.each do |s|
     salaried = sc['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
 
     if partTime
-      options << "#{qual}, 1 year part time#{salaried}"
+      options << "#{qual} part time#{salaried}"
     end
 
     if fullTime
-      options << "#{qual}, 1 year full time#{salaried}"
+      options << "#{qual} full time#{salaried}"
     end
   end
 
