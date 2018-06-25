@@ -219,6 +219,10 @@ dl.aligned dd {
   border-bottom: 0;
 }
 
+.ucas-info-table .ucas-view-link {
+  text-align: right;
+}
+
 .missing-section {
   border: 5px solid $border-colour;
   padding: $gutter / 2;

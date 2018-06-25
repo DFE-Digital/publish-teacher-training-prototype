@@ -8,8 +8,8 @@
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
     <ol>
-      <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }}</a></li>
+      <li><a href="/courses">Courses</a></li>
+      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
     </ol>
   </div>
 

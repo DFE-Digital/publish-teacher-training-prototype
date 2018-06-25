@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% set title = 'About this course' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/courses">Courses</a></li>
+      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    {{ option.name }}
+  </h1>
+
+  <!-- <dl class="aligned">
+    <dt>Name:</dt>
+    <dd>Biology</dd>
+    <dt>Training provider code:</dt>
+    <dd>134</dd>
+    <dt>Training programme code:</dt>
+    <dd>2H5B</dd>
+    <dt>Accredited provider:</dt>
+    <dd>St Mary's University, Twickenham</dd>
+    <dt>Route:</dt>
+    <dd>School Direct training programme (salaried)</dd>
+    <dt>Subjects:</dt>
+    <dd>Biology, Science, Secondary</dd>
+    <dt>Age range:</dt>
+    <dd>Secondary (11+ years)</dd>
+    <dt>Qualification:</dt>
+    <dd>QTS</dd>
+    <dt>Regions:</dt>
+    <dd>London</dd>
+  </dl>
+
+  <h3 class="heading-medium">Training locations</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Location name</th>
+        <th>Address</th>
+        <th>Code</th>
+        <th>Full time vacancies</th>
+        <th>Part time vacancies</th>
+        <th>Applications accepted from</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>St Mary's Catholic High School</td>
+        <td>Woburn Road, Croydon, CR9 2EE</td>
+        <td>S</td>
+        <td>Vacancies</td>
+        <td>Not applicable</td>
+        <td>26 Oct 2018</td>
+      </tr>
+
+    </tbody>
+  </table> -->
+
+  <form action="/course/{{ subject.slug }}" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textbox(subject.slug + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'Course fee in £', null, 'form-control-xsmall') }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+
+        <h3 class="heading-large remove-top-margin">About this course</h3>
+        <p>A short summary of the course. Be concise and use plain language.</p>
+
+        <p>It should include:</p>
+        <ul class="list list-bullet">
+          <li>what types of things you’ll be learning</li>
+          <li>overall experience (eg whether it’s hands-on classroom experience from day one)</li>
+          <li>how the course will be structured</li>
+          <li>locations that you’ll need to attend (eg if you have to attend classes at an accrediting provider as well as the training provider)</li>
+        </ul>
+
+        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p>
+
+        {{ macros.textarea(subject.slug + '-about-this-course', 'About this course', 14, '') }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Interview process</h3>
+
+        <p>Summarise the interview process that the applicant can expect. For example:</p>
+        <ul class="list list-bullet">
+          <li>who’ll be interviewing them</li>
+          <li>the number of interviews they can expect</li>
+          <li>the types of tests they'll have</li>
+        </ul>
+
+        {{ macros.textarea(subject.slug + '-interview-process', 'Interview process', 7) }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">How school placements work</h3>
+
+        <p>Summarise:</p>
+        <ul class="list list-bullet">
+          <li>the number of placements a candidate will go on</li>
+          <li>the time candidates spend in each school</li>
+          <li>how schools are chosen based on the candidate’s needs</li>
+        </ul>
+
+        {{ macros.textarea(subject.slug + '-placement-school-policy', 'How school placements work', 7) }}
+      </div>
+    </div>
+
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+  </form>
+</main>
+
+{% endblock %}
