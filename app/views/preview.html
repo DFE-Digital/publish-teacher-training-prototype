@@ -65,6 +65,27 @@
           <h4 class="heading-small" id="section-about">About the course</h4>
           {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course') }}
 
+          <h4 class="heading-small">Fees</h4>
+          <p>The course fees for 2018/2019 are as follows:</p>
+          <div class="body-text">
+            <table>
+              <tbody>
+                <tr class="visually-hidden">
+                  <th>Student type</th>
+                  <th>Fees to pay</th>
+                </tr>
+                <tr>
+                  <td>UK students</td>
+                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee'] }}</td>
+                </tr>
+                <tr>
+                  <td>EU students</td>
+                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee'] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <h4 class="heading-small">Interview process</h4>
           {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process') }}
 
