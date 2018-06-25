@@ -64,16 +64,16 @@
     </tbody>
   </table> -->
 
-  <form action="/course/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
       </div>
     </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'Course fee in £', null, 'form-control-xsmall') }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-fee', 'Course fee in £', null, 'form-control-xsmall') }}
       </div>
     </div>
 
@@ -95,7 +95,7 @@
 
         <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p>
 
-        {{ macros.textarea(subject.slug + '-about-this-course', 'About this course', 14, '') }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-about-this-course', 'About this course', 14, '') }}
       </div>
     </div>
 
@@ -112,7 +112,7 @@
           <li>the types of tests they'll have</li>
         </ul>
 
-        {{ macros.textarea(subject.slug + '-interview-process', 'Interview process', 7) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process', 7) }}
       </div>
     </div>
 
@@ -129,7 +129,7 @@
           <li>how schools are chosen based on the candidate’s needs</li>
         </ul>
 
-        {{ macros.textarea(subject.slug + '-placement-school-policy', 'How school placements work', 7) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-placement-school-policy', 'How school placements work', 7) }}
       </div>
     </div>
 

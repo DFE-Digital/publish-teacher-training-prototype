@@ -6,8 +6,8 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
-router.get('/preview/:subject', function (req, res) {
-  res.render('preview', { subject: subject(req) })
+router.get('/preview/:accreditor/:subject', function (req, res) {
+  res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
 })
 
 router.get('/email-qa-pass/:subject', function (req, res) {
@@ -83,11 +83,11 @@ function accreditor(req) {
 }
 
 function option(req, subject) {
-  var optionIndex = req.params.index - 1;
+  var optionIndex = req.params.index;
   var folded_course = subject.folded_course;
 
   return {
-    name: folded_course['options'][optionIndex],
+    name: folded_course['options'][optionIndex - 1],
     index: optionIndex
   };
 }

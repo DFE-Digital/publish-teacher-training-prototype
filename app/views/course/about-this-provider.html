@@ -17,7 +17,7 @@
     {{ title }}
   </h1>
 
-  <form action="/course/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <p>This section is your opportunity to tell applicants why they should train with you. You could consider giving answers to the following questions:</p>
@@ -26,13 +26,13 @@
           <li>advantages of you as a training provider (please include evidence)</li>
           <li>benefits of your chosen accredited provider</li>
         </ul>
-        {{ macros.textarea(subject.slug + '-about-organisation', 'Training with ' + data['training-provider-name'], 14) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with ' + data['training-provider-name'], 14) }}
       </div>
     </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-about-accrediting-provider', 'About the accrediting provider', 4) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider', 4) }}
       </div>
     </div>
 
@@ -43,7 +43,7 @@
         <h3 class="heading-large remove-top-margin">Training with a disability</h3>
         <p>Bearing in mind the broad range of disabilities that applicants may have (for example, physical, hearing and visual impairments, or dyslexia), summarise the accessibility of your course. If this varies between placement schools, please explain.</p>
 
-        {{ macros.textarea(subject.slug + '-training-with-a-disability', 'Training with a disability', 14) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability', 14) }}
       </div>
     </div>
 

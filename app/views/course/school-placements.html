@@ -18,8 +18,8 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course/{{ subject.slug }}" method="post">
-        {{ macros.textarea(subject.slug + '-placements', 'School placements', 10) }}
+      <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-placements', 'School placements', 10) }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />

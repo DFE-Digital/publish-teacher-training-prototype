@@ -17,16 +17,16 @@
     {{ title }}
   </h1>
 
-  <form action="/course/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
       </div>
     </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-about-this-course', 'About this course', 14, 'A short summary of the course. Be concise and use plain language.') }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-this-course', 'About this course', 14, 'A short summary of the course. Be concise and use plain language.') }}
 
         <a href="#">Add another ‘About this course’ section</a>
       </div>

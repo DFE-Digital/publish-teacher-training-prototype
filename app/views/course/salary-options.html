@@ -16,10 +16,10 @@
     Salary
   </h1>
 
-  <form action="/course/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-salaried', 'Earn a salary while you train', 10) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-salaried', 'Earn a salary while you train', 10) }}
       </div>
       <div class="column-one-third add-margin-for-label">
         <p>Explain how the candidate’s experience of a salaried course is different from an unsalaried course.</p>
