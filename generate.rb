@@ -39,7 +39,7 @@ prototype_data['ucasCourses'] = courses.map do |c|
 
   {
     regions: c['regions'].join(', '),
-    accrediting: c['accrediting'],
+    accrediting: c['accrediting'] || provider,
     subjects: c['subjects'].map {|s| s.downcase.capitalize }.join(', '),
     ageRange: c['ageRange'].capitalize,
     name: c['name'],
@@ -58,9 +58,15 @@ prototype_data['schools'].sort_by! { |k| k[:name] }
 
 # Create a list of accreditors
 prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
+  accrediting = c['accrediting']
+
+  if accrediting.nil?
+    accrediting = provider
+  end
+
   {
-    name: c['accrediting'],
-    slug: c['accrediting'].downcase.gsub(/[^a-zA-Z0-9]/, '-'),
+    name: accrediting,
+    slug: accrediting.downcase.gsub(/[^a-zA-Z0-9]/, '-'),
     subjects: []
   }
 end
@@ -80,7 +86,9 @@ prototype_data['subjects'].sort_by! { |k| k[:name] }
 # Group courses by accrediting provider
 courses_by_accrediting = {}
 prototype_data['accreditors'].each { |c| courses_by_accrediting[c[:name]] = [] }
-courses.each { |c| courses_by_accrediting[c['accrediting']] << c }
+courses.each do |c|
+  courses_by_accrediting[c['accrediting'] || provider] << c
+end
 
 # Group courses by subject
 courses_by_subject = {}
@@ -94,10 +102,10 @@ prototype_data['accreditors'].each do |accrediting|
 end
 
 courses.each do |course|
-  courses_by_accreditor_and_subject[course['accrediting']][course['name']] << course
+  courses_by_accreditor_and_subject[course['accrediting'] || provider][course['name']] << course
 
   subject = prototype_data['subjects'].find {|s| s[:name] == course['name']}
-  prototype_data['accreditors'].find { |a| a[:name] == course['accrediting']}[:subjects] << subject
+  prototype_data['accreditors'].find { |a| a[:name] == (course['accrediting'] || provider)}[:subjects] << subject
 end
 
 prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
@@ -131,7 +139,7 @@ courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
     folded_course = {
      name: subject,
      courses: subject_courses.count,
-     accrediting: subject_courses.map {|c| c['accrediting']}.uniq.sort,
+     accrediting: subject_courses.map {|c| c['accrediting'] || provider }.uniq.sort,
      applicationsOpen: subject_courses.map {|c| c['campuses'].map {|g| g['applyFrom'] }}.flatten.uniq.reject {|r| r == "n/a"},
      schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq.sort,
      options: options.uniq.sort,
