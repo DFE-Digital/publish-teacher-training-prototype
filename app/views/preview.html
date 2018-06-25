@@ -6,24 +6,25 @@
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-  <a href="/course/{{ subject.slug }}" class="link-back">Back to course</a>
+  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back to course</a>
 
-  <h1 class="heading-large" style="margin-top: 1.25em; margin-bottom: 0.55556em">
+  <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
     {{ subject.name }} at {{ data['training-provider-name'] }}
+    <span class="heading-secondary">Accredited by {{ accrediting.name }}</span>
   </h1>
 
   <dl class="aligned" style="margin-top: 60px; margin-bottom: 30px">
     <dt>Website:</dt>
     <dd>
-      {% if (data[subject.slug + '-course-website']) %}
-        <a href="{{ data[subject.slug + '-course-website'] }}">{{ data[subject.slug + '-course-website'] }}</a>
+      {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
+        <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}</a>
       {% else %}
-        <a href="{{ data[subject.slug + '-course-website'] }}">{{ data['website'] }}</a>
+        <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data['website'] }}</a>
       {% endif %}
     </dd>
     <dt>Date you can apply from:</dt>
     <dd>26 October 2018</dd>
-    <dt>Study options:</dt>
+    <dt>Course options:</dt>
     <dd>
       <ul class="list">
         {% for option in subject.folded_course.options %}
@@ -36,129 +37,56 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="course-contents">
-        <h2 class="heading-small">Contents</h2>
+        <h2 class="heading-medium">Contents</h2>
         <ul class="list">
-          <li><a href="#section-about">About the course</a></li>
+          <li><a href="#section-about">About the training provider</a></li>
+          <li><a href="#course-options">Course options</a></li>
           <li><a href="#section-entry">Requirements</a></li>
-          <li><a href="#section-qualification-options">Qualification options</a></li>
-          <li><a href="#section-salary-options">Salary</a></li>
-          <li><a href="#section-fees">Fees</a></li>
           <li><a href="#section-financial-support">Financial support</a></li>
-          <li><a href="#section-schools">Schools</a></li>
-          <li><a href="#section-about-provider">About the training provider</a></li>
           <li><a href="#section-contact">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
         </ul>
 
-        <h2 class="heading-medium" id="section-about">About the course</h2>
-        {{ macros.previewPart(subject.slug + '-about-this-course') }}
+        <h2 class="heading-large" id="section-about-provider">About the training provider</h2>
 
-        <h2 class="heading-medium" id="section-entry">Requirements</h2>
+        <h3 class="heading-medium">Training with {{ data['training-provider-name'] }}</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-organisation') }}
 
-        <h3 class="heading-small">Qualifications</h3>
-        {{ macros.previewPart(subject.slug + '-qualifications-required') }}
+        <h3 class="heading-medium">About the accrediting provider</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider') }}
 
-        <h3 class="heading-small">Personal qualities</h3>
-        {{ macros.previewPart(subject.slug + '-personal-qualities') }}
+        <h3 class="heading-medium">Training with a disability</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability') }}
 
-        <h3 class="heading-small">Other requirements</h3>
-        {{ macros.previewPart(subject.slug + '-other-requirements') }}
+        <h2 class="heading-large" id="course-options">Course options</h2>
+        {% for option in subject.folded_course.options %}
+          <h3 class="heading-medium" id="section-option-{{ loop.index }}">{{ option }}</h3>
 
-        <h2 class="heading-medium" id="section-qualification-options">Qualification options</h2>
+          <h4 class="heading-small" id="section-about">About the course</h4>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course') }}
 
-        <p>You can choose to apply for one of two qualifications with this course.</p>
+          <h4 class="heading-small">Interview process</h4>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process') }}
 
-        <h3 class="heading-small">PGCE with QTS course</h3>
-        {{ macros.previewPart(subject.slug + '-pgce-with-qts-qual') }}
+          <h4 class="heading-small">How school placements work</h4>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy') }}
+        {% endfor %}
 
-        <h3 class="heading-small">QTS only course</h3>
-        {{ macros.previewPart(subject.slug + '-qts-qual') }}
+        <h2 class="heading-large" id="section-entry">Requirements</h2>
 
-        <h2 class="heading-medium" id="section-salary-options">Earn a salary while you train</h2>
+        <h3 class="heading-medium">Qualifications</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-qualifications-required') }}
 
-        <p>You can choose to apply to earn a salary for this course.</p>
+        <h3 class="heading-medium">Personal qualities</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-personal-qualities') }}
 
-        {{ macros.previewPart(subject.slug + '-salaried') }}
+        <h3 class="heading-medium">Other requirements</h3>
+        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-other-requirements') }}
 
-        <h2 class="heading-medium" id="section-fees">Fees</h3>
-
-        <p>The course fees for 2018/2019 are as follows:</p>
-
-        {% if (data[subject.slug + '-pgce-with-qts-qual-fee']) %}
-        <h3 class="heading-small">Fees for PGCE with QTS course</h3>
-        <div class="body-text">
-          <table>
-            <tbody>
-              <tr class="visually-hidden">
-                <th>Student type</th>
-                <th>Fees to pay</th>
-              </tr>
-              <tr>
-                <td>UK students</td>
-                <td>£{{ data[subject.slug + '-pgce-with-qts-qual-fee'] }}</td>
-              </tr>
-              <tr>
-                <td>EU students</td>
-                <td>£{{ data[subject.slug + '-pgce-with-qts-qual-fee'] }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        {% endif %}
-
-        {% if (data[subject.slug + '-qts-qual-fee']) %}
-        <h3 class="heading-small">Fees for QTS only course</h3>
-        <div class="body-text">
-          <table>
-            <tbody>
-              <tr class="visually-hidden">
-                <th>Student type</th>
-                <th>Fees to pay</th>
-              </tr>
-              <tr>
-                <td>UK students</td>
-                <td>£{{ data[subject.slug + '-qts-qual-fee'] }}</td>
-              </tr>
-              <tr>
-                <td>EU students</td>
-                <td>£{{ data[subject.slug + '-qts-qual-fee'] }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        {% endif %}
-
-        <h2 class="heading-medium" id="section-financial-support">Financial support</h3>
+        <h2 class="heading-large" id="section-financial-support">Financial support</h3>
         <p>Not available in this prototype yet.</p>
 
-        <!-- <h2 class="heading-medium" id="section-schools">Schools</h3> -->
-
-        {% set schools = data['schools'] %}
-
-        <!-- <ul class="list">
-          {% for school in schools %}
-          <li>
-            <h3 class="heading-small">
-              {{ school.name }}
-            </h3>
-            <p>{{ school.address }}</p>
-          </li>
-          {% endfor %}
-        </ul> -->
-
-        <h2 class="heading-medium" id="section-about-provider">About {{ data['training-provider-name'] }}</h2>
-        {{ macros.previewPart(subject.slug + '-about-organisation') }}
-
-        <h3 class="heading-small">Training with a disability</h3>
-        {{ macros.previewPart(subject.slug + '-training-with-a-disability') }}
-
-        <h3 class="heading-small">Interview process</h3>
-        {{ macros.previewPart(subject.slug + '-interview-process') }}
-
-        <h3 class="heading-small">Schools you’ll be placed at</h3>
-        {{ macros.previewPart(subject.slug + '-placement-school-policy') }}
-
-        <h2 class="heading-medium" id="section-contact">Contact details</h2>
+        <h2 class="heading-large" id="section-contact">Contact details</h2>
 
         <dl class="aligned">
           <dt>Email:</dt>
@@ -176,7 +104,7 @@
           </dd>
         </dl>
 
-        <h2 class="heading-medium" id="section-apply">Apply</h2>
+        <h2 class="heading-large" id="section-apply">Apply</h2>
 
         <a href="#" class="button">Apply</a>
       </div>
