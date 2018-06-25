@@ -61,10 +61,11 @@ prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
   {
     name: c['accrediting'],
     slug: c['accrediting'].downcase.gsub(/[^a-zA-Z0-9]/, '-'),
-    courses_by_subject: [],
-    folded_courses_by_subject: []
+    subjects: []
   }
 end
+
+prototype_data['accreditors'].sort_by! { |k| k[:name] }
 
 # Create a list of subjects
 prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
@@ -94,7 +95,12 @@ end
 
 courses.each do |course|
   courses_by_accreditor_and_subject[course['accrediting']][course['name']] << course
+
+  subject = prototype_data['subjects'].find {|s| s[:name] == course['name']}
+  prototype_data['accreditors'].find { |a| a[:name] == course['accrediting']}[:subjects] << subject
 end
+
+prototype_data['accreditors'].each {|a| a[:subjects].uniq! }
 
 prototype_data['folded_courses'] = {}
 
