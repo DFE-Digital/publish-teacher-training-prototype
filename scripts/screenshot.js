@@ -38,16 +38,13 @@ var options = {
 
 var paths = [
   { path: '/courses', name: 'courses' },
-  { path: '/course/biology', name: 'course' },
-  { path: '/course/biology/from-ucas', name: 'course-details-from-ucas' },
-  { path: '/course/biology/about-this-course', name: 'about-this-course' },
-  { path: '/course/biology/about-this-provider', name: 'about-this-training-provider' },
-  { path: '/course/biology/requirements', name: 'course-requirements' },
-  { path: '/course/biology/qualification-options', name: 'qualification' },
-  { path: '/course/biology/salary-options', name: 'salary' },
-  { path: '/preview/biology', name: 'preview' },
-  { path: '/schools', name: 'schools' },
-  { path: '/organisation', name: 'organisation' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry', name: 'course' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry/ucas/2H62', name: 'course-details-from-ucas' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry/option/1', name: 'PGCE with QTS course option' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry/option/2', name: 'QTS with salary course option' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry/about-this-provider', name: 'About your organisation' },
+  { path: '/course/st-mary-s-university--twickenham/chemistry/requirements', name: 'Requirements and eligibility' },
+  { path: '/preview/st-mary-s-university--twickenham/chemistry', name: 'preview' }
 ]
 
 var template = '';

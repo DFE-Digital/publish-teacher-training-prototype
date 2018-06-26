@@ -7,8 +7,8 @@
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
     <ol>
-      <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }}</a></li>
+      <li><a href="/courses">Courses</a></li>
+      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
     </ol>
   </div>
 
@@ -30,11 +30,11 @@
   </div>
 
 
-  <form action="/course/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-pgce-with-qts-qual', 'PGCE with QTS course', 5) }}
-        {{ macros.textbox(subject.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee', 'Fee in £', 'form-control-xsmall') }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-pgce-with-qts-qual', 'PGCE with QTS course', 5) }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee', 'Fee in £', 'form-control-xsmall') }}
       </div>
       <div class="column-one-third add-margin-for-label">
         <p>Summarise what makes this course worth studying, compared to the QTS course. You could include which types of candidate benefits from this course.</p>
@@ -42,8 +42,8 @@
     </div>
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-qts-qual', 'QTS only course', 5) }}
-        {{ macros.textbox(subject.slug + '-qts-qual-fee', 'QTS course fee', 'Fee in £', 'form-control-xsmall') }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-qts-qual', 'QTS only course', 5) }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-qts-qual-fee', 'QTS course fee', 'Fee in £', 'form-control-xsmall') }}
       </div>
       <div class="column-one-third add-margin-for-label">
         <p>Summarise what makes this course worth studying, compared to the PGCE with QTS course.</p>

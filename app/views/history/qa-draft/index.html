@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'QA draft' %}
+{% set title = 'Draft of the QA process' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -10,6 +10,13 @@
     </ol>
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>An initial look at the process of sending a course to DfE for review, and examples of the responses providers might receive back.</p>
+      <p>We tested this in our first round of research with providers, towards the end of each session. <a href="https://lookback.io/upkurve/providers">Research sessions are on Lookback</a>.</p>
+    </div>
+  </div>
 
   {{ macros.screenshot('Sent to QA', 'sent-to-qa', '/public/images/history/qa-draft/thumbnails/01-sent-to-qa.png', '/public/images/history/qa-draft/01-sent-to-qa.png', '') }}
 

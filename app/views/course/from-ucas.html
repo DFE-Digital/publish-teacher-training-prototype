@@ -6,84 +6,72 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/courses">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }}</a></li>
-    </ol>
-  </div>
+  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
-    {{ title }}
+    <span class="heading-secondary">{{ subject.name }}</span>
+    {{ ucasCourse.options }} ({{ ucasCourse.programmeCode }})
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <p class="lede">
-        Course information that we’ve received from UCAS based on your submissions to them. If you want to change it you’ll need to use UCAS web-link.
+        Information imported from UCAS for course {{ ucasCourse.programmeCode }}.
       </p>
-
-      <p>Multiple UCAS courses for the same subject are combined into a single subject page with different study options. For example, courses with and without a salary.</p>
     </div>
   </div>
 
-  <ul>
-    {% for course in data['ucasCourses'] %}
-      {% if course.name == subject.name %}
-        <h2 class="heading-large" id="{{ course.programmeCode }}">
-          {{ course.name }}
-          <span class="heading-secondary">{{ course.options }}</span>
-        </h2>
+  <dl class="aligned add-top-margin">
+    <dt>Name:</dt>
+    <dd>{{ ucasCourse.name }}</dd>
+    <dt>Training provider code:</dt>
+    <dd>{{ ucasCourse.providerCode }}</dd>
+    <dt>Training programme code:</dt>
+    <dd>{{ ucasCourse.programmeCode }}</dd>
+    <dt>Accredited provider:</dt>
+    <dd>{{ ucasCourse.accrediting }}</dd>
+    <dt>Route:</dt>
+    <dd>{{ ucasCourse.route }}</dd>
+    <dt>Subjects:</dt>
+    <dd>{{ ucasCourse.subjects }}</dd>
+    <dt>Age range:</dt>
+    <dd>{{ ucasCourse.ageRange }}</dd>
+    <dt>Qualification:</dt>
+    <dd>{{ ucasCourse.qualifications }}</dd>
+    <dt>Regions:</dt>
+    <dd>{{ ucasCourse.regions }}</dd>
+  </dl>
 
-        <dl class="aligned">
-          <dt>Name:</dt>
-          <dd>{{ course.name }}</dd>
-          <dt>Training provider code:</dt>
-          <dd>{{ course.providerCode }}</dd>
-          <dt>Training programme code:</dt>
-          <dd>{{ course.programmeCode }}</dd>
-          <dt>Accredited provider:</dt>
-          <dd>{{ course.accrediting }}</dd>
-          <dt>Route:</dt>
-          <dd>{{ course.route }}</dd>
-          <dt>Subjects:</dt>
-          <dd>{{ course.subjects }}</dd>
-          <dt>Age range:</dt>
-          <dd>{{ course.ageRange }}</dd>
-          <dt>Qualification:</dt>
-          <dd>{{ course.qualifications }}</dd>
-          <dt>Regions:</dt>
-          <dd>{{ course.regions }}</dd>
-        </dl>
+  <h3 class="heading-medium">Training locations</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Location name</th>
+        <th>Address</th>
+        <th>Code</th>
+        <th>Full time vacancies</th>
+        <th>Part time vacancies</th>
+        <th>Applications accepted from</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for school in ucasCourse.schools %}
+      <tr>
+        <td>{{ school.name }}</td>
+        <td>{{ school.address }}</td>
+        <td>{{ school.code }}</td>
+        <td>Vacancies</td>
+        <td>Not applicable</td>
+        <td>26 Oct 2018</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-        <h3 class="heading-medium">Training locations</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Location name</th>
-              <th>Address</th>
-              <th>Code</th>
-              <th>Full time vacancies</th>
-              <th>Part time vacancies</th>
-              <th>Applications accepted from</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for school in course.schools %}
-            <tr>
-              <td>{{ school.name }}</td>
-              <td>{{ school.address }}</td>
-              <td>{{ school.code }}</td>
-              <td>Vacancies</td>
-              <td>Not applicable</td>
-              <td>26 Oct 2018</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endif %}
-    {% endfor %}
-  </ul>
+  <div style="margin-top: 60px">
+    <a href="#" class="button">Edit course</a>
+  </div>
+
 </main>
 
 {% endblock %}

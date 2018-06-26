@@ -30,16 +30,16 @@ prototype_data['ucasCourses'] = courses.map do |c|
   salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
 
   if partTime
-    options << "#{qual}, 1 year part time#{salaried}"
+    options << "#{qual} part time#{salaried}"
   end
 
   if fullTime
-    options << "#{qual}, 1 year full time#{salaried}"
+    options << "#{qual} full time#{salaried}"
   end
 
   {
     regions: c['regions'].join(', '),
-    accrediting: c['accrediting'],
+    accrediting: c['accrediting'] || provider,
     subjects: c['subjects'].map {|s| s.downcase.capitalize }.join(', '),
     ageRange: c['ageRange'].capitalize,
     name: c['name'],
@@ -56,6 +56,23 @@ end
 prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
 
+# Create a list of accreditors
+prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
+  accrediting = c['accrediting']
+
+  if accrediting.nil?
+    accrediting = provider
+  end
+
+  {
+    name: accrediting,
+    slug: accrediting.downcase.gsub(/[^a-zA-Z0-9]/, '-'),
+    subjects: []
+  }
+end
+
+prototype_data['accreditors'].sort_by! { |k| k[:name] }
+
 # Create a list of subjects
 prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
   {
@@ -66,50 +83,77 @@ end
 
 prototype_data['subjects'].sort_by! { |k| k[:name] }
 
+# Group courses by accrediting provider
+courses_by_accrediting = {}
+prototype_data['accreditors'].each { |c| courses_by_accrediting[c[:name]] = [] }
+courses.each do |c|
+  courses_by_accrediting[c['accrediting'] || provider] << c
+end
+
 # Group courses by subject
 courses_by_subject = {}
 prototype_data['subjects'].each { |c| courses_by_subject[c[:name]] = [] }
 courses.each { |c| courses_by_subject[c['name']] << c }
 
+courses_by_accreditor_and_subject = {}
+prototype_data['accreditors'].each do |accrediting|
+  courses_by_accreditor_and_subject[accrediting[:name]] = {}
+  prototype_data['subjects'].each { |subject| courses_by_accreditor_and_subject[accrediting[:name]][subject[:name]] = [] }
+end
+
+courses.each do |course|
+  courses_by_accreditor_and_subject[course['accrediting'] || provider][course['name']] << course
+
+  subject = prototype_data['subjects'].find {|s| s[:name] == course['name']}
+  prototype_data['accreditors'].find { |a| a[:name] == (course['accrediting'] || provider)}[:subjects] << subject
+end
+
+prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
+
+prototype_data['folded_courses'] = {}
+
 # Fold courses
-prototype_data['folded_courses'] = []
-courses_by_subject.to_a.each do |s|
-  subject = s[0]
-  subject_courses = s[1]
-  options = []
+courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
+  prototype_data['folded_courses'][accrediting] = []
 
-  subject_courses.each do |sc|
-    qual = sc['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
-    partTime = sc['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
-    fullTime = sc['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
-    salaried = sc['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
+  courses_by_subject.to_a.each do |s|
+    subject = s[0]
+    subject_courses = s[1]
+    options = []
 
-    if partTime
-      options << "#{qual}, 1 year part time#{salaried}"
+    subject_courses.each do |sc|
+      qual = sc['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+      partTime = sc['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+      fullTime = sc['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+      salaried = sc['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
+
+      if partTime
+        options << "#{qual} part time#{salaried}"
+      end
+
+      if fullTime
+        options << "#{qual} full time#{salaried}"
+      end
     end
 
-    if fullTime
-      options << "#{qual}, 1 year full time#{salaried}"
-    end
+    folded_course = {
+     name: subject,
+     courses: subject_courses.count,
+     accrediting: subject_courses.map {|c| c['accrediting'] || provider }.uniq.sort,
+     applicationsOpen: subject_courses.map {|c| c['campuses'].map {|g| g['applyFrom'] }}.flatten.uniq.reject {|r| r == "n/a"},
+     schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq.sort,
+     options: options.uniq.sort,
+     flags: {
+       partTime: subject_courses.map {|c| c['campuses'].map {|g| g['partTime'] }}.flatten.uniq.reject {|r| r == "n/a"}.count > 1,
+       salary: subject_courses.map {|c| c['route'] }.flatten.uniq.include?("School Direct training programme (salaried)"),
+       qualifications: subject_courses.map {|c| c['qualifications'] }.uniq.count > 1
+     }
+    }
+
+    prototype_data['folded_courses'][accrediting] << folded_course if folded_course[:courses] > 0
   end
-
-  folded_course = {
-   name: subject,
-   courses: subject_courses.count,
-   accrediting: subject_courses.map {|c| c['accrediting']}.uniq.sort,
-   applicationsOpen: subject_courses.map {|c| c['campuses'].map {|g| g['applyFrom'] }}.flatten.uniq.reject {|r| r == "n/a"},
-   schoolsWithVacancies: subject_courses.map {|c| c['campuses'].map {|g| g['name'] }}.flatten.uniq.sort,
-   options: options.uniq.sort,
-   flags: {
-     partTime: subject_courses.map {|c| c['campuses'].map {|g| g['partTime'] }}.flatten.uniq.reject {|r| r == "n/a"}.count > 1,
-     salary: subject_courses.map {|c| c['route'] }.flatten.uniq.include?("School Direct training programme (salaried)"),
-     qualifications: subject_courses.map {|c| c['qualifications'] }.uniq.count > 1
-   }
-  }
-
-  prototype_data['folded_courses'] << folded_course
 end
 
 # Output to copy and paste into prototype
-puts "#{courses.count} courses folded into #{prototype_data['folded_courses'].count}"
+# puts "#{courses.count} courses folded into #{prototype_data['folded_courses'].count}"
 File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data)) }

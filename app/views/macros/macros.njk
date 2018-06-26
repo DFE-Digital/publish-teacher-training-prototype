@@ -88,7 +88,7 @@
 
 {% macro textarea(id, label, rows, helpText = false) %}
 <div class="form-group">
-  <label class="form-label" for="{{id}}">{{label}}</label>
+  <label class="form-label form-label-bold" for="{{id}}">{{label}}</label>
   {% if helpText %}
     <span class="form-hint">{{helpText}}</span>
   {% endif %}
