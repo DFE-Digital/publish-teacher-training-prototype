@@ -9,7 +9,11 @@
 
   <h1 class="heading-xlarge">
     <span class="heading-secondary">{{ data['training-provider-name'] }}</span>
-    Courses by accrediting provider
+    {% if data['accreditors'][0]['name'] == data['training-provider-name'] %}
+      Courses
+    {% else %}
+      Courses by accrediting provider
+    {% endif %}
   </h1>
 
   <div class="grid-row add-double-bottom-margin">
@@ -19,10 +23,12 @@
   </div>
 
   {% for accrediting in data['accreditors'] %}
-    <h3 class="heading-medium">
-      <!-- <span style="color: #777; font-weight: normal">Accrediting provider</span><br /> -->
-      {{ accrediting.name }}
-    </h3>
+    {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
+      <h3 class="heading-medium">
+        <!-- <span style="color: #777; font-weight: normal">Accrediting provider</span><br /> -->
+        {{ accrediting.name }}
+      </h3>
+    {% endif %}
     <ul class="list listing-example">
       {% for result in accrediting.subjects %}
         <li>

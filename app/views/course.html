@@ -25,7 +25,7 @@
 
   <h1 class="heading-xlarge">
     {{ title }}
-    <span class="heading-secondary">Accredited by {{ accrediting.name }}</span>
+    {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
   <div class="grid-row add-top-margin">
@@ -62,7 +62,11 @@
               </div>
               <dl class="course-part-tasks">
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with ' + data['training-provider-name']) }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider') }}
+
+                {% if not accrediting.selfAccrediting %}
+                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider') }}
+                {% endif %}
+
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability') }}
               </dl>
             </li>

@@ -10,7 +10,7 @@
 
   <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
     {{ subject.name }} at {{ data['training-provider-name'] }}
-    <span class="heading-secondary">Accredited by {{ accrediting.name }}</span>
+    {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
   <dl class="aligned" style="margin-top: 60px; margin-bottom: 30px">
@@ -52,8 +52,10 @@
         <h3 class="heading-medium">Training with {{ data['training-provider-name'] }}</h3>
         {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-organisation') }}
 
-        <h3 class="heading-medium">About the accrediting provider</h3>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider') }}
+        {% if not accrediting.selfAccrediting %}
+          <h3 class="heading-medium">About the accrediting provider</h3>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider') }}
+        {% endif %}
 
         <h3 class="heading-medium">Training with a disability</h3>
         {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability') }}

@@ -77,7 +77,9 @@ function subject(req) {
 function accreditor(req) {
   var accreditor = req.session.data['accreditors'].find(function(a) {
     return a.slug == req.params.accreditor;
-  })
+  });
+
+  accreditor.selfAccrediting = (req.session.data['training-provider-name'] == accreditor.name);
 
   return accreditor;
 }

@@ -30,11 +30,13 @@
       </div>
     </div>
 
+    {% if not accrediting.selfAccrediting %}
     <div class="grid-row">
       <div class="column-two-thirds">
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider', 4) }}
       </div>
     </div>
+    {% endif %}
 
     <hr />
 
