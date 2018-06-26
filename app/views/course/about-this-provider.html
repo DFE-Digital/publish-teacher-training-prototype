@@ -6,12 +6,7 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/courses">Courses</a></li>
-      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
-    </ol>
-  </div>
+  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
@@ -20,13 +15,15 @@
   <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">About the courses you offer</h3>
+
         <p>This section is your opportunity to tell applicants why they should train with you. You could consider giving answers to the following questions:</p>
 
         <ul class="list list-bullet">
           <li>advantages of you as a training provider (please include evidence)</li>
           <li>benefits of your chosen accredited provider</li>
         </ul>
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with ' + data['training-provider-name'], 14) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About the courses you offer', 14) }}
       </div>
     </div>
 
@@ -37,8 +34,6 @@
       </div>
     </div>
     {% endif %}
-
-    <hr />
 
     <div class="grid-row">
       <div class="column-two-thirds">

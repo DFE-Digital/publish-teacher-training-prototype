@@ -87,10 +87,14 @@ function accreditor(req) {
 function option(req, subject) {
   var optionIndex = req.params.index;
   var folded_course = subject.folded_course;
+  var name = folded_course['options'][optionIndex - 1];
 
   return {
-    name: folded_course['options'][optionIndex - 1],
-    index: optionIndex
+    name: name,
+    index: optionIndex,
+    salaried: name.includes('salary'),
+    partTime: name.includes('part'),
+    qtsOnly: !name.includes('PGCE')
   };
 }
 

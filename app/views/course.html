@@ -51,17 +51,50 @@
         </tbody>
       </table>
 
+      <h2 class="heading-large">Courses offered</h2>
+      <div class="course-parts course-parts--large add-top-margin">
+        <ul class="course-parts-items">
+          {% for option in subject.folded_course.options %}
+            <li class="course-parts-item">
+              <h3 class="course-part-task">{{ option }}</h3>
+
+              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/option/{{ loop.index }}">Add details</a>
+              <dl class="course-part-tasks">
+                <!-- <div>
+                  <dt class="course-part-label">
+                    UCAS course codes
+                  </dt>
+                  <dd class="course-part-value">
+                    {% for course in data['ucasCourses'] %}
+                      {% if course.name == subject.name and course.accrediting == accrediting.name and course.options == option %}
+                        {{ course.programmeCode }} – <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}/ucas/{{ course.programmeCode }}">View UCAS data</a><br />
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </dd>
+                </div> -->
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website', 'Webpage (optional)') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Duration') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
+              </dl>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h2 class="heading-large">Shared course details</h2>
       <div class="course-parts course-parts--large add-top-margin">
           <ul class="course-parts-items">
             <li class="course-parts-item">
-              <div style="overflow: hidden; margin-bottom: -30px;">
-                <h3 class="course-part-task">
-                  About your organisation
-                </h3>
-                <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/about-this-provider">Edit</a>
-              </div>
+              <h3 class="course-part-task">
+                About your organisation
+              </h3>
+              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/about-this-provider">Edit</a>
               <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with ' + data['training-provider-name']) }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About the courses you offer') }}
 
                 {% if not accrediting.selfAccrediting %}
                   {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider') }}
@@ -70,32 +103,16 @@
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability') }}
               </dl>
             </li>
-
-            {% for option in subject.folded_course.options %}
-              <li class="course-parts-item">
-                <h3 class="course-part-task">{{ option }}</h3>
-
-                <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/option/{{ loop.index }}">Edit</a>
-                <dl class="course-part-tasks">
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website', 'Course webpage (optional)') }}
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Course fee') }}
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process') }}
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
-                </dl>
-              </li>
-            {% endfor %}
-
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                Course requirements
+                Requirements and eligbility
               </h3>
               <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/requirements">Edit</a>
 
               <dl class="course-part-tasks">
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)') }}
               </dl>
             </li>
             {% if subject.folded_course.flags.qualifications %}

@@ -6,63 +6,12 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/courses">Courses</a></li>
-      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
-    </ol>
-  </div>
+  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ subject.name }}</span>
     {{ option.name }}
   </h1>
-
-  <!-- <dl class="aligned">
-    <dt>Name:</dt>
-    <dd>Biology</dd>
-    <dt>Training provider code:</dt>
-    <dd>134</dd>
-    <dt>Training programme code:</dt>
-    <dd>2H5B</dd>
-    <dt>Accredited provider:</dt>
-    <dd>St Mary's University, Twickenham</dd>
-    <dt>Route:</dt>
-    <dd>School Direct training programme (salaried)</dd>
-    <dt>Subjects:</dt>
-    <dd>Biology, Science, Secondary</dd>
-    <dt>Age range:</dt>
-    <dd>Secondary (11+ years)</dd>
-    <dt>Qualification:</dt>
-    <dd>QTS</dd>
-    <dt>Regions:</dt>
-    <dd>London</dd>
-  </dl>
-
-  <h3 class="heading-medium">Training locations</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Location name</th>
-        <th>Address</th>
-        <th>Code</th>
-        <th>Full time vacancies</th>
-        <th>Part time vacancies</th>
-        <th>Applications accepted from</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr>
-        <td>St Mary's Catholic High School</td>
-        <td>Woburn Road, Croydon, CR9 2EE</td>
-        <td>S</td>
-        <td>Vacancies</td>
-        <td>Not applicable</td>
-        <td>26 Oct 2018</td>
-      </tr>
-
-    </tbody>
-  </table> -->
 
   <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
@@ -77,29 +26,63 @@
       </div>
     </div>
 
-    <hr />
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <p>How long does the course run for?</p>
+        {% set fields = [
+            {
+              name: '1 year'
+            },
+            {
+              name: 'Up to 2 years'
+            },
+            {
+              name: 'Other'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(subject.slug + '-' + accrediting.slug + '-' + option.index + '-duration', fields) }}
+      </div>
+    </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
 
         <h3 class="heading-large remove-top-margin">About this course</h3>
-        <p>A short summary of the course. Be concise and use plain language.</p>
+        <p>Use this section to give applicants an insight into this course. Describe in plain language what makes this course different to similar courses you provide.</p>
 
-        <p>It should include:</p>
+        {% if option.salaried %}
+          <p>Indicate how this salaried course differs from a fee paying course.</p>
+        {% elseif option.partTime %}
+          <p>Indicate how this part time course differs from a full time course.</p>
+        {% elseif option.qtsOnly %}
+          <p>Indicate how this QTS course differs from a PGCE with QTS course.</p>
+        {% endif %}
+
+        <p>It could include:</p>
         <ul class="list list-bullet">
-          <li>what types of things you’ll be learning</li>
+          <li>who is best suited to this type of course</li>
+          <li>how this type of course is structured differently</li>
+          <li>how the overall experience is different</li>
+          <li>if the locations you spend time in will differ</li>
+          {% if option.salaried %}
+          <li>an indication of the salary scale</li>
+          {% endif %}
+        </ul>
+
+        <!-- <p>It could include:</p>
+        <ul class="list list-bullet">
           <li>overall experience (eg whether it’s hands-on classroom experience from day one)</li>
           <li>how the course will be structured</li>
           <li>locations that you’ll need to attend (eg if you have to attend classes at an accrediting provider as well as the training provider)</li>
         </ul>
 
-        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p>
+        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p> -->
 
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-about-this-course', 'About this course', 14, '') }}
       </div>
     </div>
-
-    <hr />
 
     <div class="grid-row">
       <div class="column-two-thirds">
@@ -112,11 +95,9 @@
           <li>the types of tests they'll have</li>
         </ul>
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process', 7) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process (optional)', 7) }}
       </div>
     </div>
-
-    <hr />
 
     <div class="grid-row">
       <div class="column-two-thirds">

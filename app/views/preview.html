@@ -40,7 +40,7 @@
         <h2 class="heading-medium">Contents</h2>
         <ul class="list">
           <li><a href="#section-about">About the training provider</a></li>
-          <li><a href="#course-options">Course options</a></li>
+          <li><a href="#course-options">Courses offered</a></li>
           <li><a href="#section-entry">Requirements</a></li>
           <li><a href="#section-financial-support">Financial support</a></li>
           <li><a href="#section-contact">Contact details</a></li>
@@ -60,7 +60,7 @@
         <h3 class="heading-medium">Training with a disability</h3>
         {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability') }}
 
-        <h2 class="heading-large" id="course-options">Course options</h2>
+        <h2 class="heading-large" id="course-options">Courses offered</h2>
         {% for option in subject.folded_course.options %}
           <h3 class="heading-medium" id="section-option-{{ loop.index }}">{{ option }}</h3>
 
