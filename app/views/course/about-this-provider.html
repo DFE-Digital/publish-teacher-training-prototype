@@ -23,14 +23,14 @@
           <li>advantages of you as a training provider (please include evidence)</li>
           <li>benefits of your chosen accredited provider</li>
         </ul>
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About the courses you offer', 14) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About the courses you offer', 14, '', 250) }}
       </div>
     </div>
 
     {% if not accrediting.selfAccrediting %}
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider', 4) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider (optional)', 14, '', 250) }}
       </div>
     </div>
     {% endif %}
@@ -40,7 +40,7 @@
         <h3 class="heading-large remove-top-margin">Training with a disability</h3>
         <p>Bearing in mind the broad range of disabilities that applicants may have (for example, physical, hearing and visual impairments, or dyslexia), summarise the accessibility of your course. If this varies between placement schools, please explain.</p>
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability', 14) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability', 14, '', 250) }}
       </div>
     </div>
 

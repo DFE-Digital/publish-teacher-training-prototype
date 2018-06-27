@@ -82,7 +82,7 @@
 
         <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p> -->
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-about-this-course', 'About this course', 14, '') }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-about-this-course', 'About this course', 14, '', 400) }}
       </div>
     </div>
 
@@ -97,7 +97,7 @@
           <li>the types of tests they'll have</li>
         </ul>
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process (optional)', 7) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process (optional)', 7, '', 250) }}
       </div>
     </div>
 
@@ -112,7 +112,7 @@
           <li>how schools are chosen based on the candidate’s needs</li>
         </ul>
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-placement-school-policy', 'How school placements work', 7) }}
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-placement-school-policy', 'How school placements work', 7, '', 250) }}
       </div>
     </div>
 

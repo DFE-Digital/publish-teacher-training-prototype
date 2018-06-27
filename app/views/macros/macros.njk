@@ -86,13 +86,13 @@
 </div>
 {% endmacro %}
 
-{% macro textarea(id, label, rows, helpText = false) %}
+{% macro textarea(id, label, rows, helpText = false, maxWords = 50) %}
 <div class="form-group">
   <label class="form-label form-label-bold" for="{{id}}">{{label}}</label>
   {% if helpText %}
     <span class="form-hint">{{helpText}}</span>
   {% endif %}
-  <textarea class="form-control form-control-full" rows="{{ rows }}" name="{{ id }}" id="{{ id }}">{{ value(id) }}</textarea>
+  <textarea class="form-control form-control-full js-char-count" rows="{{ rows }}" name="{{ id }}" id="{{ id }}" data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
 </div>
 {% endmacro %}
 
