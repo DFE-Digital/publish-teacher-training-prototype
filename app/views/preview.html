@@ -103,8 +103,10 @@
             </table>
           </div>
 
-          <h4 class="heading-small">Interview process</h4>
-          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process') }}
+          {% if data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process'] %}
+            <h4 class="heading-small">Interview process</h4>
+            {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process') }}
+          {% endif %}
 
           <h4 class="heading-small">How school placements work</h4>
           {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy') }}
@@ -115,11 +117,15 @@
         <h3 class="heading-medium">Qualifications</h3>
         {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-qualifications-required') }}
 
-        <h3 class="heading-medium">Personal qualities</h3>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-personal-qualities') }}
+        {% if data[subject.slug + '-' + accrediting.slug + '-personal-qualities'] %}
+          <h3 class="heading-medium">Personal qualities</h3>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-personal-qualities') }}
+        {% endif %}
 
-        <h3 class="heading-medium">Other requirements</h3>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-other-requirements') }}
+        {% if data[subject.slug + '-' + accrediting.slug + '-other-requirements'] %}
+          <h3 class="heading-medium">Other requirements</h3>
+          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-other-requirements') }}
+        {% endif %}
 
         <h2 class="heading-large" id="section-financial-support">Financial support</h3>
         <p>Not available in this prototype yet.</p>
