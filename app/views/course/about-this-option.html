@@ -22,12 +22,6 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-fee', 'Course fee in £', null, 'form-control-xsmall') }}
-      </div>
-    </div>
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <p>How long does the course run for?</p>
         {% set fields = [
             {
@@ -43,6 +37,14 @@
         %}
 
         {{ macros.radioGroup(subject.slug + '-' + accrediting.slug + '-' + option.index + '-duration', fields) }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Fees</h3>
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
       </div>
     </div>
 

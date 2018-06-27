@@ -84,6 +84,12 @@
                   <td>EU students</td>
                   <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee'] }}</td>
                 </tr>
+                {% if data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international'] %}
+                <tr>
+                  <td>International students</td>
+                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international'] }}</td>
+                </tr>
+                {% endif %}
               </tbody>
             </table>
           </div>

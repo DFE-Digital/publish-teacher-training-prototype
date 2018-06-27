@@ -75,7 +75,8 @@
                 </div> -->
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website', 'Webpage (optional)') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Duration') }}
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
                 {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
