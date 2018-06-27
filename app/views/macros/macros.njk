@@ -142,7 +142,7 @@
 
 {% macro previewPart(id) %}
   {% if (value(id)) %}
-    <p>{{ value(id) }}</p>
+    <pre class="preview-pre">{{ value(id) }}</pre>
   {% else %}
     <p class="missing-section">
       Please add details for this section.

@@ -227,3 +227,7 @@ dl.aligned dd {
   border: 5px solid $border-colour;
   padding: $gutter / 2;
 }
+
+.preview-pre {
+  white-space: pre-wrap;
+}
