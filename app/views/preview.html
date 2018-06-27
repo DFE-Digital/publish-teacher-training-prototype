@@ -13,7 +13,7 @@
     {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
-  <dl class="aligned" style="margin-top: 60px; margin-bottom: 30px">
+  <!-- <dl class="aligned" style="margin-top: 60px;">
     <dt>Website:</dt>
     <dd>
       {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
@@ -22,9 +22,7 @@
         <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data['website'] }}</a>
       {% endif %}
     </dd>
-    <dt>Date you can apply from:</dt>
-    <dd>26 October 2018</dd>
-    <dt>Course options:</dt>
+    <dt>Courses offered:</dt>
     <dd>
       <ul class="list">
         {% for option in subject.folded_course.options %}
@@ -32,7 +30,7 @@
         {% endfor %}
       </ul>
     </dd>
-  </dl>
+  </dl> -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -63,6 +61,17 @@
         <h2 class="heading-large" id="course-options">Courses offered</h2>
         {% for option in subject.folded_course.options %}
           <h3 class="heading-medium" id="section-option-{{ loop.index }}">{{ option }}</h3>
+
+          <dl class="aligned" style="margin-bottom: 30px">
+            {% if (data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website']) %}
+            <dt>Website:</dt>
+            <dd>
+              <a href="{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index +'-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website'] }}</a>
+            </dd>
+            {% endif %}
+            <dt>Duration:</dt>
+            <dd>{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration'] }}</dd>
+          </dl>
 
           <h4 class="heading-small" id="section-about">About the course</h4>
           {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course') }}
