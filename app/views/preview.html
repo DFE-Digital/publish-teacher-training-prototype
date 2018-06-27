@@ -60,7 +60,25 @@
 
         <h2 class="heading-large" id="course-options">Courses offered</h2>
         {% for option in subject.folded_course.options %}
-          <h3 class="heading-medium" id="section-option-{{ loop.index }}">{{ option }}</h3>
+          <h3 class="heading-medium remove-bottom-margin" id="section-option-{{ loop.index }}">{{ option }}</h3>
+          <details role="group" class="add-bottom-margin">
+              {% if 'PGCE' in option %}
+                <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Postgraduate certificate in education with qualified teacher status (PGCE with QTS)</span></summary>
+
+                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+                    <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland.</p>
+                    <p>This qualification is also recognised internationally.</p>
+                    <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
+                </div>
+              {% else %}
+                <summary role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">Qualified teacher status (QTS)</span></summary>
+
+                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
+                    <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
+                    <p>If you want to teach in the rest of the UK or internationally, consider a course that gives you the qualification 'postgraduate certificate in education with qualified teacher status' instead.</p>
+                </div>
+              {% endif %}
+          </details>
 
           <dl class="aligned" style="margin-bottom: 30px">
             {% if (data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website']) %}
