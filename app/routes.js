@@ -6,6 +6,10 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.post('/courses/request', function (req, res) {
+  res.render('courses', { showMessage: true })
+})
+
 router.get('/preview/:accreditor/:subject', function (req, res) {
   res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
 })

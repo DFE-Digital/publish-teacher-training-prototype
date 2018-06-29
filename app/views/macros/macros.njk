@@ -86,6 +86,16 @@
 </div>
 {% endmacro %}
 
+{% macro textareaBasic(id, label, rows, helpText = false) %}
+<div class="form-group">
+  <label class="form-label" for="{{id}}">{{label}}</label>
+  {% if helpText %}
+    <span class="form-hint">{{helpText}}</span>
+  {% endif %}
+  <textarea class="form-control form-control-full" rows="{{ rows }}" name="{{ id }}" id="{{ id }}">{{ value(id) }}</textarea>
+</div>
+{% endmacro %}
+
 {% macro textarea(id, label, rows, helpText = false, maxWords = 50) %}
 <div class="form-group">
   <label class="form-label form-label-bold" for="{{id}}">{{label}}</label>
