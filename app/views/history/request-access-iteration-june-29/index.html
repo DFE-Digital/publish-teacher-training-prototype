@@ -1,0 +1,26 @@
+
+{% extends "layout.html" %}
+{% set title = 'Request access' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>A small iteration on the <a href="/history/check-ucas-data#request-access">initial design</a> adding a form legend and success message.</p>
+    </div>
+  </div>
+
+  {{ macros.screenshot('Request access', 'request-access', '/public/images/history/request-access-iteration-june-29/thumbnails/01-request-access.png', '/public/images/history/request-access-iteration-june-29/01-request-access.png', '') }}
+
+  {{ macros.screenshot('Access requested', 'access-requested', '/public/images/history/request-access-iteration-june-29/thumbnails/02-access-requested.png', '/public/images/history/request-access-iteration-june-29/02-access-requested.png', '') }}
+
+</main>
+{% endblock %}
