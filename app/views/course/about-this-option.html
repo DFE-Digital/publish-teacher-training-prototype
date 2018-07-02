@@ -16,12 +16,6 @@
   <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
-      </div>
-    </div>
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <p>How long does the course run for?</p>
         {% set fields = [
             {
@@ -52,35 +46,19 @@
       <div class="column-two-thirds">
 
         <h3 class="heading-large remove-top-margin">About this course</h3>
-        <p>Use this section to give applicants an insight into this course. Describe in plain language what makes this course different to similar courses you provide.</p>
+        <p>Give applicants a short description of the course.</p>
 
-        {% if option.salaried %}
-          <p>Indicate how this salaried course differs from a fee paying course.</p>
-        {% elseif option.partTime %}
-          <p>Indicate how this part time course differs from a full time course.</p>
-        {% elseif option.qtsOnly %}
-          <p>Indicate how this QTS course differs from a PGCE with QTS course.</p>
-        {% endif %}
-
-        <p>It could include:</p>
+        <p>You could include:</p>
         <ul class="list list-bullet">
-          <li>who is best suited to this type of course</li>
-          <li>how this type of course is structured differently</li>
-          <li>how the overall experience is different</li>
-          <li>if the locations you spend time in will differ</li>
-          {% if option.salaried %}
-          <li>an indication of the salary scale</li>
-          {% endif %}
+          <li>an overview of what candidates are taught</li>
+          <li>how much time they’ll spend training in school</li>
+          <li>how they’ll be assessed</li>
+          <li>the workload (eg how many essays per term?)</li>
+          <li>any other locations they’ll need to go to (eg will they also have to attend classes at an accrediting provider?)</li>
+          <li>information about the prestige of the course (eg league-table rankings)</li>
         </ul>
 
-        <!-- <p>It could include:</p>
-        <ul class="list list-bullet">
-          <li>overall experience (eg whether it’s hands-on classroom experience from day one)</li>
-          <li>how the course will be structured</li>
-          <li>locations that you’ll need to attend (eg if you have to attend classes at an accrediting provider as well as the training provider)</li>
-        </ul>
-
-        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p> -->
+        <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
 
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-about-this-course', 'About this course', 20, '', 400) }}
       </div>
@@ -88,13 +66,21 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
+        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-' + option.index + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Interview process</h3>
 
-        <p>Summarise the interview process that the applicant can expect. For example:</p>
+        <p>Give applicants a summary of the interview process.</p>
+
+        <p>This could include:</p>
         <ul class="list list-bullet">
           <li>who’ll be interviewing them</li>
-          <li>the number of interviews they can expect</li>
-          <li>the types of tests they'll have</li>
+          <li>how many interviews they’ll need to attend</li>
+          <li>details of any tests they’ll need to sit</li>
         </ul>
 
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-interview-process', 'Interview process (optional)', 10, '', 250) }}
@@ -105,11 +91,16 @@
       <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">How school placements work</h3>
 
-        <p>Summarise:</p>
+        <p>Tell applicants more about the schools they’ll be teaching in.</p>
+
+        <p>You could include:</p>
         <ul class="list list-bullet">
-          <li>the number of placements a candidate will go on</li>
-          <li>the time candidates spend in each school</li>
-          <li>how schools are chosen based on the candidate’s needs</li>
+          <li>how the candidate’s schools are selected</li>
+          <li>the average distance candidates have to travel from home to school</li>
+          <li>the age ranges they’ll be teaching (eg 11 to 16 or 11 to 18)</li>
+          <li>how many schools you partner with in total</li>
+          <li>the number of placements a candidate will have</li>
+          <li>how much time candidates spend in each school</li>
         </ul>
 
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-' + option.index + '-placement-school-policy', 'How school placements work', 10, '', 250) }}
