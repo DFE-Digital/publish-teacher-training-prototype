@@ -7,10 +7,16 @@
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
-    <ol>
-      {% if data['multi-organisation'] %}<li><a href="/your-organisations">Organisations</a></li>{% endif %}
-      <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
-    </ol>
+    {% if data['multi-organisation'] %}
+      <ol>
+        <li><a href="/">Organisations</a></li>
+        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% else %}
+      <ol>
+        <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% endif %}
   </div>
 
   {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}

@@ -3,7 +3,11 @@ var router = express.Router()
 
 // Route index page
 router.get('/', function (req, res) {
-  res.render('index')
+  if (req.session.data['multi-organisation']) {
+    res.render('your-organisations');
+  } else {
+    res.render('courses');
+  }
 })
 
 router.post('/courses/request', function (req, res) {
