@@ -102,7 +102,7 @@
               </h3>
               <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/about-this-provider">Edit</a>
               <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About your organisation') }}
+                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with you') }}
 
                 {% if not accrediting.selfAccrediting %}
                   {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider (optional)') }}

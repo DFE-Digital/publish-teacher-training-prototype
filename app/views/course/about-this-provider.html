@@ -15,13 +15,20 @@
   <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        <p>This section is your opportunity to tell applicants why they should train with you. You could consider giving answers to the following questions:</p>
+        <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of:</p>
 
         <ul class="list list-bullet">
-          <li>advantages of you as a training provider (please include evidence)</li>
-          <li>benefits of your chosen accredited provider</li>
+          <li>you as a training provider</li>
+          <li>your accrediting provider, if you have one</li>
         </ul>
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'About your organisation', 14, '', 250) }}
+
+        <p>You must be specific and factual with any claims you make, and support them with evidence. For example:</p>
+
+        <ul class="list list-bullet">
+          <li>don’t say “our students are some of the happiest in the country”</li>
+          <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
+        </ul>
+        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with you', 14, '', 250) }}
       </div>
     </div>
 
@@ -36,7 +43,7 @@
     <div class="grid-row">
       <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Training with a disability</h3>
-        <p>Bearing in mind the broad range of disabilities that applicants may have (for example, physical, hearing and visual impairments, or dyslexia), summarise the accessibility of your course. If this varies between placement schools, please explain.</p>
+        <p>Here you should summarise the accessibility of your course. Bear in mind the range of disabilities that applicants may have (eg dyslexia, or physical, hearing and visual impairments). If accessibility varies between schools or other sites, give details. You could also offer examples of how you’ve accommodated candidates with particular accessibility needs.</p>
 
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability', 14, '', 250) }}
       </div>
