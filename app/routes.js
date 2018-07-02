@@ -6,12 +6,12 @@ router.get('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
     res.render('your-organisations');
   } else {
-    res.render('courses');
+    res.render('organisation');
   }
 })
 
-router.post('/courses/request', function (req, res) {
-  res.render('courses', { showMessage: true })
+router.post('/organisation/request', function (req, res) {
+  res.render('organisation', { showMessage: true })
 })
 
 router.get('/preview/:accreditor/:subject', function (req, res) {
