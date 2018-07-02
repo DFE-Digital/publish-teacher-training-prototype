@@ -9,6 +9,7 @@ provider = 'Catholic Teaching Alliance (South East London)'
 courses = data.select {|c| c['provider'] == provider }
 
 prototype_data = {
+  'multi-organsation': false,
   'training-provider-name': provider,
   'provider-code-name': courses.first['providerCodeName'],
   'provider-code': courses.first['providerCode'],

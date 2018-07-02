@@ -8,7 +8,8 @@
   {% include "includes/phase_banner_beta.html" %}
   <div class="breadcrumbs">
     <ol>
-      <li><a href="/courses">Courses</a></li>
+      {% if data['multi-organisation'] %}<li><a href="/your-organisations">Organisations</a></li>{% endif %}
+      <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
     </ol>
   </div>
 
