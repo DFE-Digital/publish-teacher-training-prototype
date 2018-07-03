@@ -113,6 +113,7 @@ end
 prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
 
 prototype_data['folded_courses'] = {}
+prototype_data['options'] = []
 
 # Fold courses
 courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
@@ -131,10 +132,12 @@ courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
 
       if partTime
         options << "#{qual} part time#{salaried}"
+        prototype_data['options'] << "#{qual} part time#{salaried}"
       end
 
       if fullTime
         options << "#{qual} full time#{salaried}"
+        prototype_data['options'] << "#{qual} full time#{salaried}"
       end
     end
 
@@ -155,6 +158,8 @@ courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
     prototype_data['folded_courses'][accrediting] << folded_course if folded_course[:courses] > 0
   end
 end
+
+prototype_data['options'].uniq!
 
 # Output to copy and paste into prototype
 # puts "#{courses.count} courses folded into #{prototype_data['folded_courses'].count}"
