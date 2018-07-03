@@ -74,6 +74,7 @@ prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
 end
 
 prototype_data['accreditors'].sort_by! { |k| k[:name] }
+prototype_data['self_accrediting'] = (prototype_data['accreditors'].length == 1 && prototype_data['accreditors'][0][:name] == provider)
 
 # Create a list of subjects
 prototype_data['subjects'] = courses.uniq {|c| c['name'] }.map  do |c|
