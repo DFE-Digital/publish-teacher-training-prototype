@@ -6,13 +6,24 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
 
-  <h1 class="heading-xlarge">
+  {% set message %}
+    {% if showMessage %}
+      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+        <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+          Changes saved
+        </h3>
+      </div>
+    {% endif %}
+  {% endset %}
+
+  {{ macros.orgHeading('About your organisation', message) }}
+
+  <h2 class="heading-large">
     {{ title }}
-  </h1>
+  </h2>
 
-  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
+  <form action="/about-your-organisation" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of:</p>
@@ -28,14 +39,14 @@
           <li>don’t say “our students are some of the happiest in the country”</li>
           <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
         </ul>
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with you', 14, '', 250) }}
+        {{ macros.textarea('about-organisation', 'Training with you', 14, '', 250) }}
       </div>
     </div>
 
     {% if not accrediting.selfAccrediting %}
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider (optional)', 14, '', 250) }}
+        {{ macros.textarea('about-accrediting-provider', 'About the accrediting provider (optional)', 14, '', 250) }}
       </div>
     </div>
     {% endif %}
@@ -45,7 +56,7 @@
         <h3 class="heading-large remove-top-margin">Training with a disability</h3>
         <p>Here you should summarise the accessibility of your course. Bear in mind the range of disabilities that applicants may have (eg dyslexia, or physical, hearing and visual impairments). If accessibility varies between schools or other sites, give details. You could also offer examples of how you’ve accommodated candidates with particular accessibility needs.</p>
 
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability', 14, '', 250) }}
+        {{ macros.textarea('training-with-a-disability', 'Training with a disability', 14, '', 250) }}
       </div>
     </div>
 

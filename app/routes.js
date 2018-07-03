@@ -10,8 +10,12 @@ router.get('/', function (req, res) {
   }
 })
 
-router.post('/organisation/request', function (req, res) {
-  res.render('organisation', { showMessage: true })
+router.post('/request-access', function (req, res) {
+  res.render('request-access', { showMessage: true })
+})
+
+router.post('/about-your-organisation', function (req, res) {
+  res.render('about-your-organisation', { showMessage: true })
 })
 
 router.get('/preview/:accreditor/:subject', function (req, res) {

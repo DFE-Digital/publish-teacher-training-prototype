@@ -5,17 +5,31 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/organisation" class="link-back">Back</a>
 
-  <h1 class="heading-xlarge">
+  {% set message %}
+    {% if showMessage %}
+      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
+        <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+          DfE has received your request to give access to {{ data['request-first-name']}} {{ data['request-last-name'] }}.
+        </h3>
+        <p>
+          They will receive sign-up instructions if their account is approved.
+        </p>
+      </div>
+    {% endif %}
+  {% endset %}
+
+  {{ macros.orgHeading('Request access', message) }}
+
+  <h2 class="heading-large">
     Request access for someone
-  </h1>
+  </h2>
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <p class="lede">You can request a DfE Sign-in account for others who manage your courses.</p>
+      <p>You can request a DfE Sign-in account for others who manage your courses.</p>
 
-      <form action="/organisation/request" method="post">
+      <form action="/request-access" method="post">
         <legend>
           <h2 class="heading-medium">Request an account for:</h2>
         </legend>

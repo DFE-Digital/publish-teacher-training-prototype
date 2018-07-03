@@ -14,6 +14,49 @@
 </div>
 {% endmacro %}
 
+{% macro orgHeading(activeTab, message = '') %}
+<div class="breadcrumbs">
+  {% if value('multi-organisation') %}
+  <ol>
+    <li><a href="/">Organisations</a></li>
+  </ol>
+  {% endif %}
+</div>
+
+{{ message | safe }}
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge">
+      {{ value('training-provider-name') }}
+    </h1>
+  </div>
+</div>
+
+{% set tabs = [
+    {
+      text: 'Courses',
+      href: '/'
+    },
+    {
+      text: 'About your organisation',
+      href: '/about-your-organisation'
+    },
+    {
+      text: 'Request access',
+      href: '/request-access'
+    }
+  ] %}
+
+<ul class="tabs">
+  {% for tab in tabs %}
+    <li {% if activeTab == tab.text %}class="active"{% endif %}>
+      <a href="{{ tab.href }}">{{ tab.text }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
 {#
   field:
     name:

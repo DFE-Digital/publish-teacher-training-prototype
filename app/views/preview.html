@@ -37,13 +37,26 @@
       <div class="course-contents">
         <h2 class="heading-medium">Contents</h2>
         <ul class="list">
+          <li><a href="#section-about">About the training provider</a></li>
           <li><a href="#course-options">Courses offered</a></li>
           <li><a href="#section-entry">Requirements</a></li>
           <li><a href="#section-financial-support">Financial support</a></li>
-          <li><a href="#section-about">About the training provider</a></li>
           <li><a href="#section-contact">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
         </ul>
+
+        <h2 class="heading-large" id="section-about-provider">About the training provider</h2>
+        {{ macros.previewPart('about-organisation') }}
+
+        {% if not accrediting.selfAccrediting %}
+          {% if data['about-accrediting-provider'] %}
+            <h3 class="heading-medium">About the accrediting provider</h3>
+            {{ macros.previewPart('about-accrediting-provider') }}
+          {% endif %}
+        {% endif %}
+
+        <h3 class="heading-medium">Training with a disability</h3>
+        {{ macros.previewPart('training-with-a-disability') }}
 
         <h2 class="heading-large" id="course-options">Courses offered</h2>
         {% for option in subject.folded_course.options %}
@@ -134,19 +147,6 @@
 
         <h2 class="heading-large" id="section-financial-support">Financial support</h3>
         <p>Not available in this prototype yet.</p>
-
-        <h2 class="heading-large" id="section-about-provider">About the training provider</h2>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-organisation') }}
-
-        {% if not accrediting.selfAccrediting %}
-          {% if data[subject.slug + '-' + accrediting.slug + '-about-accrediting-provider'] %}
-            <h3 class="heading-medium">About the accrediting provider</h3>
-            {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider') }}
-          {% endif %}
-        {% endif %}
-
-        <h3 class="heading-medium">Training with a disability</h3>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability') }}
 
         <h2 class="heading-large" id="section-contact">Contact details</h2>
 

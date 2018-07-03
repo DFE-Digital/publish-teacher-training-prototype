@@ -98,21 +98,6 @@
           <ul class="course-parts-items">
             <li class="course-parts-item">
               <h3 class="course-part-task">
-                About your organisation
-              </h3>
-              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/about-this-provider">Edit</a>
-              <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-organisation', 'Training with you') }}
-
-                {% if not accrediting.selfAccrediting %}
-                  {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-about-accrediting-provider', 'About the accrediting provider (optional)') }}
-                {% endif %}
-
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-training-with-a-disability', 'Training with a disability') }}
-              </dl>
-            </li>
-            <li class="course-parts-item">
-              <h3 class="course-part-task">
                 Requirements and eligbility
               </h3>
               <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/requirements">Edit</a>
