@@ -49,9 +49,9 @@
         {{ macros.previewPart('about-organisation') }}
 
         {% if not accrediting.selfAccrediting %}
-          {% if data['about-accrediting-provider'] %}
-            <h3 class="heading-medium">About the accrediting provider</h3>
-            {{ macros.previewPart('about-accrediting-provider') }}
+          {% if data[accrediting.slug + '-about-accrediting-provider'] %}
+            <h3 class="heading-medium">About {{ accrediting.name }}</h3>
+            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider') }}
           {% endif %}
         {% endif %}
 

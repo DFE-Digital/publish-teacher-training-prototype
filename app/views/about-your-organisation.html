@@ -26,12 +26,7 @@
   <form action="/about-your-organisation" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of:</p>
-
-        <ul class="list list-bullet">
-          <li>you as a training provider</li>
-          <li>your accrediting provider, if you have one</li>
-        </ul>
+        <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of you as a training provider.</p>
 
         <p>You must be specific and factual with any claims you make, and support them with evidence. For example:</p>
 
@@ -46,7 +41,21 @@
     {% if not accrediting.selfAccrediting %}
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea('about-accrediting-provider', 'About the accrediting provider (optional)', 14, '', 250) }}
+        {% if data['accreditors'].length > 1 %}
+          <h2 class="heading-large">
+            About your accrediting providers
+          </h2>
+          <p>Describe advantages and special features of each accrediting provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
+        {% else %}
+          <h2 class="heading-large">
+            About your accrediting provider
+          </h2>
+          <p>Describe advantages and special features of your accrediting provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
+        {% endif %}
+
+        {% for a in data['accreditors'] %}
+          {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 14, '', 250) }}
+        {% endfor %}
       </div>
     </div>
     {% endif %}
@@ -64,7 +73,7 @@
       <input type="submit" class="button" value="Save" />
     </div>
 
-    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+    <a href="/">Cancel changes</a>
   </form>
 </main>
 
