@@ -1,0 +1,24 @@
+
+{% extends "layout.html" %}
+{% set title = 'About your organisation' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/about-your-organisation/thumbnails/01-organisation.png', '/public/images/history/about-your-organisation/01-organisation.png', '') }}
+  
+  {{ macros.screenshot('With multiple accrediting providers', 'with-multiple-accrediting-providers', '/public/images/history/about-your-organisation/thumbnails/02-with-multiple-accrediting-providers.png', '/public/images/history/about-your-organisation/02-with-multiple-accrediting-providers.png', '') }}
+  
+  {{ macros.screenshot('Course without organisation section', 'course-without-organisation-section', '/public/images/history/about-your-organisation/thumbnails/03-course-without-organisation-section.png', '/public/images/history/about-your-organisation/03-course-without-organisation-section.png', '') }}
+  
+  {{ macros.screenshot('Preview', 'preview', '/public/images/history/about-your-organisation/thumbnails/04-preview.png', '/public/images/history/about-your-organisation/04-preview.png', '') }}
+  
+</main>
+{% endblock %}
