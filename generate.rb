@@ -54,6 +54,8 @@ prototype_data['ucasCourses'] = courses.map do |c|
   }
 end
 
+prototype_data['ucasCourses'].sort_by! { |k| k[:name] }
+
 # Find all schools across all courses and flatten into array of schools
 prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
