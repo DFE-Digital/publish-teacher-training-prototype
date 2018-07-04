@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% set title = 'About this course' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/template/fields" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">Template: {{ data['template-name'] }}</span>
+    {{ title }}
+  </h1>
+
+  <form action="/template/fields" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <p>Give applicants a short description of the course.</p>
+
+        <p>You could include:</p>
+        <ul class="list list-bullet">
+          <li>an overview of what candidates are taught</li>
+          <li>how much time they’ll spend training in school</li>
+          <li>how they’ll be assessed</li>
+          <li>the workload (eg how many essays per term?)</li>
+          <li>any other locations they’ll need to go to (eg will they also have to attend classes at an accrediting provider?)</li>
+          <li>information about the prestige of the course (eg league-table rankings)</li>
+        </ul>
+
+        <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
+
+        {{ macros.textarea('template-about-this-course', 'About this course', 20, '', 400) }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large">Course length</h3>
+        <p>How long does the course run for?</p>
+        {% set fields = [
+            {
+              name: '1 year'
+            },
+            {
+              name: 'Up to 2 years'
+            },
+            {
+              name: 'Other'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('template-duration', fields) }}
+      </div>
+    </div>
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Fees</h3>
+        {{ macros.textbox('template-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
+        {{ macros.textbox('template-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
+      </div>
+    </div>
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Interview process</h3>
+
+        <p>Give applicants a summary of the interview process.</p>
+
+        <p>This could include:</p>
+        <ul class="list list-bullet">
+          <li>who’ll be interviewing them</li>
+          <li>how many interviews they’ll need to attend</li>
+          <li>details of any tests they’ll need to sit</li>
+        </ul>
+
+        {{ macros.textarea('template-interview-process', 'Interview process (optional)', 10, '', 250) }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">How school placements work</h3>
+
+        <p>Tell applicants more about the schools they’ll be teaching in.</p>
+
+        <p>You could include:</p>
+        <ul class="list list-bullet">
+          <li>how the candidate’s schools are selected</li>
+          <li>the average distance candidates have to travel from home to school</li>
+          <li>the age ranges they’ll be teaching (eg 11 to 16 or 11 to 18)</li>
+          <li>how many schools you partner with in total</li>
+          <li>the number of placements a candidate will have</li>
+          <li>how much time candidates spend in each school</li>
+        </ul>
+
+        {{ macros.textarea('template-placement-school-policy', 'How school placements work', 10, '', 250) }}
+      </div>
+    </div>
+
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/template/fields">Cancel changes</a>
+  </form>
+</main>
+
+{% endblock %}

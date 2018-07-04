@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% set title = 'Create a course template' %}
+{% block page_title %}{{ template }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/templates" class="link-back">Back</a>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-xlarge">
+        {{ title }}
+      </h1>
+
+      <p class="lede">Use templates to share information between courses.</p>
+
+      <p>Try to use different templates for each type of course on offer. Be clear about how one type of course differs from another. For example, create one template for your QTS salaried courses and another for your PGCE with QTS ones.</p>
+
+      <form action="/template/fields" method="post">
+        {{ macros.textbox('template-name', 'Template name', 'For example: Secondary PGCE courses') }}
+
+        <div class="form-group">
+          <input type="submit" value="Create template" class="button" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

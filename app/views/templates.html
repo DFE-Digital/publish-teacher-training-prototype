@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block page_title %}{{ data['training-provider-name'] }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  {{ macros.orgHeading('Course templates') }}
+
+  <h2 class="heading-large">
+    Course templates
+  </h2>
+  <p>Use templates to share information between courses.</p>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% if data['template-name'] %}
+      <div class="body-text add-double-bottom-margin">
+        <table>
+          <thead>
+            <tr>
+              <th>Template name</th>
+              <!-- <th>Courses using template</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/template/fields">{{ data['template-name'] }}</a></td>
+              <!-- <td>0</td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+
+      <p>
+        <a href="/template/new" class="button">Create new template</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

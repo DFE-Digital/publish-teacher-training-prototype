@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% set title = data['template-name'] %}
+{% block page_title %}{{ template }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/templates" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">Template</span>
+    {{ title }}
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="course-parts course-parts--large add-top-margin">
+        <ul class="course-parts-items">
+          <li class="course-parts-item">
+            <h3 class="course-part-task">About this course</h3>
+
+            <a class="course-part-task-action" href="/template/about-this-course">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Course length') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">
+              Requirements and eligbility
+            </h3>
+            <a class="course-part-task-action" href="/template/requirements">Edit</a>
+
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)') }}
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="column-one-third">
+      <div class="status">
+        <p>This template is used by 0 courses.</p>
+
+        <ul class="list">
+          <li><a href="#">Choose the courses which use this template</a></li>
+          <li>
+            <a href="#">Rename template</a>
+          </li>
+          <li>
+            <a href="#">Delete template</a>
+          </li>
+        </ul>
+
+        <hr />
+
+        <p>Before courses using this template can be published DfE must approve it.</p>
+        <a href="#" class="button">Submit for approval</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
