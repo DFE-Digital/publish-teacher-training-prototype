@@ -54,7 +54,7 @@
         {% endif %}
 
         {% for a in data['accreditors'] %}
-          {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 14, '', 250) }}
+          {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 8, '', 100) }}
         {% endfor %}
       </div>
     </div>
