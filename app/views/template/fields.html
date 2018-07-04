@@ -23,11 +23,17 @@
             <a class="course-part-task-action" href="/template/about-this-course">Edit</a>
             <dl class="course-part-tasks">
               {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Course length') }}
               {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
               {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Course length and fees</h3>
+            <a class="course-part-task-action" href="/template/fees-and-length">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Course length') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
             </dl>
           </li>
           <li class="course-parts-item">
@@ -50,7 +56,9 @@
         <p>This template is used by 0 courses.</p>
 
         <ul class="list">
-          <li><a href="#">Choose the courses which use this template</a></li>
+          <li>
+            <a href="/template/apply">Edit courses using this template</a>
+          </li>
           <li>
             <a href="#">Rename template</a>
           </li>

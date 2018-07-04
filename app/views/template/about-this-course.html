@@ -34,35 +34,6 @@
       </div>
     </div>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <h3 class="heading-large">Course length</h3>
-        <p>How long does the course run for?</p>
-        {% set fields = [
-            {
-              name: '1 year'
-            },
-            {
-              name: 'Up to 2 years'
-            },
-            {
-              name: 'Other'
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup('template-duration', fields) }}
-      </div>
-    </div>
-    <hr />
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <h3 class="heading-large remove-top-margin">Fees</h3>
-        {{ macros.textbox('template-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
-        {{ macros.textbox('template-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
-      </div>
-    </div>
     <hr />
 
     <div class="grid-row">
@@ -81,6 +52,8 @@
         {{ macros.textarea('template-interview-process', 'Interview process (optional)', 10, '', 250) }}
       </div>
     </div>
+
+    <hr />
 
     <div class="grid-row">
       <div class="column-two-thirds">
