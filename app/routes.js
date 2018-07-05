@@ -18,6 +18,31 @@ router.post('/about-your-organisation', function (req, res) {
   res.render('about-your-organisation', { showMessage: true })
 })
 
+router.post('/template/new', function (req, res) {
+  var name = req.body['template-name'];
+  var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
+
+  req.session.data['templates'].push({
+    name: name,
+    slug: slug
+  });
+
+  res.redirect('/template/' + slug);
+})
+
+router.get('/template/new', function (req, res) {
+  res.render('template/new');
+})
+
+router.get('/template/:template', function (req, res) {
+  res.render('template/fields', { template: template(req) })
+})
+
+router.get('/template/:template/:view', function (req, res) {
+  var view = req.params.view;
+  res.render(`template/${view}`, { template: template(req) })
+})
+
 router.get('/preview/:accreditor/:subject', function (req, res) {
   res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
 })
@@ -104,6 +129,14 @@ function accreditor(req) {
   accreditor.selfAccrediting = (req.session.data['training-provider-name'] == accreditor.name);
 
   return accreditor;
+}
+
+function template(req) {
+  var template = req.session.data['templates'].find(function(t) {
+    return t.slug == req.params.template;
+  });
+
+  return template;
 }
 
 function option(req, subject) {

@@ -6,18 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/template/fields" class="link-back">Back</a>
+  <a href="/template/{{ template.slug }}" class="link-back">Back</a>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-xlarge">
-        <span class="heading-secondary">Template: {{ data['template-name'] }}</span>
-        {{ title }}
-      </h1>
-    </div>
-  </div>
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">Template: {{ template.name }}</span>
+    {{ title }}
+  </h1>
 
-  <form action="/template/apply" method="post">
+  <form action="/template/{{ template.slug }}/apply" method="post">
   {% for accrediting in data['accreditors'] %}
     {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
       <h3 class="heading-medium">
@@ -45,14 +41,14 @@
                 <td>
                   {{ data[course.progammeCode + '-template'] }}
                   {% set checkboxName = course.programmeCode + '-template' %}
-                  <input type="checkbox" name="{{ checkboxName }}" value="yes" {{ checked(checkboxName, 'yes') }} />
+                  <input type="checkbox" name="{{ checkboxName }}" value="{{ template.name }}" {{ checked(checkboxName, template.slug) }} />
                 </td>
                 <td>{{ course.programmeCode }}</td>
                 <td>{{ course.name }}</td>
                 <td>{{ course.options }}</td>
                 <td>
-                  {% if data[checkboxName] == 'yes' %}
-                    {{ data['template-name'] }}
+                  {% if data[checkboxName] == template.name %}
+                    {{ template.name }}
                   {% endif %}
                 </td>
               </tr>
@@ -68,7 +64,7 @@
     <input type="submit" class="button" value="Save changes" />
   </div>
 
-  <a href="#">Cancel changes</a>
+  <a href="/template/{{ template.slug }}">Cancel changes</a>
   </form>
 
 </main>

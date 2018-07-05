@@ -18,8 +18,8 @@
 
       <p>Try to use different templates for each type of course on offer. Be clear about how one type of course differs from another. For example, create one template for your QTS salaried courses and another for your PGCE with QTS ones.</p>
 
-      <form action="/template/fields" method="post">
-        {{ macros.textbox('template-name', 'Template name', 'For example: Secondary PGCE courses') }}
+      <form action="/template/new" method="post">
+        {{ macros.textboxWithoutValue('template-name', 'Template name', 'For example: Secondary PGCE courses') }}
 
         <div class="form-group">
           <input type="submit" value="Create template" class="button" />

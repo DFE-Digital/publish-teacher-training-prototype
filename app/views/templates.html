@@ -14,7 +14,7 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      {% if data['template-name'] %}
+      {% if data['templates'].length > 0 %}
       <div class="body-text add-double-bottom-margin">
         <table>
           <thead>
@@ -24,10 +24,14 @@
             </tr>
           </thead>
           <tbody>
+            {% for template in data['templates'] %}
             <tr>
-              <td><a href="/template/fields">{{ data['template-name'] }}</a></td>
+              <td>
+                <a href="/template/{{ template.slug }}">{{ template.name }}</a>
+              </td>
               <!-- <td>0</td> -->
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>

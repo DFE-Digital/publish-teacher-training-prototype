@@ -38,8 +38,8 @@
                 <td>{{ course.options }}</td>
                 <td>
                   {% set checkboxName = course.programmeCode + '-template' %}
-                  {% if data[checkboxName] == 'yes' %}
-                    {{ data['template-name'] }}
+                  {% if data[checkboxName] %}
+                    <a href="#">{{ data[checkboxName] }}</a>
                   {% else %}
                     <span class="empty">No template</span>
                   {% endif %}

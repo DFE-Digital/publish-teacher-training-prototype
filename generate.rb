@@ -19,6 +19,7 @@ prototype_data = {
   'telephone': '0208 123 4567',
   'email': 'someemail@not-an-email.com',
   'website': 'http://www.a-provider-website.org.uk/',
+  'templates': []
 }
 
 # Map course data for the `imported from UCAS` view

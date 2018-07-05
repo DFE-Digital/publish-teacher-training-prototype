@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/template/fields" class="link-back">Back</a>
+  <a href="/template/{{ template.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
-    <span class="heading-secondary">Template: {{ data['template-name'] }}</span>
+    <span class="heading-secondary">Template: {{ template.name }}</span>
     {{ title }}
   </h1>
 
-  <form action="/template/fields" method="post">
+  <form action="/template/{{ template.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Course length</h3>
@@ -30,15 +30,15 @@
           ]
         %}
 
-        {{ macros.radioGroup('template-duration', fields) }}
+        {{ macros.radioGroup(template.slug + '-template-duration', fields) }}
       </div>
     </div>
 
     <div class="grid-row">
       <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Course fees</h3>
-        {{ macros.textbox('template-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
-        {{ macros.textbox('template-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
+        {{ macros.textbox(template.slug + '-template-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
+        {{ macros.textbox(template.slug + '-template-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       <input type="submit" class="button" value="Save" />
     </div>
 
-    <a href="/template/fields">Cancel changes</a>
+    <a href="/template/{{ template.slug }}">Cancel changes</a>
   </form>
 </main>
 
