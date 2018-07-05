@@ -45,8 +45,20 @@
 
   {% if not data[course.programmeCode + '-template-choice'] %}
     <div class="add-double-bottom-margin status-box">
+
+      {% if data['templates'].length == 0 %}
+      <h2 class="heading-large remove-top-margin">Create a course template</h2>
+      <p>You can copy the same information to different courses by creating a template. This means you won’t have to add this information individually for each course. For example, you can create a template for all your QTS salaried courses and another for your PGCE with QTS courses.</p>
+
+      <p>
+        <a href="/templates">Create your first template</a>
+      </p>
+      <hr />
+      <a href="/templates">Don’t use a template</a>
+      {% else %}
       <h2 class="heading-large remove-top-margin">Pick a course template</h2>
       {% include "course/_pick-template-choices.html" %}
+      {% endif %}
     </div>
   {% elseif data[course.programmeCode + '-template-choice'] == 'template-none'  %}
     <!-- <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
