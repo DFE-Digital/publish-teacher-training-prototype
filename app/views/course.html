@@ -43,25 +43,6 @@
     {{ title }}
   </h1>
 
-  <dl class="aligned add-top-margin add-double-bottom-margin">
-    <dt>Training provider code:</dt>
-    <dd>{{ course.providerCode }}</dd>
-    <dt>Training programme code:</dt>
-    <dd>{{ course.programmeCode }}</dd>
-    <dt>Accrediting provider:</dt>
-    <dd>{{ course.accrediting }}</dd>
-    <dt>Route:</dt>
-    <dd>{{ course.route }}</dd>
-    <dt>Subjects:</dt>
-    <dd>{{ course.subjects }}</dd>
-    <dt>Age range:</dt>
-    <dd>{{ course.ageRange }}</dd>
-    <dt>Qualification:</dt>
-    <dd>{{ course.qualifications }}</dd>
-    <dt>Regions:</dt>
-    <dd>{{ course.regions }}</dd>
-  </dl>
-
   {% if not data[course.programmeCode + '-template-choice'] %}
     <div class="add-double-bottom-margin status-box">
       <h2 class="heading-large remove-top-margin">Pick a course template</h2>
@@ -94,6 +75,25 @@
       </ul>
     </div>
   {% endif %}
+
+  <dl class="aligned add-top-margin">
+    <dt>Training provider code:</dt>
+    <dd>{{ course.providerCode }}</dd>
+    <dt>Training programme code:</dt>
+    <dd>{{ course.programmeCode }}</dd>
+    <dt>Accrediting provider:</dt>
+    <dd>{{ course.accrediting }}</dd>
+    <dt>Route:</dt>
+    <dd>{{ course.route }}</dd>
+    <dt>Subjects:</dt>
+    <dd>{{ course.subjects }}</dd>
+    <dt>Age range:</dt>
+    <dd>{{ course.ageRange }}</dd>
+    <dt>Qualification:</dt>
+    <dd>{{ course.qualifications }}</dd>
+    <dt>Regions:</dt>
+    <dd>{{ course.regions }}</dd>
+  </dl>
 
   {% if data[course.programmeCode + '-template-choice'] == 'template-none'  %}
   <div class="grid-row add-top-margin">
@@ -151,6 +151,32 @@
     </div>
   </div>
   {% endif %}
+
+  <h3 class="heading-medium">Training locations</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Location name</th>
+        <th>Address</th>
+        <th>Code</th>
+        <th>Full time vacancies</th>
+        <th>Part time vacancies</th>
+        <th>Applications accepted from</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for school in course.schools %}
+      <tr>
+        <td>{{ school.name }}</td>
+        <td>{{ school.address }}</td>
+        <td>{{ school.code }}</td>
+        <td>Vacancies</td>
+        <td>Not applicable</td>
+        <td>26 Oct 2018</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </main>
 
 {% endblock %}
