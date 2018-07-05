@@ -63,7 +63,7 @@
   </dl>
 
   {% if not data[course.programmeCode + '-template-choice'] %}
-    <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+    <div class="add-double-bottom-margin status-box">
       <h2 class="heading-large remove-top-margin">Pick a course template</h2>
       {% include "course/_pick-template-choices.html" %}
     </div>
@@ -82,7 +82,7 @@
       <a href="#" class="button">Submit for approval</a>
     </div> -->
   {% else %}
-    <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+    <div class="add-double-bottom-margin status-box">
       <p class="lede">This course uses a template:<br /><a href="/template/{{ template.slug }}">{{ template.name }}</a></p>
 
       <p class="add-double-bottom-margin"><a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}" class="button">Preview course</a></p>
@@ -98,7 +98,7 @@
   {% if data[course.programmeCode + '-template-choice'] == 'template-none'  %}
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">
-      <div class="course-parts course-parts--large add-top-margin">
+      <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <li class="course-parts-item">
             <h3 class="course-part-task">About this course</h3>
@@ -135,7 +135,7 @@
       </div>
     </div>
     <div class="column-one-third">
-      <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+      <div class="add-double-bottom-margin status-box">
         <p class="lede">This course does not use a template.</p>
 
         <ul class="list">

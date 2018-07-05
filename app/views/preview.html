@@ -8,16 +8,22 @@
 
   {% if previewingTemplate %}
     <a href="/template/{{ template.slug }}" class="link-back">Back to template</a>
+
+    <div class="status-box add-top-margin">
+      This is a preview of template: {{ template.name }}
+    </div>
   {% else %}
     <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back to course</a>
+
+    <div class="status-box add-top-margin">
+      This is a preview of course: {{ course.name }} ({{ course.programmeCode }}).
+    </div>
   {% endif %}
 
   <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
     {{ course.name }} at {{ data['training-provider-name'] }}
     {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
-
-  {{ course.options[0] }}
 
   <dl class="aligned" style="margin-top: 60px;">
     <dt>Course offered:</dt>
