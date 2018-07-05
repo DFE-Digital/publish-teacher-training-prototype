@@ -18,6 +18,15 @@ $path: "/public/images/";
   font-weight: bold;
 }
 
+table thead th {
+  border-bottom-width: 2px;
+  border-color: $black;
+}
+
+.empty {
+  color: $grey-1;
+}
+
 .status {
   background: $grey-3;
   padding: 20px;
