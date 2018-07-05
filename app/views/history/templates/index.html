@@ -1,0 +1,38 @@
+
+{% extends "layout.html" %}
+{% set title = 'Templates' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {{ macros.screenshot('Courses', 'courses', '/public/images/history/templates/thumbnails/01-courses.png', '/public/images/history/templates/01-courses.png', '') }}
+  
+  {{ macros.screenshot('Templates', 'templates', '/public/images/history/templates/thumbnails/02-templates.png', '/public/images/history/templates/02-templates.png', '') }}
+  
+  {{ macros.screenshot('New template', 'new-template', '/public/images/history/templates/thumbnails/03-new-template.png', '/public/images/history/templates/03-new-template.png', '') }}
+  
+  {{ macros.screenshot('Template', 'template', '/public/images/history/templates/thumbnails/04-template.png', '/public/images/history/templates/04-template.png', '') }}
+  
+  {{ macros.screenshot('Set fields for a template', 'set-fields-for-a-template', '/public/images/history/templates/thumbnails/05-set-fields-for-a-template.png', '/public/images/history/templates/05-set-fields-for-a-template.png', '') }}
+  
+  {{ macros.screenshot('Template preview', 'template-preview', '/public/images/history/templates/thumbnails/06-template-preview.png', '/public/images/history/templates/06-template-preview.png', '') }}
+  
+  {{ macros.screenshot('Apply template to courses', 'apply-template-to-courses', '/public/images/history/templates/thumbnails/07-apply-template-to-courses.png', '/public/images/history/templates/07-apply-template-to-courses.png', '') }}
+  
+  {{ macros.screenshot('Pick a template for a course', 'pick-a-template-for-a-course', '/public/images/history/templates/thumbnails/08-pick-a-template-for-a-course.png', '/public/images/history/templates/08-pick-a-template-for-a-course.png', '') }}
+  
+  {{ macros.screenshot('Template selected for a course', 'template-selected-for-a-course', '/public/images/history/templates/thumbnails/09-template-selected-for-a-course.png', '/public/images/history/templates/09-template-selected-for-a-course.png', '') }}
+  
+  {{ macros.screenshot('Dont use a template', 'dont-use-a-template', '/public/images/history/templates/thumbnails/10-dont-use-a-template.png', '/public/images/history/templates/10-dont-use-a-template.png', '') }}
+  
+  {{ macros.screenshot('Course preview', 'course-preview', '/public/images/history/templates/thumbnails/11-course-preview.png', '/public/images/history/templates/11-course-preview.png', '') }}
+  
+</main>
+{% endblock %}
