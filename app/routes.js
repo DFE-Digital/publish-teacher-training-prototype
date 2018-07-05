@@ -30,8 +30,10 @@ router.get('/email-qa-fail/:subject', function (req, res) {
   res.render('email-qa-fail', { subject: subject(req) })
 })
 
-router.get('/course/:accreditor/:subject', function (req, res) {
-  res.render('course', { subject: subject(req), accrediting: accreditor(req) })
+router.get('/course/:accreditor/:code', function (req, res) {
+  console.log(course(req));
+
+  res.render('course', { course: course(req), accrediting: accreditor(req) })
 })
 
 router.get('/course/:accreditor/:subject/option/:index', function (req, res) {
@@ -84,6 +86,14 @@ function subject(req) {
     slug: subject.slug,
     folded_course: folded_course
   };
+}
+
+function course(req) {
+  var course = req.session.data['ucasCourses'].find(function(a) {
+    return a.programmeCode == req.params.code;
+  });
+
+  return course;
 }
 
 function accreditor(req) {

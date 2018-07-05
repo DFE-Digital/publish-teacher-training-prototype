@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title %}{{ subject.name or 'Maths' }}{% endset %}
+{% set title %}{{ course.name }} ({{ course.programmeCode }}){% endset %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -31,111 +31,116 @@
   {% endif %}
 
   <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ course.options }}</span>
     {{ title }}
-    {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
-  <div class="grid-row add-top-margin">
-    <div class="column-two-thirds">
-      <table class="ucas-info-table">
-        <thead>
-          <tr>
-            <th>UCAS code</th>
-            <th>Type</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for course in data['ucasCourses'] %}
-            {% if course.name == subject.name and course.accrediting == accrediting.name %}
-              <tr>
-                <td>{{ course.programmeCode }}</td>
-                <td>{{ course.options }}</td>
-                <td class="ucas-view-link"><a href="/course/{{ accrediting.slug }}/{{ subject.slug }}/ucas/{{ course.programmeCode }}">View UCAS data</a></td>
-              </tr>
-            {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
+  <dl class="aligned add-top-margin add-double-bottom-margin">
+    <dt>Training provider code:</dt>
+    <dd>{{ course.providerCode }}</dd>
+    <dt>Training programme code:</dt>
+    <dd>{{ course.programmeCode }}</dd>
+    <dt>Accrediting provider:</dt>
+    <dd>{{ course.accrediting }}</dd>
+    <dt>Route:</dt>
+    <dd>{{ course.route }}</dd>
+    <dt>Subjects:</dt>
+    <dd>{{ course.subjects }}</dd>
+    <dt>Age range:</dt>
+    <dd>{{ course.ageRange }}</dd>
+    <dt>Qualification:</dt>
+    <dd>{{ course.qualifications }}</dd>
+    <dt>Regions:</dt>
+    <dd>{{ course.regions }}</dd>
+  </dl>
 
-      <h2 class="heading-large">Courses offered</h2>
+  <form action="" method="post" class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+    <h2 class="heading-large remove-top-margin">Pick a course template</h2>
+
+    {% set fields = [
+        {
+          name: data['template-name'],
+          text: '
+            <p><a href="#">View template</a></p>
+          '
+        },
+        {
+          name: 'Don’t use a template',
+          text: '
+            <p>Choose this option to fully customise this course.</p>
+          '
+        }
+      ]
+    %}
+
+    {{ macros.radioGroup(course.programmeCode + '-template-choice', fields) }}
+
+    <a href="#" class="button">Pick template</a>
+  </form>
+
+  <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+    <p class="lede">This course uses a template:<br /><a href="#">{{ data['template-name'] }}</a></p>
+
+    <p class="add-double-bottom-margin"><a href="#" class="button">Preview course</a></p>
+
+    <ul class="list remove-bottom-margin">
+      <li>
+        <a href="#">Use a different template</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+    <p class="lede">This course does not use a template.</p>
+
+    <ul class="list">
+      <li><a href="#">Preview course</a></li>
+      <li><a href="#">Switch to a template</a></li>
+    </ul>
+
+    <hr />
+
+    <p>Before this course can be published DfE must approve it.</p>
+    <a href="#" class="button">Submit for approval</a>
+  </div>
+
+  <!-- <div class="grid-row add-top-margin">
+    <div class="column-two-thirds">
       <div class="course-parts course-parts--large add-top-margin">
         <ul class="course-parts-items">
-          {% for option in subject.folded_course.options %}
-            <li class="course-parts-item">
-              <h3 class="course-part-task">{{ option }}</h3>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">About this course</h3>
 
-              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/option/{{ loop.index }}">Add details</a>
-              <dl class="course-part-tasks">
-                <!-- <div>
-                  <dt class="course-part-label">
-                    UCAS course codes
-                  </dt>
-                  <dd class="course-part-value">
-                    {% for course in data['ucasCourses'] %}
-                      {% if course.name == subject.name and course.accrediting == accrediting.name and course.options == option %}
-                        {{ course.programmeCode }} – <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}/ucas/{{ course.programmeCode }}">View UCAS data</a><br />
-                        </tr>
-                      {% endif %}
-                    {% endfor %}
-                  </dd>
-                </div> -->
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website', 'Webpage (optional)') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Duration') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
-              </dl>
-            </li>
-          {% endfor %}
+            <a class="course-part-task-action" href="/template/about-this-course">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Course length and fees</h3>
+            <a class="course-part-task-action" href="/template/fees-and-length">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Course length') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">
+              Requirements and eligbility
+            </h3>
+            <a class="course-part-task-action" href="/template/requirements">Edit</a>
+
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)') }}
+              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)') }}
+            </dl>
+          </li>
         </ul>
       </div>
-
-      <h2 class="heading-large">Shared course details</h2>
-      <div class="course-parts course-parts--large add-top-margin">
-          <ul class="course-parts-items">
-            <li class="course-parts-item">
-              <h3 class="course-part-task">
-                Requirements and eligbility
-              </h3>
-              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/requirements">Edit</a>
-
-              <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)') }}
-              </dl>
-            </li>
-            {% if subject.folded_course.flags.qualifications %}
-            <!-- <li class="course-parts-item">
-              <h3 class="course-part-task">
-                Qualification
-              </h3>
-              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/qualification-options">Edit</a>
-              <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-pgce-with-qts-qual', 'PGCE with QTS') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-pgce-with-qts-qual-fee', 'PGCE with QTS course fee') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qts-qual', 'QTS') }}
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qts-qual-fee', 'QTS course fee') }}
-              </dl>
-            </li> -->
-            {% endif %}
-            {% if subject.folded_course.flags.salary %}
-            <!-- <li class="course-parts-item">
-              <h3 class="course-part-task">
-                Salary
-              </h3>
-              <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ subject.slug }}/salary-options">Edit</a>
-              <dl class="course-part-tasks">
-                {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-salaried', 'Earn a salary while you train') }}
-              </dl>
-            </li> -->
-            {% endif %}
-          </ul>
-      </div>
-
     </div>
     <div class="column-one-third">
       <p>
@@ -146,7 +151,7 @@
         <input type="submit" value="Send to DfE" class="button" />
       </form>
     </div>
-  </div>
+  </div> -->
 </main>
 
 {% endblock %}
