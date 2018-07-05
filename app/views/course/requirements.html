@@ -1,28 +1,30 @@
 {% extends "layout.html" %}
-{% block page_title %}Your courses{% endblock %}
+{% set title = 'Requirements and eligibility' %}
+{% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
+  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
-    Requirements and eligibility
+    <span class="heading-secondary">Template: {{ template.name }}</span>
+    {{ title }}
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed', 8, 'The minimum academic qualifications required for this course.', 100) }}
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)', 8, 'Any specific qualities you look for in a candidate. For example, confidence in talking to large groups.', 100) }}
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)', 8, 'Non-academic requirements, eg DBS checks or work experience, if relevant.', 100) }}
+      <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+        {{ macros.textarea(course.programmeCode + '-qualifications-required', 'Qualifications needed', 8, 'The minimum academic qualifications required for this course.', 100) }}
+        {{ macros.textarea(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)', 8, 'Any specific qualities you look for in a candidate. For example, confidence in talking to large groups.', 100) }}
+        {{ macros.textarea(course.programmeCode + '-other-requirements', 'Other requirements (optional)', 8, 'Non-academic requirements, eg DBS checks or work experience, if relevant.', 100) }}
 
         <div class="add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
         </div>
 
-        <a href="/course/{{ subject.slug }}">Cancel changes</a>
+        <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
       </form>
     </div>
   </div>

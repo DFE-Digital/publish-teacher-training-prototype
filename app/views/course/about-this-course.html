@@ -6,40 +6,71 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
-    </ol>
-  </div>
+  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
 
-  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
+  <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textbox(subject.slug + '-' + accrediting.slug + '-course-website', 'Course webpage (optional)', 'Enter the address of a page on your website with details about this course.', 'form-control-full') }}
+        <p>Give applicants a short description of the course.</p>
+
+        <p>You could include:</p>
+        <ul class="list list-bullet">
+          <li>an overview of what candidates are taught</li>
+          <li>how much time they’ll spend training in school</li>
+          <li>how they’ll be assessed</li>
+          <li>the workload (eg how many essays per term?)</li>
+          <li>any other locations they’ll need to go to (eg will they also have to attend classes at an accrediting provider?)</li>
+          <li>information about the prestige of the course (eg league-table rankings)</li>
+        </ul>
+
+        <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
+
+        {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400) }}
       </div>
     </div>
 
+    <hr />
+
     <div class="grid-row">
       <div class="column-two-thirds">
-        {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-about-this-course', 'About this course', 14, 'A short summary of the course. Be concise and use plain language.') }}
+        <h3 class="heading-large remove-top-margin">Interview process</h3>
 
-        <a href="#">Add another ‘About this course’ section</a>
-      </div>
-      <div class="column-one-third add-margin-for-label-with-help">
-        <p>It should include:</p>
+        <p>Give applicants a summary of the interview process.</p>
+
+        <p>This could include:</p>
         <ul class="list list-bullet">
-          <li>what types of things you’ll be learning</li>
-          <li>overall experience (eg whether it’s hands-on classroom experience from day one)</li>
-          <li>how the course will be structured</li>
-          <li>locations that you’ll need to attend (eg if you have to attend classes at an accrediting provider as well as the training provider)</li>
+          <li>who’ll be interviewing them</li>
+          <li>how many interviews they’ll need to attend</li>
+          <li>details of any tests they’ll need to sit</li>
         </ul>
 
-        <p>It can also include information about the prestige or unique qualities of the course, eg league-table rankings.</p>
+        {{ macros.textarea(course.programmeCode + '-interview-process', 'Interview process (optional)', 10, '', 250) }}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">How school placements work</h3>
+
+        <p>Tell applicants more about the schools they’ll be teaching in.</p>
+
+        <p>You could include:</p>
+        <ul class="list list-bullet">
+          <li>how the candidate’s schools are selected</li>
+          <li>the average distance candidates have to travel from home to school</li>
+          <li>the age ranges they’ll be teaching (eg 11 to 16 or 11 to 18)</li>
+          <li>how many schools you partner with in total</li>
+          <li>the number of placements a candidate will have</li>
+          <li>how much time candidates spend in each school</li>
+        </ul>
+
+        {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 250) }}
       </div>
     </div>
 
@@ -47,7 +78,7 @@
       <input type="submit" class="button" value="Save" />
     </div>
 
-    <a href="/course/{{ subject.slug }}">Cancel changes</a>
+    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
   </form>
 </main>
 

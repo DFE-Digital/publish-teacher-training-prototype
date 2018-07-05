@@ -103,32 +103,32 @@
           <li class="course-parts-item">
             <h3 class="course-part-task">About this course</h3>
 
-            <a class="course-part-task-action" href="/template/about-this-course">Edit</a>
+            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/about-this-course">Edit</a>
             <dl class="course-part-tasks">
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course', 'About this course') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process', 'Interview process (optional)') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy', 'How school placements work') }}
+              {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course') }}
+              {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
+              {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work') }}
             </dl>
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">Course length and fees</h3>
-            <a class="course-part-task-action" href="/template/fees-and-length">Edit</a>
+            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/fees-and-length">Edit</a>
             <dl class="course-part-tasks">
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration', 'Course length') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee', 'Fee for UK and EU students') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international', 'Fee for international students (optional)') }}
+              {{ macros.coursePart(course.programmeCode + '-duration', 'Course length') }}
+              {{ macros.coursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
+              {{ macros.coursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
             </dl>
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">
               Requirements and eligbility
             </h3>
-            <a class="course-part-task-action" href="/template/requirements">Edit</a>
+            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/requirements">Edit</a>
 
             <dl class="course-part-tasks">
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-qualifications-required', 'Qualifications needed') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-personal-qualities', 'Personal qualities (optional)') }}
-              {{ macros.coursePart(subject.slug + '-' + accrediting.slug + '-other-requirements', 'Other requirements (optional)') }}
+              {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed') }}
+              {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
+              {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
             </dl>
           </li>
         </ul>
