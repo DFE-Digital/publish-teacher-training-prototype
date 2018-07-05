@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Catholic Teaching Alliance (South East London)'
+provider = 'University of Derby'
 courses = data.select {|c| c['provider'] == provider }
 
 prototype_data = {
