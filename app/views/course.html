@@ -19,6 +19,14 @@
     {% endif %}
   </div>
 
+  {% if showMessage %}
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+        Changes saved
+      </h3>
+    </div>
+  {% endif %}
+
   {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
       <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
@@ -54,57 +62,41 @@
     <dd>{{ course.regions }}</dd>
   </dl>
 
-  <form action="" method="post" class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
-    <h2 class="heading-large remove-top-margin">Pick a course template</h2>
+  {% if not data[course.programmeCode + '-template-choice'] %}
+    <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+      <h2 class="heading-large remove-top-margin">Pick a course template</h2>
+      {% include "course/_pick-template-choices.html" %}
+    </div>
+  {% elseif data[course.programmeCode + '-template-choice'] == 'template-none'  %}
+    <!-- <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+      <p class="lede">This course does not use a template.</p>
 
-    {% set fields = [
-        {
-          name: data['template-name'],
-          text: '
-            <p><a href="#">View template</a></p>
-          '
-        },
-        {
-          name: 'Don’t use a template',
-          text: '
-            <p>Choose this option to fully customise this course.</p>
-          '
-        }
-      ]
-    %}
+      <ul class="list">
+        <li><a href="#">Preview course</a></li>
+        <li><a href="#">Switch to a template</a></li>
+      </ul>
 
-    {{ macros.radioGroup(course.programmeCode + '-template-choice', fields) }}
+      <hr />
 
-    <a href="#" class="button">Pick template</a>
-  </form>
+      <p>Before this course can be published DfE must approve it.</p>
+      <a href="#" class="button">Submit for approval</a>
+    </div> -->
+  {% else %}
+    <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+      <p class="lede">This course uses a template:<br /><a href="/template/{{ template.slug }}">{{ template.name }}</a></p>
 
-  <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
-    <p class="lede">This course uses a template:<br /><a href="#">{{ data['template-name'] }}</a></p>
+      <p class="add-double-bottom-margin"><a href="#" class="button">Preview course</a></p>
 
-    <p class="add-double-bottom-margin"><a href="#" class="button">Preview course</a></p>
+      <ul class="list remove-bottom-margin">
+        <li>
+          <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/pick-template">Use a different template</a>
+        </li>
+      </ul>
+    </div>
+  {% endif %}
 
-    <ul class="list remove-bottom-margin">
-      <li>
-        <a href="#">Use a different template</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
-    <p class="lede">This course does not use a template.</p>
-
-    <ul class="list">
-      <li><a href="#">Preview course</a></li>
-      <li><a href="#">Switch to a template</a></li>
-    </ul>
-
-    <hr />
-
-    <p>Before this course can be published DfE must approve it.</p>
-    <a href="#" class="button">Submit for approval</a>
-  </div>
-
-  <!-- <div class="grid-row add-top-margin">
+  {% if data[course.programmeCode + '-template-choice'] == 'template-none'  %}
+  <div class="grid-row add-top-margin">
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large add-top-margin">
         <ul class="course-parts-items">
@@ -143,15 +135,22 @@
       </div>
     </div>
     <div class="column-one-third">
-      <p>
-        <a href="/preview/{{ accrediting.slug }}/{{ subject.slug }}">Preview course</a>
-      </p>
-      <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
-        <input type="hidden" name="{{ subject.slug }}-qa" value="true" />
-        <input type="submit" value="Send to DfE" class="button" />
-      </form>
+      <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
+        <p class="lede">This course does not use a template.</p>
+
+        <ul class="list">
+          <li><a href="#">Preview course</a></li>
+          <li><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/pick-template">Switch to a template</a></li>
+        </ul>
+
+        <hr />
+
+        <p>Before this course can be published DfE must approve it.</p>
+        <a href="#" class="button">Submit for approval</a>
+      </div>
     </div>
-  </div> -->
+  </div>
+  {% endif %}
 </main>
 
 {% endblock %}
