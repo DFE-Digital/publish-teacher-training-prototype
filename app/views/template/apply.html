@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Pick the courses that use this template' %}
+{% set title = 'Pick courses to use this template' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -37,18 +37,23 @@
           {% set subjectName = '' %}
           {% for course in data['ucasCourses'] %}
             {% if course.accrediting == accrediting.name %}
+              {% set templateChoice = data[course.programmeCode + '-template-choice'] %}
               <tr>
                 <td>
-                  {{ data[course.progammeCode + '-template'] }}
-                  {% set checkboxName = course.programmeCode + '-template' %}
-                  <input type="checkbox" name="{{ checkboxName }}" value="{{ template.name }}" {{ checked(checkboxName, template.slug) }} />
+                  <input type="checkbox" name="apply-to-{{ course.programmeCode }}" value="{{ template.name }}" />
                 </td>
                 <td>{{ course.programmeCode }}</td>
                 <td>{{ course.name }}</td>
                 <td>{{ course.options }}</td>
                 <td>
-                  {% if data[checkboxName] == template.name %}
-                    {{ template.name }}
+                  {% if (templateChoice == 'template-none') %}
+                    Custom course
+                  {% elseif (templateChoice) %}
+                    {% for t in data['templates'] %}
+                      {% if t.slug == templateChoice %}
+                        <a href="/template/{{ t.slug }}">{{ t.name }}</a>
+                      {% endif %}
+                    {% endfor %}
                   {% endif %}
                 </td>
               </tr>
@@ -61,7 +66,7 @@
   {% endfor %}
 
   <div class="form-group" style="margin-top: 60px">
-    <input type="submit" class="button" value="Save changes" />
+    <input type="submit" class="button" value="Set template" />
   </div>
 
   <a href="/template/{{ template.slug }}">Cancel changes</a>

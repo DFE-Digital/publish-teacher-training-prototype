@@ -43,6 +43,18 @@ router.get('/template/:template/:view', function (req, res) {
   res.render(`template/${view}`, { template: template(req) })
 })
 
+router.post('/template/:template/apply', function (req, res) {
+
+  for (choice in req.body) {
+    if (req.body[choice] != '_unchecked') {
+      var code = choice.replace('apply-to-', '');
+      req.session.data[code + '-template-choice'] = req.params.template;
+    }
+  }
+
+  res.redirect(`/template/${req.params.template}/apply`)
+})
+
 router.get('/preview/:accreditor/:subject', function (req, res) {
   res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
 })
@@ -150,8 +162,6 @@ function template(req, course) {
   } else if (course) {
     templateSlug = req.session.data[course.programmeCode + '-template-choice'];
   }
-
-  console.log(templateSlug);
 
   return req.session.data['templates'].find(function(t) {
     return t.slug == templateSlug;

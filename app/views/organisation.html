@@ -37,11 +37,16 @@
                 <td><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }}</a></td>
                 <td>{{ course.options }}</td>
                 <td>
-                  {% set checkboxName = course.programmeCode + '-template' %}
-                  {% if data[checkboxName] %}
-                    <a href="#">{{ data[checkboxName] }}</a>
-                  {% else %}
-                    <span class="empty">No template</span>
+                  {% set templateChoice = data[course.programmeCode + '-template-choice'] %}
+
+                  {% if (templateChoice == 'template-none') %}
+                    Custom course
+                  {% elseif (templateChoice) %}
+                    {% for t in data['templates'] %}
+                      {% if t.slug == templateChoice %}
+                        <a href="/template/{{ t.slug }}">{{ t.name }}</a>
+                      {% endif %}
+                    {% endfor %}
                   {% endif %}
                 </td>
               </tr>
