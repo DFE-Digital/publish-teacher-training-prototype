@@ -26,7 +26,7 @@ prototype_data = {
 prototype_data['ucasCourses'] = courses.map do |c|
 
   options = []
-  qual = c['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+  qual = (c['qualifications'].include?('Postgraduate') || c['qualifications'].include?('Professional')) ? 'PGCE with QTS' : 'QTS'
   partTime = c['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
   fullTime = c['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
   salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
@@ -129,7 +129,7 @@ courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
     options = []
 
     subject_courses.each do |sc|
-      qual = sc['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+      qual = (sc['qualifications'].include?('Postgraduate') || sc['qualifications'].include?('Professional')) ? 'PGCE with QTS' : 'QTS'
       partTime = sc['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
       fullTime = sc['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
       salaried = sc['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
