@@ -55,22 +55,45 @@ router.post('/template/:template/apply', function (req, res) {
   res.redirect(`/template/${req.params.template}/apply`)
 })
 
-router.get('/preview/:accreditor/:subject', function (req, res) {
-  res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
+router.get('/preview/template/:template', function (req, res) {
+  var t = template(req);
+  var c = {
+    name: 'Example subject'
+  }
+
+  var a = {
+    name: 'Example Accrediting Provider'
+  }
+
+  res.render('preview', { course: c, accrediting: a, template: t, prefix: t.slug + '-template', previewingTemplate: true })
 })
 
-router.get('/email-qa-pass/:subject', function (req, res) {
-  res.render('email-qa-pass', { subject: subject(req) })
-})
-
-router.get('/email-qa-fail/:subject', function (req, res) {
-  res.render('email-qa-fail', { subject: subject(req) })
-})
+// router.get('/email-qa-pass/:subject', function (req, res) {
+//   res.render('email-qa-pass', { subject: subject(req) })
+// })
+//
+// router.get('/email-qa-fail/:subject', function (req, res) {
+//   res.render('email-qa-fail', { subject: subject(req) })
+// })
 
 router.get('/course/:accreditor/:code', function (req, res) {
   var c = course(req);
 
   res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c) })
+})
+
+router.get('/preview/:accreditor/:code', function (req, res) {
+  var c = course(req);
+  var t = template(req, c);
+  var prefix = '';
+
+  if (t) {
+    prefix = t.slug + '-template';
+  } else {
+    prefix = c.programmeCode;
+  }
+
+  res.render('preview', { course: c, accrediting: accreditor(req), template: t, prefix: prefix })
 })
 
 router.post('/course/:accreditor/:code', function (req, res) {

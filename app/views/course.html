@@ -85,7 +85,7 @@
     <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
       <p class="lede">This course uses a template:<br /><a href="/template/{{ template.slug }}">{{ template.name }}</a></p>
 
-      <p class="add-double-bottom-margin"><a href="#" class="button">Preview course</a></p>
+      <p class="add-double-bottom-margin"><a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}" class="button">Preview course</a></p>
 
       <ul class="list remove-bottom-margin">
         <li>
@@ -139,7 +139,7 @@
         <p class="lede">This course does not use a template.</p>
 
         <ul class="list">
-          <li><a href="#">Preview course</a></li>
+          <li><a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}">Preview course</a></li>
           <li><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/pick-template">Switch to a template</a></li>
         </ul>
 

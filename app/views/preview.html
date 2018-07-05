@@ -1,15 +1,19 @@
 {% extends "preview-layout.html" %}
-{% block page_title %}Your courses{% endblock %}
+{% block page_title %}Preview{% endblock %}
 
 {% block content %}
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back to course</a>
+  {% if previewingTemplate %}
+    <a href="/template/{{ template.slug }}" class="link-back">Back to template</a>
+  {% else %}
+    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back to course</a>
+  {% endif %}
 
   <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
-    {{ subject.name }} at {{ data['training-provider-name'] }}
+    {{ course.name }} at {{ data['training-provider-name'] }}
     {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
@@ -45,6 +49,93 @@
           <li><a href="#section-apply">Apply</a></li>
         </ul>
 
+        <h3 class="heading-medium remove-bottom-margin" id="section-option">{{ course.options }}</h3>
+        <details role="group" class="add-bottom-margin">
+            {% if 'PGCE' == false %}
+              <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Postgraduate certificate in education with qualified teacher status (PGCE with QTS)</span></summary>
+
+              <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+                  <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland.</p>
+                  <p>This qualification is also recognised internationally.</p>
+                  <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
+              </div>
+            {% else %}
+              <summary role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">Qualified teacher status (QTS)</span></summary>
+
+              <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
+                  <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
+                  <p>If you want to teach in the rest of the UK or internationally, consider a course that gives you the qualification 'postgraduate certificate in education with qualified teacher status' instead.</p>
+              </div>
+            {% endif %}
+        </details>
+
+        <dl class="aligned" style="margin-bottom: 30px">
+          {% if (data[prefix + '-course-website']) %}
+          <dt>Website:</dt>
+          <dd>
+            <a href="{{ data[prefix +'-course-website'] }}">{{ data[prefix + '-course-website'] }}</a>
+          </dd>
+          {% endif %}
+          <dt>Course length:</dt>
+          <dd>{{ data[prefix + '-duration'] }}</dd>
+        </dl>
+
+        <h4 class="heading-small" id="section-about">About the course</h4>
+        {{ macros.previewPart(prefix + '-about-this-course') }}
+
+        <h4 class="heading-small">Fees</h4>
+        <p>The course fees for 2018/2019 are as follows:</p>
+        <div class="body-text">
+          <table>
+            <tbody>
+              <tr class="visually-hidden">
+                <th>Student type</th>
+                <th>Fees to pay</th>
+              </tr>
+              <tr>
+                <td>UK students</td>
+                <td>£{{ data[prefix + '-fee'] }}</td>
+              </tr>
+              <tr>
+                <td>EU students</td>
+                <td>£{{ data[prefix + '-fee'] }}</td>
+              </tr>
+              {% if data[prefix + '-fee-international'] %}
+              <tr>
+                <td>International students</td>
+                <td>£{{ data[prefix + '-fee-international'] }}</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        {% if data[prefix + '-interview-process'] %}
+          <h4 class="heading-small">Interview process</h4>
+          {{ macros.previewPart(prefix + '-interview-process') }}
+        {% endif %}
+
+        <h4 class="heading-small">How school placements work</h4>
+        {{ macros.previewPart(prefix + '-placement-school-policy') }}
+
+        <h2 class="heading-large" id="section-entry">Requirements</h2>
+
+        <h3 class="heading-medium">Qualifications</h3>
+        {{ macros.previewPart(prefix + '-qualifications-required') }}
+
+        {% if data[prefix + '-personal-qualities'] %}
+          <h3 class="heading-medium">Personal qualities</h3>
+          {{ macros.previewPart(prefix + '-personal-qualities') }}
+        {% endif %}
+
+        {% if data[prefix + '-other-requirements'] %}
+          <h3 class="heading-medium">Other requirements</h3>
+          {{ macros.previewPart(prefix + '-other-requirements') }}
+        {% endif %}
+
+        <h2 class="heading-large" id="section-financial-support">Financial support</h3>
+        <p>Not available in this prototype yet.</p>
+
         <h2 class="heading-large" id="section-about-provider">About the training provider</h2>
         {{ macros.previewPart('about-organisation') }}
 
@@ -57,96 +148,6 @@
 
         <h3 class="heading-medium">Training with a disability</h3>
         {{ macros.previewPart('training-with-a-disability') }}
-
-        <h2 class="heading-large" id="course-options">Courses offered</h2>
-        {% for option in subject.folded_course.options %}
-          <h3 class="heading-medium remove-bottom-margin" id="section-option-{{ loop.index }}">{{ option }}</h3>
-          <details role="group" class="add-bottom-margin">
-              {% if 'PGCE' in option %}
-                <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Postgraduate certificate in education with qualified teacher status (PGCE with QTS)</span></summary>
-
-                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
-                    <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland.</p>
-                    <p>This qualification is also recognised internationally.</p>
-                    <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
-                </div>
-              {% else %}
-                <summary role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">Qualified teacher status (QTS)</span></summary>
-
-                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
-                    <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
-                    <p>If you want to teach in the rest of the UK or internationally, consider a course that gives you the qualification 'postgraduate certificate in education with qualified teacher status' instead.</p>
-                </div>
-              {% endif %}
-          </details>
-
-          <dl class="aligned" style="margin-bottom: 30px">
-            {% if (data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website']) %}
-            <dt>Website:</dt>
-            <dd>
-              <a href="{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index +'-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-course-website'] }}</a>
-            </dd>
-            {% endif %}
-            <dt>Duration:</dt>
-            <dd>{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-duration'] }}</dd>
-          </dl>
-
-          <h4 class="heading-small" id="section-about">About the course</h4>
-          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-about-this-course') }}
-
-          <h4 class="heading-small">Fees</h4>
-          <p>The course fees for 2018/2019 are as follows:</p>
-          <div class="body-text">
-            <table>
-              <tbody>
-                <tr class="visually-hidden">
-                  <th>Student type</th>
-                  <th>Fees to pay</th>
-                </tr>
-                <tr>
-                  <td>UK students</td>
-                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee'] }}</td>
-                </tr>
-                <tr>
-                  <td>EU students</td>
-                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee'] }}</td>
-                </tr>
-                {% if data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international'] %}
-                <tr>
-                  <td>International students</td>
-                  <td>£{{ data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-fee-international'] }}</td>
-                </tr>
-                {% endif %}
-              </tbody>
-            </table>
-          </div>
-
-          {% if data[subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process'] %}
-            <h4 class="heading-small">Interview process</h4>
-            {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-interview-process') }}
-          {% endif %}
-
-          <h4 class="heading-small">How school placements work</h4>
-          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-' + loop.index + '-placement-school-policy') }}
-        {% endfor %}
-
-        <h2 class="heading-large" id="section-entry">Requirements</h2>
-
-        <h3 class="heading-medium">Qualifications</h3>
-        {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-qualifications-required') }}
-
-        {% if data[subject.slug + '-' + accrediting.slug + '-personal-qualities'] %}
-          <h3 class="heading-medium">Personal qualities</h3>
-          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-personal-qualities') }}
-        {% endif %}
-
-        {% if data[subject.slug + '-' + accrediting.slug + '-other-requirements'] %}
-          <h3 class="heading-medium">Other requirements</h3>
-          {{ macros.previewPart(subject.slug + '-' + accrediting.slug + '-other-requirements') }}
-        {% endif %}
-
-        <h2 class="heading-large" id="section-financial-support">Financial support</h3>
-        <p>Not available in this prototype yet.</p>
 
         <h2 class="heading-large" id="section-contact">Contact details</h2>
 
