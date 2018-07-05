@@ -102,6 +102,11 @@ router.post('/course/:accreditor/:code', function (req, res) {
   res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c), showMessage: true })
 })
 
+router.get('/course/:accreditor/:code/no-template', function (req, res) {
+  req.session.data[req.params.code + '-template-choice'] = 'template-none';
+  res.redirect(`/course/${req.params.accreditor}/${req.params.code}`);
+})
+
 router.get('/course/:accreditor/:code/:view', function (req, res) {
   var view = req.params.view;
   res.render(`course/${view}`, { course: course(req), accrediting: accreditor(req) })
