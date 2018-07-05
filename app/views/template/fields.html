@@ -6,7 +6,18 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/templates" class="link-back">Back</a>
+  <div class="breadcrumbs">
+    {% if data['multi-organisation'] %}
+      <ol>
+        <li><a href="/">Organisations</a></li>
+        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% else %}
+      <ol>
+        <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% endif %}
+  </div>
 
   <h1 class="heading-xlarge">
     <span class="heading-secondary">Template</span>
@@ -53,6 +64,11 @@
     </div>
     <div class="column-one-third">
       <div class="status">
+
+        <p><a href="#">Preview template</a></p>
+
+        <hr />
+
         <p>This template is used by 0 courses.</p>
 
         <ul class="list">
