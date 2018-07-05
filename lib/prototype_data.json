@@ -10,7 +10,10 @@
   "email": "someemail@not-an-email.com",
   "website": "http://www.a-provider-website.org.uk/",
   "templates": [
-
+    {
+      "name": "An example template",
+      "slug": "an-example-template"
+    }
   ],
   "ucasCourses": [
     {
