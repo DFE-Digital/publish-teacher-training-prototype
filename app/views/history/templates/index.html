@@ -12,27 +12,74 @@
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
 
-  {{ macros.screenshot('Courses', 'courses', '/public/images/history/templates/thumbnails/01-courses.png', '/public/images/history/templates/01-courses.png', '') }}
-  
-  {{ macros.screenshot('Templates', 'templates', '/public/images/history/templates/thumbnails/02-templates.png', '/public/images/history/templates/02-templates.png', '') }}
-  
-  {{ macros.screenshot('New template', 'new-template', '/public/images/history/templates/thumbnails/03-new-template.png', '/public/images/history/templates/03-new-template.png', '') }}
-  
-  {{ macros.screenshot('Template', 'template', '/public/images/history/templates/thumbnails/04-template.png', '/public/images/history/templates/04-template.png', '') }}
-  
-  {{ macros.screenshot('Set fields for a template', 'set-fields-for-a-template', '/public/images/history/templates/thumbnails/05-set-fields-for-a-template.png', '/public/images/history/templates/05-set-fields-for-a-template.png', '') }}
-  
-  {{ macros.screenshot('Template preview', 'template-preview', '/public/images/history/templates/thumbnails/06-template-preview.png', '/public/images/history/templates/06-template-preview.png', '') }}
-  
-  {{ macros.screenshot('Apply template to courses', 'apply-template-to-courses', '/public/images/history/templates/thumbnails/07-apply-template-to-courses.png', '/public/images/history/templates/07-apply-template-to-courses.png', '') }}
-  
-  {{ macros.screenshot('Pick a template for a course', 'pick-a-template-for-a-course', '/public/images/history/templates/thumbnails/08-pick-a-template-for-a-course.png', '/public/images/history/templates/08-pick-a-template-for-a-course.png', '') }}
-  
-  {{ macros.screenshot('Template selected for a course', 'template-selected-for-a-course', '/public/images/history/templates/thumbnails/09-template-selected-for-a-course.png', '/public/images/history/templates/09-template-selected-for-a-course.png', '') }}
-  
-  {{ macros.screenshot('Dont use a template', 'dont-use-a-template', '/public/images/history/templates/thumbnails/10-dont-use-a-template.png', '/public/images/history/templates/10-dont-use-a-template.png', '') }}
-  
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>A first pass at providing users with a template function.</p>
+
+      <h2 class="heading-large">Why use templates?</h2>
+      <p>For many training providers there is great similarity between the courses they offer for different subjects. Users need an easy way to share information between these courses so they don't have to copy and paste content between them. Users also need to easily update all courses that share information, so that they all remain consistent, again without needing to copy and paste.</p>
+      <p>We’ve observed in user research that without the ability to share information users are likely to use copy and paste.</p>
+
+      <h2 class="heading-large">What goes into a template?</h2>
+      <p>A template should have an identical structure to a course. eg About this course, course fees and length, and course requirements.</p>
+
+      <p>A course either uses a template wholesale or is completely custom. Our hypothesis is that a middle-ground, where a user can pick and choose which fields to copy or use, will be too complex a concept to explain and build, especially regarding ongoing maintenance and consistency.</p>
+
+      <h2 class="heading-large">Allowing multiple templates</h2>
+      <p>Training providers can have similarity between courses in many ways. All of their PGCE courses might be the same, while their QTS all follow a different pattern. The same could be true for secondary vs primary. If a provider uses multiple accrediting providers then an accrediting provider template could work.</p>
+
+      <h2 class="heading-large">Template limits and risks</h2>
+      <p>Because a template includes all course fields it might be inappropriate to use them across certain courses. For example, by setting the fees on a template to those of a PGCE course (£9,000), this template shouldn’t then be applied to a QTS course – which costs less. There's a risk that users could apply these templates wrongly and show incorrect information to users.</p>
+    </div>
+  </div>
+
+  {{ macros.screenshot('Courses', 'courses', '/public/images/history/templates/thumbnails/01-courses.png', '/public/images/history/templates/01-courses.png', '
+    <p>The courses view (unfolded, showing each variant of a course) with a column showing which template each course uses. If the course doesn’t use a template then ‘Custom course’ is displayed.</p>
+  ') }}
+
+  {{ macros.screenshot('Templates', 'templates', '/public/images/history/templates/thumbnails/02-templates.png', '/public/images/history/templates/02-templates.png', '
+    <p>A tab for templates showing all templates an organisation has made. This table might be expanded to include how many courses each one is applied to.</p>
+  ') }}
+
+  {{ macros.screenshot('New template', 'new-template', '/public/images/history/templates/thumbnails/03-new-template.png', '/public/images/history/templates/03-new-template.png', '
+    <p>Create a template by choosing a name.</p>
+  ') }}
+
+  {{ macros.screenshot('Template', 'template', '/public/images/history/templates/thumbnails/04-template.png', '/public/images/history/templates/04-template.png', '
+    <p>A template looks the same as a course. It can be edited in parts and previewed.</p>
+  ') }}
+
+  {{ macros.screenshot('Set fields for a template', 'set-fields-for-a-template', '/public/images/history/templates/thumbnails/05-set-fields-for-a-template.png', '/public/images/history/templates/05-set-fields-for-a-template.png', '
+    <p>An example of fields available for a template.</p>
+  ') }}
+
+  {{ macros.screenshot('Template preview', 'template-preview', '/public/images/history/templates/thumbnails/06-template-preview.png', '/public/images/history/templates/06-template-preview.png', '
+    <p>A template preview needs to indicate:</p>
+    <ul class="list list-bullet">
+      <li>that it’s a template</li>
+      <li>which bits will vary by course</li>
+    </ul>
+
+    <p>Hypothesis: There might be a need to indicate where each field can be edited.</p>
+  ') }}
+
+  {{ macros.screenshot('Apply template to courses', 'apply-template-to-courses', '/public/images/history/templates/thumbnails/07-apply-template-to-courses.png', '/public/images/history/templates/07-apply-template-to-courses.png', '
+    <p>A bulk editing screen to apply a template to many courses at once. This could be delivered in a later iteration of templates.</p>
+  ') }}
+
+  {{ macros.screenshot('Pick a template for a course', 'pick-a-template-for-a-course', '/public/images/history/templates/thumbnails/08-pick-a-template-for-a-course.png', '/public/images/history/templates/08-pick-a-template-for-a-course.png', '
+    <p>When navigating to a course users are presented with a choice on how to proceed. They can pick a template or choose to write a custom course description.</p>
+  ') }}
+
+  {{ macros.screenshot('Template selected for a course', 'template-selected-for-a-course', '/public/images/history/templates/thumbnails/09-template-selected-for-a-course.png', '/public/images/history/templates/09-template-selected-for-a-course.png', '
+    <p>Once a template is selected a user can preview the course or click through to the template itself. No other fields are needed.</p>
+  ') }}
+
+  {{ macros.screenshot('Don’t use a template', 'dont-use-a-template', '/public/images/history/templates/thumbnails/10-dont-use-a-template.png', '/public/images/history/templates/10-dont-use-a-template.png', '
+    <p>If a custom course is selected the course fields will appear and the course can be previewed and submitted to DfE for the QA process.</p>
+  ') }}
+
   {{ macros.screenshot('Course preview', 'course-preview', '/public/images/history/templates/thumbnails/11-course-preview.png', '/public/images/history/templates/11-course-preview.png', '') }}
-  
+
 </main>
 {% endblock %}
