@@ -43,51 +43,6 @@
     {{ title }}
   </h1>
 
-  {% if not data[course.programmeCode + '-template-choice'] %}
-    <div class="add-double-bottom-margin status-box">
-
-      {% if data['templates'].length == 0 %}
-      <h2 class="heading-large remove-top-margin">Create a course template</h2>
-      <p>You can copy the same information to different courses by creating a template. This means you won’t have to add this information individually for each course. For example, you can create a template for all your QTS salaried courses and another for your PGCE with QTS courses.</p>
-
-      <p>
-        <a href="/templates">Create your first template</a>
-      </p>
-      <hr />
-      <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/no-template">Don’t use a template</a>
-      {% else %}
-      <h2 class="heading-large remove-top-margin">Pick a course template</h2>
-      {% include "course/_pick-template-choices.html" %}
-      {% endif %}
-    </div>
-  {% elseif data[course.programmeCode + '-template-choice'] == 'template-none'  %}
-    <!-- <div class="add-double-bottom-margin" style="border: 5px solid #ddd; padding: 20px">
-      <p class="lede">This course does not use a template.</p>
-
-      <ul class="list">
-        <li><a href="#">Preview course</a></li>
-        <li><a href="#">Switch to a template</a></li>
-      </ul>
-
-      <hr />
-
-      <p>Before this course can be published DfE must approve it.</p>
-      <a href="#" class="button">Submit for approval</a>
-    </div> -->
-  {% else %}
-    <div class="add-double-bottom-margin status-box">
-      <p class="lede">This course uses a template:<br /><a href="/template/{{ template.slug }}">{{ template.name }}</a></p>
-
-      <p class="add-double-bottom-margin"><a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}" class="button">Preview course</a></p>
-
-      <ul class="list remove-bottom-margin">
-        <li>
-          <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/pick-template">Use a different template</a>
-        </li>
-      </ul>
-    </div>
-  {% endif %}
-
   <dl class="aligned add-top-margin">
     <dt>Training provider code:</dt>
     <dd>{{ course.providerCode }}</dd>
@@ -107,7 +62,6 @@
     <dd>{{ course.regions }}</dd>
   </dl>
 
-  {% if data[course.programmeCode + '-template-choice'] == 'template-none'  %}
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large">
@@ -148,12 +102,7 @@
     </div>
     <div class="column-one-third">
       <div class="add-double-bottom-margin status-box">
-        <p class="lede">This course does not use a template.</p>
-
-        <ul class="list">
-          <li><a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}">Preview course</a></li>
-          <li><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/pick-template">Switch to a template</a></li>
-        </ul>
+        <a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}">Preview course</a>
 
         <hr />
 
@@ -162,7 +111,6 @@
       </div>
     </div>
   </div>
-  {% endif %}
 
   <h3 class="heading-medium">Training locations</h3>
   <table>
