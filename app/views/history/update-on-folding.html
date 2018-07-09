@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% set title = 'An update on UCAS course folding' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We created the logic around course folding in a design with data exercise that we have since tested with training providers and candidates:</p>
+      <ul class="list list-bullet">
+        <li><a href="/history/school-direct-view">Training provider research</a></li>
+        <li><a href="https://search-and-compare-beta.herokuapp.com/history/course-options-user-research-june-8">Candidate research</a></li>
+      </ul>
+
+      <p>The first version of the tool will be based on UCAS’s definition of a course. Course metadata will still be created and configured using UCAS. The UCAS model of a course must persist in some format in the publish courses tool. It is also the model that providers are most familiar with.</p>
+
+      <h2 class="heading-large">Folded courses didn’t test well</h2>
+
+      <p>When we tested folding courses by subject with training providers they expressed surprise and confusion. It wasn’t obvious to them how certain information would be explained in the fields provided. For example: ‘About this course’, “which course is that for, these courses are different?”</p>
+
+      <p>We <a href="/history/iteration-june-26">iterated the page layout</a> to be more explicit about the fields for each course variant to avoid this confusion. We found more and more small exceptions that meant fewer fields could be shared between variants; eg a salaried course has a different interview process, and might have more emphasis on experience in the entry requirements.</p>
+
+      <p>When we tested with candidates it wasn’t clear that a page represented different variants of a course, and it wasn't obvious which fields related to which variant.</p>
+
+      <h2 class="heading-large">Folding on less</h2>
+
+      <p>In response to research and to reduce complexity for users, we will fold only in the scenario where a school direct provider has created multiple courses for each of their schools.</p>
+
+      <p>Where schools have been given their own subject course by their training provider, these can be combined into a single course – as though they were one couse on UCAS with multiple campus options.</p>
+
+      <div class="body-text">
+        <table>
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Needs folding into single course</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Higher Education</td>
+              <td>Nothing</td>
+            </tr>
+            <tr>
+              <td>SCITT</td>
+              <td>Nothing</td>
+            </tr>
+            <tr>
+              <td>School Direct</td>
+              <td>
+                <ul class="list remove-bottom-margin">
+                  <li>Schools when the variant is the same</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="heading-large">Unfolding full time and part time</h2>
+
+        <p>Training providers can choose to represent full time and part time courses as a single course in UCAS. Part time courses can be longer and have different placement school policies. We need to unfold them and ask for information for the part time version.</p>
+
+        <p>In this scenario both full time and part time would have the same course code, the latter would be denoted by selecting "part time" in the application process.</p>
+
+        <p>Some providers already separate full time and part time courses.</p>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
