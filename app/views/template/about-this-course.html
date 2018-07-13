@@ -6,13 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
+  <a href="/template/{{ template.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
+    <span class="heading-secondary">Template: {{ template.name }}</span>
     {{ title }}
   </h1>
 
-  <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+  <form action="/template/{{ template.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <p>Give applicants a short description of the course.</p>
@@ -29,7 +30,7 @@
 
         <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
 
-        {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400) }}
+        {{ macros.textarea(template.slug + '-template-about-this-course', 'About this course', 20, '', 400) }}
       </div>
     </div>
 
@@ -48,7 +49,7 @@
           <li>details of any tests they’ll need to sit</li>
         </ul>
 
-        {{ macros.textarea(course.programmeCode + '-interview-process', 'Interview process (optional)', 10, '', 250) }}
+        {{ macros.textarea(template.slug + '-template-interview-process', 'Interview process (optional)', 10, '', 250) }}
       </div>
     </div>
 
@@ -70,7 +71,7 @@
           <li>how much time candidates spend in each school</li>
         </ul>
 
-        {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 250) }}
+        {{ macros.textarea(template.slug + '-template-placement-school-policy', 'How school placements work', 10, '', 250) }}
       </div>
     </div>
 
@@ -78,7 +79,7 @@
       <input type="submit" class="button" value="Save" />
     </div>
 
-    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
+    <a href="/template/{{ template.slug }}">Cancel changes</a>
   </form>
 </main>
 

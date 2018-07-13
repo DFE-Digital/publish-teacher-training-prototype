@@ -18,40 +18,118 @@ router.post('/about-your-organisation', function (req, res) {
   res.render('about-your-organisation', { showMessage: true })
 })
 
-router.get('/preview/:accreditor/:subject', function (req, res) {
-  res.render('preview', { accrediting: accreditor(req), subject: subject(req) })
-})
+router.post('/template/new', function (req, res) {
+  var name = req.body['template-name'];
+  var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
 
-router.get('/email-qa-pass/:subject', function (req, res) {
-  res.render('email-qa-pass', { subject: subject(req) })
-})
-
-router.get('/email-qa-fail/:subject', function (req, res) {
-  res.render('email-qa-fail', { subject: subject(req) })
-})
-
-router.get('/course/:accreditor/:subject', function (req, res) {
-  res.render('course', { subject: subject(req), accrediting: accreditor(req) })
-})
-
-router.get('/course/:accreditor/:subject/option/:index', function (req, res) {
-  var subj = subject(req);
-
-  res.render(`course/about-this-option`, { accrediting: accreditor(req), subject: subj, option: option(req, subj) })
-})
-
-router.get('/course/:accreditor/:subject/ucas/:code', function (req, res) {
-  var ucasCourse = req.session.data['ucasCourses'].find(function(course) {
-    return course.programmeCode == req.params.code;
+  req.session.data['templates'].push({
+    name: name,
+    slug: slug
   });
 
-  res.render(`course/from-ucas`, { accrediting: accreditor(req), subject: subject(req), ucasCourse: ucasCourse })
+  res.redirect('/template/' + slug);
 })
 
-router.get('/course/:accreditor/:subject/:view', function (req, res) {
-  var view = req.params.view;
-  res.render(`course/${view}`, { accrediting: accreditor(req), subject: subject(req) })
+router.get('/template/new', function (req, res) {
+  res.render('template/new');
 })
+
+router.get('/template/:template', function (req, res) {
+  res.render('template/fields', { template: template(req) })
+})
+
+router.get('/template/:template/:view', function (req, res) {
+  var view = req.params.view;
+  res.render(`template/${view}`, { template: template(req) })
+})
+
+router.post('/template/:template/apply', function (req, res) {
+
+  for (choice in req.body) {
+    if (req.body[choice] != '_unchecked') {
+      var code = choice.replace('apply-to-', '');
+      req.session.data[code + '-template-choice'] = req.params.template;
+    }
+  }
+
+  res.redirect(`/template/${req.params.template}/apply`)
+})
+
+router.get('/preview/template/:template', function (req, res) {
+  var t = template(req);
+  var c = {
+    name: 'Example subject'
+  }
+
+  var a = {
+    name: 'Example Accrediting Provider'
+  }
+
+  res.render('preview', { course: c, accrediting: a, template: t, prefix: t.slug + '-template', previewingTemplate: true })
+})
+
+// router.get('/email-qa-pass/:subject', function (req, res) {
+//   res.render('email-qa-pass', { subject: subject(req) })
+// })
+//
+// router.get('/email-qa-fail/:subject', function (req, res) {
+//   res.render('email-qa-fail', { subject: subject(req) })
+// })
+
+router.get('/course/:accreditor/:code', function (req, res) {
+  var c = course(req);
+
+  res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c) })
+})
+
+router.get('/preview/:accreditor/:code', function (req, res) {
+  var c = course(req);
+  var t = template(req, c);
+  var prefix = '';
+
+  if (t) {
+    prefix = t.slug + '-template';
+  } else {
+    prefix = c.programmeCode;
+  }
+
+  res.render('preview', { course: c, accrediting: accreditor(req), template: t, prefix: prefix })
+})
+
+router.post('/course/:accreditor/:code', function (req, res) {
+  var c = course(req);
+
+  res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c), showMessage: true })
+})
+
+router.get('/course/:accreditor/:code/no-template', function (req, res) {
+  req.session.data[req.params.code + '-template-choice'] = 'template-none';
+  res.redirect(`/course/${req.params.accreditor}/${req.params.code}`);
+})
+
+router.get('/course/:accreditor/:code/:view', function (req, res) {
+  var view = req.params.view;
+  res.render(`course/${view}`, { course: course(req), accrediting: accreditor(req) })
+})
+
+// router.get('/course/:accreditor/:subject/option/:index', function (req, res) {
+//   var subj = subject(req);
+//
+//   res.render(`course/about-this-option`, { accrediting: accreditor(req), subject: subj, option: option(req, subj) })
+// })
+
+// router.get('/course/:accreditor/:subject/ucas/:code', function (req, res) {
+//   var ucasCourse = req.session.data['ucasCourses'].find(function(course) {
+//     return course.programmeCode == req.params.code;
+//   });
+//
+//   res.render(`course/from-ucas`, { accrediting: accreditor(req), subject: subject(req), ucasCourse: ucasCourse })
+// })
+
+// router.get('/course/:accreditor/:subject/:view', function (req, res) {
+//   var view = req.params.view;
+//   res.render(`course/${view}`, { accrediting: accreditor(req), subject: subject(req) })
+// })
 
 router.get('/school/:id', function (req, res) {
   var school = req.session.data['schools'].find(function(school) {
@@ -86,6 +164,14 @@ function subject(req) {
   };
 }
 
+function course(req) {
+  var course = req.session.data['ucasCourses'].find(function(a) {
+    return a.programmeCode == req.params.code;
+  });
+
+  return course;
+}
+
 function accreditor(req) {
   var accreditor = req.session.data['accreditors'].find(function(a) {
     return a.slug == req.params.accreditor;
@@ -94,6 +180,20 @@ function accreditor(req) {
   accreditor.selfAccrediting = (req.session.data['training-provider-name'] == accreditor.name);
 
   return accreditor;
+}
+
+function template(req, course) {
+  var templateSlug;
+
+  if (req.params.template) {
+    templateSlug = req.params.template
+  } else if (course) {
+    templateSlug = req.session.data[course.programmeCode + '-template-choice'];
+  }
+
+  return req.session.data['templates'].find(function(t) {
+    return t.slug == templateSlug;
+  });
 }
 
 function option(req, subject) {

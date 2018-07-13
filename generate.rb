@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Catholic Teaching Alliance (South East London)'
+provider = 'Bracknell Forest Partnership'
 courses = data.select {|c| c['provider'] == provider }
 
 prototype_data = {
@@ -18,14 +18,20 @@ prototype_data = {
   'postcode': 'SW1 1AA',
   'telephone': '0208 123 4567',
   'email': 'someemail@not-an-email.com',
-  'website': 'http://www.a-provider-website.org.uk/',
+  'website': '',
+  'templates': []
 }
 
 # Map course data for the `imported from UCAS` view
 prototype_data['ucasCourses'] = courses.map do |c|
 
   options = []
-  qual = c['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+
+  if !c['qualifications'] || c['qualifications'].length == 0
+    qual = "Unknown"
+  else
+    qual = (c['qualifications'].include?('Postgraduate') || c['qualifications'].include?('Professional')) ? 'PGCE with QTS' : 'QTS'
+  end
   partTime = c['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
   fullTime = c['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
   salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
@@ -46,7 +52,7 @@ prototype_data['ucasCourses'] = courses.map do |c|
     name: c['name'],
     slug: c['name'].downcase.gsub(/[^a-zA-Z0-9]/, '-').gsub(/--*/, '-').gsub(/-$/,''),
     route: c['route'],
-    qualifications: c['qualifications'].join(', '),
+    qualifications: c['qualifications'] ? c['qualifications'].join(', ') : 'Unknown',
     providerCode: c['providerCode'],
     programmeCode: c['programmeCode'],
     schools: c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } },
@@ -128,7 +134,12 @@ courses_by_accreditor_and_subject.each do |accrediting, courses_by_subject|
     options = []
 
     subject_courses.each do |sc|
-      qual = sc['qualifications'].include?('Postgraduate') ? 'PGCE with QTS' : 'QTS'
+      if !sc['qualifications'] || sc['qualifications'].length == 0
+        qual = "Unknown"
+      else
+        qual = (sc['qualifications'].include?('Postgraduate') || sc['qualifications'].include?('Professional')) ? 'PGCE with QTS' : 'QTS'
+      end
+
       partTime = sc['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
       fullTime = sc['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
       salaried = sc['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''

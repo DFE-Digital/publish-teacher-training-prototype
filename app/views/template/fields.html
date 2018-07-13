@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% set title = template.name %}
+{% block page_title %}Template: {{ template.name }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    {% if data['multi-organisation'] %}
+      <ol>
+        <li><a href="/">Organisations</a></li>
+        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% else %}
+      <ol>
+        <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% endif %}
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">Template</span>
+    {{ title }}
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="course-parts course-parts--large">
+        <ul class="course-parts-items">
+          <li class="course-parts-item">
+            <h3 class="course-part-task">About this course</h3>
+
+            <a class="course-part-task-action" href="/template/{{ template.slug }}/about-this-course">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(template.slug + '-template-about-this-course', 'About this course') }}
+              {{ macros.coursePart(template.slug + '-template-interview-process', 'Interview process (optional)') }}
+              {{ macros.coursePart(template.slug + '-template-placement-school-policy', 'How school placements work') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Course length and fees</h3>
+            <a class="course-part-task-action" href="/template/{{ template.slug }}/fees-and-length">Edit</a>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(template.slug + '-template-duration', 'Course length') }}
+              {{ macros.coursePart(template.slug + '-template-fee', 'Fee for UK and EU students') }}
+              {{ macros.coursePart(template.slug + '-template-fee-international', 'Fee for international students (optional)') }}
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">
+              Requirements and eligbility
+            </h3>
+            <a class="course-part-task-action" href="/template/{{ template.slug }}/requirements">Edit</a>
+
+            <dl class="course-part-tasks">
+              {{ macros.coursePart(template.slug + '-template-qualifications-required', 'Qualifications needed') }}
+              {{ macros.coursePart(template.slug + '-template-personal-qualities', 'Personal qualities (optional)') }}
+              {{ macros.coursePart(template.slug + '-template-other-requirements', 'Other requirements (optional)') }}
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="column-one-third">
+      <div class="status-box">
+
+        <p><a href="/preview/template/{{ template.slug }}">Preview template</a></p>
+
+        <hr />
+
+        <!-- <p>This template is used by 0 courses.</p> -->
+
+        <ul class="list">
+          <li>
+            <a href="/template/{{ template.slug }}/apply">Edit courses using this template</a>
+          </li>
+          <li>
+            <a href="#">Rename template</a>
+          </li>
+          <li>
+            <a href="#">Delete template</a>
+          </li>
+        </ul>
+
+        <hr />
+
+        <p>You will need approval from DfE to publish this template.</p>
+        <a href="#" class="button">Submit for approval</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

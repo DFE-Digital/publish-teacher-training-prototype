@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% set title = 'Course length and fees' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+
+  <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Course length</h3>
+        {% set fields = [
+            {
+              name: '1 year'
+            },
+            {
+              name: 'Up to 2 years'
+            },
+            {
+              name: 'Other'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(course.programmeCode + '-duration', fields) }}
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-large remove-top-margin">Course fees</h3>
+        {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
+        {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
+      </div>
+    </div>
+
+    <div class="add-top-margin add-double-bottom-margin">
+      <input type="submit" class="button" value="Save" />
+    </div>
+
+    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
+  </form>
+</main>
+
+{% endblock %}

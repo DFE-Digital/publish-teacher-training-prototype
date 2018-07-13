@@ -1,0 +1,35 @@
+<form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+  <div class="form-group">
+    {% for t in data['templates'] %}
+      <div class="multiple-choice">
+        <input
+          id="radio-{{ t.slug }}-part-{{ loop.index }}"
+          type="radio"
+          name="{{ course.programmeCode }}-template-choice"
+          value="{{ t.slug }}"
+          {{ checked(course.programmeCode + '-template-choice', t.slug) }}
+        >
+        <label for="radio-{{ t.slug }}-part-{{ loop.index }}">
+          <span>{{ t.name }}</span>
+          – <a href="/template/{{ t.slug }}">View template</a>
+        </label>
+      </div>
+    {% endfor %}
+    <p class="form-block">or</p>
+    <div class="multiple-choice">
+      <input
+        id="radio-template-none"
+        type="radio"
+        name="{{ course.programmeCode }}-template-choice"
+        value="template-none"
+        {{ checked(course.programmeCode + '-template-choice', 'template-none') }}
+      >
+      <label for="radio-template-none">
+        Don’t use a template<br />
+        <span class="empty">Write unique content for this course.</span>
+      </label>
+    </div>
+  </div>
+
+  <input type="submit" value="Pick template" class="button" />
+</form>
