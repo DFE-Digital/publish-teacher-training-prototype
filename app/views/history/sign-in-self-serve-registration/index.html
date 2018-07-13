@@ -11,6 +11,12 @@
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
 
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We send users a sign-up link so they can register and then be forwarded on to our service.</p>
+    </div>
+  </div>
+
 {{ macros.screenshot('Register', 'register', '/public/images/history/sign-in-self-serve-registration/thumbnails/01-register.png', '/public/images/history/sign-in-self-serve-registration/01-register.png', '') }}
 
 {{ macros.screenshot('Verify', 'verify', '/public/images/history/sign-in-self-serve-registration/thumbnails/02-verify.png', '/public/images/history/sign-in-self-serve-registration/02-verify.png', '') }}
@@ -19,9 +25,19 @@
 
 {{ macros.screenshot('Choose password', 'choose-password', '/public/images/history/sign-in-self-serve-registration/thumbnails/04-choose-password.png', '/public/images/history/sign-in-self-serve-registration/04-choose-password.png', '') }}
 
-{{ macros.screenshot('Success and return', 'success-and-return', '/public/images/history/sign-in-self-serve-registration/thumbnails/05-success-and-return.png', '/public/images/history/sign-in-self-serve-registration/05-success-and-return.png', '') }}
+{{ macros.screenshot('Success and return', 'success-and-return', '/public/images/history/sign-in-self-serve-registration/thumbnails/05-success-and-return.png', '/public/images/history/sign-in-self-serve-registration/05-success-and-return.png', '
+  <p>Unlike in this screenshot, we can tailor this success button to take users to the publish courses service, avoiding users getting stuck within DfE Sign in.</p>
+') }}
 
-{{ macros.screenshot('Receive success email', 'user-receives-success-email', '/public/images/history/sign-in-pre-register-user/thumbnails/10-user-receives-success-email.png', '/public/images/history/sign-in-pre-register-user/10-user-receives-success-email.png', '') }}
+{{ macros.screenshot('Receive success email', 'user-receives-success-email', '/public/images/history/sign-in-pre-register-user/thumbnails/10-user-receives-success-email.png', '/public/images/history/sign-in-pre-register-user/10-user-receives-success-email.png', '
+  <p>When users are registered they receive this welcome email. We’ve found that users would refer to this email when they want to return to our service. By using this email to click through to DfE Sign-in the user has no easy route out to our service.</p>
+
+  <p>To solve this we will send our own welcome email and request that this version of the email be suppressed.</p>
+
+  <p>Suppress DfE sign-in email:<br /><a href="https://dfedigital.atlassian.net/browse/BATSA-441">BATSA-441</a></p>
+
+  <p>Create our own welcome email:<br /><a href="https://dfedigital.atlassian.net/browse/BATSA-442">BATSA-442</a></p>
+') }}
 
 </main>
 {% endblock %}
