@@ -35,9 +35,54 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        <h3 class="heading-large remove-top-margin">Course fees</h3>
-        {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
-        {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
+        <h3 class="heading-large remove-top-margin">Is this course fee paying or salaried?</h3>
+        {% set feeFields %}
+          <h4 class="heading-medium remove-top-margin">Course fees</h4>
+
+          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£') }}
+          {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
+
+          <h5 class="heading-small">More details (optional)</h5>
+
+          <p>If applicable, give further details about the fees for this course.</p>
+
+          <p>This could include:</p>
+          <ul class="list list-bullet">
+            <li>any top up fees</li>
+            <li>any other costs</li>
+          </ul>
+
+          {{ macros.textarea(course.programmeCode + '-fee-details', '', 10, null, 250) }}
+        {% endset %}
+
+        {% set salaryFields %}
+          <h4 class="heading-medium remove-top-margin">Salary</h4>
+
+          <p>Give details about the salary for this course.</p>
+          <p>You can include:</p>
+          <ul class="list list-bullet">
+            <li>an indication of the salary</li>
+            <li>that there are no fees for this course</li>
+            <li>any top up fees or other costs</li>
+            <li>how a salaried course differs from a fee paying course</li>
+          </ul>
+
+          {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250) }}
+        {% endset %}
+
+        {% set fields = [
+            {
+              name: 'Fee paying course',
+              more: feeFields
+            },
+            {
+              name: 'Salaried course',
+              more: salaryFields
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(course.programmeCode + '-feePaying', fields) }}
       </div>
     </div>
 
