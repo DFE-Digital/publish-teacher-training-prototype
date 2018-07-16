@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Course length and fees' %}
+{% set title %}Course length and {% if course.salaried %}salary{% else %}fees{% endif %}{% endset %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -35,9 +35,36 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        <h3 class="heading-large remove-top-margin">Course fees</h3>
-        {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students in £', null, 'form-control-xsmall') }}
-        {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students in £ (optional)', null, 'form-control-xsmall') }}
+        {% if course.salaried %}
+          <h3 class="heading-large">Salary</h4>
+
+          <p>Give details about the salary for this course.</p>
+          <p>You can include:</p>
+          <ul class="list list-bullet">
+            <li>an indication of the salary</li>
+            <li>whether there are any fees or others costs – if there are no fees for this course, say so</li>
+          </ul>
+
+          {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250) }}
+        {% else %}
+          <h3 class="heading-large">Course fees</h4>
+
+          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£') }}
+          {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
+
+          <h4 class="heading-medium">Fee details</h4>
+
+          <p>If applicable, give further details about the fees for this course.</p>
+
+          <p>This could include:</p>
+          <ul class="list list-bullet">
+            <li>any top up fees</li>
+            <li>any other costs</li>
+          </ul>
+
+          {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
+        {% endif %}
+
       </div>
     </div>
 

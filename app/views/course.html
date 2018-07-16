@@ -77,12 +77,17 @@
             </dl>
           </li>
           <li class="course-parts-item">
-            <h3 class="course-part-task">Course length and fees</h3>
+            <h3 class="course-part-task">Course length and {% if course.salaried %}salary{% else %}fees{% endif %}</h3>
             <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/fees-and-length">Edit</a>
             <dl class="course-part-tasks">
               {{ macros.coursePart(course.programmeCode + '-duration', 'Course length') }}
-              {{ macros.coursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
-              {{ macros.coursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
+              {% if course.salaried %}
+                {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary') }}
+              {% else %}
+                {{ macros.coursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
+                {{ macros.coursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
+                {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
+              {% endif %}
             </dl>
           </li>
           <li class="course-parts-item">

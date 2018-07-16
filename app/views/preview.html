@@ -59,7 +59,7 @@
         </details>
       {% endif %}
     </dd>
-    <dt>Study type and course length:</dt>
+    <dt>Course length:</dt>
     <dd>
       {% if previewingTemplate %}
         Varies depending on course
@@ -74,7 +74,7 @@
     </dd>
     <dt>Date you can apply from:</dt>
     <dd>26 October 2018</dd>
-    <dt>Provider website:</dt>
+    <dt>Website:</dt>
     <dd>
       {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
         <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}</a>
@@ -95,7 +95,11 @@
           {% if data[prefix + '-interview-process'] %}
             <li><a href="#section-interview">Interview process</a></li>
           {% endif %}
-          <li><a href="#section-fees">Fees</a></li>
+          {% if course.salaried %}
+            <li><a href="#section-salary">Salary</a></li>
+          {% else %}
+            <li><a href="#section-fees">Fees</a></li>
+          {% endif %}
           <li><a href="#section-financial-support">Financial support</a></li>
           <li><a href="#section-about">About the training provider</a></li>
           <li><a href="#section-contact">Contact details</a></li>
@@ -128,32 +132,41 @@
           {{ macros.previewPart(prefix + '-interview-process') }}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-fees">Fees</h2>
-        <p>The course fees for 2018/2019 are as follows:</p>
-        <div class="body-text">
-          <table>
-            <tbody>
-              <tr class="visually-hidden">
-                <th>Student type</th>
-                <th>Fees to pay</th>
-              </tr>
-              <tr>
-                <td>UK students</td>
-                <td>£{{ data[prefix + '-fee'] }}</td>
-              </tr>
-              <tr>
-                <td>EU students</td>
-                <td>£{{ data[prefix + '-fee'] }}</td>
-              </tr>
-              {% if data[prefix + '-fee-international'] %}
-              <tr>
-                <td>International students</td>
-                <td>£{{ data[prefix + '-fee-international'] }}</td>
-              </tr>
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
+        {% if course.salaried %}
+          <h2 class="heading-medium" id="section-salary">Salary</h2>
+          {{ macros.previewPart(prefix + '-salary') }}
+        {% else %}
+          <h2 class="heading-medium" id="section-fees">Fees</h2>
+          <p>The course fees for 2018/2019 are as follows:</p>
+          <div class="body-text">
+            <table>
+              <tbody>
+                <tr class="visually-hidden">
+                  <th>Student type</th>
+                  <th>Fees to pay</th>
+                </tr>
+                <tr>
+                  <td>UK students</td>
+                  <td>£{{ data[prefix + '-fee'] }}</td>
+                </tr>
+                <tr>
+                  <td>EU students</td>
+                  <td>£{{ data[prefix + '-fee'] }}</td>
+                </tr>
+                {% if data[prefix + '-fee-international'] %}
+                <tr>
+                  <td>International students</td>
+                  <td>£{{ data[prefix + '-fee-international'] }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+
+          {% if data[prefix + '-fee-details'] %}
+            {{ macros.previewPart(prefix + '-fee-details') }}
+          {% endif %}
+        {% endif %}
 
         <h2 class="heading-medium" id="section-financial-support">Financial support</h3>
         <p>Not available in this prototype.</p>
