@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Course length and fees' %}
+{% set title %}Course length and {% if course.salaried %}salary{% else %}fees{% endif %}{% endset %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -35,28 +35,8 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
-        <h3 class="heading-large remove-top-margin">Is this course fee paying or salaried?</h3>
-        {% set feeFields %}
-          <h4 class="heading-medium remove-top-margin">Course fees</h4>
-
-          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£') }}
-          {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
-
-          <h5 class="heading-small">More details (optional)</h5>
-
-          <p>If applicable, give further details about the fees for this course.</p>
-
-          <p>This could include:</p>
-          <ul class="list list-bullet">
-            <li>any top up fees</li>
-            <li>any other costs</li>
-          </ul>
-
-          {{ macros.textarea(course.programmeCode + '-fee-details', '', 10, null, 250) }}
-        {% endset %}
-
-        {% set salaryFields %}
-          <h4 class="heading-medium remove-top-margin">Salary</h4>
+        {% if course.salaried %}
+          <h3 class="heading-large">Salary</h4>
 
           <p>Give details about the salary for this course.</p>
           <p>You can include:</p>
@@ -66,21 +46,25 @@
           </ul>
 
           {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250) }}
-        {% endset %}
+        {% else %}
+          <h3 class="heading-large">Course fees</h4>
 
-        {% set fields = [
-            {
-              name: 'Fee paying course',
-              more: feeFields
-            },
-            {
-              name: 'Salaried course',
-              more: salaryFields
-            }
-          ]
-        %}
+          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£') }}
+          {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
 
-        {{ macros.radioGroup(course.programmeCode + '-feePaying', fields) }}
+          <h4 class="heading-medium">Fee details</h4>
+
+          <p>If applicable, give further details about the fees for this course.</p>
+
+          <p>This could include:</p>
+          <ul class="list list-bullet">
+            <li>any top up fees</li>
+            <li>any other costs</li>
+          </ul>
+
+          {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
+        {% endif %}
+
       </div>
     </div>
 
