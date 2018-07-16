@@ -84,8 +84,8 @@
               {% if course.salaried %}
                 {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary') }}
               {% else %}
-                {{ macros.coursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
-                {{ macros.coursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
+                {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
+                {{ macros.feesCoursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
                 {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
               {% endif %}
               {{ macros.coursePart(course.programmeCode + '-financial-support', 'Financial support you offer (optional)') }}
