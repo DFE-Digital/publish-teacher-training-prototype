@@ -1,0 +1,52 @@
+
+{% extends "layout.html" %}
+{% set title = 'Salary and fees' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Fee paying courses need to have some different fields to salaried courses. Courses offering a salary typically don’t have any course fees (though some courses may have top-up fees for the PGCE aspect of a course) – for these courses we shouldn’t be asking for course fees. (<a href="/history/templates#dont-use-a-template">Example of the problem</a>)</p>
+
+      <p>Use different fields for school direct salaried courses and add fields to cater for:</p>
+      <ul class="list list-bullet">
+        <li>an explanation of the salary available</li>
+        <li>clarification on whether there are any fees for this course (we can’t infer this though we could say ‘courses offering a salary usually…’, or something to that effect)</li>
+        <li>more complex fee structures (eg add-ons and other costs)</li>
+      </ul>
+
+      <p><a href="/history/school-direct-view#salary">Previously we were asking for differences between salaried and fee paying courses</a>. These details should now be in the ‘About this course’ section.</p>
+
+      <h2 class="heading-medium">Salary amount</h2>
+      <p><a href="/history/school-direct-view#salary">We used to ask for the salary amount</a> but for much of the year the actual salary figure isn’t available. It’s based on the national teacher’s pay scale that is published later in the year. Schools also apply this scale differently, eg prorata based on time in schools vs full time. Rules around this are unclear, the salary field could be used to explain this.</p>
+
+      <a href="https://dfedigital.atlassian.net/browse/BATSA-464">BATSA-464</a>
+    </div>
+  </div>
+
+  {{ macros.screenshot('Course length and salary', 'course-length-and-salary', '/public/images/history/salary-and-fees/thumbnails/01-course-length-and-salary.png', '/public/images/history/salary-and-fees/01-course-length-and-salary.png', '
+    <p>A school direct salaried course</p>
+
+    <p>Add a salary field to allow training providers to indicate the amount of salary available and whether there are any other costs. We also prompt for an explicit declaration that there are no fees to pay.</p>
+  ') }}
+
+  {{ macros.screenshot('Course length and fees', 'course-length-and-fees', '/public/images/history/salary-and-fees/thumbnails/02-course-length-and-fees.png', '/public/images/history/salary-and-fees/02-course-length-and-fees.png', '
+    <p>A school direct course</p>
+
+    <p>Add a fee details field to allow training providers to give more details if their fees are more complex (eg top-up fees for PGCE aspect of the course).</p>
+  ') }}
+
+  {{ macros.screenshot('Preview of salaried course', 'preview-of-salaried-course', '/public/images/history/salary-and-fees/thumbnails/03-preview-of-salaried-course.png', '/public/images/history/salary-and-fees/03-preview-of-salaried-course.png', '') }}
+
+  {{ macros.screenshot('Preview of fee paying course', 'preview-of-fee-paying-course', '/public/images/history/salary-and-fees/thumbnails/04-preview-of-fee-paying-course.png', '/public/images/history/salary-and-fees/04-preview-of-fee-paying-course.png', '') }}
+
+</main>
+{% endblock %}
