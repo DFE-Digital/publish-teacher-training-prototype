@@ -37,14 +37,7 @@ var options = {
 }
 
 var paths = [
-  { path: '/courses', name: 'courses' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry', name: 'course' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry/ucas/2H62', name: 'course-details-from-ucas' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry/option/1', name: 'PGCE with QTS course option' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry/option/2', name: 'QTS with salary course option' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry/about-this-provider', name: 'About your organisation' },
-  { path: '/course/st-mary-s-university--twickenham/chemistry/requirements', name: 'Requirements and eligibility' },
-  { path: '/preview/st-mary-s-university--twickenham/chemistry', name: 'preview' }
+  { path: '', name: '' }
 ]
 
 var template = '';
