@@ -245,8 +245,26 @@ dl.aligned dd {
   border-bottom: 0;
 }
 
-.ucas-info-table .ucas-view-link {
-  text-align: right;
+.ucas-info-table  {
+  .subject-col {
+    width: 30%;
+  }
+
+  .code-col {
+    width: 15%;
+  }
+
+  .type-col {
+    width: 40%;
+  }
+
+  .status-col {
+    width: 20%;
+  }
+
+  .ucas-view-link {
+    text-align: right;
+  }
 }
 
 .missing-section {
