@@ -20,6 +20,15 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'First screen', id: 'we-imported' },
+  { text: 'Courses', id: 'courses' },
+  { text: 'Courses by accrediting provider', id: 'courses-by-accrediting-provider' },
+  { text: 'Request access for someone', id: 'request-access' },
+  { text: 'View course', id: 'view-course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('First screen', 'we-imported', '/public/images/history/check-ucas-data/thumbnails/01-we-imported.png', '/public/images/history/check-ucas-data/01-we-imported.png', '
     <p>The screen a user will see the first time they log in to the service.</p>
   ') }}

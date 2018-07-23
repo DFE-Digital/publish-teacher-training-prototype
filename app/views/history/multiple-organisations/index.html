@@ -78,6 +78,13 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Organisations', id: 'organisations' },
+  { text: 'Courses for an organisation', id: 'courses-for-an-organisation' },
+  { text: 'Course', id: 'course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Organisations', 'organisations', '/public/images/history/multiple-organisations/thumbnails/01-organisations.png', '/public/images/history/multiple-organisations/01-organisations.png', '
     <p>A list of organisations the user can manage. Sometimes these organisations will have very similar names, eg Chepping View Primary Academy and Chepping View Primary Academy SCITT.</p>
     <p>Include course count as an additional differentiator.</p>

@@ -48,6 +48,12 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Courses', id: 'courses' },
+  { text: 'Course', id: 'course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Courses', 'courses', '/public/images/history/ucas-course-status/thumbnails/01-courses.png', '/public/images/history/ucas-course-status/01-courses.png', '') }}
 
   {{ macros.screenshot('Course', 'course', '/public/images/history/ucas-course-status/thumbnails/02-course.png', '/public/images/history/ucas-course-status/02-course.png', '') }}

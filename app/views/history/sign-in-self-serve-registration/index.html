@@ -17,6 +17,16 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Register', id: 'register' },
+  { text: 'Verify', id: 'verify' },
+  { text: 'Receive verify email', id: 'receive-verify-email' },
+  { text: 'Choose password', id: 'choose-password' },
+  { text: 'Success and return', id: 'success-and-return' },
+  { text: 'Receive success email', id: 'user-receives-success-email' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
 {{ macros.screenshot('Register', 'register', '/public/images/history/sign-in-self-serve-registration/thumbnails/01-register.png', '/public/images/history/sign-in-self-serve-registration/01-register.png', '') }}
 
 {{ macros.screenshot('Verify', 'verify', '/public/images/history/sign-in-self-serve-registration/thumbnails/02-verify.png', '/public/images/history/sign-in-self-serve-registration/02-verify.png', '') }}

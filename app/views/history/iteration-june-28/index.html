@@ -32,6 +32,15 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'PGCE with QTS course option', id: 'PGCE with QTS course option' },
+  { text: 'QTS with salary course option', id: 'QTS with salary course option' },
+  { text: 'About your organisation', id: 'About your organisation' },
+  { text: 'Requirements and eligibility', id: 'Requirements and eligibility' },
+  { text: 'Preview', id: 'preview' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('PGCE with QTS course option', 'PGCE with QTS course option', '/public/images/history/iteration-june-28/thumbnails/04-PGCE with QTS course option.png', '/public/images/history/iteration-june-28/04-PGCE with QTS course option.png', '') }}
 
   {{ macros.screenshot('QTS with salary course option', 'QTS with salary course option', '/public/images/history/iteration-june-28/thumbnails/05-QTS with salary course option.png', '/public/images/history/iteration-june-28/05-QTS with salary course option.png', '') }}

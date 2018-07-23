@@ -32,6 +32,14 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Course length and salary', id: 'course-length-and-salary' },
+  { text: 'Course length and fees', id: 'course-length-and-fees' },
+  { text: 'Preview of salaried course', id: 'preview-of-salaried-course' },
+  { text: 'Preview of fee paying course', id: 'preview-of-fee-paying-course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Course length and salary', 'course-length-and-salary', '/public/images/history/salary-and-fees/thumbnails/01-course-length-and-salary.png', '/public/images/history/salary-and-fees/01-course-length-and-salary.png', '
     <p>A school direct salaried course</p>
 

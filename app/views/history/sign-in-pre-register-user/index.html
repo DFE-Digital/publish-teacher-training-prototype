@@ -19,6 +19,20 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Admin adds new user', id: 'admin-adds-new-user' },
+  { text: 'Admin sets organisation', id: 'admin-sets-organisation' },
+  { text: 'Admin chooses organisation', id: 'admin-chooses-organisation' },
+  { text: 'Admin sets permission for user', id: 'admin-sets-permission-for-user' },
+  { text: 'We send an email to set context', id: '06a-we-send-email' },
+  { text: 'User receives invite email', id: '06b-user-receives-invite-email' },
+  { text: 'User goes to link and verifies', id: 'user-goes-to-link-and-verifies' },
+  { text: 'User chooses password', id: 'user-chooses-password' },
+  { text: 'User success and return', id: 'user-success-and-return' },
+  { text: 'User receives success email', id: 'user-receives-success-email' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
 {{ macros.screenshot('Admin adds new user', 'admin-adds-new-user', '/public/images/history/sign-in-pre-register-user/thumbnails/01-admin-adds-new-user.png', '/public/images/history/sign-in-pre-register-user/01-admin-adds-new-user.png', '') }}
 
 {{ macros.screenshot('Admin sets organisation', 'admin-sets-organisation', '/public/images/history/sign-in-pre-register-user/thumbnails/02-admin-sets-organisation.png', '/public/images/history/sign-in-pre-register-user/02-admin-sets-organisation.png', '') }}

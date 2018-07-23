@@ -18,6 +18,15 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Course', id: 'course' },
+  { text: 'About this course', id: 'about-this-course' },
+  { text: 'Course requirements', id: 'course-requirements' },
+  { text: 'Qualification options', id: 'qualification-options' },
+  { text: 'Salary options', id: 'salary-options' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Course', 'course', '/public/images/history/course-with-variants/thumbnails/01-course.png', '/public/images/history/course-with-variants/01-course.png', '
     <h3 class="heading-medium remove-top-margin">Qualification variants</h3>
 

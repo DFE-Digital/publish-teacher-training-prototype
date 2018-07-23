@@ -41,9 +41,16 @@ var paths = [
 ]
 
 var template = '';
+var contents = `
+  {% set contents = [`;
+var endContents = `
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+`;
 
 paths.forEach(function(item, index) {
   var i = index + 1;
+  var comma = index > 0 ? ', ': '';
   var indexStr = i < 10 ? '0' + i : i;
   var screenshot = directory + '/' + indexStr + '-' + item.name + '.png';
   var thumbnail = directory + '/thumbnails/' + indexStr + '-' + item.name + '.png';
@@ -53,6 +60,9 @@ paths.forEach(function(item, index) {
   template += `
   {{ macros.screenshot('${heading}', '${item.name}', '${thumbnail.replace('app/assets', '/public')}', '${screenshot.replace('app/assets', '/public')}', '') }}
   `
+
+  contents += `${comma}
+    { text: '${heading}', id: '${item.name}' }`;
 
   webshot('http://localhost:3000' + item.path, screenshot, options, function(err) {
     console.log(screenshot);
@@ -83,7 +93,7 @@ var templateEnd = `
 {% endblock %}
 `;
 
-fs.writeFile(indexDirectory + "/index.html", templateStart + template + templateEnd, function(err) {
+fs.writeFile(indexDirectory + "/index.html", templateStart + contents + endContents + template + templateEnd, function(err) {
   if (err) {
     return console.log(err);
   }

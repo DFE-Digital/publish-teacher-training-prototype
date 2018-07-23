@@ -28,6 +28,15 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Organisation', id: 'organisation' },
+  { text: 'About your organisation', id: 'about-your-organisation' },
+  { text: 'With one accrediting provider', id: 'with-one-accrediting-provider' },
+  { text: 'With multiple accrediting providers', id: 'with-multiple-accrediting-providers' },
+  { text: 'Course without organisation section', id: 'course-without-organisation-section' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/about-your-organisation/thumbnails/01-organisation.png', '/public/images/history/about-your-organisation/01-organisation.png', '') }}
 
   {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/about-your-organisation/thumbnails/01-about-your-organisation.png', '/public/images/history/about-your-organisation/01-about-your-organisation.png', '') }}

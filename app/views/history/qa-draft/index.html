@@ -18,6 +18,13 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Sent to QA', id: 'sent-to-qa' },
+  { text: 'QA passed email', id: 'qa-passed-email' },
+  { text: 'QA failed email', id: 'qa-failed-email' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Sent to QA', 'sent-to-qa', '/public/images/history/qa-draft/thumbnails/01-sent-to-qa.png', '/public/images/history/qa-draft/01-sent-to-qa.png', '') }}
 
   {{ macros.screenshot('QA passed email', 'qa-passed-email', '/public/images/history/qa-draft/thumbnails/02-qa-passed-email.png', '/public/images/history/qa-draft/02-qa-passed-email.png', '') }}

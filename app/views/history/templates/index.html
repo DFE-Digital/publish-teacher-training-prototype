@@ -96,6 +96,21 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Courses', id: 'courses' },
+  { text: 'Templates', id: 'templates' },
+  { text: 'New template', id: 'new-template' },
+  { text: 'Template', id: 'template' },
+  { text: 'Set fields for a template', id: 'set-fields-for-a-template' },
+  { text: 'Template preview', id: 'template-preview' },
+  { text: 'Apply template to courses', id: 'apply-template-to-courses' },
+  { text: 'Pick a template for a course', id: 'pick-a-template-for-a-course' },
+  { text: 'Template selected for a course', id: 'template-selected-for-a-course' },
+  { text: 'Don’t use a template', id: 'dont-use-a-template' },
+  { text: 'Course preview', id: 'course-preview' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Courses', 'courses', '/public/images/history/templates/thumbnails/01-courses.png', '/public/images/history/templates/01-courses.png', '
     <p>The courses view (unfolded, showing each variant of a course) with a column showing which template each course uses. If the course doesn’t use a template then ‘Custom course’ is displayed.</p>
   ') }}

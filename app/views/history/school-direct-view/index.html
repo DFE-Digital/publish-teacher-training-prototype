@@ -24,6 +24,21 @@
     </div>
   </div>
 
+  {% set contents = [
+  { text: 'Courses', id: 'courses' },
+  { text: 'Course', id: 'course' },
+  { text: 'Course details from ucas', id: 'course-details-from-ucas' },
+  { text: 'About this course', id: 'about-this-course' },
+  { text: 'About this training provider', id: 'about-this-training-provider' },
+  { text: 'Course requirements', id: 'course-requirements' },
+  { text: 'Qualification', id: 'qualification' },
+  { text: 'Salary', id: 'salary' },
+  { text: 'Preview', id: 'preview' },
+  { text: 'Schools', id: 'schools' },
+  { text: 'Organisation', id: 'organisation' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
   {{ macros.screenshot('Courses', 'courses', '/public/images/history/school-direct-view/thumbnails/01-courses.png', '/public/images/history/school-direct-view/01-courses.png', '') }}
 
   {{ macros.screenshot('Course', 'course', '/public/images/history/school-direct-view/thumbnails/02-course.png', '/public/images/history/school-direct-view/02-course.png', '') }}
