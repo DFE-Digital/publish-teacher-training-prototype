@@ -38,6 +38,19 @@
 
         {{ macros.textbox('website', 'Your website', '', 'form-control-full')}}
       </div>
+      <div class="column-one-third">
+        <div class="add-double-bottom-margin status-box">
+          <h3 class="heading-medium remove-top-margin">Publish changes</h3>
+          <p>You’ve made changes to your organisation details.</p>
+          <p>Publish changes to update the information shown on all {{ data['training-provider-name']}} courses.</p>
+          <a href="#" class="button">Publish changes</a>
+          <hr />
+          <h3 class="heading-medium remove-top-margin">Formatting</h3>
+          <p>You can use paragraphs, lists and links in your content.</p>
+
+          <a href="#">Formatting help</a>
+        </div>
+      </div>
     </div>
 
     {% if not data['self_accrediting'] %}

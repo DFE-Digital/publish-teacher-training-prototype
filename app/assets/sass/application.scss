@@ -33,8 +33,9 @@ table thead th {
 }
 
 .status-box {
-  border: 5px solid #ddd;
+  background-color: $grey-4;
   padding: 20px;
+  border-top: 5px solid $govuk-blue;
 }
 
 // Related items
