@@ -7,9 +7,9 @@
 </ul>
 {% endmacro %}
 
-{% macro screenshot(title, id, thumbnail, full, text = '') %}
+{% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'heading-large', headingLevel = 'h2') %}
 <div class="design-history-item">
-  <h2 class="heading-large" id="{{ id }}">{{ title }}</h2>
+  <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>
   <div class="grid-row">
     <div class="column-two-thirds design-history-screenshot">
       <a href="{{ full }}">
@@ -20,6 +20,63 @@
       {{ text | safe }}
     </div>
   </div>
+</div>
+{% endmacro %}
+
+{% macro aboutYourOrgPublish(state = 'new', publishedBefore = false) %}
+<div class="add-double-bottom-margin status-box">
+  {% if state == 'new' or state == 'draft' %}
+    {% if state == 'new' %}
+      <p>This information hasn’t been published yet.</p>
+      <hr />
+    {% endif %}
+
+    <h3 class="heading-medium remove-top-margin">Publish{% if state == 'draft' %} changes{% endif %}</h3>
+    {% if state == 'draft' %}<p>You’ve made changes to this information.</p>{% endif %}
+    <p>Publishing will update all {{ value('training-provider-name') }} courses.</p>
+    <p>
+      <a href="#" class="button">Publish{% if state == 'draft' %} changes{% endif %}</a>
+    </p>
+    {% if publishedBefore %}<p class="font-xsmall">Last published on 10 July 2018</p>{% endif %}
+  {% else %}
+    <p>This information was last published on 10 July 2018</p>
+  {% endif %}
+
+  <hr />
+  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <p>You can use paragraphs, lists and links in your content.</p>
+  <a href="#">Formatting help</a>
+</div>
+{% endmacro %}
+
+{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#') %}
+<div class="add-double-bottom-margin status-box">
+  {% if state == 'new' or state == 'draft' %}
+    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <p>See how this course will look with your changes.</p>
+    <p>Preview your course to check for mistakes before publishing.</p>
+    <a href="{{ previewLink }}">Preview course</a>
+    <hr />
+
+    <h3 class="heading-medium remove-top-margin">Publish changes</h3>
+    {% if state == 'draft' %}
+      <p>This course has changed since it was last published.</p>
+    {% endif %}
+
+    <p>Publish your changes for applicants to see them.</p>
+    <a href="#" class="button">Publish changes</a>
+
+    {% if publishedBefore %}
+      <p class="font-xsmall">Last published on 10 July 2018</p>
+    {% endif %}
+  {% else %}
+    <p>This course was last published on 10 July 2018</p>
+  {% endif %}
+
+  <hr />
+  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <p>See how this course currently looks to applicants:</p>
+  <a href="#">View on website</a>
 </div>
 {% endmacro %}
 

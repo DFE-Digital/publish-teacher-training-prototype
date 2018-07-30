@@ -57,7 +57,7 @@
   </div>
   {% endif %}
 
-  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
+  <!-- <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
     <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
       We couldn’t publish this course because some information was missing
     </h3>
@@ -81,7 +81,7 @@
         <a href="#">Give details about the qualifications needed</a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
@@ -94,7 +94,7 @@
     </div>
   {% endif %}
 
-  <dl class="aligned add-top-margin">
+  <dl class="aligned add-top-margin add-double-bottom-margin">
     <dt>Training provider code:</dt>
     <dd>{{ course.providerCode }}</dd>
     <dt>Training programme code:</dt>
@@ -158,17 +158,7 @@
       </div>
     </div>
     <div class="column-one-third">
-      <div class="add-double-bottom-margin status-box">
-        <h3 class="heading-medium remove-top-margin">Preview course</h3>
-        <p>See how this course will look to applicants.</p>
-        <p><p>Preview your course to check for mistakes before publishing.</p></p>
-        <a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}">Preview course</a>
-        <hr />
-
-        <h3 class="heading-medium remove-top-margin">Publish changes</h3>
-        <p>This course has changed since it was last published. Publish your changes for applicants to see them.</p>
-        <a href="#" class="button">Publish changes</a>
-      </div>
+      {{ macros.coursePublish('new', false, '/preview/' +  accrediting.slug + '/' + course.programmeCode) }}
     </div>
   </div>
 

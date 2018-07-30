@@ -37,7 +37,8 @@ var options = {
 }
 
 var paths = [
-  { path: '', name: '' }
+  { path: '/about-your-organisation', name: 'about-your-organisation' },
+  { path: '/course/devon-primary-scitt/2XLR', name: 'course' }
 ]
 
 var template = '';
