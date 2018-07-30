@@ -19,6 +19,11 @@
     {% endif %}
   </div>
 
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ course.options }}</span>
+    {{ title }}
+  </h1>
+
   {% if showMessage %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
       <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
@@ -26,6 +31,57 @@
       </h3>
     </div>
   {% endif %}
+
+  <!-- <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      Course published
+    </h3>
+    <p>
+      <a href="#">View on website</a>
+    </p>
+  </div> -->
+
+  {% if data[course.programmeCode + '-show-errors'] and errors %}
+  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
+      We couldn’t publish this course because some information was missing
+    </h3>
+    <p>
+      Fix the following problems and try publishing again:
+    </p>
+    <ul class="error-summary-list">
+      {% for error in errors %}
+      <li><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}{{ error.link }}">{{ error.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
+    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+      We couldn’t publish this course because some information was missing
+    </h3>
+    <p>
+      Fix the following problems and try publishing again:
+    </p>
+    <ul class="error-summary-list">
+      <li>
+        <a href="#">Give details about this course</a>
+      </li>
+      <li>
+        <a href="#">Give details about how school placements work</a>
+      </li>
+      <li>
+        <a href="#">Enter a course length</a>
+      </li>
+      <li>
+        <a href="#">Enter course fees for UK and EU students</a>
+      </li>
+      <li>
+        <a href="#">Give details about the qualifications needed</a>
+      </li>
+    </ul>
+  </div> -->
 
   {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
@@ -38,12 +94,7 @@
     </div>
   {% endif %}
 
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.options }}</span>
-    {{ title }}
-  </h1>
-
-  <dl class="aligned add-top-margin">
+  <dl class="aligned add-top-margin add-double-bottom-margin">
     <dt>Training provider code:</dt>
     <dd>{{ course.providerCode }}</dd>
     <dt>Training programme code:</dt>
@@ -107,14 +158,7 @@
       </div>
     </div>
     <div class="column-one-third">
-      <div class="add-double-bottom-margin status-box">
-        <a href="/preview/{{ accrediting.slug }}/{{ course.programmeCode }}">Preview course</a>
-
-        <hr />
-
-        <p>Before this course can be published DfE must approve it.</p>
-        <a href="#" class="button">Submit for approval</a>
-      </div>
+      {{ macros.coursePublish('new', false, '/preview/' +  accrediting.slug + '/' + course.programmeCode) }}
     </div>
   </div>
 
