@@ -211,4 +211,30 @@ function option(req, subject) {
   };
 }
 
+function validate(req, course, locals) {
+  var data = req.session.data;
+  var prefix = course.programmeCode
+  var errors = [];
+
+  if (!data[prefix + '-about-this-course']) {
+    errors.push({
+      title: 'Give details about this course',
+      link: `/about-this-course#${prefix}-about-this-course`
+    })
+  }
+
+  if (!data[prefix + '-placement-school-policy']) {
+    errors.push({
+      title: 'Give details about how school placements work',
+      link: `/about-this-course#${prefix}-placement-school-policy`
+    })
+  }
+
+  if (errors.length > 0) {
+    locals.errors = errors;
+  } else {
+    locals.success = true;
+  }
+}
+
 module.exports = router
