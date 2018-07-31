@@ -25,6 +25,8 @@
 
       <p>As a user I need to save changes without immediately publishing them so that I can check or preview content, ask for a review, or make corrections, before applicants see that content.</p>
 
+      <p>As a user I need to know when there are unpublished changes so that I can publish them.</p>
+
       <p>We expect to discover further needs in research that can be prioritised and addressed in later iterations, such as:</p>
       <ul class="list list-bullet">
         <li>needing to see what has changed since the last published version</li>
@@ -44,6 +46,16 @@
         <li>Draft: The fields have been edited and those changes have not been published</li>
         <li>Published: The fields have been published and no subsequent edits have been made.</li>
       </ul>
+
+      <h3 class="heading-medium">Design notes</h3>
+      <ul class="list list-bullet">
+        <li>Indicate when there are unpublished changes</li>
+        <li>Hide the publish action from content in published state</li>
+        <li>Once published, indicate the last publish date, ‘last’ differentiates from ‘first published’</li>
+        <li>Keep preview and publish actions in ‘new’ state for familiarisation</li>
+        <li>Include a view on website link to see what the live version looks like, must be distinguished from preview</li>
+        <li>Explain what preview is and why it’s useful – we’ve observed confusion about preview in research</li>
+      </ul>
     </div>
   </div>
 
@@ -57,8 +69,8 @@
     <a href="#">Formatting help</a>
   {% endset %}
 
-  <div class="grid-row">
-    <div class="column-one-third">
+  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="column-one-quarter">
       <h2 class="heading-medium">
         New
       </h2>
@@ -66,23 +78,34 @@
       {{ macros.aboutYourOrgPublish('new') }}
     </div>
 
-    <div class="column-one-third">
-      <h2 class="heading-medium">Draft</h2>
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.aboutYourOrgPublish('draft') }}
     </div>
 
-    <div class="column-one-third">
+    <div class="column-one-quarter">
       <h2 class="heading-medium">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.aboutYourOrgPublish('published') }}
     </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Second draft</h2>
+      <p>Edits made after publishing</p>
+      {{ macros.aboutYourOrgPublish('draft', true) }}
+    </div>
   </div>
 
   <h2 class="heading-large" id="course-heading">Course</h2>
-
   <div class="grid-row">
-    <div class="column-one-third">
+    <div class="column-two-thirds">
+      <p>The difference between a course and organisation information is that a course already exists in a published state. We publish the minimum course details automatically so that the course is findable, even if the training provider doesn’t log in and enrich their course.</p>
+    </div>
+  </div>
+
+  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="column-one-quarter">
       <h2 class="heading-medium">
         New
       </h2>
@@ -90,16 +113,22 @@
       {{ macros.coursePublish('new') }}
     </div>
 
-    <div class="column-one-third">
-      <h2 class="heading-medium">Draft</h2>
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.coursePublish('draft') }}
     </div>
 
-    <div class="column-one-third">
+    <div class="column-one-quarter">
       <h2 class="heading-medium">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.coursePublish('published') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Second draft</h2>
+      <p>Edits made after publishing</p>
+      {{ macros.coursePublish('draft', true) }}
     </div>
   </div>
 
