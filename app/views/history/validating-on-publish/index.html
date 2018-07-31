@@ -1,0 +1,45 @@
+
+{% extends "layout.html" %}
+{% set title = 'Validating on publish' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Users need to save without all required fields being present so they’re not obstructed when completing their course listing. We’ve observed users filling them in peacemeal. For example, they may require information from an accrediting provider, or if they’re copying content from their previous UCAS listings or course website – they may not have existing text for one of the new fields, a field they plan to come back to. Leaving a field blank is preferable and less error prone than forcing them to enter ‘TBC’ or something similar.</p>
+
+      <p>When publishing a course we need to validate that all the required parts are present. When fields aren’t present we need to prompt users to go back to those fields and complete them.</p>
+
+      <hr />
+
+      <p><a href="https://trello.com/c/jB5C2SWM/47-design-validation-at-time-of-publishing">Trello story</a>, part of the “<a href="https://trello.com/c/gczKVoh3/51-simple-publish-action-and-validation-word-counts-and-mandatory-fields">Simple publish</a>” story map.</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Validating a course on publish', id: 'validating-a-course-on-publish' },
+    { text: 'Validating about this course', id: 'validating-about-this-course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Validating a course on publish', 'validating-a-course-on-publish', '/public/images/history/validating-on-publish/thumbnails/01-validating-a-course-on-publish.png', '/public/images/history/validating-on-publish/01-validating-a-course-on-publish.png', '
+    <p>A user has attempted to publish an empty course.</p>
+    <p>This page shows all the errors a user could see at this stage.</p>
+    <p>Optional fields do not error if they are not present.</p>
+    <p>Clicking an error takes you to the field that’s missing. Clicking "Give details about this course" takes you to the "About this course" section on the "About this course" page.</p>
+  ') }}
+
+  {{ macros.screenshot('Validating about this course', 'validating-about-this-course', '/public/images/history/validating-on-publish/thumbnails/02-validating-about-this-course.png', '/public/images/history/validating-on-publish/02-validating-about-this-course.png', '
+    <p>An example of the "About this course" page once a user navigates to it after attempting to publish.</p>
+  ') }}
+
+</main>
+{% endblock %}
