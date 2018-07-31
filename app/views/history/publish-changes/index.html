@@ -60,14 +60,11 @@
   </div>
 
   <h2 class="heading-large" id="about-your-organisation-heading">About your organisation</h2>
-
-  {% set formatting %}
-    <hr class="remove-top-margin" />
-    <h3 class="heading-medium remove-top-margin">Formatting</h3>
-    <p>You can use paragraphs, lists and links in your content.</p>
-
-    <a href="#">Formatting help</a>
-  {% endset %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>The publish workflow sits alongside the form fields for entering organisation information. This means there will be two green primary action buttons on the page.</p>
+    </div>
+  </div>
 
   <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
     <div class="column-one-quarter">
@@ -100,7 +97,18 @@
   <h2 class="heading-large" id="course-heading">Course</h2>
   <div class="grid-row">
     <div class="column-two-thirds">
+      <h3 class="heading-medium">A course will already be published</h3>
       <p>The difference between a course and organisation information is that a course already exists in a published state. We publish the minimum course details automatically so that the course is findable, even if the training provider doesn’t log in and enrich their course.</p>
+
+      <p>We need to accurately distinguish the difference between automatic publishing of changes made on UCAS vs the publishing of enriched course content. There is a risk that ‘Last published on’ can be misinterpreted.</p>
+
+      <p>The ‘Last published on’ date should be the date that the course content was last published. It is not when UCAS content changes, or when organisation information was updated.</p>
+
+
+      <h3 class="heading-medium">View on website vs preview</h3>
+      <p>In these designs we show both preview and a link to view the live version of the content. These two views will look very similar and there's a risk that users will be confused by them. The two links are useful because they are the only way of comparing between live and draft.</p>
+
+      <p>An alternative might be to move the ‘View on website’ link to the point of preview, perhaps as something like ‘View live version’.</p>
     </div>
   </div>
 
