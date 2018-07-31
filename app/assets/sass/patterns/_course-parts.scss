@@ -97,6 +97,11 @@ $course-parts-indent: 35px;
     padding: 0;
     margin-bottom: 10px;
 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+
     &--empty {
       color: $grey-1;
     }
