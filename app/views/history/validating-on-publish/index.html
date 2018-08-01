@@ -16,7 +16,7 @@
     <div class="column-two-thirds">
       <p>Users need to save without all required fields being present so they’re not obstructed when completing their course listing. We’ve observed users filling them in peacemeal. For example, they may require information from an accrediting provider, or if they’re copying content from their previous UCAS listings or course website – they may not have existing text for one of the new fields, a field they plan to come back to. Leaving a field blank is preferable and less error prone than forcing them to enter ‘TBC’ or something similar.</p>
 
-      <p>When publishing a course we need to validate that all the required parts are present. When fields aren’t present we need to prompt users to go back to those fields and complete them.</p>
+      <p>When publishing we need to validate that all the required parts are present. When fields aren’t present we need to prompt users to go back to those fields and complete them.</p>
 
       <hr />
 
@@ -26,7 +26,8 @@
 
   {% set contents = [
     { text: 'Validating a course on publish', id: 'validating-a-course-on-publish' },
-    { text: 'Validating about this course', id: 'validating-about-this-course' }
+    { text: 'Validating about this course', id: 'validating-about-this-course' },
+    { text: 'Validating ‘About your organisation’ on publish', id: 'validating-about-your-organisation-on-publish' }
   ] %}
   {{ macros.screenshotContents(contents) }}
 
@@ -41,5 +42,6 @@
     <p>An example of the "About this course" page once a user navigates to it after attempting to publish.</p>
   ') }}
 
+  {{ macros.screenshot('Validating ‘About your organisation’ on publish', 'validating-about-your-organisation-on-publish', '/public/images/history/validating-on-publish/thumbnails/01-validating-about-your-organisation-on-publish.png', '/public/images/history/validating-on-publish/01-validating-about-your-organisation-on-publish.png', '') }}
 </main>
 {% endblock %}
