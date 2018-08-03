@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    {% if data['multi-organisation'] %}
+      <ol>
+        <li><a href="/">Organisations</a></li>
+        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% else %}
+      <ol>
+        <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% endif %}
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ course.options }}</span>
+    {{ title }}
+  </h1>
+
+  <div class="not-running-notice add-double-bottom-margin">
+    <h2 class="heading-large remove-top-margin">This course is not running</h2>
+    <p class="lede remove-bottom-margin">It won’t appear online. To publish it you need to set the status of at least one training location to “running” in UCAS.</p>
+  </div>
+
+  <dl class="aligned add-top-margin add-double-bottom-margin">
+    <dt>Status:</dt>
+    <dd>Not running</dd>
+    <dt>Training provider code:</dt>
+    <dd>{{ course.providerCode }}</dd>
+    <dt>Training programme code:</dt>
+    <dd>{{ course.programmeCode }}</dd>
+    <dt>Accrediting provider:</dt>
+    <dd>{{ course.accrediting }}</dd>
+    <dt>Route:</dt>
+    <dd>{{ course.route }}</dd>
+    <dt>Subjects:</dt>
+    <dd>{{ course.subjects }}</dd>
+    <dt>Age range:</dt>
+    <dd>{{ course.ageRange }}</dd>
+    <dt>Qualification:</dt>
+    <dd>{{ course.qualifications }}</dd>
+    <dt>Regions:</dt>
+    <dd>{{ course.regions }}</dd>
+  </dl>
+
+  <div class="grid-row add-top-margin">
+    <div class="column-two-thirds">
+      <div class="course-parts course-parts--large">
+        <ul class="course-parts-items">
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Training locations</h3>
+
+            <div style="clear: left; padding-top: 20px">
+            {% for school in course.schools %}
+            <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+            <dl class="aligned add-top-margin add-double-bottom-margin">
+              <dt>Address:</dt>
+              <dd>{{ school.address }}</dd>
+              <dt>Status:</dt>
+              <dd>Discontinued</dd>
+              <dt>Vacancies:</dt>
+              <dd>Full time vacancies</dd>
+              <dt>Apply from:</dt>
+              <dd>October 2018</dd>
+            </dl>
+            {% endfor %}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

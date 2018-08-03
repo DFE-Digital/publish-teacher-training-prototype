@@ -25,7 +25,7 @@
             <th class="code-col" style="width: 40px">Code</th>
             <th class="subject-col" style="width: 30%">Subject</th>
             <th class="type-col">Type</th>
-            <th class="status-col">UCAS status</th>
+            <th class="status-col">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,15 @@
                 <td>{{ course.programmeCode }}</td>
                 <td><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }}</a></td>
                 <td>{{ course.options }}</td>
-                <td>Running</td>
+                <td>{% if loop.index == 2 %}
+                      New – not yet running
+                    {% elseif loop.index == 7 %}
+                      Not running
+                    {% elseif loop.index == 4 %}
+                      Not running
+                    {% else %}
+                      Running
+                    {% endif %}</td>
               </tr>
               {% set subjectName = course.name %}
             {% endif %}

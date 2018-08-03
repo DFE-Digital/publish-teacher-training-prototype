@@ -82,6 +82,12 @@ router.get('/course/:accreditor/:code', function (req, res) {
   res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c) })
 })
 
+router.get('/course-not-running/:accreditor/:code', function (req, res) {
+  var c = course(req);
+
+  res.render('course-not-running', { course: c, accrediting: accreditor(req), template: template(req, c) })
+})
+
 router.get('/preview/:accreditor/:code', function (req, res) {
   var c = course(req);
   var t = template(req, c);
