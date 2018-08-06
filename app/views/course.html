@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 {% block page_title %}{{ title }}{% endblock %}
+{% set coursePath = '/course/' + accrediting.slug + '/' + course.programmeCode %}
 
 {% block content %}
 
@@ -82,22 +83,22 @@
           <li class="course-parts-item">
             <h3 class="course-part-task">About this course</h3>
 
-            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/about-this-course">Edit</a>
+            <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
             <dl class="course-part-tasks">
-              {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course') }}
+              {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
-              {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work') }}
+              {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
             </dl>
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">Course length and {% if course.salaried %}salary{% else %}fees{% endif %}</h3>
-            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/fees-and-length">Edit</a>
+            <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">Edit</a>
             <dl class="course-part-tasks">
-              {{ macros.coursePart(course.programmeCode + '-duration', 'Course length') }}
+              {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
               {% if course.salaried %}
-                {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary') }}
+                {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary', errors, coursePath) }}
               {% else %}
-                {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students') }}
+                {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students', errors, coursePath) }}
                 {{ macros.feesCoursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
                 {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
               {% endif %}
@@ -108,10 +109,10 @@
             <h3 class="course-part-task">
               Requirements and eligbility
             </h3>
-            <a class="course-part-task-action" href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}/requirements">Edit</a>
+            <a class="course-part-task-action" href="{{ coursePath }}/requirements">Edit</a>
 
             <dl class="course-part-tasks">
-              {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed') }}
+              {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
             </dl>

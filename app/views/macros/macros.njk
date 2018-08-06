@@ -279,11 +279,13 @@
 </div>
 {% endmacro %}
 
-{% macro coursePart(id, label, error = false) %}
-<div {% if error %}class="course-part-error"{% endif %}>
+{% macro coursePart(id, label, errors, coursePath) %}
+{% set e = error(id, errors) %}
+
+<div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
-    {% if error %}<a href="#{{ id }}" class="course-part-label-error">{{ error }}</a>{% endif %}
+    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">
@@ -297,11 +299,12 @@
 </div>
 {% endmacro %}
 
-{% macro feesCoursePart(id, label, error = false) %}
-<div {% if error %}class="course-part-error"{% endif %}>
+{% macro feesCoursePart(id, label, errors) %}
+{% set e = error(id, errors) %}
+<div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
-    {% if error %}<a href="#{{ id }}" class="course-part-label-error">{{ error }}</a>{% endif %}
+    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">
