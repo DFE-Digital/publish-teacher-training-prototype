@@ -12,6 +12,8 @@
     {{ title }}
   </h1>
 
+  {% include "course/_errors.html" %}
+
   <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">

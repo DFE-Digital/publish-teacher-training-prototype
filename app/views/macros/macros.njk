@@ -55,7 +55,7 @@
 </div>
 {% endmacro %}
 
-{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#') %}
+{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if publishedBefore or state == 'published' %}
     <p>Last published on 10 July 2018</p>
@@ -75,7 +75,7 @@
 
     <h3 class="heading-medium remove-top-margin">Publish</h3>
     <p>Publish your changes for applicants to see them.</p>
-    <a href="#" class="button">Publish</a>
+    <a href="{{ publishLink }}" class="button">Publish</a>
   {% endif %}
 
   <hr />
