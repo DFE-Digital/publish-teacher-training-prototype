@@ -69,10 +69,20 @@ $course-parts-indent: 35px;
       }
     }
 
-    @include media(desktop) {
-      &:first-child > * {
-        padding-top: 0;
-      }
+    // @include media(desktop) {
+    //   &:first-child > * {
+    //     padding-top: 0;
+    //   }
+    // }
+  }
+
+  .course-part-error {
+    dt, dd {
+      border-left: 5px solid $error-colour;
+      padding-left: 10px;
+    }
+     dt {
+      color: $error-colour;
     }
   }
 
@@ -85,6 +95,11 @@ $course-parts-indent: 35px;
     // @include media(desktop) {
     //   width: 30%;
     // }
+  }
+
+  .course-part-label-error {
+    font-weight: normal;
+    display: block;
   }
 
   > *:first-child .course-part-label {

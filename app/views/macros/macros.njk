@@ -55,7 +55,7 @@
 </div>
 {% endmacro %}
 
-{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#') %}
+{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if publishedBefore or state == 'published' %}
     <p>Last published on 10 July 2018</p>
@@ -75,7 +75,7 @@
 
     <h3 class="heading-medium remove-top-margin">Publish</h3>
     <p>Publish your changes for applicants to see them.</p>
-    <a href="#" class="button">Publish</a>
+    <a href="{{ publishLink }}" class="button">Publish</a>
   {% endif %}
 
   <hr />
@@ -134,8 +134,14 @@
     text:
     more:
 #}
-{% macro radioGroup(name, fields) %}
-  <div class="form-group">
+{% macro radioGroup(name, fields, errors = false) %}
+  {% set e = error(name, errors) %}
+  <div class="form-group {% if e %} form-group-error{% endif %}">
+  {% if e %}
+    <span class="error-message">
+      {{ e.title }}
+    </span>
+  {% endif %}
   {% for field in fields %}
     <div class="multiple-choice" data-target="radio-{{ name }}-part-{{ loop.index }}-extra">
       <input
@@ -190,9 +196,15 @@
 </div>
 {% endmacro %}
 
-{% macro textbox(id, label, helpText = false, size = '', prefix = false) %}
-<div class="form-group">
+{% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false) %}
+{% set e = error(id, errors) %}
+<div class="form-group {% if e %} form-group-error{% endif %}">
   <label class="form-label" for="{{id}}">{{label | safe}}</label>
+  {% if e %}
+    <span class="error-message">
+      {{ e.title }}
+    </span>
+  {% endif %}
   {% if helpText %}
     <span class="form-hint">{{helpText | safe}}</span>
   {% endif %}
@@ -223,9 +235,16 @@
 </div>
 {% endmacro %}
 
-{% macro textarea(id, label, rows, helpText = false, maxWords = 50) %}
-<div class="form-group">
+{% macro textarea(id, label, rows, helpText = false, maxWords = 50, errors = false) %}
+{% set e = error(id, errors) %}
+
+<div class="form-group{% if e %} form-group-error{% endif %}">
   <label class="form-label form-label-bold" for="{{id}}">{{label}}</label>
+  {% if e %}
+    <span class="error-message">
+      {{ e.title }}
+    </span>
+  {% endif %}
   {% if helpText %}
     <span class="form-hint">{{helpText}}</span>
   {% endif %}
@@ -260,10 +279,13 @@
 </div>
 {% endmacro %}
 
-{% macro coursePart(id, label) %}
-<div>
+{% macro coursePart(id, label, errors, coursePath) %}
+{% set e = error(id, errors) %}
+
+<div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
+    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">
@@ -277,10 +299,12 @@
 </div>
 {% endmacro %}
 
-{% macro feesCoursePart(id, label) %}
-<div>
+{% macro feesCoursePart(id, label, errors) %}
+{% set e = error(id, errors) %}
+<div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
+    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">

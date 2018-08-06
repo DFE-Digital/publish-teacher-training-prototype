@@ -12,6 +12,8 @@
     {{ title }}
   </h1>
 
+  {% include "course/_errors.html" %}
+
   <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
@@ -29,7 +31,7 @@
           ]
         %}
 
-        {{ macros.radioGroup(course.programmeCode + '-duration', fields) }}
+        {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
       </div>
     </div>
 
@@ -45,11 +47,11 @@
             <li>say whether there are any fees or others costs – if there are no fees for this course, you should also say so</li>
           </ul>
 
-          {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250) }}
+          {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250, errors) }}
         {% else %}
           <h2 class="heading-large">Course fees</h2>
 
-          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£') }}
+          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£', errors) }}
           {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
 
           <h4 class="heading-medium">Fee details</h4>

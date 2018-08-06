@@ -18,68 +18,91 @@ router.post('/about-your-organisation', function (req, res) {
   res.render('about-your-organisation', { showMessage: true })
 })
 
-router.post('/template/new', function (req, res) {
-  var name = req.body['template-name'];
-  var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
-
-  req.session.data['templates'].push({
-    name: name,
-    slug: slug
-  });
-
-  res.redirect('/template/' + slug);
-})
-
-router.get('/template/new', function (req, res) {
-  res.render('template/new');
-})
-
-router.get('/template/:template', function (req, res) {
-  res.render('template/fields', { template: template(req) })
-})
-
-router.get('/template/:template/:view', function (req, res) {
-  var view = req.params.view;
-  res.render(`template/${view}`, { template: template(req) })
-})
-
-router.post('/template/:template/apply', function (req, res) {
-
-  for (choice in req.body) {
-    if (req.body[choice] != '_unchecked') {
-      var code = choice.replace('apply-to-', '');
-      req.session.data[code + '-template-choice'] = req.params.template;
-    }
-  }
-
-  res.redirect(`/template/${req.params.template}/apply`)
-})
-
-router.get('/preview/template/:template', function (req, res) {
-  var t = template(req);
-  var c = {
-    name: 'Example subject'
-  }
-
-  var a = {
-    name: 'Example Accrediting Provider'
-  }
-
-  res.render('preview', { course: c, accrediting: a, template: t, prefix: t.slug + '-template', previewingTemplate: true })
-})
-
-// router.get('/email-qa-pass/:subject', function (req, res) {
-//   res.render('email-qa-pass', { subject: subject(req) })
+// router.post('/template/new', function (req, res) {
+//   var name = req.body['template-name'];
+//   var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
+//
+//   req.session.data['templates'].push({
+//     name: name,
+//     slug: slug
+//   });
+//
+//   res.redirect('/template/' + slug);
 // })
 //
-// router.get('/email-qa-fail/:subject', function (req, res) {
-//   res.render('email-qa-fail', { subject: subject(req) })
+// router.get('/template/new', function (req, res) {
+//   res.render('template/new');
+// })
+//
+// router.get('/template/:template', function (req, res) {
+//   res.render('template/fields', { template: template(req) })
+// })
+//
+// router.get('/template/:template/:view', function (req, res) {
+//   var view = req.params.view;
+//   res.render(`template/${view}`, { template: template(req) })
+// })
+//
+// router.post('/template/:template/apply', function (req, res) {
+//
+//   for (choice in req.body) {
+//     if (req.body[choice] != '_unchecked') {
+//       var code = choice.replace('apply-to-', '');
+//       req.session.data[code + '-template-choice'] = req.params.template;
+//     }
+//   }
+//
+//   res.redirect(`/template/${req.params.template}/apply`)
+// })
+//
+// router.get('/preview/template/:template', function (req, res) {
+//   var t = template(req);
+//   var c = {
+//     name: 'Example subject'
+//   }
+//
+//   var a = {
+//     name: 'Example Accrediting Provider'
+//   }
+//
+//   res.render('preview', { course: c, accrediting: a, template: t, prefix: t.slug + '-template', previewingTemplate: true })
 // })
 
+// Publish course action
+router.get('/publish/:accreditor/:code', function (req, res) {
+  var c = course(req);
+  var errors = validate(req.session.data, c);
+
+  if (errors.length > 0) {
+    req.session.data[c.programmeCode + '-show-publish-errors'] = true;
+  }
+
+  res.redirect('/course/' + req.params.accreditor + '/' + req.params.code);
+})
+
+// Course page
 router.get('/course/:accreditor/:code', function (req, res) {
   var c = course(req);
 
-  res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c) })
+  res.render('course', {
+    course: c,
+    accrediting: accreditor(req),
+    template: template(req, c),
+    errors: validate(req.session.data, c)
+  })
+})
+
+// Post to course page
+router.post('/course/:accreditor/:code', function (req, res) {
+  var c = course(req);
+
+  res.render('course', {
+    course: c,
+    accrediting: accreditor(req),
+    template: template(req, c),
+    errors: validate(req.session.data, c),
+    showMessage: true
+  })
 })
 
 router.get('/course-not-running/:accreditor/:code', function (req, res) {
@@ -102,56 +125,37 @@ router.get('/preview/:accreditor/:code', function (req, res) {
   res.render('preview', { course: c, accrediting: accreditor(req), template: t, prefix: prefix })
 })
 
-router.post('/course/:accreditor/:code', function (req, res) {
-  var c = course(req);
-
-  res.render('course', { course: c, accrediting: accreditor(req), template: template(req, c), showMessage: true })
-})
-
-router.get('/course/:accreditor/:code/no-template', function (req, res) {
-  req.session.data[req.params.code + '-template-choice'] = 'template-none';
-  res.redirect(`/course/${req.params.accreditor}/${req.params.code}`);
-})
+// router.get('/course/:accreditor/:code/no-template', function (req, res) {
+//   req.session.data[req.params.code + '-template-choice'] = 'template-none';
+//   res.redirect(`/course/${req.params.accreditor}/${req.params.code}`);
+// })
 
 router.get('/course/:accreditor/:code/:view', function (req, res) {
   var view = req.params.view;
-  res.render(`course/${view}`, { course: course(req), accrediting: accreditor(req) })
+  var c = course(req);
+
+  res.render(`course/${view}`, {
+    course: c,
+    accrediting: accreditor(req),
+    errors: validate(req.session.data, c, view)
+  })
 })
 
-// router.get('/course/:accreditor/:subject/option/:index', function (req, res) {
-//   var subj = subject(req);
-//
-//   res.render(`course/about-this-option`, { accrediting: accreditor(req), subject: subj, option: option(req, subj) })
-// })
-
-// router.get('/course/:accreditor/:subject/ucas/:code', function (req, res) {
-//   var ucasCourse = req.session.data['ucasCourses'].find(function(course) {
-//     return course.programmeCode == req.params.code;
+// router.get('/school/:id', function (req, res) {
+//   var school = req.session.data['schools'].find(function(school) {
+//     return school.code == req.params.id;
 //   });
 //
-//   res.render(`course/from-ucas`, { accrediting: accreditor(req), subject: subject(req), ucasCourse: ucasCourse })
+//   res.render('school', { school: school })
 // })
-
-// router.get('/course/:accreditor/:subject/:view', function (req, res) {
-//   var view = req.params.view;
-//   res.render(`course/${view}`, { accrediting: accreditor(req), subject: subject(req) })
+//
+// router.get('/school/:id/edit', function (req, res) {
+//   var school = req.session.data['schools'].find(function(school) {
+//     return school.id == req.params.id;
+//   });
+//
+//   res.render('edit-school', { school: school })
 // })
-
-router.get('/school/:id', function (req, res) {
-  var school = req.session.data['schools'].find(function(school) {
-    return school.code == req.params.id;
-  });
-
-  res.render('school', { school: school })
-})
-
-router.get('/school/:id/edit', function (req, res) {
-  var school = req.session.data['schools'].find(function(school) {
-    return school.id == req.params.id;
-  });
-
-  res.render('edit-school', { school: school })
-})
 
 function subject(req) {
   var accrediting = accreditor(req);
@@ -217,30 +221,81 @@ function option(req, subject) {
   };
 }
 
-function validate(req, course, locals) {
-  var data = req.session.data;
-  var prefix = course.programmeCode
+function validate(data, course, view) {
+  var prefix = course.programmeCode;
+  var view = view || 'all';
   var errors = [];
 
-  if (!data[prefix + '-about-this-course']) {
-    errors.push({
-      title: 'Give details about this course',
-      link: `/about-this-course#${prefix}-about-this-course`
-    })
+  if (view == 'all' || view == 'about-this-course') {
+    if (!data[prefix + '-about-this-course']) {
+      errors.push({
+        title: 'Give details about this course',
+        id: `${prefix}-about-this-course`,
+        link: `/about-this-course#${prefix}-about-this-course`,
+        page: 'about-this-course'
+      })
+    }
+
+    if (!data[prefix + '-placement-school-policy']) {
+      errors.push({
+        title: 'Give details about how school placements work',
+        id: `${prefix}-placement-school-policy`,
+        link: `/about-this-course#${prefix}-placement-school-policy`,
+        page: 'about-this-course'
+      })
+    }
   }
 
-  if (!data[prefix + '-placement-school-policy']) {
-    errors.push({
-      title: 'Give details about how school placements work',
-      link: `/about-this-course#${prefix}-placement-school-policy`
-    })
+  if (view == 'all' || view == 'requirements') {
+    if (!data[prefix + '-qualifications-required']) {
+      errors.push({
+        title: 'Give details about the qualifications needed',
+        id: `${prefix}-qualifications-required`,
+        link: `/requirements#${prefix}-qualifications-required`,
+        page: 'requirements'
+      })
+    }
   }
 
-  if (errors.length > 0) {
-    locals.errors = errors;
-  } else {
-    locals.success = true;
+  if (view == 'all' || view == 'fees-and-length') {
+    if (!data[prefix + '-duration']) {
+      errors.push({
+        title: 'Enter a course length',
+        id: `${prefix}-duration`,
+        link: `/fees-and-length#${prefix}-duration`,
+        page: 'fees-and-length'
+      })
+    }
+
+    if (!course.salaried && !data[prefix + '-fee']) {
+      errors.push({
+        title: 'Enter course fees for UK and EU students',
+        id: `${prefix}-fee`,
+        link: `/fees-and-length#${prefix}-fee`,
+        page: 'fees-and-length'
+      })
+    }
+
+    if (course.salaried && !data[prefix + '-salary-details']) {
+      errors.push({
+        title: 'Give details about the salary for this course',
+        id: `${prefix}-salary-details`,
+        link: `/fees-and-length#${prefix}-salary-details`,
+        page: 'fees-and-length'
+      })
+    }
   }
+
+  return errors;
 }
+
+
+// router.get('/email-qa-pass/:subject', function (req, res) {
+//   res.render('email-qa-pass', { subject: subject(req) })
+// })
+//
+// router.get('/email-qa-fail/:subject', function (req, res) {
+//   res.render('email-qa-fail', { subject: subject(req) })
+// })
 
 module.exports = router
