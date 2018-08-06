@@ -173,6 +173,19 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       return value;
     })
 
+    nunjucksEnv.addGlobal('error', function (id, errors) {
+      var data = req.session.data;
+      var courseCode = id.split('-')[0];
+
+      if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
+        return false
+      }
+
+      return errors.find(function(e) {
+               return e.id == id;
+             });
+    })
+
     next()
   })
 }

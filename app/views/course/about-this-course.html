@@ -31,7 +31,7 @@
 
         <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
 
-        {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400) }}
+        {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400, errors) }}
       </div>
     </div>
 
@@ -72,7 +72,7 @@
           <li>how much time candidates spend in each school</li>
         </ul>
 
-        {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 250) }}
+        {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 250, errors) }}
       </div>
     </div>
 

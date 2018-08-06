@@ -230,6 +230,7 @@ function validate(data, course, view) {
     if (!data[prefix + '-about-this-course']) {
       errors.push({
         title: 'Give details about this course',
+        id: `${prefix}-about-this-course`,
         link: `/about-this-course#${prefix}-about-this-course`,
         page: 'about-this-course'
       })
@@ -238,6 +239,7 @@ function validate(data, course, view) {
     if (!data[prefix + '-placement-school-policy']) {
       errors.push({
         title: 'Give details about how school placements work',
+        id: `${prefix}-placement-school-policy`,
         link: `/about-this-course#${prefix}-placement-school-policy`,
         page: 'about-this-course'
       })
@@ -248,6 +250,7 @@ function validate(data, course, view) {
     if (!data[prefix + '-qualifications-required']) {
       errors.push({
         title: 'Give details about the qualifications needed',
+        id: `${prefix}-qualifications-required`,
         link: `/requirements#${prefix}-qualifications-required`,
         page: 'requirements'
       })
@@ -258,6 +261,7 @@ function validate(data, course, view) {
     if (!data[prefix + '-duration']) {
       errors.push({
         title: 'Enter a course length',
+        id: `${prefix}-duration`,
         link: `/fees-and-length#${prefix}-duration`,
         page: 'fees-and-length'
       })
@@ -266,6 +270,7 @@ function validate(data, course, view) {
     if (!course.salaried && !data[prefix + '-fee']) {
       errors.push({
         title: 'Enter course fees for UK and EU students',
+        id: `${prefix}-fee`,
         link: `/fees-and-length#${prefix}-fee`,
         page: 'fees-and-length'
       })
@@ -274,6 +279,7 @@ function validate(data, course, view) {
     if (course.salaried && !data[prefix + '-salary-details']) {
       errors.push({
         title: 'Give details about the salary for this course',
+        id: `${prefix}-salary-details`,
         link: `/fees-and-length#${prefix}-salary-details`,
         page: 'fees-and-length'
       })
