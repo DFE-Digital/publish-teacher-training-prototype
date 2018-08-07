@@ -14,6 +14,7 @@ var browserSync = require('browser-sync')
 var config = require('./app/config.js')
 var utils = require('./lib/utils.js')
 var packageJson = require('./package.json')
+var dateFormat = require('dateformat')
 
 // Grab environment variables specified in Procfile or as Heroku config vars
 var releaseVersion = packageJson.version
@@ -184,6 +185,11 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       return errors.find(function(e) {
                return e.id == id;
              });
+    })
+
+    nunjucksEnv.addGlobal('today', function () {
+      var now = new Date();
+      return dateFormat(now, "d mmmm yyyy");
     })
 
     next()

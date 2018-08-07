@@ -26,7 +26,7 @@
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false) %}
 <div class="add-double-bottom-margin status-box">
   {% if publishedBefore or state == 'published' %}
-    <p>Last published on 10 July 2018</p>
+    <p>Last published on {{ today() }}</p>
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
@@ -58,7 +58,7 @@
 {% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if publishedBefore or state == 'published' %}
-    <p>Last published on 10 July 2018</p>
+    <p>Last published on {{ today() }}</p>
   {% endif %}
 
   {% if state == 'draft' %}
