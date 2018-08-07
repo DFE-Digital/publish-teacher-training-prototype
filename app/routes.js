@@ -77,6 +77,7 @@ router.get('/publish/:accreditor/:code', function (req, res) {
     req.session.data[c.programmeCode + '-show-publish-errors'] = errors.length > 0;
   } else {
     req.session.data[c.programmeCode + '-publish-state'] = 'published';
+    req.session.data[c.programmeCode + '-published-before'] = true;
   }
 
   res.redirect('/course/' + req.params.accreditor + '/' + req.params.code + '?publish=true');
@@ -99,12 +100,14 @@ router.get('/course/:accreditor/:code', function (req, res) {
 // Post to course page
 router.post('/course/:accreditor/:code', function (req, res) {
   var c = course(req);
+  req.session.data[c.programmeCode + '-publish-state'] = 'draft';
 
   res.render('course', {
     course: c,
     accrediting: accreditor(req),
     template: template(req, c),
     errors: validate(req.session.data, c),
+    publishState : 'draft',
     showMessage: true
   })
 })

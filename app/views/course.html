@@ -2,6 +2,9 @@
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 {% block page_title %}{{ title }}{% endblock %}
 {% set coursePath = '/course/' + accrediting.slug + '/' + course.programmeCode %}
+{% set previewLink = '/preview/' +  accrediting.slug + '/' + course.programmeCode %}
+{% set publishLink = '/publish/' +  accrediting.slug + '/' + course.programmeCode %}
+{% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 
 {% block content %}
 
@@ -30,6 +33,10 @@
       <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
         Changes saved
       </h3>
+      <p>Preview your course to check for mistakes before publishing.</p>
+      <p>
+        <a href="{{ previewLink }}">Preview course</a>
+      </p>
     </div>
   {% endif %}
 
@@ -143,11 +150,7 @@
       </div>
     </div>
     <div class="column-one-third">
-      {% set previewLink = '/preview/' +  accrediting.slug + '/' + course.programmeCode %}
-      {% set publishLink = '/publish/' +  accrediting.slug + '/' + course.programmeCode %}
-      {% set publishState = data[course.programmeCode + '-publish-state'] or 'new' %}
-
-      {{ macros.coursePublish(publishState, false, previewLink, publishLink) }}
+      {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], previewLink, publishLink) }}
     </div>
   </div>
 
