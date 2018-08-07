@@ -33,14 +33,17 @@
     </div>
   {% endif %}
 
-  <!-- <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+  {% if justPublished %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
     <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
-      Course published
+      Your changes have been published
     </h3>
     <p>
+      See how this course looks to applicants:<br />
       <a href="#">View on website</a>
     </p>
-  </div> -->
+  </div>
+  {% endif %}
 
   {% include "course/_errors.html" %}
 
@@ -142,8 +145,9 @@
     <div class="column-one-third">
       {% set previewLink = '/preview/' +  accrediting.slug + '/' + course.programmeCode %}
       {% set publishLink = '/publish/' +  accrediting.slug + '/' + course.programmeCode %}
+      {% set publishState = data[course.programmeCode + '-publish-state'] or 'new' %}
 
-      {{ macros.coursePublish('new', false, previewLink, publishLink) }}
+      {{ macros.coursePublish(publishState, false, previewLink, publishLink) }}
     </div>
   </div>
 

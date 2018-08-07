@@ -74,21 +74,25 @@ router.get('/publish/:accreditor/:code', function (req, res) {
   var errors = validate(req.session.data, c);
 
   if (errors.length > 0) {
-    req.session.data[c.programmeCode + '-show-publish-errors'] = true;
+    req.session.data[c.programmeCode + '-show-publish-errors'] = errors.length > 0;
+  } else {
+    req.session.data[c.programmeCode + '-publish-state'] = 'published';
   }
 
-  res.redirect('/course/' + req.params.accreditor + '/' + req.params.code);
+  res.redirect('/course/' + req.params.accreditor + '/' + req.params.code + '?publish=true');
 })
 
 // Course page
 router.get('/course/:accreditor/:code', function (req, res) {
   var c = course(req);
+  var errors = validate(req.session.data, c);
 
   res.render('course', {
     course: c,
     accrediting: accreditor(req),
     template: template(req, c),
-    errors: validate(req.session.data, c)
+    errors: errors,
+    justPublished: (req.query.publish && errors.length == 0)
   })
 })
 
