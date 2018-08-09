@@ -65,6 +65,10 @@
 
       <p>There remains a case for folding some School Direct courses once the minimum viable service is built. Where a provider has separated their courses purely by school, <a href="/history/imported-from-ucas#folding-on-schools">folding by school</a> could be worth folding. Grouping might also work.</p>
 
+      <p>
+        <a href="/history/unfolded-courses">Unfolded designs</a>
+      </p>
+
       <h2 class="heading-large">Grouping not folding</h2>
 
       <p>The benefit of folding on search results that we saw with applicants can be achieved using grouping.</p>
@@ -72,8 +76,25 @@
       <p>Rather than 1 result linking to a page with all variants, instead group a provider’s courses in the search results. A group will have multiple links to each variants – allowing for a cursory comparison, while the group itself can be easily skipped past.</p>
 
       <p>We’re <a href="https://trello.com/c/jQftifYl/44-group-listings-to-make-results-easier-to-scan">tracking grouping on the story map</a> and consider it outside of the minimum viable service.</p>
-      </div>
     </div>
   </div>
+
+  <h2 class="heading-large">Unfolded course designs</h2>
+
+  {% set contents = [
+    { text: 'Organisation', id: 'organisation' },
+    { text: 'Course: PGCE with QTS full time with salary', id: 'pgce-with-qts-full-time-with-salary' },
+    { text: 'Course: PGCE with QTS full time', id: 'pgce-with-qts-full-time' },
+    { text: 'About your organisation', id: 'about-your-organisation' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/unfolded-courses/thumbnails/01-organisation.png', '/public/images/history/unfolded-courses/01-organisation.png', '', 'heading-large', 'h3') }}
+
+  {{ macros.screenshot('Course: PGCE with QTS full time with salary', 'pgce-with-qts-full-time-with-salary', '/public/images/history/unfolded-courses/thumbnails/02-pgce-with-qts-full-time-with-salary.png', '/public/images/history/unfolded-courses/02-pgce-with-qts-full-time-with-salary.png', '', 'heading-large', 'h3') }}
+
+  {{ macros.screenshot('Course: PGCE with QTS full time', 'pgce-with-qts-full-time', '/public/images/history/unfolded-courses/thumbnails/03-pgce-with-qts-full-time.png', '/public/images/history/unfolded-courses/03-pgce-with-qts-full-time.png', '', 'heading-large', 'h3') }}
+
+  {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/unfolded-courses/thumbnails/04-about-your-organisation.png', '/public/images/history/unfolded-courses/04-about-your-organisation.png', '', 'heading-large', 'h3') }}
 </main>
 {% endblock %}
