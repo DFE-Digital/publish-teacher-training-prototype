@@ -33,6 +33,16 @@ table thead th {
   border-color: $black;
 }
 
+.table-small {
+  th {
+    @include bold-16;
+  }
+
+  td {
+    @include core-16;
+  }
+}
+
 .empty {
   color: $grey-1;
 }
@@ -280,19 +290,23 @@ dl.aligned.course-part-tasks dd {
 }
 
 .ucas-info-table  {
+  td {
+    vertical-align: top;
+  }
+
   .subject-col {
     width: 25%;
   }
 
-  .code-col {
-    width: 10%;
-  }
-
   .type-col {
-    width: 40%;
+    width: 30%;
   }
 
   .status-col {
+    width: 20%;
+  }
+
+  .complete-col {
     width: 25%;
   }
 

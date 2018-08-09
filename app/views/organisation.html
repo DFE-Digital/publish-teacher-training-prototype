@@ -19,13 +19,13 @@
       </h3>
     {% endif %}
     <div class="body-text">
-      <table class="ucas-info-table">
+      <table class="ucas-info-table table-small">
         <thead>
           <tr>
-            <th class="code-col" style="width: 40px">Code</th>
-            <th class="subject-col" style="width: 30%">Subject</th>
+            <th class="subject-col" style="width: 30%">Course</th>
             <th class="type-col">Type</th>
             <th class="status-col">Status</th>
+            <th class="complete-col">Course content</th>
           </tr>
         </thead>
         <tbody>
@@ -33,10 +33,11 @@
           {% for course in data['ucasCourses'] %}
             {% if course.accrediting == accrediting.name %}
               <tr>
-                <td>{{ course.programmeCode }}</td>
-                <td><a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }}</a></td>
+                <td>
+                  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                </td>
                 <td>{{ course.options }}</td>
-                <td>{% if loop.index == 2 %}
+                <td>Running <!-- {% if loop.index == 2 %}
                       New – not yet running
                     {% elseif loop.index == 7 %}
                       Not running
@@ -44,7 +45,18 @@
                       Not running
                     {% else %}
                       Running
-                    {% endif %}</td>
+                    {% endif %} --></td>
+                <td>
+                  {% if loop.index == 2 %}
+                    Published 1 June 2018
+                  {% elseif loop.index == 7 %}
+                    Unpublished changes
+                  {% elseif loop.index == 4 %}
+                    Unpublished changes
+                  {% else %}
+                    No content
+                  {% endif %}
+                </td>
               </tr>
               {% set subjectName = course.name %}
             {% endif %}
