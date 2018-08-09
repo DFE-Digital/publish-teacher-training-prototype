@@ -153,32 +153,6 @@
       {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], previewLink, publishLink) }}
     </div>
   </div>
-
-
-
-  <!-- <table>
-    <thead>
-      <tr>
-        <th>Name and address</th>
-        <th>Vacancies</th>
-        <th>Status</th>
-        <th>Apply from</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for school in course.schools %}
-      <tr>
-        <td>
-          {{ school.name }} (Code: {{ school.code }})<br />
-          {{ school.address }}
-        </td>
-        <td>Full time vacancies</td>
-        <td>Running</td>
-        <td>26 Oct 2018</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table> -->
 </main>
 
 {% endblock %}

@@ -318,12 +318,16 @@
 </div>
 {% endmacro %}
 
-{% macro previewPart(id) %}
+{% macro previewPart(id, org = false) %}
   {% if (value(id)) %}
     <pre class="preview-pre">{{ value(id) }}</pre>
   {% else %}
     <p class="missing-section">
-      Please add details for this section.
+      {% if org %}
+        Please add details <a href="/about-your-organisation">about your organisation</a>.
+      {% else %}
+        Please add details for this section.
+      {% endif %}
     </p>
   {% endif %}
 {% endmacro %}

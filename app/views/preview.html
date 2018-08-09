@@ -21,7 +21,7 @@
   {% endif %}
 
   <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
-    {{ course.name }} at {{ data['training-provider-name'] }}
+    {{ course.name }} with {{ data['training-provider-name'] }}
     {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
   </h1>
 
@@ -41,19 +41,18 @@
       {% else %}
         <details role="group">
           {% if 'PGCE' in course.options[0] %}
-            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">PGCE with Qualified teacher status (QTS)</span></summary>
+            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">PGCE with QTS</span></summary>
 
             <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
-                <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland.</p>
-                <p>This qualification is also recognised internationally.</p>
+                <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally.</p>
                 <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
             </div>
           {% else %}
-            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">Qualified teacher status (QTS)</span></summary>
+            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">QTS</span></summary>
 
             <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
                 <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
-                <p>If you want to teach in the rest of the UK or internationally, consider a course that gives you the qualification 'postgraduate certificate in education with qualified teacher status' instead.</p>
+                <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
             </div>
           {% endif %}
         </details>
@@ -172,17 +171,17 @@
         <p>Not available in this prototype.</p>
 
         <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
-        {{ macros.previewPart('about-organisation') }}
+        {{ macros.previewPart('about-organisation', true) }}
 
         {% if not accrediting.selfAccrediting %}
           {% if data[accrediting.slug + '-about-accrediting-provider'] %}
             <h3 class="heading-small">About {{ accrediting.name }}</h3>
-            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider') }}
+            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
           {% endif %}
         {% endif %}
 
         <h3 class="heading-small">Training with a disability</h3>
-        {{ macros.previewPart('training-with-a-disability') }}
+        {{ macros.previewPart('training-with-a-disability', true) }}
 
         <h2 class="heading-medium" id="section-contact">Contact details</h2>
 
