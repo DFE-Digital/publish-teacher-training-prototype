@@ -14,7 +14,43 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <p>Exploration of a course page with fields to capture variants of a course and the differences between them. It’s unclear how courses vary between qualification, funding, subject and accrediting provider – use fields on a course page to allow providers to help candidates make an informed choice.</p>
+      <p>Exploration of a course page with fields to capture variants of a course and the differences between them.</p>
+      <p>Based on UCAS course descriptions it’s often unclear how courses vary between qualification, funding, subject and accrediting provider – use fields on a course page to prompt providers to indicate these differences, helping candidates make an informed choice.</p>
+
+      <h3 class="heading-medium remove-top-margin">Qualification variants</h3>
+
+      <p>Providers set up courses with the following qualifications in UCAS:</p>
+      <ul class="list list-bullet">
+        <li>QTS, Postgraduate, Professional: 4661 courses</li>
+        <li>QTS, Postgraduate: 3919 courses</li>
+        <li>QTS: 3098 courses</li>
+        <li>QTS, Professional: 95 courses</li>
+      </ul>
+
+      <p>Some providers have separate courses for their QTS and PGCE variants. We’ve seen examples of QTS only courses in UCAS that do actually offer a PGCE, the qualification isn’t set up correctly in UCAS. We don’t know the extent of this problem.</p>
+
+      <p>The opposite exists too, some use PGCE with QTS but highlight at interview or application stage that candidates can opt for the QTS only route if appropriate.</p>
+
+      <p>We cannot infer the variants available from the UCAS data.</p>
+
+      <h2 class="heading-medium">Salary variants</h2>
+
+      <p>Salaried courses have their own course and are defined by their route:</p>
+
+      <p>Routes:</p>
+
+      <ul class="list list-bullet">
+        <li>School Direct: 7033</li>
+        <li>School Direct (salaried): 1910</li>
+        <li>SCITT: 1603</li>
+        <li>Higher Education: 1235</li>
+      </ul>
+
+      <h2 class="heading-medium">Schools</h2>
+
+      <p>Schools (campus/location in UCAS) will be imported with the course and associated with the training provider.<p>
+
+      <p>We may want each school to have its own information: description, address and type. When a candidate can express a preference for a school, this information can be shown on the course page to aid their decision making.</p>
     </div>
   </div>
 
@@ -28,34 +64,7 @@
   {{ macros.screenshotContents(contents) }}
 
   {{ macros.screenshot('Course', 'course', '/public/images/history/course-with-variants/thumbnails/01-course.png', '/public/images/history/course-with-variants/01-course.png', '
-    <h3 class="heading-medium remove-top-margin">Qualification variants</h3>
-
-    <p>Providers set up courses with the following qualifications in UCAS:</p>
-    <ul class="list list-bullet">
-      <li>QTS, Postgraduate, Professional: 4661 courses</li>
-      <li>QTS, Postgraduate: 3919 courses</li>
-      <li>QTS: 3098 courses</li>
-      <li>QTS, Professional: 95 courses</li>
-    </ul>
-
-    <p>Some providers have separate courses for their QTS and PGCE variants. Some use only QTS – apparently by mistake, others use only PGCE with QTS but highlight at interview or application stage that candidates can opt for the QTS only route if appropriate. We cannot infer the variants available from the UCAS data.</p>
-
-    <h3 class="heading-medium">Salary variants</h3>
-
-    <p>Salaried courses appear to always have their own course and are defined by the route:</p>
-
-    <ul class="list list-bullet">
-      <li>School Direct: 7033</li>
-      <li>School Direct (salaried): 1910</li>
-      <li>SCITT: 1603</li>
-      <li>Higher Education: 1235</li>
-    </ul>
-
     <p>When a salary variant is available, include the "Salary options" field. Use these fields to explain how this variant is different – eg more time in school, limited places, more experience needed.</p>
-
-    <h3 class="heading-medium">Schools</h3>
-
-    <p>Schools (campus/location in UCAS) will be imported with the course and associated with the training provider. Each school should have its own information: description, address and type. When a candidate can express a preference for a school, this information can be shown on the course page.</p>
   ') }}
 
   {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/course-with-variants/thumbnails/02-about-this-course.png', '/public/images/history/course-with-variants/02-about-this-course.png', '
