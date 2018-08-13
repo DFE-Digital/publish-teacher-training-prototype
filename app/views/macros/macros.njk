@@ -23,6 +23,14 @@
 </div>
 {% endmacro %}
 
+{% macro formatting() %}
+<div class="add-double-bottom-margin status-box">
+  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <p>You can use paragraphs, lists and links in your content.</p>
+  <a href="#">Formatting help</a>
+</div>
+{% endmacro %}
+
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false) %}
 <div class="add-double-bottom-margin status-box">
   {% if publishedBefore or state == 'published' %}
