@@ -18,6 +18,10 @@ router.post('/about-your-organisation', function (req, res) {
   res.render('about-your-organisation', { showMessage: true })
 })
 
+router.get('/preview/about-your-organisation', function (req, res) {
+  res.render('preview-organisation-information')
+})
+
 // router.post('/template/new', function (req, res) {
 //   var name = req.body['template-name'];
 //   var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
