@@ -14,6 +14,41 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
+      <p>From user research we’ve found that users need to format their text using paragraphs, lists and links.</p>
+
+      <p>Most users have naturally formatted their content into paragraphs without further guidance. They assume that paragraphs will just work.</p>
+
+      <p>Users asked about lists, and looked for guidance. Without guidance users have tried to guess how lists would format, using dashes, asterisks and copied bullet points to create them.</p>
+
+      <p>Users have requested links so they can point to existing text on their or their accrediting provider’s website. eg For information about disabled access. They have not guessed how to input links.</p>
+
+      <h2 class="heading-large">Pasting URLs</h2>
+
+      <p>We could allow users to paste URLs into the textarea. If the URL is valid then it can become clickable.</p>
+
+      <p>Something like this:<br /><a href="https://manage-courses-prototype.herokuapp.com/history/formatting">https://manage-courses-prototype.herokuapp.com/history/formatting</a></p>
+
+      <p>The problem with these sorts of links is that they aren’t accessible. They don’t have any useful labels to indicate what the link is for. The URL is often long and hard to read.</p>
+
+      <h2 class="heading-large">Markdown</h2>
+
+      <p>We could use markdown. An off-the-shelf library could render our markdown. <a href="https://github.com/DFE-Digital/search-and-compare-ui/blob/6c14c801c0b89e3f96effe9f25d5f66a5832e5fe/src/Utils/MarkdownFormatter.cs">A parser exists in search-and-compare-ui</a>.</p>
+
+      <p>Markdown works with dashes and asterisks for lists which matches our user’s expectations.</p>
+
+      <p>Links in markdown can be confusing. It’s hard to remember which way around the brackets go, is it: []() or ()[] – it’s the first one.</p>
+
+      <p>Preview would need to render markdown.</p>
+
+      <p>Markdown would let us add more complex features easily in the future.</p>
+
+      <p>We need to test the link syntax with users to see how easy it is to use. We might need to provide tools to make it more easy to add links in the future.</p>
+
+      <h2 class="heading-large">HTML</h2>
+
+      <p>We could allow users to use raw HTML: &#x3C;a href=&#x22;/blah&#x22;&#x3E;Link&#x3C;/a&#x3E;. This is prone to more user error than markdown.</p>
+
+      <p>It is the undocumented approach used by users on the existing UCAS system.</p>
 
     </div>
   </div>
