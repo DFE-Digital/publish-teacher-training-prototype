@@ -198,6 +198,11 @@
     }
 
     // Bind focus/blur events for polling
+
+    $(countElementExtended.countElement).blur(function() {
+      CharCount.prototype.updateCountMessage(countElementExtended);
+    });
+
     countElementExtended.countElement.addEventListener('focus', CharCount.prototype.handleFocus.bind(countElementExtended))
     countElementExtended.countElement.addEventListener('blur', CharCount.prototype.handleBlur.bind(countElementExtended))
   }

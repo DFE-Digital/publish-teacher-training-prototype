@@ -1,0 +1,46 @@
+.editor-toolbar {
+  border: 2px solid $black;
+  border-radius: 0;
+  opacity: 1 !important;
+}
+
+.CodeMirror {
+  border: 2px solid $black;
+  border-top: none;
+  border-radius: 0;
+}
+
+.cm-link,
+.cm-url {
+  color: $link-colour !important;
+}
+
+
+.fa-arrows-alt,
+.fa-question-circle,
+.fa-columns  {
+  display: none !important;
+}
+
+i.separator {
+  display: none !important;
+}
+
+.fa-link + i.separator {
+  display: inline !important;
+  border-left-color: $border-colour;
+}
+
+.editor-statusbar {
+  display: none;
+}
+
+.editor-preview-active {
+  background: $grey-4;
+}
+
+.markdown ul,
+.editor-preview-active ul {
+  @extend .list;
+  @extend .list-bullet;
+}
