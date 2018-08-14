@@ -188,6 +188,15 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       return marked(text);
     })
 
+    nunjucksEnv.addGlobal('courseOptions', function() {
+      var o = [];
+      req.session.data['ucasCourses'].forEach(function(course) {
+        o.push(`<option value="">${course.name} (${course.programmeCode})</option>`);
+      });
+
+      return o;
+    })
+
     nunjucksEnv.addGlobal('error', function (id, errors) {
       var data = req.session.data;
       var courseCode = id.split('-')[0];
