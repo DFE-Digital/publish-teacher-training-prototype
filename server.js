@@ -15,6 +15,7 @@ var config = require('./app/config.js')
 var utils = require('./lib/utils.js')
 var packageJson = require('./package.json')
 var dateFormat = require('dateformat')
+var marked = require('marked')
 
 // Grab environment variables specified in Procfile or as Heroku config vars
 var releaseVersion = packageJson.version
@@ -172,6 +173,19 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       }
 
       return value;
+    })
+
+    nunjucksEnv.addGlobal('markdown', function(name) {
+      if (req.session.data === undefined) {
+        return ''
+      }
+
+      var text = req.session.data[name]
+      if (text === undefined) {
+        return ''
+      }
+
+      return marked(text);
     })
 
     nunjucksEnv.addGlobal('error', function (id, errors) {
