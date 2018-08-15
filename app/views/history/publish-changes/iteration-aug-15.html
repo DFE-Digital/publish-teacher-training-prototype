@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% set title = 'Publishing workflow – iteration 15 August' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>An iteration on <a href="/history/publish-changes">the original</a> that highlights the ‘unpublished changes’ aspect of the publish sidebar.</p>
+      <p>It needs to be more obvious when there’s something that needs publishing.</p>
+    </div>
+  </div>
+
+  <h2 class="heading-large" id="about-your-organisation-heading">About your organisation</h2>
+
+  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">
+        New
+      </h2>
+      <p>Fields are empty</p>
+      {{ macros.aboutYourOrgPublish('new') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">First draft</h2>
+      <p>Edits have been made</p>
+      {{ macros.aboutYourOrgPublish('draft') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Published</h2>
+      <p>No subsequent edits made</p>
+      {{ macros.aboutYourOrgPublish('published') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Second draft</h2>
+      <p>Edits made after publishing</p>
+      {{ macros.aboutYourOrgPublish('draft', true) }}
+    </div>
+  </div>
+
+  <h2 class="heading-large" id="course-heading">Course</h2>
+
+  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">
+        New
+      </h2>
+      <p>Fields are empty</p>
+      {{ macros.coursePublish('new') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">First draft</h2>
+      <p>Edits have been made</p>
+      {{ macros.coursePublish('draft') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Published</h2>
+      <p>No subsequent edits made</p>
+      {{ macros.coursePublish('published') }}
+    </div>
+
+    <div class="column-one-quarter">
+      <h2 class="heading-medium">Second draft</h2>
+      <p>Edits made after publishing</p>
+      {{ macros.coursePublish('draft', true) }}
+    </div>
+  </div>
+</main>
+{% endblock %}

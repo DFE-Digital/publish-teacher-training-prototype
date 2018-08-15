@@ -31,12 +31,9 @@
   {% if showMessage %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
       <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
-        Changes saved
+        Your changes have been saved
       </h3>
-      <p>Preview your course to check for mistakes before publishing.</p>
-      <p>
-        <a href="{{ previewLink }}">Preview course</a>
-      </p>
+      <p><a href="{{ previewLink }}">Preview your course</a> to check for mistakes before publishing.</p>
     </div>
   {% endif %}
 
@@ -65,31 +62,36 @@
     </div>
   {% endif %}
 
-  <dl class="aligned add-top-margin add-double-bottom-margin">
-    <dt>Status:</dt>
-    <dd>Running</dd>
-    <dt>Training provider code:</dt>
-    <dd>{{ course.providerCode }}</dd>
-    <dt>Training programme code:</dt>
-    <dd>{{ course.programmeCode }}</dd>
-    <dt>Accrediting provider:</dt>
-    <dd>{{ course.accrediting }}</dd>
-    <dt>Route:</dt>
-    <dd>{{ course.route }}</dd>
-    <dt>Subjects:</dt>
-    <dd>{{ course.subjects }}</dd>
-    <!-- <dt>Age range:</dt>
-    <dd>{{ course.ageRange }}</dd> -->
-    <dt>Qualification:</dt>
-    <dd>{{ course.qualifications }}</dd>
-    <dt>Regions:</dt>
-    <dd>{{ course.regions }}</dd>
-  </dl>
+
 
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Information from UCAS</h3>
+            <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
+            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
+              <dt>Status:</dt>
+              <dd>Running</dd>
+              <dt>Training provider code:</dt>
+              <dd>{{ course.providerCode }}</dd>
+              <dt>Training programme code:</dt>
+              <dd>{{ course.programmeCode }}</dd>
+              <dt>Accrediting provider:</dt>
+              <dd>{{ course.accrediting }}</dd>
+              <dt>Route:</dt>
+              <dd>{{ course.route }}</dd>
+              <dt>Subjects:</dt>
+              <dd>{{ course.subjects }}</dd>
+              <!-- <dt>Age range:</dt>
+              <dd>{{ course.ageRange }}</dd> -->
+              <dt>Qualification:</dt>
+              <dd>{{ course.qualifications }}</dd>
+              <dt>Regions:</dt>
+              <dd>{{ course.regions }}</dd>
+            </dl>
+          </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">About this course</h3>
 
