@@ -37,6 +37,15 @@ i.separator {
 
 .editor-preview-active {
   background: $grey-4;
+
+  &:before {
+    content: 'Content preview';
+    background-color: $grey-1;
+    color: $white;
+    display: block;
+    margin: -10px -10px 10px;
+    padding: 10px;
+  }
 }
 
 .markdown ul,
