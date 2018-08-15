@@ -31,7 +31,7 @@
 </div>
 {% endmacro %}
 
-{% macro aboutYourOrgPublish(state = 'new', publishedBefore = false) %}
+{% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
     <div class="unpublished-changes">
@@ -59,7 +59,7 @@
     <h3 class="heading-medium remove-top-margin">Publish</h3>
     <p>New information will show on all {{ value('training-provider-name') }} courses.</p>
     <p>
-      <a href="#" class="button">Publish</a>
+      <a href="{{ publishLink }}" class="button">Publish</a>
     </p>
     <hr />
   {% endif %}

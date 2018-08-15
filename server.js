@@ -192,6 +192,10 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       var data = req.session.data;
       var courseCode = id.split('-')[0];
 
+      if (courseCode == 'about' || courseCode == 'training') {
+        courseCode = 'about-your-organisation';
+      }
+
       if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
         return false
       }

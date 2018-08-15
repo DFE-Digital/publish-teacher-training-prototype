@@ -14,12 +14,31 @@ router.post('/request-access', function (req, res) {
   res.render('request-access', { showMessage: true })
 })
 
+router.get('/about-your-organisation', function (req, res) {
+  var errors = validateOrg(req.session.data);
+  res.render('about-your-organisation', { errors: errors, justPublished: (req.query.publish && errors.length == 0) })
+})
+
 router.post('/about-your-organisation', function (req, res) {
-  res.render('about-your-organisation', { showMessage: true })
+  req.session.data['about-your-organisation-publish-state'] = 'draft';
+  res.render('about-your-organisation', { showMessage: true, publishState : 'draft' })
 })
 
 router.get('/preview/about-your-organisation', function (req, res) {
   res.render('preview-organisation-information')
+})
+
+router.get('/publish/about-your-organisation', function (req, res) {
+  var errors = validateOrg(req.session.data);
+
+  if (errors.length > 0) {
+    req.session.data['about-your-organisation-show-publish-errors'] = errors.length > 0;
+  } else {
+    req.session.data['about-your-organisation-publish-state'] = 'published';
+    req.session.data['about-your-organisation-published-before'] = true;
+  }
+
+  res.redirect('/about-your-organisation?publish=true');
 })
 
 // router.post('/template/new', function (req, res) {
@@ -295,6 +314,30 @@ function validate(data, course, view) {
         page: 'fees-and-length'
       })
     }
+  }
+
+  return errors;
+}
+
+function validateOrg(data) {
+  var errors = [];
+
+  if (!data['about-organisation']) {
+    errors.push({
+      title: 'Give details about your organisation',
+      id: `about-organisation`,
+      link: `/about-your-organisation#about-organisation`,
+      page: 'about-your-organisation'
+    })
+  }
+
+  if (!data['training-with-a-disability']) {
+    errors.push({
+      title: 'Give details about training with a disability',
+      id: `training-with-a-disability`,
+      link: `/about-your-organisation#training-with-a-disability`,
+      page: 'about-your-organisation'
+    })
   }
 
   return errors;

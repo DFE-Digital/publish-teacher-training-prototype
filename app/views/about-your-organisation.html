@@ -7,6 +7,8 @@
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
+  {{ macros.orgHeading('About your organisation', message) }}
+
   {% set message %}
     {% if showMessage %}
       <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
@@ -17,7 +19,29 @@
     {% endif %}
   {% endset %}
 
-  {{ macros.orgHeading('About your organisation', message) }}
+  {% if data['about-your-organisation-show-publish-errors'] and errors.length > 0 %}
+  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+      We couldn’t publish this because some information was missing
+    </h3>
+    <p>
+      Fix the following problems and try publishing again:
+    </p>
+    <ul class="error-summary-list">
+      {% for error in errors %}
+      <li><a href="{{ error.link }}">{{ error.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if justPublished %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      Your changes have been published
+    </h3>
+  </div>
+  {% endif %}
 
   <h2 class="heading-large">
     {{ title }}
@@ -34,10 +58,11 @@
           <li>don’t say “our students are some of the happiest in the country”</li>
           <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
         </ul>
-        {{ macros.textarea('about-organisation', 'Training with you', 14, '', 250) }}
+        {{ macros.textarea('about-organisation', 'Training with you', 14, '', 250, errors) }}
       </div>
       <div class="column-one-third">
-        {{ macros.aboutYourOrgPublish('new') }}
+        {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
+        {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
       </div>
     </div>
 
@@ -68,7 +93,7 @@
         <h3 class="heading-large remove-top-margin">Training with a disability</h3>
         <p>Here you should summarise the accessibility of your course. Bear in mind the range of disabilities that applicants may have (eg dyslexia, or physical, hearing and visual impairments). If accessibility varies between schools or other sites, give details. You could also offer examples of how you’ve accommodated candidates with particular accessibility needs.</p>
 
-        {{ macros.textarea('training-with-a-disability', 'Training with a disability', 14, '', 250) }}
+        {{ macros.textarea('training-with-a-disability', 'Training with a disability', 14, '', 250, errors) }}
       </div>
     </div>
 
