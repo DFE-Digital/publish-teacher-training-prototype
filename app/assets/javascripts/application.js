@@ -21,6 +21,11 @@ $(document).ready(function () {
 
       var simplemde = new SimpleMDE({
         element: $(this).get(0),
+        autosave: {
+          enabled: true,
+          delay: 1000,
+          uniqueId: $textarea.attr('id')
+        },
         hideIcons: [
           'bold',
           'italic',
