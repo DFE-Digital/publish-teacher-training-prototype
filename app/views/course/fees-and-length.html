@@ -14,9 +14,9 @@
 
   {% include "course/_errors.html" %}
 
-  <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
-    <div class="grid-row">
-      <div class="column-two-thirds">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
         <h2 class="heading-large remove-top-margin">Course length</h2>
         {% set fields = [
             {
@@ -32,14 +32,7 @@
         %}
 
         {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
-      </div>
-      <div class="column-one-third">
-        {{ macros.formatting() }}
-      </div>
-    </div>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
         {% if course.salaried %}
           <h2 class="heading-large">Salary</h2>
 
@@ -69,25 +62,24 @@
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
         {% endif %}
-      </div>
-    </div>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <h2 class="heading-large">Financial support you offer</h2>
         <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
         <p>You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
 
         {{ macros.textarea(course.programmeCode + '-financial-support', 'Financial support you offer (optional)', 10, null, 250) }}
-      </div>
-    </div>
 
-    <div class="add-top-margin add-double-bottom-margin">
-      <input type="submit" class="button" value="Save" />
-    </div>
+        <div class="add-top-margin add-double-bottom-margin">
+          <input type="submit" class="button" value="Save" />
+        </div>
 
-    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
-  </form>
+        <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
+      </form>
+    </div>
+    <div class="column-one-third">
+      {{ macros.copyContent() }}
+    </div>
+  </div>
 </main>
 
 {% endblock %}

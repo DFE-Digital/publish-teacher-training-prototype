@@ -14,6 +14,10 @@ $path: "/public/images/";
 @import 'patterns/success-summary';
 @import 'patterns/character-counts';
 
+.multiple-choice [type=checkbox] + label::before {
+  background: #fff;
+}
+
 .not-running-notice {
   border: 5px solid $govuk-blue;
   padding: 20px;
@@ -301,4 +305,28 @@ dl.aligned.course-part-tasks dd {
 
 .preview-pre {
   white-space: pre-wrap;
+}
+
+.textarea-wrapper {
+  position: relative;
+
+  .custom-toolbar {
+    text-align: right;
+    width: 320px;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 2;
+
+    label {
+      @include core-16;
+      display: inline;
+      margin-right: 5px;
+    }
+
+    select {
+      @include core-16;
+      width: 220px;
+    }
+  }
 }
