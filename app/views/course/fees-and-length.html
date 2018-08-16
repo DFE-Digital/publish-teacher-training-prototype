@@ -32,14 +32,7 @@
         %}
 
         {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
-      </div>
-      <div class="column-one-third">
-        {{ macros.formatting() }}
-      </div>
-    </div>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
         {% if course.salaried %}
           <h2 class="heading-large">Salary</h2>
 
@@ -69,6 +62,44 @@
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
         {% endif %}
+      </div>
+      <div class="column-one-third">
+        <div class="status-box">
+          <form>
+            <h3 class="heading-medium remove-top-margin">Copy content from another course</h3>
+
+            <p>Filling in these fields from another course will overwrite existing text.</p>
+
+            <label class="form-label form-label-bold" for="copy-from">Copy from</label>
+            <select id="copy-from" name="copy-from" class="form-control add-bottom-margin" style="width: 100%; background: #fff">
+              {{ courseOptions() | safe }}
+            </select>
+
+            <h4 class="heading-small">Copy which fields?</h4>
+            {% set fields = [
+                {
+                  name: 'Course length'
+                },
+                {
+                  name: 'Salary'
+                },
+                {
+                  name: 'Financial support you offer'
+                }
+              ]
+            %}
+
+            {{ macros.checkboxGroup(course.programmeCode + '-duration', fields, errors) }}
+
+            <input type="submit" class="button" value="Copy content" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+
       </div>
     </div>
 

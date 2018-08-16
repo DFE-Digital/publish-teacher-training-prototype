@@ -14,6 +14,10 @@ $path: "/public/images/";
 @import 'patterns/success-summary';
 @import 'patterns/character-counts';
 
+.multiple-choice [type=checkbox] + label::before {
+  background: #fff;
+}
+
 .not-running-notice {
   border: 5px solid $govuk-blue;
   padding: 20px;

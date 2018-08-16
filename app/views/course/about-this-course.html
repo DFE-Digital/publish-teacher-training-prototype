@@ -34,7 +34,36 @@
         {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400, errors) }}
       </div>
       <div class="column-one-third">
-        {{ macros.formatting() }}
+        <div class="status-box">
+          <form>
+            <h3 class="heading-medium remove-top-margin">Copy content from another course</h3>
+
+            <p>Filling in these fields from another course will overwrite existing text.</p>
+
+            <label class="form-label form-label-bold" for="copy-from">Copy from</label>
+            <select id="copy-from" name="copy-from" class="form-control add-bottom-margin" style="width: 100%; background: #fff">
+              {{ courseOptions() | safe }}
+            </select>
+
+            <h4 class="heading-small">Copy which fields?</h4>
+            {% set fields = [
+                {
+                  name: 'About this course'
+                },
+                {
+                  name: 'Interview process'
+                },
+                {
+                  name: 'How school placements work'
+                }
+              ]
+            %}
+
+            {{ macros.checkboxGroup(course.programmeCode + '-duration', fields, errors) }}
+
+            <input type="submit" class="button" value="Copy content" />
+          </form>
+        </div>
       </div>
     </div>
 

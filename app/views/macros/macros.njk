@@ -266,14 +266,6 @@
     <span class="form-hint">{{helpText}}</span>
   {% endif %}
   <div class="textarea-wrapper">
-    <div class="custom-toolbar">
-      {# <a href="#">Copy from another course</a> #}
-      {# <label class="form-label">Copy from:</label> #}
-      <select name="" class="form-control">
-        <option value="">Copy from another course</option>
-        {{ courseOptions() | safe }}
-      </select>
-    </div>
     <textarea class="form-control form-control-full js-char-count" rows="{{ rows }}" name="{{ id }}" id="{{ id }}" data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
   </div>
 </div>
