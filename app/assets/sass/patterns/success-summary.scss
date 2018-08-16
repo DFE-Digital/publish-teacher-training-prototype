@@ -24,3 +24,10 @@ $success-green: $button-colour;
     @extend .error-summary-heading;
   }
 }
+
+.error-summary-small,
+.success-summary-small {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0 0 0 5px;
+}

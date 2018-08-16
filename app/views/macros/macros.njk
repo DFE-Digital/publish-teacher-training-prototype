@@ -31,6 +31,42 @@
 </div>
 {% endmacro %}
 
+{% macro copyContent() %}
+<form data-module="copy-content">
+  <div class="status-box">
+    <h3 class="heading-medium remove-top-margin">
+      <span class="js-cant-copy" style="display: none">Use this content again</span>
+      <span class="js-can-copy" style="display: none">Use content from another course</span>
+    </h3>
+
+    <div class="success-summary success-summary-small js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none;">
+      <h3 class="heading-small success-summary-heading add-bottom-margin remove-top-margin" id="success-summary-heading-example-1">
+        Fields copied:
+      </h3>
+      <div class="js-what-copied"></div>
+    </div>
+    <div class="error-summary error-summary-small js-error-copy" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="display: none">
+      <h3 class="heading-small error-summary-heading" id="error-summary-heading-example-1">
+        There was no content to copy.
+      </h3>
+    </div>
+
+    <div class="js-can-copy" style="display: none">
+      <p>Fill in this page with content from another course.</p>
+
+      <label class="form-label form-label-bold" for="copy-from">Copy from</label>
+      <select id="copy-from" name="copy-from" class="form-control add-double-bottom-margin" style="width: 100%; background: #fff">
+        {{ courseOptions() | safe }}
+      </select>
+      <input type="submit" class="button" value="Copy content" />
+    </div>
+    <div class="js-cant-copy" style="display: none">
+      <p>When you’ve added content to this page, you can copy it to other courses</p>
+    </div>
+  </div>
+</form>
+{% endmacro %}
+
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
@@ -266,7 +302,12 @@
     <span class="form-hint">{{helpText}}</span>
   {% endif %}
   <div class="textarea-wrapper">
-    <textarea class="form-control form-control-full js-char-count" rows="{{ rows }}" name="{{ id }}" id="{{ id }}" data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
+    <textarea
+      class="form-control form-control-full js-char-count"
+      rows="{{ rows }}"
+      name="{{ id }}"
+      id="{{ id }}"
+      data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
   </div>
 </div>
 {% endmacro %}

@@ -14,9 +14,9 @@
 
   {% include "course/_errors.html" %}
 
-  <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
-    <div class="grid-row">
-      <div class="column-two-thirds">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
         <p>Give applicants a short description of the course.</p>
 
         <p>You could include:</p>
@@ -32,45 +32,9 @@
         <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
 
         {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400, errors) }}
-      </div>
-      <div class="column-one-third">
-        <div class="status-box">
-          <form>
-            <h3 class="heading-medium remove-top-margin">Copy content from another course</h3>
 
-            <p>Filling in these fields from another course will overwrite existing text.</p>
+        <hr />
 
-            <label class="form-label form-label-bold" for="copy-from">Copy from</label>
-            <select id="copy-from" name="copy-from" class="form-control add-bottom-margin" style="width: 100%; background: #fff">
-              {{ courseOptions() | safe }}
-            </select>
-
-            <h4 class="heading-small">Copy which fields?</h4>
-            {% set fields = [
-                {
-                  name: 'About this course'
-                },
-                {
-                  name: 'Interview process'
-                },
-                {
-                  name: 'How school placements work'
-                }
-              ]
-            %}
-
-            {{ macros.checkboxGroup(course.programmeCode + '-duration', fields, errors) }}
-
-            <input type="submit" class="button" value="Copy content" />
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Interview process</h3>
 
         <p>Give applicants a summary of the interview process.</p>
@@ -83,13 +47,9 @@
         </ul>
 
         {{ macros.textarea(course.programmeCode + '-interview-process', 'Interview process (optional)', 10, '', 250) }}
-      </div>
-    </div>
 
-    <hr />
+        <hr />
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">How school placements work</h3>
 
         <p>Tell applicants more about the schools they’ll be teaching in.</p>
@@ -105,15 +65,18 @@
         </ul>
 
         {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 250, errors) }}
-      </div>
-    </div>
 
-    <div class="add-double-bottom-margin">
-      <input type="submit" class="button" value="Save" />
-    </div>
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="button" value="Save" />
+        </div>
 
-    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
-  </form>
+        <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
+      </form>
+    </div>
+    <div class="column-one-third">
+      {{ macros.copyContent() }}
+    </div>
+  </div>
 </main>
 
 {% endblock %}
