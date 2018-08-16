@@ -40,7 +40,10 @@
 
           if (newValue) {
             field.val(newValue);
-            copied.push(field.parents('.form-group').find('label').text())
+            copied.push(field.parents('.form-group').find('label').text());
+
+            var $codemirror = field.nextAll('.CodeMirror')[0].CodeMirror;
+            $codemirror.getDoc().setValue(newValue);
           }
         });
 
