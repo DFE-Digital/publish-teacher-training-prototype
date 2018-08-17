@@ -1,6 +1,6 @@
 
 {% extends "layout.html" %}
-{% set title = 'Better than copy paste' %}
+{% set title = 'Copy content from another course' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -15,7 +15,8 @@
   {% set contents = [
     { text: 'Use this content again', id: 'use-this-content-again' },
     { text: 'Use content from another course', id: 'use-content-from-another-course' },
-    { text: 'Content copied from another course', id: 'content-copied-from-another-course' }
+    { text: 'Content copied from another course', id: 'content-copied-from-another-course' },
+    { text: 'Nothing copied from another course', id: 'nothing-copied-from-another-course' }
   ] %}
   {{ macros.screenshotContents(contents) }}
 
@@ -25,5 +26,6 @@
 
   {{ macros.screenshot('Content copied from another course', 'content-copied-from-another-course', '/public/images/history/better-than-copy-paste/thumbnails/01-content-copied-from-another-course.png', '/public/images/history/better-than-copy-paste/01-content-copied-from-another-course.png', '') }}
 
+  {{ macros.screenshot('Nothing copied from another course', 'nothing-copied-from-another-course', '/public/images/history/better-than-copy-paste/thumbnails/01-nothing-copied-from-another-course.png', '/public/images/history/better-than-copy-paste/01-nothing-copied-from-another-course.png', '') }}
 </main>
 {% endblock %}
