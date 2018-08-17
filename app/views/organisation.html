@@ -48,13 +48,13 @@
                     {% endif %} --></td>
                 <td>
                   {% if loop.index == 2 %}
-                    Published 1 June 2018
+                    <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
                   {% elseif loop.index == 7 %}
-                    Unpublished changes
+                    <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
                   {% elseif loop.index == 4 %}
-                    Unpublished changes
+                    <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
                   {% else %}
-                    No content
+                    <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
                   {% endif %}
                 </td>
               </tr>

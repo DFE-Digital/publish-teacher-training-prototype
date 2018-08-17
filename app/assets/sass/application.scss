@@ -43,6 +43,27 @@ table thead th {
   }
 }
 
+.phase-tag-small {
+  @include bold-16;
+  letter-spacing: 0;
+}
+
+.phase-tag-no-content {
+  background: $white;
+  color: $grey-1;
+  border: 2px solid $grey-2;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+// .phase-tag-draft {
+//   background: $pink;
+// }
+
+.phase-tag-published {
+  background: $button-colour;
+}
+
 .empty {
   color: $grey-1;
 }
