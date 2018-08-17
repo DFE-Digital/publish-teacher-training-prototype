@@ -190,9 +190,9 @@ table thead th {
 }
 
 .tabs {
+  background: $grey-4;
   padding-left: 0;
-  border-bottom: 1px solid $border-colour;
-  font-size: 19px;
+  @include bold-19;
   margin-bottom: $gutter;
 
   li {
@@ -202,18 +202,21 @@ table thead th {
 
   a {
     display: block;
-    padding: 15px 20px;
+    padding: 15px 20px 10px;
+    text-decoration: none;
+    border-bottom: 5px solid $grey-4;
+
+    &:visited {
+      color: $link-colour;
+    }
+
+    &:focus {
+      border-color: $focus-colour;
+    }
   }
 
   .active a {
-    border: 1px solid $border-colour;
-    border-bottom-color: #fff;
-    text-decoration: none;
-
-    &:link,
-    &:visited {
-      color: $text-colour;
-    }
+    border-bottom-color: $govuk-blue;
   }
 }
 
@@ -257,33 +260,6 @@ dl.aligned dd {
 
 dl.aligned.course-part-tasks dd {
   width: 60%;
-}
-
-.tabs {
-  padding-left: 0;
-  border-bottom: 1px solid $border-colour;
-  font-size: 19px;
-
-  li {
-    margin-bottom: -1px;
-    display: inline-block;
-  }
-
-  a {
-    display: block;
-    padding: 15px 20px;
-  }
-
-  .active a {
-    border: 1px solid $border-colour;
-    border-bottom-color: #fff;
-    text-decoration: none;
-
-    &:link,
-    &:visited {
-      color: $text-colour;
-    }
-  }
 }
 
 .study-options-table-code {
