@@ -55,9 +55,12 @@ table thead th {
 
     p {
       margin-bottom: 0;
-      @include bold-19;
     }
   }
+}
+
+.who-saved {
+  @include core-16;
 }
 
 // Related items
