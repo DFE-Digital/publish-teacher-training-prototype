@@ -1,0 +1,29 @@
+
+{% extends "layout.html" %}
+{% set title = 'Better than copy paste' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {% set contents = [
+    { text: 'Use this content again', id: 'use-this-content-again' },
+    { text: 'Use content from another course', id: 'use-content-from-another-course' },
+    { text: 'Content copied from another course', id: 'content-copied-from-another-course' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Use this content again', 'use-this-content-again', '/public/images/history/better-than-copy-paste/thumbnails/01-use-this-content-again.png', '/public/images/history/better-than-copy-paste/01-use-this-content-again.png', '') }}
+
+  {{ macros.screenshot('Use content from another course', 'use-content-from-another-course', '/public/images/history/better-than-copy-paste/thumbnails/01-use-content-from-another-course.png', '/public/images/history/better-than-copy-paste/01-use-content-from-another-course.png', '') }}
+
+  {{ macros.screenshot('Content copied from another course', 'content-copied-from-another-course', '/public/images/history/better-than-copy-paste/thumbnails/01-content-copied-from-another-course.png', '/public/images/history/better-than-copy-paste/01-content-copied-from-another-course.png', '') }}
+
+</main>
+{% endblock %}
