@@ -222,8 +222,14 @@
   </div>
 {% endmacro %}
 
-{% macro checkboxGroup(name, fields) %}
-<div class="form-group">
+{% macro checkboxGroup(name, fields, errors = false) %}
+{% set e = error(name, errors) %}
+<div class="form-group {% if e %} form-group-error{% endif %}">
+  {% if e %}
+    <span class="error-message">
+      {{ e.title }}
+    </span>
+  {% endif %}
   {% for field in fields %}
     <div class="multiple-choice" data-target="checkbox-part-{{ loop.index }}-extra">
       <input

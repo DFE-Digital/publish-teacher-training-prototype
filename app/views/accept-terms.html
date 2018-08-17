@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% set title = 'Before you begin' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs"></div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-xlarge">
+        {{ title }}
+      </h1>
+
+      <p>We need you to read and agree to our terms and conditions.</p>
+
+      <p>In summary:</p>
+      <ul class="list list-bullet">
+        <li>something</li>
+        <li>something else</li>
+      </ul>
+
+      <p>
+        Read our <a href="#">full terms and conditions</a>.
+      </p>
+
+      <hr />
+      <form action="#" method="post">
+        <fieldset>
+          <legend></legend>
+        </fieldset>
+        <fieldset>
+          {% set fields = [
+              {
+                name: 'I agree to the terms and conditions'
+              }
+            ]
+          %}
+
+          {{ macros.checkboxGroup('terms-and-conditions', fields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
+
+          <input type="submit" class="button" value="Continue">
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
