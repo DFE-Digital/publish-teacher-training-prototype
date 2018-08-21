@@ -201,9 +201,41 @@
           </dd>
         </dl>
 
-        <h2 class="heading-medium" id="section-apply">Apply</h2>
+        <h2 class="heading-medium" id="section-apply">
+          Apply
+        </h2>
+        <p>
+          <a href="https://2018.teachertraining.apply.ucas.com/apply/student/login.do">Apply on the UCAS website</a>. You’ll need to register with UCAS before you can apply.
+        </p>
+        <p>
+          You’ll need these codes for the Choices section of the application form:
+        </p>
+        <ul class="list list-bullet">
+          <li>training provider code: {{ course.providerCode }}</li>
+          <li>training programme code: {{ course.programmeCode }}</li>
+        </ul>
 
-        <a href="#" class="button">Apply</a>
+        <p>You’ll also need to choose a training location and give the relevant training location code.</p>
+
+        <p>Available training locations:</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 30%">Name</th>
+              <th style="width: 60%">Address</th>
+              <th>Code</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for school in course.schools %}
+            <tr>
+              <td>{{ school.name }}</td>
+              <td>{{ school.address }}</td>
+              <td>{{ school.code }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
