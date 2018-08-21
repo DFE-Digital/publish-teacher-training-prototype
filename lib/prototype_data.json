@@ -1,8 +1,8 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Bracknell Forest Partnership",
-  "provider-code-name": "A2738",
-  "provider-code": "2FZ",
+  "training-provider-name": "Bromley Schools Collegiate",
+  "provider-code-name": "BROM",
+  "provider-code": "B91",
   "address-line-1": "123 Baker Street",
   "town": "London",
   "postcode": "SW1 1AA",
@@ -14,131 +14,21 @@
   ],
   "ucasCourses": [
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Art / art & design, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Art & Design",
-      "slug": "art-design",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36W2",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Biology, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Biology",
-      "slug": "biology",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36W4",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Biology, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Biology",
-      "slug": "biology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36W6",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
-      "slug": "chemistry",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WB",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
-      "slug": "chemistry",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36W9",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Computer studies, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Computing",
-      "slug": "computing",
-      "route": "School Direct training programme",
+      "name": "Computer Science",
+      "slug": "computer-science",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WG",
+      "providerCode": "B91",
+      "programmeCode": "IX99",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -146,65 +36,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Design and technology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Design and Technology",
-      "slug": "design-and-technology",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WL",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Design and technology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Design and Technology",
-      "slug": "design-and-technology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WK",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Drama and theatre studies, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Drama",
       "slug": "drama",
-      "route": "School Direct training programme",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WM",
+      "providerCode": "B91",
+      "programmeCode": "2YDF",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -212,43 +58,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "English, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "English",
       "slug": "english",
-      "route": "School Direct training programme (salaried)",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WQ",
+      "providerCode": "B91",
+      "programmeCode": "Q3X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "English, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "English",
-      "slug": "english",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WP",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -256,21 +80,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Geography, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Geography",
       "slug": "geography",
-      "route": "School Direct training programme",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WR",
+      "providerCode": "B91",
+      "programmeCode": "2YDH",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -278,21 +102,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "History, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "History",
       "slug": "history",
-      "route": "School Direct training programme",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WT",
+      "providerCode": "B91",
+      "programmeCode": "V1X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -300,43 +124,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Mathematics, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Mathematics",
       "slug": "mathematics",
-      "route": "School Direct training programme (salaried)",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WX",
+      "providerCode": "B91",
+      "programmeCode": "G1X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "slug": "mathematics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WW",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -344,43 +146,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "French, German, Languages, Languages (european), Secondary",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
+      "subjects": "Languages, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Modern Lanaguages (French and German)",
-      "slug": "modern-lanaguages-french-and-german",
-      "route": "School Direct training programme (salaried)",
+      "name": "Modern Languages",
+      "slug": "modern-languages",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X5",
+      "providerCode": "B91",
+      "programmeCode": "2YDJ",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "French, German, Languages, Languages (european), Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Lanaguages (French and German)",
-      "slug": "modern-lanaguages-french-and-german",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36WY",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -388,109 +168,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "German, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Lanaguages (German and Spanish)",
-      "slug": "modern-lanaguages-german-and-spanish",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X2",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "French, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French and Spanish)",
-      "slug": "modern-languages-french-and-spanish",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X3",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "French, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French and Spanish)",
-      "slug": "modern-languages-french-and-spanish",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X8",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "German, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (German and Spanish)",
-      "slug": "modern-languages-german-and-spanish",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X7",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Music, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Music",
       "slug": "music",
-      "route": "School Direct training programme",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36X9",
+      "providerCode": "B91",
+      "programmeCode": "2YDK",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -498,21 +190,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Physical education, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Physical Education",
       "slug": "physical-education",
-      "route": "School Direct training programme",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36XC",
+      "providerCode": "B91",
+      "programmeCode": "2YDL",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -520,43 +212,21 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Physics, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Physics",
       "slug": "physics",
-      "route": "School Direct training programme (salaried)",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36XG",
+      "providerCode": "B91",
+      "programmeCode": "F3X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time with salary"
-      ]
-    },
-    {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Mathematics, Physics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physics with Mathematics",
-      "slug": "physics-with-mathematics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "2FZ",
-      "programmeCode": "36XK",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
@@ -564,81 +234,65 @@
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary",
-      "slug": "primary",
-      "route": "School Direct training programme (salaried)",
-      "qualifications": "QTS",
-      "providerCode": "2FZ",
-      "programmeCode": "36XQ",
+      "name": "Primary (5-11)",
+      "slug": "primary-5-11",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "X105",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
-        "QTS full time with salary"
+        "PGCE with QTS full time"
       ]
     },
     {
-      "regions": "South East",
-      "accrediting": "The University of Reading",
-      "subjects": "Primary",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary",
-      "slug": "primary",
-      "route": "School Direct training programme",
-      "qualifications": "QTS",
-      "providerCode": "2FZ",
-      "programmeCode": "36XP",
+      "regions": "London",
+      "accrediting": "Bromley Schools Collegiate",
+      "subjects": "Religious education, Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Religious Education",
+      "slug": "religious-education",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "B91",
+      "programmeCode": "33YX",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-          "code": "-"
+          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+          "code": ""
         }
       ],
       "options": [
-        "QTS full time"
+        "PGCE with QTS full time"
       ]
     }
   ],
   "schools": [
     {
       "name": "Main Site",
-      "address": "Ranelagh Drive, Bracknell, Berkshire, RG12 9DA",
-      "code": "-"
+      "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
+      "code": ""
     }
   ],
   "accreditors": [
     {
-      "name": "The University of Reading",
-      "slug": "the-university-of-reading",
+      "name": "Bromley Schools Collegiate",
+      "slug": "bromley-schools-collegiate",
       "subjects": [
         {
-          "name": "Art & Design",
-          "slug": "art-design"
-        },
-        {
-          "name": "Biology",
-          "slug": "biology"
-        },
-        {
-          "name": "Chemistry",
-          "slug": "chemistry"
-        },
-        {
-          "name": "Computing",
-          "slug": "computing"
-        },
-        {
-          "name": "Design and Technology",
-          "slug": "design-and-technology"
+          "name": "Computer Science",
+          "slug": "computer-science"
         },
         {
           "name": "Drama",
@@ -661,20 +315,8 @@
           "slug": "mathematics"
         },
         {
-          "name": "Modern Lanaguages (French and German)",
-          "slug": "modern-lanaguages-french-and-german"
-        },
-        {
-          "name": "Modern Lanaguages (German and Spanish)",
-          "slug": "modern-lanaguages-german-and-spanish"
-        },
-        {
-          "name": "Modern Languages (French and Spanish)",
-          "slug": "modern-languages-french-and-spanish"
-        },
-        {
-          "name": "Modern Languages (German and Spanish)",
-          "slug": "modern-languages-german-and-spanish"
+          "name": "Modern Languages",
+          "slug": "modern-languages"
         },
         {
           "name": "Music",
@@ -689,37 +331,21 @@
           "slug": "physics"
         },
         {
-          "name": "Physics with Mathematics",
-          "slug": "physics-with-mathematics"
+          "name": "Primary (5-11)",
+          "slug": "primary-5-11"
         },
         {
-          "name": "Primary",
-          "slug": "primary"
+          "name": "Religious Education",
+          "slug": "religious-education"
         }
       ]
     }
   ],
-  "self_accrediting": false,
+  "self_accrediting": true,
   "subjects": [
     {
-      "name": "Art & Design",
-      "slug": "art-design"
-    },
-    {
-      "name": "Biology",
-      "slug": "biology"
-    },
-    {
-      "name": "Chemistry",
-      "slug": "chemistry"
-    },
-    {
-      "name": "Computing",
-      "slug": "computing"
-    },
-    {
-      "name": "Design and Technology",
-      "slug": "design-and-technology"
+      "name": "Computer Science",
+      "slug": "computer-science"
     },
     {
       "name": "Drama",
@@ -742,20 +368,8 @@
       "slug": "mathematics"
     },
     {
-      "name": "Modern Lanaguages (French and German)",
-      "slug": "modern-lanaguages-french-and-german"
-    },
-    {
-      "name": "Modern Lanaguages (German and Spanish)",
-      "slug": "modern-lanaguages-german-and-spanish"
-    },
-    {
-      "name": "Modern Languages (French and Spanish)",
-      "slug": "modern-languages-french-and-spanish"
-    },
-    {
-      "name": "Modern Languages (German and Spanish)",
-      "slug": "modern-languages-german-and-spanish"
+      "name": "Modern Languages",
+      "slug": "modern-languages"
     },
     {
       "name": "Music",
@@ -770,21 +384,21 @@
       "slug": "physics"
     },
     {
-      "name": "Physics with Mathematics",
-      "slug": "physics-with-mathematics"
+      "name": "Primary (5-11)",
+      "slug": "primary-5-11"
     },
     {
-      "name": "Primary",
-      "slug": "primary"
+      "name": "Religious Education",
+      "slug": "religious-education"
     }
   ],
   "folded_courses": {
-    "The University of Reading": [
+    "Bromley Schools Collegiate": [
       {
-        "name": "Art & Design",
+        "name": "Computer Science",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -798,101 +412,14 @@
         "flags": {
           "partTime": false,
           "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Biology",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Chemistry",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Computing",
-        "courses": 1,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Design and Technology",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
           "qualifications": false
         }
       },
       {
         "name": "Drama",
-        "courses": 2,
+        "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -906,14 +433,14 @@
         "flags": {
           "partTime": false,
           "salary": false,
-          "qualifications": true
+          "qualifications": false
         }
       },
       {
         "name": "English",
-        "courses": 2,
+        "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -922,12 +449,11 @@
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
+          "PGCE with QTS full time"
         ],
         "flags": {
           "partTime": false,
-          "salary": true,
+          "salary": false,
           "qualifications": false
         }
       },
@@ -935,7 +461,7 @@
         "name": "Geography",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -956,7 +482,7 @@
         "name": "History",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -975,53 +501,9 @@
       },
       {
         "name": "Mathematics",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Modern Lanaguages (French and German)",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Modern Lanaguages (German and Spanish)",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1039,32 +521,10 @@
         }
       },
       {
-        "name": "Modern Languages (French and Spanish)",
-        "courses": 2,
-        "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time",
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Modern Languages (German and Spanish)",
+        "name": "Modern Languages",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1073,11 +533,11 @@
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time with salary"
+          "PGCE with QTS full time"
         ],
         "flags": {
           "partTime": false,
-          "salary": true,
+          "salary": false,
           "qualifications": false
         }
       },
@@ -1085,7 +545,7 @@
         "name": "Music",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1106,7 +566,7 @@
         "name": "Physical Education",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1127,28 +587,7 @@
         "name": "Physics",
         "courses": 1,
         "accrediting": [
-          "The University of Reading"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time with salary"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": true,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Physics with Mathematics",
-        "courses": 1,
-        "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1166,10 +605,10 @@
         }
       },
       {
-        "name": "Primary",
-        "courses": 2,
+        "name": "Primary (5-11)",
+        "courses": 1,
         "accrediting": [
-          "The University of Reading"
+          "Bromley Schools Collegiate"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1178,21 +617,38 @@
           "Main Site"
         ],
         "options": [
-          "QTS full time",
-          "QTS full time with salary"
+          "PGCE with QTS full time"
         ],
         "flags": {
           "partTime": false,
-          "salary": true,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Religious Education",
+        "courses": 1,
+        "accrediting": [
+          "Bromley Schools Collegiate"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
           "qualifications": false
         }
       }
     ]
   },
   "options": [
-    "PGCE with QTS full time",
-    "PGCE with QTS full time with salary",
-    "QTS full time",
-    "QTS full time with salary"
+    "PGCE with QTS full time"
   ]
 }
