@@ -89,18 +89,19 @@
         <h2 class="heading-small">Contents</h2>
         <ul class="list">
           <li><a href="#section-about">About the course</a></li>
-          <li><a href="#section-entry">Requirements</a></li>
-          <li><a href="#section-schools">How school placements work</a></li>
           {% if data[prefix + '-interview-process'] %}
             <li><a href="#section-interview">Interview process</a></li>
           {% endif %}
+          <li><a href="#section-schools">How school placements work</a></li>
           {% if course.salaried %}
             <li><a href="#section-salary">Salary</a></li>
           {% else %}
             <li><a href="#section-fees">Fees</a></li>
           {% endif %}
           <li><a href="#section-financial-support">Financial support</a></li>
+          <li><a href="#section-entry">Requirements</a></li>
           <li><a href="#section-about-provider">About the training provider</a></li>
+          <li><a href="#section-access-needs">Training with disabilities and other needs</a></li>
           <li><a href="#section-provider">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
         </ul>
@@ -108,28 +109,13 @@
         <h2 class="heading-medium" id="section-about">About the course</h2>
         {{ macros.previewPart(prefix + '-about-this-course') }}
 
-        <h2 class="heading-medium" id="section-entry">Requirements</h2>
-
-        <h3 class="heading-small">Qualifications</h3>
-        {{ macros.previewPart(prefix + '-qualifications-required') }}
-
-        {% if data[prefix + '-personal-qualities'] %}
-          <h3 class="heading-small">Personal qualities</h3>
-          {{ macros.previewPart(prefix + '-personal-qualities') }}
-        {% endif %}
-
-        {% if data[prefix + '-other-requirements'] %}
-          <h3 class="heading-small">Other requirements</h3>
-          {{ macros.previewPart(prefix + '-other-requirements') }}
-        {% endif %}
-
-        <h2 class="heading-medium" id="section-schools">How school placements work</h2>
-        {{ macros.previewPart(prefix + '-placement-school-policy') }}
-
         {% if data[prefix + '-interview-process'] %}
           <h2 class="heading-medium" id="section-interview">Interview process</h2>
           {{ macros.previewPart(prefix + '-interview-process') }}
         {% endif %}
+
+        <h2 class="heading-medium" id="section-schools">How school placements work</h2>
+        {{ macros.previewPart(prefix + '-placement-school-policy') }}
 
         {% if course.salaried %}
           <h2 class="heading-medium" id="section-salary">Salary</h2>
@@ -181,6 +167,21 @@
           {{ macros.previewPart(prefix + '-financial-support') }}
         {% endif %}
 
+        <h2 class="heading-medium" id="section-entry">Requirements</h2>
+
+        <h3 class="heading-small">Qualifications needed</h3>
+        {{ macros.previewPart(prefix + '-qualifications-required') }}
+
+        {% if data[prefix + '-personal-qualities'] %}
+          <h3 class="heading-small">Personal qualities</h3>
+          {{ macros.previewPart(prefix + '-personal-qualities') }}
+        {% endif %}
+
+        {% if data[prefix + '-other-requirements'] %}
+          <h3 class="heading-small">Other requirements</h3>
+          {{ macros.previewPart(prefix + '-other-requirements') }}
+        {% endif %}
+
         <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
         {{ macros.previewPart('about-organisation', true) }}
 
@@ -191,7 +192,7 @@
           {% endif %}
         {% endif %}
 
-        <h3 class="heading-small">Training with a disability</h3>
+        <h2 class="heading-medium" id="section-access-needs">Training with disabilities and other needs</h2>
         {{ macros.previewPart('training-with-a-disability', true) }}
 
         <h2 class="heading-medium" id="section-contact">Contact details</h2>
