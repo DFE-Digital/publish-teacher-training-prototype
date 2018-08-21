@@ -34,10 +34,14 @@
             {% if course.accrediting == accrediting.name %}
               <tr>
                 <td>
-                  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                  {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
+                    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                  {% else %}
+                    <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                  {% endif %}
                 </td>
                 <td>{{ course.options }}</td>
-                <td>Running <!-- {% if loop.index == 2 %}
+                <td>{% if loop.index == 2 %}
                       New – not yet running
                     {% elseif loop.index == 7 %}
                       Not running
@@ -45,14 +49,16 @@
                       Not running
                     {% else %}
                       Running
-                    {% endif %} --></td>
+                    {% endif %}</td>
                 <td>
-                  {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                    <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
-                  {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                    <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
-                  {% else %}
-                    <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                  {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
+                    {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
+                      <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+                    {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
+                      <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+                    {% else %}
+                      <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                    {% endif %}
                   {% endif %}
                 </td>
               </tr>
