@@ -18,7 +18,7 @@ prototype_data = {
   'postcode': 'SW1 1AA',
   'telephone': '0208 123 4567',
   'email': 'someemail@not-an-email.com',
-  'website': '',
+  'website': 'https://www.bscteach.co.uk/',
   'templates': []
 }
 
