@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Bromley Schools Collegiate'
+provider = 'The Rutland Teaching Alliance'
 courses = data.select {|c| c['provider'] == provider }
 
 prototype_data = {
@@ -18,7 +18,7 @@ prototype_data = {
   'postcode': 'SW1 1AA',
   'telephone': '0208 123 4567',
   'email': 'someemail@not-an-email.com',
-  'website': 'https://www.bscteach.co.uk/',
+  'website': 'https://www.rutlandta.com/',
   'templates': []
 }
 
