@@ -78,7 +78,7 @@
       {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
         <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}</a>
       {% else %}
-        <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data['website'] }}</a>
+        <a href="{{ data['website'] }}">{{ data['website'] }}</a>
       {% endif %}
     </dd>
   </dl>
