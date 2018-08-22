@@ -1,34 +1,34 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Bromley Schools Collegiate",
-  "provider-code-name": "BROM",
-  "provider-code": "B91",
+  "training-provider-name": "Angel Islington Teaching School Alliance",
+  "provider-code-name": "A2602",
+  "provider-code": "2BZ",
   "address-line-1": "123 Baker Street",
   "town": "London",
   "postcode": "SW1 1AA",
   "telephone": "0208 123 4567",
   "email": "someemail@not-an-email.com",
-  "website": "https://www.bscteach.co.uk/",
+  "website": "http://www.egaschool.co.uk/244/the-angel-islington-teaching-school-alliance",
   "templates": [
 
   ],
   "ucasCourses": [
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "Computer studies, Secondary",
+      "accrediting": "UCL, University College London (University of London",
+      "subjects": "Biology, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Computer Science",
-      "slug": "computer-science",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "IX99",
+      "name": "Biology",
+      "slug": "biology",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YCF",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -37,20 +37,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "Drama and theatre studies, Secondary",
+      "accrediting": "UCL, University College London (University of London",
+      "subjects": "Chemistry, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Drama",
-      "slug": "drama",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "2YDF",
+      "name": "Chemistry",
+      "slug": "chemistry",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YN3",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -59,20 +59,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "English, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "English",
       "slug": "english",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "Q3X1",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YNS",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -81,20 +81,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Geography, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Geography",
       "slug": "geography",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "2YDH",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "37KD",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -103,42 +103,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "History, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "History",
-      "slug": "history",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "V1X1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Mathematics, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Mathematics",
       "slug": "mathematics",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "G1X1",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YNR",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -147,20 +125,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Languages, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Modern Languages",
       "slug": "modern-languages",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "2YDJ",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "37KG",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -169,64 +147,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "Music, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Music",
-      "slug": "music",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "2YDK",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "Physical education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physical Education",
-      "slug": "physical-education",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "2YDL",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Physics, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Physics",
       "slug": "physics",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "F3X1",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YNQ",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -235,42 +169,20 @@
     },
     {
       "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
+      "accrediting": "UCL, University College London (University of London",
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary (5-11)",
-      "slug": "primary-5-11",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "X105",
+      "name": "Primary",
+      "slug": "primary",
+      "route": "School Direct training programme",
+      "qualifications": "QTS, Postgraduate",
+      "providerCode": "2BZ",
+      "programmeCode": "2YNV",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "Bromley Schools Collegiate",
-      "subjects": "Religious education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Religious Education",
-      "slug": "religious-education",
-      "route": "SCITT (School Centred Initial Teacher Training) programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "B91",
-      "programmeCode": "33YX",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-          "code": ""
+          "address": "Donegal Street, Islington, London, N1 9QG",
+          "code": "-"
         }
       ],
       "options": [
@@ -281,22 +193,22 @@
   "schools": [
     {
       "name": "Main Site",
-      "address": "Beaverwood School, Beaverwood Road, Chislehurst, Kent, BR7 6HE",
-      "code": ""
+      "address": "Donegal Street, Islington, London, N1 9QG",
+      "code": "-"
     }
   ],
   "accreditors": [
     {
-      "name": "Bromley Schools Collegiate",
-      "slug": "bromley-schools-collegiate",
+      "name": "UCL, University College London (University of London",
+      "slug": "ucl-university-college-london-university-of-london",
       "subjects": [
         {
-          "name": "Computer Science",
-          "slug": "computer-science"
+          "name": "Biology",
+          "slug": "biology"
         },
         {
-          "name": "Drama",
-          "slug": "drama"
+          "name": "Chemistry",
+          "slug": "chemistry"
         },
         {
           "name": "English",
@@ -307,10 +219,6 @@
           "slug": "geography"
         },
         {
-          "name": "History",
-          "slug": "history"
-        },
-        {
           "name": "Mathematics",
           "slug": "mathematics"
         },
@@ -319,37 +227,25 @@
           "slug": "modern-languages"
         },
         {
-          "name": "Music",
-          "slug": "music"
-        },
-        {
-          "name": "Physical Education",
-          "slug": "physical-education"
-        },
-        {
           "name": "Physics",
           "slug": "physics"
         },
         {
-          "name": "Primary (5-11)",
-          "slug": "primary-5-11"
-        },
-        {
-          "name": "Religious Education",
-          "slug": "religious-education"
+          "name": "Primary",
+          "slug": "primary"
         }
       ]
     }
   ],
-  "self_accrediting": true,
+  "self_accrediting": false,
   "subjects": [
     {
-      "name": "Computer Science",
-      "slug": "computer-science"
+      "name": "Biology",
+      "slug": "biology"
     },
     {
-      "name": "Drama",
-      "slug": "drama"
+      "name": "Chemistry",
+      "slug": "chemistry"
     },
     {
       "name": "English",
@@ -360,10 +256,6 @@
       "slug": "geography"
     },
     {
-      "name": "History",
-      "slug": "history"
-    },
-    {
       "name": "Mathematics",
       "slug": "mathematics"
     },
@@ -372,33 +264,21 @@
       "slug": "modern-languages"
     },
     {
-      "name": "Music",
-      "slug": "music"
-    },
-    {
-      "name": "Physical Education",
-      "slug": "physical-education"
-    },
-    {
       "name": "Physics",
       "slug": "physics"
     },
     {
-      "name": "Primary (5-11)",
-      "slug": "primary-5-11"
-    },
-    {
-      "name": "Religious Education",
-      "slug": "religious-education"
+      "name": "Primary",
+      "slug": "primary"
     }
   ],
   "folded_courses": {
-    "Bromley Schools Collegiate": [
+    "UCL, University College London (University of London": [
       {
-        "name": "Computer Science",
+        "name": "Biology",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -416,10 +296,10 @@
         }
       },
       {
-        "name": "Drama",
+        "name": "Chemistry",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -440,7 +320,7 @@
         "name": "English",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -461,28 +341,7 @@
         "name": "Geography",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "History",
-        "courses": 1,
-        "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -503,7 +362,7 @@
         "name": "Mathematics",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -524,49 +383,7 @@
         "name": "Modern Languages",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Music",
-        "courses": 1,
-        "accrediting": [
-          "Bromley Schools Collegiate"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Physical Education",
-        "courses": 1,
-        "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -587,7 +404,7 @@
         "name": "Physics",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -605,31 +422,10 @@
         }
       },
       {
-        "name": "Primary (5-11)",
+        "name": "Primary",
         "courses": 1,
         "accrediting": [
-          "Bromley Schools Collegiate"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Religious Education",
-        "courses": 1,
-        "accrediting": [
-          "Bromley Schools Collegiate"
+          "UCL, University College London (University of London"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
