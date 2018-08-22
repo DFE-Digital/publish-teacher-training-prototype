@@ -61,37 +61,25 @@
           <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
         </ul>
         {{ macros.textarea('about-organisation', 'Training with you', 14, '', 250, errors) }}
-      </div>
-      <div class="column-one-third">
-        {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
-        {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
-      </div>
-    </div>
 
-    {% if not data['self_accrediting'] %}
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        {% if data['accreditors'].length > 1 %}
-          <h2 class="heading-large">
-            About your accredited providers
-          </h2>
-          <p>Describe advantages and special features of each accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
-        {% else %}
-          <h2 class="heading-large">
-            About your accredited provider
-          </h2>
-          <p>Describe advantages and special features of your accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
+        {% if not data['self_accrediting'] %}
+          {% if data['accreditors'].length > 1 %}
+            <h2 class="heading-large">
+              About your accredited providers
+            </h2>
+            <p>Describe advantages and special features of each accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
+          {% else %}
+            <h2 class="heading-large">
+              About your accredited provider
+            </h2>
+            <p>Describe advantages and special features of your accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
+          {% endif %}
+
+          {% for a in data['accreditors'] %}
+            {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 8, '', 100) }}
+          {% endfor %}
         {% endif %}
 
-        {% for a in data['accreditors'] %}
-          {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 8, '', 100) }}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <h3 class="heading-large remove-top-margin">Training with disabilities and other needs</h3>
         <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
 
@@ -103,6 +91,10 @@
         <p>If accessibility varies between locations, give details. It’s also useful to candidates to know how you’ve accommodated others with specific access needs in the past.</p>
 
         {{ macros.textarea('training-with-a-disability', 'Training with disabilities and other needs', 14, '', 250, errors) }}
+      </div>
+      <div class="column-one-third">
+        {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
+        {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
       </div>
     </div>
 

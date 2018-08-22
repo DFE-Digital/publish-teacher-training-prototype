@@ -24,11 +24,22 @@
 {% endmacro %}
 
 {% macro formatting() %}
-<div class="add-double-bottom-margin status-box">
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
-  <p>You can use paragraphs, lists and links in your content.</p>
-  <a href="#">Formatting help</a>
-</div>
+<h3 class="heading-medium remove-top-margin">Formatting</h3>
+<h4 class="heading-small">Links</h4>
+<p>Use square brackets [] around the link text and round brackets () around the link URL. Make sure there are no spaces between the brackets.</p>
+
+<p>For example:<br /> [GOV.UK](https://gov.uk/)</p>
+
+<h4 class="heading-small">Lists</h4>
+<p>To create a bulleted list:</p>
+<ul class="list list-bullet">
+  <li>use asterisks (*) to create a bullet point (hyphens also work)</li>
+  <li>make sure there is one space after the asterisk</li>
+  <li>leave 1 empty line space before the bullets start, and one after</li>
+</ul>
+
+<p>For example:</p>
+<p>* list item 1<br/>* list item 2</p>
 {% endmacro %}
 
 {% macro copyContent() %}
@@ -101,9 +112,7 @@
     <hr />
   {% endif %}
 
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
-  <p>You can use paragraphs, lists and links in your content.</p>
-  <a href="#">Formatting help</a>
+  {{ formatting() }}
 </div>
 {% endmacro %}
 
