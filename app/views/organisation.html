@@ -20,18 +20,16 @@
   <h2 class="heading-large remove-top-margin">About your organisation</h2>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <dl class="course-part-tasks remove-top-margin">
-        {{ macros.coursePart('about-organisation', 'About your organisation') }}
-        {% if not data['self_accrediting'] %}
-          {% for a in data['accreditors'] %}
-            {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
-          {% endfor %}
+      <p>Your organisation information and contact details display on every course. They are edited and published separately to course information.</p>
+      <p>
+        {% if data['about-your-organisation-publish-state'] == 'draft' %}
+          <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+        {% elseif data['about-your-organisation-publish-state'] == 'published' %}
+          <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+        {% else %}
+          <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
         {% endif %}
-        {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs') }}
-      </dl>
-
-      <p class="add-top-margin">
-        <a href="/about-your-organisation">Edit and publish organisation information</a>
+        <a href="/about-your-organisation">Edit your organisation information</a>
       </p>
     </div>
   </div>
