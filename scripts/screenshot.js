@@ -37,8 +37,11 @@ var options = {
 }
 
 var paths = [
+  { path: '/', name: 'organisation' },
+  { path: '/course/bromley-schools-collegiate/IX99', name: 'course' },
+  { path: '/preview/bromley-schools-collegiate/IX99', name: 'preview' },
   { path: '/about-your-organisation', name: 'about-your-organisation' },
-  { path: '/course/devon-primary-scitt/2XLR', name: 'course' }
+  { path: '/course/bromley-schools-collegiate/IX99/fees-and-length', name: 'course-length-and-fees' },
 ]
 
 var template = '';
