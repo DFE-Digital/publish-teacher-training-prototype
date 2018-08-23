@@ -17,7 +17,7 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <dl class="course-part-tasks remove-top-margin">
-        {{ macros.coursePart('about-your-organisation', 'About your organisation') }}
+        {{ macros.coursePart('about-organisation', 'About your organisation') }}
         {% if not data['self_accrediting'] %}
           {% for a in data['accreditors'] %}
             {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}

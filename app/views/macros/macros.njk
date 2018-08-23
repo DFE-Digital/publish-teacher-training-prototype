@@ -78,6 +78,12 @@
 </form>
 {% endmacro %}
 
+{% macro formattingBox() %}
+<div class="add-double-bottom-margin status-box">
+  {{ formatting() }}
+</div>
+{% endmacro %}
+
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
@@ -89,7 +95,8 @@
 
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
-    <hr />
+
+    {% if state == 'draft' %}<hr />{% endif %}
   {% endif %}
 
   {% if state == 'new' %}
@@ -109,10 +116,7 @@
     <p>
       <a href="{{ publishLink }}" class="button">Publish</a>
     </p>
-    <hr />
   {% endif %}
-
-  {{ formatting() }}
 </div>
 {% endmacro %}
 
