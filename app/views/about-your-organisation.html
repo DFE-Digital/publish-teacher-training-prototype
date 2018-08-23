@@ -3,11 +3,17 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-  {{ macros.orgHeading('About your organisation', message) }}
+  <div class="breadcrumbs">
+
+    <ol>
+      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
+      <li><a href="/">{{ data['training-provider-name']}}</a></li>
+    </ol>
+
+  </div>
 
   {% set message %}
     {% if showMessage %}
@@ -43,67 +49,55 @@
   </div>
   {% endif %}
 
-  <h2 class="heading-large">
-    {{ title }}
-  </h2>
+  {{ macros.orgHeading('About your organisation', message) }}
 
-  <form action="/about-your-organisation" method="post">
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <p>This information shows on all of your courses.</p>
+  <div class="grid-row add-top-margin">
+    <div class="column-two-thirds">
+      <div class="course-parts course-parts--large">
+        <ul class="course-parts-items">
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Contact details from UCAS</h3>
+            <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
+            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
+              <dt>Training provider code:</dt>
+              <dd>{{ data['provider-code'] }}</dd>
+              <dt>Email:</dt>
+              <dd>{{ data['email'] }}</dd>
+              <dt>Telephone:</dt>
+              <dd>{{ data['telephone'] }}</dd>
+              <dt>Website:</dt>
+              <dd><a href="{{ data['website'] }}" style="padding: 0">{{ data['website'] }}</a></dd>
+              <dt>Address:</dt>
+              <dd>
+                {{ data['training-provider-name'] }}<br />
+                {{ data['address-line-1'] }}<br />
+                {{ data['town'] }}<br />
+                {{ data['postcode'] }}
+              </dd>
+            </dl>
+          </li>
+          <li class="course-parts-item">
+            <h3 class="course-part-task">About your organisation</h3>
+            <a class="course-part-task-action" href="/about-your-organisation/edit">Edit</a>
 
-        <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of you as a training provider.</p>
-
-        <p>You must be specific and factual with any claims you make, and support them with evidence. For example:</p>
-
-        <ul class="list list-bullet">
-          <li>don’t say “our students are some of the happiest in the country”</li>
-          <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
+            <dl class="course-part-tasks">
+              {{ macros.coursePart('about-organisation', 'About your organisation') }}
+              {% if not data['self_accrediting'] %}
+                {% for a in data['accreditors'] %}
+                  {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
+                {% endfor %}
+              {% endif %}
+              {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs') }}
+            </dl>
+          </li>
         </ul>
-        {{ macros.textarea('about-organisation', 'Training with you', 14, '', 250, errors) }}
-
-        {% if not data['self_accrediting'] %}
-          {% if data['accreditors'].length > 1 %}
-            <h2 class="heading-large">
-              About your accredited providers
-            </h2>
-            <p>Describe advantages and special features of each accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
-          {% else %}
-            <h2 class="heading-large">
-              About your accredited provider
-            </h2>
-            <p>Describe advantages and special features of your accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
-          {% endif %}
-
-          {% for a in data['accreditors'] %}
-            {{ macros.textarea(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)', 8, '', 100) }}
-          {% endfor %}
-        {% endif %}
-
-        <h3 class="heading-large remove-top-margin">Training with disabilities and other needs</h3>
-        <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
-
-        <ul class="list list-bullet">
-          <li>dyslexia</li>
-          <li>physical, hearing and visual impairments</li>
-          <li>mental health conditions</li>
-        </ul>
-        <p>If accessibility varies between locations, give details. It’s also useful to candidates to know how you’ve accommodated others with specific access needs in the past.</p>
-
-        {{ macros.textarea('training-with-a-disability', 'Training with disabilities and other needs', 14, '', 250, errors) }}
-      </div>
-      <div class="column-one-third">
-        {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
-        {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
       </div>
     </div>
-
-    <div class="add-double-bottom-margin">
-      <input type="submit" class="button" value="Save" />
+    <div class="column-one-third">
+      {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
+      {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
     </div>
-
-    <a href="/">Cancel changes</a>
-  </form>
+  </div>
 </main>
 
 {% endblock %}

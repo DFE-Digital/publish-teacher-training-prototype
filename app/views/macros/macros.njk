@@ -74,25 +74,41 @@
     <div class="js-cant-copy" style="display: none">
       <p>When you’ve added content to this page, you can copy it to other courses</p>
     </div>
+    <hr />
+
+    {{ formatting() }}
   </div>
 </form>
+{% endmacro %}
+
+{% macro formattingBox() %}
+<div class="add-double-bottom-margin status-box">
+  {{ formatting() }}
+</div>
 {% endmacro %}
 
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
     <div class="unpublished-changes">
-      <p><span class="bold">You have unpublished changes.</span></p>
-      <p class="who-saved add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+      <span class="phase-tag phase-tag-draft add-bottom-margin">Draft</span>
+      <p>You have unpublished changes.</p>
+      <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
     </div>
-  {% endif %}
-
-  {% if publishedBefore or state == 'published' %}
-    <p>Last published:<br />{{ today() }} by Rita Cosca</p>
     <hr />
   {% endif %}
 
+  {% if state == 'published' %}
+    <span class="phase-tag phase-tag-published add-bottom-margin">Published</span>
+  {% endif %}
+  {% if publishedBefore or state == 'published' %}
+    <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+
+    {% if state == 'draft' %}<hr />{% endif %}
+  {% endif %}
+
   {% if state == 'new' %}
+    <span class="phase-tag phase-tag-no-content add-bottom-margin">Empty</span>
     <p>You need to complete and publish this information.</p>
     <hr />
   {% endif %}
@@ -109,24 +125,31 @@
     <p>
       <a href="{{ publishLink }}" class="button">Publish</a>
     </p>
-    <hr />
   {% endif %}
-
-  {{ formatting() }}
 </div>
 {% endmacro %}
 
 {% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
-    <div class="unpublished-changes">
-      <p>You have unpublished changes.</p>
-      <p class="who-saved add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
-    </div>
+    <span class="phase-tag phase-tag-draft add-bottom-margin">Draft</span>
+    <p>You have unpublished changes.</p>
+    <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+    <hr />
+  {% endif %}
+
+  {% if state == 'published' %}
+    <span class="phase-tag phase-tag-published add-bottom-margin">Draft</span>
   {% endif %}
 
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+    <hr />
+  {% endif %}
+
+  {% if state == 'new' %}
+    <span class="phase-tag phase-tag-no-content add-bottom-margin">Empty</span>
+    <p>You need to complete and publish this information.</p>
     <hr />
   {% endif %}
 
@@ -150,46 +173,11 @@
 {% endmacro %}
 
 {% macro orgHeading(activeTab, message = '') %}
-<div class="breadcrumbs">
-  {% if value('multi-organisation') %}
-  <ol>
-    <li><a href="/">Organisations</a></li>
-  </ol>
-  {% endif %}
-</div>
-
 {{ message | safe }}
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-xlarge">
-      {{ value('training-provider-name') }}
-    </h1>
-  </div>
-</div>
-
-{% set tabs = [
-    {
-      text: 'Courses',
-      href: '/'
-    },
-    {
-      text: 'About your organisation',
-      href: '/about-your-organisation'
-    },
-    {
-      text: 'Request access for someone else',
-      href: '/request-access'
-    }
-  ] %}
-
-<ul class="tabs">
-  {% for tab in tabs %}
-    <li {% if activeTab == tab.text %}class="active"{% endif %}>
-      <a href="{{ tab.href }}">{{ tab.text }}</a>
-    </li>
-  {% endfor %}
-</ul>
+<h1 class="heading-xlarge">
+  {{ activeTab }}
+</h1>
 {% endmacro %}
 
 {#

@@ -5,7 +5,35 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  {{ macros.orgHeading('Courses') }}
+  <div class="breadcrumbs">
+    <ol>
+      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
+    </ol>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-xlarge">{{ data['training-provider-name'] }}</h1>
+    </div>
+  </div>
+
+  <h2 class="heading-large remove-top-margin">About your organisation</h2>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Your organisation information and contact details will show on every course. They are edited and published separately from course information.</p>
+      <p>
+        {% if data['about-your-organisation-publish-state'] == 'draft' %}
+          <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+        {% elseif data['about-your-organisation-publish-state'] == 'published' %}
+          <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+        {% else %}
+          <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+        {% endif %}
+        <a href="/about-your-organisation">Edit your organisation information</a>
+      </p>
+    </div>
+  </div>
+  <hr />
 
   <h2 class="heading-large">
     Courses
@@ -14,18 +42,17 @@
   {% for accrediting in data['accreditors'] %}
     {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
       <h3 class="heading-medium">
-        <span style="color: #777; font-weight: normal">Accrediting provider</span><br />
+        <span style="color: #777; font-weight: normal">Accredited provider</span><br />
         {{ accrediting.name }}
       </h3>
     {% endif %}
     <div class="body-text">
-      <table class="ucas-info-table table-small">
+      <table class="ucas-info-table">
         <thead>
           <tr>
-            <th class="subject-col" style="width: 30%">Course</th>
+            <th class="subject-col">Course</th>
             <th class="type-col">Type</th>
-            <th class="status-col">Status</th>
-            <th class="complete-col">Course content</th>
+            <th class="status-col">State</th>
           </tr>
         </thead>
         <tbody>
@@ -39,17 +66,9 @@
                   {% else %}
                     <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                   {% endif %}
+                  </span>
                 </td>
                 <td>{{ course.options }}</td>
-                <td>{% if loop.index == 2 %}
-                      New – not yet running
-                    {% elseif loop.index == 7 %}
-                      Not running
-                    {% elseif loop.index == 4 %}
-                      Not running
-                    {% else %}
-                      Running
-                    {% endif %}</td>
                 <td>
                   {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
@@ -59,6 +78,10 @@
                     {% else %}
                       <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
                     {% endif %}
+                  {% elseif loop.index == 2 %}
+                    <span class="phase-tag phase-tag-small phase-tag-not-running">New – not yet running</span>
+                  {% else %}
+                    <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
                   {% endif %}
                 </td>
               </tr>
@@ -69,6 +92,13 @@
       </table>
     </div>
   {% endfor %}
+  <hr />
+
+  <h2 class="heading-large">Request access for someone</h2>
+  <p>You can request a DfE Sign-in account for others who manage your courses.</p>
+  <p>
+    <a href="/request-access">Request access for someone</a>
+  </p>
 </main>
 
 {% endblock %}

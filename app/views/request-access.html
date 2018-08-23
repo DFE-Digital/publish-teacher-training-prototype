@@ -6,6 +6,13 @@
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
+  <div class="breadcrumbs">
+    <ol>
+      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
+      <li><a href="/">{{ data['training-provider-name']}}</a></li>
+    </ol>
+  </div>
+
   {% set message %}
     {% if showMessage %}
       <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
@@ -19,11 +26,7 @@
     {% endif %}
   {% endset %}
 
-  {{ macros.orgHeading('Request access for someone else', message) }}
-
-  <h2 class="heading-large">
-    Request access for someone else
-  </h2>
+  {{ macros.orgHeading('Request access for someone', message) }}
 
   <div class="grid-row">
     <div class="column-two-thirds">

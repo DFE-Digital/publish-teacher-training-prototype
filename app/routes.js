@@ -19,6 +19,11 @@ router.get('/about-your-organisation', function (req, res) {
   res.render('about-your-organisation', { errors: errors, justPublished: (req.query.publish && errors.length == 0) })
 })
 
+router.get('/about-your-organisation/edit', function (req, res) {
+  var errors = validateOrg(req.session.data);
+  res.render('about-your-organisation/edit', { errors: errors, justPublished: (req.query.publish && errors.length == 0) })
+})
+
 router.post('/about-your-organisation', function (req, res) {
   req.session.data['about-your-organisation-publish-state'] = 'draft';
   res.render('about-your-organisation', { showMessage: true, publishState : 'draft' })
@@ -326,7 +331,7 @@ function validateOrg(data) {
     errors.push({
       title: 'Give details about your organisation',
       id: `about-organisation`,
-      link: `/about-your-organisation#about-organisation`,
+      link: `/about-your-organisation/edit#about-organisation`,
       page: 'about-your-organisation'
     })
   }
@@ -335,7 +340,7 @@ function validateOrg(data) {
     errors.push({
       title: 'Give details about training with a disability',
       id: `training-with-a-disability`,
-      link: `/about-your-organisation#training-with-a-disability`,
+      link: `/about-your-organisation/edit#training-with-a-disability`,
       page: 'about-your-organisation'
     })
   }
