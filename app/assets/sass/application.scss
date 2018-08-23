@@ -84,17 +84,6 @@ table thead th {
   background-color: $grey-4;
   padding: 20px;
   border-top: 5px solid $govuk-blue;
-
-  .unpublished-changes {
-    background: $govuk-blue;
-    color: $white;
-    margin: -20px -20px 30px;
-    padding: 10px 20px 20px;
-
-    p {
-      margin-bottom: 0;
-    }
-  }
 }
 
 .who-saved {

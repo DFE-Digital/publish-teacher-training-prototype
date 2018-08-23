@@ -91,11 +91,16 @@
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
     <div class="unpublished-changes">
-      <p><span class="bold">You have unpublished changes.</span></p>
-      <p class="who-saved add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+      <span class="phase-tag phase-tag-draft add-bottom-margin">Draft</span>
+      <p>You have unpublished changes.</p>
+      <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
     </div>
+    <hr />
   {% endif %}
 
+  {% if state == 'published' %}
+    <span class="phase-tag phase-tag-published add-bottom-margin">Published</span>
+  {% endif %}
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
 
@@ -103,6 +108,7 @@
   {% endif %}
 
   {% if state == 'new' %}
+    <span class="phase-tag phase-tag-no-content add-bottom-margin">Empty</span>
     <p>You need to complete and publish this information.</p>
     <hr />
   {% endif %}
@@ -126,14 +132,24 @@
 {% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
-    <div class="unpublished-changes">
-      <p>You have unpublished changes.</p>
-      <p class="who-saved add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
-    </div>
+    <span class="phase-tag phase-tag-draft add-bottom-margin">Draft</span>
+    <p>You have unpublished changes.</p>
+    <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+    <hr />
+  {% endif %}
+
+  {% if state == 'published' %}
+    <span class="phase-tag phase-tag-published add-bottom-margin">Draft</span>
   {% endif %}
 
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+    <hr />
+  {% endif %}
+
+  {% if state == 'new' %}
+    <span class="phase-tag phase-tag-no-content add-bottom-margin">Empty</span>
+    <p>You need to complete and publish this information.</p>
     <hr />
   {% endif %}
 
