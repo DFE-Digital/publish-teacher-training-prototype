@@ -3,11 +3,17 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-  {{ macros.orgHeading('About your organisation', message) }}
+  <div class="breadcrumbs">
+
+    <ol>
+      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
+      <li><a href="/">{{ data['training-provider-name']}}</a></li>
+    </ol>
+
+  </div>
 
   {% set message %}
     {% if showMessage %}
@@ -43,14 +49,14 @@
   </div>
   {% endif %}
 
-  <h2 class="heading-large">
-    {{ title }}
-  </h2>
+  {{ macros.orgHeading('About your organisation', message) }}
 
   <form action="/about-your-organisation" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <p>This information shows on all of your courses.</p>
+
+        <h2 class="heading-large">Training with you</h2>
 
         <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of you as a training provider.</p>
 

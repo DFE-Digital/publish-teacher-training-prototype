@@ -5,7 +5,33 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  {{ macros.orgHeading('Courses') }}
+  <div class="breadcrumbs">
+    <ol>
+      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">{{ data['training-provider-name'] }}</h1>
+
+  <h2 class="heading-large">About your organisation</h2>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <dl class="course-part-tasks remove-top-margin">
+        {{ macros.coursePart('about-your-organisation', 'About your organisation') }}
+        {% if not data['self_accrediting'] %}
+          {% for a in data['accreditors'] %}
+            {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
+          {% endfor %}
+        {% endif %}
+        {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs') }}
+      </dl>
+
+      <p class="add-top-margin">
+        <a href="/about-your-organisation">Edit and publish organisation information</a>
+      </p>
+    </div>
+  </div>
+  <hr />
 
   <h2 class="heading-large">
     Courses
@@ -69,6 +95,13 @@
       </table>
     </div>
   {% endfor %}
+  <hr />
+
+  <h2 class="heading-large">Request access for someone</h2>
+  <p>You can request a DfE Sign-in account for others who manage your courses.</p>
+  <p>
+    <a href="/request-access">Request access for someone</a>
+  </p>
 </main>
 
 {% endblock %}
