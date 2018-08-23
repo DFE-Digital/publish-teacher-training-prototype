@@ -19,7 +19,7 @@ $path: "/public/images/";
 }
 
 .not-running-notice {
-  border: 5px solid $govuk-blue;
+  border: 5px solid $grey-3;
   padding: 20px;
 }
 
@@ -56,9 +56,16 @@ table thead th {
   margin-bottom: -1px;
 }
 
-// .phase-tag-draft {
-//   background: $pink;
-// }
+.phase-tag-not-running {
+  background: $grey-3;
+  color: $black;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.phase-tag-draft {
+  background: $orange;
+}
 
 .phase-tag-published {
   background: $button-colour;
@@ -292,19 +299,15 @@ dl.aligned.course-part-tasks dd {
   }
 
   .subject-col {
-    width: 25%;
+    width: 40%;
   }
 
   .type-col {
-    width: 30%;
+    width: 40%;
   }
 
   .status-col {
     width: 20%;
-  }
-
-  .complete-col {
-    width: 25%;
   }
 
   .ucas-view-link {

@@ -47,13 +47,12 @@
       </h3>
     {% endif %}
     <div class="body-text">
-      <table class="ucas-info-table table-small">
+      <table class="ucas-info-table">
         <thead>
           <tr>
-            <th class="subject-col" style="width: 30%">Course</th>
+            <th class="subject-col">Course</th>
             <th class="type-col">Type</th>
-            <th class="status-col">Status</th>
-            <th class="complete-col">Course content</th>
+            <th class="status-col">State</th>
           </tr>
         </thead>
         <tbody>
@@ -67,17 +66,9 @@
                   {% else %}
                     <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                   {% endif %}
+                  </span>
                 </td>
                 <td>{{ course.options }}</td>
-                <td>{% if loop.index == 2 %}
-                      New – not yet running
-                    {% elseif loop.index == 7 %}
-                      Not running
-                    {% elseif loop.index == 4 %}
-                      Not running
-                    {% else %}
-                      Running
-                    {% endif %}</td>
                 <td>
                   {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
@@ -87,6 +78,10 @@
                     {% else %}
                       <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
                     {% endif %}
+                  {% elseif loop.index == 2 %}
+                    <span class="phase-tag phase-tag-small phase-tag-not-running">New – not yet running</span>
+                  {% else %}
+                    <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
                   {% endif %}
                 </td>
               </tr>
