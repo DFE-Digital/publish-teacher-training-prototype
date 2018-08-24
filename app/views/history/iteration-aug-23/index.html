@@ -1,0 +1,38 @@
+
+{% extends "layout.html" %}
+{% set title = 'Iteration aug 23' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {% set contents = [
+    { text: 'Organisation', id: 'organisation' }, 
+    { text: 'Course', id: 'course' }, 
+    { text: 'Preview', id: 'preview' }, 
+    { text: 'About your organisation', id: 'about-your-organisation' }, 
+    { text: 'Edit about your organisation', id: 'edit-about-your-organisation' }, 
+    { text: 'Course length and fees', id: 'course-length-and-fees' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/iteration-aug-23/thumbnails/01-organisation.png', '/public/images/history/iteration-aug-23/01-organisation.png', '') }}
+  
+  {{ macros.screenshot('Course', 'course', '/public/images/history/iteration-aug-23/thumbnails/02-course.png', '/public/images/history/iteration-aug-23/02-course.png', '') }}
+  
+  {{ macros.screenshot('Preview', 'preview', '/public/images/history/iteration-aug-23/thumbnails/03-preview.png', '/public/images/history/iteration-aug-23/03-preview.png', '') }}
+  
+  {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/iteration-aug-23/thumbnails/04-about-your-organisation.png', '/public/images/history/iteration-aug-23/04-about-your-organisation.png', '') }}
+  
+  {{ macros.screenshot('Edit about your organisation', 'edit-about-your-organisation', '/public/images/history/iteration-aug-23/thumbnails/05-edit-about-your-organisation.png', '/public/images/history/iteration-aug-23/05-edit-about-your-organisation.png', '') }}
+  
+  {{ macros.screenshot('Course length and fees', 'course-length-and-fees', '/public/images/history/iteration-aug-23/thumbnails/06-course-length-and-fees.png', '/public/images/history/iteration-aug-23/06-course-length-and-fees.png', '') }}
+  
+</main>
+{% endblock %}
