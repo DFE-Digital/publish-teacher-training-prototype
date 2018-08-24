@@ -17,10 +17,13 @@
     </div>
   </div>
 
-  <h2 class="heading-large remove-top-margin">About your organisation</h2>
   <div class="grid-row">
     <div class="column-two-thirds">
+      <h2 class="heading-large remove-top-margin">Step 1. About your organisation</h2>
       <p>Your organisation information and contact details will show on every course. They are edited and published separately from course information.</p>
+
+      <p>You need to complete your organisation fields and publish them.</p>
+
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
           <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
@@ -29,15 +32,27 @@
         {% else %}
           <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
         {% endif %}
-        <a href="/about-your-organisation">Edit your organisation information</a>
+        <a href="/about-your-organisation">Fill-in your organisation information</a>
       </p>
     </div>
   </div>
   <hr />
 
-  <h2 class="heading-large">
-    Courses
-  </h2>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h2 class="heading-large">
+        Step 2. Course details
+      </h2>
+
+      <h3 class="heading-medium">Preview and publish courses</h3>
+      <p>You must complete and publish each course. You should preview your course to see how it will look to applicants before you publish.</p>
+
+      <p>Your course information will not be seen by applicants until you have published it.</p>
+
+      <h3 class="heading-medium">Copying content between courses</h3>
+      <p>Once you’ve completed a single course you can use a ‘copy course’ feature to duplicate information in other courses.</p>
+    </div>
+  </div>
 
   {% for accrediting in data['accreditors'] %}
     {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
