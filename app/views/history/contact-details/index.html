@@ -1,0 +1,32 @@
+
+{% extends "layout.html" %}
+{% set title = 'Contact details' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  {% set contents = [
+    { text: 'About your organisation', id: 'about-your-organisation' },
+    { text: 'Contact details', id: 'contact-details' },
+    { text: 'About your organisation with errors', id: 'about-your-organisation-with-errors' },
+    { text: 'Contact details with errors', id: 'contact-details-with-errors' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/contact-details/thumbnails/01-about-your-organisation.png', '/public/images/history/contact-details/01-about-your-organisation.png', '') }}
+
+  {{ macros.screenshot('Contact details', 'contact-details', '/public/images/history/contact-details/thumbnails/02-contact-details.png', '/public/images/history/contact-details/02-contact-details.png', '') }}
+
+  {{ macros.screenshot('About your organisation with errors', 'about-your-organisation-with-errors', '/public/images/history/contact-details/thumbnails/01-about-your-organisation-with-errors.png', '/public/images/history/contact-details/01-about-your-organisation-with-errors.png', '') }}
+
+  {{ macros.screenshot('Contact details with errors', 'contact-details-with-errors', '/public/images/history/contact-details/thumbnails/02-contact-details-with-errors.png', '/public/images/history/contact-details/02-contact-details-with-errors.png', '') }}
+
+</main>
+{% endblock %}
