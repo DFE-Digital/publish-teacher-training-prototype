@@ -8,12 +8,12 @@
   {% include "includes/phase_banner_beta.html" %}
   <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
 
+  {% include "course/_errors.html" %}
+
   <h1 class="heading-xlarge">
     <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
-
-  {% include "course/_errors.html" %}
 
   <div class="grid-row">
     <div class="column-two-thirds">

@@ -201,7 +201,7 @@ var addCheckedFunction = function (app, nunjucksEnv) {
       var data = req.session.data;
       var courseCode = id.split('-')[0];
 
-      if (courseCode == 'about' || courseCode == 'training') {
+      if (courseCode.length > 4) {
         courseCode = 'about-your-organisation';
       }
 
