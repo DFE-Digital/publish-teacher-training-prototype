@@ -1,0 +1,115 @@
+
+{% extends "layout.html" %}
+{% set title = 'Contact details' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We added the <a href="/history/iteration-aug-23#about-your-organisation">contact details from UCAS</a> to the design (<a href="https://trello.com/c/XcWDGsvo/175-design-showing-org-info-to-publishers">Trello</a>). In user research we asked training providers about those details. We expected to be able to display them to applicants. We thought this was something we could avoid building for the minimum viable service.</p>
+
+      <p>Users told us that those UCAS contact details wouldn’t be correct.</p>
+
+      <div class="panel panel-border-wide">
+        <p>“Where are the contact details pulled from? … I don’t want it to put my personal details … I don’t want it to show an address, it’ll be wrong … If you pull in the address from UCAS it’ll be wrong … It could be an admin office, not somewhere someone can visit and see us” (<a href="https://lookback.io/watch/kY9HWu5MJiJhgJ5yC?t=58m55s">Video</a>)</p>
+      </div>
+
+      <div class="panel panel-border-wide">
+        <p>“So I need to put in the contact details… Where am I putting in the contact details? … The information I put on UCAS isn’t necessarily who they need to ring” (<a href="https://lookback.io/watch/acQugHJ6r7QFpvkMQ?t=1h25m6.76s">Video</a>)</p>
+      </div>
+
+      <h2 class="heading-large">The data is in Entry Profiles</h2>
+
+      <p>We import data from UCAS’s NetUpdate tool. We don’t use any of the Entry Profiles information. Entry Profiles is the tool that Publish courses will replace, it isn’t available to training providers for the 2019/2020 cycle.</p>
+
+      <p>Contact details for institutions in NetUpdate are incomplete, they don’t have email and address fields. The websites stored haven’t been validated, they often don’t have a protocol.</p>
+
+      <p>The information shown to applicants is actually stored in the Entry Profiles system. Here there are well formatted addresses, telephone numbers, emails and validated websites.</p>
+
+      <p>If we used this data, because Entry Profiles is no longer available, and without a way to update it in Publish courses, providers couldn’t update or correct their contact information.</p>
+
+      <h2 class="heading-large">Editing contact details in Publish courses</h2>
+
+      <h3 class="heading-medium">A one-off import</h3>
+
+      <p>We need to import the Entry Profiles contact details as a one-off. This will seed the contact details for every UCAS institution. From then on our database will be the source of truth.</p>
+
+      <h3 class="heading-medium">Adding contact details to About your organisation</h3>
+
+      <p>Replace the read only "information from UCAS" section with a standard contact details one. Contact details can be edited on their own page, this includes email, telephone number, website and contact address.</p>
+
+      <h2 class="heading-large">Validating contact details</h2>
+
+      <h3 class="heading-medium">Email address</h3>
+
+      <p><a href="https://design-system.service.gov.uk/patterns/email-addresses/">Follow design system guidance on email addresses</a></p>
+
+      <p>We indicate in the help text that this is the email address applicants will use to contact them.</p>
+
+      <h3 class="heading-medium">Telephone number</h3>
+
+      <p><a href="https://design-system.service.gov.uk/patterns/telephone-numbers/">Follow design system guidance on telephone numbers</a></p>
+
+      <div class="panel panel-border-wide">
+        <p>Users should be allowed to enter telephone numbers in whatever format is familiar to them. You should allow for additional spaces, hyphens, brackets and dashes, and be able to accommodate country and area codes.</p>
+      </div>
+
+      <p>We must allow users to include an extension number. This is usually in the format: 01234 987654 ext 1234</p>
+
+      <p>“I set up UCAS, so it’s probably my details. UCAS probably doesn’t have the extension number” (<a href="https://lookback.io/watch/acQugHJ6r7QFpvkMQ?t=2h28m54.82s">Video</a>)</p>
+
+      <h3 class="heading-medium">Website</h3>
+
+      <p>A website fails validation if it is not a valid URL.</p>
+
+      <p>After a website is entered we must:</p>
+      <ul class="list list-bullet">
+        <li>convert it to lowercase</li>
+        <li>prepend `http://` if there is no protocol</li>
+      </ul>
+
+      <p>We need training providers to deep link to the page on their website that lists their courses. Some of the URLs we will import already do this. A top-level URL can make it hard to find the information needed – a school website doesn’t prioritise their ITT content, a university equally prioritises other types of course and facilities.</p>
+
+      <h3 class="heading-medium">Contact address</h3>
+
+      <p><a href="https://design-system.service.gov.uk/patterns/addresses/#multiple-text-inputs">Follow design system guidance on addresses with multiple text inputs</a></p>
+
+      <p>The first line of the address, town or city, county and postcode are required fields for the benefit of applicants.</p>
+
+      <p>Applicants can use the postcode to quickly lookup directions. The county along with the town or city is a quick indicator of where an address is.</p>
+
+      <p>If we have problems with these fields being required we can loosen the rules.</p>
+
+
+
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'About your organisation', id: 'about-your-organisation' },
+    { text: 'Contact details', id: 'contact-details' },
+    { text: 'About your organisation with errors', id: 'about-your-organisation-with-errors' },
+    { text: 'Contact details with errors', id: 'contact-details-with-errors' },
+    { text: 'Preview with missing contact details', id: 'preview-with-missing-contact-details' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/contact-details/thumbnails/01-about-your-organisation.png', '/public/images/history/contact-details/01-about-your-organisation.png', '') }}
+
+  {{ macros.screenshot('Contact details', 'contact-details', '/public/images/history/contact-details/thumbnails/02-contact-details.png', '/public/images/history/contact-details/02-contact-details.png', '') }}
+
+  {{ macros.screenshot('About your organisation with errors', 'about-your-organisation-with-errors', '/public/images/history/contact-details/thumbnails/01-about-your-organisation-with-errors.png', '/public/images/history/contact-details/01-about-your-organisation-with-errors.png', '') }}
+
+  {{ macros.screenshot('Contact details with errors', 'contact-details-with-errors', '/public/images/history/contact-details/thumbnails/02-contact-details-with-errors.png', '/public/images/history/contact-details/02-contact-details-with-errors.png', '') }}
+
+  {{ macros.screenshot('Preview with missing contact details', 'preview-with-missing-contact-details', '/public/images/history/contact-details/thumbnails/03-preview-with-missing-contact-details.png', '/public/images/history/contact-details/03-preview-with-missing-contact-details.png', '') }}
+</main>
+{% endblock %}

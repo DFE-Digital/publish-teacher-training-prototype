@@ -7,12 +7,10 @@
   {% include "includes/phase_banner_beta.html" %}
 
   <div class="breadcrumbs">
-
     <ol>
       {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
       <li><a href="/">{{ data['training-provider-name']}}</a></li>
     </ol>
-
   </div>
 
   {% set message %}
@@ -55,7 +53,7 @@
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
-          <li class="course-parts-item">
+          <!-- <li class="course-parts-item">
             <h3 class="course-part-task">Contact details from UCAS</h3>
             <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
             <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
@@ -75,19 +73,59 @@
                 {{ data['postcode'] }}
               </dd>
             </dl>
+          </li> -->
+          <li class="course-parts-item">
+            <h3 class="course-part-task">Contact details</h3>
+            <a class="course-part-task-action" href="/about-your-organisation/contact">Edit</a>
+
+            <dl class="course-part-tasks">
+              {{ macros.coursePart('email-address', 'Email address', errors) }}
+              {{ macros.coursePart('telephone-number', 'Telephone number', errors) }}
+              {{ macros.coursePart('website', 'Website', errors) }}
+
+              <div {% if e %}class="course-part-error"{% endif %}>
+                <dt class="course-part-label">
+                  Contact address
+                  {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
+                </dt>
+                {% if data['building-and-street'] or data['building-and-street-2'] or data['organisation-town-or-city'] or data['county'] or data['postcode'] %}
+                  <dd class="course-part-value">
+                    {% if data['building-and-street'] %}
+                      {{ data['building-and-street'] }}<br />
+                    {% endif %}
+                    {% if data['building-and-street-2'] %}
+                      {{ data['building-and-street-2'] }}<br />
+                    {% endif %}
+                    {% if data['organisation-town-or-city'] %}
+                      {{ data['organisation-town-or-city'] }}<br />
+                    {% endif %}
+                    {% if data['county'] %}
+                      {{ data['county'] }}<br />
+                    {% endif %}
+                    {% if data['postcode'] %}
+                      {{ data['postcode'] }}<br />
+                    {% endif %}
+                  </dd>
+                {% else %}
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                {% endif %}
+              </div>
+            </dl>
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">About your organisation</h3>
             <a class="course-part-task-action" href="/about-your-organisation/edit">Edit</a>
 
             <dl class="course-part-tasks">
-              {{ macros.coursePart('about-organisation', 'About your organisation') }}
+              {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
               {% if not data['self_accrediting'] %}
                 {% for a in data['accreditors'] %}
                   {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
                 {% endfor %}
               {% endif %}
-              {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs') }}
+              {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
             </dl>
           </li>
         </ul>

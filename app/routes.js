@@ -20,8 +20,13 @@ router.get('/about-your-organisation', function (req, res) {
 })
 
 router.get('/about-your-organisation/edit', function (req, res) {
-  var errors = validateOrg(req.session.data);
-  res.render('about-your-organisation/edit', { errors: errors, justPublished: (req.query.publish && errors.length == 0) })
+  var errors = validateOrg(req.session.data, 'about-your-organisation');
+  res.render('about-your-organisation/edit', { errors: errors })
+})
+
+router.get('/about-your-organisation/contact', function (req, res) {
+  var errors = validateOrg(req.session.data, 'contact-details');
+  res.render('about-your-organisation/contact', { errors: errors })
 })
 
 router.post('/about-your-organisation', function (req, res) {
@@ -324,25 +329,93 @@ function validate(data, course, view) {
   return errors;
 }
 
-function validateOrg(data) {
+function validateOrg(data, view) {
   var errors = [];
+  var view = view || 'all';
 
-  if (!data['about-organisation']) {
-    errors.push({
-      title: 'Give details about your organisation',
-      id: `about-organisation`,
-      link: `/about-your-organisation/edit#about-organisation`,
-      page: 'about-your-organisation'
-    })
+  if (view == 'all' || view == 'about-your-organisation') {
+    if (!data['about-organisation']) {
+      errors.push({
+        title: 'Give details about your organisation',
+        id: `about-organisation`,
+        link: `/about-your-organisation/edit#about-organisation`,
+        page: 'about-your-organisation'
+      })
+    }
+
+    if (!data['training-with-a-disability']) {
+      errors.push({
+        title: 'Give details about training with a disability',
+        id: `training-with-a-disability`,
+        link: `/about-your-organisation/edit#training-with-a-disability`,
+        page: 'about-your-organisation'
+      })
+    }
   }
 
-  if (!data['training-with-a-disability']) {
-    errors.push({
-      title: 'Give details about training with a disability',
-      id: `training-with-a-disability`,
-      link: `/about-your-organisation/edit#training-with-a-disability`,
-      page: 'about-your-organisation'
-    })
+  if (view == 'all' || view == 'contact-details') {
+    if (!data['email-address']) {
+      errors.push({
+        title: 'Email address is missing',
+        id: `email-address`,
+        link: `/about-your-organisation/contact#email-address`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['telephone-number']) {
+      errors.push({
+        title: 'Telephone number is missing',
+        id: `telephone-number`,
+        link: `/about-your-organisation/contact#telephone-number`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['website']) {
+      errors.push({
+        title: 'Website is missing',
+        id: `website`,
+        link: `/about-your-organisation/contact#website`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['building-and-street']) {
+      errors.push({
+        title: 'Give a building and street name in your contact address',
+        id: `building-and-street`,
+        link: `/about-your-organisation/contact#building-and-street`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['organisation-town-or-city']) {
+      errors.push({
+        title: 'Give a town or city in your contact address',
+        id: `organisation-town-or-city`,
+        link: `/about-your-organisation/contact#organisation-town-or-city`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['postcode']) {
+      errors.push({
+        title: 'Give a postcode in your contact address',
+        id: `postcode`,
+        link: `/about-your-organisation/contact#postcode`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['county']) {
+      errors.push({
+        title: 'Give a county in your contact address',
+        id: `county`,
+        link: `/about-your-organisation/contact#county`,
+        page: 'contact'
+      })
+    }
   }
 
   return errors;
