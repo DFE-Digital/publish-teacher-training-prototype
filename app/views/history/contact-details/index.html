@@ -12,11 +12,16 @@
   </div>
   <h1 class="heading-xlarge">{{ title }}</h1>
 
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>In user research we asked training providers about importing their contact details from UCAS and displaying them to applicants. We assumed that these were the details shown to users</p>
+    </div>
+  </div>
+
   {% set contents = [
     { text: 'About your organisation', id: 'about-your-organisation' },
     { text: 'Contact details', id: 'contact-details' },
-    { text: 'About your organisation with errors', id: 'about-your-organisation-with-errors' },
-    { text: 'Contact details with errors', id: 'contact-details-with-errors' }
+    { text: 'Preview with missing contact details', id: 'preview-with-missing-contact-details' }
   ] %}
   {{ macros.screenshotContents(contents) }}
 
@@ -24,9 +29,7 @@
 
   {{ macros.screenshot('Contact details', 'contact-details', '/public/images/history/contact-details/thumbnails/02-contact-details.png', '/public/images/history/contact-details/02-contact-details.png', '') }}
 
-  {{ macros.screenshot('About your organisation with errors', 'about-your-organisation-with-errors', '/public/images/history/contact-details/thumbnails/01-about-your-organisation-with-errors.png', '/public/images/history/contact-details/01-about-your-organisation-with-errors.png', '') }}
-
-  {{ macros.screenshot('Contact details with errors', 'contact-details-with-errors', '/public/images/history/contact-details/thumbnails/02-contact-details-with-errors.png', '/public/images/history/contact-details/02-contact-details-with-errors.png', '') }}
+  {{ macros.screenshot('Preview with missing contact details', 'preview-with-missing-contact-details', '/public/images/history/contact-details/thumbnails/03-preview-with-missing-contact-details.png', '/public/images/history/contact-details/03-preview-with-missing-contact-details.png', '') }}
 
 </main>
 {% endblock %}
