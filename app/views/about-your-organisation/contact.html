@@ -20,6 +20,14 @@
         {{ macros.textbox('email-address', 'Email address', 'Give an email address that applicants can use to contact you', 'form-control', null, errors) }}
         {{ macros.textbox('telephone-number', 'Telephone number', 'Give a telephone number that applicants can use to call you', 'form-control', null, errors) }}
         {{ macros.textbox('website', 'Website', 'Add a link to the initial teacher training or course pages of your website', 'form-control-full', null, errors) }}
+
+        <h2 class="heading-medium" id="contact-address">Contact address</h2>
+        {{ macros.textbox('building-and-street', 'Building and street', null, 'form-control-full', null, errors) }}
+        {{ macros.textbox('building-and-street-2', null, null, 'form-control-full', null, errors) }}
+
+        {{ macros.textbox('organisation-town-or-city', 'Town or city', null, 'form-control', null, errors) }}
+        {{ macros.textbox('county', 'County', null, 'form-control', null, errors) }}
+        {{ macros.textbox('postcode', 'Postcode', null, 'form-control-small', null, errors) }}
       </div>
     </div>
 

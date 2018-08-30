@@ -82,6 +82,36 @@
               {{ macros.coursePart('email-address', 'Email address', errors) }}
               {{ macros.coursePart('telephone-number', 'Telephone number', errors) }}
               {{ macros.coursePart('website', 'Website', errors) }}
+
+              <div {% if e %}class="course-part-error"{% endif %}>
+                <dt class="course-part-label">
+                  Contact address
+                  {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
+                </dt>
+                {% if data['building-and-street'] or data['building-and-street-2'] or data['organisation-town-or-city'] or data['county'] or data['postcode'] %}
+                  <dd class="course-part-value">
+                    {% if data['building-and-street'] %}
+                      {{ data['building-and-street'] }}<br />
+                    {% endif %}
+                    {% if data['building-and-street-2'] %}
+                      {{ data['building-and-street-2'] }}<br />
+                    {% endif %}
+                    {% if data['organisation-town-or-city'] %}
+                      {{ data['organisation-town-or-city'] }}<br />
+                    {% endif %}
+                    {% if data['county'] %}
+                      {{ data['county'] }}<br />
+                    {% endif %}
+                    {% if data['postcode'] %}
+                      {{ data['postcode'] }}<br />
+                    {% endif %}
+                  </dd>
+                {% else %}
+                  <dd class="course-part-value course-part-value--empty">
+                    This field is empty
+                  </dd>
+                {% endif %}
+              </div>
             </dl>
           </li>
           <li class="course-parts-item">

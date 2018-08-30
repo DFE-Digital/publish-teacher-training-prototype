@@ -380,6 +380,42 @@ function validateOrg(data, view) {
         page: 'contact'
       })
     }
+
+    if (!data['building-and-street']) {
+      errors.push({
+        title: 'Give a building and street name in your contact address',
+        id: `building-and-street`,
+        link: `/about-your-organisation/contact#building-and-street`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['organisation-town-or-city']) {
+      errors.push({
+        title: 'Give a town or city in your contact address',
+        id: `organisation-town-or-city`,
+        link: `/about-your-organisation/contact#organisation-town-or-city`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['postcode']) {
+      errors.push({
+        title: 'Give a postcode in your contact address',
+        id: `postcode`,
+        link: `/about-your-organisation/contact#postcode`,
+        page: 'contact'
+      })
+    }
+
+    if (!data['county']) {
+      errors.push({
+        title: 'Give a county in your contact address',
+        id: `county`,
+        link: `/about-your-organisation/contact#county`,
+        page: 'contact'
+      })
+    }
   }
 
   return errors;

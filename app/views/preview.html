@@ -197,18 +197,27 @@
 
         <h2 class="heading-medium" id="section-contact">Contact details</h2>
 
+        {% if not (data['email-address'] and data['telephone-number'] and data['website'] and data['postcode'] and data['building-and-street']) %}
+          <p class="missing-section">
+            Please <a href="/about-your-organisation">add your missing contact details</a></a>.
+          </p>
+        {% endif %}
+
         <dl class="aligned">
           <dt>Email:</dt>
-          <dd><a href="#">{{ data['email'] }}</a></dd>
+          <dd><a href="#">{{ data['email-address'] }}</a></dd>
           <dt>Telephone:</dt>
-          <dd>{{ data['telephone'] }}</dd>
+          <dd>{{ data['telephone-number'] }}</dd>
           <dt>Website:</dt>
           <dd><a href="{{ data['website'] }}">{{ data['website'] }}</a></dd>
           <dt>Address:</dt>
           <dd>
-            {{ data['training-provider-name'] }}<br />
-            {{ data['address-line-1'] }}<br />
-            {{ data['town'] }}<br />
+            {{ data['building-and-street'] }}<br />
+            {% if data['building-and-street-2'] %}
+              {{ data['building-and-street-2'] }}<br />
+            {% endif %}
+            {{ data['organisation-town-or-city'] }}<br />
+            {{ data['county'] }}<br />
             {{ data['postcode'] }}
           </dd>
         </dl>
