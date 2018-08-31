@@ -13,12 +13,6 @@ prototype_data = {
   'training-provider-name': provider,
   'provider-code-name': courses.first['providerCodeName'],
   'provider-code': courses.first['providerCode'],
-  'address-line-1': '123 Baker Street',
-  'town': 'London',
-  'postcode': 'SW1 1AA',
-  'telephone': '0208 123 4567',
-  'email': 'someemail@not-an-email.com',
-  'website': 'http://www.egaschool.co.uk/244/the-angel-islington-teaching-school-alliance',
   'templates': []
 }
 
