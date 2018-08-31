@@ -100,6 +100,7 @@
 
   {% if state == 'published' %}
     <span class="phase-tag phase-tag-published add-bottom-margin">Published</span>
+    <p>Applicants will see this on all your courses from October.</p>
   {% endif %}
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
@@ -121,7 +122,8 @@
     <hr /> #}
 
     <h3 class="heading-medium remove-top-margin">Publish</h3>
-    <p>New information will show on all {{ value('training-provider-name') }} courses.</p>
+    <p>This information will show on all your courses.</p>
+    <p>Applicants will see published information from October.</p>
     <p>
       <a href="{{ publishLink }}" class="button">Publish</a>
     </p>
@@ -140,6 +142,7 @@
 
   {% if state == 'published' %}
     <span class="phase-tag phase-tag-published add-bottom-margin">Published</span>
+    <p>Applicants will see this from October.</p>
   {% endif %}
 
   {% if publishedBefore or state == 'published' %}
@@ -161,7 +164,9 @@
     <hr />
 
     <h3 class="heading-medium remove-top-margin">Publish</h3>
-    <p>Publish your changes for applicants to see them.</p>
+    <p>Publish your changes.</p>
+
+    <p>Applicants will see published content from October.</p>
     <a href="{{ publishLink }}" class="button">Publish</a>
     <hr />
   {% endif %}
