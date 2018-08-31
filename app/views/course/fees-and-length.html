@@ -62,13 +62,13 @@
           </ul>
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
+
+          <h2 class="heading-large">Financial support you offer</h2>
+          <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
+          <p>You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
+
+          {{ macros.textarea(course.programmeCode + '-financial-support', 'Financial support you offer (optional)', 10, null, 250) }}
         {% endif %}
-
-        <h2 class="heading-large">Financial support you offer</h2>
-        <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
-        <p>You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
-
-        {{ macros.textarea(course.programmeCode + '-financial-support', 'Financial support you offer (optional)', 10, null, 250) }}
 
         <div class="add-top-margin add-double-bottom-margin">
           <input type="submit" class="button" value="Save" />
