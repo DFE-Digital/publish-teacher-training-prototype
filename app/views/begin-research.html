@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% set title %}Before we begin{% endset %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>This is a prototype.</p>
+      <p>The data shown in this prototype:</p>
+
+      <ul class="list list-bullet">
+        <li>is old and may be out of date</li>
+        <li>doesn’t represent the live version</li>
+      </ul>
+
+      <p>Any changes made using this prototype are temporary and will be deleted after the research ends.</p>
+
+      <a href="/" class="button">Start research</a>
+    </div>
+</div>
+</main>
+
+{% endblock %}
