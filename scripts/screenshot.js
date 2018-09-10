@@ -4,6 +4,9 @@ var fs = require('fs');
 var sharp = require('sharp');
 var directoryName = process.argv.slice(-1)[0];
 
+var hostname = "localhost";
+var domain = `http://${hostname}:3000`;
+
 if (directoryName.startsWith('/Users')) {
   console.log('No arguments set');
   console.log('Please set a screenshot directory in the format directory-name-with-hyphens');
@@ -33,15 +36,18 @@ var options = {
   shotSize: {
     width: 'window',
     height: 'all'
-  }
+  },
+  cookies: [
+    {
+    'name': 'seen_cookie_message',
+    'value': 'yes',
+    'domain': hostname
+    }
+  ]
 }
 
 var paths = [
-  { path: '/', name: 'organisation' },
-  { path: '/course/bromley-schools-collegiate/IX99', name: 'course' },
-  { path: '/preview/bromley-schools-collegiate/IX99', name: 'preview' },
-  { path: '/about-your-organisation', name: 'about-your-organisation' },
-  { path: '/course/bromley-schools-collegiate/IX99/fees-and-length', name: 'course-length-and-fees' },
+  { path: '/', name: 'organisation' }
 ]
 
 var template = '';
@@ -68,7 +74,7 @@ paths.forEach(function(item, index) {
   contents += `${comma}
     { text: '${heading}', id: '${item.name}' }`;
 
-  webshot('http://localhost:3000' + item.path, screenshot, options, function(err) {
+  webshot(domain + item.path, screenshot, options, function(err) {
     console.log(screenshot);
     sharp(screenshot).resize(630, null).toFile(thumbnail);
   });
