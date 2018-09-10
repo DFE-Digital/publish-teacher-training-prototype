@@ -1,0 +1,58 @@
+
+{% extends "layout.html" %}
+{% set title = 'Enrichment release – 6 September' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Screenshots of Publish courses (manage-courses-ui) as released on 6 September.</p>
+      <p>This is what the service looked like when we enabled organisation and course enrichment for the first time.</p>
+
+      <p>This release doesn’t include:</p>
+      <ul class="list list-bullet">
+        <li>editing contact details</li>
+        <li>about your organisation <a href="/history/iteration-aug-23">layout improvements</a></li>
+        <li>persistent validation on publish</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Organisation', id: 'organisation' },
+    { text: 'Course', id: 'course' },
+    { text: 'About this course', id: 'about-this-course' },
+    { text: 'Fees and length', id: 'fees-and-length' },
+    { text: 'Requirements and eligibility', id: 'requirements-and-eligibility' },
+    { text: 'Preview', id: 'preview' },
+    { text: 'About your organisation', id: 'about-your-organisation' },
+    { text: 'Request access', id: 'request-access' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/enrichment-sept-6/thumbnails/01-organisation.png', '/public/images/history/enrichment-sept-6/01-organisation.png', '') }}
+
+  {{ macros.screenshot('Course', 'course', '/public/images/history/enrichment-sept-6/thumbnails/02-course.png', '/public/images/history/enrichment-sept-6/02-course.png', '') }}
+
+  {{ macros.screenshot('About this course', 'about-this-course', '/public/images/history/enrichment-sept-6/thumbnails/03-about-this-course.png', '/public/images/history/enrichment-sept-6/03-about-this-course.png', '') }}
+
+  {{ macros.screenshot('Fees and length', 'fees-and-length', '/public/images/history/enrichment-sept-6/thumbnails/04-fees-and-length.png', '/public/images/history/enrichment-sept-6/04-fees-and-length.png', '') }}
+
+  {{ macros.screenshot('Requirements and eligibility', 'requirements-and-eligibility', '/public/images/history/enrichment-sept-6/thumbnails/05-requirements-and-eligibility.png', '/public/images/history/enrichment-sept-6/05-requirements-and-eligibility.png', '') }}
+
+  {{ macros.screenshot('Preview', 'preview', '/public/images/history/enrichment-sept-6/thumbnails/06-preview.png', '/public/images/history/enrichment-sept-6/06-preview.png', '') }}
+
+  {{ macros.screenshot('About your organisation', 'about-your-organisation', '/public/images/history/enrichment-sept-6/thumbnails/07-about-your-organisation.png', '/public/images/history/enrichment-sept-6/07-about-your-organisation.png', '') }}
+
+  {{ macros.screenshot('Request access', 'request-access', '/public/images/history/enrichment-sept-6/thumbnails/08-request-access.png', '/public/images/history/enrichment-sept-6/08-request-access.png', '') }}
+
+</main>
+{% endblock %}
