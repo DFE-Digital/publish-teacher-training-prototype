@@ -60,15 +60,15 @@
     </dd>
     <dt>Course length:</dt>
     <dd>
-      {% if previewingTemplate %}
-        Varies depending on course
+      {% if data[prefix + '-duration'] == 'Other' %}
+        {{ data[prefix + '-duration-other'] }}
       {% else %}
         {{ data[prefix + '-duration'] or '1 year' }}
-        {% if 'full' in course.options[0] %}
-          full time
-        {% else %}
-          part time
-        {% endif %}
+      {% endif %}
+      {% if 'full' in course.options[0] %}
+        full time
+      {% else %}
+        part time
       {% endif %}
     </dd>
     <dt>Date you can apply from:</dt>

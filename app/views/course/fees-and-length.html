@@ -19,6 +19,10 @@
     <div class="column-two-thirds">
       <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
         <h2 class="heading-large remove-top-margin">Course length</h2>
+        {% set otherField %}
+          {{ macros.textbox(course.programmeCode + '-duration-other', 'Course length')}}
+        {% endset %}
+
         {% set fields = [
             {
               name: '1 year'
@@ -27,12 +31,15 @@
               name: 'Up to 2 years'
             },
             {
-              name: 'Other'
+              name: 'Other',
+              more: otherField
             }
           ]
         %}
 
         {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
+
+        <hr />
 
         {% if course.salaried %}
           <h2 class="heading-large">Salary</h2>
@@ -40,7 +47,7 @@
           <p>Give details about the salary for this course.</p>
           <p>You should:</p>
           <ul class="list list-bullet">
-            <li>give an indication of the salary</li>
+            <li>give an indication of the salary – if you don’t have the figure, say how it will be calculated (eg using the unqualified teachers’ pay scales)</li>
             <li>say whether there are any fees or others costs – if there are no fees for this course, you should also say so</li>
           </ul>
 
@@ -62,6 +69,8 @@
           </ul>
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
+
+          <hr />
 
           <h2 class="heading-large">Financial support you offer</h2>
           <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>

@@ -24,31 +24,42 @@
     {{ title }}
   </h1>
 
-  <div class="not-running-notice add-double-bottom-margin">
-    <h2 class="heading-large remove-top-margin">This course is not running</h2>
-    <p class="lede remove-bottom-margin">It won’t appear online. To publish it you need to set the status of at least one training location to “running” in <a href="https://update.ucas.co.uk/cgi-bin/hsrun.hse/NetUpdate/netupdate2/netupdate2.hjx;start=netupdate2.HsLoginPage.run">UCAS web-link</a>.</p>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h3 class="heading-medium">Information from UCAS</h3>
+      <div class="notice" style="margin-top: 30px">
+        <i class="icon icon-important">
+          <span class="visually-hidden">Warning</span>
+        </i>
+        <strong class="bold-small">
+          This course is not running.
+        </strong>
+      </div>
+      <p style="margin-left: 50px; margin-bottom: 30px">It won’t appear online. You can publish it by changing the status of one or more training locations to “running” in <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>.</p>
+      <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
+      <dl class="aligned add-top-margin add-double-bottom-margin">
+        <dt>Status:</dt>
+        <dd>Not running</dd>
+        <dt>Training provider code:</dt>
+        <dd>{{ course.providerCode }}</dd>
+        <dt>Training programme code:</dt>
+        <dd>{{ course.programmeCode }}</dd>
+        <dt>Accredited provider:</dt>
+        <dd>{{ course.accrediting }}</dd>
+        <dt>Route:</dt>
+        <dd>{{ course.route }}</dd>
+        <dt>Subjects:</dt>
+        <dd>{{ course.subjects }}</dd>
+        <!-- <dt>Age range:</dt>
+        <dd>{{ course.ageRange }}</dd> -->
+        <dt>Qualification:</dt>
+        <dd>{{ course.qualifications }}</dd>
+        <dt>Regions:</dt>
+        <dd>{{ course.regions }}</dd>
+      </dl>
+    </div>
   </div>
 
-  <dl class="aligned add-top-margin add-double-bottom-margin">
-    <dt>Status:</dt>
-    <dd>Not running</dd>
-    <dt>Training provider code:</dt>
-    <dd>{{ course.providerCode }}</dd>
-    <dt>Training programme code:</dt>
-    <dd>{{ course.programmeCode }}</dd>
-    <dt>Accredited provider:</dt>
-    <dd>{{ course.accrediting }}</dd>
-    <dt>Route:</dt>
-    <dd>{{ course.route }}</dd>
-    <dt>Subjects:</dt>
-    <dd>{{ course.subjects }}</dd>
-    <!-- <dt>Age range:</dt>
-    <dd>{{ course.ageRange }}</dd> -->
-    <dt>Qualification:</dt>
-    <dd>{{ course.qualifications }}</dd>
-    <dt>Regions:</dt>
-    <dd>{{ course.regions }}</dd>
-  </dl>
 
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">

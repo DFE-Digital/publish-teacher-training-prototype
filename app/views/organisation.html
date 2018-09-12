@@ -20,9 +20,9 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large remove-top-margin">Step 1. About your organisation</h2>
-      <p>Your organisation information and contact details will show on every course. They are edited and published separately from course information.</p>
+      <p>You need to add a description of your organisation - this is a chance to tell applicants why they should train with you. You should also say what you do for candidates with disabilities and other needs, and check your contact details to make sure they're correct.</p>
 
-      <p>You need to complete your organisation fields and publish them.</p>
+      <p>Once you’ve published your organisation information, it will show on each of your course pages. You’ll have to add your course details separately in Step 2 below.</p>
 
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
@@ -45,12 +45,12 @@
       </h2>
 
       <h3 class="heading-medium">Preview and publish courses</h3>
-      <p>You must complete and publish each course. You should preview your course to see how it will look to applicants before you publish.</p>
+      <p>Give more details about each of your courses - including their structure and content, information about fees and financial help, and the qualifications needed for them.</p>
 
-      <p>Your course information will not be seen by applicants until you have published it.</p>
+      <p>Make sure you preview each course before you publish it, to see how it will look online to applicants. Your courses won’t be seen by applicants until the search service, Find postgraduate teacher training, is launched in October.</p>
 
       <h3 class="heading-medium">Copying content between courses</h3>
-      <p>Once you’ve completed a single course you can use a ‘copy course’ feature to duplicate information in other courses.</p>
+      <p>After you’ve saved your first course, when you’re completing the next you can use the ‘copy from course’ feature to fill in fields. This can be found on the ‘About this course’, ‘Course length and fees’ and ‘Requirements and eligibility’ pages.</p>
     </div>
   </div>
 
@@ -76,7 +76,7 @@
             {% if course.accrediting == accrediting.name %}
               <tr>
                 <td>
-                  {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
+                  {% if (loop.index != 4 and loop.index != 7) %}
                     <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                   {% else %}
                     <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
@@ -85,7 +85,7 @@
                 </td>
                 <td>{{ course.options }}</td>
                 <td>
-                  {% if (loop.index != 2 and loop.index != 4 and loop.index != 7) %}
+                  {% if (loop.index != 4 and loop.index != 7) %}
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
                       <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
                     {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
@@ -93,8 +93,6 @@
                     {% else %}
                       <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
                     {% endif %}
-                  {% elseif loop.index == 2 %}
-                    <span class="phase-tag phase-tag-small phase-tag-not-running">New – not yet running</span>
                   {% else %}
                     <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
                   {% endif %}
