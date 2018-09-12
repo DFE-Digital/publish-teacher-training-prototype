@@ -1,0 +1,81 @@
+
+{% extends "layout.html" %}
+{% set title = 'Copy content from another course (Live)' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>When we initially designed and tested the <a href="/history/copy-content-from-another-course">copy content feature</a> we expected the backend to be a bottleneck:</p>
+
+      <div class="panel panel-border-wide">
+        <p>We needed an alternative to templates … without depending on backend development too heavily – which is our current bottleneck.</p>
+      </div>
+
+      <p>This assumption was wrong: we made good progress with course enrichment and it was faster and easier to <a href="https://github.com/DFE-Digital/manage-courses-ui/pull/143">build this without frontend dependencies</a>.</p>
+
+      <p>Because the feature now operates with a form submit and a full page reload we had to make some design iterations.</p>
+
+      <h2 class="heading-large">What we changed</h2>
+
+      <h3 class="heading-medium">Moving the list of copied fields</h3>
+
+      <p>In the original we listed the copied fields <a href="/history/copy-content-from-another-course#content-copied-from-another-course">by the copy course form</a>. This makes sense when the frontend does a seamless update. On a full page reload however these messages get lost.</p>
+
+      <p>We updated the design by moving the alert and the copied fields to the top of the page, like success and error summaries. And like on an error summary, we link to each of the fields that’s been updated.</p>
+
+      <h3 class="heading-medium">Your changes are not yet saved</h3>
+
+      <p>In the original when the fields were updated by JavaScript it was intuitive that users needed to save to continue. This had tested well. If they tried to leave without saving the ‘unsaved changes’ dialogue would warn them.</p>
+
+      <p>Doing the same thing with a form submission and page reload is less intuitive. We could immediately save changes and show a success message, or we could request that users review what’s been copied and ask them to save. The second option is preferable as we’d like users to review and make changes before saving.</p>
+
+      <p>To emphasise that ‘this isn’t quite done’, we introduced a new alert state – an orange intermediate alert. It's not an error, it's not successful yet, it's sort like a draft – which is also orange. The colour doesn’t fit quite right but it seems to work.</p>
+
+      <h3 class="heading-medium">JavaScript prompts</h3>
+
+      <p>If a user makes changes to any fields and then tries to copy we warn about losing unsaved changes.</p>
+      <p>If a user copies a course and tries to leave without saving we also warn about losing unsaved changes.</p>
+
+      <h2 class="heading-large">People aren’t finding the feature</h2>
+
+      <p>We’ve had support requests asking where the feature is. In research people have been looking for this on:</p>
+      <ul class="list list-bullet">
+        <li>the course overview</li>
+        <li>the course listing</li>
+        <li>their first course, thinking they copy from it to another</li>
+      </ul>
+
+      <p>We’ve made some copy changes to better highlight the feature but we need to reassess where this lives. Does a full course copy make sense now? Would that live on the course overview?</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'About this course before copying', id: 'about-this-course-before-copying' },
+    { text: 'Copying content on about this course', id: 'copying-content-on-about-this-course' },
+    { text: 'Copying content on fees and length', id: 'copying-content-on-fees-and-length' },
+    { text: 'Copying content on requirements', id: 'copying-content-on-requirements' },
+    { text: 'Nothing to copy', id: 'nothing-to-copy' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('About this course before copying', 'about-this-course-before-copying', '/public/images/history/copy-content-from-another-course-live/thumbnails/01-about-this-course-before-copying.png', '/public/images/history/copy-content-from-another-course-live/01-about-this-course-before-copying.png', '') }}
+
+  {{ macros.screenshot('Copying content on about this course', 'copying-content-on-about-this-course', '/public/images/history/copy-content-from-another-course-live/thumbnails/02-copying-content-on-about-this-course.png', '/public/images/history/copy-content-from-another-course-live/02-copying-content-on-about-this-course.png', '') }}
+
+  {{ macros.screenshot('Copying content on fees and length', 'copying-content-on-fees-and-length', '/public/images/history/copy-content-from-another-course-live/thumbnails/03-copying-content-on-fees-and-length.png', '/public/images/history/copy-content-from-another-course-live/03-copying-content-on-fees-and-length.png', '') }}
+
+  {{ macros.screenshot('Copying content on requirements', 'copying-content-on-requirements', '/public/images/history/copy-content-from-another-course-live/thumbnails/04-copying-content-on-requirements.png', '/public/images/history/copy-content-from-another-course-live/04-copying-content-on-requirements.png', '') }}
+
+  {{ macros.screenshot('Nothing to copy', 'nothing-to-copy', '/public/images/history/copy-content-from-another-course-live/thumbnails/05-nothing-to-copy.png', '/public/images/history/copy-content-from-another-course-live/05-nothing-to-copy.png', '') }}
+
+</main>
+{% endblock %}
