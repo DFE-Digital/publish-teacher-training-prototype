@@ -4,8 +4,10 @@ var fs = require('fs');
 var sharp = require('sharp');
 var directoryName = process.argv.slice(-1)[0];
 
-var hostname = "localhost";
-var domain = `http://${hostname}:3000`;
+// var hostname = "localhost";
+// var domain = `http://${hostname}:3000`;
+var hostname = "bat-dev-manage-courses-ui-app.azurewebsites.net";
+var domain = `https://${hostname}`;
 
 if (directoryName.startsWith('/Users')) {
   console.log('No arguments set');
@@ -39,15 +41,31 @@ var options = {
   },
   cookies: [
     {
-    'name': 'seen_cookie_message',
-    'value': 'yes',
-    'domain': hostname
+      'name': 'seen_cookie_message',
+      'value': 'yes',
+      'domain': hostname
+    },
+    {
+      'name': '.AspNetCore.Cookies',
+      'value': '',
+      'domain': hostname
+    },
+    {
+      'name': 'ARRAffinity',
+      'value': '',
+      'domain': hostname
     }
   ]
 }
 
 var paths = [
   { path: '/', name: 'organisation' }
+  { path: '/organisation/2at/course/self/35l6/about', name: 'about-this-course' },
+  { path: '/organisation/2at/course/self/35l6/fees-and-length', name: 'fees-and-length' },
+  { path: '/organisation/2at/course/self/35l6/requirements', name: 'requirements-and-eligibility' },
+  { path: '/organisation/2at/course/self/35l6/preview', name: 'preview' },
+  { path: '/organisation/2at/about', name: 'about-your-organisation' },
+  { path: '/organisation/2at/request-access', name: 'request-access' }
 ]
 
 var template = '';
