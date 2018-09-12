@@ -47,7 +47,7 @@
   <div class="status-box">
     <h3 class="heading-medium remove-top-margin">
       <span class="js-cant-copy" style="display: none">Use this content again</span>
-      <span class="js-can-copy" style="display: none">Use content from another course</span>
+      <span class="js-can-copy" style="display: none">Copy content from another course</span>
     </h3>
 
     <div class="success-summary success-summary-small js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none;">
@@ -115,7 +115,7 @@
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
-    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <h3 class="heading-medium remove-top-margin">Preview on a course</h3>
     <p>This information will show on all your courses.</p>
     <p>Preview any course to see how it will look to applicants.</p>
 
@@ -123,6 +123,7 @@
 
     <h3 class="heading-medium remove-top-margin">Publish</h3>
     <p>Applicants will see published information from October.</p>
+    <p>You can make changes to this after publishing it.</p>
     <p>
       <a href="{{ publishLink }}" class="button">Publish</a>
     </p>

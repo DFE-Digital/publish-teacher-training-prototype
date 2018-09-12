@@ -71,6 +71,7 @@
           <li class="course-parts-item">
             <h3 class="course-part-task">Information from UCAS</h3>
             <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
+            <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
             <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
               <dt>Status:</dt>
               <dd>Running</dd>
@@ -106,7 +107,11 @@
             <h3 class="course-part-task">Course length and {% if course.salaried %}salary{% else %}fees{% endif %}</h3>
             <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">Edit</a>
             <dl class="course-part-tasks">
-              {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
+              {% if data[course.programmeCode + '-duration'] == 'Other' %}
+                {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
+              {% else %}
+                {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
+              {% endif %}
               {% if course.salaried %}
                 {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary', errors, coursePath) }}
               {% else %}
