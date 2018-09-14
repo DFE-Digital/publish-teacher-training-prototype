@@ -1,4 +1,4 @@
-# Manage teacher training courses – prototype
+# Publish teacher training courses – prototype and design history
 
 The course management tool for https://find-postgraduate-teacher-training.education.gov.uk/
 
@@ -17,7 +17,7 @@ The live service lives at:<br />
 * https://github.com/DFE-Digital/search-and-compare-ui
 
 Design history of the frontend at:<br />
-* https://search-and-compare-beta.herokuapp.com/history
+* https://search-and-compare.herokuapp.com/history
 
 ## Change the provider in the prototype
 
