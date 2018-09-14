@@ -1,4 +1,4 @@
-# Publish teacher training courses – prototype and design history
+# Publish teacher training courses<br />Prototype and design history
 
 The course management tool for https://find-postgraduate-teacher-training.education.gov.uk/
 
