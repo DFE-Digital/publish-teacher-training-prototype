@@ -25,3 +25,5 @@ Design history of the frontend at:<br />
 * Set the `provider` in [generate.rb](https://github.com/fofr/manage-courses-prototype/blob/master/generate.rb#L9) to the name of the provider in UCAS
 * Run the ruby script: `./generate.rb`, which generates a new `prototype_data.json` file
 * Commit the changes to master, which auto-deploys to Heroku
+
+![Screenshot of prototype](https://raw.githubusercontent.com/DFE-Digital/manage-courses-prototype/master/app/assets/images/history/iteration-aug-23/01-organisation.png)
