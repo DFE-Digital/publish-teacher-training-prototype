@@ -36,6 +36,75 @@
 
         <hr />
 
+        <h3 class="heading-large remove-top-margin">Outcome</h3>
+        <p>Pick the outcome which describes what a trainee will get when they complete this course.</p>
+        {% set pgceFields %}
+          {% set fields = [
+              {
+                name: 'PGCE is optional'
+              },
+              {
+                name: 'PGCE comes with Masters level credits'
+              }
+            ]
+          %}
+          {{ macros.checkboxGroup(course.programmeCode + '-pgce-options', fields, errors) }}
+        {% endset %}
+
+        {% set fields = [
+            {
+              name: 'PGCE with QTS',
+              text: 'Postgraduate certificate in education with qualified teacher status'
+            },
+            {
+              name: 'QTS',
+              text: 'Qualified teacher status'
+            },
+            {
+              name: 'QTS with optional PGCE',
+              text: 'Qualified teacher status with optional postgraduate certificate in education'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(course.programmeCode + '-qual-and-outcome', fields, errors) }}
+
+        <details>
+          <summary><span class="summary">More options</span></summary>
+          <div class="panel panel-border-narrow">
+            {% set otherField %}
+              {{ macros.textbox(course.programmeCode + '-other-qual-and-outcome-abbr', 'Outcome abbreviation', 'eg PGDE, ProfGCE')}}
+
+              {{ macros.textbox(course.programmeCode + '-other-qual-and-outcome-full', 'Outcome in full', 'eg Postgraduate diploma in education', 'form-control-full')}}
+
+              <p>You need to explain this outcome so that applicants understand what they’ll get.</p>
+              {{ macros.textarea(course.programmeCode + '-other-qual-and-outcome-description', 'Outcome explanation (optional)', 10, '', 100) }}
+            {% endset %}
+
+            {% set fields = [
+                {
+                  name: 'PGDE with QTS',
+                  text: 'Postgraduate diploma in education with qualified teacher status'
+                },
+                {
+                  name: 'PGCE only (further education, without QTS)',
+                  text: 'Only applies to courses in further education'
+                },
+                {
+                  name: 'PGDE only (further education, without QTS)',
+                  text: 'Only applies to courses in further education'
+                }
+              ]
+            %}
+
+            {{ macros.radioGroup(course.programmeCode + '-qual-and-outcome', fields, errors) }}
+          </div>
+        </details>
+
+
+
+        <hr />
+
         <h3 class="heading-large remove-top-margin">Interview process</h3>
 
         <p>Give applicants a summary of the interview process.</p>
