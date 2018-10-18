@@ -28,13 +28,17 @@
       <h2 class="heading-large">A new publishing status</h2>
       <p>We need a new publishing status when a course is set to running but not yet been published on UCAS.</p>
 
-      <p>Thus, courses can have 1 of 4 statuses:</p>
-      <ul class="list list-bullet">
-        <li>Running - the course is published and applicants can see it on search</li>
-        <li>Not running – the course is not published, it can’t be found on search</li>
-        <li>New - not yet running – the course is not published yet because it hasn’t been set to running on UCAS</li>
-        <li><strong class="bold">Needs attention on UCAS – the course is not published yet because none of its training locations has been set to publish on UCAS</strong></li>
-      </ul>
+      <p>Courses can have 1 of 4 statuses.</p>
+
+      <h3 class="heading-medium">1. Running</h3>
+
+      <p>At least one location is set to running and publish is set to ‘yes’. The course is published and applicants can see it on search. It can be edited.</p>
+
+      <h3 class="heading-medium">2. Needs attention on UCAS</h3>
+
+      <p>If the status isn’t running, but there are some training locations set to running with publish set to ‘no’.</p>
+
+      <p>The course is not published yet because candidates can’t apply to it. It can’t be found on search. It can be edited by publishers.</p>
 
       <p>On the organisation page any course with the status ‘Needs attention on UCAS’ should have that status displayed in red and bold to drawn attention to it. The status should link to the course page:</p>
 
@@ -42,7 +46,19 @@
         <img src="/public/images/history/needs-attention-status.png" alt="Screenshot showing needs attention on UCAS status" style="width: 100%" />
       </p>
 
-      <p>Whether or not a course has been published on UCAS isn’t relevant for ’Running’, ’Not running’ and ’New - not yet running’ statuses.</p>
+      <h3 class="heading-medium">3. New - not yet running</h3>
+
+      <p>If there’s no training location set to running, but at least one set to ‘new’.</p>
+
+      <p>The course is not published, it can’t be found on search. It can be edited by publishers.</p>
+
+      <h3 class="heading-medium">4. Not running</h3>
+
+      <p>All locations are either suspended or discontinued.</p>
+
+      <p>It can’t be found on search and it can’t be edited.</p>
+
+      <p>Whether or not a course has been published on UCAS isn’t relevant for ’Not running’ and ’New - not yet running’ statuses.</p>
 
       <h2 class="heading-large">Training location status</h2>
       <p>When a training location is set to running but publish is set to ‘No’ it should have the following status:</p>
@@ -56,42 +72,43 @@
       <p>
         <a href="https://trello.com/c/sXUxUwyL/479-ucas-unpublished-courses-appearing-on-search-showing-incorrectly-on-publish">Trello ticket</a>
       </p>
+
+
+        <h2 class="heading-large">If the course status is ‘Needs attention on UCAS’</h2>
+
+        <p>We need to show an error message at the top of the course page:</p>
+
+        <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+          <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+            This course needs attention in UCAS
+          </h3>
+          <p>Candidates can’t apply to this course because no training location has a publish value set to ‘Yes’ in <a href="#">UCAS web-link</a>. This course will not appear in Find postgraduate teacher training.</p>
+
+          <p>
+            To allow candidates to find and apply to this course, you must set the publish value of all currently running training locations to ‘Yes’.
+          </p>
+        </div>
+
+        <h2 class="heading-large">If the course status is ‘Running’ but some training locations are wrong</h2>
+
+        <p>We need to show a different error message at the top of the course page:</p>
+
+        <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+          <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+            Your training locations need attention in UCAS
+          </h3>
+          <p>
+            Training locations for this course are set to ‘Running’ in <a href="#">UCAS web-link</a>, but their publish value hasn’t been set to ‘Yes’.
+          </p>
+          <p>These training locations will not appear in Find postgraduate teacher training:</p>
+          <ul class="list list-bullet bold">
+            <li>Matravers School (Code: M)</li>
+          </ul>
+          <p>
+            To allow candidates to view and apply to a training location, you must set its publish value to ‘Yes’ in web-link.
+          </p>
+        </div>
     </div>
-  </div>
-
-  <h2 class="heading-large">If all training locations are wrong</h2>
-
-  <p>We need to show an error message at the top of the course page:</p>
-
-  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-      This course needs attention in UCAS
-    </h3>
-    <p>Candidates can’t apply to this course because no training location has a publish value set to ‘Yes’ in <a href="#">UCAS web-link</a>. This course will not appear in Find postgraduate teacher training.</p>
-
-    <p>
-      To allow candidates to find and apply to this course, you must set the publish value of all currently running training locations to ‘Yes’.
-    </p>
-  </div>
-
-  <h2 class="heading-large">If some training locations are wrong</h2>
-
-  <p>We need to show a different error message at the top of the course page:</p>
-
-  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-      Your training locations need attention in UCAS
-    </h3>
-    <p>
-      Training locations for this course are set to ‘Running’ in <a href="#">UCAS web-link</a>, but their publish value hasn’t been set to ‘Yes’.
-    </p>
-    <p>These training locations will not appear in Find postgraduate teacher training:</p>
-    <ul class="list list-bullet bold">
-      <li>Matravers School (Code: M)</li>
-    </ul>
-    <p>
-      To allow candidates to view and apply to a training location, you must set its publish value to ‘Yes’ in web-link.
-    </p>
   </div>
 </main>
 {% endblock %}
