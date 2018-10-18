@@ -1,0 +1,50 @@
+
+{% extends "layout.html" %}
+{% set title = 'Course statuses – Iteration 15 October' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>As a user looking at all of my courses imported from UCAS, I need to know which of those courses have been published, so that I know which courses applicants are seeing.</p>
+
+      <p>An iteration on the <a href="/history/ucas-course-status">first UCAS course status design</a> and the <a href="/history/course-not-running">second UCAS course status design</a>. We have received Zendesk tickets where candidates took a course code from DfE Find and hit errors when they tried to apply. The investigation showed that this was caused by us publishing courses to DfE Find which were set to running on UCAS, but weren’t set to published on UCAS.</p>
+
+      <p>The <a href="https://www.ucas.com/file/115581/download?token=mv-G6P53">UCAS Teacher Training Set-up Guide</a> says:</p>
+      <div class="panel panel-wide-border">
+        <blockquote>
+          <p>Once you have confirmation that a training programme has been allocated places, please check you have your training programmes set to both <strong class="bold-small">Running</strong> and <strong class="bold-small">Yes</strong> in <strong class="bold-small">Publish</strong>, so applicants can apply.</p>
+        </blockquote>
+      </div>
+
+      <h2 class="heading-medium">A new publishing status</h2>
+      <p>We need a new publishing status when a course is set to running but not yet been published on UCAS.</p>
+
+      <p>Thus, courses can have 1 of 4 statuses:</p>
+      <ul class="list list-bullet">
+        <li>Running - the course is published and applicants can see it on search</li>
+        <li>Not running – the course is not published, it can’t be found on search</li>
+        <li>New - not yet running – the course is not published yet because it hasn’t been set to running on UCAS</li>
+        <li><strong class="bold-small">Running but incomplete – the course is not published yet because it hasn’t been set to publish on UCAS</strong></li>
+      </ul>
+
+      <p>Whether or not a course has been published on UCAS isn’t relevant for ’Running’, ’Not running’ and ’New - not yet running’ statuses.</p>
+
+      <h2 class="heading-medium">Courses that are running but incomplete</h2>
+      <p>Courses that are running but are incomplete can’t be edited. The fields and publish actions do not show. The publisher is prompted to publish the course on UCAS web-link.</p>
+
+      <p>
+        <a href="https://trello.com/c/sXUxUwyL/479-ucas-unpublished-courses-appearing-on-search-showing-incorrectly-on-publish">Trello ticket</a>
+      </p>
+    </div>
+  </div>
+</main>
+{% endblock %}
