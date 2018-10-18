@@ -67,7 +67,8 @@
           <tr>
             <th class="subject-col">Course</th>
             <th class="type-col">Type</th>
-            <th class="status-col">State</th>
+            <th class="status-col" style="width: 100px">Status</th>
+            <th class="status-col">Course content</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +77,9 @@
             {% if course.accrediting == accrediting.name %}
               <tr>
                 <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
+                  {% if (loop.index == 5) %}
+                    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}?attention=yes">{{ course.name }} ({{ course.programmeCode }})</a>
+                  {% elseif (loop.index != 4 and loop.index != 7) %}
                     <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                   {% else %}
                     <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
@@ -84,6 +87,15 @@
                   </span>
                 </td>
                 <td>{{ course.options }}</td>
+                <td>
+                  {% if (loop.index == 5) %}
+                    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}?attention=yes" style="font-weight: bold; color: #b10e1e;">Needs&nbsp;attention<br />in UCAS</a>
+                  {% elseif (loop.index != 4 and loop.index != 7) %}
+                    Running
+                  {% else %}
+                    Not running
+                  {% endif %}
+                </td>
                 <td>
                   {% if (loop.index != 4 and loop.index != 7) %}
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
