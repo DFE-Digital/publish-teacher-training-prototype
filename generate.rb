@@ -71,6 +71,8 @@ prototype_data['ucasCourses'] = courses.map do |c|
     options << "#{qual} full time#{salaried}"
   end
 
+  prototype_data[c['programmeCode'] + '-outcome'] = qual
+
   {
     regions: c['regions'].join(', '),
     accrediting: c['accrediting'] || provider,

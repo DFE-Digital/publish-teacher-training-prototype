@@ -191,7 +191,7 @@
     text:
     more:
 #}
-{% macro radioGroup(name, fields, errors = false) %}
+{% macro radioGroup(name, fields, errors = false, index = 0) %}
   {% set e = error(name, errors) %}
   <div class="form-group {% if e %} form-group-error{% endif %}">
   {% if e %}
@@ -200,15 +200,16 @@
     </span>
   {% endif %}
   {% for field in fields %}
-    <div class="multiple-choice" data-target="radio-{{ name }}-part-{{ loop.index }}-extra">
+    {% set i = loop.index + index %}
+    <div class="multiple-choice" data-target="radio-{{ name }}-part-{{ i }}-extra">
       <input
-        id="radio-{{ name }}-part-{{ loop.index }}"
+        id="radio-{{ name }}-part-{{ i }}"
         type="radio"
         name="{{ name }}"
         value="{{ field.name }}"
         {{ checked(name, field.name) }}
       >
-      <label for="radio-{{ name }}-part-{{ loop.index }}">
+      <label for="radio-{{ name }}-part-{{ i }}">
         {% if field.text %}
           <span class="bold">{{ field.name }}</span><br />
           {{ field.text | safe }}
@@ -218,7 +219,7 @@
       </label>
     </div>
     {% if field.more %}
-      <div class="panel panel-border-wide js-hidden" id="radio-{{ name }}-part-{{ loop.index }}-extra">
+      <div class="panel panel-border-wide js-hidden" id="radio-{{ name }}-part-{{ i }}-extra">
         {{ field.more | safe }}
       </div>
     {% endif %}

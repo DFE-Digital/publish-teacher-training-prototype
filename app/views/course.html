@@ -99,6 +99,7 @@
             <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
             <dl class="course-part-tasks">
               {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
+              {{ macros.coursePart(course.programmeCode + '-outcome', 'Outcome', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
             </dl>
