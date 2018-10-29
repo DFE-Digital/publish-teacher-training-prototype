@@ -179,6 +179,28 @@
               <dd>October 2018</dd>
             </dl>
             {% endfor %}
+
+            <details>
+              <summary><span class="summary">There are 4 suspended and discontinued training locations</span></summary>
+              <div class="panel panel-border-narrow">
+                <p>These are old training locations which are no longer valid for this course.</p>
+
+                {% for school in course.schools %}
+                <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+                <dl class="aligned add-top-margin add-double-bottom-margin">
+                  <dt>Address:</dt>
+                  <dd>{{ school.address }}</dd>
+                  <dt>Status:</dt>
+                  <dd>Suspended</dd>
+                  <dt>Vacancies:</dt>
+                  <dd>Full time vacancies</dd>
+                  <dt>Apply from:</dt>
+                  <dd>October 2018</dd>
+                </dl>
+                {% endfor %}
+              </div>
+            </details>
+
             </div>
           </li>
         </ul>
