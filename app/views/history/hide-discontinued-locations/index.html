@@ -1,0 +1,45 @@
+
+{% extends "layout.html" %}
+{% set title = 'Hide discontinued training locations' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>The way we display non-running training locations in Publish has confused some publishers (we’ve received Zendesk tickets about superfluous training locations on their courses, where the publisher didn’t understand that the location was discontinued and they didn’t need to do anything).</p>
+      <p>Also we show irrelevant info for those locations – this looks weird, eg vacancies on a suspended location.</p>
+
+      <h2 class="heading-large">Hide confusing locations</h2>
+
+      <p>This design hides all suspended or discontinued training locations behind a disclosure.</p>
+
+      <p>Inside the disclosure the listed locations only have their address and status, vacancies and apply dates are removed.</p>
+
+      <p>(See the bottom of each screenshot)</p>
+
+      <p>
+        <a href="https://trello.com/c/8c2gDVqe/501-tweak-how-non-running-training-locations-are-presented">Trello</a>
+      </p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Discontinued training locations behind disclosure', id: 'discontinued-training-locations' },
+    { text: 'Disclosure when open', id: 'discontinued-training-locations-open' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Discontinued training locations behind disclosure', 'discontinued-training-locations', '/public/images/history/hide-discontinued-locations/thumbnails/01-discontinued-training-locations.png', '/public/images/history/hide-discontinued-locations/01-discontinued-training-locations.png', '') }}
+
+  {{ macros.screenshot('Disclosure when open', 'discontinued-training-locations-open', '/public/images/history/hide-discontinued-locations/thumbnails/01-discontinued-training-locations-open.png', '/public/images/history/hide-discontinued-locations/01-discontinued-training-locations-open.png', '') }}
+
+</main>
+{% endblock %}
