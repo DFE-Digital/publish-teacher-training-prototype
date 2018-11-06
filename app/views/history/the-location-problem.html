@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% set title = 'The location problem' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We know that different providers treat location differently. A provider might:</p>
+
+      <ul class="list list-bullet">
+        <li>list all of their schools as training locations on one course</li>
+        <li>list each school with its own course, duplicating courses</li>
+        <li>not list any school, because they are not yet known</li>
+        <li>not list any school, because there are too many</li>
+        <li>list only regional hubs rather than a list of schools</li>
+        <li>not list any other location, because you can only apply to the ‘main site’ (eg a University)</li>
+      </ul>
+
+      <p>Providers may not list their schools and locations on Find or UCAS but they might list them on their own websites.</p>
+
+      <p>It’s not just a provider’s attitude towards giving location information, it is also capability – both in what UCAS has historically provided and in what information is available at the time, and how the organisation wishes to divide up the applications they receive.</p>
+
+      <h2 class="heading-large">Locations we know about</h2>
+
+      <p>All our locations come from UCAS. We only know about two types of location:</p>
+
+      <ul class="list list-bullet">
+        <li>a training provider’s contact address</li>
+        <li>listed training locations – these are places a candidate can apply to in UCAS Apply, not necessarily where they will spend the majority, if any, of their time when training.</li>
+      </ul>
+
+      <p>We call them ‘training locations’ on Find for consistency with UCAS, partly so that users know what to fill in on their application form. This terminology is confusing for us and for users. ‘Application locations’ is more appropriate.</p>
+
+      <p>UCAS limits training locations to 36 per provider (codes 0-9 and A-Z). Some providers have multiple UCAS institutions to get around this limitation, such as West London Teaching School Alliance.</p>
+
+      <p>UCAS provides no way of classifying these locations. They might be administrative addresses, campuses, schools, hubs or areas. We use them to show results sorted by distance from a searched for location.</p>
+
+      <h2 class="heading-large">What next</h2>
+
+      <p>We need to better understand the locations we know about. What are they? Do students spent time at these places? How long do they spend there?</p>
+
+      <p>And we need to gather more locations from providers. Specifically the places where students will spend the most time.</p>
+
+      <h2 class="heading-large">User research</h2>
+
+      <p>We’ve spoken to 3 providers:</p>
+
+      <ul class="list list-bullet">
+        <li><a href="https://lookback.io/watch/ivTWHyrMDfXG3ij2W">Educate Teacher Training</a> (SCITT)</li>
+        <li><a href="https://lookback.io/watch/mJMixngKomcCCAhGj">Ealing Teaching School Alliance</a> (School direct)</li>
+        <li><a href="https://lookback.io/watch/B4a3xtutcpg5i8FGn">Keele and North Staffordshire Teacher Education</a> (SCITT)</li>
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}
