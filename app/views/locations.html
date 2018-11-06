@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block page_title %}Organisation{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    {% if data['multi-organisation'] %}
+      <ol>
+        <li><a href="/">Organisations</a></li>
+        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% else %}
+      <ol>
+        <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      </ol>
+    {% endif %}
+  </div>
+
+  <h1 class="heading-xlarge">
+    Locations
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h2 class="heading-large">Locations that can be applied to</h2>
+      <p>Each location has a name, address and a code. The code is used by applicants to choose a training location on the UCAS application form.</p>
+
+      <p>When an applicant searches by location we use the address of each location to determine how far away each course is from them.</p>
+
+      <p>You are limited to 36 training locations by UCAS.</p>
+      {% set schools = data['schools'] %}
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th style="width: 60%">Name</th>
+        <th style="width: 20%">Courses</th>
+        <th style="width: 20%">Content</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for school in schools %}
+      <tr>
+        <td><strong class="bold-medium">{{ school.code }}</strong></td>
+        <td>
+          <a href="/school/{{ school.code }}" class="bold">{{ school.name }}</a><br />
+          {{ school.address }}
+        </td>
+        <td>5 courses</td>
+        <td><span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>
+
+{% endblock %}
