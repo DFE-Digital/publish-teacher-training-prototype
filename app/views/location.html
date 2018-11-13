@@ -35,41 +35,80 @@
 
       <p>Pick one or more statements that describe this location.</p>
 
+      {% set howManyField %}
+        {{ macros.textbox(school.code + '-location-count', 'How many other locations does this represent?', null, 'form-control-small', null, errors) }}
+      {% endset %}
+
+      {% set areaField %}
+        {{ macros.textbox(school.code + '-area-radius', 'Roughly how big is this area?', 'Radius of area in miles', 'form-control-small', null, errors) }}
+        {{ howManyField | safe }}
+      {% endset %}
+
+      <h3 class="heading-medium">This location represents:</h3>
+
       {% set fields = [
           {
-            name: 'Applicants will spend time training here'
+            name: 'a building or specific address'
           },
           {
-            name: 'No training happens here'
+            name: 'an area rather than a specific address',
+            more: areaField
           },
           {
-            name: 'This location is for academic training'
+            name: 'a specific address and other locations',
+            more: howManyField
           },
           {
-            name: 'This location is for professional training'
-          },
-          {
-            name: 'Applicants need to travel to this address'
-          },
-          {
-            name: 'This is where applicants will go to most'
-          },
-          {
-            name: 'Applicants will spend some time here but will mostly be at another location'
-          },
-          {
-            name: 'This location represents an area rather than a place'
-          },
-          {
-            name: 'This location represents itself and other nearby locations'
-          },
-          {
-            name: 'This location represents many places because of the limit of 36 training locations in UCAS'
+            name: 'many places because of the limit of 36 training locations in UCAS',
+            more: howManyField
           }
         ]
       %}
 
-      {{ macros.checkboxGroup(school.code + '-tell-us', fields, errors) }}
+      {{ macros.checkboxGroup(school.code + '-represents', fields, errors, 100) }}
+
+      <h3 class="heading-medium">What happens at this location</h3>
+
+      {% set fields = [
+          {
+            name: 'Students train here'
+          },
+          {
+            name: 'Students have academic training here'
+          },
+          {
+            name: 'Students have professional training here'
+          },
+          {
+            name: 'Students teach in a classroom here'
+          },
+          {
+            name: 'No training happens here'
+          }
+        ]
+      %}
+
+      {{ macros.checkboxGroup(school.code + '-what-happens', fields, errors, 200) }}
+
+      <h3 class="heading-medium">Time that students spend here</h3>
+
+      {% set fields = [
+          {
+            name: 'Students need to travel to this address'
+          },
+          {
+            name: 'Students go to this location the most'
+          },
+          {
+            name: 'Students spend some time here but will mostly be elsewhere'
+          },
+          {
+            name: 'Time spent here depends on the course'
+          }
+        ]
+      %}
+
+      {{ macros.checkboxGroup(school.code + '-tell-us', fields, errors, 300) }}
 
       <hr />
 
@@ -102,7 +141,7 @@
         ]
       %}
 
-      {{ macros.checkboxGroup(school.code + '-type', fields, errors, 10) }}
+      {{ macros.checkboxGroup(school.code + '-type', fields, errors, 400) }}
 
       <hr />
 
