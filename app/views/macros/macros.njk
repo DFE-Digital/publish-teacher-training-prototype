@@ -223,7 +223,7 @@
   </div>
 {% endmacro %}
 
-{% macro checkboxGroup(name, fields, errors = false) %}
+{% macro checkboxGroup(name, fields, errors = false, index = 0) %}
 {% set e = error(name, errors) %}
 <div class="form-group {% if e %} form-group-error{% endif %}">
   {% if e %}
@@ -232,15 +232,16 @@
     </span>
   {% endif %}
   {% for field in fields %}
-    <div class="multiple-choice" data-target="checkbox-part-{{ loop.index }}-extra">
+    {% set i = loop.index + index %}
+    <div class="multiple-choice" data-target="checkbox-part-{{ i }}-extra">
       <input
-        id="checkbox-part-{{ loop.index }}"
+        id="checkbox-part-{{ i }}"
         type="checkbox"
         name="{{ name }}"
         value="{{ field.name }}"
         {{ checked(name, field.name) }}
       >
-      <label for="checkbox-part-{{ loop.index }}">
+      <label for="checkbox-part-{{ i }}">
         <span {% if field.text %}class="bold"{% endif %}>{{ field.name }}</span>
         {% if field.text %}
           <br />{{ field.text | safe }}
@@ -248,7 +249,7 @@
       </label>
     </div>
     {% if field.more %}
-      <div class="panel panel-border-wide js-hidden" id="checkbox-part-{{ loop.index }}-extra">
+      <div class="panel panel-border-wide js-hidden" id="checkbox-part-{{ i }}-extra">
         {{ field.more | safe }}
       </div>
     {% endif %}
@@ -256,7 +257,7 @@
 </div>
 {% endmacro %}
 
-{% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false) %}
+{% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false, v = false) %}
 {% set e = error(id, errors) %}
 <div class="form-group {% if e %} form-group-error{% endif %}">
   <label class="form-label" for="{{id}}">{{label | safe}}</label>
@@ -271,7 +272,7 @@
   {% if prefix %}
     <span class="form-control-prefix">{{ prefix }}</span>
   {% endif %}
-  <input class="form-control {{ size }}" name="{{id}}" type="text" id="{{id}}" value="{{ value(id) }}">
+  <input class="form-control {{ size }}" name="{{id}}" type="text" id="{{id}}" value="{{ v or value(id) }}">
 </div>
 {% endmacro %}
 
