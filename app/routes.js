@@ -181,21 +181,21 @@ router.get('/course/:accreditor/:code/:view', function (req, res) {
   })
 })
 
-// router.get('/school/:id', function (req, res) {
-//   var school = req.session.data['schools'].find(function(school) {
-//     return school.code == req.params.id;
-//   });
-//
-//   res.render('school', { school: school })
-// })
-//
-// router.get('/school/:id/edit', function (req, res) {
-//   var school = req.session.data['schools'].find(function(school) {
-//     return school.id == req.params.id;
-//   });
-//
-//   res.render('edit-school', { school: school })
-// })
+router.get('/location/:id', function (req, res) {
+  var school = req.session.data['schools'].find(function(school) {
+    return school.code == req.params.id;
+  });
+
+  res.render('location', { school: school })
+})
+
+router.get('/location/:id/edit', function (req, res) {
+  var school = req.session.data['schools'].find(function(school) {
+    return school.id == req.params.id;
+  });
+
+  res.render('edit-location', { school: school })
+})
 
 function subject(req) {
   var accrediting = accreditor(req);
