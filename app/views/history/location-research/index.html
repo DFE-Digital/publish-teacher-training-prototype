@@ -1,0 +1,56 @@
+
+{% extends "layout.html" %}
+{% set title = 'Location labels and survey research' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Following research on maps with candidates and <a href="/history/the-location-problem">discussions with providers about location</a>, we sought to focus further research by providing prototypes.</p>
+
+      <p><a href="https://search-and-compare-prototype.herokuapp.com/history/map-4">We showed providers maps</a> for the first time, and then quizzed them about their locations using the Publish prototype.</p>
+
+      <h2 class="heading-large">Design changes</h2>
+
+      <p>These changes weren’t intended as final designs to be shipped in the product, but more a basis for focused conversation around specific aspects of location.</p>
+
+      <ul class="list list-bullet">
+        <li>Add a locations section to the organisation page (Step 2)</li>
+        <li>List organisations that candidates can choose on a locations page</li>
+        <li>Create a page for each location</li>
+        <li>For each location ask questions about time spent there, what the location is for and the nature of the location</li>
+        <li>For each location try to add a label</li>
+      </ul>
+
+      <h2 class="heading-large">User research</h2>
+
+      <ul class="list list-bullet">
+        <li><a href="https://lookback.io/watch/4tQhyScCJf2e3WcNL">West London Teaching Schools Alliance</a></li>
+        <li><a href="https://lookback.io/watch/j7XGfjfS8Bh4WrSzz">UCL</a></li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Organisation', id: 'organisation' },
+    { text: 'Locations', id: 'locations' },
+    { text: 'Location survey', id: 'location-survey' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/location-research/thumbnails/01-organisation.png', '/public/images/history/location-research/01-organisation.png', '') }}
+
+  {{ macros.screenshot('Locations', 'locations', '/public/images/history/location-research/thumbnails/02-locations.png', '/public/images/history/location-research/02-locations.png', '') }}
+
+  {{ macros.screenshot('Location survey', 'location-survey', '/public/images/history/location-research/thumbnails/03-location-survey.png', '/public/images/history/location-research/03-location-survey.png', '') }}
+
+</main>
+{% endblock %}
