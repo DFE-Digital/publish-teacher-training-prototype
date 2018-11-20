@@ -1,52 +1,43 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "United Teaching National SCITT",
-  "provider-code-name": "UCL",
-  "provider-code": "1A9",
+  "training-provider-name": "University of Hertfordshire",
+  "provider-code-name": "HERTS",
+  "provider-code": "H36",
   "templates": [
 
   ],
-  "2P3V-outcome": "PGCE with QTS",
-  "2P3T-outcome": "PGCE with QTS",
-  "2P3S-outcome": "PGCE with QTS",
-  "2P35-outcome": "PGCE with QTS",
-  "2P36-outcome": "PGCE with QTS",
-  "2P37-outcome": "PGCE with QTS",
-  "2P38-outcome": "PGCE with QTS",
-  "2P3J-outcome": "PGCE with QTS",
-  "2P39-outcome": "PGCE with QTS",
-  "2P3B-outcome": "PGCE with QTS",
-  "2P3F-outcome": "PGCE with QTS",
-  "2P3D-outcome": "PGCE with QTS",
-  "2P3L-outcome": "PGCE with QTS",
-  "2P3G-outcome": "PGCE with QTS",
-  "2P3M-outcome": "PGCE with QTS",
-  "2P3H-outcome": "PGCE with QTS",
-  "2P3N-outcome": "PGCE with QTS",
-  "2P3K-outcome": "PGCE with QTS",
-  "2P3R-outcome": "PGCE with QTS",
-  "2P3P-outcome": "PGCE with QTS",
-  "2P3Q-outcome": "PGCE with QTS",
-  "2P3W-outcome": "PGCE with QTS",
-  "2P3X-outcome": "PGCE with QTS",
-  "2P3Y-outcome": "PGCE with QTS",
+  "X171-outcome": "PGCE with QTS",
+  "W1X1-outcome": "PGCE with QTS",
+  "CX11-outcome": "PGCE with QTS",
+  "F2X1-outcome": "PGCE with QTS",
+  "38C8-outcome": "QTS",
+  "38C7-outcome": "QTS",
+  "RX11-outcome": "PGCE with QTS",
+  "RXD1-outcome": "PGCE with QTS",
+  "R1X1-outcome": "PGCE with QTS",
+  "RX21-outcome": "PGCE with QTS",
+  "38C9-outcome": "QTS",
+  "38CB-outcome": "QTS",
+  "34ZD-outcome": "PGCE with QTS",
+  "G1X1-outcome": "PGCE with QTS",
+  "F3X2-outcome": "PGCE with QTS",
   "ucasCourses": [
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Art / art & design, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Art and Design",
       "slug": "art-and-design",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P35",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "W1X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -54,21 +45,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Biology, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Biology",
       "slug": "biology",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P36",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "CX11",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -76,43 +67,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Business education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Business",
-      "slug": "business",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P37",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Chemistry, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Chemistry",
       "slug": "chemistry",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P38",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "F2X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -120,175 +89,109 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Citizenship, Secondary",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "Computer studies, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Citizenship",
-      "slug": "citizenship",
+      "name": "Computing",
+      "slug": "computing",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P39",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C8",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Computer studies, Information communication technology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Computing with ICT",
-      "slug": "computing-with-ict",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3B",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "English, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "English",
       "slug": "english",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3D",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C7",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Drama and theatre studies, English, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "English with Drama",
-      "slug": "english-with-drama",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3F",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Geography, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Geography",
       "slug": "geography",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3G",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C9",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "History, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "History",
       "slug": "history",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3H",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38CB",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Chinese, English as a second or other language, Languages, Languages (asian), Languages (european), Mandarin, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mandarin Chinese with a European Language or EAL",
-      "slug": "mandarin-chinese-with-a-european-language-or-eal",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3J",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Mathematics, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Mathematics",
       "slug": "mathematics",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3K",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "G1X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -296,21 +199,65 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, German, Languages, Languages (european), Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (French with German)",
+      "slug": "modern-languages-french-with-german",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "RX11",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, Languages, Languages (european), Secondary, Spanish",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (French with Spanish)",
+      "slug": "modern-languages-french-with-spanish",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "RXD1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "French, Languages, Languages (european), Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French with additional language)",
-      "slug": "modern-languages-french-with-additional-language",
+      "name": "Modern Languages (French)",
+      "slug": "modern-languages-french",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3L",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "R1X1",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -318,21 +265,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "German, Languages, Languages (european), Secondary",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, German, Languages, Languages (european), Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (German with additional language)",
-      "slug": "modern-languages-german-with-additional-language",
+      "name": "Modern Languages (German with French)",
+      "slug": "modern-languages-german-with-french",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3M",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "RX21",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -340,21 +287,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Languages, Languages (european), Secondary, Spanish",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "Languages, Secondary, Spanish",
       "ageRange": "Secondary (11+ years)",
       "name": "Modern Languages (Spanish)",
       "slug": "modern-languages-spanish",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3N",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "34ZD",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -362,43 +309,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Music, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Music",
-      "slug": "music",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3P",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Physics, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Physics",
       "slug": "physics",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3Q",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "F3X2",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -406,153 +331,21 @@
       ]
     },
     {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Mathematics, Physics, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physics with Mathematics",
-      "slug": "physics-with-mathematics",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3R",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary",
-      "slug": "primary",
+      "name": "Primary - General",
+      "slug": "primary-general",
       "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3S",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "X171",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Mathematics, Primary",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary (Specialist Mathematics)",
-      "slug": "primary-specialist-mathematics",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3T",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Early years, Primary",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary FS/KS1",
-      "slug": "primary-fs-ks1",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3V",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Psychology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Psychology",
-      "slug": "psychology",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3W",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Religious education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Religious Education",
-      "slug": "religious-education",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3X",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "London",
-      "accrediting": "UCL, University College London (University of London)",
-      "subjects": "Secondary, Social science",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Social Science",
-      "slug": "social-science",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "U80",
-      "programmeCode": "2P3Y",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -562,65 +355,15 @@
   ],
   "schools": [
     {
-      "name": "Paddington Academy",
-      "address": "Paddington Academy, 50 Maryland Road, London W92DR",
+      "name": "Main Site",
+      "address": "",
       "code": "-"
-    },
-    {
-      "name": "United Teaching Kent",
-      "address": "Ashford, Wye, Orpington",
-      "code": "4"
-    },
-    {
-      "name": "United Teaching South Yorkshire",
-      "address": "Sheffield, Barnsley",
-      "code": "5"
-    },
-    {
-      "name": "United Teaching Cumbria",
-      "address": "Cumbria, Cumbria",
-      "code": "U"
-    },
-    {
-      "name": "United Teaching East Sussex",
-      "address": "Eastbourne, East Sussex",
-      "code": "V"
-    },
-    {
-      "name": "United Teaching Lincolnshire",
-      "address": "Lincoln, Lincoln, Lincolnshire",
-      "code": "B"
-    },
-    {
-      "name": "United Teaching Essex",
-      "address": "Dagenham, Essex",
-      "code": "8"
-    },
-    {
-      "name": "United Teaching Oxfordshire",
-      "address": "Banbury, Banbury",
-      "code": "0"
-    },
-    {
-      "name": "United Teaching Wiltshire",
-      "address": "Swindon, Swindon, Wiltshire",
-      "code": "J"
-    },
-    {
-      "name": "United Teaching London",
-      "address": "London - Various, London",
-      "code": "A"
-    },
-    {
-      "name": "United Teaching West Sussex",
-      "address": "Shoreham, Bognor Regis, Midhurst",
-      "code": "S"
     }
   ],
   "accreditors": [
     {
-      "name": "UCL, University College London (University of London)",
-      "slug": "ucl-university-college-london-university-of-london",
+      "name": "University of Hertfordshire",
+      "slug": "university-of-hertfordshire",
       "subjects": [
         {
           "name": "Art and Design",
@@ -631,28 +374,16 @@
           "slug": "biology"
         },
         {
-          "name": "Business",
-          "slug": "business"
-        },
-        {
           "name": "Chemistry",
           "slug": "chemistry"
         },
         {
-          "name": "Citizenship",
-          "slug": "citizenship"
-        },
-        {
-          "name": "Computing with ICT",
-          "slug": "computing-with-ict"
+          "name": "Computing",
+          "slug": "computing"
         },
         {
           "name": "English",
           "slug": "english"
-        },
-        {
-          "name": "English with Drama",
-          "slug": "english-with-drama"
         },
         {
           "name": "Geography",
@@ -663,60 +394,36 @@
           "slug": "history"
         },
         {
-          "name": "Mandarin Chinese with a European Language or EAL",
-          "slug": "mandarin-chinese-with-a-european-language-or-eal"
-        },
-        {
           "name": "Mathematics",
           "slug": "mathematics"
         },
         {
-          "name": "Modern Languages (French with additional language)",
-          "slug": "modern-languages-french-with-additional-language"
+          "name": "Modern Languages (French with German)",
+          "slug": "modern-languages-french-with-german"
         },
         {
-          "name": "Modern Languages (German with additional language)",
-          "slug": "modern-languages-german-with-additional-language"
+          "name": "Modern Languages (French with Spanish)",
+          "slug": "modern-languages-french-with-spanish"
+        },
+        {
+          "name": "Modern Languages (French)",
+          "slug": "modern-languages-french"
+        },
+        {
+          "name": "Modern Languages (German with French)",
+          "slug": "modern-languages-german-with-french"
         },
         {
           "name": "Modern Languages (Spanish)",
           "slug": "modern-languages-spanish"
         },
         {
-          "name": "Music",
-          "slug": "music"
-        },
-        {
           "name": "Physics",
           "slug": "physics"
         },
         {
-          "name": "Physics with Mathematics",
-          "slug": "physics-with-mathematics"
-        },
-        {
-          "name": "Primary",
-          "slug": "primary"
-        },
-        {
-          "name": "Primary (Specialist Mathematics)",
-          "slug": "primary-specialist-mathematics"
-        },
-        {
-          "name": "Primary FS/KS1",
-          "slug": "primary-fs-ks1"
-        },
-        {
-          "name": "Psychology",
-          "slug": "psychology"
-        },
-        {
-          "name": "Religious Education",
-          "slug": "religious-education"
-        },
-        {
-          "name": "Social Science",
-          "slug": "social-science"
+          "name": "Primary - General",
+          "slug": "primary-general"
         }
       ]
     }
@@ -732,28 +439,16 @@
       "slug": "biology"
     },
     {
-      "name": "Business",
-      "slug": "business"
-    },
-    {
       "name": "Chemistry",
       "slug": "chemistry"
     },
     {
-      "name": "Citizenship",
-      "slug": "citizenship"
-    },
-    {
-      "name": "Computing with ICT",
-      "slug": "computing-with-ict"
+      "name": "Computing",
+      "slug": "computing"
     },
     {
       "name": "English",
       "slug": "english"
-    },
-    {
-      "name": "English with Drama",
-      "slug": "english-with-drama"
     },
     {
       "name": "Geography",
@@ -764,69 +459,45 @@
       "slug": "history"
     },
     {
-      "name": "Mandarin Chinese with a European Language or EAL",
-      "slug": "mandarin-chinese-with-a-european-language-or-eal"
-    },
-    {
       "name": "Mathematics",
       "slug": "mathematics"
     },
     {
-      "name": "Modern Languages (French with additional language)",
-      "slug": "modern-languages-french-with-additional-language"
+      "name": "Modern Languages (French with German)",
+      "slug": "modern-languages-french-with-german"
     },
     {
-      "name": "Modern Languages (German with additional language)",
-      "slug": "modern-languages-german-with-additional-language"
+      "name": "Modern Languages (French with Spanish)",
+      "slug": "modern-languages-french-with-spanish"
+    },
+    {
+      "name": "Modern Languages (French)",
+      "slug": "modern-languages-french"
+    },
+    {
+      "name": "Modern Languages (German with French)",
+      "slug": "modern-languages-german-with-french"
     },
     {
       "name": "Modern Languages (Spanish)",
       "slug": "modern-languages-spanish"
     },
     {
-      "name": "Music",
-      "slug": "music"
-    },
-    {
       "name": "Physics",
       "slug": "physics"
     },
     {
-      "name": "Physics with Mathematics",
-      "slug": "physics-with-mathematics"
-    },
-    {
-      "name": "Primary",
-      "slug": "primary"
-    },
-    {
-      "name": "Primary (Specialist Mathematics)",
-      "slug": "primary-specialist-mathematics"
-    },
-    {
-      "name": "Primary FS/KS1",
-      "slug": "primary-fs-ks1"
-    },
-    {
-      "name": "Psychology",
-      "slug": "psychology"
-    },
-    {
-      "name": "Religious Education",
-      "slug": "religious-education"
-    },
-    {
-      "name": "Social Science",
-      "slug": "social-science"
+      "name": "Primary - General",
+      "slug": "primary-general"
     }
   ],
   "folded_courses": {
-    "UCL, University College London (University of London)": [
+    "University of Hertfordshire": [
       {
         "name": "Art and Design",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -847,28 +518,7 @@
         "name": "Biology",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Business",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -889,7 +539,7 @@
         "name": "Chemistry",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -907,40 +557,19 @@
         }
       },
       {
-        "name": "Citizenship",
+        "name": "Computing",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Computing with ICT",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -952,7 +581,7 @@
         "name": "English",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -961,28 +590,7 @@
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "English with Drama",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -994,16 +602,16 @@
         "name": "Geography",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1015,37 +623,16 @@
         "name": "History",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
           "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Mandarin Chinese with a European Language or EAL",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1057,7 +644,7 @@
         "name": "Mathematics",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1075,10 +662,10 @@
         }
       },
       {
-        "name": "Modern Languages (French with additional language)",
+        "name": "Modern Languages (French with German)",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1096,10 +683,52 @@
         }
       },
       {
-        "name": "Modern Languages (German with additional language)",
+        "name": "Modern Languages (French with Spanish)",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Modern Languages (French)",
+        "courses": 1,
+        "accrediting": [
+          "University of Hertfordshire"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Modern Languages (German with French)",
+        "courses": 1,
+        "accrediting": [
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1120,28 +749,7 @@
         "name": "Modern Languages (Spanish)",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Music",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1162,7 +770,7 @@
         "name": "Physics",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1180,136 +788,10 @@
         }
       },
       {
-        "name": "Physics with Mathematics",
+        "name": "Primary - General",
         "courses": 1,
         "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Primary",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Primary (Specialist Mathematics)",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Primary FS/KS1",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Psychology",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Religious Education",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Main Site"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Social Science",
-        "courses": 1,
-        "accrediting": [
-          "UCL, University College London (University of London)"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1329,6 +811,7 @@
     ]
   },
   "options": [
-    "PGCE with QTS full time"
+    "PGCE with QTS full time",
+    "QTS full time"
   ]
 }
