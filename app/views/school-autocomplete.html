@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block page_title %}Location{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      <li><a href="/locations">Locations</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    School autocomplete
+  </h1>
+
+  <label for="my-autocomplete">Select your country</label>
+  <div id="my-autocomplete-container"></div>
+
+  <form action="/locations" class="grid-row">
+    <input type="submit" class="button" value="Save" />
+  </form>
+</main>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="/public/javascripts/schools.js"></script>
+<script>
+  accessibleAutocomplete({
+    element: document.querySelector('#my-autocomplete-container'),
+    id: 'my-autocomplete', // To match it to the existing <label>.
+    source: autocomplete_options
+  })
+</script>
+{% endblock %}
