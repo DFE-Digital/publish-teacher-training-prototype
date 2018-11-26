@@ -15,7 +15,7 @@
     School autocomplete
   </h1>
 
-  <label for="my-autocomplete">Select your country</label>
+  <label for="my-autocomplete">Choose a school by name or URN number</label>
   <div id="my-autocomplete-container"></div>
 
   <form action="/locations" class="grid-row">
@@ -27,10 +27,21 @@
 {% block page_scripts %}
 <script src="/public/javascripts/schools.js"></script>
 <script>
+  var createSimpleEngine = function (values) {
+    return function (query, syncResults) {
+      var matches = values
+        .filter(function(r) {
+          return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        })
+        .slice(0, 10)
+      syncResults(matches)
+    }
+  }
+
   accessibleAutocomplete({
     element: document.querySelector('#my-autocomplete-container'),
     id: 'my-autocomplete', // To match it to the existing <label>.
-    source: autocomplete_options
+    source: createSimpleEngine(autocomplete_options)
   })
 </script>
 {% endblock %}
