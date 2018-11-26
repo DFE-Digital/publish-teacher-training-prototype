@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block page_title %}Location{% endblock %}
+{% set title = 'Add your partner schools' %}
+{% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main">
@@ -12,15 +13,24 @@
   </div>
 
   <h1 class="heading-xlarge">
-    School autocomplete
+    {{ title }}
   </h1>
 
-  <label for="my-autocomplete">Choose a school by name or URN number</label>
-  <div id="my-autocomplete-container"></div>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/locations">
+        <ul class="list" id="selected-schools-list"></ul>
+        <hr />
 
-  <form action="/locations" class="grid-row">
-    <input type="submit" class="button" value="Save" />
-  </form>
+        <div class="form-group">
+          <label for="my-autocomplete">Choose a school by name or URN number</label>
+          <div id="my-autocomplete-container"></div>
+        </div>
+
+        <input type="submit" class="button" value="Add" />
+      </form>
+    </div>
+  </div>
 </main>
 {% endblock %}
 
@@ -41,7 +51,21 @@
   accessibleAutocomplete({
     element: document.querySelector('#my-autocomplete-container'),
     id: 'my-autocomplete', // To match it to the existing <label>.
-    source: createSimpleEngine(autocomplete_options)
+    source: createSimpleEngine(autocomplete_options),
+    minLength: 2,
+    onConfirm: function(school) {
+      if (school) {
+        $('#selected-schools-list').append(`
+          <li>
+            <h3 class="heading-small remove-bottom-margin">${school}</h3>
+            <p><a href="#">Remove school</a> – <a href="https://www.get-information-schools.service.gov.uk/Establishments/Establishment/Details/102344">Details</a> – Bristol</p>
+          </li>
+        `);
+        setTimeout(function() {
+          $('#my-autocomplete-container input').val('');
+        }, 50);
+      }
+    }
   })
 </script>
 {% endblock %}
