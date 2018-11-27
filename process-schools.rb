@@ -19,12 +19,12 @@ class UpdateSchoolData
     end
 
     autocomplete_strings =  schools.map do |s|
-                              "#{s['name']} (#{s['urn']}, #{s['town']})"
+                              "#{s['name']} (#{s['urn']}, #{s['town']}, #{s['postcode']})"
                             end
 
     # puts autocomplete_strings[0]
     # puts autocomplete_strings.uniq.count
-    File.open('schools.js', 'w') { |file| file.write("var autocomplete_options = " + autocomplete_strings.uniq.inspect + ";") }
+    File.open('app/assets/javascripts/schools.js', 'w') { |file| file.write("var autocomplete_options = " + autocomplete_strings.uniq.inspect + ";") }
   end
 
   private
