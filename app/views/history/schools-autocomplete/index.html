@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% set title = 'Schools autocomplete' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We need to test this with providers.</p>
+
+      <p>If we begin asking providers for their <a href="https://search-and-compare-prototype.herokuapp.com/history/maps-for-providers-with-many-partners">list of partner schools</a> we’ll need a fast and easy way to create and manage that list. Partner schools can be more than 1,000.</p>
+
+      <p>Use the accessible autocomplete with the <a href="https://get-information-schools.service.gov.uk/Downloads">Edubase schools data</a>, there’s about 26,000 schools.</p>
+
+      <p>Each option contains:</p>
+      <ul class="list list-bullet">
+        <li>school name</li>
+        <li>town</li>
+        <li>URN number</li>
+        <li>postcode</li>
+      </ul>
+
+      <p>This allows searching for schools by each of these properties (eg all schools in ‘BN1’). The text is also necessary as a differentiator when choosing a school with a common name – for example St Mary’s Catholic Primary School.</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Schools autocomplete', id: 'partner-schools-autocomplete' },
+    { text: 'Schools autocomplete (GIF)', id: 'partner-schools-autocomplete-gif' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+{{ macros.screenshot('Schools autocomplete', 'partner-schools-autocomplete', '/public/images/history/schools-autocomplete/thumbnails/01-partner-schools-autocomplete.png', '/public/images/history/schools-autocomplete/01-partner-schools-autocomplete.png', '') }}
+
+{{ macros.screenshot('Schools autocomplete (GIF)', 'partner-schools-autocomplete-gif', '/public/images/history/schools-autocomplete/02-schools-autocomplete.gif', '/public/images/history/schools-autocomplete/02-schools-autocomplete.gif', '') }}
+
+</main>
+{% endblock %}
