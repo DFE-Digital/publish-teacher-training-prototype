@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% set title = 'UCAS onboarding form' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+  <div class="column-two-thirds">
+    <p>The form completed by new training providers when they begin offering initial teacher training courses.</p>
+    <p>
+      <a href="https://www.ucasdigital.com/misc/UTT_form/uttform.html">Live form</a>
+    </p>
+  </div>
+</div>
+
+  {% set contents = [
+    { text: 'Onboarding form', id: 'onboarding-form' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+{{ macros.screenshot('Onboarding form', 'onboarding-form', '/public/images/history/ucas-onboarding-form/thumbnails/01-onboarding-form.png', '/public/images/history/ucas-onboarding-form/01-onboarding-form.png', '') }}
+
+</main>
+{% endblock %}
