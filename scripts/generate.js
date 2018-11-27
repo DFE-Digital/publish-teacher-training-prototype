@@ -22,26 +22,39 @@ if ( ! fs.existsSync(indexDirectory)){
 }
 
 var template = '';
+var contents = `
+  {% set contents = [`;
+var endContents = `
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+`;
+
+var i = 0;
 
 fs.readdir(directory, (err, files) => {
-  files.forEach(file => {
-    if (!(/^\d{2}/.test(file) && /\.png$/.test(file))) {
+  files.forEach((file, index) => {
+    if (!(/^\d{2}/.test(file) && /\.(png|jpg)$/.test(file))) {
       console.log('Ignoring: ' + file);
       return;
     }
 
     var screenshot = directory + '/' + file;
     var thumbnail = directory + '/thumbnails/' + file;
+    var comma = i > 0 ? ', ': '';
 
     // 01-name.png
-    var name = file.replace(/^\d{2}-/, '').replace(/\.png$/, '');
+    var name = file.replace(/^\d{2}-/, '').replace(/\.(png|jpg)$/, '');
     var heading = name.replace(/-/g, ' ');
     heading = heading.charAt(0).toUpperCase() + heading.slice(1)
 
     template += `
 {{ macros.screenshot('${heading}', '${name}', '${thumbnail.replace('app/assets', '/public')}', '${screenshot.replace('app/assets', '/public')}', '') }}
 `
+    contents += `${comma}
+    { text: '${heading}', id: '${name}' }`;
+
     sharp(screenshot).resize(630, null).toFile(thumbnail);
+    i = i + 1;
   });
 
   var title = directoryName.replace(/-/g, ' ');
@@ -66,7 +79,7 @@ fs.readdir(directory, (err, files) => {
 {% endblock %}
 `;
 
-  fs.writeFile(indexDirectory + "/index.html", templateStart + template + templateEnd, function(err) {
+  fs.writeFile(indexDirectory + "/index.html", templateStart + contents + endContents + template + templateEnd, function(err) {
     if (err) {
       return console.log(err);
     }
