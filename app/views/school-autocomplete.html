@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% set title = 'Add your partner schools' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<style>
+  #selected-schools-list li {
+    border-bottom: 1px solid #ccc;
+  }
+</style>
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <div class="breadcrumbs">
+    <ol>
+      <li><a href="/">{{ data['training-provider-name']}}</a></li>
+      <li><a href="/locations">Locations</a></li>
+    </ol>
+  </div>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/locations">
+        <ul class="list" id="selected-schools-list">
+          {% for s in data['partner-school'] %}
+            <li>
+              <h3 class="heading-small remove-bottom-margin">
+                {{ s }}
+              </h3>
+              <input type="hidden" name="partner-school" value="{{ s }}">
+              <p>
+                <a href="https://www.get-information-schools.service.gov.uk/Establishments/Establishment/Details/" target="_blank">School details</a> – <a href="#">Remove</a>
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="form-group">
+          <label for="my-autocomplete">Choose a school by name, postcode or URN number</label>
+          <div id="my-autocomplete-container"></div>
+        </div>
+
+        <input type="submit" class="button" value="Save" />
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="/public/javascripts/schools.js"></script>
+<script>
+  var createSimpleEngine = function (values) {
+    return function (query, syncResults) {
+      var matches = values
+        .filter(function(r) {
+          return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        })
+        .slice(0, 10)
+      syncResults(matches)
+    }
+  }
+
+  accessibleAutocomplete({
+    element: document.querySelector('#my-autocomplete-container'),
+    id: 'my-autocomplete', // To match it to the existing <label>.
+    source: createSimpleEngine(autocomplete_options),
+    minLength: 2,
+    onConfirm: function(school) {
+      if (school) {
+        var urn = school.match(/\d{6}/)[0];
+
+        $('#selected-schools-list').append(`
+          <li>
+            <h3 class="heading-small remove-bottom-margin">
+              ${school}
+            </h3>
+            <input type="hidden" name="partner-school" value="${school}">
+            <p>
+              <a href="https://www.get-information-schools.service.gov.uk/Establishments/Establishment/Details/${urn}" target="_blank">School details</a> – <a href="#">Remove</a>
+            </p>
+          </li>
+        `);
+        setTimeout(function() {
+          $('#my-autocomplete-container input').val('');
+        }, 50);
+      }
+    }
+  })
+</script>
+{% endblock %}
