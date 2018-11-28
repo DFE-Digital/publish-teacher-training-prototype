@@ -1,51 +1,43 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Sheffield Teaching School Alliance",
-  "provider-code-name": "A1778",
-  "provider-code": "1N5",
+  "training-provider-name": "University of Hertfordshire",
+  "provider-code-name": "HERTS",
+  "provider-code": "H36",
   "templates": [
 
   ],
-  "2VYS-outcome": "PGCE with QTS",
-  "2499-outcome": "PGCE with QTS",
-  "25DL-outcome": "PGCE with QTS",
-  "25DY-outcome": "PGCE with QTS",
-  "2DBB-outcome": "PGCE with QTS",
-  "25DC-outcome": "PGCE with QTS",
-  "25DH-outcome": "PGCE with QTS",
-  "25DK-outcome": "PGCE with QTS",
-  "25DN-outcome": "PGCE with QTS",
-  "25DP-outcome": "PGCE with QTS",
-  "37CT-outcome": "PGCE with QTS",
-  "2Q87-outcome": "PGCE with QTS",
-  "25DR-outcome": "PGCE with QTS",
-  "34HZ-outcome": "PGCE with QTS",
-  "25DS-outcome": "PGCE with QTS",
-  "29DT-outcome": "PGCE with QTS",
-  "25DT-outcome": "PGCE with QTS",
-  "3245-outcome": "PGCE with QTS",
-  "25FH-outcome": "PGCE with QTS",
-  "25FL-outcome": "PGCE with QTS",
-  "25FP-outcome": "PGCE with QTS",
-  "25FR-outcome": "PGCE with QTS",
-  "2HT5-outcome": "PGCE with QTS",
+  "X171-outcome": "PGCE with QTS",
+  "W1X1-outcome": "PGCE with QTS",
+  "CX11-outcome": "PGCE with QTS",
+  "F2X1-outcome": "PGCE with QTS",
+  "38C8-outcome": "QTS",
+  "38C7-outcome": "QTS",
+  "RX11-outcome": "PGCE with QTS",
+  "RXD1-outcome": "PGCE with QTS",
+  "R1X1-outcome": "PGCE with QTS",
+  "RX21-outcome": "PGCE with QTS",
+  "38C9-outcome": "QTS",
+  "38CB-outcome": "QTS",
+  "34ZD-outcome": "PGCE with QTS",
+  "G1X1-outcome": "PGCE with QTS",
+  "F3X2-outcome": "PGCE with QTS",
   "ucasCourses": [
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Art / art & design, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Art and Design",
       "slug": "art-and-design",
-      "route": "School Direct training programme",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DC",
+      "providerCode": "H36",
+      "programmeCode": "W1X1",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -53,26 +45,21 @@
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Biology, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Biology",
       "slug": "biology",
-      "route": "School Direct training programme",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DH",
+      "providerCode": "H36",
+      "programmeCode": "CX11",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "-"
-        },
-        {
-          "name": "Winterhill School",
-          "address": "High Street, Kimberworth, Rotherham, S61 2BD",
-          "code": "R"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -80,53 +67,21 @@
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Business education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Business Studies",
-      "slug": "business-studies",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DK",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "East Midlands, Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Chemistry, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Chemistry",
       "slug": "chemistry",
-      "route": "School Direct training programme",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DL",
+      "providerCode": "H36",
+      "programmeCode": "F2X1",
       "schools": [
         {
-          "name": "High Storrs School",
-          "address": "High Storrs Road, Sheffield, S11 7LH",
-          "code": "A"
-        },
-        {
-          "name": "Peak District",
-          "address": "hope Valley College, Castleton Road, Hope, S33 6SD",
-          "code": "P"
-        },
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -134,293 +89,109 @@
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Computer studies, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Computing",
       "slug": "computing",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DN",
+      "route": "Higher Education programme",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C8",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Design and technology, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Design and Technology",
-      "slug": "design-and-technology",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DP",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Design and technology, Design and technology (food), Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Design and Technology (Food)",
-      "slug": "design-and-technology-food",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "37CT",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Drama and theatre studies, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Drama",
-      "slug": "drama",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1N5",
-      "programmeCode": "2Q87",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "English, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "English",
       "slug": "english",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DR",
+      "route": "Higher Education programme",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C7",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Geography, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Geography",
       "slug": "geography",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "29DT",
+      "route": "Higher Education programme",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38C9",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "The University of Sheffield",
-      "subjects": "Geography, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Geography",
-      "slug": "geography",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DS",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "History, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "History",
       "slug": "history",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DT",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "The University of Sheffield",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "slug": "mathematics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "3245",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "East Midlands, Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "slug": "mathematics",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25DY",
-      "schools": [
-        {
-          "name": "High Storrs School",
-          "address": "High Storrs Road, Sheffield, S11 7LH",
-          "code": "A"
-        },
-        {
-          "name": "Ecclesfield School",
-          "address": "Chapeltown Road, Sheffield, S35 9WD",
-          "code": "F"
-        },
-        {
-          "name": "Meadowhead School",
-          "address": "Dyche Lane, Sheffield, S8 8BR",
-          "code": "M"
-        },
-        {
-          "name": "Peak District",
-          "address": "hope Valley College, Castleton Road, Hope, S33 6SD",
-          "code": "P"
-        },
-        {
-          "name": "Winterhill School",
-          "address": "High Street, Kimberworth, Rotherham, S61 2BD",
-          "code": "R"
-        },
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        },
-        {
-          "name": "Westfield School",
-          "address": "Eckington Road, Sheffield, S20 1HQ",
-          "code": "W"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "The National Modern Languages SCITT",
-      "subjects": "French, German, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French, German, Spanish)",
-      "slug": "modern-languages-french-german-spanish",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "34HZ",
+      "route": "Higher Education programme",
+      "qualifications": "QTS",
+      "providerCode": "H36",
+      "programmeCode": "38CB",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "-"
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time"
+        "QTS full time"
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Music, Secondary",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "Mathematics, Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Music",
-      "slug": "music",
-      "route": "School Direct training programme",
+      "name": "Mathematics",
+      "slug": "mathematics",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25FH",
+      "providerCode": "H36",
+      "programmeCode": "G1X1",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -428,21 +199,21 @@
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Physical education, Secondary",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, German, Languages, Languages (european), Secondary",
       "ageRange": "Secondary (11+ years)",
-      "name": "Physical Education",
-      "slug": "physical-education",
-      "route": "School Direct training programme",
+      "name": "Modern Languages (French with German)",
+      "slug": "modern-languages-french-with-german",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25FL",
+      "providerCode": "H36",
+      "programmeCode": "RX11",
       "schools": [
         {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -450,31 +221,109 @@
       ]
     },
     {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, Languages, Languages (european), Secondary, Spanish",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (French with Spanish)",
+      "slug": "modern-languages-french-with-spanish",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "RXD1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, Languages, Languages (european), Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (French)",
+      "slug": "modern-languages-french",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "R1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "French, German, Languages, Languages (european), Secondary",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (German with French)",
+      "slug": "modern-languages-german-with-french",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "RX21",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
+      "subjects": "Languages, Secondary, Spanish",
+      "ageRange": "Secondary (11+ years)",
+      "name": "Modern Languages (Spanish)",
+      "slug": "modern-languages-spanish",
+      "route": "Higher Education programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "H36",
+      "programmeCode": "34ZD",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Physics, Science, Secondary",
       "ageRange": "Secondary (11+ years)",
       "name": "Physics",
       "slug": "physics",
-      "route": "School Direct training programme",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25FP",
+      "providerCode": "H36",
+      "programmeCode": "F3X2",
       "schools": [
         {
-          "name": "High Storrs School",
-          "address": "High Storrs Road, Sheffield, S11 7LH",
-          "code": "A"
-        },
-        {
-          "name": "Meadowhead School",
-          "address": "Dyche Lane, Sheffield, S8 8BR",
-          "code": "M"
-        },
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -482,124 +331,21 @@
       ]
     },
     {
-      "regions": "East Midlands, Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Early years, Primary",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary (3-7)",
-      "slug": "primary-3-7",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate",
-      "providerCode": "1N5",
-      "programmeCode": "2VYS",
-      "schools": [
-        {
-          "name": "Peak District",
-          "address": "hope Valley College, Castleton Road, Hope, S33 6SD",
-          "code": "P"
-        },
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "East Midlands, Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
+      "regions": "Eastern",
+      "accrediting": "University of Hertfordshire",
       "subjects": "Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary (5-11)",
-      "slug": "primary-5-11",
-      "route": "School Direct training programme",
+      "name": "Primary - General",
+      "slug": "primary-general",
+      "route": "Higher Education programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "2499",
+      "providerCode": "H36",
+      "programmeCode": "X171",
       "schools": [
         {
-          "name": "Chesterfield",
-          "address": "Inkersall/Brimington, Inkersall Green Road, Chesterfield, S43 3SE",
-          "code": "C"
-        },
-        {
-          "name": "Peak District",
-          "address": "hope Valley College, Castleton Road, Hope, S33 6SD",
-          "code": "P"
-        },
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Primary, Special educational needs",
-      "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary (Special Educational Needs)",
-      "slug": "primary-special-educational-needs",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "2DBB",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Religious education, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Religious Education",
-      "slug": "religious-education",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "25FR",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Yorkshire & the Humber",
-      "accrediting": "Sheffield Hallam University",
-      "subjects": "Secondary, Social science",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Social Sciences",
-      "slug": "social-sciences",
-      "route": "School Direct training programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "1N5",
-      "programmeCode": "2HT5",
-      "schools": [
-        {
-          "name": "Silverdale School (Lead School)",
-          "address": "Bents Crescent, Sheffield, S11 9QH",
-          "code": "S"
+          "name": "Main Site",
+          "address": "",
+          "code": ""
         }
       ],
       "options": [
@@ -609,55 +355,15 @@
   ],
   "schools": [
     {
-      "name": "Chesterfield",
-      "address": "Inkersall/Brimington, Inkersall Green Road, Chesterfield, S43 3SE",
-      "code": "C"
-    },
-    {
-      "name": "Ecclesfield School",
-      "address": "Chapeltown Road, Sheffield, S35 9WD",
-      "code": "F"
-    },
-    {
-      "name": "High Storrs School",
-      "address": "High Storrs Road, Sheffield, S11 7LH",
-      "code": "A"
-    },
-    {
       "name": "Main Site",
-      "address": "Bents Crescent, Sheffield, S11 9QH",
-      "code": "-"
-    },
-    {
-      "name": "Meadowhead School",
-      "address": "Dyche Lane, Sheffield, S8 8BR",
-      "code": "M"
-    },
-    {
-      "name": "Peak District",
-      "address": "hope Valley College, Castleton Road, Hope, S33 6SD",
-      "code": "P"
-    },
-    {
-      "name": "Silverdale School (Lead School)",
-      "address": "Bents Crescent, Sheffield, S11 9QH",
-      "code": "S"
-    },
-    {
-      "name": "Westfield School",
-      "address": "Eckington Road, Sheffield, S20 1HQ",
-      "code": "W"
-    },
-    {
-      "name": "Winterhill School",
-      "address": "High Street, Kimberworth, Rotherham, S61 2BD",
-      "code": "R"
+      "address": "",
+      "code": ""
     }
   ],
   "accreditors": [
     {
-      "name": "Sheffield Hallam University",
-      "slug": "sheffield-hallam-university",
+      "name": "University of Hertfordshire",
+      "slug": "university-of-hertfordshire",
       "subjects": [
         {
           "name": "Art and Design",
@@ -668,28 +374,12 @@
           "slug": "biology"
         },
         {
-          "name": "Business Studies",
-          "slug": "business-studies"
-        },
-        {
           "name": "Chemistry",
           "slug": "chemistry"
         },
         {
           "name": "Computing",
           "slug": "computing"
-        },
-        {
-          "name": "Design and Technology",
-          "slug": "design-and-technology"
-        },
-        {
-          "name": "Design and Technology (Food)",
-          "slug": "design-and-technology-food"
-        },
-        {
-          "name": "Drama",
-          "slug": "drama"
         },
         {
           "name": "English",
@@ -708,65 +398,37 @@
           "slug": "mathematics"
         },
         {
-          "name": "Music",
-          "slug": "music"
+          "name": "Modern Languages (French with German)",
+          "slug": "modern-languages-french-with-german"
         },
         {
-          "name": "Physical Education",
-          "slug": "physical-education"
+          "name": "Modern Languages (French with Spanish)",
+          "slug": "modern-languages-french-with-spanish"
+        },
+        {
+          "name": "Modern Languages (French)",
+          "slug": "modern-languages-french"
+        },
+        {
+          "name": "Modern Languages (German with French)",
+          "slug": "modern-languages-german-with-french"
+        },
+        {
+          "name": "Modern Languages (Spanish)",
+          "slug": "modern-languages-spanish"
         },
         {
           "name": "Physics",
           "slug": "physics"
         },
         {
-          "name": "Primary (3-7)",
-          "slug": "primary-3-7"
-        },
-        {
-          "name": "Primary (5-11)",
-          "slug": "primary-5-11"
-        },
-        {
-          "name": "Primary (Special Educational Needs)",
-          "slug": "primary-special-educational-needs"
-        },
-        {
-          "name": "Religious Education",
-          "slug": "religious-education"
-        },
-        {
-          "name": "Social Sciences",
-          "slug": "social-sciences"
-        }
-      ]
-    },
-    {
-      "name": "The National Modern Languages SCITT",
-      "slug": "the-national-modern-languages-scitt",
-      "subjects": [
-        {
-          "name": "Modern Languages (French, German, Spanish)",
-          "slug": "modern-languages-french-german-spanish"
-        }
-      ]
-    },
-    {
-      "name": "The University of Sheffield",
-      "slug": "the-university-of-sheffield",
-      "subjects": [
-        {
-          "name": "Geography",
-          "slug": "geography"
-        },
-        {
-          "name": "Mathematics",
-          "slug": "mathematics"
+          "name": "Primary - General",
+          "slug": "primary-general"
         }
       ]
     }
   ],
-  "self_accrediting": false,
+  "self_accrediting": true,
   "subjects": [
     {
       "name": "Art and Design",
@@ -777,28 +439,12 @@
       "slug": "biology"
     },
     {
-      "name": "Business Studies",
-      "slug": "business-studies"
-    },
-    {
       "name": "Chemistry",
       "slug": "chemistry"
     },
     {
       "name": "Computing",
       "slug": "computing"
-    },
-    {
-      "name": "Design and Technology",
-      "slug": "design-and-technology"
-    },
-    {
-      "name": "Design and Technology (Food)",
-      "slug": "design-and-technology-food"
-    },
-    {
-      "name": "Drama",
-      "slug": "drama"
     },
     {
       "name": "English",
@@ -817,55 +463,47 @@
       "slug": "mathematics"
     },
     {
-      "name": "Modern Languages (French, German, Spanish)",
-      "slug": "modern-languages-french-german-spanish"
+      "name": "Modern Languages (French with German)",
+      "slug": "modern-languages-french-with-german"
     },
     {
-      "name": "Music",
-      "slug": "music"
+      "name": "Modern Languages (French with Spanish)",
+      "slug": "modern-languages-french-with-spanish"
     },
     {
-      "name": "Physical Education",
-      "slug": "physical-education"
+      "name": "Modern Languages (French)",
+      "slug": "modern-languages-french"
+    },
+    {
+      "name": "Modern Languages (German with French)",
+      "slug": "modern-languages-german-with-french"
+    },
+    {
+      "name": "Modern Languages (Spanish)",
+      "slug": "modern-languages-spanish"
     },
     {
       "name": "Physics",
       "slug": "physics"
     },
     {
-      "name": "Primary (3-7)",
-      "slug": "primary-3-7"
-    },
-    {
-      "name": "Primary (5-11)",
-      "slug": "primary-5-11"
-    },
-    {
-      "name": "Primary (Special Educational Needs)",
-      "slug": "primary-special-educational-needs"
-    },
-    {
-      "name": "Religious Education",
-      "slug": "religious-education"
-    },
-    {
-      "name": "Social Sciences",
-      "slug": "social-sciences"
+      "name": "Primary - General",
+      "slug": "primary-general"
     }
   ],
   "folded_courses": {
-    "Sheffield Hallam University": [
+    "University of Hertfordshire": [
       {
         "name": "Art and Design",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -880,35 +518,13 @@
         "name": "Biology",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Main Site",
-          "Winterhill School"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Business Studies",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -923,15 +539,13 @@
         "name": "Chemistry",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "High Storrs School",
-          "Peak District",
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -946,79 +560,16 @@
         "name": "Computing",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Design and Technology",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Design and Technology (Food)",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Drama",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1030,16 +581,16 @@
         "name": "English",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1051,16 +602,16 @@
         "name": "Geography",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1072,16 +623,16 @@
         "name": "History",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
-          "26 Oct 2017"
+          "23 Nov 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
-          "PGCE with QTS full time"
+          "QTS full time"
         ],
         "flags": {
           "partTime": false,
@@ -1093,19 +644,13 @@
         "name": "Mathematics",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Ecclesfield School",
-          "High Storrs School",
-          "Meadowhead School",
-          "Peak District",
-          "Silverdale School (Lead School)",
-          "Westfield School",
-          "Winterhill School"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -1117,16 +662,16 @@
         }
       },
       {
-        "name": "Music",
+        "name": "Modern Languages (French with German)",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -1138,16 +683,79 @@
         }
       },
       {
-        "name": "Physical Education",
+        "name": "Modern Languages (French with Spanish)",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Modern Languages (French)",
+        "courses": 1,
+        "accrediting": [
+          "University of Hertfordshire"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Modern Languages (German with French)",
+        "courses": 1,
+        "accrediting": [
+          "University of Hertfordshire"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
+        ],
+        "options": [
+          "PGCE with QTS full time"
+        ],
+        "flags": {
+          "partTime": false,
+          "salary": false,
+          "qualifications": false
+        }
+      },
+      {
+        "name": "Modern Languages (Spanish)",
+        "courses": 1,
+        "accrediting": [
+          "University of Hertfordshire"
+        ],
+        "applicationsOpen": [
+          "26 Oct 2017"
+        ],
+        "schoolsWithVacancies": [
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -1162,15 +770,13 @@
         "name": "Physics",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
         ],
         "schoolsWithVacancies": [
-          "High Storrs School",
-          "Meadowhead School",
-          "Silverdale School (Lead School)"
+          "Main Site"
         ],
         "options": [
           "PGCE with QTS full time"
@@ -1182,120 +788,10 @@
         }
       },
       {
-        "name": "Primary (3-7)",
+        "name": "Primary - General",
         "courses": 1,
         "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Peak District",
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Primary (5-11)",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Chesterfield",
-          "Peak District",
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Primary (Special Educational Needs)",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Religious Education",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Social Sciences",
-        "courses": 1,
-        "accrediting": [
-          "Sheffield Hallam University"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      }
-    ],
-    "The National Modern Languages SCITT": [
-      {
-        "name": "Modern Languages (French, German, Spanish)",
-        "courses": 1,
-        "accrediting": [
-          "The National Modern Languages SCITT"
+          "University of Hertfordshire"
         ],
         "applicationsOpen": [
           "26 Oct 2017"
@@ -1312,53 +808,10 @@
           "qualifications": false
         }
       }
-    ],
-    "The University of Sheffield": [
-      {
-        "name": "Geography",
-        "courses": 1,
-        "accrediting": [
-          "The University of Sheffield"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      },
-      {
-        "name": "Mathematics",
-        "courses": 1,
-        "accrediting": [
-          "The University of Sheffield"
-        ],
-        "applicationsOpen": [
-          "26 Oct 2017"
-        ],
-        "schoolsWithVacancies": [
-          "Silverdale School (Lead School)"
-        ],
-        "options": [
-          "PGCE with QTS full time"
-        ],
-        "flags": {
-          "partTime": false,
-          "salary": false,
-          "qualifications": false
-        }
-      }
     ]
   },
   "options": [
-    "PGCE with QTS full time"
+    "PGCE with QTS full time",
+    "QTS full time"
   ]
 }
