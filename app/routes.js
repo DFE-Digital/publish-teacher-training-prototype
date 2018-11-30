@@ -10,6 +10,48 @@ router.get('/', function (req, res) {
   }
 })
 
+router.post('/new/confirm', function (req, res) {
+  var data = req.session.data;
+  var generatedTitle = data['new-subject'];
+  var courseOffered = data['new-outcome'];
+
+  if (data['new-subject'] == 'Modern languages') {
+    if (data['new-second-language']) {
+      generatedTitle = `${generatedTitle} (${data['new-first-language']} and ${data['new-second-language']})`;
+    } else {
+      generatedTitle = `${generatedTitle} (${data['new-first-language']})`;
+    }
+  }
+
+  if (data['new-sen']) {
+    generatedTitle = generatedTitle + ' (Special educational needs)';
+  }
+
+  if (data['new-full-part'] == 'Full time or part time') {
+    courseOffered = courseOffered + ', full time or part time';
+  } else if (data['new-full-part'])  {
+    courseOffered = courseOffered + ' ' + data['new-full-part'].toLowerCase();
+  }
+
+  if (data['new-type'] == 'Salaried') {
+    courseOffered = courseOffered + ' with salary';
+  }
+
+  if (data['new-type'] == 'Teaching apprenticeship') {
+    courseOffered = courseOffered + ' teaching apprenticeship';
+  }
+
+  res.render('new/confirm', { generatedTitle: generatedTitle, courseOffered: courseOffered });
+})
+
+router.post('/new/languages', function (req, res) {
+  if (req.session.data['new-subject'] == 'Modern languages') {
+    res.render('new/languages');
+  } else {
+    res.redirect('/new/outcome');
+  }
+})
+
 router.post('/request-access', function (req, res) {
   res.render('request-access', { showMessage: true })
 })

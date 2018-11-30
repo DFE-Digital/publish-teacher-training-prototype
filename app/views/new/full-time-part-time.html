@@ -1,0 +1,39 @@
+{% set title = 'Full time or part time?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/outcome" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/accredited-provider" method="post">
+
+        {% set fields = [
+            {
+              name: 'Full time'
+            },
+            {
+              name: 'Part time'
+            },
+            {
+              name: 'Full time or part time'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('new-full-part', fields, errors) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

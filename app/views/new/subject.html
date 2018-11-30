@@ -1,0 +1,67 @@
+{% set title %}Pick a {{ data['new-phase'] | lower }} subject{% endset %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/phase" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/languages" method="post">
+        {% set primaryFields = [
+           { name: 'Primary'},
+           { name: 'Primary with English'},
+           { name: 'Primary with history or geography'},
+           { name: 'Primary with mathematics'},
+           { name: 'Primary with modern languages'},
+           { name: 'Primary with physical education'},
+           { name: 'Primary with science'}
+          ]
+        %}
+
+        {% set secondaryFields = [
+           { name: 'Art and design'},
+           { name: 'Balanced science'},
+           { name: 'Biology'},
+           { name: 'Business studies'},
+           { name: 'Chemistry'},
+           { name: 'Citizenship'},
+           { name: 'Classics'},
+           { name: 'Communication and media studies'},
+           { name: 'Computing'},
+           { name: 'Dance'},
+           { name: 'Design and technology'},
+           { name: 'Drama'},
+           { name: 'Economics'},
+           { name: 'Geography'},
+           { name: 'Health and social care'},
+           { name: 'History'},
+           { name: 'Mathematics'},
+           { name: 'Modern languages'},
+           { name: 'Music'},
+           { name: 'Physical education'},
+           { name: 'Physics'},
+           { name: 'Psychology'},
+           { name: 'Religious education'},
+           { name: 'Social sciences'}
+          ]
+        %}
+
+        {% if data['new-phase'] == 'Primary' %}
+          {{ macros.select('new-subject', 'Primary subject', primaryFields) }}
+        {% elseif data['new-phase'] == 'Secondary' %}
+          {{ macros.select('new-subject', 'Secondary subject', secondaryFields) }}
+        {% endif %}
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

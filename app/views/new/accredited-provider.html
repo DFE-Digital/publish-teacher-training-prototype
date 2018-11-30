@@ -1,0 +1,50 @@
+{% set title = 'Is another organisation the accredited provider?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/full-time-part-time" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/confirm" method="post">
+        {% set accreditedProviderFields %}
+          {{ macros.select('new-accredited-provider', 'Name of accredited provider', [
+            {
+              name: 'Goldsmiths, University of London'
+            },
+            {
+              name: 'The University of Warwick'
+            },
+            {
+              name: 'UCL, University College London (University of London)'
+            }
+          ]) }}
+        {% endset %}
+
+        {% set fields = [
+            {
+              name: 'Yes',
+              more: accreditedProviderFields
+            },
+            {
+              name: 'No, we are the accredited provider'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('new-has-accredited-provider', fields, errors) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

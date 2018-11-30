@@ -181,6 +181,27 @@
 </h1>
 {% endmacro %}
 
+{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, index = 0) %}
+  <div class="form-group">
+    <label class="form-label" for="{{ name }}">{{ label }}</label>
+    {% if helpText %}
+      <span class="form-hint">{{helpText | safe}}</span>
+    {% endif %}
+    <select class="form-control" id="{{ name }}" name="{{ name }}">
+      {% if emptyOption %}
+        <option></option>
+      {% endif %}
+      {% for o in options %}
+        {% if o.name %}
+          <option value="{{ o.name }}">{{ o.name }}</option>
+        {% else %}
+          <option value="{{ o }}">{{ o }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+{% endmacro %}
+
 {#
   field:
     name:

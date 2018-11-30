@@ -1,0 +1,51 @@
+{% set title %}Pick the languages for this course{% endset %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/phase" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/outcome" method="post">
+        {% set languageFields = [
+          { name: 'English as a foreign language'},
+          { name: 'French'},
+          { name: 'German'},
+          { name: 'Italian'},
+          { name: 'Japanese'},
+          { name: 'Mandarin'},
+          { name: 'Russian'},
+          { name: 'Spanish'},
+          { name: 'Other modern language'}
+          ]
+        %}
+
+        {{ macros.select('new-first-language', 'Language', languageFields) }}
+        {{ macros.select('new-second-language', 'Second language (optional)', languageFields) }}
+
+        {% set furtherLanguages %}
+          <h3 class="heading-medium">Further languages</h3>
+          {{ macros.checkboxGroup('new-further-languages', languageFields, 0, false) }}
+        {% endset %}
+
+        {{ macros.checkboxGroup('new-further-languages', [
+          {
+            name: 'This course has more languages',
+            more: furtherLanguages
+          }
+        ]) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,183 @@
+{% set title = 'Check your answers before confirming' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/accredited-provider" class="link-back">Back</a>
+
+  <form action="/" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-xlarge add-double-bottom-margin">
+          {{ title }}
+        </h1>
+
+        <dl class="govuk-check-your-answers cya-questions-short" style="margin-top: 60px; margin-bottom: 60px">
+          <div>
+            <dt class="cya-question">
+              Title
+            </dt>
+            <dd class="cya-answer">
+              {{ generatedTitle }}
+            </dd>
+            <dd class="cya-change">
+              <a href="#">
+                Change<span class="visually-hidden"> title</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Description
+            </dt>
+            <dd class="cya-answer">
+              {{ courseOffered }}
+            </dd>
+            <dd class="cya-change">
+
+            </dd>
+          </div>
+
+          <div>
+            <dt class="cya-question">
+              Phase
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-phase'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/phase">
+                Change<span class="visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Special educational needs (SEN)
+            </dt>
+            <dd class="cya-answer">
+              {% if data['new-sen'] %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/phase">
+                Change<span class="visually-hidden"> SEN</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Fee or salary
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-type'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/phase">
+                Change<span class="visually-hidden"> fee or salary</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Subject
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-subject'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/subject">
+                Change<span class="visually-hidden"> subject</span>
+              </a>
+            </dd>
+          </div>
+          {% if data['new-subject'] == 'Modern languages' %}
+          <div>
+            <dt class="cya-question">
+              Languages
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-first-language'] }}
+              {% if data['new-second-language'] %}
+                <br />{{ data['new-second-language'] }}
+              {% endif %}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/languages">
+                Change<span class="visually-hidden"> subject</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
+          <div>
+            <dt class="cya-question">
+              Outcome
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-outcome'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/outcome">
+                Change<span class="visually-hidden"> outcome</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Full time or part time
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-full-part'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/full-time-part-time">
+                Change<span class="visually-hidden"> full time or part time</span>
+              </a>
+            </dd>
+          </div>
+
+          {% if data['new-has-accredited-provider'] == 'Yes' %}
+            <div>
+              <dt class="cya-question">
+                Accredited provider
+              </dt>
+              <dd class="cya-answer">
+                {{ data['new-accredited-provider'] }}
+              </dd>
+              <dd class="cya-change">
+                <a href="/new/accredited-provider">
+                  Change<span class="visually-hidden"> accredited provider</span>
+                </a>
+              </dd>
+            </div>
+          {% else %}
+            <div>
+              <dt class="cya-question">
+                Separate accredited provider?
+              </dt>
+              <dd class="cya-answer">
+                {{ data['new-has-accredited-provider'] }}
+              </dd>
+              <dd class="cya-change">
+                <a href="/new/accredited-provider">
+                  Change<span class="visually-hidden"> accredited provider</span>
+                </a>
+              </dd>
+            </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="button" value="Confirm" />
+    </div>
+  </form>
+</main>
+
+{% endblock %}

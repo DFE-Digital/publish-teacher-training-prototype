@@ -1,0 +1,47 @@
+{% set title = 'Pick a course outcome' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/subject" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Pick the outcome which describes what a trainee will get when they complete this course.</p>
+      <form action="/new/full-time-part-time" method="post">
+
+        {% set fields = [
+            {
+              name: 'PGCE with QTS',
+              text: 'Postgraduate certificate in education with qualified teacher status'
+            },
+            {
+              name: 'QTS',
+              text: 'Qualified teacher status'
+            },
+            {
+              name: 'QTS with optional PGCE',
+              text: 'Qualified teacher status with optional postgraduate certificate in education'
+            },
+            {
+              name: 'PGDE with QTS',
+              text: 'Postgraduate diploma in education with qualified teacher status'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('new-outcome', fields, errors) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
