@@ -18,32 +18,7 @@
         <dl class="govuk-check-your-answers cya-questions-short" style="margin-top: 60px; margin-bottom: 60px">
           <div>
             <dt class="cya-question">
-              Title
-            </dt>
-            <dd class="cya-answer">
-              {{ generatedTitle }}
-            </dd>
-            <dd class="cya-change">
-              <a href="#">
-                Change<span class="visually-hidden"> title</span>
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt class="cya-question">
-              Description
-            </dt>
-            <dd class="cya-answer">
-              {{ courseOffered }}
-            </dd>
-            <dd class="cya-change">
-
-            </dd>
-          </div>
-
-          <div>
-            <dt class="cya-question">
-              Phase
+              Level
             </dt>
             <dd class="cya-answer">
               {{ data['new-phase'] }}
@@ -171,12 +146,60 @@
               </dd>
             </div>
           {% endif %}
+          <div>
+            <dt class="cya-question">
+              Title
+            </dt>
+            <dd class="cya-answer">
+              {{ data['new-title'] or data['new-generated-title'] or generatedTitle }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/title">
+                Change<span class="visually-hidden"> title</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Description
+            </dt>
+            <dd class="cya-answer">
+              {{ courseOffered }}
+            </dd>
+            <dd class="cya-change">
+
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Course code
+            </dt>
+            <dd class="cya-answer">
+              A123
+            </dd>
+            <dd class="cya-change">
+
+            </dd>
+          </div>
         </dl>
+
+        <h2 class="heading-large">Preview</h2>
+
+        <p>See how this course will appear when it’s published on Find postgraduate teacher training:</p>
+        <div class="panel panel-border-wide">
+          <h3 class="heading-medium remove-top-margin">
+            <span class="heading-small">{{ data['training-provider-name'] }}</span><br />
+            {{ data['new-title'] or data['new-generated-title'] or generatedTitle }} (A123)
+          </h3>
+
+          <p>Course: {{ courseOffered }}</p>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <input type="submit" class="button" value="Confirm" />
+    <div class="form-group" style="margin-top: 30px">
+      <input type="submit" class="button" value="Save new course" />
     </div>
+    <p>Saving this course will not publish it.</p>
   </form>
 </main>
 

@@ -10,10 +10,13 @@ router.get('/', function (req, res) {
   }
 })
 
-router.post('/new/confirm', function (req, res) {
+router.all('/new/confirm', function (req, res) {
   var data = req.session.data;
+  res.render('new/confirm', { generatedTitle: getGeneratedTitle(data), courseOffered: getCourseOffered(data) });
+})
+
+function getGeneratedTitle(data) {
   var generatedTitle = data['new-subject'];
-  var courseOffered = data['new-outcome'];
 
   if (data['new-subject'] == 'Modern languages') {
     if (data['new-second-language']) {
@@ -26,6 +29,13 @@ router.post('/new/confirm', function (req, res) {
   if (data['new-sen']) {
     generatedTitle = generatedTitle + ' (Special educational needs)';
   }
+
+  data['new-generated-title'] = generatedTitle;
+  return generatedTitle;
+}
+
+function getCourseOffered(data) {
+  var courseOffered = data['new-outcome'];
 
   if (data['new-full-part'] == 'Full time or part time') {
     courseOffered = courseOffered + ', full time or part time';
@@ -41,8 +51,8 @@ router.post('/new/confirm', function (req, res) {
     courseOffered = courseOffered + ' teaching apprenticeship';
   }
 
-  res.render('new/confirm', { generatedTitle: generatedTitle, courseOffered: courseOffered });
-})
+  return courseOffered;
+}
 
 router.post('/new/languages', function (req, res) {
   if (req.session.data['new-subject'] == 'Modern languages') {
