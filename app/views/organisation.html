@@ -38,7 +38,7 @@
   </div>
   <hr />
 
-  <div class="grid-row">
+  <!-- <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large remove-top-margin">Step 2. Locations</h2>
       <p>Give the address, type of location and name of each place applicants can choose when they apply.</p>
@@ -48,12 +48,12 @@
       </p>
     </div>
   </div>
-  <hr />
+  <hr /> -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large">
-        Step 3. Course details
+        Step 2. Course details
       </h2>
 
       <h3 class="heading-medium">Preview and publish courses</h3>
@@ -80,7 +80,6 @@
             <th class="subject-col">Course</th>
             <th class="type-col">Type</th>
             <th class="status-col" style="width: 100px">Status</th>
-            <th class="status-col">Course content</th>
           </tr>
         </thead>
         <tbody>
@@ -97,13 +96,6 @@
                   </span>
                 </td>
                 <td>{{ course.options }}</td>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    Running
-                  {% else %}
-                    Not running
-                  {% endif %}
-                </td>
                 <td>
                   {% if (loop.index != 4 and loop.index != 7) %}
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
