@@ -8,7 +8,7 @@
   {% include "includes/phase_banner_beta.html" %}
   <a href="{% if data['new-course']['include-accredited'] %}/new/accredited-provider{% else %}/new/full-time-part-time{% endif %}" class="link-back">Back</a>
 
-  <form action="/" method="post">
+  <form action="/new/create" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="heading-xlarge add-double-bottom-margin">
@@ -192,7 +192,7 @@
         <div class="panel panel-border-wide">
           <h3 class="heading-medium remove-top-margin">
             <span class="heading-small">{{ data['training-provider-name'] }}</span><br />
-            {{ data['new-title'] or data['new-generated-title'] or generatedTitle }} (A123)
+            {{ data['new-title'] or generatedTitle }} (A123)
           </h3>
 
           <p>Course: {{ courseOffered }}</p>

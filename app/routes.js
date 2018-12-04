@@ -51,6 +51,7 @@ function getCourseOffered(data) {
     courseOffered = courseOffered + ' teaching apprenticeship';
   }
 
+  data['new-generated-description'] = courseOffered;
   return courseOffered;
 }
 
@@ -60,6 +61,65 @@ router.post('/new/languages', function (req, res) {
   } else {
     res.redirect('/new/outcome');
   }
+})
+
+router.post('/new/create', function (req, res) {
+  // Take new data and make it into a course
+  var data = req.session.data;
+  var course = {
+    "accrediting": data['new-accredited-provider'] || data['training-provider-name'],
+    "subjects": `${data['new-subject']}, ${data['new-phase']}`,
+    "name": data['new-generated-title'],
+    "slug": "new-course",
+    "route": null,
+    "qualifications": null,
+    "providerCode": data['ucasCourses'][0]['providerCode'],
+    "programmeCode": "A123",
+    "schools": [
+
+    ],
+    "options": [
+      data['new-generated-description']
+    ]
+  };
+
+  data['ucasCourses'].push(course);
+
+  // "ucasCourses": [
+  //   {
+  //     "regions": "Eastern",
+  //     "accrediting": "University of Hertfordshire",
+  //     "subjects": "Art / art & design, Secondary",
+  //     "ageRange": "Secondary (11+ years)",
+  //     "name": "Art and Design",
+  //     "slug": "art-and-design",
+  //     "route": "Higher Education programme",
+  //     "qualifications": "QTS, Postgraduate, Professional",
+  //     "providerCode": "H36",
+  //     "programmeCode": "W1X1",
+  //     "schools": [
+  //       {
+  //         "name": "Main Site",
+  //         "address": "",
+  //         "code": ""
+  //       }
+  //     ],
+  //     "options": [
+  //       "PGCE with QTS full time"
+  //     ]
+  //   },
+
+  // "new-phase": "Secondary",
+  // "new-type": "Salaried",
+  // "new-subject": "Modern languages",
+  // "new-first-language": "French",
+  // "new-second-language": "German",
+  // "new-further-languages": "This course has more languages",
+  // "new-outcome": "PGCE with QTS",
+  // "new-full-part": "Full time",
+  // "new-has-accredited-provider": "No, we are the accredited provider",
+
+  res.redirect(`/course/${data['accreditors'][0]['slug']}/A123`);
 })
 
 router.post('/request-access', function (req, res) {
