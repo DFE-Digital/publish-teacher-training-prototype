@@ -19,10 +19,14 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 1. About your organisation</h2>
-      <p>You need to add a description of your organisation - this is a chance to tell applicants why they should train with you. You should also say what you do for candidates with disabilities and other needs, and check your contact details to make sure they're correct.</p>
+      <h2 class="heading-large remove-top-margin">Step 1. Your organisation</h2>
 
-      <p>Once you’ve published your organisation information, it will show on each of your course pages. You’ll have to add your course details separately in Step 2 below.</p>
+      <p>Use this section to:</p>
+      <ul class="list list-bullet">
+        <li>write about your organisation</li>
+        <li>set your contact details</li>
+        <li>publish this information on all course pages</li>
+      </ul>
 
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
@@ -53,16 +57,17 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large">
-        Step 2. Course details
+        Step 2. Courses
       </h2>
 
-      <h3 class="heading-medium">Preview and publish courses</h3>
-      <p>Give more details about each of your courses - including their structure and content, information about fees and financial help, and the qualifications needed for them.</p>
+      <p>Use this section to:</p>
+      <ul class="list list-bullet">
+        <li>create, preview and publish courses</li>
+        <li>copy content between courses</li>
+      </ul>
 
       <p>Make sure you preview each course before you publish it, to see how it will look online to applicants.</p>
-
-      <h3 class="heading-medium">Copying content between courses</h3>
-      <p>After you’ve saved your first course, when you’re completing the next you can use the ‘copy from course’ feature to fill in fields. This can be found on the ‘About this course’, ‘Course length and fees’ and ‘Requirements and eligibility’ pages.</p>
+      <p>Applicants can only see and apply to published courses.</p>
     </div>
   </div>
 
@@ -115,6 +120,10 @@
           {% endfor %}
         </tbody>
       </table>
+
+      <p class="add-top-margin">
+        <a href="/new/phase" class="button">Add course</a>
+      </p>
     </div>
   {% endfor %}
   <hr />
