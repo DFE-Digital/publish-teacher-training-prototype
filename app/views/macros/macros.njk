@@ -195,9 +195,9 @@
       {% endif %}
       {% for o in options %}
         {% if o.name %}
-          <option value="{{ o.name }}">{{ o.name }}</option>
+          <option value="{{ o.name }}" {% if (o.name == value(name)) %}selected{% endif %}>{{ o.name }}</option>
         {% else %}
-          <option value="{{ o }}">{{ o }}</option>
+          <option value="{{ o }}" {% if (o == value(name)) %}selected{% endif %}>{{ o }}</option>
         {% endif %}
       {% endfor %}
     </select>
