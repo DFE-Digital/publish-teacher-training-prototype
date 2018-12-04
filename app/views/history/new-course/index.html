@@ -43,11 +43,11 @@
         <li>Primary with mathematics (Special educational needs)</li>
         <li>Biology (Special educational needs)</li>
       </ul>
-
     </div>
   </div>
 
   {% set contents = [
+    { text: 'Workflow diagram', id: 'workflow-diagram' },
     { text: 'Type of course', id: 'type-of-course' },
     { text: 'Pick a subject', id: 'pick-a-subject' },
     { text: 'Pick languages', id: 'pick-languages' },
@@ -58,6 +58,12 @@
     { text: 'Customise title', id: 'customise-title' }
   ] %}
   {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Workflow diagram', 'workflow-diagram', '/public/images/history/new-course/00-new-course-workflow.png', '/public/images/history/new-course/00-new-course-workflow.png', '
+    <p><a href="https://docs.google.com/drawings/d/1DAhz464j1XDyQPoOH0adIwAceUwuGU1rqsWkVn8ZQ8I/edit">Google diagram</a></p>
+
+    <p>Diagram showing which screens are applicable to which journey.</p>
+  ') }}
 
   {{ macros.screenshot('Type of course', 'type-of-course', '/public/images/history/new-course/thumbnails/01-type-of-course.png', '/public/images/history/new-course/01-type-of-course.png', '
     <p>Start by choosing a level, whether the course is SEN and if it’s salaried or fee paying.</p>
