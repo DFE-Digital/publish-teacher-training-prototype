@@ -181,7 +181,7 @@
 </h1>
 {% endmacro %}
 
-{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, index = 0) %}
+{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = true) %}
   <div class="form-group">
     <label class="form-label" for="{{ name }}">{{ label }}</label>
     {% if helpText %}
@@ -199,6 +199,16 @@
         {% endif %}
       {% endfor %}
     </select>
+    {% if autocomplete %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        accessibleAutocomplete.enhanceSelectElement({
+          showAllValues: true,
+          selectElement: document.querySelector('#{{ name }}')
+        })
+      });
+    </script>
+    {% endif %}
   </div>
 {% endmacro %}
 
