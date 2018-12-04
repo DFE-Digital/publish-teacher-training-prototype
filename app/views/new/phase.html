@@ -6,9 +6,9 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <!-- <a href="/new/title" class="link-back">Back</a> -->
+  <a href="/" class="link-back">Back</a>
 
-  <h1 class="heading-xlarge" style="margin-top: 60px">
+  <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
@@ -40,22 +40,6 @@
         %}
 
         {{ macros.checkboxGroup('new-sen', fields, 0, false) }}
-
-        <h2 class="heading-medium">Fee or salary</h2>
-        {% set fields = [
-            {
-              name: 'Fee paying (unsalaried)'
-            },
-            {
-              name: 'Salaried'
-            },
-            {
-              name: 'Teaching apprenticeship'
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup('new-type', fields, 0, false) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>
