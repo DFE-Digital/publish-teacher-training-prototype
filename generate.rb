@@ -13,7 +13,11 @@ prototype_data = {
   'training-provider-name': provider,
   'provider-code-name': courses.first['providerCodeName'],
   'provider-code': courses.first['providerCode'],
-  'templates': []
+  'templates': [],
+  'new-course': {
+    'include-accredited': courses.first['route'].include?('School Direct'),
+    'include-fee-or-salary': courses.first['route'].include?('School Direct')
+  }
 
   # "25PP-about-this-course": "About this course",
   # "25PP-interview-process": "Interview process",

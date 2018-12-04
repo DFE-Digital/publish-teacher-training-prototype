@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/outcome" class="link-back">Back</a>
+  <a href="{% if data['new-course']['include-fee-or-salary'] %}/new/funding{% else %}/new/outcome{% endif %}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new/accredited-provider" method="post">
+      <form action="{% if data['new-course']['include-accredited'] %}/new/accredited-provider{% else %}/new/confirm{% endif %}" method="post">
 
         {% set fields = [
             {

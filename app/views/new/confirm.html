@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/accredited-provider" class="link-back">Back</a>
+  <a href="{% if data['new-course']['include-accredited'] %}/new/accredited-provider{% else %}/new/full-time-part-time{% endif %}" class="link-back">Back</a>
 
   <form action="/" method="post">
     <div class="grid-row">
@@ -90,6 +90,7 @@
               </a>
             </dd>
           </div>
+          {% if data['new-course']['include-fee-or-salary'] %}
           <div>
             <dt class="cya-question">
               Fee or salary
@@ -103,6 +104,7 @@
               </a>
             </dd>
           </div>
+          {% endif %}
           <div>
             <dt class="cya-question">
               Full time or part time
@@ -116,35 +118,36 @@
               </a>
             </dd>
           </div>
-
-          {% if data['new-has-accredited-provider'] == 'Yes' %}
-            <div>
-              <dt class="cya-question">
-                Accredited provider
-              </dt>
-              <dd class="cya-answer">
-                {{ data['new-accredited-provider'] }}
-              </dd>
-              <dd class="cya-change">
-                <a href="/new/accredited-provider">
-                  Change<span class="visually-hidden"> accredited provider</span>
-                </a>
-              </dd>
-            </div>
-          {% else %}
-            <div>
-              <dt class="cya-question">
-                Separate accredited provider?
-              </dt>
-              <dd class="cya-answer">
-                {{ data['new-has-accredited-provider'] }}
-              </dd>
-              <dd class="cya-change">
-                <a href="/new/accredited-provider">
-                  Change<span class="visually-hidden"> accredited provider</span>
-                </a>
-              </dd>
-            </div>
+          {% if data['new-course']['include-accredited'] %}
+            {% if data['new-has-accredited-provider'] == 'Yes' %}
+              <div>
+                <dt class="cya-question">
+                  Accredited provider
+                </dt>
+                <dd class="cya-answer">
+                  {{ data['new-accredited-provider'] }}
+                </dd>
+                <dd class="cya-change">
+                  <a href="/new/accredited-provider">
+                    Change<span class="visually-hidden"> accredited provider</span>
+                  </a>
+                </dd>
+              </div>
+            {% else %}
+              <div>
+                <dt class="cya-question">
+                  Separate accredited provider?
+                </dt>
+                <dd class="cya-answer">
+                  {{ data['new-has-accredited-provider'] }}
+                </dd>
+                <dd class="cya-change">
+                  <a href="/new/accredited-provider">
+                    Change<span class="visually-hidden"> accredited provider</span>
+                  </a>
+                </dd>
+              </div>
+            {% endif %}
           {% endif %}
           <div>
             <dt class="cya-question">
