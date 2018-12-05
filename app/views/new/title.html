@@ -16,7 +16,7 @@
       <p>You can customise your course title but any changes will be subject to approval by the Becoming a Teacher team.</p>
 
       <form action="/new/{{ code }}/confirm" method="post">
-        {{ macros.textbox(code + '-new-title', 'Title', '', 'form-control-full', false, false, data[code + '-new-generated-title']) }}
+        {{ macros.textbox(code + '-new-title', 'Title', '', 'form-control-full', false, false, data[code + '-new-title'] or data[code + '-new-generated-title']) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>
