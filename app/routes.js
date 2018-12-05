@@ -315,14 +315,9 @@ function subject(req) {
     return s.slug == req.params.subject;
   })
 
-  var folded_course = req.session.data['folded_courses'][accrediting['name']].find(function(folded_course) {
-    return folded_course.name == subject.name;
-  });
-
   return {
     name: subject.name,
-    slug: subject.slug,
-    folded_course: folded_course
+    slug: subject.slug
   };
 }
 
