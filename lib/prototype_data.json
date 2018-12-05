@@ -1,8 +1,8 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "University of Hertfordshire",
-  "provider-code-name": "HERTS",
-  "provider-code": "H36",
+  "training-provider-name": "Keele and North Staffordshire Teacher Education",
+  "provider-code-name": "A2309",
+  "provider-code": "24J",
   "templates": [
 
   ],
@@ -10,361 +10,169 @@
     "include-accredited": false,
     "include-fee-or-salary": false
   },
-  "X171-outcome": "PGCE with QTS",
-  "X171-accredited-provider": "University of Hertfordshire",
-  "W1X1-outcome": "PGCE with QTS",
-  "W1X1-accredited-provider": "University of Hertfordshire",
-  "CX11-outcome": "PGCE with QTS",
-  "CX11-accredited-provider": "University of Hertfordshire",
-  "F2X1-outcome": "PGCE with QTS",
-  "F2X1-accredited-provider": "University of Hertfordshire",
-  "38C8-outcome": "QTS",
-  "38C8-accredited-provider": "University of Hertfordshire",
-  "38C7-outcome": "QTS",
-  "38C7-accredited-provider": "University of Hertfordshire",
-  "RX11-outcome": "PGCE with QTS",
-  "RX11-accredited-provider": "University of Hertfordshire",
-  "RXD1-outcome": "PGCE with QTS",
-  "RXD1-accredited-provider": "University of Hertfordshire",
-  "R1X1-outcome": "PGCE with QTS",
-  "R1X1-accredited-provider": "University of Hertfordshire",
-  "RX21-outcome": "PGCE with QTS",
-  "RX21-accredited-provider": "University of Hertfordshire",
-  "38C9-outcome": "QTS",
-  "38C9-accredited-provider": "University of Hertfordshire",
-  "38CB-outcome": "QTS",
-  "38CB-accredited-provider": "University of Hertfordshire",
-  "34ZD-outcome": "PGCE with QTS",
-  "34ZD-accredited-provider": "University of Hertfordshire",
-  "G1X1-outcome": "PGCE with QTS",
-  "G1X1-accredited-provider": "University of Hertfordshire",
-  "F3X2-outcome": "PGCE with QTS",
-  "F3X2-accredited-provider": "University of Hertfordshire",
+  "2Q5R-outcome": "PGCE with QTS",
+  "2Q5R-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2N2M-outcome": "PGCE with QTS",
+  "2N2M-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2KBH-outcome": "PGCE with QTS",
+  "2KBH-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2KBF-outcome": "PGCE with QTS",
+  "2KBF-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2KBJ-outcome": "PGCE with QTS",
+  "2KBJ-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2KBS-outcome": "PGCE with QTS",
+  "2KBS-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "2KBY-outcome": "PGCE with QTS",
+  "2KBY-accredited-provider": "Keele and North Staffordshire Teacher Education",
   "ucasCourses": [
     {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Art / art & design, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Art and Design",
-      "slug": "art-and-design",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "W1X1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Biology, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Biology",
-      "slug": "biology",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "CX11",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Chemistry, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Chemistry",
-      "slug": "chemistry",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "F2X1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Computer studies, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Computing",
-      "slug": "computing",
-      "route": "Higher Education programme",
-      "qualifications": "QTS",
-      "providerCode": "H36",
-      "programmeCode": "38C8",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "English, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "English",
-      "slug": "english",
-      "route": "Higher Education programme",
-      "qualifications": "QTS",
-      "providerCode": "H36",
-      "programmeCode": "38C7",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Geography, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Geography",
-      "slug": "geography",
-      "route": "Higher Education programme",
-      "qualifications": "QTS",
-      "providerCode": "H36",
-      "programmeCode": "38C9",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "History, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "History",
-      "slug": "history",
-      "route": "Higher Education programme",
-      "qualifications": "QTS",
-      "providerCode": "H36",
-      "programmeCode": "38CB",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Mathematics, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Mathematics",
-      "slug": "mathematics",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "G1X1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "French, German, Languages, Languages (european), Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French with German)",
-      "slug": "modern-languages-french-with-german",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "RX11",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "French, Languages, Languages (european), Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French with Spanish)",
-      "slug": "modern-languages-french-with-spanish",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "RXD1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "French, Languages, Languages (european), Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (French)",
-      "slug": "modern-languages-french",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "R1X1",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "French, German, Languages, Languages (european), Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (German with French)",
-      "slug": "modern-languages-german-with-french",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "RX21",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Languages, Secondary, Spanish",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Modern Languages (Spanish)",
-      "slug": "modern-languages-spanish",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "34ZD",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Physics, Science, Secondary",
-      "ageRange": "Secondary (11+ years)",
-      "name": "Physics",
-      "slug": "physics",
-      "route": "Higher Education programme",
-      "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "F3X2",
-      "schools": [
-        {
-          "name": "Main Site",
-          "address": "",
-          "code": ""
-        }
-      ],
-      "options": [
-        "PGCE with QTS full time"
-      ]
-    },
-    {
-      "regions": "Eastern",
-      "accrediting": "University of Hertfordshire",
-      "subjects": "Primary",
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Early years, Primary",
       "ageRange": "Primary (c3 - 11/12 years)",
-      "name": "Primary - General",
-      "slug": "primary-general",
-      "route": "Higher Education programme",
+      "name": "Primary (Early Years)",
+      "slug": "primary-early-years",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
       "qualifications": "QTS, Postgraduate, Professional",
-      "providerCode": "H36",
-      "programmeCode": "X171",
+      "providerCode": "24J",
+      "programmeCode": "2Q5R",
       "schools": [
         {
           "name": "Main Site",
-          "address": "",
-          "code": ""
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Geography, History, Primary",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary (Geography and History)",
+      "slug": "primary-geography-and-history",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2KBH",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Languages, Primary",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary (Modern Languages)",
+      "slug": "primary-modern-languages",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2KBF",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "English, Primary",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary (with English)",
+      "slug": "primary-with-english",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2N2M",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Primary, Science",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary (with Science)",
+      "slug": "primary-with-science",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2KBY",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Mathematics, Primary",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary General (with Mathematics)",
+      "slug": "primary-general-with-mathematics",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2KBJ",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ]
+    },
+    {
+      "regions": "West Midlands",
+      "accrediting": "Keele and North Staffordshire Teacher Education",
+      "subjects": "Physical education, Primary",
+      "ageRange": "Primary (c3 - 11/12 years)",
+      "name": "Primary Physical Education (PE)",
+      "slug": "primary-physical-education-pe",
+      "route": "SCITT (School Centred Initial Teacher Training) programme",
+      "qualifications": "QTS, Postgraduate, Professional",
+      "providerCode": "24J",
+      "programmeCode": "2KBS",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+          "code": "-"
         }
       ],
       "options": [
@@ -375,74 +183,42 @@
   "schools": [
     {
       "name": "Main Site",
-      "address": "",
-      "code": ""
+      "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
+      "code": "-"
     }
   ],
   "accreditors": [
     {
-      "name": "University of Hertfordshire",
-      "slug": "university-of-hertfordshire",
+      "name": "Keele and North Staffordshire Teacher Education",
+      "slug": "keele-and-north-staffordshire-teacher-education",
       "subjects": [
         {
-          "name": "Art and Design",
-          "slug": "art-and-design"
+          "name": "Primary (Early Years)",
+          "slug": "primary-early-years"
         },
         {
-          "name": "Biology",
-          "slug": "biology"
+          "name": "Primary (Geography and History)",
+          "slug": "primary-geography-and-history"
         },
         {
-          "name": "Chemistry",
-          "slug": "chemistry"
+          "name": "Primary (Modern Languages)",
+          "slug": "primary-modern-languages"
         },
         {
-          "name": "Computing",
-          "slug": "computing"
+          "name": "Primary (with English)",
+          "slug": "primary-with-english"
         },
         {
-          "name": "English",
-          "slug": "english"
+          "name": "Primary (with Science)",
+          "slug": "primary-with-science"
         },
         {
-          "name": "Geography",
-          "slug": "geography"
+          "name": "Primary General (with Mathematics)",
+          "slug": "primary-general-with-mathematics"
         },
         {
-          "name": "History",
-          "slug": "history"
-        },
-        {
-          "name": "Mathematics",
-          "slug": "mathematics"
-        },
-        {
-          "name": "Modern Languages (French with German)",
-          "slug": "modern-languages-french-with-german"
-        },
-        {
-          "name": "Modern Languages (French with Spanish)",
-          "slug": "modern-languages-french-with-spanish"
-        },
-        {
-          "name": "Modern Languages (French)",
-          "slug": "modern-languages-french"
-        },
-        {
-          "name": "Modern Languages (German with French)",
-          "slug": "modern-languages-german-with-french"
-        },
-        {
-          "name": "Modern Languages (Spanish)",
-          "slug": "modern-languages-spanish"
-        },
-        {
-          "name": "Physics",
-          "slug": "physics"
-        },
-        {
-          "name": "Primary - General",
-          "slug": "primary-general"
+          "name": "Primary Physical Education (PE)",
+          "slug": "primary-physical-education-pe"
         }
       ]
     }
@@ -450,64 +226,32 @@
   "self_accrediting": true,
   "subjects": [
     {
-      "name": "Art and Design",
-      "slug": "art-and-design"
+      "name": "Primary (Early Years)",
+      "slug": "primary-early-years"
     },
     {
-      "name": "Biology",
-      "slug": "biology"
+      "name": "Primary (Geography and History)",
+      "slug": "primary-geography-and-history"
     },
     {
-      "name": "Chemistry",
-      "slug": "chemistry"
+      "name": "Primary (Modern Languages)",
+      "slug": "primary-modern-languages"
     },
     {
-      "name": "Computing",
-      "slug": "computing"
+      "name": "Primary (with English)",
+      "slug": "primary-with-english"
     },
     {
-      "name": "English",
-      "slug": "english"
+      "name": "Primary (with Science)",
+      "slug": "primary-with-science"
     },
     {
-      "name": "Geography",
-      "slug": "geography"
+      "name": "Primary General (with Mathematics)",
+      "slug": "primary-general-with-mathematics"
     },
     {
-      "name": "History",
-      "slug": "history"
-    },
-    {
-      "name": "Mathematics",
-      "slug": "mathematics"
-    },
-    {
-      "name": "Modern Languages (French with German)",
-      "slug": "modern-languages-french-with-german"
-    },
-    {
-      "name": "Modern Languages (French with Spanish)",
-      "slug": "modern-languages-french-with-spanish"
-    },
-    {
-      "name": "Modern Languages (French)",
-      "slug": "modern-languages-french"
-    },
-    {
-      "name": "Modern Languages (German with French)",
-      "slug": "modern-languages-german-with-french"
-    },
-    {
-      "name": "Modern Languages (Spanish)",
-      "slug": "modern-languages-spanish"
-    },
-    {
-      "name": "Physics",
-      "slug": "physics"
-    },
-    {
-      "name": "Primary - General",
-      "slug": "primary-general"
+      "name": "Primary Physical Education (PE)",
+      "slug": "primary-physical-education-pe"
     }
   ]
 }
