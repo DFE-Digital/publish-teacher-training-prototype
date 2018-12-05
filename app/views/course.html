@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 {% block page_title %}{{ title }}{% endblock %}
-{% set coursePath = '/course/' + accrediting.slug + '/' + course.programmeCode %}
-{% set previewLink = '/preview/' +  accrediting.slug + '/' + course.programmeCode %}
-{% set publishLink = '/publish/' +  accrediting.slug + '/' + course.programmeCode %}
+{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
+{% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
+{% set publishLink = '/publish/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 
 {% block content %}
@@ -77,19 +77,6 @@
   {% endif %}
 
   {% include "course/_errors.html" %}
-
-  {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
-        {{ title }} has been sent to DfE for review
-      </h3>
-      <p>
-        You will receive an email when the course is published or if changes are needed.
-      </p>
-    </div>
-  {% endif %}
-
-
 
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">

@@ -95,9 +95,9 @@
                 <tr>
                   <td>
                     {% if (loop.index != 4 and loop.index != 7) %}
-                      <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% else %}
-                      <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% endif %}
                     </span>
                   </td>

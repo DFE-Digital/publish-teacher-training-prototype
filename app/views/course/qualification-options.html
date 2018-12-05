@@ -8,7 +8,7 @@
   <div class="breadcrumbs">
     <ol>
       <li><a href="/">{{ data['training-provider-name'] }}</a></li>
-      <li><a href="/course/{{ accrediting.slug }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
+      <li><a href="/course/{{ data['provider-code'] }}/{{ subject.slug or '/maths' }}">{{ subject.name or 'Maths' }} – {{ accrediting.name }}</a></li>
     </ol>
   </div>
 
@@ -30,7 +30,7 @@
   </div>
 
 
-  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
+  <form action="/course/{{ data['provider-code'] }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         {{ macros.textarea(subject.slug + '-' + accrediting.slug + '-pgce-with-qts-qual', 'PGCE with QTS course', 5) }}

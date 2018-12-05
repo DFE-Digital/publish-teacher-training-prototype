@@ -119,7 +119,7 @@ router.post('/new/create', function (req, res) {
   // "new-full-part": "Full time",
   // "new-has-accredited-provider": "No, we are the accredited provider",
 
-  res.redirect(`/course/${data['accreditors'][0]['slug']}/A123`);
+  res.redirect(`/course/${data['provider-code']}/A123`);
 })
 
 router.post('/request-access', function (req, res) {
@@ -164,7 +164,7 @@ router.get('/publish/about-your-organisation', function (req, res) {
 })
 
 // Publish course action
-router.get('/publish/:accreditor/:code', function (req, res) {
+router.get('/publish/:providerCode/:code', function (req, res) {
   var c = course(req);
   var errors = validate(req.session.data, c);
 
@@ -175,70 +175,53 @@ router.get('/publish/:accreditor/:code', function (req, res) {
     req.session.data[c.programmeCode + '-published-before'] = true;
   }
 
-  res.redirect('/course/' + req.params.accreditor + '/' + req.params.code + '?publish=true');
+  res.redirect('/course/' + req.params.providerCode + '/' + req.params.code + '?publish=true');
 })
 
 // Course page
-router.get('/course/:accreditor/:code', function (req, res) {
+router.get('/course/:providerCode/:code', function (req, res) {
   var c = course(req);
   var errors = validate(req.session.data, c);
 
   res.render('course', {
     course: c,
-    accrediting: accreditor(req),
-    template: template(req, c),
     errors: errors,
     justPublished: (req.query.publish && errors.length == 0)
   })
 })
 
 // Post to course page
-router.post('/course/:accreditor/:code', function (req, res) {
+router.post('/course/:providerCode/:code', function (req, res) {
   var c = course(req);
   req.session.data[c.programmeCode + '-publish-state'] = 'draft';
 
   res.render('course', {
     course: c,
-    accrediting: accreditor(req),
-    template: template(req, c),
     errors: validate(req.session.data, c),
     publishState : 'draft',
     showMessage: true
   })
 })
 
-router.get('/course-not-running/:accreditor/:code', function (req, res) {
+router.get('/course-not-running/:providerCode/:code', function (req, res) {
   var c = course(req);
 
-  res.render('course-not-running', { course: c, accrediting: accreditor(req), template: template(req, c) })
+  res.render('course-not-running', { course: c })
 })
 
-router.get('/preview/:accreditor/:code', function (req, res) {
+router.get('/preview/:providerCode/:code', function (req, res) {
   var c = course(req);
-  var t = template(req, c);
   var prefix = '';
 
-  if (t) {
-    prefix = t.slug + '-template';
-  } else {
-    prefix = c.programmeCode;
-  }
-
-  res.render('preview', { course: c, accrediting: accreditor(req), template: t, prefix: prefix })
+  res.render('preview', { course: c, prefix: prefix })
 })
 
-// router.get('/course/:accreditor/:code/no-template', function (req, res) {
-//   req.session.data[req.params.code + '-template-choice'] = 'template-none';
-//   res.redirect(`/course/${req.params.accreditor}/${req.params.code}`);
-// })
-
-router.get('/course/:accreditor/:code/:view', function (req, res) {
+router.get('/course/:providerCode/:code/:view', function (req, res) {
   var view = req.params.view;
   var c = course(req);
 
   res.render(`course/${view}`, {
     course: c,
-    accrediting: accreditor(req),
     errors: validate(req.session.data, c, view)
   })
 })
@@ -278,30 +261,6 @@ function course(req) {
 
   course.salaried = (course.route == 'School Direct training programme (salaried)')
   return course;
-}
-
-function accreditor(req) {
-  var accreditor = req.session.data['accreditors'].find(function(a) {
-    return a.slug == req.params.accreditor;
-  });
-
-  accreditor.selfAccrediting = (req.session.data['training-provider-name'] == accreditor.name);
-
-  return accreditor;
-}
-
-function template(req, course) {
-  var templateSlug;
-
-  if (req.params.template) {
-    templateSlug = req.params.template
-  } else if (course) {
-    templateSlug = req.session.data[course.programmeCode + '-template-choice'];
-  }
-
-  return req.session.data['templates'].find(function(t) {
-    return t.slug == templateSlug;
-  });
 }
 
 function option(req, subject) {

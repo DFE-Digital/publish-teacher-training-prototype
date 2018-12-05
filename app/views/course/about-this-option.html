@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ accrediting.slug }}/{{ subject.slug }}" class="link-back">Back</a>
+  <a href="/course/{{ data['provider-code'] }}/{{ subject.slug }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     <span class="heading-secondary">{{ subject.name }}</span>
     {{ option.name }}
   </h1>
 
-  <form action="/course/{{ accrediting.slug }}/{{ subject.slug }}" method="post">
+  <form action="/course/{{ data['provider-code'] }}/{{ subject.slug }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <p>How long does the course run for?</p>

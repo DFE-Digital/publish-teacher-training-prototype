@@ -1,4 +1,4 @@
-<form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+<form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
   <div class="form-group">
     {% for t in data['templates'] %}
       <div class="multiple-choice">
