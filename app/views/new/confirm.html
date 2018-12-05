@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/{{ code }}/{% if data[code + '-new-course']['include-accredited'] %}accredited-provider{% else %}full-time-part-time{% endif %}" class="link-back">Back</a>
+  <a href="/new/{{ code }}/{% if data['new-course']['include-accredited'] %}accredited-provider{% else %}full-time-part-time{% endif %}" class="link-back">Back</a>
 
   <form action="/new/{{ code }}/create" method="post">
     <div class="grid-row">
@@ -90,7 +90,7 @@
               </a>
             </dd>
           </div>
-          {% if data[code + '-new-course']['include-fee-or-salary'] %}
+          {% if data['new-course']['include-fee-or-salary'] %}
           <div>
             <dt class="cya-question">
               Fee or salary
@@ -118,7 +118,7 @@
               </a>
             </dd>
           </div>
-          {% if data[code + '-new-course']['include-accredited'] %}
+          {% if data['new-course']['include-accredited'] %}
             {% if data[code + '-new-has-accredited-provider'] == 'Yes' %}
               <div>
                 <dt class="cya-question">
