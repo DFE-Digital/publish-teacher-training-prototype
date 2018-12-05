@@ -10,76 +10,94 @@ router.get('/', function (req, res) {
   }
 })
 
-router.all('/new/confirm', function (req, res) {
-  var data = req.session.data;
-  res.render('new/confirm', { generatedTitle: getGeneratedTitle(data), courseOffered: getCourseOffered(data) });
+router.get('/new/start', function (req, res) {
+  var code = generateCourseCode();
+  res.redirect('/new/' + code + '/phase');
 })
 
-function getGeneratedTitle(data) {
-  var generatedTitle = data['new-subject'];
+router.all('/new/:code/confirm', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
 
-  if (data['new-subject'] == 'Modern languages') {
-    if (data['new-second-language']) {
-      generatedTitle = `${generatedTitle} (${data['new-first-language']} and ${data['new-second-language']})`;
+  res.render('new/confirm', {
+    code: req.params.code,
+    generatedTitle: getGeneratedTitle(code, data),
+    courseOffered: getCourseOffered(code, data)
+  });
+})
+
+function generateCourseCode() {
+  var code = 'X' + Math.floor(Math.random()*(999 - 100 + 1) + 100);
+  return code;
+}
+
+function getGeneratedTitle(code, data) {
+  var generatedTitle = data[code + '-new-subject'];
+
+  if (data[code + '-new-subject'] == 'Modern languages') {
+    if (data[code + '-new-second-language']) {
+      generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']} and ${data[code + '-new-second-language']})`;
     } else {
-      generatedTitle = `${generatedTitle} (${data['new-first-language']})`;
+      generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']})`;
     }
   }
 
-  if (data['new-sen']) {
+  if (data[code + '-new-sen']) {
     generatedTitle = generatedTitle + ' (Special educational needs)';
   }
 
-  data['new-generated-title'] = generatedTitle;
+  data[code + '-new-generated-title'] = generatedTitle;
   return generatedTitle;
 }
 
-function getCourseOffered(data) {
-  var courseOffered = data['new-outcome'];
+function getCourseOffered(code, data) {
+  var courseOffered = data[code + '-new-outcome'];
 
-  if (data['new-full-part'] == 'Full time or part time') {
+  if (data[code + '-new-full-part'] == 'Full time or part time') {
     courseOffered = courseOffered + ', full time or part time';
-  } else if (data['new-full-part'])  {
-    courseOffered = courseOffered + ' ' + data['new-full-part'].toLowerCase();
+  } else if (data[code + '-new-full-part'])  {
+    courseOffered = courseOffered + ' ' + data[code + '-new-full-part'].toLowerCase();
   }
 
-  if (data['new-type'] == 'Salaried') {
+  if (data[code + '-new-type'] == 'Salaried') {
     courseOffered = courseOffered + ' with salary';
   }
 
-  if (data['new-type'] == 'Teaching apprenticeship') {
+  if (data[code + '-new-type'] == 'Teaching apprenticeship') {
     courseOffered = courseOffered + ' teaching apprenticeship';
   }
 
-  data['new-generated-description'] = courseOffered;
+  data[code + '-new-generated-description'] = courseOffered;
   return courseOffered;
 }
 
-router.post('/new/languages', function (req, res) {
-  if (req.session.data['new-subject'] == 'Modern languages') {
-    res.render('new/languages');
+router.post('/new/:code/languages', function (req, res) {
+  if (req.session.data[req.params.code + '-new-subject'] == 'Modern languages') {
+    res.render('new/languages', {code: req.params.code});
   } else {
-    res.redirect('/new/outcome');
+    res.redirect('/new/' + req.params.code + '/outcome');
   }
 })
 
-router.post('/new/create', function (req, res) {
+router.post('/new/:code/create', function (req, res) {
   // Take new data and make it into a course
   var data = req.session.data;
+  var code = req.params.code;
+
   var course = {
-    "accrediting": data['new-accredited-provider'] || data['training-provider-name'],
-    "subjects": `${data['new-subject']}, ${data['new-phase']}`,
-    "name": data['new-generated-title'],
+    "accrediting": data[code + '-new-accredited-provider'] || data['training-provider-name'],
+    "subjects": `${data[code + '-new-subject']}, ${data[code + '-new-phase']}`,
+    "name": data[code + '-new-title'] || data[code + '-new-generated-title'],
     "slug": "new-course",
-    "route": null,
+    "route": "New",
     "qualifications": null,
     "providerCode": data['provider-code'],
-    "programmeCode": "A123",
+    "programmeCode": req.params.code,
     "schools": [
 
     ],
     "options": [
-      data['new-generated-description']
+      data[code + '-new-generated-description']
     ]
   };
 
@@ -119,7 +137,11 @@ router.post('/new/create', function (req, res) {
   // "new-full-part": "Full time",
   // "new-has-accredited-provider": "No, we are the accredited provider",
 
-  res.redirect(`/course/${data['provider-code']}/A123`);
+  res.redirect(`/course/${data['provider-code']}/${req.params.code}`);
+})
+
+router.all('/new/:code/:view', function (req, res) {
+  res.render(`new/${req.params.view}`, {code: req.params.code})
 })
 
 router.post('/request-access', function (req, res) {

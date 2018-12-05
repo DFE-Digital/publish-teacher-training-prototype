@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/outcome" class="link-back">Back</a>
+  <a href="/new/{{ code }}/outcome" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new/full-time-part-time" method="post">
+      <form action="/new/{{ code }}/full-time-part-time" method="post">
         {% set fields = [
             {
               name: 'Fee paying (no salary)'
@@ -27,7 +27,7 @@
           ]
         %}
 
-        {{ macros.radioGroup('new-type', fields, 0, false) }}
+        {{ macros.radioGroup(code + '-new-type', fields, 0, false) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>

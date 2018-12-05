@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/subject" class="link-back">Back</a>
+  <a href="/new/{{ code }}/subject" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
@@ -14,7 +14,7 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <p>What will a trainee get when they complete this course?</p>
-      <form action="{% if data['new-course']['include-fee-or-salary'] %}/new/funding{% else %}/new/full-time-part-time{% endif %}" method="post">
+      <form action="/new/{{ code }}/{% if data[code + '-new-course']['include-fee-or-salary'] %}funding{% else %}full-time-part-time{% endif %}" method="post">
 
         {% set fields = [
             {
@@ -36,7 +36,7 @@
           ]
         %}
 
-        {{ macros.radioGroup('new-outcome', fields, errors) }}
+        {{ macros.radioGroup(code + '-new-outcome', fields, errors) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>

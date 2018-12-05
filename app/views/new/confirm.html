@@ -6,9 +6,9 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="{% if data['new-course']['include-accredited'] %}/new/accredited-provider{% else %}/new/full-time-part-time{% endif %}" class="link-back">Back</a>
+  <a href="/new/{{ code }}/{% if data[code + '-new-course']['include-accredited'] %}accredited-provider{% else %}full-time-part-time{% endif %}" class="link-back">Back</a>
 
-  <form action="/new/create" method="post">
+  <form action="/new/{{ code }}/create" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="heading-xlarge add-double-bottom-margin">
@@ -21,7 +21,7 @@
               Level
             </dt>
             <dd class="cya-answer">
-              {{ data['new-phase'] }}
+              {{ data[code + '-new-phase'] }}
             </dd>
             <dd class="cya-change">
               <a href="/new/phase">
@@ -34,14 +34,14 @@
               Special educational needs (SEN)
             </dt>
             <dd class="cya-answer">
-              {% if data['new-sen'] %}
+              {% if data[code + '-new-sen'] %}
                 Yes
               {% else %}
                 No
               {% endif %}
             </dd>
             <dd class="cya-change">
-              <a href="/new/phase">
+              <a href="/new/{{ code }}/phase">
                 Change<span class="visually-hidden"> SEN</span>
               </a>
             </dd>
@@ -51,27 +51,27 @@
               Subject
             </dt>
             <dd class="cya-answer">
-              {{ data['new-subject'] }}
+              {{ data[code + '-new-subject'] }}
             </dd>
             <dd class="cya-change">
-              <a href="/new/subject">
+              <a href="/new/{{ code }}/subject">
                 Change<span class="visually-hidden"> subject</span>
               </a>
             </dd>
           </div>
-          {% if data['new-subject'] == 'Modern languages' %}
+          {% if data[code + '-new-subject'] == 'Modern languages' %}
           <div>
             <dt class="cya-question">
               Languages
             </dt>
             <dd class="cya-answer">
-              {{ data['new-first-language'] }}
-              {% if data['new-second-language'] %}
-                <br />{{ data['new-second-language'] }}
+              {{ data[code + '-new-first-language'] }}
+              {% if data[code + '-new-second-language'] %}
+                <br />{{ data[code + '-new-second-language'] }}
               {% endif %}
             </dd>
             <dd class="cya-change">
-              <a href="/new/languages">
+              <a href="/new/{{ code }}/languages">
                 Change<span class="visually-hidden"> subject</span>
               </a>
             </dd>
@@ -82,24 +82,24 @@
               Outcome
             </dt>
             <dd class="cya-answer">
-              {{ data['new-outcome'] }}
+              {{ data[code + '-new-outcome'] }}
             </dd>
             <dd class="cya-change">
-              <a href="/new/outcome">
+              <a href="/new/{{ code }}/outcome">
                 Change<span class="visually-hidden"> outcome</span>
               </a>
             </dd>
           </div>
-          {% if data['new-course']['include-fee-or-salary'] %}
+          {% if data[code + '-new-course']['include-fee-or-salary'] %}
           <div>
             <dt class="cya-question">
               Fee or salary
             </dt>
             <dd class="cya-answer">
-              {{ data['new-type'] }}
+              {{ data[code + '-new-type'] }}
             </dd>
             <dd class="cya-change">
-              <a href="/new/funding">
+              <a href="/new/{{ code }}/funding">
                 Change<span class="visually-hidden"> fee or salary</span>
               </a>
             </dd>
@@ -110,25 +110,25 @@
               Full time or part time
             </dt>
             <dd class="cya-answer">
-              {{ data['new-full-part'] }}
+              {{ data[code + '-new-full-part'] }}
             </dd>
             <dd class="cya-change">
-              <a href="/new/full-time-part-time">
+              <a href="/new/{{ code }}/full-time-part-time">
                 Change<span class="visually-hidden"> full time or part time</span>
               </a>
             </dd>
           </div>
-          {% if data['new-course']['include-accredited'] %}
-            {% if data['new-has-accredited-provider'] == 'Yes' %}
+          {% if data[code + '-new-course']['include-accredited'] %}
+            {% if data[code + '-new-has-accredited-provider'] == 'Yes' %}
               <div>
                 <dt class="cya-question">
                   Accredited provider
                 </dt>
                 <dd class="cya-answer">
-                  {{ data['new-accredited-provider'] }}
+                  {{ data[code + '-new-accredited-provider'] }}
                 </dd>
                 <dd class="cya-change">
-                  <a href="/new/accredited-provider">
+                  <a href="/new/{{ code }}/accredited-provider">
                     Change<span class="visually-hidden"> accredited provider</span>
                   </a>
                 </dd>
@@ -139,10 +139,10 @@
                   Separate accredited provider?
                 </dt>
                 <dd class="cya-answer">
-                  {{ data['new-has-accredited-provider'] }}
+                  {{ data[code + '-new-has-accredited-provider'] }}
                 </dd>
                 <dd class="cya-change">
-                  <a href="/new/accredited-provider">
+                  <a href="/new/{{ code }}/accredited-provider">
                     Change<span class="visually-hidden"> accredited provider</span>
                   </a>
                 </dd>
@@ -154,10 +154,10 @@
               Title
             </dt>
             <dd class="cya-answer">
-              {{ data['new-title'] or data['new-generated-title'] or generatedTitle }}
+              {{ data[code + '-new-title'] or data[code + '-new-generated-title'] or generatedTitle }}
             </dd>
             <dd class="cya-change">
-              <a href="/new/title">
+              <a href="/new/{{ code }}/title">
                 Change<span class="visually-hidden"> title</span>
               </a>
             </dd>
@@ -178,7 +178,7 @@
               Course code
             </dt>
             <dd class="cya-answer">
-              A123
+              {{ code }}
             </dd>
             <dd class="cya-change">
 
@@ -192,7 +192,7 @@
         <div class="panel panel-border-wide">
           <h3 class="heading-medium remove-top-margin">
             <span class="heading-small">{{ data['training-provider-name'] }}</span><br />
-            {{ data['new-title'] or generatedTitle }} (A123)
+            {{ data[code + '-new-title'] or generatedTitle }} ({{ code }})
           </h3>
 
           <p>Course: {{ courseOffered }}</p>

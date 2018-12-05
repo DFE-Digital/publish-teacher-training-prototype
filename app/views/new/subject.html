@@ -1,4 +1,4 @@
-{% set title %}Pick a {{ data['new-phase'] | lower }} subject{% endset %}
+{% set title %}Pick a {{ data[code + '-new-phase'] | lower }} subject{% endset %}
 {% extends "layout.html" %}
 {% block page_title %}{{ title }}{% endblock %}
 
@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/phase" class="link-back">Back</a>
+  <a href="/new/{{ code }}/phase" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new/languages" method="post">
+      <form action="/new/{{ code }}/languages" method="post">
         {% set primaryFields = [
            { name: 'Primary'},
            { name: 'Primary with English'},
@@ -53,10 +53,10 @@
           ]
         %}
 
-        {% if data['new-phase'] == 'Primary' %}
-          {{ macros.select('new-subject', 'Primary subject', primaryFields) }}
-        {% elseif data['new-phase'] == 'Secondary' %}
-          {{ macros.select('new-subject', 'Secondary subject', secondaryFields) }}
+        {% if data[code + '-new-phase'] == 'Primary' %}
+          {{ macros.select(code + '-new-subject', 'Primary subject', primaryFields) }}
+        {% elseif data[code + '-new-phase'] == 'Secondary' %}
+          {{ macros.select(code + '-new-subject', 'Secondary subject', secondaryFields) }}
         {% endif %}
         <input type="submit" class="button" value="Continue" />
       </form>
