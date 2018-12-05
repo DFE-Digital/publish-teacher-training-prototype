@@ -71,61 +71,63 @@
     </div>
   </div>
 
-  {% for accrediting in data['accreditors'] %}
-    {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
-      <h3 class="heading-medium">
-        <span style="color: #777; font-weight: normal">Accredited provider</span><br />
-        {{ accrediting.name }}
-      </h3>
-    {% endif %}
-    <div class="body-text">
-      <table class="ucas-info-table">
-        <thead>
-          <tr>
-            <th class="subject-col">Course</th>
-            <th class="type-col">Type</th>
-            <th class="status-col" style="width: 100px">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% set subjectName = '' %}
-          {% for course in data['ucasCourses'] %}
-            {% if course.accrediting == accrediting.name %}
-              <tr>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
-                  {% else %}
-                    <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
-                  {% endif %}
-                  </span>
-                </td>
-                <td>{{ course.options }}</td>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                      <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                      <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+  {% if data['ucasCourses'].length > 0 %}
+    {% for accrediting in data['accreditors'] %}
+      {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
+        <h3 class="heading-medium">
+          <span style="color: #777; font-weight: normal">Accredited provider</span><br />
+          {{ accrediting.name }}
+        </h3>
+      {% endif %}
+      <div class="body-text">
+        <table class="ucas-info-table">
+          <thead>
+            <tr>
+              <th class="subject-col">Course</th>
+              <th class="type-col">Type</th>
+              <th class="status-col" style="width: 100px">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% set subjectName = '' %}
+            {% for course in data['ucasCourses'] %}
+              {% if course.accrediting == accrediting.name %}
+                <tr>
+                  <td>
+                    {% if (loop.index != 4 and loop.index != 7) %}
+                      <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% else %}
-                      <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                      <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% endif %}
-                  {% else %}
-                    <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
-                  {% endif %}
-                </td>
-              </tr>
-              {% set subjectName = course.name %}
-            {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
+                    </span>
+                  </td>
+                  <td>{{ course.options }}</td>
+                  <td>
+                    {% if (loop.index != 4 and loop.index != 7) %}
+                      {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
+                        <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+                      {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
+                        <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+                      {% else %}
+                        <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                      {% endif %}
+                    {% else %}
+                      <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% set subjectName = course.name %}
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  {% endif %}
 
-      <p class="add-top-margin">
-        <a href="/new/phase" class="button">Add a new course</a>
-      </p>
-    </div>
-  {% endfor %}
+  <p class="add-top-margin">
+    <a href="/new/phase" class="button">Add a new course</a>
+  </p>
   <hr />
 
   <h2 class="heading-large">Request access for someone</h2>

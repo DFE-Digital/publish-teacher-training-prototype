@@ -73,7 +73,7 @@ router.post('/new/create', function (req, res) {
     "slug": "new-course",
     "route": null,
     "qualifications": null,
-    "providerCode": data['ucasCourses'][0]['providerCode'],
+    "providerCode": data['provider-code'],
     "programmeCode": "A123",
     "schools": [
 
