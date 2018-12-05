@@ -83,14 +83,28 @@ router.post('/new/:code/create', function (req, res) {
   // Take new data and make it into a course
   var data = req.session.data;
   var code = req.params.code;
+  var languages = [];
+
+  if (data[code + '-new-first-language']) {
+    languages.push(data[code + '-new-first-language'])
+  }
+
+  if (data[code + '-new-second-language']) {
+    languages.push(data[code + '-new-second-language'])
+  }
 
   var course = {
     "accrediting": data[code + '-new-accredited-provider'] || data['training-provider-name'],
-    "subjects": `${data[code + '-new-subject']}, ${data[code + '-new-phase']}`,
+    "level": data[code + '-new-phase'],
+    "sen": data[code + '-new-sen'],
+    "subject": data[code + '-new-subject'],
+    "languages": languages,
     "name": data[code + '-new-title'] || data[code + '-new-generated-title'],
+    "full-part": data[code + '-new-full-part'],
+    "type": data[code + '-new-type'],
     "slug": "new-course",
     "route": "New",
-    "qualifications": null,
+    "outcome": data[code + '-new-outcome'],
     "providerCode": data['provider-code'],
     "programmeCode": req.params.code,
     "schools": [

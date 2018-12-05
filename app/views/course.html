@@ -89,19 +89,33 @@
             <p class="lede">{{ course.options }}</p>
             <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
               <dt>Level:</dt>
-              <dd>Secondary</dd>
+              <dd>{{ course.level }}</dd>
               <dt>Special educational needs:</dt>
-              <dd>No</dd>
+              <dd>
+                {% if course.sen %}
+                  Yes
+                {% else %}
+                  No
+                {% endif %}
+              </dd>
               <dt>Subject:</dt>
-              <dd>Art and design</dd>
+              <dd>{{ course.subject }}</dd>
+              {% if course.subject == 'Modern languages' %}
+                <dt>Languages:</dt>
+                <dd>{{ course.languages.join(', ') }}</dd>
+              {% endif %}
               <dt>Outcome:</dt>
-              <dd>{{ data[course.programmeCode + '-outcome'] }}</dd>
+              <dd>{{ course.outcome or data[course.programmeCode + '-outcome'] }}</dd>
               <dt>Full time or part time:</dt>
-              <dd>Full time</dd>
-              <dt>Fee or salary:</dt>
-              <dd>Fee paying</dd>
-              <dt>Accredited provider:</dt>
-              <dd>{{ course.accrediting }}</dd>
+              <dd>{{ course['full-part'] }}</dd>
+              {% if data['new-course']['include-fee-or-salary'] %}
+                <dt>Fee or salary:</dt>
+                <dd>{{ course.type }}</dd>
+              {% endif %}
+              {% if data['new-course']['include-accredited'] %}
+                <dt>Accredited provider:</dt>
+                <dd>{{ course.accrediting }}</dd>
+              {% endif %}
             </dl>
           </li>
           <!-- <li class="course-parts-item">
