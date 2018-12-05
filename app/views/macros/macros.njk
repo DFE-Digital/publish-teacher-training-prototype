@@ -183,7 +183,7 @@
 </h1>
 {% endmacro %}
 
-{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = true) %}
+{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = false) %}
   <div class="form-group">
     <label class="form-label" for="{{ name }}">{{ label }}</label>
     {% if helpText %}
