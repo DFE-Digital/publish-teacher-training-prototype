@@ -43,7 +43,7 @@ function getGeneratedTitle(code, data) {
   }
 
   if (data[code + '-new-sen']) {
-    generatedTitle = generatedTitle + ' (Special educational needs)';
+    generatedTitle = generatedTitle + ' (with Special educational needs)';
   }
 
   data[code + '-new-generated-title'] = generatedTitle;
