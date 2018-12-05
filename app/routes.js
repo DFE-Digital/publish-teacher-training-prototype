@@ -163,56 +163,6 @@ router.get('/publish/about-your-organisation', function (req, res) {
   res.redirect('/about-your-organisation?publish=true');
 })
 
-// router.post('/template/new', function (req, res) {
-//   var name = req.body['template-name'];
-//   var slug = name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/-$/g, '').toLowerCase();
-//
-//   req.session.data['templates'].push({
-//     name: name,
-//     slug: slug
-//   });
-//
-//   res.redirect('/template/' + slug);
-// })
-//
-// router.get('/template/new', function (req, res) {
-//   res.render('template/new');
-// })
-//
-// router.get('/template/:template', function (req, res) {
-//   res.render('template/fields', { template: template(req) })
-// })
-//
-// router.get('/template/:template/:view', function (req, res) {
-//   var view = req.params.view;
-//   res.render(`template/${view}`, { template: template(req) })
-// })
-//
-// router.post('/template/:template/apply', function (req, res) {
-//
-//   for (choice in req.body) {
-//     if (req.body[choice] != '_unchecked') {
-//       var code = choice.replace('apply-to-', '');
-//       req.session.data[code + '-template-choice'] = req.params.template;
-//     }
-//   }
-//
-//   res.redirect(`/template/${req.params.template}/apply`)
-// })
-//
-// router.get('/preview/template/:template', function (req, res) {
-//   var t = template(req);
-//   var c = {
-//     name: 'Example subject'
-//   }
-//
-//   var a = {
-//     name: 'Example Accrediting Provider'
-//   }
-//
-//   res.render('preview', { course: c, accrediting: a, template: t, prefix: t.slug + '-template', previewingTemplate: true })
-// })
-
 // Publish course action
 router.get('/publish/:accreditor/:code', function (req, res) {
   var c = course(req);
