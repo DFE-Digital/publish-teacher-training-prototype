@@ -151,7 +151,7 @@ router.post('/new/:code/create', function (req, res) {
   // "new-full-part": "Full time",
   // "new-has-accredited-provider": "No, we are the accredited provider",
 
-  res.redirect(`/course/${data['provider-code']}/${req.params.code}`);
+  res.redirect(`/course/${data['provider-code']}/${req.params.code}?created=true`);
 })
 
 router.all('/new/:code/:view', function (req, res) {
@@ -222,6 +222,7 @@ router.get('/course/:providerCode/:code', function (req, res) {
   res.render('course', {
     course: c,
     errors: errors,
+    justCreated: req.query.created,
     justPublished: (req.query.publish && errors.length == 0)
   })
 })

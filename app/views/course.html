@@ -23,6 +23,17 @@
     {% endif %}
   </div>
 
+  {% if justCreated %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      Your course is saved and ready to complete
+    </h3>
+    <p>
+      Complete and publish your course so that candidates can find and apply to it.
+    </p>
+  </div>
+  {% endif %}
+
   <!-- <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
     <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
       Your training locations need attention in UCAS
