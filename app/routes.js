@@ -27,7 +27,9 @@ router.all('/new/:code/confirm', function (req, res) {
 })
 
 function generateCourseCode() {
-  var code = 'X' + Math.floor(Math.random()*(999 - 100 + 1) + 100);
+  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ'.split('');
+  var letter = letters[ Math.floor(Math.random() * letters.length) ];
+  var code = letter + Math.floor(Math.random()*(999 - 100 + 1) + 100);
   return code;
 }
 
