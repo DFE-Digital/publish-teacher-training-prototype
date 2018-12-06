@@ -6,19 +6,11 @@
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
 
-  {% if previewingTemplate %}
-    <a href="/template/{{ template.slug }}" class="link-back">Back to template</a>
+  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="link-back">Back to course</a>
 
-    <div class="status-box add-top-margin">
-      This is a preview of a template: {{ template.name }}
-    </div>
-  {% else %}
-    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back to course</a>
-
-    <div class="status-box add-top-margin">
-      This is a preview of a course: {{ course.name }} ({{ course.programmeCode }}).
-    </div>
-  {% endif %}
+  <div class="status-box add-top-margin">
+    This is a preview of a course: {{ course.name }} ({{ course.programmeCode }}).
+  </div>
 
   <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
     {{ course.name }} with {{ data['training-provider-name'] }}
@@ -28,35 +20,27 @@
   <dl class="aligned" style="margin-top: 60px;">
     <dt>Course offered:</dt>
     <dd>
-      {% if previewingTemplate %}
-        Varies depending on course
-      {% else %}
-        {{ course.options[0] }}
-      {% endif %}
+      {{ course.options[0] }}
     </dd>
     <dt>Qualification:</dt>
     <dd>
-      {% if previewingTemplate %}
-        Varies depending on course
-      {% else %}
-        <details role="group">
-          {% if 'PGCE' in course.options[0] %}
-            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">PGCE with QTS</span></summary>
+      <details role="group">
+        {% if 'PGCE' in course.options[0] %}
+          <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">PGCE with QTS</span></summary>
 
-            <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
-                <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally.</p>
-                <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
-            </div>
-          {% else %}
-            <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">QTS</span></summary>
+          <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+              <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally.</p>
+              <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
+          </div>
+        {% else %}
+          <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">QTS</span></summary>
 
-            <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
-                <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
-                <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
-            </div>
-          {% endif %}
-        </details>
-      {% endif %}
+          <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
+              <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
+              <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
+          </div>
+        {% endif %}
+      </details>
     </dd>
     <dt>Course length:</dt>
     <dd>

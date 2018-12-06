@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 {% block page_title %}{{ title }}{% endblock %}
-{% set coursePath = '/course/' + accrediting.slug + '/' + course.programmeCode %}
-{% set previewLink = '/preview/' +  accrediting.slug + '/' + course.programmeCode %}
-{% set publishLink = '/publish/' +  accrediting.slug + '/' + course.programmeCode %}
+{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
+{% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
+{% set publishLink = '/publish/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 
 {% block content %}
@@ -22,6 +22,17 @@
       </ol>
     {% endif %}
   </div>
+
+  {% if justCreated %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      Your course is saved and ready to complete
+    </h3>
+    <p>
+      Add the rest of your details and publish the course, so that candidates can find it and apply to it.
+    </p>
+  </div>
+  {% endif %}
 
   <!-- <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
     <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -78,27 +89,51 @@
 
   {% include "course/_errors.html" %}
 
-  {% if data[subject.slug + '-' + accrediting.slug + '-qa'] == 'true' %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
-        {{ title }} has been sent to DfE for review
-      </h3>
-      <p>
-        You will receive an email when the course is published or if changes are needed.
-      </p>
-    </div>
-  {% endif %}
-
-
-
   <div class="grid-row add-top-margin">
     <div class="column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <li class="course-parts-item">
-            <h3 class="course-part-task">Information from UCAS</h3>
+            <h3 class="course-part-task">Course information</h3>
+            <!-- <a class="course-part-task-action" href="#">Edit</a> -->
             <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
-            <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
+            <p class="lede">{{ course.options }}</p>
+            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
+              <dt>Level:</dt>
+              <dd>{{ course.level }}</dd>
+              <dt>Special educational needs:</dt>
+              <dd>
+                {% if course.sen %}
+                  Yes
+                {% else %}
+                  No
+                {% endif %}
+              </dd>
+              <dt>Subject:</dt>
+              <dd>{{ course.subject }}</dd>
+              {% if course.subject == 'Modern languages' %}
+                <dt>Languages:</dt>
+                <dd>{{ course.languages.join(', ') }}</dd>
+              {% endif %}
+              <dt>Outcome:</dt>
+              <dd>{{ course.outcome or data[course.programmeCode + '-outcome'] }}</dd>
+              <dt>Full time or part time:</dt>
+              <dd>{{ course['full-part'] }}</dd>
+              {% if data['new-course']['include-fee-or-salary'] %}
+                <dt>Fee or salary:</dt>
+                <dd>{{ course.type }}</dd>
+              {% endif %}
+              {% if data['new-course']['include-accredited'] %}
+                <dt>Accredited provider:</dt>
+                <dd>{{ course.accrediting }}</dd>
+              {% endif %}
+            </dl>
+          </li>
+          <!-- <li class="course-parts-item">
+            <h3 class="course-part-task">Course information</h3>
+
+            <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
+
             <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
               <dt>Status:</dt>
               <dd>Running</dd>
@@ -112,21 +147,20 @@
               <dd>{{ course.route }}</dd>
               <dt>Subjects:</dt>
               <dd>{{ course.subjects }}</dd>
-              <!-- <dt>Age range:</dt>
-              <dd>{{ course.ageRange }}</dd> -->
+              <dt>Age range:</dt>
+              <dd>{{ course.ageRange }}</dd>
               <dt>Qualification:</dt>
               <dd>{{ course.qualifications }}</dd>
               <dt>Regions:</dt>
               <dd>{{ course.regions }}</dd>
             </dl>
-          </li>
+          </li> -->
           <li class="course-parts-item">
             <h3 class="course-part-task">About this course</h3>
 
             <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
             <dl class="course-part-tasks">
               {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
-              {{ macros.coursePart(course.programmeCode + '-outcome', 'Outcome', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
             </dl>

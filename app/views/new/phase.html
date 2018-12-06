@@ -1,0 +1,50 @@
+{% set title = 'What type of new course?' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/new/{{ code }}/subject" method="post">
+
+        <h2 class="heading-medium remove-top-margin">Level</h2>
+        {% set fields = [
+            {
+              name: 'Primary'
+            },
+            {
+              name: 'Secondary'
+            },
+            {
+              name: 'Further education'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(code + '-new-phase', fields) }}
+
+        <h2 class="heading-medium">Special educational needs (SEN)</h2>
+        {% set fields = [
+            {
+              name: 'This is a special educational needs course'
+            }
+          ]
+        %}
+
+        {{ macros.checkboxGroup(code + '-new-sen', fields, 0, false) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

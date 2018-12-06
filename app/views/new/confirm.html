@@ -1,0 +1,209 @@
+{% set title = 'Check your answers before confirming' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/new/{{ code }}/{% if data['new-course']['include-accredited'] %}accredited-provider{% else %}full-time-part-time{% endif %}" class="link-back">Back</a>
+
+  <form action="/new/{{ code }}/create" method="post">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-xlarge add-double-bottom-margin">
+          {{ title }}
+        </h1>
+
+        <dl class="govuk-check-your-answers cya-questions-short" style="margin-top: 60px; margin-bottom: 60px">
+          <div>
+            <dt class="cya-question">
+              Level
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-phase'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/phase">
+                Change<span class="visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Special educational needs (SEN)
+            </dt>
+            <dd class="cya-answer">
+              {% if data[code + '-new-sen'] %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/phase">
+                Change<span class="visually-hidden"> SEN</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Subject
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-subject'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/subject">
+                Change<span class="visually-hidden"> subject</span>
+              </a>
+            </dd>
+          </div>
+          {% if data[code + '-new-subject'] == 'Modern languages' %}
+          <div>
+            <dt class="cya-question">
+              Languages
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-first-language'] }}
+              {% if data[code + '-new-second-language'] %}
+                <br />{{ data[code + '-new-second-language'] }}
+              {% endif %}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/languages">
+                Change<span class="visually-hidden"> subject</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
+          <div>
+            <dt class="cya-question">
+              Outcome
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-outcome'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/outcome">
+                Change<span class="visually-hidden"> outcome</span>
+              </a>
+            </dd>
+          </div>
+          {% if data['new-course']['include-fee-or-salary'] %}
+          <div>
+            <dt class="cya-question">
+              Fee or salary
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-type'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/funding">
+                Change<span class="visually-hidden"> fee or salary</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
+          <div>
+            <dt class="cya-question">
+              Full time or part time
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-full-part'] }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/full-time-part-time">
+                Change<span class="visually-hidden"> full time or part time</span>
+              </a>
+            </dd>
+          </div>
+          {% if data['new-course']['include-accredited'] %}
+            {% if data[code + '-new-has-accredited-provider'] == 'Yes' %}
+              <div>
+                <dt class="cya-question">
+                  Accredited provider
+                </dt>
+                <dd class="cya-answer">
+                  {{ data[code + '-new-accredited-provider'] }}
+                </dd>
+                <dd class="cya-change">
+                  <a href="/new/{{ code }}/accredited-provider">
+                    Change<span class="visually-hidden"> accredited provider</span>
+                  </a>
+                </dd>
+              </div>
+            {% else %}
+              <div>
+                <dt class="cya-question">
+                  Separate accredited provider?
+                </dt>
+                <dd class="cya-answer">
+                  {{ data[code + '-new-has-accredited-provider'] }}
+                </dd>
+                <dd class="cya-change">
+                  <a href="/new/{{ code }}/accredited-provider">
+                    Change<span class="visually-hidden"> accredited provider</span>
+                  </a>
+                </dd>
+              </div>
+            {% endif %}
+          {% endif %}
+          <div>
+            <dt class="cya-question">
+              Title
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-title'] or data[code + '-new-generated-title'] or generatedTitle }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/title">
+                Change<span class="visually-hidden"> title</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Description
+            </dt>
+            <dd class="cya-answer">
+              {{ courseOffered }}
+            </dd>
+            <dd class="cya-change">
+
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
+              Course code
+            </dt>
+            <dd class="cya-answer">
+              {{ code }}
+            </dd>
+            <dd class="cya-change">
+
+            </dd>
+          </div>
+        </dl>
+
+        <h2 class="heading-large">Preview</h2>
+
+        <p>See how this course will appear when it’s published on Find postgraduate teacher training:</p>
+        <div class="panel panel-border-wide">
+          <h3 class="heading-medium remove-top-margin">
+            <span class="heading-small">{{ data['training-provider-name'] }}</span><br />
+            {{ data[code + '-new-title'] or generatedTitle }} ({{ code }})
+          </h3>
+
+          <p>Course: {{ courseOffered }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" style="margin-top: 30px">
+      <input type="submit" class="button" value="Save new course" />
+    </div>
+    <p>Saving this course will not publish it.</p>
+  </form>
+</main>
+
+{% endblock %}

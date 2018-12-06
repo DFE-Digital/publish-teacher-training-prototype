@@ -12,12 +12,14 @@
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>
   <div class="grid-row">
     <div class="column-two-thirds design-history-screenshot">
-      <a href="{{ full }}">
-        <img src="{{ thumbnail }}" width="630" alt="Screenshot of {{ title }}" />
-      </a>
-    </div>
-    <div class="column-one-third design-history-text">
-      {{ text | safe }}
+      <div class="add-double-bottom-margin">
+        <a href="{{ full }}">
+          <img src="{{ thumbnail }}" width="630" alt="Screenshot of {{ title }}" />
+        </a>
+      </div>
+      <div class="design-history-text">
+        {{ text | safe }}
+      </div>
     </div>
   </div>
 </div>
@@ -179,6 +181,37 @@
 <h1 class="heading-xlarge">
   {{ activeTab }}
 </h1>
+{% endmacro %}
+
+{% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = false) %}
+  <div class="form-group">
+    <label class="form-label" for="{{ name }}">{{ label }}</label>
+    {% if helpText %}
+      <span class="form-hint">{{helpText | safe}}</span>
+    {% endif %}
+    <select class="form-control" id="{{ name }}" name="{{ name }}">
+      {% if emptyOption %}
+        <option></option>
+      {% endif %}
+      {% for o in options %}
+        {% if o.name %}
+          <option value="{{ o.name }}" {% if (o.name == value(name)) %}selected{% endif %}>{{ o.name }}</option>
+        {% else %}
+          <option value="{{ o }}" {% if (o == value(name)) %}selected{% endif %}>{{ o }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+    {% if autocomplete %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        accessibleAutocomplete.enhanceSelectElement({
+          showAllValues: true,
+          selectElement: document.querySelector('#{{ name }}')
+        })
+      });
+    </script>
+    {% endif %}
+  </div>
 {% endmacro %}
 
 {#

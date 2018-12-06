@@ -19,10 +19,14 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 1. About your organisation</h2>
-      <p>You need to add a description of your organisation - this is a chance to tell applicants why they should train with you. You should also say what you do for candidates with disabilities and other needs, and check your contact details to make sure they're correct.</p>
+      <h2 class="heading-large remove-top-margin">Step 1. Your organisation</h2>
 
-      <p>Once you’ve published your organisation information, it will show on each of your course pages. You’ll have to add your course details separately in Step 2 below.</p>
+      <p>Use this section to:</p>
+      <ul class="list list-bullet">
+        <li>write about your organisation</li>
+        <li>set your contact details</li>
+        <li>publish this information on all course pages</li>
+      </ul>
 
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
@@ -38,7 +42,7 @@
   </div>
   <hr />
 
-  <div class="grid-row">
+  <!-- <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large remove-top-margin">Step 2. Locations</h2>
       <p>Give the address, type of location and name of each place applicants can choose when they apply.</p>
@@ -48,83 +52,82 @@
       </p>
     </div>
   </div>
-  <hr />
+  <hr /> -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <h2 class="heading-large">
-        Step 3. Course details
+        Step 2. Courses
       </h2>
 
-      <h3 class="heading-medium">Preview and publish courses</h3>
-      <p>Give more details about each of your courses - including their structure and content, information about fees and financial help, and the qualifications needed for them.</p>
+      <p>Use this section to:</p>
+      <ul class="list list-bullet">
+        <li>create, preview and publish courses</li>
+        <li>copy content between courses</li>
+      </ul>
 
       <p>Make sure you preview each course before you publish it, to see how it will look online to applicants.</p>
-
-      <h3 class="heading-medium">Copying content between courses</h3>
-      <p>After you’ve saved your first course, when you’re completing the next you can use the ‘copy from course’ feature to fill in fields. This can be found on the ‘About this course’, ‘Course length and fees’ and ‘Requirements and eligibility’ pages.</p>
+      <p>Applicants can only see and apply to published courses.</p>
     </div>
   </div>
 
-  {% for accrediting in data['accreditors'] %}
-    {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
-      <h3 class="heading-medium">
-        <span style="color: #777; font-weight: normal">Accredited provider</span><br />
-        {{ accrediting.name }}
-      </h3>
-    {% endif %}
-    <div class="body-text">
-      <table class="ucas-info-table">
-        <thead>
-          <tr>
-            <th class="subject-col">Course</th>
-            <th class="type-col">Type</th>
-            <th class="status-col" style="width: 100px">Status</th>
-            <th class="status-col">Course content</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% set subjectName = '' %}
-          {% for course in data['ucasCourses'] %}
-            {% if course.accrediting == accrediting.name %}
-              <tr>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
-                  {% else %}
-                    <a href="/course-not-running/{{ accrediting.slug }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
-                  {% endif %}
-                  </span>
-                </td>
-                <td>{{ course.options }}</td>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    Running
-                  {% else %}
-                    Not running
-                  {% endif %}
-                </td>
-                <td>
-                  {% if (loop.index != 4 and loop.index != 7) %}
-                    {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                      <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                      <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+  {% if data['ucasCourses'].length > 0 %}
+    {% for accrediting in data['accreditors'] %}
+      {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
+        <h3 class="heading-medium">
+          <span style="color: #777; font-weight: normal">Accredited provider</span><br />
+          {{ accrediting.name }}
+        </h3>
+      {% endif %}
+      <div class="body-text">
+        <table class="ucas-info-table">
+          <thead>
+            <tr>
+              <th class="subject-col">Course</th>
+              <th class="type-col">Type</th>
+              <th class="status-col" style="width: 100px">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% set subjectName = '' %}
+            {% for course in data['ucasCourses'] %}
+              {% if course.accrediting == accrediting.name %}
+                <tr>
+                  <td>
+                    {% if (loop.index != 4 and loop.index != 7) %}
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% else %}
-                      <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% endif %}
-                  {% else %}
-                    <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
-                  {% endif %}
-                </td>
-              </tr>
-              {% set subjectName = course.name %}
-            {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endfor %}
+                    </span>
+                  </td>
+                  <td>{{ course.options }}</td>
+                  <td>
+                    {% if (loop.index != 4 and loop.index != 7) %}
+                      {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
+                        <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+                      {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
+                        <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+                      {% else %}
+                        <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                      {% endif %}
+                    {% else %}
+                      <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% set subjectName = course.name %}
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <p class="add-top-margin">
+    <a href="/new/start" class="button">Add a new course</a>
+  </p>
   <hr />
 
   <h2 class="heading-large">Request access for someone</h2>

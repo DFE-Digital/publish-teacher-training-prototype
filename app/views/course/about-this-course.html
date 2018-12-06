@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" class="link-back">Back</a>
+  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
@@ -17,7 +17,7 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/course/{{ accrediting.slug }}/{{ course.programmeCode }}" method="post">
+      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
         <p>Give applicants a short description of the course.</p>
 
         <p>You could include:</p>
@@ -36,7 +36,7 @@
 
         <hr />
 
-        <h3 class="heading-large remove-top-margin">Outcome</h3>
+        <!-- <h3 class="heading-large remove-top-margin">Outcome</h3>
         <p>Pick the outcome which describes what a trainee will get when they complete this course.</p>
 
         {% set fields = [
@@ -79,10 +79,7 @@
             {{ macros.radioGroup(course.programmeCode + '-outcome', fields, errors, 4) }}
           </div>
         </details>
-
-
-
-        <hr />
+        <hr /> -->
 
         <h3 class="heading-large remove-top-margin">Interview process</h3>
 
@@ -119,7 +116,7 @@
           <input type="submit" class="button" value="Save" />
         </div>
 
-        <a href="/course/{{ accrediting.slug }}/{{ course.programmeCode }}">Cancel changes</a>
+        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
       </form>
     </div>
     <div class="column-one-third">

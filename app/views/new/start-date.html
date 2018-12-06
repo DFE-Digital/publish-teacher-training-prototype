@@ -6,13 +6,13 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/qualifications" class="link-back">Back</a>
+  <a href="/new/outcome" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <form action="/new/duration" method="post">
-    {{ macros.datefields('start-date', 'Course start date') }}
+    {{ macros.datefields('new-start-date', 'Course start date') }}
 
     <div class="form-group">
       <input type="submit" class="button" value="Continue" />

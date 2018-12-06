@@ -1,4 +1,4 @@
-{% set title = 'What is the course title?' %}
+{% set title = 'Edit course title' %}
 {% extends "layout.html" %}
 {% block page_title %}{{ title }}{% endblock %}
 
@@ -6,18 +6,22 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="#" class="link-back">Back</a>
-  <form action="/new/qualifications" method="post">
-    {% set label %}
-      <h1 class="heading-xlarge add-bottom-margin">
-        {{ title }}
-      </h1>
-    {% endset %}
+  <a href="/new/{{ code }}/confirm" class="link-back">Back</a>
 
-    {{ macros.textbox('title', label) }}
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>You can customise your course title but any changes will be subject to approval by the Becoming a Teacher team.</p>
 
-    <input type="submit" class="button" value="Continue" />
-  </form>
+      <form action="/new/{{ code }}/confirm" method="post">
+        {{ macros.textbox(code + '-new-title', 'Title', '', 'form-control-full', false, false, data[code + '-new-title'] or data[code + '-new-generated-title']) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
 </main>
 
 {% endblock %}
