@@ -81,7 +81,7 @@ router.post('/new/:code/languages', function (req, res) {
   }
 })
 
-router.post('/new/:code/create', function (req, res) {
+router.all('/new/:code/create', function (req, res) {
   // Take new data and make it into a course
   var data = req.session.data;
   var code = req.params.code;

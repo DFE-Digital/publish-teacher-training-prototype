@@ -1,0 +1,68 @@
+
+{% extends "layout.html" %}
+{% set title = 'New course – Iteration 6 December' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>This design <a href="/history/new-course">tweaks the previous wizard</a> so that:</p>
+
+      <ul class="list list-bullet">
+        <li>fees and salary have their own page</li>
+        <li>there’s a route into creating a course</li>
+        <li>course creation has a success message</li>
+        <li>the created course page has no UCAS section</li>
+        <li>there’s a read only course information section</li>
+        <li>the confirm page only shows parts relevant to the journey taken</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Organisation page', id: 'organisation-page' },
+    { text: 'Type of course', id: 'type-of-course' },
+    { text: 'Pick a subject', id: 'pick-a-subject' },
+    { text: 'Pick languages', id: 'pick-languages' },
+    { text: 'Pick outcome', id: 'pick-outcome' },
+    { text: 'Fee or salary', id: 'fee-or-salary' },
+    { text: 'Full time or part time', id: 'full-time-or-part-time' },
+    { text: 'Accredited provider', id: 'accredited-provider' },
+    { text: 'Confirm', id: 'confirm' },
+    { text: 'Customise title', id: 'customise-title' },
+    { text: 'On course creation', id: 'on-course-creation' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation page', 'organisation-page', '/public/images/history/new-course-2/thumbnails/01-organisation-page.png', '/public/images/history/new-course-2/01-organisation-page.png', '') }}
+
+  {{ macros.screenshot('Type of course', 'type-of-course', '/public/images/history/new-course-2/thumbnails/02-type-of-course.png', '/public/images/history/new-course-2/02-type-of-course.png', '') }}
+
+  {{ macros.screenshot('Pick a subject', 'pick-a-subject', '/public/images/history/new-course-2/thumbnails/03-pick-a-subject.png', '/public/images/history/new-course-2/03-pick-a-subject.png', '') }}
+
+  {{ macros.screenshot('Pick languages', 'pick-languages', '/public/images/history/new-course-2/thumbnails/04-pick-languages.png', '/public/images/history/new-course-2/04-pick-languages.png', '') }}
+
+  {{ macros.screenshot('Pick outcome', 'pick-outcome', '/public/images/history/new-course-2/thumbnails/05-pick-outcome.png', '/public/images/history/new-course-2/05-pick-outcome.png', '') }}
+
+  {{ macros.screenshot('Fee or salary', 'fee-or-salary', '/public/images/history/new-course-2/thumbnails/06-fee-or-salary.png', '/public/images/history/new-course-2/06-fee-or-salary.png', '') }}
+
+  {{ macros.screenshot('Full time or part time', 'full-time-or-part-time', '/public/images/history/new-course-2/thumbnails/07-full-time-or-part-time.png', '/public/images/history/new-course-2/07-full-time-or-part-time.png', '') }}
+
+  {{ macros.screenshot('Accredited provider', 'accredited-provider', '/public/images/history/new-course-2/thumbnails/08-accredited-provider.png', '/public/images/history/new-course-2/08-accredited-provider.png', '') }}
+
+  {{ macros.screenshot('Confirm', 'confirm', '/public/images/history/new-course-2/thumbnails/09-confirm.png', '/public/images/history/new-course-2/09-confirm.png', '') }}
+
+  {{ macros.screenshot('Customise title', 'customise-title', '/public/images/history/new-course-2/thumbnails/10-customise-title.png', '/public/images/history/new-course-2/10-customise-title.png', '') }}
+
+  {{ macros.screenshot('On course creation', 'on-course-creation', '/public/images/history/new-course-2/thumbnails/11-on-course-creation.png', '/public/images/history/new-course-2/11-on-course-creation.png', '') }}
+
+</main>
+{% endblock %}
