@@ -1,64 +1,147 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Keele and North Staffordshire Teacher Education",
-  "provider-code-name": "A2309",
-  "provider-code": "24J",
-  "2Q5R-outcome": "PGCE with QTS",
-  "2Q5R-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2N2M-outcome": "PGCE with QTS",
-  "2N2M-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2KBH-outcome": "PGCE with QTS",
-  "2KBH-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2KBF-outcome": "PGCE with QTS",
-  "2KBF-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2KBJ-outcome": "PGCE with QTS",
-  "2KBJ-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2KBS-outcome": "PGCE with QTS",
-  "2KBS-accredited-provider": "Keele and North Staffordshire Teacher Education",
-  "2KBY-outcome": "PGCE with QTS",
-  "2KBY-accredited-provider": "Keele and North Staffordshire Teacher Education",
+  "training-provider-name": "ARK Teacher Training",
+  "provider-code-name": "A1460",
+  "provider-code": "1CS",
+  "2DHL-outcome": "PGCE with QTS",
+  "2DHL-accredited-provider": "ARK Teacher Training",
+  "2DHM-outcome": "PGCE with QTS",
+  "2DHM-accredited-provider": "ARK Teacher Training",
+  "2DGY-outcome": "PGCE with QTS",
+  "2DGY-accredited-provider": "ARK Teacher Training",
+  "2DGZ-outcome": "PGCE with QTS",
+  "2DGZ-accredited-provider": "ARK Teacher Training",
+  "34GF-outcome": "PGCE with QTS",
+  "34GF-accredited-provider": "ARK Teacher Training",
+  "2DH3-outcome": "PGCE with QTS",
+  "2DH3-accredited-provider": "ARK Teacher Training",
+  "2DH4-outcome": "PGCE with QTS",
+  "2DH4-accredited-provider": "ARK Teacher Training",
+  "2DGW-outcome": "PGCE with QTS",
+  "2DGW-accredited-provider": "ARK Teacher Training",
+  "2HJ5-outcome": "PGCE with QTS",
+  "2HJ5-accredited-provider": "ARK Teacher Training",
+  "2DH5-outcome": "PGCE with QTS",
+  "2DH5-accredited-provider": "ARK Teacher Training",
+  "2DH6-outcome": "PGCE with QTS",
+  "2DH6-accredited-provider": "ARK Teacher Training",
+  "2DHG-outcome": "PGCE with QTS",
+  "2DHG-accredited-provider": "ARK Teacher Training",
+  "2DH7-outcome": "PGCE with QTS",
+  "2DH7-accredited-provider": "ARK Teacher Training",
+  "2DH8-outcome": "PGCE with QTS",
+  "2DH8-accredited-provider": "ARK Teacher Training",
+  "2DH9-outcome": "PGCE with QTS",
+  "2DH9-accredited-provider": "ARK Teacher Training",
+  "2DHB-outcome": "PGCE with QTS",
+  "2DHB-accredited-provider": "ARK Teacher Training",
+  "2DHF-outcome": "PGCE with QTS",
+  "2DHF-accredited-provider": "ARK Teacher Training",
+  "2DHC-outcome": "PGCE with QTS",
+  "2DHC-accredited-provider": "ARK Teacher Training",
+  "2DHD-outcome": "PGCE with QTS",
+  "2DHD-accredited-provider": "ARK Teacher Training",
+  "2DHH-outcome": "PGCE with QTS",
+  "2DHH-accredited-provider": "ARK Teacher Training",
+  "2DNK-outcome": "PGCE with QTS",
+  "2DNK-accredited-provider": "ARK Teacher Training",
+  "2DC2-outcome": "PGCE with QTS",
+  "2DC2-accredited-provider": "ARK Teacher Training",
+  "2LH5-outcome": "PGCE with QTS",
+  "2LH5-accredited-provider": "ARK Teacher Training",
+  "2DHJ-outcome": "PGCE with QTS",
+  "2DHJ-accredited-provider": "ARK Teacher Training",
+  "2DHK-outcome": "PGCE with QTS",
+  "2DHK-accredited-provider": "ARK Teacher Training",
+  "2NB5-outcome": "PGCE with QTS",
+  "2NB5-accredited-provider": "ARK Teacher Training",
+  "2T4F-outcome": "PGCE with QTS",
+  "2T4F-accredited-provider": "ARK Teacher Training",
   "ucasCourses": [
 
   ],
   "schools": [
     {
-      "name": "Main Site",
-      "address": "Roe Lane, Newcastle under Lyme, Staffordshire, ST5 3PJ",
-      "code": "-"
+      "name": "Ark Teacher Training - Birmingham",
+      "address": "Birmingham: various",
+      "code": "B"
+    },
+    {
+      "name": "Ark Teacher Training - Hastings",
+      "address": "Hastings: various",
+      "code": "S"
+    },
+    {
+      "name": "Ark Teacher Training - London",
+      "address": "London: various",
+      "code": "L"
+    },
+    {
+      "name": "Ark Teacher Training - Portsmouth",
+      "address": "Portsmouth: various",
+      "code": "P"
     }
   ],
   "accreditors": [
     {
-      "name": "Keele and North Staffordshire Teacher Education",
-      "slug": "keele-and-north-staffordshire-teacher-education",
+      "name": "ARK Teacher Training",
+      "slug": "ark-teacher-training",
       "subjects": [
         {
-          "name": "Primary (Early Years)",
-          "slug": "primary-early-years"
+          "name": "Biology",
+          "slug": "biology"
         },
         {
-          "name": "Primary (Geography and History)",
-          "slug": "primary-geography-and-history"
+          "name": "Biology (Now Teach)",
+          "slug": "biology-now-teach"
         },
         {
-          "name": "Primary (Modern Languages)",
-          "slug": "primary-modern-languages"
+          "name": "Chemistry",
+          "slug": "chemistry"
         },
         {
-          "name": "Primary (with English)",
-          "slug": "primary-with-english"
+          "name": "Design and Technology",
+          "slug": "design-and-technology"
         },
         {
-          "name": "Primary (with Science)",
-          "slug": "primary-with-science"
+          "name": "English",
+          "slug": "english"
         },
         {
-          "name": "Primary General (with Mathematics)",
-          "slug": "primary-general-with-mathematics"
+          "name": "Geography",
+          "slug": "geography"
         },
         {
-          "name": "Primary Physical Education (PE)",
-          "slug": "primary-physical-education-pe"
+          "name": "History",
+          "slug": "history"
+        },
+        {
+          "name": "Mathematics",
+          "slug": "mathematics"
+        },
+        {
+          "name": "Modern Languages",
+          "slug": "modern-languages"
+        },
+        {
+          "name": "Music",
+          "slug": "music"
+        },
+        {
+          "name": "Physical Education",
+          "slug": "physical-education"
+        },
+        {
+          "name": "Physics",
+          "slug": "physics"
+        },
+        {
+          "name": "Primary",
+          "slug": "primary"
+        },
+        {
+          "name": "Religious Education",
+          "slug": "religious-education"
         }
       ]
     }
@@ -66,37 +149,65 @@
   "self_accrediting": true,
   "subjects": [
     {
-      "name": "Primary (Early Years)",
-      "slug": "primary-early-years"
+      "name": "Biology",
+      "slug": "biology"
     },
     {
-      "name": "Primary (Geography and History)",
-      "slug": "primary-geography-and-history"
+      "name": "Biology (Now Teach)",
+      "slug": "biology-now-teach"
     },
     {
-      "name": "Primary (Modern Languages)",
-      "slug": "primary-modern-languages"
+      "name": "Chemistry",
+      "slug": "chemistry"
     },
     {
-      "name": "Primary (with English)",
-      "slug": "primary-with-english"
+      "name": "Design and Technology",
+      "slug": "design-and-technology"
     },
     {
-      "name": "Primary (with Science)",
-      "slug": "primary-with-science"
+      "name": "English",
+      "slug": "english"
     },
     {
-      "name": "Primary General (with Mathematics)",
-      "slug": "primary-general-with-mathematics"
+      "name": "Geography",
+      "slug": "geography"
     },
     {
-      "name": "Primary Physical Education (PE)",
-      "slug": "primary-physical-education-pe"
+      "name": "History",
+      "slug": "history"
+    },
+    {
+      "name": "Mathematics",
+      "slug": "mathematics"
+    },
+    {
+      "name": "Modern Languages",
+      "slug": "modern-languages"
+    },
+    {
+      "name": "Music",
+      "slug": "music"
+    },
+    {
+      "name": "Physical Education",
+      "slug": "physical-education"
+    },
+    {
+      "name": "Physics",
+      "slug": "physics"
+    },
+    {
+      "name": "Primary",
+      "slug": "primary"
+    },
+    {
+      "name": "Religious Education",
+      "slug": "religious-education"
     }
   ],
   "new-course": {
-    "include-accredited": false,
-    "include-fee-or-salary": false,
-    "include-locations": false
+    "include-accredited": true,
+    "include-fee-or-salary": true,
+    "include-locations": true
   }
 }
