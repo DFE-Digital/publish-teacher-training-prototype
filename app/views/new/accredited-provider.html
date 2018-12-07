@@ -6,14 +6,14 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/{{ code }}/full-time-part-time" class="link-back">Back</a>
+  <a href="{{ paths.back }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new/{{ code }}/confirm" method="post">
+      <form action="{{ paths.next }}" method="post">
         {% set accreditedProviderFields %}
           {{ macros.select(code + '-new-accredited-provider', 'Name of accredited provider', [
             {

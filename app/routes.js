@@ -28,7 +28,8 @@ router.all('/new/:code/training-locations', function (req, res) {
   });
 
   res.render('new/training-locations', {
-    code: req.params.code,
+    code: code,
+    paths: newCourseWizardPaths(req.path, code, data),
     locations: locations
   });
 })
@@ -38,7 +39,8 @@ router.all('/new/:code/confirm', function (req, res) {
   var code = req.params.code;
 
   res.render('new/confirm', {
-    code: req.params.code,
+    code: code,
+    paths: newCourseWizardPaths(req.path, code, data),
     generatedTitle: getGeneratedTitle(code, data),
     courseOffered: getCourseOffered(code, data)
   });
@@ -70,6 +72,34 @@ function getGeneratedTitle(code, data) {
   return generatedTitle;
 }
 
+function newCourseWizardPaths(currentPath, code, data) {
+  var paths = [
+    '/',
+    `/new/${code}/phase`,
+    `/new/${code}/subject`,
+    `/new/${code}/languages`,
+    `/new/${code}/outcome`,
+    ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : []),
+    `/new/${code}/full-time-part-time`,
+    ...(data['new-course']['include-locations'] ? [`/new/${code}/training-locations`] : []),
+    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-provider`] : []),
+    `/new/${code}/confirm`,
+    `/new/${code}/create`
+  ];
+  var index = paths.indexOf(currentPath);
+  var next = paths[index + 1];
+  var back = paths[index - 1];
+
+  if (back == `/new/${code}/languages` && data[code + '-new-subject'] != 'Modern languages') {
+    back = paths[index - 2];
+  }
+
+  return {
+    next: next,
+    back: back
+  }
+}
+
 function getCourseOffered(code, data) {
   var courseOffered = data[code + '-new-outcome'];
 
@@ -92,10 +122,16 @@ function getCourseOffered(code, data) {
 }
 
 router.post('/new/:code/languages', function (req, res) {
-  if (req.session.data[req.params.code + '-new-subject'] == 'Modern languages') {
-    res.render('new/languages', {code: req.params.code});
+  var code = req.params.code;
+  var data = req.session.data;
+
+  if (data[code + '-new-subject'] == 'Modern languages') {
+    res.render('new/languages', {
+      code: code,
+      paths: newCourseWizardPaths(req.path, code, data)
+    });
   } else {
-    res.redirect('/new/' + req.params.code + '/outcome');
+    res.redirect('/new/' + code + '/outcome');
   }
 })
 
@@ -175,7 +211,8 @@ router.all('/new/:code/create', function (req, res) {
 })
 
 router.all('/new/:code/:view', function (req, res) {
-  res.render(`new/${req.params.view}`, {code: req.params.code})
+  var code = req.params.code;
+  res.render(`new/${req.params.view}`, {code: code, paths: newCourseWizardPaths(req.path, code, req.session.data)})
 })
 
 router.post('/request-access', function (req, res) {

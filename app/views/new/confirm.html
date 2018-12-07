@@ -6,9 +6,9 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/{{ code }}/{% if data['new-course']['include-accredited'] %}accredited-provider{% else %}full-time-part-time{% endif %}" class="link-back">Back</a>
+  <a href="{{ paths.back }}" class="link-back">Back</a>
 
-  <form action="/new/{{ code }}/create" method="post">
+  <form action="{{ paths.next }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="heading-xlarge add-double-bottom-margin">
