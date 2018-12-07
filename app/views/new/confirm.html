@@ -118,7 +118,7 @@
               </a>
             </dd>
           </div>
-          {% if data['new-course']['include-locations'] %}
+          {% if data['new-course']['include-locations'] and data[code + '-new-locations'] %}
           <div>
             <dt class="cya-question">
               Training locations

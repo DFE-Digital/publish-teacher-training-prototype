@@ -71,8 +71,8 @@ router.post('/new/:code/languages', function (req, res) {
   }
 })
 
+// Take new data and make it into a course
 router.all('/new/:code/create', function (req, res) {
-  // Take new data and make it into a course
   var data = req.session.data;
   var code = req.params.code;
   var languages = [];
@@ -83,6 +83,17 @@ router.all('/new/:code/create', function (req, res) {
 
   if (data[code + '-new-second-language']) {
     languages.push(data[code + '-new-second-language'])
+  }
+
+  var schools = [];
+  if (Array.isArray(data[code + '-new-locations'])) {
+    data[code + '-new-locations'].forEach(name => {
+      schools.push(data['schools'].find(school => school.name == name));
+    });
+  }
+
+  if (schools.length == 0) {
+    schools.push(data['schools'][0]);
   }
 
   var course = {
@@ -98,10 +109,8 @@ router.all('/new/:code/create', function (req, res) {
     "route": "New",
     "outcome": data[code + '-new-outcome'],
     "providerCode": data['provider-code'],
-    "programmeCode": req.params.code,
-    "schools": [
-
-    ],
+    "programmeCode": code,
+    "schools": schools,
     "options": [
       data[code + '-new-generated-description']
     ]
@@ -143,7 +152,7 @@ router.all('/new/:code/create', function (req, res) {
   // "new-full-part": "Full time",
   // "new-has-accredited-provider": "No, we are the accredited provider",
 
-  res.redirect(`/course/${data['provider-code']}/${req.params.code}?created=true`);
+  res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
 })
 
 router.all('/new/:code/:view', function (req, res) {
