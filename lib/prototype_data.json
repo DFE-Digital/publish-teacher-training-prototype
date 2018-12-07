@@ -3,10 +3,6 @@
   "training-provider-name": "Keele and North Staffordshire Teacher Education",
   "provider-code-name": "A2309",
   "provider-code": "24J",
-  "new-course": {
-    "include-accredited": false,
-    "include-fee-or-salary": false
-  },
   "2Q5R-outcome": "PGCE with QTS",
   "2Q5R-accredited-provider": "Keele and North Staffordshire Teacher Education",
   "2N2M-outcome": "PGCE with QTS",
@@ -97,5 +93,10 @@
       "name": "Primary Physical Education (PE)",
       "slug": "primary-physical-education-pe"
     }
-  ]
+  ],
+  "new-course": {
+    "include-accredited": false,
+    "include-fee-or-salary": false,
+    "include-locations": false
+  }
 }

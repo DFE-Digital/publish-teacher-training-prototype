@@ -13,11 +13,6 @@ prototype_data = {
   'training-provider-name': provider,
   'provider-code-name': courses.first['providerCodeName'],
   'provider-code': courses.first['providerCode'],
-  'new-course': {
-    'include-accredited': courses.first['route'].include?('School Direct'),
-    'include-fee-or-salary': courses.first['route'].include?('School Direct')
-  }
-
   # "25PP-about-this-course": "About this course",
   # "25PP-interview-process": "Interview process",
   # "25PP-placement-school-policy": "How school placements work",
@@ -155,7 +150,13 @@ courses.each do |course|
   prototype_data['accreditors'].find { |a| a[:name] == (course['accrediting'] || provider)}[:subjects] << subject
 end
 
+prototype_data['new-course'] = {
+  'include-accredited': courses.first['route'].include?('School Direct'),
+  'include-fee-or-salary': courses.first['route'].include?('School Direct'),
+  'include-locations': prototype_data['schools'].length > 1
+}
+
 prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
 
 # Output to prototype
-File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data)) }
+File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data) + "\n") }
