@@ -15,6 +15,24 @@ router.get('/new/start', function (req, res) {
   res.redirect('/new/' + code + '/phase');
 })
 
+router.all('/new/:code/training-locations', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+  var locations = [];
+
+  data['schools'].forEach(school => {
+    locations.push({
+      name: school.name,
+      text: school.address
+    });
+  });
+
+  res.render('new/training-locations', {
+    code: req.params.code,
+    locations: locations
+  });
+})
+
 router.all('/new/:code/confirm', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
