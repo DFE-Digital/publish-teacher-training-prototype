@@ -56,7 +56,7 @@ function generateCourseCode() {
 function getGeneratedTitle(code, data) {
   var generatedTitle = data[code + '-new-subject'];
 
-  if (data[code + '-new-subject'] == 'Modern languages') {
+  if (isModernLanguages(code, data)) {
     if (data[code + '-new-second-language']) {
       generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']} and ${data[code + '-new-second-language']})`;
     } else {
@@ -90,7 +90,7 @@ function newCourseWizardPaths(currentPath, code, data) {
   var next = paths[index + 1];
   var back = paths[index - 1];
 
-  if (back == `/new/${code}/languages` && data[code + '-new-subject'] != 'Modern languages') {
+  if (back == `/new/${code}/languages` && !isModernLanguages(code, data)) {
     back = paths[index - 2];
   }
 
@@ -121,11 +121,15 @@ function getCourseOffered(code, data) {
   return courseOffered;
 }
 
+function isModernLanguages(code, data) {
+  return data[code + '-new-subject'] == 'Modern languages'
+}
+
 router.post('/new/:code/languages', function (req, res) {
   var code = req.params.code;
   var data = req.session.data;
 
-  if (data[code + '-new-subject'] == 'Modern languages') {
+  if (isModernLanguages(code, data)) {
     res.render('new/languages', {
       code: code,
       paths: newCourseWizardPaths(req.path, code, data)
