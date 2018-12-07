@@ -1,0 +1,43 @@
+{% set title = 'Pick the training locations for this course' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="{{ paths.back }}" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        {% if data[code + '-new-full-part'] == 'Full time or part time' %}
+          {% set vacancyFields = [
+              {
+                name: 'Full time places'
+              },
+              {
+                name: 'Part time places'
+              }
+            ]
+          %}
+
+          {% set more %}
+            <p>Does this location offer full time places, part time places or both?</p>
+            {{ macros.checkboxGroup(code + '-new-location-full-part', vacancyFields) }}
+          {% endset %}
+          {% set modifiedLocations = locations|addMoreToFields(more) %}
+          {{ macros.checkboxGroup(code + '-new-locations', modifiedLocations) }}
+        {% else %}
+          {{ macros.checkboxGroup(code + '-new-locations', locations) }}
+        {% endif %}
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
