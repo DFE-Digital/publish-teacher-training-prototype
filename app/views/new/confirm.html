@@ -118,6 +118,21 @@
               </a>
             </dd>
           </div>
+          {% if data['new-course']['include-locations'] %}
+          <div>
+            <dt class="cya-question">
+              Training locations
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-locations'] | join('<br>') | safe }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/training-locations">
+                Change<span class="visually-hidden"> training locations</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
           {% if data['new-course']['include-accredited'] %}
             {% if data[code + '-new-has-accredited-provider'] == 'Yes' %}
               <div>
