@@ -14,24 +14,25 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        {% if data[code + '-new-full-part-time'] == 'Full time or part time' %}
+        {% if data[code + '-new-full-part'] == 'Full time or part time' %}
           {% set vacancyFields = [
               {
-                name: 'Full time places available'
+                name: 'Full time places'
               },
               {
-                name: 'Part time places available'
+                name: 'Part time places'
               }
             ]
           %}
 
           {% set more %}
-            {{ macros.checkboxGroup(code + '-new-location-full-part', vacancyFields, errors) }}
+            <p>Does this location offer full time places, part time places or both?</p>
+            {{ macros.checkboxGroup(code + '-new-location-full-part', vacancyFields) }}
           {% endset %}
           {% set modifiedLocations = locations|addMoreToFields(more) %}
-          {{ macros.checkboxGroup(code + '-new-locations', modifiedLocations, errors) }}
+          {{ macros.checkboxGroup(code + '-new-locations', modifiedLocations) }}
         {% else %}
-          {{ macros.checkboxGroup(code + '-new-locations', locations, errors) }}
+          {{ macros.checkboxGroup(code + '-new-locations', locations) }}
         {% endif %}
         <input type="submit" class="button" value="Continue" />
       </form>
