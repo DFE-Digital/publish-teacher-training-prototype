@@ -24,6 +24,37 @@
         <li>there’s a read only course information section</li>
         <li>the confirm page only shows parts relevant to the journey taken</li>
       </ul>
+
+      <h2 class="heading-large" id="user-research">User research</h2>
+
+      <p>We tested the shortest path with 2 providers. This excluded language, training location, fee and salary and accredited provider screens.</p>
+
+      <ul class="list list-bullet">
+        <li><a href="https://lookback.io/watch/veykZkMozQtCAvceD">Keele and North Staffordshire Education</a> (<a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77">alternative version</a>)</li>
+        <li><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH">University of Wolverhampton</a></li>
+      </ul>
+
+      <p>Providers found adding a new course easy to do:</p>
+      <ul class="list list-bullet">
+        <li><a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=1h15m15s">“It’s an easier to use system, seemed quicker”</a></li>
+        <li><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH?t=50m26.78s">“This looks much clearer”</a></li>
+      </ul>
+
+      <h3 class="heading-medium">Course codes</h3>
+
+      <p>Keele told us stories of users applying for the wrong course because they had the wrong course code. Many of them are different by 1 digit. <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=28m46s">They are too hard to differentiate</a>.</p>
+
+      <p>They want the course codes to be more clearly related to a provider: <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=29m7s">“Can the codes be related to a provider? … We use KNST a lot”</a></p>
+
+      <p>The University of Wolverhampton have UCAS course codes but also use their own internal codes which cover postgraduate and undergraduate courses. They are longer (eg <a href="https://courses.wlv.ac.uk/course.asp?code=SE016P01UVG">SE016P01UVG</a>) and don’t appear to be surfaced to candidates.</p>
+
+      <p><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH?t=18m19.94s">Some courses are known by their codes</a>, perhaps because they’ve had the same code for a long time. This suggests that changing codes for existing courses might create a new mental burden for providers.</p>
+
+      <h3 class="heading-medium">Modular, or not modular?</h3>
+
+      <p>Keele said, <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=1h12m24s">“Ours is always no, we don’t do a modular course … I don’t know how it’d make a difference … We’ve never done it, we’ve never looked into what it means … If we don’t understand, how will candidates know?”</a></p>
+
+      <p>University of Wolverhampton said, <a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH?t=49m3.97s">“Ours are all modular … we have 6x 20 credit modules … I think that can be explained through the blurb [though]”</a></p>
     </div>
   </div>
 
@@ -42,25 +73,52 @@
   ] %}
   {{ macros.screenshotContents(contents) }}
 
-  {{ macros.screenshot('Organisation page', 'organisation-page', '/public/images/history/new-course-2/thumbnails/01-organisation-page.png', '/public/images/history/new-course-2/01-organisation-page.png', '') }}
+  {{ macros.screenshot('Organisation page', 'organisation-page', '/public/images/history/new-course-2/thumbnails/01-organisation-page.png', '/public/images/history/new-course-2/01-organisation-page.png', '
+    <p>When the courses table is empty users found the ‘Add course’ button easily.</p>
+  ') }}
 
-  {{ macros.screenshot('Type of course', 'type-of-course', '/public/images/history/new-course-2/thumbnails/02-type-of-course.png', '/public/images/history/new-course-2/02-type-of-course.png', '') }}
+  {{ macros.screenshot('Type of course', 'type-of-course', '/public/images/history/new-course-2/thumbnails/02-type-of-course.png', '/public/images/history/new-course-2/02-type-of-course.png', '
+    <p>Users accurately completed these details.</p>
+    <p>Providers <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=57m14s">told us that they use the term ‘SEND’</a> rather than ‘SEN’.</p>
+  ') }}
 
-  {{ macros.screenshot('Pick a subject', 'pick-a-subject', '/public/images/history/new-course-2/thumbnails/03-pick-a-subject.png', '/public/images/history/new-course-2/03-pick-a-subject.png', '') }}
+  {{ macros.screenshot('Pick a subject', 'pick-a-subject', '/public/images/history/new-course-2/thumbnails/03-pick-a-subject.png', '/public/images/history/new-course-2/03-pick-a-subject.png', '
+    <p>Users easily selected the subject they wanted.</p>
+  ') }}
 
   {{ macros.screenshot('Pick languages', 'pick-languages', '/public/images/history/new-course-2/thumbnails/04-pick-languages.png', '/public/images/history/new-course-2/04-pick-languages.png', '') }}
 
-  {{ macros.screenshot('Pick outcome', 'pick-outcome', '/public/images/history/new-course-2/thumbnails/05-pick-outcome.png', '/public/images/history/new-course-2/05-pick-outcome.png', '') }}
+  {{ macros.screenshot('Pick outcome', 'pick-outcome', '/public/images/history/new-course-2/thumbnails/05-pick-outcome.png', '/public/images/history/new-course-2/05-pick-outcome.png', '
+    <p>University of Wolverhampton didn’t question the new ‘QTS with optional PGCE’ option.</p>
+  ') }}
 
   {{ macros.screenshot('Fee or salary', 'fee-or-salary', '/public/images/history/new-course-2/thumbnails/06-fee-or-salary.png', '/public/images/history/new-course-2/06-fee-or-salary.png', '') }}
 
-  {{ macros.screenshot('Full time or part time', 'full-time-or-part-time', '/public/images/history/new-course-2/thumbnails/07-full-time-or-part-time.png', '/public/images/history/new-course-2/07-full-time-or-part-time.png', '') }}
+  {{ macros.screenshot('Full time or part time', 'full-time-or-part-time', '/public/images/history/new-course-2/thumbnails/07-full-time-or-part-time.png', '/public/images/history/new-course-2/07-full-time-or-part-time.png', '
+    <p>Keele expected course length to be identified here too.</p>
+  ') }}
 
   {{ macros.screenshot('Accredited provider', 'accredited-provider', '/public/images/history/new-course-2/thumbnails/08-accredited-provider.png', '/public/images/history/new-course-2/08-accredited-provider.png', '') }}
 
-  {{ macros.screenshot('Confirm', 'confirm', '/public/images/history/new-course-2/thumbnails/09-confirm.png', '/public/images/history/new-course-2/09-confirm.png', '') }}
+  {{ macros.screenshot('Confirm', 'confirm', '/public/images/history/new-course-2/thumbnails/09-confirm.png', '/public/images/history/new-course-2/09-confirm.png', '
+    <p>The check your answers design tested well.</p>
 
-  {{ macros.screenshot('Customise title', 'customise-title', '/public/images/history/new-course-2/thumbnails/10-customise-title.png', '/public/images/history/new-course-2/10-customise-title.png', '') }}
+    <p>Users could easily see what they’d chosen and could go back and change their answers. When going back to an earlier part of the wizard you currently need to then go through each following question – 1 user didn’t expect this and <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=50m11s">thought they’d go back to the summary</a>.</p>
+
+    <p>Users seemed to understand that clicking ‘Save’ wouldn’t publish their course.</p>
+
+    <p>When prompted users found the customise title screen.</p>
+  ') }}
+
+  {{ macros.screenshot('Customise title', 'customise-title', '/public/images/history/new-course-2/thumbnails/10-customise-title.png', '/public/images/history/new-course-2/10-customise-title.png', '
+    <p>The warning text about DfE approval wasn’t read, this might need an explicit action, like a checkbox.</p>
+
+    <p>Keele asked for guidance around titles, and some examples.</p>
+
+    <p>University of Wolverhampton changed "Mathematics" to "Secondary Mathematics" and then "Secondary Education Mathematics (PGCE optional)". The secondary and optional PGCE parts of the course are communicated elsewhere, alongside the title.</p>
+
+    <p>A <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=59m33s">bug in the prototype raised a potential issue</a>: If they edit the title and then go back through the wizard changing some options (in the session they added SEND), should it still generate a new title? The prototype didn’t, but she expected to see SEN in the title now.</p>
+  ') }}
 
   {{ macros.screenshot('On course creation', 'on-course-creation', '/public/images/history/new-course-2/thumbnails/11-on-course-creation.png', '/public/images/history/new-course-2/11-on-course-creation.png', '') }}
 

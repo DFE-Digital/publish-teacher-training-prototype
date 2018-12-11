@@ -1,6 +1,6 @@
 
 {% extends "layout.html" %}
-{% set title = 'New course' %}
+{% set title = 'New course wizard' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -50,7 +50,14 @@
         <li>Training location assignment</li>
         <li>Course start month</li>
         <li>Applications open date</li>
+        <li>Apply eligibility settings</li>
       </ul>
+
+      <h2 class="heading-large" id="user-research">User research</h2>
+
+      <p>
+        <a href="/history/new-course-2#user-research">We tested the next iteration</a>
+      </p>
     </div>
   </div>
 
@@ -76,7 +83,7 @@
   {{ macros.screenshot('Type of course', 'type-of-course', '/public/images/history/new-course/thumbnails/01-type-of-course.png', '/public/images/history/new-course/01-type-of-course.png', '
     <p>Start by choosing a level, whether the course is SEN and if it’s salaried or fee paying.</p>
 
-    <p>The last part could be split onto its own page. Only School Direct providers have a choice between fee paying and salary. We believe that the apprenticeship option is also only applicable to School Direct providers. Universities and SCITTs won’t see this question.</p>
+    <p>The last part could be split onto its own page (<a href="/history/new-course-2#fee-or-salary">updated design</a>). Only School Direct providers have a choice between fee paying and salary. We believe that the apprenticeship option is also only applicable to School Direct providers. Universities and SCITTs won’t see this question.</p>
   ') }}
 
   {{ macros.screenshot('Pick a subject', 'pick-a-subject', '/public/images/history/new-course/thumbnails/02-pick-a-subject.png', '/public/images/history/new-course/02-pick-a-subject.png', '
