@@ -21,6 +21,10 @@ router.get('/', function (req, res) {
   }
 })
 
+router.get('/design-history', function (req, res) {
+  res.redirect('/history');
+})
+
 router.get('/new/start', function (req, res) {
   var code = generateCourseCode();
   res.redirect('/new/' + code + '/phase');
