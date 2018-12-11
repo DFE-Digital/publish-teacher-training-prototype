@@ -14,7 +14,7 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        {% set accreditedProviderFields %}
+        {% set otherAccreditedProviderFields %}
           {{ macros.select(code + '-new-accredited-provider', 'Name of accredited provider', [
             {
               name: 'Goldsmiths, University of London'
@@ -24,6 +24,24 @@
             },
             {
               name: 'UCL, University College London (University of London)'
+            }
+          ], false, true, false, true) }}
+        {% endset %}
+
+        {% set accreditedProviderFields %}
+          {{ macros.radioGroup(code + '-new-accredited-provider', [
+            {
+              name: 'Sheffield Hallam University'
+            },
+            {
+              name: 'The National Modern Languages SCITT'
+            },
+            {
+              name: 'The University of Sheffield'
+            },
+            {
+              name: 'Other',
+              more: otherAccreditedProviderFields
             }
           ]) }}
         {% endset %}
