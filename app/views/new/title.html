@@ -18,6 +18,21 @@
       <form action="/new/{{ code }}/confirm" method="post">
         {{ macros.textbox(code + '-new-title', 'Title', '', 'form-control-full', false, false, data[code + '-new-title'] or data[code + '-new-generated-title']) }}
 
+        <p>We will approve titles that include:</p>
+
+        <ul class="list list-bullet">
+          <li>a subject or pair of subjects, eg Geography, or Geography with History</li>
+          <li>an age range, eg Primary (3-7), or Primary (5-11)</li>
+        </ul>
+
+        <p>We won’t approve titles that include:</p>
+
+        <ul class="list list-bullet">
+          <li>school names</li>
+          <li>qualifications or outcomes, eg PGCE with QTS full time</li>
+          <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
+        </ul>
+
         <input type="submit" class="button" value="Continue" />
       </form>
     </div>
