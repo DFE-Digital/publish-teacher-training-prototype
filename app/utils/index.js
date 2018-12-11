@@ -10,7 +10,11 @@ function getGeneratedTitle(code, data) {
 
   if (isModernLanguages(code, data)) {
     if (data[code + '-new-second-language']) {
-      generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']} and ${data[code + '-new-second-language']})`;
+      if (data[code + '-new-further-languages']) {
+        generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']}, ${data[code + '-new-second-language']}, ${data[code + '-new-further-languages'].join(', ')})`;
+      } else {
+        generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']} and ${data[code + '-new-second-language']})`;
+      }
     } else {
       generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']})`;
     }

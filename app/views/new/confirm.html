@@ -69,6 +69,10 @@
               {% if data[code + '-new-second-language'] %}
                 <br />{{ data[code + '-new-second-language'] }}
               {% endif %}
+              {% if data[code + '-new-further-languages'] %}
+                <br />
+                {{ data[code + '-new-further-languages'].join('<br />') | safe }}
+              {% endif %}
             </dd>
             <dd class="cya-change">
               <a href="/new/{{ code }}/languages">
