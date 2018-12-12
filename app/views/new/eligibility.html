@@ -1,0 +1,55 @@
+{% set title = 'Minimum course requirements' %}
+{% extends "layout.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="{{ paths.back }}" class="link-back">Back</a>
+
+  <!-- examples:
+      1: https://find-postgraduate-teacher-training.education.gov.uk/course/17B/225K
+      2: https://find-postgraduate-teacher-training.education.gov.uk/course/12U/2527
+      3: https://find-postgraduate-teacher-training.education.gov.uk/course/1PJ/236Y
+      9: https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X341
+  -->
+
+  <h1 class="heading-xlarge">
+    {{ title }}
+  </h1>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        {% set fields = [
+            {
+              name: 'Applicants must have this qualification before they apply'
+            },
+            {
+              name: 'Applicants will be considered if they expect to have this qualification before the course begins'
+            },
+            {
+              name: 'Applicants without this qualification can be offered an equivalence test'
+            },
+            {
+              name: 'Not applicable'
+            }
+          ]
+        %}
+
+        <h2 class="heading-medium">English Language</h2>
+        {{ macros.radioGroup(code + '-new-english-requirements', fields, errors) }}
+
+        <h2 class="heading-medium">Mathematics</h2>
+        {{ macros.radioGroup(code + '-new-maths-requirements', fields, errors) }}
+
+        <h2 class="heading-medium">Science</h2>
+        {{ macros.radioGroup(code + '-new-science-requirements', fields, errors) }}
+
+        <input type="submit" class="button" value="Continue" />
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
