@@ -21,30 +21,36 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        {% set fields = [
-            {
-              name: 'Applicants must have this qualification before they apply'
-            },
-            {
-              name: 'Applicants will be considered if they expect to have this qualification before the course begins'
-            },
-            {
-              name: 'Applicants without this qualification can be offered an equivalence test'
-            },
-            {
-              name: 'Not applicable'
-            }
-          ]
-        %}
+        <!-- [ ] Applicants need a minimum GCSE grade A* to C, 4 or more, or an equivalent
+          * Do not accept applications from candidates who need to take an equivalence test
+          * Do not accept applications from candidates who do not have the qualification but expect to have it before the course begins -->
 
-        <h2 class="heading-medium">English Language</h2>
-        {{ macros.radioGroup(code + '-new-english-requirements', fields, errors) }}
+        <p>Applicants need a minimum of GCSE grade C (or 4), or an equivalent in:</p>
 
-        <h2 class="heading-medium">Mathematics</h2>
-        {{ macros.radioGroup(code + '-new-maths-requirements', fields, errors) }}
+        {% set moreText %}
+          <p>Accept applications from candidates:</p>
+          <ul class="list list-bullet">
+            <!-- <li>with the qualification</li> -->
+            <li>who expect to have the qualification when the course begins</li>
+            <li>who need to take an equivalency test</li>
+          </ul>
+          <a href="#">Change</a>
+        {% endset %}
 
-        <h2 class="heading-medium">Science</h2>
-        {{ macros.radioGroup(code + '-new-science-requirements', fields, errors) }}
+        {{ macros.checkboxGroup(code + '-new-min-requirements', [
+          {
+            name: 'English language',
+            more: moreText
+          },
+          {
+            name: 'Mathematics',
+            more: moreText
+          },
+          {
+            name: 'Science',
+            more: moreText
+          }
+        ], errors) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>

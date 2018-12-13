@@ -170,6 +170,19 @@
           {% endif %}
           <div>
             <dt class="cya-question">
+              Minimum requirements
+            </dt>
+            <dd class="cya-answer">
+              {{ data[code + '-new-min-requirements'] or 'None' }}
+            </dd>
+            <dd class="cya-change">
+              <a href="/new/{{ code }}/eligibility">
+                Change<span class="visually-hidden"> minimum requirements</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="cya-question">
               Title
             </dt>
             <dd class="cya-answer">
