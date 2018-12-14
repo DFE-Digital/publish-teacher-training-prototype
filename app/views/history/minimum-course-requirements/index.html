@@ -1,0 +1,42 @@
+
+{% extends "layout.html" %}
+{% set title = 'New course wizard: Minimum course requirements' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>Following on from the <a href="/history/specific-requirements">investigation into UCAS specific course requirements</a>, a design that comes towards the end of the new course wizard.</p>
+
+      <p>This design aims to:</p>
+      <ul class="list list-bullet">
+        <li>move more providers to the most flexible default (eg option 3)</li>
+        <li>make it clear what that choice means</li>
+      </ul>
+
+      <p>Things not yet considered in this design:</p>
+      <ul class="list list-bullet">
+        <li>communicating legal minimums (eg Primary requires a C in Science)</li>
+        <li>applying defaults based on legal minimums</li>
+        <li>what happens when you hit ‘change’</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Minimum course requirements', id: 'minimum-course-requirements' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Minimum course requirements', 'minimum-course-requirements', '/public/images/history/minimum-course-requirements/thumbnails/01-minimum-course-requirements.png', '/public/images/history/minimum-course-requirements/01-minimum-course-requirements.png', '') }}
+
+</main>
+{% endblock %}
