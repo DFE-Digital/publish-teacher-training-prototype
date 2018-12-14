@@ -49,6 +49,17 @@ router.all('/new/:code/training-locations', function (req, res) {
   });
 })
 
+router.all('/new/:code/title', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new/title', {
+    code: code,
+    paths: newCourseWizardPaths(req.path, code, data),
+    generatedTitle: getGeneratedTitle(code, data)
+  });
+})
+
 router.all('/new/:code/confirm', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
@@ -56,7 +67,6 @@ router.all('/new/:code/confirm', function (req, res) {
   res.render('new/confirm', {
     code: code,
     paths: newCourseWizardPaths(req.path, code, data),
-    generatedTitle: getGeneratedTitle(code, data),
     courseOffered: getCourseOffered(code, data)
   });
 })

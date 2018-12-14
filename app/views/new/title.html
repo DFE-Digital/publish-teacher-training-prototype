@@ -1,4 +1,4 @@
-{% set title = 'Edit course title' %}
+{% set title = 'Is this course title right?' %}
 {% extends "layout.html" %}
 {% block page_title %}{{ title }}{% endblock %}
 
@@ -6,40 +6,58 @@
 
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/{{ code }}/confirm" class="link-back">Back</a>
+  <a href="{{ paths.back }}" class="link-back">Back</a>
 
   <h1 class="heading-xlarge">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <div class="notice add-double-bottom-margin">
-        <i class="icon icon-important">
-          <span class="visually-hidden">Warning</span>
-        </i>
-        <strong class="bold-small">
-          All course title changes are subject to approval by the Becoming a Teacher team
-        </strong>
+      <p>From your answers we’ve created this title for your course:</p>
+      <div class="panel panel-border-wide add-double-bottom-margin">
+        <p class="lede">
+          {{ generatedTitle }}
+        </p>
       </div>
-      <!-- <p>You can customise your course title but any changes will be subject to approval by the Becoming a Teacher team.</p> -->
 
-      <form action="/new/{{ code }}/confirm" method="post">
-        {{ macros.textbox(code + '-new-title', 'Title', '', 'form-control-full', false, false, data[code + '-new-title'] or data[code + '-new-generated-title']) }}
+      <form action="{{ paths.next }}" method="post">
+        {% set moreTitle %}
+          {{ macros.textbox(code + '-new-title', 'New title', '', 'form-control-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
 
-        <p>We will approve titles that include:</p>
+          <div class="notice add-double-bottom-margin">
+            <i class="icon icon-important" style="margin-top: -17px;">
+              <span class="visually-hidden">Warning</span>
+            </i>
+            <strong class="bold-small">
+              All course title changes are subject to approval by the Becoming a Teacher team
+            </strong>
+          </div>
 
-        <ul class="list list-bullet">
-          <li>a subject or pair of subjects, eg Geography, or Geography with History</li>
-          <li>an age range, eg Primary (3-7), or Primary (5-11)</li>
-        </ul>
+          <p>We will approve titles that include:</p>
 
-        <p>We won’t approve titles that include:</p>
+          <ul class="list list-bullet">
+            <li>a subject or pair of subjects, eg Geography, or Geography with History</li>
+            <li>an age range, eg Primary (3-7), or Primary (5-11)</li>
+          </ul>
 
-        <ul class="list list-bullet">
-          <li>school names</li>
-          <li>qualifications or outcomes, eg PGCE with QTS full time</li>
-          <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
-        </ul>
+          <p>We won’t approve titles that include:</p>
+
+          <ul class="list list-bullet">
+            <li>school names</li>
+            <li>qualifications or outcomes, eg PGCE with QTS full time</li>
+            <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
+          </ul>
+        {% endset %}
+
+        {{ macros.radioGroup(code + '-new-min-requirements', [
+          {
+            name: 'Yes, that’s correct'
+          },
+          {
+            name: 'No, I need to change the title',
+            more: moreTitle
+          }
+        ], errors) }}
 
         <input type="submit" class="button" value="Continue" />
       </form>
