@@ -44,14 +44,19 @@ table thead th {
 }
 
 .phase-tag-small {
-  @include bold-16;
-  letter-spacing: 0;
+  // padding-top: 4px;
+  // padding-bottom: 1px;
+  padding: 4px 8px 1px;
+}
+
+.phase-tag-table {
+  // display: block;
 }
 
 .phase-tag-no-content {
   background: $white;
   color: $grey-1;
-  border: 2px solid $grey-2;
+  border: 2px solid lighten($grey-1, 10%);
   margin-top: -1px;
   margin-bottom: -1px;
 }
@@ -283,21 +288,17 @@ dl.aligned.course-part-tasks dd {
 }
 
 .ucas-info-table  {
-  td {
-    vertical-align: top;
-  }
-
-  .subject-col {
-    width: 40%;
-  }
-
-  .type-col {
-    width: 40%;
-  }
-
-  .status-col {
-    width: 20%;
-  }
+  // .subject-col {
+  //   width: 40%;
+  // }
+  //
+  // .type-col {
+  //   width: 40%;
+  // }
+  //
+  // .status-col {
+  //   width: 20%;
+  // }
 
   .ucas-view-link {
     text-align: right;

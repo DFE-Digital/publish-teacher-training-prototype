@@ -83,8 +83,10 @@
           <thead>
             <tr>
               <th class="subject-col">Course</th>
-              <th class="type-col">Type</th>
-              <th class="status-col" style="width: 100px">Status</th>
+              <th class="status-col" style="width: 120px">Status</th>
+              <th class="published-col">Published</th>
+              <th class="applications-col">Applications</th>
+              <th class="type-col">Vacancies?</th>
             </tr>
           </thead>
           <tbody>
@@ -94,26 +96,44 @@
                 <tr>
                   <td>
                     {% if (loop.index != 4 and loop.index != 7) %}
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% else %}
-                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
                     {% endif %}
-                    </span>
+                    <br />
+                    <span class="font-xsmall">{{ course.options }}</span>
                   </td>
-                  <td>{{ course.options }}</td>
-                  <td>
-                    {% if (loop.index != 4 and loop.index != 7) %}
-                      {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                        <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
-                      {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                        <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+                  {% if (loop.index == 4 or loop.index == 7) %}
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  {% else %}
+                    <td>
+                      {% if loop.index == 1 %}
+                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                       {% else %}
-                        <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+                        {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
+                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+                        {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
+                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                        {% else %}
+                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span>
+                        {% endif %}
                       {% endif %}
-                    {% else %}
-                      <span class="phase-tag phase-tag-small phase-tag-not-running">Not running</span>
-                    {% endif %}
-                  </td>
+                    </td>
+                    <td>
+                      10 August
+                    </td>
+                    <td>
+                      Open
+                    </td>
+                    <td>
+                      Yes (<a href="#">Edit</a>)
+                    </td>
+                  {% endif %}
                 </tr>
                 {% set subjectName = course.name %}
               {% endif %}
