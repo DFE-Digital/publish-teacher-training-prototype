@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% set title = 'Vacancies' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+    {{ title }}
+  </h1>
+
+  <style>
+   td .form-group {
+     margin-bottom: 0;
+   }
+  </style>
+
+  {% include "course/_errors.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      {% set fields = [
+          {
+            name: 'Vacancies'
+          }
+        ]
+      %}
+
+      {% set fullPartfields = [
+          {
+            name: 'Full time vacancies'
+          },
+          {
+            name: 'Part time vacancies'
+          }
+        ]
+      %}
+
+      {% set table %}
+        <div class="add-double-bottom-margin">
+          <table>
+            <thead>
+              <tr>
+                <th>Training location</th>
+                <th>Vacancies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Main Site</td>
+                <td>
+                  {{ macros.checkboxGroup(course.programmeCode + '-vacancies-1', fields, errors) }}
+                </td>
+              </tr>
+              <tr>
+                <td>Pool Hayes Primary School</td>
+                <td>
+                  {{ macros.checkboxGroup(course.programmeCode + '-vacancies-2', fullPartfields, errors) }}
+                </td>
+              </tr>
+              <tr>
+                <td>St Mary’s Catholic Primary School</td>
+                <td>
+                  {{ macros.checkboxGroup(course.programmeCode + '-vacancies-3', fields, errors) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      {% endset %}
+
+      {% set radioFields = [
+          {
+            name: 'Close applications, this course is full',
+            text: 'There are no vacancies at any training location.<br />You can reopen a course that’s full.'
+          },
+          {
+            or: true
+          },
+          {
+            name: 'Edit by training location',
+            text: 'Pick which locations still have vacancies',
+            more: table
+          }
+        ]
+      %}
+
+      {{ macros.radioGroup('terms-and-conditions', radioFields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
+
+      <form action="/" method="post">
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="button" value="Update vacancies" />
+        </div>
+
+        <p><a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a></p>
+
+        <p>Changes are published immediately.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

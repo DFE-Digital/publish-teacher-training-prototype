@@ -216,7 +216,7 @@ var addCheckedFunction = function (app, nunjucksEnv) {
 
     nunjucksEnv.addGlobal('today', function () {
       var now = new Date();
-      return dateFormat(now, "d mmmm yyyy");
+      return dateFormat(now, "d mmm yyyy");
     })
 
     next()

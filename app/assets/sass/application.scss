@@ -314,6 +314,11 @@ dl.aligned.course-part-tasks dd {
   white-space: pre-wrap;
 }
 
+.no-wrap,
+.nowrap {
+  white-space: nowrap;
+}
+
 .textarea-wrapper {
   position: relative;
 
@@ -335,5 +340,17 @@ dl.aligned.course-part-tasks dd {
       @include core-16;
       width: 220px;
     }
+  }
+}
+
+.form-block--or {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 641px) {
+  .form-block--or {
+    margin-top: -10px;
+    margin-bottom: 20px;
   }
 }

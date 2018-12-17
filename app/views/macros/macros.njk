@@ -230,27 +230,31 @@
   {% endif %}
   {% for field in fields %}
     {% set i = loop.index + index %}
-    <div class="multiple-choice" data-target="radio-{{ name }}-part-{{ i }}-extra">
-      <input
-        id="radio-{{ name }}-part-{{ i }}"
-        type="radio"
-        name="{{ name }}"
-        value="{{ field.name }}"
-        {{ checked(name, field.name) }}
-      >
-      <label for="radio-{{ name }}-part-{{ i }}">
-        {% if field.text %}
-          <span class="bold">{{ field.name }}</span><br />
-          {{ field.text | safe }}
-        {% else %}
-          {{ field.name }}
-        {% endif %}
-      </label>
-    </div>
-    {% if field.more %}
-      <div class="panel panel-border-wide js-hidden" id="radio-{{ name }}-part-{{ i }}-extra">
-        {{ field.more | safe }}
+    {% if field.or %}
+      <p class="form-block form-block--or">or</p>
+    {% else %}
+      <div class="multiple-choice" data-target="radio-{{ name }}-part-{{ i }}-extra">
+        <input
+          id="radio-{{ name }}-part-{{ i }}"
+          type="radio"
+          name="{{ name }}"
+          value="{{ field.name }}"
+          {{ checked(name, field.name) }}
+        >
+        <label for="radio-{{ name }}-part-{{ i }}">
+          {% if field.text %}
+            <span class="bold">{{ field.name }}</span><br />
+            {{ field.text | safe }}
+          {% else %}
+            {{ field.name }}
+          {% endif %}
+        </label>
       </div>
+      {% if field.more %}
+        <div class="panel panel-border-wide js-hidden" id="radio-{{ name }}-part-{{ i }}-extra">
+          {{ field.more | safe }}
+        </div>
+      {% endif %}
     {% endif %}
   {% endfor %}
   </div>

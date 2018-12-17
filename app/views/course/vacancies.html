@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% set title = 'Vacancies' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_beta.html" %}
+  <a href="/" class="link-back">Back</a>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+    {{ title }}
+  </h1>
+
+  {% include "course/_errors.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/" method="post">
+
+        {% set fields = [
+            {
+              name: 'Vacancies',
+              text: 'Applications are open'
+            },
+            {
+              name: 'No vacancies',
+              text: 'Close applications and mark course as full',
+              more: 'You can reopen a course that’s full.'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(course.programmeCode + '-vacancies', fields, errors) }}
+
+        <p>Changes are immediate.</p>
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="button" value="Update vacancies" />
+        </div>
+
+        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
