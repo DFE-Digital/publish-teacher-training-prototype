@@ -83,8 +83,8 @@
           <thead>
             <tr>
               <th class="subject-col">Course</th>
-              <th class="status-col" style="width: 120px">Status</th>
-              <th class="published-col">Published</th>
+              <th class="status-col" style="width: 170px">Status</th>
+              <th class="published-col">Last&nbsp;published</th>
               <th class="applications-col">Applications</th>
               <th class="type-col">Vacancies?</th>
             </tr>
@@ -94,44 +94,111 @@
             {% for course in data['ucasCourses'] %}
               {% if course.accrediting == accrediting.name %}
                 <tr>
-                  <td>
-                    {% if (loop.index != 4 and loop.index != 7) %}
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                    {% else %}
+                    <!-- <td>
                       <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                    {% endif %}
-                    <br />
-                    <span class="font-xsmall">{{ course.options }}</span>
-                  </td>
-                  {% if (loop.index == 4 or loop.index == 7) %}
+                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                    </td>
                     <td>
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
                     </td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                  {% else %}
+                    <td></td> -->
+                  {% if (loop.index == 1) %}
                     <td>
-                      {% if loop.index == 1 %}
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                    </td>
+                    <td class="no-wrap">10 November 2018</td>
+                    <td>Open</td>
+                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                  {% elseif (loop.index == 2) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                    </td>
+                    <td class="no-wrap">1 December 2018</td>
+                    <td>Closed</td>
+                    <td>No (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                  {% elseif (loop.index == 3) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
+                      <span class="font-xsmall">* Unpublished changes</span>
+                    </td>
+                    <td class="no-wrap">9 October 2018</td>
+                    <td class="no-wrap">Open</td>
+                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                  {% elseif (loop.index == 4) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                    </td>
+                    <td class="no-wrap">1 December 2018</td>
+                    <td class="no-wrap">Open from<br />3 March 2019</td>
+                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                  {% elseif (loop.index == 7) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
+                    </td>
+                    <td class="no-wrap">Withdrawn on<br />1 December 2018</td>
+                    <td class="no-wrap">Closed</td>
+                    <td>No</td>
+                  {% elseif (loop.index == 8) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                    </td>
+                    <td>
+                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+                    </td>
+                    <td class="no-wrap">Not yet published</td>
+                    <td class="no-wrap"></td>
+                    <td></td>
+                  {% elseif (loop.index < 11) %}
+                    <td>
+                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                    </td>
+                    <td>
+                      {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
+                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+                      {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
                         <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                       {% else %}
-                        {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
-                        {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
-                        {% else %}
-                          <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span>
-                        {% endif %}
+                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
+                      {% endif %}
+                    </td>
+                    <td class="no-wrap">
+                      {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
+                        {{ today() }}
                       {% endif %}
                     </td>
                     <td>
-                      10 August
+                      {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
+                        Open
+                      {% endif %}
                     </td>
                     <td>
-                      Open
-                    </td>
-                    <td>
-                      Yes (<a href="#">Edit</a>)
+                      {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
+                        Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
+                      {% endif %}
                     </td>
                   {% endif %}
                 </tr>
