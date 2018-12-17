@@ -12,39 +12,7 @@ prototype_data = {
   'multi-organisation': false,
   'training-provider-name': provider,
   'provider-code-name': courses.first['providerCodeName'],
-  'provider-code': courses.first['providerCode'],
-  # "25PP-about-this-course": "About this course",
-  # "25PP-interview-process": "Interview process",
-  # "25PP-placement-school-policy": "How school placements work",
-  # "25PP-duration": "1 year",
-  # "25PP-fee": "1,000",
-  # "25PP-fee-international": "5,000",
-  # "25PP-fee-details": "Fee details",
-  # "25PP-financial-support": "Financial support you offer",
-  # "25PP-qualifications-required": "Qualifications required",
-  # "25PP-personal-qualities": "Personal qualities",
-  # "25PP-other-requirements": "Other requirements",
-  #
-  # "2926-about-this-course": "About this course",
-  # "2926-placement-school-policy": "How school placements work",
-  # "2926-duration": "1 year",
-  # "2926-fee": "1,000",
-  # "2926-qualifications-required": "Qualifications required",
-  #
-  # "25MG-about-this-course": "About this course",
-  # "25MG-interview-process": "Interview process",
-  # "25MG-placement-school-policy": "How school placements work",
-  # "25MG-duration": "1 year",
-  # "25MG-salary-details": "Salary",
-  # "25MG-qualifications-required": "Qualifications required",
-  # "25MG-personal-qualities": "Personal qualities",
-  # "25MG-other-requirements": "Other requirements",
-  #
-  # "25MP-about-this-course": "About this course",
-  # "25MP-placement-school-policy": "How school placements work",
-  # "25MP-duration": "1 year",
-  # "25MP-salary-details": "Salary",
-  # "25MP-qualifications-required": "Qualifications required",
+  'provider-code': courses.first['providerCode']
 }
 
 # Map course data for the `imported from UCAS` view
@@ -71,6 +39,9 @@ prototype_data['ucasCourses'] = courses.map do |c|
 
   prototype_data[c['programmeCode'] + '-outcome'] = qual
   prototype_data[c['programmeCode'] + '-accredited-provider'] = c['accrediting'] || provider
+  prototype_data[c['programmeCode'] + '-vacancies-flag'] = true
+  prototype_data[c['programmeCode'] + '-full-time-and-part-time'] = partTime && fullTime
+  prototype_data[c['programmeCode'] + '-multi-location'] = c['campuses'].length > 1
 
   {
     regions: c['regions'].join(', '),
