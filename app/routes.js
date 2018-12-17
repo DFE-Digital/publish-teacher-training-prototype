@@ -13,11 +13,12 @@ var {
 } = require('./utils')
 
 // Route index page
-router.get('/', function (req, res) {
+router.all('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
     res.render('your-organisations');
   } else {
-    res.render('organisation');
+
+    res.render('organisation', { justEditedVacancies: req.query.editedVacancies });
   }
 })
 
@@ -254,6 +255,20 @@ router.post('/course/:providerCode/:code', function (req, res) {
     publishState : 'draft',
     showMessage: true
   })
+})
+
+// Post to vacancies page
+router.post('/course/:providerCode/:code/vacancies', function (req, res) {
+  var c = course(req);
+
+  if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are no vacancies') {
+    req.session.data[c.programmeCode + '-vacancies-flag'] = 'No';
+  } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are vacancies') {
+    req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
+  } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are some vacancies') {
+    req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
+  }
+  res.redirect('/?editedVacancies=true')
 })
 
 router.get('/course-not-running/:providerCode/:code', function (req, res) {

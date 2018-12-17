@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Vacancies' %}
+{% set title = 'Edit vacancies' %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -75,15 +75,15 @@
 
       {% set radioFields = [
           {
-            name: 'Close applications, this course is full',
-            text: 'There are no vacancies at any training location.<br />You can reopen a course that’s full.'
+            name: 'There are no vacancies',
+            text: 'Close this course to new applications.<br />You can reopen a course later.'
           },
           {
             or: true
           },
           {
-            name: 'Edit by training location',
-            text: 'Pick which locations still have vacancies',
+            name: 'There are some vacancies',
+            text: 'Pick the locations with vacancies',
             more: table
           }
         ]
@@ -94,12 +94,12 @@
       <form action="/" method="post">
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Update vacancies" />
+          <input type="submit" class="button" value="Publish changes" />
         </div>
 
         <p><a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a></p>
 
-        <p>Changes are published immediately.</p>
+        <p>There may be a delay before your changes appear on UCAS Apply.</p>
       </form>
     </div>
   </div>

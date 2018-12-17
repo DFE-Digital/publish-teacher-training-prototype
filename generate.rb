@@ -39,9 +39,14 @@ prototype_data['ucasCourses'] = courses.map do |c|
 
   prototype_data[c['programmeCode'] + '-outcome'] = qual
   prototype_data[c['programmeCode'] + '-accredited-provider'] = c['accrediting'] || provider
-  prototype_data[c['programmeCode'] + '-vacancies-flag'] = true
+  prototype_data[c['programmeCode'] + '-vacancies-flag'] = 'Yes'
+  prototype_data[c['programmeCode'] + '-vacancies-choice'] = 'There are some vacancies'
   prototype_data[c['programmeCode'] + '-full-time-and-part-time'] = partTime && fullTime
   prototype_data[c['programmeCode'] + '-multi-location'] = c['campuses'].length > 1
+
+  c['campuses'].each_with_index do |campus, i|
+    prototype_data["#{c['programmeCode']}-vacancies-#{i + 1}"] = 'Vacancies'
+  end
 
   {
     regions: c['regions'].join(', '),

@@ -11,6 +11,14 @@
     </ol>
   </div>
 
+  {% if justEditedVacancies %}
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+        Course vacancies published
+      </h3>
+    </div>
+  {% endif %}
+
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-xlarge">{{ data['training-provider-name'] }}</h1>
@@ -86,7 +94,7 @@
               <th class="status-col" style="width: 170px">Status</th>
               <th class="published-col">Last&nbsp;published</th>
               <th class="applications-col">Applications</th>
-              <th class="type-col">Vacancies?</th>
+              <th class="type-col">Vacancies</th>
             </tr>
           </thead>
           <tbody>
@@ -104,76 +112,21 @@
                     <td></td>
                     <td></td>
                     <td></td> -->
-                  {% if (loop.index == 1) %}
+                  {% if (loop.index < 5) %}
                     <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
                     <td>
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                     </td>
                     <td class="no-wrap">10 November 2018</td>
-                    <td>Open</td>
-                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
-                  {% elseif (loop.index == 2) %}
                     <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
-                    </td>
+                      {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}</td>
+                    <td>{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                  {% else %}
                     <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
-                    </td>
-                    <td class="no-wrap">1 December 2018</td>
-                    <td>Closed</td>
-                    <td>No (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
-                  {% elseif (loop.index == 3) %}
-                    <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
-                    </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
-                      <span class="font-xsmall">* Unpublished changes</span>
-                    </td>
-                    <td class="no-wrap">9 October 2018</td>
-                    <td class="no-wrap">Open</td>
-                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
-                  {% elseif (loop.index == 4) %}
-                    <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
-                    </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
-                    </td>
-                    <td class="no-wrap">1 December 2018</td>
-                    <td class="no-wrap">Open from<br />3 March 2019</td>
-                    <td>Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
-                  {% elseif (loop.index == 7) %}
-                    <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
-                    </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
-                    </td>
-                    <td class="no-wrap">Withdrawn on<br />1 December 2018</td>
-                    <td class="no-wrap">Closed</td>
-                    <td>No</td>
-                  {% elseif (loop.index == 8) %}
-                    <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
-                    </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
-                    </td>
-                    <td class="no-wrap">Not yet published</td>
-                    <td class="no-wrap"></td>
-                    <td></td>
-                  {% elseif (loop.index < 11) %}
-                    <td>
-                      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="font-xsmall">{{ course.options }}</span>
                     </td>
                     <td>

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
-{% set title = 'Vacancies' %}
+{% set title = 'Edit vacancies' %}
 {% block page_title %}{{ title }}{% endblock %}
-
+{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
 {% block content %}
 
 <main id="content" role="main">
@@ -17,30 +17,88 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/" method="post">
+      <form action="{{ coursePath }}/vacancies" method="post">
 
-        {% set fields = [
-            {
-              name: 'Vacancies',
-              text: 'Applications are open'
-            },
-            {
-              name: 'No vacancies',
-              text: 'Close applications and mark course as full',
-              more: 'You can reopen a course that’s full.'
-            }
-          ]
-        %}
+        {% if data[course.programmeCode + '-multi-location'] %}
+          {% set fields = [
+              {
+                name: 'Vacancies'
+              }
+            ]
+          %}
 
-        {{ macros.radioGroup(course.programmeCode + '-vacancies', fields, errors) }}
+          {% set table %}
+            <div class="add-double-bottom-margin">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Training location</th>
+                    <th>Vacancies</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in course.schools %}
+                    <tr>
+                      <td>{{ s.name }}</td>
+                      <td>
+                        {{ macros.checkboxGroup(course.programmeCode + '-vacancies-' + loop.index, fields, errors) }}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endset %}
 
-        <p>Changes are immediate.</p>
+          {% set radioFields = [
+              {
+                name: 'There are no vacancies',
+                text: 'Close this course to new applications.<br />You can reopen a course later.'
+              },
+              {
+                or: true
+              },
+              {
+                name: 'There are some vacancies',
+                text: 'Pick the locations with vacancies',
+                more: table
+              }
+            ]
+          %}
+
+          {{ macros.radioGroup(course.programmeCode + '-vacancies-choice', radioFields) }}
+        {% else %}
+          {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
+            {% set fields = [
+                {
+                  name: 'There are no vacancies',
+                  text: 'Close this course to new applications.<br />You can reopen a course later.'
+                }
+              ]
+            %}
+          {% else %}
+            {% set fields = [
+                {
+                  name: 'There are vacancies',
+                  text: 'Reopen this course to new applications.'
+                }
+              ]
+            %}
+          {% endif %}
+
+          <input type="hidden" name="{{ course.programmeCode }}-vacancies-flag" value="{% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}No{% else %}Yes{% endif %}" />
+          {{ macros.checkboxGroup(course.programmeCode + '-vacancies', fields, errors) }}
+        {% endif %}
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Update vacancies" />
+          <input type="submit" class="button" value="Publish changes" />
         </div>
 
-        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+        <p>
+          <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+        </p>
+
+        <p>There may be a delay before your changes appear on UCAS Apply.</p>
       </form>
     </div>
   </div>
