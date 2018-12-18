@@ -32,16 +32,25 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Training location</th>
-                    <th>Vacancies</th>
+                    <th>Training locations with vacancies</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for s in course.schools %}
                     <tr>
-                      <td>{{ s.name }}</td>
                       <td>
-                        {{ macros.checkboxGroup(course.programmeCode + '-vacancies-' + loop.index, fields, errors) }}
+                        <div class="multiple-choice">
+                          <input
+                            id="checkbox-part-{{ loop.index }}"
+                            type="checkbox"
+                            name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
+                            value="Vacancies"
+                            {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
+                          >
+                          <label for="checkbox-part-{{ loop.index }}">
+                            {{ s.name }}
+                          </label>
+                        </div>
                       </td>
                     </tr>
                   {% endfor %}
