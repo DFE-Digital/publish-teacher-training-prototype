@@ -1,0 +1,54 @@
+
+{% extends "layout.html" %}
+{% set title = 'Vacancies' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main design-history">
+  <div class="breadcrumbs dont-print">
+    <ol>
+      <li><a href="/history">Design history</a></li>
+    </ol>
+  </div>
+  <h1 class="heading-xlarge">{{ title }}</h1>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p>We don’t know how providers use vacancies yet. This design assumes that closing a course (eg there are no vacancies at any training location) is the most common action.</p>
+
+      <p>The design for editing vacancies must account for the following scenarios:</p>
+
+      <ul class="list list-bullet">
+        <li>a course with one training location</li>
+        <li>a part time or full time course with one training location</li>
+        <li>a course with many training locations</li>
+        <li>a part time or full time course with many training locations</li>
+      </ul>
+
+      <p>Vacancies could sit within a course, alongside the enrichment fields, or separate to it. If vacancies were alongside enrichment then either; vacancies would need to be published after editing; or vacancies would behave differently to the other form. For this reason vacancies has been put elsewhere, and the design tries to make it clear that these changes will be immediate.</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Organisation table showing link to edit vacancies', id: 'organisation-table-showing-vacancies' },
+    { text: 'Multiple training locations', id: 'multiple-training-locations-one-column' },
+    { text: 'Multiple training locations (two columns)', id: 'multiple-training-locations-two-column' },
+    { text: 'Multiple training locations with no vacancies', id: 'multiple-training-locations-two-column-no-vacancies' },
+    { text: 'Single training location with vacancies', id: 'single-training-location-with-vacancies' },
+    { text: 'Single training location no vacancies', id: 'single-training-location-no-vacancies' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Organisation table showing link to edit vacancies', 'organisation-table-showing-vacancies', '/public/images/history/vacancies/thumbnails/05-organisation-table-showing-vacancies.png', '/public/images/history/vacancies/05-organisation-table-showing-vacancies.png', '') }}
+
+  {{ macros.screenshot('Multiple training locations', 'multiple-training-locations-one-column', '/public/images/history/vacancies/thumbnails/01-multiple-training-locations-one-column.png', '/public/images/history/vacancies/01-multiple-training-locations-one-column.png', '') }}
+
+  {{ macros.screenshot('Multiple training locations (two columns)', 'multiple-training-locations-two-column', '/public/images/history/vacancies/thumbnails/01-multiple-training-locations-two-column.png', '/public/images/history/vacancies/01-multiple-training-locations-two-column.png', '') }}
+
+  {{ macros.screenshot('Multiple training locations with no vacancies', 'multiple-training-locations-two-column-no-vacancies', '/public/images/history/vacancies/thumbnails/02-multiple-training-locations-two-column-no-vacancies.png', '/public/images/history/vacancies/02-multiple-training-locations-two-column-no-vacancies.png', '') }}
+
+  {{ macros.screenshot('Single training location with vacancies', 'single-training-location-with-vacancies', '/public/images/history/vacancies/thumbnails/03-single-training-location-with-vacancies.png', '/public/images/history/vacancies/03-single-training-location-with-vacancies.png', '') }}
+
+  {{ macros.screenshot('Single training location no vacancies', 'single-training-location-no-vacancies', '/public/images/history/vacancies/thumbnails/04-single-training-location-no-vacancies.png', '/public/images/history/vacancies/04-single-training-location-no-vacancies.png', '') }}
+</main>
+{% endblock %}
