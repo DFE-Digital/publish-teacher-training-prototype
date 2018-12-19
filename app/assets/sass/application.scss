@@ -1,18 +1,18 @@
-// Path to assets for use with the file-url function
-// in the govuk frontend toolkit's url-helpers partial
-$path: "/public/images/";
+// global styles for <a> and <p> tags
+$govuk-global-styles: true;
 
-// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
-// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
-@import 'govuk-elements';
+// Import GOV.UK Frontend
+@import "node_modules/govuk-frontend/all";
 
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 @import 'patterns/simplemde-theme';
-@import 'patterns/check-your-answers';
-@import 'patterns/task-list';
 @import 'patterns/course-parts';
 @import 'patterns/success-summary';
 @import 'patterns/character-counts';
+@import "patterns/check-your-answers";
+@import "patterns/step-by-step-navigation";
+@import "patterns/task-list";
+@import "patterns/related-items";
 
 .multiple-choice [type=checkbox] + label::before {
   background: #fff;
