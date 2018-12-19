@@ -2,11 +2,11 @@
 {% extends "layout.html" %}
 {% block page_title %}{{ title }}{% endblock %}
 
-{% block content %}
-
-
+{% block afterPhaseBanner %}
   <a href="{{ paths.back }}" class="link-back">Back</a>
+{% endblock %}
 
+{% block content %}
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
