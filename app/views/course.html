@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<main id="content" role="main">
+
   <div class="breadcrumbs">
     {% if data['multi-organisation'] %}
       <ol>
@@ -239,6 +239,6 @@
       {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], previewLink, publishLink) }}
     </div>
   </div>
-</main>
+
 
 {% endblock %}

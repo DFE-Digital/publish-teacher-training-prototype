@@ -107,7 +107,6 @@ var templateStart = `
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main design-history">
   <div class="breadcrumbs dont-print">
     <ol>
       <li><a href="/history">Design history</a></li>
@@ -117,7 +116,6 @@ var templateStart = `
 `;
 
 var templateEnd = `
-</main>
 {% endblock %}
 `;
 

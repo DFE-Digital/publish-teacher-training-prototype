@@ -65,7 +65,6 @@ fs.readdir(directory, (err, files) => {
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
   <div class="breadcrumbs">
     <ol>
       <li><a href="/history">Design history</a></li>
@@ -75,7 +74,6 @@ fs.readdir(directory, (err, files) => {
 `;
 
   var templateEnd = `
-</main>
 {% endblock %}
 `;
 
