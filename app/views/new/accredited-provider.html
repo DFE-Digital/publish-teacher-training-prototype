@@ -10,8 +10,8 @@
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         {% set otherAccreditedProviderFields %}
           {{ macros.select(code + '-new-accredited-provider', 'Name of accredited provider', [

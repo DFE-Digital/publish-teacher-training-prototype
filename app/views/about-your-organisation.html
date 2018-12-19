@@ -48,8 +48,8 @@
 
   {{ macros.orgHeading('About your organisation', message) }}
 
-  <div class="grid-row add-top-margin">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row add-top-margin">
+    <div class="govuk-grid-column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <!-- <li class="course-parts-item">
@@ -130,7 +130,7 @@
         </ul>
       </div>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
       {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
     </div>

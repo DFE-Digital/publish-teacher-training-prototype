@@ -14,8 +14,8 @@
 
   {% include "course/_errors.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
         <p>Give applicants a short description of the course.</p>
 
@@ -118,7 +118,7 @@
         <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
       </form>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       {{ macros.copyContent() }}
     </div>
   </div>

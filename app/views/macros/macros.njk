@@ -10,8 +10,8 @@
 {% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'govuk-heading-l', headingLevel = 'h2') %}
 <div class="design-history-item">
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>
-  <div class="grid-row">
-    <div class="column-two-thirds design-history-screenshot">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds design-history-screenshot">
       <div class="add-double-bottom-margin">
         <a href="{{ full }}">
           <img src="{{ thumbnail }}" width="630" alt="Screenshot of {{ title }}" />
