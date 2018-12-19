@@ -24,21 +24,21 @@
       <p>These titles are largely inline with existing course titles.</p>
 
       <p>For most courses the title will be the subject:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>Mathematics</li>
         <li>Primary with mathematics</li>
         <li>Biology</li>
       </ul>
 
       <p>For modern languages the languages are appended to the title:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>Modern languages (French and German)</li>
         <li>Modern languages (French, German, Spanish)</li>
         <li>Modern languages (French)</li>
       </ul>
 
       <p>If the course is marked as a special educational needs one, it’s appended to the title:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>Mathematics (Special educational needs)</li>
         <li>Primary with mathematics (Special educational needs)</li>
         <li>Biology (Special educational needs)</li>
@@ -46,7 +46,7 @@
 
       <h2 class="govuk-heading-l">Missing from this design</h2>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>Training location assignment</li>
         <li>Course start month</li>
         <li>Applications open date</li>
@@ -89,7 +89,7 @@
   {{ macros.screenshot('Pick a subject', 'pick-a-subject', '/public/images/history/new-course/thumbnails/02-pick-a-subject.png', '/public/images/history/new-course/02-pick-a-subject.png', '
     <p>If a user chooses:</p>
 
-    <ul class="list list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
       <li>Primary, they see a list of all primary subjects</li>
       <li>Secondary, they see only secondary subjects</li>
       <li>Further education, they go on a different journey (not yet designed), they won’t see this page</li>
@@ -131,7 +131,7 @@
 
     <p>From the answers we can also preview how the course will look on Find. We show the generated:</p>
 
-    <ul class="list list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
       <li>title</li>
       <li>course description</li>
       <li>course code</li>
@@ -147,17 +147,17 @@
 
     <p>The suggested process is:</p>
 
-    <ul class="list list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
     <li>Provider alters a course name from the default</li>
     <li>The system flags that course as having a non-standard name</li>
     <li>There is a report in the support app which shows all non-standard names</li>
     <li>
       An ops team-member looks at the entry in the support app:
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>If the proposed name is fine, they acknowledge the change in the support app</li>
         <li>
           If the proposed name isn’t fine, they:
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>Go into Publish as a god user and update the course name</li>
             <li>Notify the provider over Zendesk</li>
             <li>Acknowledge the change in the support app</li>

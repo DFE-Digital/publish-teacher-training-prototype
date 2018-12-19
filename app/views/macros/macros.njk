@@ -1,6 +1,6 @@
 {% macro screenshotContents(contents) %}
 <h2 class="govuk-heading-m">Screenshots</h2>
-<ul class="list">
+<ul class="govuk-list">
   {% for c in contents %}
     <li><a href="#{{ c.id }}">{{ c.text }}</a></li>
   {% endfor %}
@@ -34,7 +34,7 @@
 
 <h4 class="govuk-heading-s">Lists</h4>
 <p>To create a bulleted list:</p>
-<ul class="list list-bullet">
+<ul class="govuk-list govuk-list--bullet">
   <li>use asterisks (*) to create a bullet point (hyphens also work)</li>
   <li>make sure there is one space after the asterisk</li>
   <li>leave 1 empty line space before the bullets start, and one after</li>

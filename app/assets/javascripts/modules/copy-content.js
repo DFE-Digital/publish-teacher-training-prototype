@@ -66,7 +66,7 @@
           element.find('.js-success-copy').hide();
           element.find('.js-error-copy').show();
         } else {
-          var $ul = $('<ul class="list remove-bottom-margin">');
+          var $ul = $('<ul class="govuk-list remove-bottom-margin">');
           var $whatCopied = element.find('.js-what-copied');
 
           for (var i = 0, l = copied.length; i < l; i++) {
