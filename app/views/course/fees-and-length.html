@@ -39,7 +39,7 @@
 
         {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
 
-        <hr />
+        <hr class="govuk-section-break govuk-section-break--visible" />
 
         {% if course.salaried %}
           <h2 class="govuk-heading-l">Salary</h2>
@@ -70,7 +70,7 @@
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
 
-          <hr />
+          <hr class="govuk-section-break govuk-section-break--visible" />
 
           <h2 class="govuk-heading-l">Financial support you offer</h2>
           <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>

@@ -59,7 +59,7 @@
       </p>
     </div>
   </div>
-  <hr /> -->
+  <hr class="govuk-section-break govuk-section-break--visible" /> -->
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -104,7 +104,7 @@
                 <tr>
                     <!-- <td>
                       <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                      <br /><span class="govuk-body-s">{{ course.options }}</span>
                     </td>
                     <td>
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
@@ -115,7 +115,7 @@
                   {% if (loop.index < 5) %}
                     <td>
                       <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                      <br /><span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
                     <td>
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
@@ -127,7 +127,7 @@
                   {% else %}
                     <td>
                       <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                      <br /><span class="govuk-body-s">{{ course.options }}</span>
                     </td>
                     <td>
                       {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
