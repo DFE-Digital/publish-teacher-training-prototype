@@ -1,6 +1,9 @@
 // global styles for <a> and <p> tags
 $govuk-global-styles: true;
 
+// Not in design system:
+$button-colour: #00823b;
+
 // Import GOV.UK Frontend
 @import "node_modules/govuk-frontend/all";
 
@@ -8,7 +11,6 @@ $govuk-global-styles: true;
 @import 'patterns/simplemde-theme';
 @import 'patterns/course-parts';
 @import 'patterns/success-summary';
-@import 'patterns/character-counts';
 @import "patterns/check-your-answers";
 @import "patterns/step-by-step-navigation";
 @import "patterns/task-list";
@@ -19,27 +21,27 @@ $govuk-global-styles: true;
 }
 
 .not-running-notice {
-  border: 5px solid $grey-3;
+  border: 5px solid govuk-colour("grey-3");
   padding: 20px;
 }
 
 #proposition-links {
-  color: $white;
+  color: govuk-colour("white");
   font-weight: bold;
 }
 
 table thead th {
   border-bottom-width: 2px;
-  border-color: $black;
+  border-color: govuk-colour("black");
 }
 
 .table-small {
   th {
-    @include bold-16;
+    @include govuk-font(16, $weight: bold);
   }
 
   td {
-    @include core-16;
+    @include govuk-font(16);
   }
 }
 
@@ -54,22 +56,22 @@ table thead th {
 }
 
 .phase-tag-no-content {
-  background: $white;
-  color: $grey-1;
-  border: 2px solid lighten($grey-1, 10%);
+  background: govuk-colour("white");
+  color: govuk-colour("grey-1");
+  border: 2px solid lighten(govuk-colour("grey-1"), 10%);
   margin-top: -1px;
   margin-bottom: -1px;
 }
 
 .phase-tag-not-running {
-  background: $grey-3;
-  color: $black;
+  background: govuk-colour("grey-3");
+  color: govuk-colour("black");
   margin-top: -1px;
   margin-bottom: -1px;
 }
 
 .phase-tag-draft {
-  background: $orange;
+  background: govuk-colour("orange");
 }
 
 .phase-tag-published {
@@ -77,29 +79,29 @@ table thead th {
 }
 
 .empty {
-  color: $grey-1;
+  color: govuk-colour("grey-1");
 }
 
 .status {
-  background: $grey-3;
+  background: govuk-colour("grey-3");
   padding: 20px;
 }
 
 .status-box {
-  background-color: $grey-4;
+  background-color: govuk-colour("grey-4");
   padding: 20px;
-  border-top: 5px solid $govuk-blue;
+  border-top: 5px solid govuk-colour("blue");
 }
 
 .who-saved {
-  @include core-16;
+  @include govuk-font(16);
 }
 
 // Related items
 // (These styles will be moved to GOV.UK elements, duplicating here for now.)
 .govuk-related-items {
-  margin-top: $gutter;
-  border-top: 10px solid $govuk-blue;
+  margin-top: $govuk-gutter;
+  border-top: 10px solid govuk-colour("blue");
   padding-top: 5px;
 
   .heading-medium {
@@ -115,8 +117,8 @@ table thead th {
 
 .doc-image {
   max-width: 100%;
-  border: 1px solid $border-colour;
-  margin-bottom: $gutter * 2;
+  border: 1px solid $govuk-border-colour;
+  margin-bottom: $govuk-gutter * 2;
 }
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
@@ -130,15 +132,15 @@ table thead th {
 }
 
 .add-bottom-margin {
-  margin-bottom: $gutter / 2;
+  margin-bottom: $govuk-gutter / 2;
 }
 
 .add-double-bottom-margin {
-  margin-bottom: $gutter;
+  margin-bottom: $govuk-gutter;
 }
 
 .add-top-margin {
-  margin-top: $gutter / 2;
+  margin-top: $govuk-gutter / 2;
 }
 
 .add-margin-for-label {
@@ -154,7 +156,7 @@ table thead th {
 }
 
 .results-item {
-  margin-bottom: $gutter;
+  margin-bottom: $govuk-gutter;
 }
 
 .metadata dt,
@@ -172,13 +174,13 @@ table thead th {
 }
 
 .filter-category {
-  background-color: $grey-3;
+  background-color: govuk-colour("grey-3");
   padding: 12px;
   margin-bottom: 10px;
 }
 
 .filters {
-  background-color: $white;
+  background-color: govuk-colour("white");
   padding: 10px;
 }
 
@@ -191,10 +193,10 @@ table thead th {
 }
 
 .tabs {
-  background: $grey-4;
+  background: govuk-colour("grey-4");
   padding-left: 0;
-  @include bold-19;
-  margin-bottom: $gutter;
+  @include govuk-font(19, $weight: bold);
+  margin-bottom: $govuk-gutter;
 
   li {
     margin-bottom: -1px;
@@ -205,19 +207,19 @@ table thead th {
     display: block;
     padding: 15px 20px 10px;
     text-decoration: none;
-    border-bottom: 5px solid $grey-4;
+    border-bottom: 5px solid govuk-colour("grey-4");
 
     &:visited {
-      color: $link-colour;
+      color: $govuk-link-colour;
     }
 
     &:focus {
-      border-color: $focus-colour;
+      border-color: $govuk-focus-colour;
     }
   }
 
   .active a {
-    border-bottom-color: $govuk-blue;
+    border-bottom-color: govuk-colour("blue");
   }
 }
 
@@ -279,7 +281,7 @@ dl.aligned.course-part-tasks dd {
 .fake-email {
   margin-left: 15px;
   margin-top: 20px;
-  border: 5px solid $border-colour;
+  border: 5px solid $govuk-border-colour;
   padding: 60px;
 }
 
@@ -306,8 +308,8 @@ dl.aligned.course-part-tasks dd {
 }
 
 .missing-section {
-  border: 5px solid $border-colour;
-  padding: $gutter / 2;
+  border: 5px solid $govuk-border-colour;
+  padding: $govuk-gutter / 2;
 }
 
 .preview-pre {
@@ -331,13 +333,13 @@ dl.aligned.course-part-tasks dd {
     z-index: 2;
 
     label {
-      @include core-16;
+      @include govuk-font(16);
       display: inline;
       margin-right: 5px;
     }
 
     select {
-      @include core-16;
+      @include govuk-font(16);
       width: 220px;
     }
   }

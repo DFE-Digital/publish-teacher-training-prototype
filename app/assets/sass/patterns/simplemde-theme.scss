@@ -1,18 +1,18 @@
 .editor-toolbar {
-  border: 2px solid $black;
+  border: 2px solid govuk-colour("black");
   border-radius: 0;
   opacity: 1 !important;
 }
 
 .CodeMirror {
-  border: 2px solid $black;
+  border: 2px solid govuk-colour("black");
   border-top: none;
   border-radius: 0;
 }
 
 .cm-link,
 .cm-url {
-  color: $link-colour !important;
+  color: $govuk-link-colour !important;
 }
 
 
@@ -28,7 +28,7 @@ i.separator {
 
 .fa-link + i.separator {
   display: inline !important;
-  border-left-color: $border-colour;
+  border-left-color: $govuk-border-colour;
 }
 
 .editor-statusbar {
@@ -36,20 +36,21 @@ i.separator {
 }
 
 .editor-preview-active {
-  background: $grey-4;
+  background: govuk-colour("grey-4");
 
   &:before {
     content: 'Content preview';
-    background-color: $grey-1;
-    color: $white;
+    background-color: govuk-colour("grey-1");
+    color: govuk-colour("white");
     display: block;
     margin: -10px -10px 10px;
     padding: 10px;
   }
 }
 
-.markdown ul,
-.editor-preview-active ul {
-  @extend .list;
-  @extend .list-bullet;
-}
+// Temporarily disabled
+// .markdown ul,
+// .editor-preview-active ul {
+//   @extend .list;
+//   @extend .list-bullet;
+// }
