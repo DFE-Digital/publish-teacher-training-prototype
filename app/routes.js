@@ -260,15 +260,23 @@ router.post('/course/:providerCode/:code', function (req, res) {
 // Post to vacancies page
 router.post('/course/:providerCode/:code/vacancies', function (req, res) {
   var c = course(req);
+  var data = req.session.data;
 
-  if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are no vacancies') {
-    req.session.data[c.programmeCode + '-vacancies-flag'] = 'No';
-  } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are vacancies') {
-    req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
-  } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are some vacancies') {
-    req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
+  if (!data[course.programmeCode + '-multi-location'] && req.body[c.programmeCode + '-vacancies-choice'] == '_unchecked') {
+    res.render('course/vacancies', {
+      course: c,
+      showErrors: true
+    })
+  } else {
+    if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are no vacancies') {
+      req.session.data[c.programmeCode + '-vacancies-flag'] = 'No';
+    } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are vacancies') {
+      req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
+    } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are some vacancies') {
+      req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
+    }
+    res.redirect('/?editedVacancies=true')
   }
-  res.redirect('/?editedVacancies=true')
 })
 
 router.get('/course-not-running/:providerCode/:code', function (req, res) {

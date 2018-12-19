@@ -205,8 +205,10 @@ var addCheckedFunction = function (app, nunjucksEnv) {
         courseCode = 'about-your-organisation';
       }
 
-      if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
-        return false
+      // Temporarily disable hiding of publish errors
+      // if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
+      if (!errors || data === undefined) {
+       return false
       }
 
       return errors.find(function(e) {

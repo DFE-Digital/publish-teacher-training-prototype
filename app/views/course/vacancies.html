@@ -4,16 +4,108 @@
 {% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
 {% block content %}
 
+{% set table %}
+  <div class="add-double-bottom-margin">
+    <table>
+      <thead>
+        <tr>
+          <th>Training locations with vacancies</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in course.schools %}
+          <tr>
+            <td>
+              <div class="multiple-choice">
+                <input
+                  id="checkbox-part-{{ loop.index }}"
+                  type="checkbox"
+                  name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
+                  value="Vacancies"
+                  {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
+                >
+                <label for="checkbox-part-{{ loop.index }}">
+                  {{ s.name }}
+                </label>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endset %}
+
+{% set radioFields = [
+    {
+      name: 'There are no vacancies',
+      text: 'Close this course to new applications.<br />You can reopen a course later.'
+    },
+    {
+      or: true
+    },
+    {
+      name: 'There are some vacancies',
+      text: 'Pick the locations with vacancies',
+      more: table
+    }
+  ]
+%}
+
+{% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
+  {% set fields = [
+      {
+        name: 'There are no vacancies',
+        text: 'Close this course to new applications.<br />You can reopen a course later.'
+      }
+    ]
+  %}
+
+  {% if showErrors %}
+    {% set errors = [
+      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are no vacancies to close applications' }
+    ] %}
+  {% endif %}
+{% else %}
+  {% set fields = [
+      {
+        name: 'There are vacancies',
+        text: 'Reopen this course to new applications.'
+      }
+    ]
+  %}
+
+  {% if showErrors %}
+    {% set errors = [
+      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are vacancies to reopen applications' }
+    ] %}
+  {% endif %}
+{% endif %}
+
 <main id="content" role="main">
   {% include "includes/phase_banner_beta.html" %}
   <a href="/" class="link-back">Back</a>
+
+  {% if showErrors and errors %}
+    <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+      <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+        We couldn’t edit the vacancies for this course
+      </h3>
+      <p>
+        Fix the following problems and try again:
+      </p>
+      <ul class="error-summary-list">
+        {% for error in errors %}
+        <li><a href="#checkbox-part-1">{{ error.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
   <h1 class="heading-xlarge">
     <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
-
-  {% include "course/_errors.html" %}
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -26,81 +118,19 @@
               }
             ]
           %}
-
-          {% set table %}
-            <div class="add-double-bottom-margin">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Training locations with vacancies</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for s in course.schools %}
-                    <tr>
-                      <td>
-                        <div class="multiple-choice">
-                          <input
-                            id="checkbox-part-{{ loop.index }}"
-                            type="checkbox"
-                            name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
-                            value="Vacancies"
-                            {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
-                          >
-                          <label for="checkbox-part-{{ loop.index }}">
-                            {{ s.name }}
-                          </label>
-                        </div>
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          {% endset %}
-
-          {% set radioFields = [
-              {
-                name: 'There are no vacancies',
-                text: 'Close this course to new applications.<br />You can reopen a course later.'
-              },
-              {
-                or: true
-              },
-              {
-                name: 'There are some vacancies',
-                text: 'Pick the locations with vacancies',
-                more: table
-              }
-            ]
-          %}
-
           {{ macros.radioGroup(course.programmeCode + '-vacancies-choice', radioFields) }}
         {% else %}
-          {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-            {% set fields = [
-                {
-                  name: 'There are no vacancies',
-                  text: 'Close this course to new applications.<br />You can reopen a course later.'
-                }
-              ]
-            %}
-          {% else %}
-            {% set fields = [
-                {
-                  name: 'There are vacancies',
-                  text: 'Reopen this course to new applications.'
-                }
-              ]
-            %}
-          {% endif %}
-
-          <input type="hidden" name="{{ course.programmeCode }}-vacancies-flag" value="{% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}No{% else %}Yes{% endif %}" />
-          {{ macros.checkboxGroup(course.programmeCode + '-vacancies', fields, errors) }}
+          {{ macros.checkboxGroup(course.programmeCode + '-vacancies-choice', fields, errors) }}
         {% endif %}
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Publish changes" />
+          {% if data[course.programmeCode + '-multi-location'] %}
+            <input type="submit" class="button" value="Publish changes" />
+          {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
+            <input type="submit" class="button" value="Close applications" />
+          {% else %}
+            <input type="submit" class="button" value="Re-open applications" />
+          {% endif %}
         </div>
 
         <p>
