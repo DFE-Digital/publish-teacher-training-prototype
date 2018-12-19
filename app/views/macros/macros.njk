@@ -71,7 +71,7 @@
       <select id="copy-from" name="copy-from" class="form-control add-double-bottom-margin" style="width: 100%; background: #fff">
         {{ courseOptions() | safe }}
       </select>
-      <input type="submit" class="button" value="Copy content" />
+      <input type="submit" class="govuk-button" value="Copy content" />
     </div>
     <div class="js-cant-copy" style="display: none">
       <p>When you’ve added content to this page, you can copy it to other courses</p>
@@ -125,7 +125,7 @@
     <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>You can make changes to this after publishing it.</p>
     <p>
-      <a href="{{ publishLink }}" class="button">Publish</a>
+      <a href="{{ publishLink }}" class="govuk-button">Publish</a>
     </p>
   {% endif %}
 </div>
@@ -165,7 +165,7 @@
     <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>Publish your changes.</p>
 
-    <a href="{{ publishLink }}" class="button">Publish</a>
+    <a href="{{ publishLink }}" class="govuk-button">Publish</a>
     <hr class="govuk-section-break govuk-section-break--visible" />
   {% endif %}
 

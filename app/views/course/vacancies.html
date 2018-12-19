@@ -125,11 +125,11 @@
 
         <div class="add-double-bottom-margin">
           {% if data[course.programmeCode + '-multi-location'] %}
-            <input type="submit" class="button" value="Publish changes" />
+            <input type="submit" class="govuk-button" value="Publish changes" />
           {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-            <input type="submit" class="button" value="Close applications" />
+            <input type="submit" class="govuk-button" value="Close applications" />
           {% else %}
-            <input type="submit" class="button" value="Re-open applications" />
+            <input type="submit" class="govuk-button" value="Re-open applications" />
           {% endif %}
         </div>
 
