@@ -25,7 +25,7 @@
 
   {% if justCreated %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
       Your course is saved and ready to complete
     </h3>
     <p>
@@ -35,7 +35,7 @@
   {% endif %}
 
   <!-- <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
       Your training locations need attention in UCAS
     </h3>
     <p>
@@ -51,7 +51,7 @@
   </div>
 
   <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
       This course needs attention in UCAS
     </h3>
     <p>Candidates can’t apply to this course because no training location has a publish value set to ‘Yes’ in <a href="#">UCAS web-link</a>. This course will not appear in Find postgraduate teacher training.</p>
@@ -61,14 +61,14 @@
     </p>
   </div> -->
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     <span class="heading-secondary">{{ course.options }}</span>
     {{ title }}
   </h1>
 
   {% if showMessage %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
         Your changes have been saved
       </h3>
       <p><a href="{{ previewLink }}">Preview your course</a> to check for mistakes before publishing.</p>
@@ -77,7 +77,7 @@
 
   {% if justPublished %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
       Your changes have been published
     </h3>
     <p>
@@ -201,7 +201,7 @@
 
             <div style="clear: left; padding-top: 20px">
             {% for school in course.schools %}
-            <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+            <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
             <dl class="aligned add-top-margin add-double-bottom-margin">
               <dt>Address:</dt>
               <dd>{{ school.address }}</dd>
@@ -220,7 +220,7 @@
                 <p>These locations won’t appear on the page for this course and candidates won’t be able apply for them.</p>
 
                 {% for school in course.schools %}
-                <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+                <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
                 <dl class="aligned add-top-margin add-double-bottom-margin">
                   <dt>Address:</dt>
                   <dd>{{ school.address }}</dd>

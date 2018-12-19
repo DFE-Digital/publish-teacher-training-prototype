@@ -113,7 +113,7 @@ var templateStart = `
       <li><a href="/history">Design history</a></li>
     </ol>
   </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 `;
 
 var templateEnd = `

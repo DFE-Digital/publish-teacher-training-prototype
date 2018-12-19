@@ -9,14 +9,14 @@
 
 {% include "about-your-organisation/_errors.html" %}
 
-<h1 class="heading-xlarge">
+<h1 class="govuk-heading-xl">
   {{ title }}
 </h1>
 
   <form action="/about-your-organisation" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        <h2 class="heading-large remove-top-margin">About your organisation</h2>
+        <h2 class="govuk-heading-l remove-top-margin">About your organisation</h2>
 
         <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of you as a training provider.</p>
 
@@ -30,12 +30,12 @@
 
         {% if not data['self_accrediting'] %}
           {% if data['accreditors'].length > 1 %}
-            <h2 class="heading-large">
+            <h2 class="govuk-heading-l">
               About your accredited providers
             </h2>
             <p>Describe advantages and special features of each accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
           {% else %}
-            <h2 class="heading-large">
+            <h2 class="govuk-heading-l">
               About your accredited provider
             </h2>
             <p>Describe advantages and special features of your accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
@@ -46,7 +46,7 @@
           {% endfor %}
         {% endif %}
 
-        <h3 class="heading-large remove-top-margin">Training with disabilities and other needs</h3>
+        <h3 class="govuk-heading-l remove-top-margin">Training with disabilities and other needs</h3>
         <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
 
         <ul class="list list-bullet">

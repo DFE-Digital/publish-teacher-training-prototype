@@ -11,13 +11,13 @@
     </ol>
   </div>
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ school.name }}
   </h1>
 
   <form action="/locations" class="grid-row">
     <div class="column-two-thirds">
-      <!-- <h2 class="heading-medium">Information from UCAS</h2>
+      <!-- <h2 class="govuk-heading-m">Information from UCAS</h2>
       <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
       <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
         <dt>Name:</dt>
@@ -32,7 +32,7 @@
 
       <hr />
 
-      <h2 class="heading-large add-double-bottom-margin" id="tell-us">Tell us about this location</h2>
+      <h2 class="govuk-heading-l add-double-bottom-margin" id="tell-us">Tell us about this location</h2>
 
       <p>Pick one or more statements that describe this location.</p>
 
@@ -45,7 +45,7 @@
         {{ howManyField | safe }}
       {% endset %}
 
-      <h3 class="heading-medium">This location represents:</h3>
+      <h3 class="govuk-heading-m">This location represents:</h3>
 
       {% set fields = [
           {
@@ -68,7 +68,7 @@
 
       {{ macros.checkboxGroup(school.code + '-represents', fields, errors, 100) }}
 
-      <h3 class="heading-medium">What happens at this location</h3>
+      <h3 class="govuk-heading-m">What happens at this location</h3>
 
       {% set fields = [
           {
@@ -91,7 +91,7 @@
 
       {{ macros.checkboxGroup(school.code + '-what-happens', fields, errors, 200) }}
 
-      <h3 class="heading-medium">Time that students spend here</h3>
+      <h3 class="govuk-heading-m">Time that students spend here</h3>
 
       {% set fields = [
           {
@@ -113,7 +113,7 @@
 
       <hr />
 
-      <h2 class="heading-large add-double-bottom-margin" id="type">Label this location</h2>
+      <h2 class="govuk-heading-l add-double-bottom-margin" id="type">Label this location</h2>
 
       <p>Pick one or more label that best describes this location.</p>
 
@@ -146,7 +146,7 @@
 
       <hr />
 
-      <h2 class="heading-large" id="address">Address</h2>
+      <h2 class="govuk-heading-l" id="address">Address</h2>
       <p>Not available in this prototype.</p>
 
 

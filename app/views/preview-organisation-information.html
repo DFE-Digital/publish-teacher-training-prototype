@@ -14,27 +14,27 @@
     <p class="remove-bottom-margin">Preview a course to see a complete page.</p>
   </div>
 
-  <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
+  <h1 class="govuk-heading-xl" style="margin-top: 1.25em; margin-bottom: 0.55556em">
     About your organisation
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="course-contents">
-        <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
+        <h2 class="govuk-heading-m" id="section-about-provider">About the training provider</h2>
         {{ macros.previewPart('about-organisation', true) }}
 
         {% if not accrediting.selfAccrediting %}
           {% if data[accrediting.slug + '-about-accrediting-provider'] %}
-            <h3 class="heading-small">About {{ accrediting.name }}</h3>
+            <h3 class="govuk-heading-s">About {{ accrediting.name }}</h3>
             {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
           {% endif %}
         {% endif %}
 
-        <h3 class="heading-small">Training with a disability</h3>
+        <h3 class="govuk-heading-s">Training with a disability</h3>
         {{ macros.previewPart('training-with-a-disability', true) }}
 
-        <h2 class="heading-medium" id="section-contact">Contact details</h2>
+        <h2 class="govuk-heading-m" id="section-contact">Contact details</h2>
 
         <dl class="aligned">
           <dt>Email:</dt>

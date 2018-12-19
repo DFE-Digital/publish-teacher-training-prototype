@@ -1,5 +1,5 @@
 {% macro screenshotContents(contents) %}
-<h2 class="heading-medium">Screenshots</h2>
+<h2 class="govuk-heading-m">Screenshots</h2>
 <ul class="list">
   {% for c in contents %}
     <li><a href="#{{ c.id }}">{{ c.text }}</a></li>
@@ -7,7 +7,7 @@
 </ul>
 {% endmacro %}
 
-{% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'heading-large', headingLevel = 'h2') %}
+{% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'govuk-heading-l', headingLevel = 'h2') %}
 <div class="design-history-item">
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>
   <div class="grid-row">
@@ -26,13 +26,13 @@
 {% endmacro %}
 
 {% macro formatting() %}
-<h3 class="heading-medium remove-top-margin">Formatting</h3>
-<h4 class="heading-small">Links</h4>
+<h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
+<h4 class="govuk-heading-s">Links</h4>
 <p>Use square brackets [] around the link text and round brackets () around the link URL. Make sure there are no spaces between the brackets.</p>
 
 <p>For example:<br /> [GOV.UK](https://gov.uk/)</p>
 
-<h4 class="heading-small">Lists</h4>
+<h4 class="govuk-heading-s">Lists</h4>
 <p>To create a bulleted list:</p>
 <ul class="list list-bullet">
   <li>use asterisks (*) to create a bullet point (hyphens also work)</li>
@@ -47,19 +47,19 @@
 {% macro copyContent() %}
 <form data-module="copy-content">
   <div class="status-box">
-    <h3 class="heading-medium remove-top-margin">
+    <h3 class="govuk-heading-m remove-top-margin">
       <span class="js-cant-copy" style="display: none">Use this content again</span>
       <span class="js-can-copy" style="display: none">Copy content from another course</span>
     </h3>
 
     <div class="success-summary success-summary-small js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none;">
-      <h3 class="heading-small success-summary-heading add-bottom-margin remove-top-margin" id="success-summary-heading-example-1">
+      <h3 class="govuk-heading-s success-summary-heading add-bottom-margin remove-top-margin" id="success-summary-heading-example-1">
         Fields copied:
       </h3>
       <div class="js-what-copied"></div>
     </div>
     <div class="error-summary error-summary-small js-error-copy" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="display: none">
-      <h3 class="heading-small error-summary-heading" id="error-summary-heading-example-1">
+      <h3 class="govuk-heading-s error-summary-heading" id="error-summary-heading-example-1">
         There was no content to copy.
       </h3>
     </div>
@@ -116,13 +116,13 @@
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
-    <h3 class="heading-medium remove-top-margin">Preview on a course</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Preview on a course</h3>
     <p>This information will show on all your courses.</p>
     <p>Preview any course to see how it will look to applicants.</p>
 
     <hr />
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>You can make changes to this after publishing it.</p>
     <p>
       <a href="{{ publishLink }}" class="button">Publish</a>
@@ -156,20 +156,20 @@
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
-    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Preview</h3>
     <p>See how this course looks with your changes.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
     <a href="{{ previewLink }}">Preview course</a>
     <hr />
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>Publish your changes.</p>
 
     <a href="{{ publishLink }}" class="button">Publish</a>
     <hr />
   {% endif %}
 
-  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
   <a href="#">View on website</a>
 </div>
@@ -178,7 +178,7 @@
 {% macro orgHeading(activeTab, message = '') %}
 {{ message | safe }}
 
-<h1 class="heading-xlarge">
+<h1 class="govuk-heading-xl">
   {{ activeTab }}
 </h1>
 {% endmacro %}

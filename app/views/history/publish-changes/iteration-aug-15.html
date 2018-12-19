@@ -9,7 +9,7 @@
       <li><a href="/history">Design history</a></li>
     </ol>
   </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
@@ -19,11 +19,11 @@
     </div>
   </div>
 
-  <h2 class="heading-large" id="about-your-organisation-heading">About your organisation</h2>
+  <h2 class="govuk-heading-l" id="about-your-organisation-heading">About your organisation</h2>
 
   <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
     <div class="column-one-quarter">
-      <h2 class="heading-medium">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
@@ -31,29 +31,29 @@
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.aboutYourOrgPublish('draft') }}
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.aboutYourOrgPublish('published') }}
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
       {{ macros.aboutYourOrgPublish('draft', true) }}
     </div>
   </div>
 
-  <h2 class="heading-large" id="course-heading">Course</h2>
+  <h2 class="govuk-heading-l" id="course-heading">Course</h2>
 
   <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
     <div class="column-one-quarter">
-      <h2 class="heading-medium">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
@@ -61,19 +61,19 @@
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.coursePublish('draft') }}
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.coursePublish('published') }}
     </div>
 
     <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
       {{ macros.coursePublish('draft', true) }}
     </div>

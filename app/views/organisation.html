@@ -13,7 +13,7 @@
 
   {% if justEditedVacancies %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
         Course vacancies published
       </h3>
     </div>
@@ -21,13 +21,13 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h1 class="heading-xlarge">{{ data['training-provider-name'] }}</h1>
+      <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>
     </div>
   </div>
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 1. Your organisation</h2>
+      <h2 class="govuk-heading-l remove-top-margin">Step 1. Your organisation</h2>
 
       <p>Use this section to:</p>
       <ul class="list list-bullet">
@@ -51,7 +51,7 @@
 
   <!-- <div class="grid-row">
     <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 2. Locations</h2>
+      <h2 class="govuk-heading-l remove-top-margin">Step 2. Locations</h2>
       <p>Give the address, type of location and name of each place applicants can choose when they apply.</p>
       <p>When an applicant searches by location we use the address of each training location to calculate the distance to them.</p>
       <p>
@@ -63,7 +63,7 @@
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h2 class="heading-large">
+      <h2 class="govuk-heading-l">
         Step 2. Courses
       </h2>
 
@@ -81,7 +81,7 @@
   {% if data['ucasCourses'].length > 0 %}
     {% for accrediting in data['accreditors'] %}
       {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
-        <h3 class="heading-medium">
+        <h3 class="govuk-heading-m">
           <span style="color: #777; font-weight: normal">Accredited provider</span><br />
           {{ accrediting.name }}
         </h3>
@@ -103,7 +103,7 @@
               {% if course.accrediting == accrediting.name %}
                 <tr>
                     <!-- <td>
-                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="font-xsmall">{{ course.options }}</span>
                     </td>
                     <td>
@@ -114,7 +114,7 @@
                     <td></td> -->
                   {% if (loop.index < 5) %}
                     <td>
-                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
                     <td>
@@ -126,7 +126,7 @@
                     <td>{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
                   {% else %}
                     <td>
-                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="font-xsmall">{{ course.options }}</span>
                     </td>
                     <td>
@@ -168,7 +168,7 @@
     <a href="/new/start" class="button">Add a new course</a>
   </p>
 
-  <h2 class="heading-large">Request access for someone</h2>
+  <h2 class="govuk-heading-l">Request access for someone</h2>
   <p>You can request a DfE Sign-in account for others who manage your courses.</p>
   <p>
     <a href="/request-access">Request access for someone</a>

@@ -8,7 +8,7 @@
   {% include "includes/phase_banner_beta.html" %}
   <a href="/" class="link-back">Back</a>
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
@@ -28,10 +28,10 @@
           ]
         %}
 
-        <h2 class="heading-large">Full time</h2>
+        <h2 class="govuk-heading-l">Full time</h2>
         {{ macros.radioGroup(course.programmeCode + '-vacancies-ft', fields, errors) }}
 
-        <h2 class="heading-large">Part time</h2>
+        <h2 class="govuk-heading-l">Part time</h2>
         {{ macros.radioGroup(course.programmeCode + '-vacancies-pt', fields, errors) }}
 
         <p>Changes are immediate.</p>

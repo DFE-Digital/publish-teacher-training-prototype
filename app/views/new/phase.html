@@ -8,14 +8,14 @@
   {% include "includes/phase_banner_beta.html" %}
   <a href="{{ paths.back }}" class="link-back">Back</a>
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="{{ paths.next }}" method="post">
 
-        <h2 class="heading-medium remove-top-margin">Level</h2>
+        <h2 class="govuk-heading-m remove-top-margin">Level</h2>
         {% set fields = [
             {
               name: 'Primary'
@@ -31,7 +31,7 @@
 
         {{ macros.radioGroup(code + '-new-phase', fields) }}
 
-        <h2 class="heading-medium">Special educational needs and disability (SEND)</h2>
+        <h2 class="govuk-heading-m">Special educational needs and disability (SEND)</h2>
         {% set fields = [
             {
               name: 'This is a SEND course'

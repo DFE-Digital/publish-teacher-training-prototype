@@ -19,7 +19,7 @@
     </ol>
   </div>
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
 
@@ -29,7 +29,7 @@
         <ul class="list" id="selected-schools-list">
           {% for s in data['partner-school'] %}
             <li>
-              <h3 class="heading-small remove-bottom-margin">
+              <h3 class="govuk-heading-s remove-bottom-margin">
                 {{ s }}
               </h3>
               <input type="hidden" name="partner-school" value="{{ s }}">
@@ -76,7 +76,7 @@
 
         $('#selected-schools-list').append(`
           <li>
-            <h3 class="heading-small remove-bottom-margin">
+            <h3 class="govuk-heading-s remove-bottom-margin">
               ${school}
             </h3>
             <input type="hidden" name="partner-school" value="${school}">

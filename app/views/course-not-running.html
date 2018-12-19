@@ -19,14 +19,14 @@
     {% endif %}
   </div>
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     <span class="heading-secondary">{{ course.options }}</span>
     {{ title }}
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h3 class="heading-medium">Information from UCAS</h3>
+      <h3 class="govuk-heading-m">Information from UCAS</h3>
       <div class="notice" style="margin-top: 30px">
         <i class="icon icon-important">
           <span class="visually-hidden">Warning</span>
@@ -70,7 +70,7 @@
 
             <div style="clear: left; padding-top: 20px">
             {% for school in course.schools %}
-            <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+            <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
             <dl class="aligned add-top-margin add-double-bottom-margin">
               <dt>Address:</dt>
               <dd>{{ school.address }}</dd>

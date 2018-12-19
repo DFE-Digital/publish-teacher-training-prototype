@@ -11,7 +11,7 @@
   <form action="{{ paths.next }}" method="post">
     <div class="grid-row">
       <div class="column-two-thirds">
-        <h1 class="heading-xlarge add-double-bottom-margin">
+        <h1 class="govuk-heading-xl add-double-bottom-margin">
           {{ title }}
         </h1>
 
@@ -218,12 +218,12 @@
           </div>
         </dl>
 
-        <h2 class="heading-large">Preview</h2>
+        <h2 class="govuk-heading-l">Preview</h2>
 
         <p>See how this course will appear when it’s published on Find postgraduate teacher training:</p>
         <div class="panel panel-border-wide">
-          <h3 class="heading-medium remove-top-margin">
-            <span class="heading-small">{{ data['training-provider-name'] }}</span><br />
+          <h3 class="govuk-heading-m remove-top-margin">
+            <span class="govuk-heading-s">{{ data['training-provider-name'] }}</span><br />
             {{ data[code + '-new-title'] or generatedTitle }} ({{ code }})
           </h3>
 
