@@ -100,7 +100,7 @@
     <div class="js-cant-copy" style="display: none">
       <p>When you’ve added content to this page, you can copy it to other courses</p>
     </div>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
     {{ formatting() }}
   </div>
@@ -121,7 +121,7 @@
       <p>You have unpublished changes.</p>
       <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
     </div>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
   {% if state == 'published' %}
@@ -130,27 +130,25 @@
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
 
-    {% if state == 'draft' %}<hr class="govuk-section-break govuk-section-break--visible" />{% endif %}
+    {% if state == 'draft' %}<hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />{% endif %}
   {% endif %}
 
   {% if state == 'new' %}
     <span class="govuk-tag phase-tag-no-content add-bottom-margin">Empty</span>
     <p>You need to complete and publish this information.</p>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
-    <h3 class="govuk-heading-m remove-top-margin">Preview on a course</h3>
+    <h3 class="govuk-heading-m">Preview on a course</h3>
     <p>This information will show on all your courses.</p>
     <p>Preview any course to see how it will look to applicants.</p>
 
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m">Publish</h3>
     <p>You can make changes to this after publishing it.</p>
-    <p>
-      <a href="{{ publishLink }}" class="govuk-button">Publish</a>
-    </p>
+    <a href="{{ publishLink }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
   {% endif %}
 </div>
 {% endmacro %}
@@ -161,7 +159,7 @@
     <span class="govuk-tag phase-tag-draft add-bottom-margin">Draft</span>
     <p>You have unpublished changes.</p>
     <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
   {% if state == 'published' %}
@@ -170,32 +168,36 @@
 
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
   {% if state == 'new' %}
     <span class="govuk-tag phase-tag-no-content add-bottom-margin">Empty</span>
     <p>You need to complete and publish this information.</p>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
   {% if state == 'new' or state == 'draft' %}
-    <h3 class="govuk-heading-m remove-top-margin">Preview</h3>
+    <h3 class="govuk-heading-m">Preview</h3>
     <p>See how this course looks with your changes.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
-    <a href="{{ previewLink }}">Preview course</a>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <p>
+      <a href="{{ previewLink }}">Preview course</a>
+    </p>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m">Publish</h3>
     <p>Publish your changes.</p>
 
-    <a href="{{ publishLink }}" class="govuk-button">Publish</a>
-    <hr class="govuk-section-break govuk-section-break--visible" />
+    <a href="{{ publishLink }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
-  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
+  <h3 class="govuk-heading-m">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
-  <a href="#">View on website</a>
+  <p class="govuk-!-margin-bottom-0">
+    <a href="#">View on website</a>
+  </p>
 </div>
 {% endmacro %}
 

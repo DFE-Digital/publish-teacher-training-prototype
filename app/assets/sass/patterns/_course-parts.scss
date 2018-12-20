@@ -16,6 +16,7 @@ $course-parts-indent: 35px;
 
 .course-parts-items {
   padding-left: 0;
+  margin-top: 0;
   margin-bottom: $govuk-gutter;
   @include govuk-media-query($from: tablet) {
     margin-bottom: ($govuk-gutter * 2);
