@@ -24,15 +24,12 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h3 class="govuk-heading-m">Information from UCAS</h3>
-      <div class="notice" style="margin-top: 30px">
-        <i class="icon icon-important">
-          <span class="visually-hidden">Warning</span>
-        </i>
-        <strong class="bold-small">
-          This course is not running.
-        </strong>
-      </div>
-      <p style="margin-left: 50px; margin-bottom: 30px">It won’t appear online. You can publish it by changing the status of one or more training locations to “running” in <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>.</p>
+      {{ govukWarningText({
+        text: 'This course is not running.',
+        iconFallbackText: "Warning"
+      }) }}
+
+      <p style="margin-top: -30px; margin-left: 50px; margin-bottom: 30px">It won’t appear online. You can publish it by changing the status of one or more training locations to “running” in <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>.</p>
       <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
       <dl class="aligned add-top-margin add-double-bottom-margin">
         <dt>Status:</dt>
