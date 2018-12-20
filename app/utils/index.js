@@ -170,7 +170,12 @@ function validate(data, course, view) {
     }
   }
 
-  return errors;
+  return errors.map(e => {
+    e.text = e.title;
+    e.href = course.path + e.link;
+
+    return e;
+  });
 }
 
 function validateOrg(data, view) {
@@ -262,7 +267,12 @@ function validateOrg(data, view) {
     }
   }
 
-  return errors;
+  return errors.map(e => {
+    e.text = e.title;
+    e.href = e.link;
+
+    return e;
+  });
 }
 
 module.exports = {

@@ -63,7 +63,11 @@
 
     {% if showErrors %}
       {% set errors = [
-        { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are no vacancies to close applications' }
+        {
+          id: course.programmeCode + '-vacancies-choice',
+          href: '#checkbox-part-1',
+          text: 'Please confirm there are no vacancies to close applications'
+        }
       ] %}
     {% endif %}
   {% else %}
@@ -77,25 +81,20 @@
 
     {% if showErrors %}
       {% set errors = [
-        { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are vacancies to reopen applications' }
+        {
+          id: course.programmeCode + '-vacancies-choice',
+          href: '#checkbox-part-1',
+          text: 'Please confirm there are vacancies to reopen applications'
+        }
       ] %}
     {% endif %}
   {% endif %}
 
   {% if showErrors and errors %}
-    <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-      <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
-        We couldn’t edit the vacancies for this course
-      </h3>
-      <p>
-        Fix the following problems and try again:
-      </p>
-      <ul class="error-summary-list">
-        {% for error in errors %}
-        <li><a href="#checkbox-part-1">{{ error.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
+    {{ govukErrorSummary({
+      titleText: "We couldn’t edit the vacancies for this course",
+      errorList: errors
+    }) }}
   {% endif %}
 
   <h1 class="govuk-heading-xl">

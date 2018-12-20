@@ -249,7 +249,7 @@
   <div class="govuk-form-group {% if e %} govuk-form-group--error{% endif %}">
     {% if e %}
       <span class="govuk-error-message">
-        {{ e.title }}
+        {{ e.text }}
       </span>
     {% endif %}
 
@@ -300,7 +300,7 @@
   <div class="govuk-form-group {% if e %} govuk-form-group--error{% endif %}">
     {% if e %}
       <span class="govuk-error-message">
-        {{ e.title }}
+        {{ e.text }}
       </span>
     {% endif %}
     <div class="govuk-checkboxes" data-module="checkboxes">
@@ -350,7 +350,7 @@
     {% endif %}
     {% if e %}
       <span class="govuk-error-message">
-        {{ e.title }}
+        {{ e.text }}
       </span>
     {% endif %}
     {% if prefix %}
@@ -390,7 +390,7 @@
       {% endif %}
       {% if e %}
         <span class="govuk-error-message">
-          {{ e.title }}
+          {{ e.text }}
         </span>
       {% endif %}
       <div class="textarea-wrapper">
@@ -440,7 +440,7 @@
 <div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
-    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
+    {% if e %}<a href="{{ e.href }}" class="course-part-label-error">{{ e.text }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">
@@ -459,7 +459,7 @@
 <div {% if e %}class="course-part-error"{% endif %}>
   <dt class="course-part-label">
     {{ label }}
-    {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
+    {% if e %}<a href="{{ e.href }}" class="course-part-label-error">{{ e.text }}</a>{% endif %}
   </dt>
   {% if (value(id)) %}
     <dd class="course-part-value">
