@@ -86,49 +86,49 @@
         </h3>
       {% endif %}
       <div class="body-text">
-        <table class="ucas-info-table">
-          <thead>
-            <tr>
-              <th class="subject-col">Course</th>
-              <th class="status-col" style="width: 170px">Status</th>
-              <th class="published-col">Last&nbsp;published</th>
-              <th class="applications-col">Applications</th>
-              <th class="type-col">Vacancies</th>
+        <table class="govuk-table ucas-info-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header subject-col" scope="col">Course</th>
+              <th class="govuk-table__header status-col" style="width: 170px" scope="col">Status</th>
+              <th class="govuk-table__header published-col" scope="col">Last&nbsp;published</th>
+              <th class="govuk-table__header applications-col" scope="col">Applications</th>
+              <th class="govuk-table__header type-col" scope="col">Vacancies</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="govuk-table__body">
             {% set subjectName = '' %}
             {% for course in data['ucasCourses'] %}
               {% if course.accrediting == accrediting.name %}
-                <tr>
-                    <!-- <td>
+                <tr class="govuk-table__row">
+                    <!-- <td class="govuk-table__cell">
                       <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
                       <br /><span class="govuk-body-s">{{ course.options }}</span>
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td> -->
+                    <td class="govuk-table__cell"></td>
+                    <td class="govuk-table__cell"></td>
+                    <td class="govuk-table__cell"></td> -->
                   {% if (loop.index < 5) %}
-                    <td>
-                      <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
+                    <td class="govuk-table__cell">
+                      <a href="#" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                     </td>
-                    <td class="no-wrap">10 November 2018</td>
-                    <td>
+                    <td class="govuk-table__cell no-wrap">10 November 2018</td>
+                    <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}</td>
-                    <td>{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                    <td class="govuk-table__cell">{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
                   {% else %}
-                    <td>
-                      <a href="#" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="govuk-body-s">{{ course.options }}</span>
+                    <td class="govuk-table__cell">
+                      <a href="#" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <span class="govuk-body-s">{{ course.options }}</span>
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
                         <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
                       {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
@@ -137,17 +137,17 @@
                         <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
                       {% endif %}
                     </td>
-                    <td class="no-wrap">
+                    <td class="govuk-table__cell no-wrap">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         {{ today() }}
                       {% endif %}
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         Open
                       {% endif %}
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
                       {% endif %}
