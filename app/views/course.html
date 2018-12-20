@@ -197,23 +197,21 @@
             <h3 class="course-part-task">Training locations</h3>
 
             <div style="clear: left; padding-top: 20px">
-            {% for school in course.schools %}
-            <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
-            <dl class="aligned add-top-margin add-double-bottom-margin">
-              <dt>Address:</dt>
-              <dd>{{ school.address }}</dd>
-              <dt>Status:</dt>
-              <dd>Running</dd>
-              <dt>Vacancies:</dt>
-              <dd>Full time vacancies</dd>
-              <dt>Apply from:</dt>
-              <dd>October 2018</dd>
-            </dl>
-            {% endfor %}
+              {% for school in course.schools %}
+              <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+              <dl class="aligned add-top-margin add-double-bottom-margin">
+                <dt>Address:</dt>
+                <dd>{{ school.address }}</dd>
+                <dt>Status:</dt>
+                <dd>Running</dd>
+                <dt>Vacancies:</dt>
+                <dd>Full time vacancies</dd>
+                <dt>Apply from:</dt>
+                <dd>October 2018</dd>
+              </dl>
+              {% endfor %}
 
-            <details>
-              <summary><span class="summary">There are 4 suspended or discontinued training locations for this course</span></summary>
-              <div class="panel panel-border-narrow">
+              {% set detailsText %}
                 <p>These locations won’t appear on the page for this course and candidates won’t be able apply for them.</p>
 
                 {% for school in course.schools %}
@@ -225,9 +223,11 @@
                   <dd>Suspended</dd>
                 </dl>
                 {% endfor %}
-              </div>
-            </details>
-
+              {% endset %}
+              {{ govukDetails({
+                summaryText: "There are 4 suspended or discontinued training locations for this course",
+                text: detailsText | safe
+              }) }}
             </div>
           </li>
         </ul>
