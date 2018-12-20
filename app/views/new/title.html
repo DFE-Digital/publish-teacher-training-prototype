@@ -20,14 +20,10 @@
         {% set moreTitle %}
           {{ macros.textbox(code + '-new-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
 
-          <div class="notice add-double-bottom-margin">
-            <i class="icon icon-important" style="margin-top: -17px;">
-              <span class="visually-hidden">Warning</span>
-            </i>
-            <strong class="bold-small">
-              All course title changes are subject to approval by the Becoming a Teacher team
-            </strong>
-          </div>
+          {{ govukWarningText({
+            text: "All course title changes are subject to approval by the Becoming a Teacher team",
+            iconFallbackText: "Warning"
+          }) }}
 
           <p>We will approve titles that include:</p>
 
