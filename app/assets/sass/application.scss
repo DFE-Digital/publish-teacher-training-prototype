@@ -350,6 +350,13 @@ dl.aligned.course-part-tasks dd {
   }
 }
 
+.govuk-prefix-input {
+  @include govuk-font($size: 19, $weight: bold);
+  bottom: 7px;
+  left: 15px;
+  relative: absolute;
+}
+
 .form-block--or {
   margin-left: 10px;
   margin-bottom: 10px;
