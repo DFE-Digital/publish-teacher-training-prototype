@@ -225,6 +225,71 @@ if (useAutoStoreData === 'true') {
   }
 }
 
+app.use(function (req, res, next) {
+  nunjucksAppEnv.addGlobal('value', function (name) {
+     if (req.session.data === undefined) {
+       return ''
+     }
+
+     var value = req.session.data[name]
+     if (value === undefined) {
+       return ''
+     }
+
+     return value;
+   })
+
+  nunjucksAppEnv.addGlobal('markdown', function(name) {
+   if (req.session.data === undefined) {
+     return ''
+   }
+
+   var text = req.session.data[name]
+   if (text === undefined) {
+     return ''
+   }
+
+   return marked(text);
+  })
+
+  nunjucksAppEnv.addGlobal('courseOptions', function() {
+   var o = ['<option value=""></option>'];
+   req.session.data['ucasCourses'].forEach(function(course) {
+     o.push(`<option value="${course.programmeCode}">${course.name} (${course.programmeCode})</option>`);
+   });
+
+   return o;
+  })
+
+  nunjucksAppEnv.addGlobal('error', function (id, errors) {
+   var data = req.session.data;
+
+   console.log(data);
+   var courseCode = id.split('-')[0];
+
+   if (courseCode.length > 4) {
+     courseCode = 'about-your-organisation';
+   }
+
+   // Temporarily disable hiding of publish errors
+   // if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
+   if (!errors || data === undefined) {
+    return false
+   }
+
+   return errors.find(function(e) {
+            return e.id == id;
+          });
+  })
+
+  nunjucksAppEnv.addGlobal('today', function () {
+   var now = new Date();
+   return dateFormat(now, "d mmm yyyy");
+  })
+
+  next()
+});
+
 // Clear all data in session if you open /prototype-admin/clear-data
 app.post('/prototype-admin/clear-data', function (req, res) {
   req.session.data = {}
