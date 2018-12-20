@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-!-margin-bottom-7">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l remove-top-margin">Step 1. Your organisation</h2>
 
@@ -35,7 +35,7 @@
         {% else %}
           <span class="govuk-tag phase-tag-small phase-tag-no-content">Empty</span>
         {% endif %}
-        <a href="/about-your-organisation">Fill-in your organisation information</a>
+        <a href="/about-your-organisation" class="govuk-!-margin-left-2">Fill-in your organisation information</a>
       </p>
     </div>
   </div>
@@ -52,7 +52,7 @@
   </div>
   <hr class="govuk-section-break govuk-section-break--visible" /> -->
 
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-!-margin-bottom-6">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l">
         Step 2. Courses
@@ -73,7 +73,7 @@
     {% for accrediting in data['accreditors'] %}
       {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
         <h3 class="govuk-heading-m">
-          <span style="color: #777; font-weight: normal">Accredited provider</span><br />
+          <span class="govuk-caption-m">Accredited provider</span>
           {{ accrediting.name }}
         </h3>
       {% endif %}
@@ -159,7 +159,7 @@
     <a href="/new/start" class="govuk-button">Add a new course</a>
   </p>
 
-  <h2 class="govuk-heading-l">Request access for someone</h2>
+  <h2 class="govuk-heading-l govuk-!-margin-top-7">Request access for someone</h2>
   <p>You can request a DfE Sign-in account for others who manage your courses.</p>
   <p>
     <a href="/request-access">Request access for someone</a>
