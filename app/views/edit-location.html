@@ -1,14 +1,10 @@
 {% extends "layout.html" %}
 {% block pageTitle %}Your organisation{% endblock %}
+{% block backLink %}{{ macros.backLink('/school/' + school.id) }}{% endblock %}
 
 {% block content %}
-
-
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <a href="/school/{{ school.id }}" class="govuk-back-link">Back</a>
-
       <form action="/organisation" method="post">
         <legend>
           <h1 class="govuk-heading-xl">

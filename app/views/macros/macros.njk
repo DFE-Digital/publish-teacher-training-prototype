@@ -24,6 +24,11 @@
   </div>
 {% endmacro %}
 
+{% macro backLink(path = "/") %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({ text: "Back", href: path }) }}
+{% endmacro %}
+
 {% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'govuk-heading-l', headingLevel = 'h2') %}
 <div class="design-history-item">
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>

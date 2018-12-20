@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
 {% set title %}Course length and {% if course.salaried %}salary{% else %}fees{% endif %}{% endset %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
-
-
-  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-back-link">Back</a>
-
   {% include "course/_errors.html" %}
 
   <h1 class="govuk-heading-xl">

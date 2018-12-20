@@ -100,6 +100,7 @@ function course(req) {
     return a.programmeCode == req.params.code;
   });
 
+  course.path = `/course/${course.providerCode}/${course.programmeCode}`;
   course.salaried = (course.route == 'School Direct training programme (salaried)')
   return course;
 }

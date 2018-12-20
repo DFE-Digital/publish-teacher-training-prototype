@@ -1,89 +1,86 @@
 {% extends "layout.html" %}
 {% set title = 'Edit vacancies' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
+{% block backLink %}{{ macros.backLink() }}{% endblock %}
+
 {% block content %}
-
-{% set table %}
-  <div class="add-double-bottom-margin">
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Training locations with vacancies</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        {% for s in course.schools %}
+  {% set table %}
+    <div class="add-double-bottom-margin">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <div class="multiple-choice">
-                <input
-                  id="checkbox-part-{{ loop.index }}"
-                  type="checkbox"
-                  name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
-                  value="Vacancies"
-                  {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
-                >
-                <label for="checkbox-part-{{ loop.index }}">
-                  {{ s.name }}
-                </label>
-              </div>
-            </td>
+            <th class="govuk-table__header" scope="col">Training locations with vacancies</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-{% endset %}
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for s in course.schools %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <div class="multiple-choice">
+                  <input
+                    id="checkbox-part-{{ loop.index }}"
+                    type="checkbox"
+                    name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
+                    value="Vacancies"
+                    {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
+                  >
+                  <label for="checkbox-part-{{ loop.index }}">
+                    {{ s.name }}
+                  </label>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endset %}
 
-{% set radioFields = [
-    {
-      name: 'There are no vacancies',
-      text: 'Close this course to new applications.<br />You can reopen a course later.'
-    },
-    {
-      or: true
-    },
-    {
-      name: 'There are some vacancies',
-      text: 'Pick the locations with vacancies',
-      more: table
-    }
-  ]
-%}
-
-{% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-  {% set fields = [
+  {% set radioFields = [
       {
         name: 'There are no vacancies',
         text: 'Close this course to new applications.<br />You can reopen a course later.'
-      }
-    ]
-  %}
-
-  {% if showErrors %}
-    {% set errors = [
-      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are no vacancies to close applications' }
-    ] %}
-  {% endif %}
-{% else %}
-  {% set fields = [
+      },
       {
-        name: 'There are vacancies',
-        text: 'Reopen this course to new applications.'
+        or: true
+      },
+      {
+        name: 'There are some vacancies',
+        text: 'Pick the locations with vacancies',
+        more: table
       }
     ]
   %}
 
-  {% if showErrors %}
-    {% set errors = [
-      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are vacancies to reopen applications' }
-    ] %}
+  {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
+    {% set fields = [
+        {
+          name: 'There are no vacancies',
+          text: 'Close this course to new applications.<br />You can reopen a course later.'
+        }
+      ]
+    %}
+
+    {% if showErrors %}
+      {% set errors = [
+        { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are no vacancies to close applications' }
+      ] %}
+    {% endif %}
+  {% else %}
+    {% set fields = [
+        {
+          name: 'There are vacancies',
+          text: 'Reopen this course to new applications.'
+        }
+      ]
+    %}
+
+    {% if showErrors %}
+      {% set errors = [
+        { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are vacancies to reopen applications' }
+      ] %}
+    {% endif %}
   {% endif %}
-{% endif %}
-
-
-  <a href="/" class="govuk-back-link">Back</a>
 
   {% if showErrors and errors %}
     <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -108,7 +105,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ coursePath }}/vacancies" method="post">
+      <form action="{{ course.path }}/vacancies" method="post">
 
         {% if data[course.programmeCode + '-multi-location'] %}
           {% set fields = [

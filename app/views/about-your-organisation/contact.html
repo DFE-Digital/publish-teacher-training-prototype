@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
 {% set title = 'Contact details' %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
 
 {% block content %}
-
-<a href="/about-your-organisation" class="govuk-back-link">Back</a>
-
 {% include "about-your-organisation/_errors.html" %}
 
 <h1 class="govuk-heading-xl">
