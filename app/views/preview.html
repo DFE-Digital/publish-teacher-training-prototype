@@ -111,24 +111,24 @@
           {% else %}
             <p>The course fees for 2018/2019 are as follows:</p>
             <div class="body-text">
-              <table>
-                <tbody>
+              <table class="govuk-table">
+                <tbody class="govuk-table__body">
                   <tr class="visually-hidden">
-                    <th>Student type</th>
-                    <th>Fees to pay</th>
+                    <th class="govuk-table__header" scope="col">Student type</th>
+                    <th class="govuk-table__header" scope="col">Fees to pay</th>
                   </tr>
-                  <tr>
-                    <td>UK students</td>
-                    <td>£{{ data[prefix + '-fee'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">UK students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
                   </tr>
-                  <tr>
-                    <td>EU students</td>
-                    <td>£{{ data[prefix + '-fee'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">EU students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
                   </tr>
                   {% if data[prefix + '-fee-international'] %}
-                  <tr>
-                    <td>International students</td>
-                    <td>£{{ data[prefix + '-fee-international'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">International students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee-international'] }}</td>
                   </tr>
                   {% endif %}
                 </tbody>
@@ -222,20 +222,20 @@
         <p>You’ll also need to choose a training location and give the relevant training location code.</p>
 
         <p>Available training locations:</p>
-        <table>
-          <thead>
-            <tr>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
               <th style="width: 30%">Name</th>
               <th style="width: 60%">Address</th>
-              <th>Code</th>
+              <th class="govuk-table__header" scope="col">Code</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="govuk-table__body">
             {% for school in course.schools %}
-            <tr>
-              <td>{{ school.name }}</td>
-              <td>{{ school.address }}</td>
-              <td>{{ school.code }}</td>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{ school.name }}</td>
+              <td class="govuk-table__cell">{{ school.address }}</td>
+              <td class="govuk-table__cell">{{ school.code }}</td>
             </tr>
             {% endfor %}
           </tbody>
