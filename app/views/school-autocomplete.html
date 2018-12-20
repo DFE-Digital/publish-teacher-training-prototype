@@ -1,35 +1,25 @@
 {% extends "layout.html" %}
 {% set title = 'Add your partner schools' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
 
 {% block content %}
-
 <style>
   #selected-schools-list li {
     border-bottom: 1px solid #ccc;
   }
 </style>
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/">{{ data['training-provider-name']}}</a></li>
-      <li><a href="/locations">Locations</a></li>
-    </ol>
-  </div>
-
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/locations">
-        <ul class="list" id="selected-schools-list">
+        <ul class="govuk-list" id="selected-schools-list">
           {% for s in data['partner-school'] %}
             <li>
-              <h3 class="heading-small remove-bottom-margin">
+              <h3 class="govuk-heading-s remove-bottom-margin">
                 {{ s }}
               </h3>
               <input type="hidden" name="partner-school" value="{{ s }}">
@@ -44,11 +34,11 @@
           <div id="my-autocomplete-container"></div>
         </div>
 
-        <input type="submit" class="button" value="Save" />
+        <input type="submit" class="govuk-button" value="Save" />
       </form>
     </div>
   </div>
-</main>
+
 {% endblock %}
 
 {% block page_scripts %}
@@ -76,7 +66,7 @@
 
         $('#selected-schools-list').append(`
           <li>
-            <h3 class="heading-small remove-bottom-margin">
+            <h3 class="govuk-heading-s remove-bottom-margin">
               ${school}
             </h3>
             <input type="hidden" name="partner-school" value="${school}">

@@ -1,15 +1,6 @@
 {% if data['about-your-organisation-show-publish-errors'] and errors.length > 0 %}
-<div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-  <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-    We couldn’t publish this because some information was missing
-  </h3>
-  <p>
-    Fix the following problems and try publishing again:
-  </p>
-  <ul class="error-summary-list">
-    {% for error in errors %}
-    <li><a href="{{ error.link }}">{{ error.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+  {{ govukErrorSummary({
+    titleText: "We couldn’t publish this because some information was missing",
+    errorList: errors
+  }) }}
 {% endif %}

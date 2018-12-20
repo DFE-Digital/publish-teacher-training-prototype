@@ -1,22 +1,17 @@
-
 {% extends "layout.html" %}
 {% set title = 'New course – Iteration 6 December' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>This design <a href="/history/new-course">tweaks the previous wizard</a> so that:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>fees and salary have their own page</li>
         <li>there’s a route into creating a course</li>
         <li>course creation has a success message</li>
@@ -25,22 +20,22 @@
         <li>the confirm page only shows parts relevant to the journey taken</li>
       </ul>
 
-      <h2 class="heading-large" id="user-research">User research</h2>
+      <h2 class="govuk-heading-l" id="user-research">User research</h2>
 
       <p>We tested the shortest path with 2 providers. This excluded language, training location, fee and salary and accredited provider screens.</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li><a href="https://lookback.io/watch/veykZkMozQtCAvceD">Keele and North Staffordshire Education</a> (<a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77">alternative version</a>)</li>
         <li><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH">University of Wolverhampton</a></li>
       </ul>
 
       <p>Providers found adding a new course easy to do:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li><a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=1h15m15s">“It’s an easier to use system, seemed quicker”</a></li>
         <li><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH?t=50m26.78s">“This looks much clearer”</a></li>
       </ul>
 
-      <h3 class="heading-medium">Course codes</h3>
+      <h3 class="govuk-heading-m">Course codes</h3>
 
       <p>Keele told us stories of users applying for the wrong course because they had the wrong course code. Many of them are different by 1 digit. <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=28m46s">They are too hard to differentiate</a>.</p>
 
@@ -50,7 +45,7 @@
 
       <p><a href="https://lookback.io/watch/gYu2aoCo3PWyaJEHH?t=18m19.94s">Some courses are known by their codes</a>, perhaps because they’ve had the same code for a long time. This suggests that changing codes for existing courses might create a new mental burden for providers.</p>
 
-      <h3 class="heading-medium">Modular, or not modular?</h3>
+      <h3 class="govuk-heading-m">Modular, or not modular?</h3>
 
       <p>Keele said, <a href="https://lookback.io/watch/gKCGDj8zDhCiqwQ77?t=1h12m24s">“Ours is always no, we don’t do a modular course … I don’t know how it’d make a difference … We’ve never done it, we’ve never looked into what it means … If we don’t understand, how will candidates know?”</a></p>
 
@@ -122,5 +117,5 @@
 
   {{ macros.screenshot('On course creation', 'on-course-creation', '/public/images/history/new-course-2/thumbnails/11-on-course-creation.png', '/public/images/history/new-course-2/11-on-course-creation.png', '') }}
 
-</main>
+
 {% endblock %}

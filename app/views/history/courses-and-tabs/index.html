@@ -1,19 +1,13 @@
-
 {% extends "layout.html" %}
 {% set title = 'Courses and tabs' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   <p>This is a visualisation of course information structured by:</p>
-  <ul class="list list-bullet">
+  <ul class="govuk-list govuk-list--bullet">
     <li>training provider metadata (eg provider name, contact details)</li>
     <li>common course information (eg about this provider or interview process)</li>
     <li>schools an organisation is associated with</li>
@@ -25,17 +19,17 @@
 
     <p>Use tabs to split up key information around courses, schools, default course information and the organisation’s metadata.</p>
 
-    <h3 class="heading-medium">Course breakdown</h3>
+    <h3 class="govuk-heading-m">Course breakdown</h3>
 
     <p>Use tables to show each study option with availability by school.</p>
 
     <p>Design breaks down when there are many schools and options per course. eg United Teaching National SCITT has about 10 schools with 4 variants (PGCE, QTS, salaried, no salary) which would be a table of 40 rows per course.</p>
 
-    <h3 class="heading-medium">Questions</h3>
+    <h3 class="govuk-heading-m">Questions</h3>
 
     <p class="bold">Should the page be paginated?</p>
 
-    <ul class="list list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
       <li>30% of providers have only 1 or 2 courses</li>
       <li>85% of providers have 20 or fewer courses</li>
       <li>10% of providers have 50-100 courses</li>
@@ -58,5 +52,5 @@
 
   {{ macros.screenshot('Schools', 'schools', '/public/images/history/courses-and-tabs/thumbnails/04-schools.png', '/public/images/history/courses-and-tabs/04-schools.png', '') }}
 
-</main>
+
 {% endblock %}

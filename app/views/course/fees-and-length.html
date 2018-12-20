@@ -1,24 +1,20 @@
 {% extends "layout.html" %}
 {% set title %}Course length and {% if course.salaried %}salary{% else %}fees{% endif %}{% endset %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="link-back">Back</a>
-
   {% include "course/_errors.html" %}
 
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
-        <h2 class="heading-large remove-top-margin">Course length</h2>
+        <h2 class="govuk-heading-l remove-top-margin">Course length</h2>
         {% set otherField %}
           {{ macros.textbox(course.programmeCode + '-duration-other', 'Course length')}}
         {% endset %}
@@ -39,40 +35,40 @@
 
         {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
 
-        <hr />
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
         {% if course.salaried %}
-          <h2 class="heading-large">Salary</h2>
+          <h2 class="govuk-heading-l">Salary</h2>
 
           <p>Give details about the salary for this course.</p>
           <p>You should:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>give an indication of the salary – if you don’t have the figure, say how it will be calculated (eg using the unqualified teachers’ pay scales)</li>
             <li>say whether there are any fees or others costs – if there are no fees for this course, you should also say so</li>
           </ul>
 
           {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250, errors) }}
         {% else %}
-          <h2 class="heading-large">Course fees</h2>
+          <h2 class="govuk-heading-l">Course fees</h2>
 
           {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£', errors) }}
           {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
 
-          <h4 class="heading-medium">Fee details</h4>
+          <h4 class="govuk-heading-m">Fee details</h4>
 
           <p>If applicable, give further details about the fees for this course.</p>
 
           <p>This could include:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>any top up fees</li>
             <li>any other costs</li>
           </ul>
 
           {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
 
-          <hr />
+          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-          <h2 class="heading-large">Financial support you offer</h2>
+          <h2 class="govuk-heading-l">Financial support you offer</h2>
           <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
           <p>You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
 
@@ -80,16 +76,16 @@
         {% endif %}
 
         <div class="add-top-margin add-double-bottom-margin">
-          <input type="submit" class="button" value="Save" />
+          <input type="submit" class="govuk-button" value="Save" />
         </div>
 
-        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+        <p><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       {{ macros.copyContent() }}
     </div>
   </div>
-</main>
+
 
 {% endblock %}

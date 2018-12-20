@@ -1,47 +1,44 @@
 {% extends "layout.html" %}
 {% set title = 'Requirements and eligibility' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
   {% include "course/_errors.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
-        <h2 class="heading-large remove-top-margin">Qualifications needed</h2>
+        <h2 class="govuk-heading-l remove-top-margin">Qualifications needed</h2>
         <p>State the minimum academic qualifications needed for this course.</p>
 
         {{ macros.textarea(course.programmeCode + '-qualifications-required', 'Qualifications needed', 8, null, 100, errors) }}
 
-        <h2 class="heading-large">Personal qualities</h2>
+        <h2 class="govuk-heading-l">Personal qualities</h2>
         <p>Tell applicants about the skills and motivation you’re looking for (eg experience with children, a genuine passion for teaching, or a talent for public speaking).</p>
         {{ macros.textarea(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)', 8, null, 100) }}
 
-        <h2 class="heading-large">Other requirements</h2>
+        <h2 class="govuk-heading-l">Other requirements</h2>
         <p>If applicants need any non-academic qualifications or documents, list them here (eg criminal record checks, or relevant work experience).</p>
         {{ macros.textarea(course.programmeCode + '-other-requirements', 'Other requirements (optional)', 8, null, 100) }}
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Save" />
+          <input type="submit" class="govuk-button" value="Save" />
         </div>
 
-        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+        <p><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       {{ macros.copyContent() }}
     </div>
   </div>
-</main>
+
 
 {% endblock %}

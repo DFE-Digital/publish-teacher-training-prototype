@@ -1,41 +1,36 @@
-
 {% extends "layout.html" %}
 {% set title = 'Course statuses – Iteration 3 August' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>As a user looking at all of my courses imported from UCAS, I need to know which of those courses have been published, so that I know which courses applicants are seeing.</p>
 
       <p>An iteration on the <a href="/history/ucas-course-status">first UCAS course status design</a>. Following that design we found that status in UCAS is per training location rather than per course. We need some logic to determine whether a course should be published based on the status of its training locations.</p>
 
-      <h2 class="heading-medium">Separating out UCAS status</h2>
+      <h2 class="govuk-heading-m">Separating out UCAS status</h2>
       <p>The UCAS statuses are per location, not per course. Instead of repeating those statuses give an indicatication of the affect of those statuses on the course. State whether a course is running, not running, or not running because it is new.</p>
 
       <p>Courses can have 1 of 3 statuses:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>Running - the course is published and applicants can see it on search</li>
         <li>Not running – the course is not published, it can’t be found on search</li>
         <li>New - not yet running – the course is not published yet because it hasn’t been set to publish on UCAS</li>
       </ul>
 
-      <h2 class="heading-medium">Resolving course status from training location statuses</h2>
+      <h2 class="govuk-heading-m">Resolving course status from training location statuses</h2>
       <p>If any training location has the status ‘Running’, then the course is running and we publish it, otherwise we do not publish.</p>
       <p>If no locations are running, but at least one is ‘New’, then the course is ‘New - not yet running’.</p>
       <p>If all locations are ‘Discontinued’ or ‘Suspended’, then the course is ‘Not running’.</p>
 
       <p>We hypothesise that a user needs to know the difference between a course that is not running because it was stopped and one that is not running because it’s not ready to go live yet.</p>
 
-      <h2 class="heading-medium">Courses that aren’t running</h2>
+      <h2 class="govuk-heading-m">Courses that aren’t running</h2>
       <p>Courses that aren’t running can’t be edited. The fields and publish actions do not show.</p>
 
       <p>
@@ -57,5 +52,5 @@
 
   {{ macros.screenshot('A course that’s running', 'a-course-that-is-running', '/public/images/history/course-not-running/thumbnails/03-a-course-that-is-running.png', '/public/images/history/course-not-running/03-a-course-that-is-running.png', '') }}
 
-</main>
+
 {% endblock %}

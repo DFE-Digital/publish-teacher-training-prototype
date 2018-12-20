@@ -1,22 +1,18 @@
 {% extends "layout.html" %}
 {% set title = 'Vacancies' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink() }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
   {% include "course/_errors.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/" method="post">
         {% set fields = [
             {
@@ -28,22 +24,22 @@
           ]
         %}
 
-        <h2 class="heading-large">Full time</h2>
+        <h2 class="govuk-heading-l">Full time</h2>
         {{ macros.radioGroup(course.programmeCode + '-vacancies-ft', fields, errors) }}
 
-        <h2 class="heading-large">Part time</h2>
+        <h2 class="govuk-heading-l">Part time</h2>
         {{ macros.radioGroup(course.programmeCode + '-vacancies-pt', fields, errors) }}
 
         <p>Changes are immediate.</p>
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Update vacancies" />
+          <input type="submit" class="govuk-button" value="Update vacancies" />
         </div>
 
-        <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+        <p><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

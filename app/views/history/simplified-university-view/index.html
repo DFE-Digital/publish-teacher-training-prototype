@@ -1,23 +1,18 @@
-
 {% extends "layout.html" %}
 {% set title = 'A university’s view' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>
         Universities are the simplest provider. There are no schools to apply to and <a href="/history/imported-from-ucas">no course folding</a>.
       </p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>remove schools link in header</li>
         <li>hide accrediting provider</li>
         <li>don’t show any of the qualification or salary study option fields</li>
@@ -52,5 +47,5 @@
 
   {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/simplified-university-view/thumbnails/07-organisation.png', '/public/images/history/simplified-university-view/07-organisation.png', '') }}
 
-</main>
+
 {% endblock %}

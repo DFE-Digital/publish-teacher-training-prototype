@@ -1,33 +1,24 @@
-
 {% extends "layout.html" %}
 {% set title = 'Publishing workflow' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <div class="notice add-double-bottom-margin">
-        <i class="icon icon-important">
-          <span class="visually-hidden">Warning</span>
-        </i>
-        <strong class="bold-small">
-          There is a <a href="/history/publish-changes/iteration-aug-15">newer version of this design</a>
-        </strong>
-      </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukWarningText({
+        text: 'There is a <a href="/history/publish-changes/iteration-aug-15">newer version of this design</a>' | safe,
+        iconFallbackText: "Warning"
+      }) }}
 
       <p>Designs for the different states content can be in, for both courses and organisation information.</p>
 
       <p>These designs represent a minimum viable workflow, they separate the save action from the publish action.</p>
 
-      <h3 class="heading-medium">User needs</h3>
+      <h3 class="govuk-heading-m">User needs</h3>
 
       <p>As a user I need to publish content so that applicants can see it.</p>
 
@@ -36,30 +27,30 @@
       <p>As a user I need to know when there are unpublished changes so that I can publish them.</p>
 
       <p>We expect to discover further needs in research that can be prioritised and addressed in later iterations, such as:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>needing to see what has changed since the last published version</li>
         <li>needing to see a history of all published changes</li>
         <li>needing to revert a draft back to a published state</li>
       </ul>
 
-      <h3 class="heading-medium">Validation</h3>
+      <h3 class="govuk-heading-m">Validation</h3>
       <p>Validate against word count when saving.</p>
       <p>Validate all required fields have been completed before publishing.</p>
 
-      <h3 class="heading-medium">No QA in this flow</h3>
+      <h3 class="govuk-heading-m">No QA in this flow</h3>
       <p>We originally expected to build a <a href="/history/qa-draft">quality assurance (QA) review step</a> into the publishing workflow. But given the complexity of building this flow and the volume of courses needing approval, we switched to a ‘spot-check’ approach, where we will review a sample of all published content.</p>
 
-      <h3 class="heading-medium">State</h3>
+      <h3 class="govuk-heading-m">State</h3>
       <p>A course or the ‘About your organisation’ section can be in one of these states:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>New: The fields are all empty</li>
         <li>Draft: The fields have been edited and those changes have not been published</li>
         <li>Published: The fields have been published and no subsequent edits have been made.</li>
       </ul>
 
-      <h3 class="heading-medium">Design notes</h3>
-      <ul class="list list-bullet">
+      <h3 class="govuk-heading-m">Design notes</h3>
+      <ul class="govuk-list govuk-list--bullet">
         <li>Indicate when there are unpublished changes</li>
         <li>Hide the publish action from content in published state</li>
         <li>Once published, indicate the last publish date, ‘last’ differentiates from ‘first published’</li>
@@ -70,16 +61,16 @@
     </div>
   </div>
 
-  <h2 class="heading-large" id="about-your-organisation-heading">About your organisation</h2>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <h2 class="govuk-heading-l" id="about-your-organisation-heading">About your organisation</h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>The publish workflow sits alongside the form fields for entering organisation information. This means there will be two green primary action buttons on the page.</p>
     </div>
   </div>
 
-  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">
+  <div class="govuk-grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
@@ -94,27 +85,27 @@
 
 
 
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>New information will show on all Bracknell Forest Partnership courses.</p>
     <p>
-      <a href="#" class="button">Publish</a>
+      <a href="#" class="govuk-button">Publish</a>
     </p>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
   <p>You can use paragraphs, lists and links in your content.</p>
   <a href="#">Formatting help</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -127,27 +118,27 @@
 
       <p>You have unpublished changes.</p>
 
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>New information will show on all Bracknell Forest Partnership courses.</p>
     <p>
-      <a href="#" class="button">Publish</a>
+      <a href="#" class="govuk-button">Publish</a>
     </p>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
   <p>You can use paragraphs, lists and links in your content.</p>
   <a href="#">Formatting help</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -157,16 +148,16 @@
 
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
   <p>You can use paragraphs, lists and links in your content.</p>
   <a href="#">Formatting help</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -181,19 +172,19 @@
 
       <p>You have unpublished changes.</p>
 
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>New information will show on all Bracknell Forest Partnership courses.</p>
     <p>
-      <a href="#" class="button">Publish</a>
+      <a href="#" class="govuk-button">Publish</a>
     </p>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">Formatting</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
   <p>You can use paragraphs, lists and links in your content.</p>
   <a href="#">Formatting help</a>
 </div>
@@ -201,38 +192,38 @@
     </div>
   </div>
 
-  <!-- <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">
+  <!-- <div class="govuk-grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
       {{ macros.aboutYourOrgPublish('new') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.aboutYourOrgPublish('draft') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.aboutYourOrgPublish('published') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
       {{ macros.aboutYourOrgPublish('draft', true) }}
     </div>
   </div> -->
 
-  <h2 class="heading-large" id="course-heading">Course</h2>
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h3 class="heading-medium">A course will already be published</h3>
+  <h2 class="govuk-heading-l" id="course-heading">Course</h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h3 class="govuk-heading-m">A course will already be published</h3>
       <p>The difference between a course and organisation information is that a course already exists in a published state. We publish the minimum course details automatically so that the course is findable, even if the training provider doesn’t log in and enrich their course.</p>
 
       <p>We need to accurately distinguish the difference between automatic publishing of changes made on UCAS vs the publishing of enriched course content. There is a risk that ‘Last published on’ can be misinterpreted.</p>
@@ -240,16 +231,16 @@
       <p>The ‘Last published on’ date should be the date that the course content was last published. It is not when UCAS content changes, or when organisation information was updated.</p>
 
 
-      <h3 class="heading-medium">View on website vs preview</h3>
+      <h3 class="govuk-heading-m">View on website vs preview</h3>
       <p>In these designs we show both preview and a link to view the live version of the content. These two views will look very similar and there's a risk that users will be confused by them. The two links are useful because they are the only way of comparing between live and draft.</p>
 
       <p>An alternative might be to move the ‘View on website’ link to the point of preview, perhaps as something like ‘View live version’.</p>
     </div>
   </div>
 
-  <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">
+  <div class="govuk-grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
@@ -260,27 +251,27 @@
 
 
 
-    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Preview</h3>
     <p>See how this course looks with your changes.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
     <a href="#">Preview course</a>
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>Publish your changes for applicants to see them.</p>
-    <a href="#" class="button">Publish</a>
+    <a href="#" class="govuk-button">Publish</a>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
   <a href="#">View on website</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -288,31 +279,31 @@
 
 
     <p>You have unpublished changes.</p>
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
 
-    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Preview</h3>
     <p>See how this course looks with your changes.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
     <a href="#">Preview course</a>
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>Publish your changes for applicants to see them.</p>
-    <a href="#" class="button">Publish</a>
+    <a href="#" class="govuk-button">Publish</a>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
   <a href="#">View on website</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -324,16 +315,16 @@
 
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
   <a href="#">View on website</a>
 </div>
 
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
 
 <div class="add-double-bottom-margin status-box">
@@ -343,23 +334,23 @@
 
 
     <p>You have unpublished changes.</p>
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
 
-    <h3 class="heading-medium remove-top-margin">Preview</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Preview</h3>
     <p>See how this course looks with your changes.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
     <a href="#">Preview course</a>
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <h3 class="heading-medium remove-top-margin">Publish</h3>
+    <h3 class="govuk-heading-m remove-top-margin">Publish</h3>
     <p>Publish your changes for applicants to see them.</p>
-    <a href="#" class="button">Publish</a>
+    <a href="#" class="govuk-button">Publish</a>
 
 
-  <hr>
-  <h3 class="heading-medium remove-top-margin">View on website</h3>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  <h3 class="govuk-heading-m remove-top-margin">View on website</h3>
   <p>See how this course currently looks to applicants:</p>
   <a href="#">View on website</a>
 </div>
@@ -367,42 +358,42 @@
     </div>
   </div>
 
-  <!-- <div class="grid-row" style="margin-left: -165px; margin-right: -165px">
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">
+  <!-- <div class="govuk-grid-row" style="margin-left: -165px; margin-right: -165px">
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">
         New
       </h2>
       <p>Fields are empty</p>
       {{ macros.coursePublish('new') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">First draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">First draft</h2>
       <p>Edits have been made</p>
       {{ macros.coursePublish('draft') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Published</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Published</h2>
       <p>No subsequent edits made</p>
       {{ macros.coursePublish('published') }}
     </div>
 
-    <div class="column-one-quarter">
-      <h2 class="heading-medium">Second draft</h2>
+    <div class="govuk-grid-column-one-quarter">
+      <h2 class="govuk-heading-m">Second draft</h2>
       <p>Edits made after publishing</p>
       {{ macros.coursePublish('draft', true) }}
     </div>
   </div> -->
 
-  <h2 class="heading-large">Screenshots</h2>
+  <h2 class="govuk-heading-l">Screenshots</h2>
 
   {{ macros.screenshot('About your organisation messaging in context', 'about-your-organisation', '/public/images/history/publish-changes/thumbnails/01-about-your-organisation.png', '/public/images/history/publish-changes/01-about-your-organisation.png', '
     <p>Use the right hand column to communicate state and provide formatting guidance.</p>
     <p>Comprehensive formatting guidance can be documented on a standalone page.</p>
-  ', 'heading-medium', 'h3') }}
+  ', 'govuk-heading-m', 'h3') }}
 
-  {{ macros.screenshot('Course messaging in context', 'course', '/public/images/history/publish-changes/thumbnails/02-course.png', '/public/images/history/publish-changes/02-course.png', '', 'heading-medium', 'h3') }}
+  {{ macros.screenshot('Course messaging in context', 'course', '/public/images/history/publish-changes/thumbnails/02-course.png', '/public/images/history/publish-changes/02-course.png', '', 'govuk-heading-m', 'h3') }}
 
-</main>
+
 {% endblock %}

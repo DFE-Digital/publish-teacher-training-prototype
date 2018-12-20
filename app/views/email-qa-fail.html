@@ -1,17 +1,12 @@
 {% extends "email-layout.html" %}
-{% block page_title %}Email: QA passed{% endblock %}
+{% block pageTitle %}Email: QA passed{% endblock %}
 
 {% block content %}
+  <h1 class="govuk-heading-l">Email received</h1>
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs"></div>
-
-  <h1 class="heading-large">Email received</h1>
-
-  <div class="grid-row">
-    <div class="column-two-thirds fake-email">
-      <h1 class="heading-small add-double-bottom-margin">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds fake-email">
+      <h1 class="govuk-heading-s add-double-bottom-margin">
         Your {{ subject.name | lower }} course needs changes
       </h1>
 
@@ -20,7 +15,7 @@
       </p>
 
       <p>Before your course will be published you must:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>remove unsubstantiated claims</li>
         <li>fix spelling mistakes</li>
         <li>complete missing sections</li>
@@ -32,6 +27,6 @@
     </div>
   </div>
 
-</main>
+
 
 {% endblock %}

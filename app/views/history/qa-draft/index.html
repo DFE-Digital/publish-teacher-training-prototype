@@ -1,18 +1,14 @@
 {% extends "layout.html" %}
 {% set title = 'Draft of the QA process' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>An initial look at the process of sending a course to DfE for review, and examples of the responses providers might receive back.</p>
       <p>We tested this in our first round of research with providers, towards the end of each session. <a href="https://lookback.io/dfe-digital/providers">Research sessions are on Lookback</a>.</p>
     </div>
@@ -31,5 +27,5 @@
 
   {{ macros.screenshot('QA failed email', 'qa-failed-email', '/public/images/history/qa-draft/thumbnails/03-qa-failed-email.png', '/public/images/history/qa-draft/03-qa-failed-email.png', '') }}
 
-</main>
+
 {% endblock %}

@@ -1,20 +1,16 @@
 {% extends "layout.html" %}
 {% set title = 'Edit a course outcome' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>We currently infer the outcome with a mapping from UCAS data:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>qts: QTS</li>
         <li>postgraduate or professional (with or without QTS selected): PGCE with QTS</li>
       </ul>
@@ -25,22 +21,22 @@
 
       <p>We need to allow users to easily set their outcome if what we’ve inferred is wrong. This design should also allow further qualification options to be added.</p>
 
-      <h2 class="heading-large">Implementation options</h2>
+      <h2 class="govuk-heading-l">Implementation options</h2>
 
       <p>We could take a similar to contacts details: if a provider hasn’t set anything specific, we should continue to infer an outcome from the UCAS data. Once they’ve set their own we always use that one.</p>
 
       <p>Alternatively we could populate an enrichment field for each of the courses containing the outcome. Then we would only need to infer outcome for new courses. The enrichment population shouldn’t alter the content state (eg it should not make new drafts).</p>
 
-      <h2 class="heading-large">QTS with optional PGCE</h2>
+      <h2 class="govuk-heading-l">QTS with optional PGCE</h2>
 
       <p>There is a new option: QTS with optional PGCE. Providers have requested this label, and it makes sense to indicate it. For filtering purposes this should behave the same as PGCE with QTS.</p>
 
-      <h2 class="heading-large">Hide uncommon options</h2>
+      <h2 class="govuk-heading-l">Hide uncommon options</h2>
 
       <p>The design separates common options from the uncommon ones. We want to nudge providers towards the most common QTS and PGCE with QTS.</p>
       <p>If one of the options in the disclosure is selected then the box should be opened by default.</p>
 
-      <h2 class="heading-large">Further education options</h2>
+      <h2 class="govuk-heading-l">Further education options</h2>
 
       <p>Further education courses don’t come with QTS. We need to add a bit of context to the outcome option here so that providers don’t click ‘PGCE’ or ‘PGDE’ by mistake. In publish courses only we add the further education context to the label and make the lack of QTS explicit.</p>
     </div>
@@ -59,5 +55,5 @@
 
   {{ macros.screenshot('Edit outcome with more options open', 'edit-outcome-with-more-options-open', '/public/images/history/choose-outcome/thumbnails/03-edit-outcome-with-more-options-open.png', '/public/images/history/choose-outcome/03-edit-outcome-with-more-options-open.png', '') }}
 
-</main>
+
 {% endblock %}

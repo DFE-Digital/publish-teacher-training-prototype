@@ -1,34 +1,29 @@
-
 {% extends "layout.html" %}
 {% set title = 'Enrichment release – 6 September' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>Screenshots of Publish courses (manage-courses-ui) as released on 6 September.</p>
       <p>This is what the service looked like when we enabled organisation and course enrichment for the first time.</p>
 
       <p>This release doesn’t include:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>editing contact details</li>
         <li>about your organisation <a href="/history/iteration-aug-23">layout improvements</a></li>
         <li>persistent validation on publish</li>
       </ul>
 
-      <h2 class="heading-large">User research</h2>
+      <h2 class="govuk-heading-l">User research</h2>
 
       <p>After launch we tested this with providers:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li><a href="https://lookback.io/watch/6Cxgfdd85cChDjSWT">Excalibur TSA</a></li>
         <li><a href="https://lookback.io/watch/aEg6nx4WHpuwQjTJq">Learning Institute South West</a></li>
         <li><a href="https://lookback.io/watch/2E4kE9niSMwCnRCiN">UCL (in-person)</a></li>
@@ -74,5 +69,5 @@
 
   {{ macros.screenshot('Request access', 'request-access', '/public/images/history/enrichment-sept-6/thumbnails/08-request-access.png', '/public/images/history/enrichment-sept-6/08-request-access.png', '') }}
 
-</main>
+
 {% endblock %}

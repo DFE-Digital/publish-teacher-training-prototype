@@ -1,35 +1,30 @@
-
 {% extends "layout.html" %}
 {% set title = 'Copy content – Iteration 14 September' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>An iteration on where the copy content feature sits.</p>
 
       <p>Because of its position in the right hand column it’s too easily missed by users completing the form. For users who search for the feature because they’ve read about it, it’s missed because they’re searching on the course overview page.</p>
 
       <p>This design aims to make the feature more discoverable by:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>putting the form on each section of the course overview (behind a disclosure)</li>
         <li>moving the form from the right to below the title, in the main flow of the document (also behind a disclosure)</li>
       </ul>
 
       <p>There are subtle differences in the copy for the two pages.</p>
 
-      <h2 class="heading-large">Course overview</h2>
+      <h2 class="govuk-heading-l">Course overview</h2>
       <p>Notes on implementation:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>the disclosure must have unique but hidden text for screenreaders (like the edit links)</li>
         <li>when the form is submitted the behaviour is the same, eg the ‘About this course’ page is loaded with <a href="/history/copy-content-from-another-course-live#copying-content-on-about-this-course">the orange prompt</a></li>
       </ul>
@@ -51,5 +46,5 @@
 
   {{ macros.screenshot('Copy content disclosure when open', 'copy-content-disclosure-when-open', '/public/images/history/copy-content-from-another-course-14-sept/thumbnails/03-copy-content-disclosure-when-open.png', '/public/images/history/copy-content-from-another-course-14-sept/03-copy-content-disclosure-when-open.png', '') }}
 
-</main>
+
 {% endblock %}

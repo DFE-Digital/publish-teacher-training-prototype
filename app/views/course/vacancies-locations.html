@@ -1,15 +1,11 @@
 {% extends "layout.html" %}
 {% set title = 'Edit vacancies' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink() }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
@@ -21,8 +17,8 @@
 
   {% include "course/_errors.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       {% set fields = [
           {
             name: 'Vacancies'
@@ -42,29 +38,29 @@
 
       {% set table %}
         <div class="add-double-bottom-margin">
-          <table>
-            <thead>
-              <tr>
-                <th>Training location</th>
-                <th>Vacancies</th>
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col">Training location</th>
+                <th class="govuk-table__header" scope="col">Vacancies</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Main Site</td>
-                <td>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Main Site</td>
+                <td class="govuk-table__cell">
                   {{ macros.checkboxGroup(course.programmeCode + '-vacancies-1', fields, errors) }}
                 </td>
               </tr>
-              <tr>
-                <td>Pool Hayes Primary School</td>
-                <td>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Pool Hayes Primary School</td>
+                <td class="govuk-table__cell">
                   {{ macros.checkboxGroup(course.programmeCode + '-vacancies-2', fullPartfields, errors) }}
                 </td>
               </tr>
-              <tr>
-                <td>St Mary’s Catholic Primary School</td>
-                <td>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">St Mary’s Catholic Primary School</td>
+                <td class="govuk-table__cell">
                   {{ macros.checkboxGroup(course.programmeCode + '-vacancies-3', fields, errors) }}
                 </td>
               </tr>
@@ -94,15 +90,15 @@
       <form action="/" method="post">
 
         <div class="add-double-bottom-margin">
-          <input type="submit" class="button" value="Publish changes" />
+          <input type="submit" class="govuk-button" value="Publish changes" />
         </div>
 
-        <p><a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a></p>
+        <p><p><a href="{{ course.path }}">Cancel changes</a></p></p>
 
         <p>There may be a delay before your changes appear on UCAS Apply.</p>
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

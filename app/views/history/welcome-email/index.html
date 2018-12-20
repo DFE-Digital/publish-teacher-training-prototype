@@ -1,23 +1,18 @@
 {% extends "layout.html" %}
 {% set title = 'Welcome email' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>This is the email we send to users when they log in for the first time.</p>
       <p>We send our own welcome email so that users have an easy way back to our service, and to encourage them to bookmark the right URL.</p>
     </div>
   </div>
 
   {{ macros.screenshot('', 'welcome-email', '/public/images/history/welcome-email/thumbnails/01-welcome-email.png', '/public/images/history/welcome-email/01-welcome-email.png', '') }}
-</main>
+
 {% endblock %}

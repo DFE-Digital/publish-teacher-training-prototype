@@ -3,38 +3,36 @@
 // Spacing to the left of the task list
 $course-parts-indent: 35px;
 
-// .course-parts {
-//   margin-top: $gutter;
-//   @include media(tablet) {
-//     margin-top: ($gutter * 1.5);
-//   }
-// }
+.course-parts {
+  @include govuk-font(19);
+}
 
 .course-parts-section {
   display: table;
-  @include bold-36;
+  @include govuk-font(36, $weight: bold);
   margin-bottom: 15px;
-  padding-bottom: ($gutter / 6);
+  padding-bottom: ($govuk-gutter / 6);
 }
 
 .course-parts-items {
-  margin-bottom: $gutter;
-  @include media(tablet) {
-    margin-bottom: ($gutter * 2);
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: $govuk-gutter;
+  @include govuk-media-query($from: tablet) {
+    margin-bottom: ($govuk-gutter * 2);
   }
 }
 
 .course-parts-item {
-  border-top: 1px solid $border-colour;
-  padding-top: $gutter;
-  padding-bottom: $gutter;
-  @extend %contain-floats;
+  list-style: none;
+  border-top: 1px solid $govuk-border-colour;
+  padding-top: $govuk-gutter;
+  @include govuk-clearfix;
 }
 
 .course-part-task {
-  width: $two-thirds;
   float: left;
-  @include bold-24;
+  @include govuk-font(24, $weight: bold);
   margin: 0;
 }
 
@@ -47,7 +45,7 @@ $course-parts-indent: 35px;
 .course-part-tasks {
   margin-top: 60px;
 
-  @include media(desktop) {
+  @include govuk-media-query($from: desktop) {
     display: table;
     width: 100%;
   }
@@ -55,21 +53,21 @@ $course-parts-indent: 35px;
   > * {
     position: relative;
 
-    @include media(desktop) {
+    @include govuk-media-query($from: desktop) {
       display: table-row;
     }
 
     > * {
       display: block;
 
-      @include media(desktop) {
+      @include govuk-media-query($from: desktop) {
         display: table-cell;
         padding: em(12, 19) em(20, 19) em(9, 19) 0; // copied from Elements' td padding
         margin: 0;
       }
     }
 
-    // @include media(desktop) {
+    // @include govuk-media-query($from: desktop) {
     //   &:first-child > * {
     //     padding-top: 0;
     //   }
@@ -78,11 +76,11 @@ $course-parts-indent: 35px;
 
   .course-part-error {
     dt, dd {
-      border-left: 5px solid $error-colour;
+      border-left: 5px solid $govuk-error-colour;
       padding-left: 10px;
     }
      dt {
-      color: $error-colour;
+      color: $govuk-error-colour;
     }
   }
 
@@ -92,7 +90,7 @@ $course-parts-indent: 35px;
     font-weight: bold;
     padding-bottom: 5px;
 
-    // @include media(desktop) {
+    // @include govuk-media-query($from: desktop) {
     //   width: 30%;
     // }
   }
@@ -110,7 +108,7 @@ $course-parts-indent: 35px;
     float: none;
     display: block;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -118,7 +116,7 @@ $course-parts-indent: 35px;
     max-width: 500px;
 
     &--empty {
-      color: $grey-1;
+      color: govuk-colour("grey-1");
     }
   }
 }

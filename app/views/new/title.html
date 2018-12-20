@@ -1,48 +1,40 @@
 {% set title = 'Is this course title right?' %}
 {% extends "layout.html" %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="{{ paths.back }}" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>From your answers we’ve created this title for your course:</p>
-      <div class="panel panel-border-wide add-double-bottom-margin">
-        <p class="lede">
+      <div class="govuk-inset-text add-double-bottom-margin">
+        <p class="govuk-body-l">
           {{ generatedTitle }}
         </p>
       </div>
 
       <form action="{{ paths.next }}" method="post">
         {% set moreTitle %}
-          {{ macros.textbox(code + '-new-title', 'New title', '', 'form-control-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
+          {{ macros.textbox(code + '-new-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
 
-          <div class="notice add-double-bottom-margin">
-            <i class="icon icon-important" style="margin-top: -17px;">
-              <span class="visually-hidden">Warning</span>
-            </i>
-            <strong class="bold-small">
-              All course title changes are subject to approval by the Becoming a Teacher team
-            </strong>
-          </div>
+          {{ govukWarningText({
+            text: "All course title changes are subject to approval by the Becoming a Teacher team",
+            iconFallbackText: "Warning"
+          }) }}
 
           <p>We will approve titles that include:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a subject or pair of subjects, eg Geography, or Geography with History</li>
             <li>an age range, eg Primary (3-7), or Primary (5-11)</li>
           </ul>
 
           <p>We won’t approve titles that include:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>school names</li>
             <li>qualifications or outcomes, eg PGCE with QTS full time</li>
             <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
@@ -59,10 +51,10 @@
           }
         ], errors) }}
 
-        <input type="submit" class="button" value="Continue" />
+        <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

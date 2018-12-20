@@ -1,41 +1,35 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+
+{% block breadcrumbs %}
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          href: "/",
+          text: data['training-provider-name']
+        }
+      ]
+    })
+  }}
+{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    {% if data['multi-organisation'] %}
-      <ol>
-        <li><a href="/">Organisations</a></li>
-        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% else %}
-      <ol>
-        <li><a href="/">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% endif %}
-  </div>
-
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.options }}</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.options }}</span>
     {{ title }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h3 class="heading-medium">Information from UCAS</h3>
-      <div class="notice" style="margin-top: 30px">
-        <i class="icon icon-important">
-          <span class="visually-hidden">Warning</span>
-        </i>
-        <strong class="bold-small">
-          This course is not running.
-        </strong>
-      </div>
-      <p style="margin-left: 50px; margin-bottom: 30px">It won’t appear online. You can publish it by changing the status of one or more training locations to “running” in <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>.</p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h3 class="govuk-heading-m">Information from UCAS</h3>
+      {{ govukWarningText({
+        text: 'This course is not running.',
+        iconFallbackText: "Warning"
+      }) }}
+
+      <p style="margin-top: -30px; margin-left: 50px; margin-bottom: 30px">It won’t appear online. You can publish it by changing the status of one or more training locations to “running” in <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>.</p>
       <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
       <dl class="aligned add-top-margin add-double-bottom-margin">
         <dt>Status:</dt>
@@ -61,8 +55,8 @@
   </div>
 
 
-  <div class="grid-row add-top-margin">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row add-top-margin">
+    <div class="govuk-grid-column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <li class="course-parts-item">
@@ -70,7 +64,7 @@
 
             <div style="clear: left; padding-top: 20px">
             {% for school in course.schools %}
-            <h4 class="heading-small add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
+            <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
             <dl class="aligned add-top-margin add-double-bottom-margin">
               <dt>Address:</dt>
               <dd>{{ school.address }}</dd>
@@ -88,6 +82,6 @@
       </div>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

@@ -1,36 +1,27 @@
 {% extends "layout.html" %}
-{% block page_title %}{{ data['training-provider-name'] }}{% endblock %}
+{% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs">
-    <ol>
-      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
-    </ol>
-  </div>
-
   {% if justEditedVacancies %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
         Course vacancies published
       </h3>
     </div>
   {% endif %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-xlarge">{{ data['training-provider-name'] }}</h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>
     </div>
   </div>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 1. Your organisation</h2>
+  <div class="govuk-grid-row govuk-!-margin-bottom-7">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l remove-top-margin">Step 1. Your organisation</h2>
 
       <p>Use this section to:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>write about your organisation</li>
         <li>set your contact details</li>
         <li>publish this information on all course pages</li>
@@ -38,20 +29,20 @@
 
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
-          <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+          <span class="govuk-tag phase-tag-small phase-tag-draft">Draft</span>
         {% elseif data['about-your-organisation-publish-state'] == 'published' %}
-          <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+          <span class="govuk-tag phase-tag-small phase-tag-published">Published</span>
         {% else %}
-          <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+          <span class="govuk-tag phase-tag-small phase-tag-no-content">Empty</span>
         {% endif %}
-        <a href="/about-your-organisation">Fill-in your organisation information</a>
+        <a href="/about-your-organisation" class="govuk-!-margin-left-2">Fill-in your organisation information</a>
       </p>
     </div>
   </div>
 
-  <!-- <div class="grid-row">
-    <div class="column-two-thirds">
-      <h2 class="heading-large remove-top-margin">Step 2. Locations</h2>
+  <!-- <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l remove-top-margin">Step 2. Locations</h2>
       <p>Give the address, type of location and name of each place applicants can choose when they apply.</p>
       <p>When an applicant searches by location we use the address of each training location to calculate the distance to them.</p>
       <p>
@@ -59,16 +50,16 @@
       </p>
     </div>
   </div>
-  <hr /> -->
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" /> -->
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h2 class="heading-large">
+  <div class="govuk-grid-row govuk-!-margin-bottom-6">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">
         Step 2. Courses
       </h2>
 
       <p>Use this section to:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>create, preview and publish courses</li>
         <li>copy content between courses</li>
       </ul>
@@ -81,74 +72,74 @@
   {% if data['ucasCourses'].length > 0 %}
     {% for accrediting in data['accreditors'] %}
       {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
-        <h3 class="heading-medium">
-          <span style="color: #777; font-weight: normal">Accredited provider</span><br />
+        <h3 class="govuk-heading-m">
+          <span class="govuk-caption-m">Accredited provider</span>
           {{ accrediting.name }}
         </h3>
       {% endif %}
       <div class="body-text">
-        <table class="ucas-info-table">
-          <thead>
-            <tr>
-              <th class="subject-col">Course</th>
-              <th class="status-col" style="width: 170px">Status</th>
-              <th class="published-col">Last&nbsp;published</th>
-              <th class="applications-col">Applications</th>
-              <th class="type-col">Vacancies</th>
+        <table class="govuk-table ucas-info-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header subject-col" scope="col">Course</th>
+              <th class="govuk-table__header status-col" style="width: 170px" scope="col">Status</th>
+              <th class="govuk-table__header published-col" scope="col">Last&nbsp;published</th>
+              <th class="govuk-table__header applications-col" scope="col">Applications</th>
+              <th class="govuk-table__header type-col" scope="col">Vacancies</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="govuk-table__body">
             {% set subjectName = '' %}
             {% for course in data['ucasCourses'] %}
               {% if course.accrediting == accrediting.name %}
-                <tr>
-                    <!-- <td>
-                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                <tr class="govuk-table__row">
+                    <!-- <td class="govuk-table__cell">
+                      <a href="/course-not-running/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <br /><span class="govuk-body-s">{{ course.options }}</span>
                     </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
+                    <td class="govuk-table__cell">
+                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td> -->
+                    <td class="govuk-table__cell"></td>
+                    <td class="govuk-table__cell"></td>
+                    <td class="govuk-table__cell"></td> -->
                   {% if (loop.index < 5) %}
-                    <td>
-                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }} – <a href="#">View on website</a></span>
+                    <td class="govuk-table__cell">
+                      <a href="#" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
-                    <td>
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                    <td class="govuk-table__cell">
+                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                     </td>
-                    <td class="no-wrap">10 November 2018</td>
-                    <td>
+                    <td class="govuk-table__cell no-wrap">10 November 2018</td>
+                    <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}</td>
-                    <td>{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
+                    <td class="govuk-table__cell">{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
                   {% else %}
-                    <td>
-                      <a href="#" class="heading-small">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <br /><span class="font-xsmall">{{ course.options }}</span>
+                    <td class="govuk-table__cell">
+                      <a href="#" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+                      <span class="govuk-body-s">{{ course.options }}</span>
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
                       {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                       {% else %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
                       {% endif %}
                     </td>
-                    <td class="no-wrap">
+                    <td class="govuk-table__cell no-wrap">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         {{ today() }}
                       {% endif %}
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         Open
                       {% endif %}
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
                         Yes (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
                       {% endif %}
@@ -165,14 +156,14 @@
   {% endif %}
 
   <p class="add-top-margin">
-    <a href="/new/start" class="button">Add a new course</a>
+    <a href="/new/start" class="govuk-button">Add a new course</a>
   </p>
 
-  <h2 class="heading-large">Request access for someone</h2>
+  <h2 class="govuk-heading-l govuk-!-margin-top-7">Request access for someone</h2>
   <p>You can request a DfE Sign-in account for others who manage your courses.</p>
   <p>
     <a href="/request-access">Request access for someone</a>
   </p>
-</main>
+
 
 {% endblock %}

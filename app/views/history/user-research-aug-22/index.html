@@ -1,30 +1,25 @@
-
 {% extends "layout.html" %}
 {% set title = 'User research - 22 August' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>In August we’ve struggled to find providers to test with, because schools are on holiday and universities are very busy.</p>
 
       <p>We tested this design with 3 providers:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li><a href="https://lookback.io/watch/kY9HWu5MJiJhgJ5yC">Keele and North Staffordshire Teacher Education</a></li>
         <li><a href="https://lookback.io/watch/acQugHJ6r7QFpvkMQ">West London Teaching Schools Alliance</a></li>
         <li><a href="https://lookback.io/watch/QfEkvbkjW6uCJaLYJ">Bromely Schools Collegiate</a> (<a href="https://lookback.io/watch/r7d8nZPwuqHCZNgpg">Part 2</a>)</li>
       </ul>
 
-      <h2 class="heading-large">Users miss ‘About your organisation’</h2>
+      <h2 class="govuk-heading-l">Users miss ‘About your organisation’</h2>
 
       <p>The about your organisation fields are behind a tab on the homepage. We’ve found in research that users go straight to courses. Then they either publish without noticing  the organisation fields, or they find them while previewing and click through to complete them.</p>
 
@@ -32,17 +27,17 @@
 
       <p>In this design we tweaked the styles of the navigation from tabs to a bar. We hoped that the navigation would be more obvious and that users were simply not seeing the links.</p>
 
-      <h3 class="heading-medium">Results</h3>
+      <h3 class="govuk-heading-m">Results</h3>
 
       <p>This design tweak didn’t change user behaviour. A <a href="/history/iteration-aug-23">more substantial redesign</a> is needed to bring ‘About the organisation’ into the user journey.</p>
 
-      <h2 class="heading-large">Statuses</h2>
+      <h2 class="govuk-heading-l">Statuses</h2>
 
       <p>We needed to test whether users understood the ‘running/not running’ column and its affect on editing.</p>
 
       <p>This design also introduced a separate kind of status to display the publish state of the course content. We wanted to see if this was also understood, and if the two statuses were confusing.</p>
 
-      <h3 class="heading-medium">Results</h3>
+      <h3 class="govuk-heading-m">Results</h3>
 
       <p>Users recognised the ‘running/not running’ text used by UCAS. They understood that it meant applicants wouldn’t see the course and that if they wanted it to show they would need to edit it in UCAS. They also understood that editing would be available if the course was set to running.</p>
 
@@ -52,7 +47,7 @@
 
       <p>One user didn’t realise they needed to publish courses themselves. They believed draft meant it was ready for some sort of sign-off from DfE. We’d previously tested a QA process with this user. <a href="https://lookback.io/watch/QfEkvbkjW6uCJaLYJ?t=47m6s">“My guess is that someone else needs to sign it off”</a>.</p>
 
-      <h2 class="heading-large">Courses are already published</h2>
+      <h2 class="govuk-heading-l">Courses are already published</h2>
 
       <p>It’s not clear to users that courses which are set to running but have no published content will still be seen by applicants, just in a minimal state. We need to set these expectations better. This will begin with a comms email.</p>
 
@@ -82,5 +77,5 @@
 
   {{ macros.screenshot('Workflow states', 'workflow-states', '/public/images/history/user-research-aug-22/thumbnails/01-workflow-states.png', '/public/images/history/user-research-aug-22/01-workflow-states.png', '') }}
 
-</main>
+
 {% endblock %}

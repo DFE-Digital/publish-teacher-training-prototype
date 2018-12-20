@@ -1,28 +1,25 @@
 {% extends "layout.html" %}
 {% set title = 'Edit ‘About your organisation’' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-<a href="/about-your-organisation" class="link-back">Back</a>
-
 {% include "about-your-organisation/_errors.html" %}
 
-<h1 class="heading-xlarge">
+<h1 class="govuk-heading-xl">
   {{ title }}
 </h1>
 
   <form action="/about-your-organisation" method="post">
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <h2 class="heading-large remove-top-margin">About your organisation</h2>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l remove-top-margin">About your organisation</h2>
 
         <p>This is your chance to tell applicants why they should choose to train with you. You could describe any advantages and special features of you as a training provider.</p>
 
         <p>You must be specific and factual with any claims you make, and support them with evidence. For example:</p>
 
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>don’t say “our students are some of the happiest in the country”</li>
           <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
         </ul>
@@ -30,12 +27,12 @@
 
         {% if not data['self_accrediting'] %}
           {% if data['accreditors'].length > 1 %}
-            <h2 class="heading-large">
+            <h2 class="govuk-heading-l">
               About your accredited providers
             </h2>
             <p>Describe advantages and special features of each accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
           {% else %}
-            <h2 class="heading-large">
+            <h2 class="govuk-heading-l">
               About your accredited provider
             </h2>
             <p>Describe advantages and special features of your accredited provider. You must be specific and factual with any claims you make, and support them with evidence.</p>
@@ -46,10 +43,10 @@
           {% endfor %}
         {% endif %}
 
-        <h3 class="heading-large remove-top-margin">Training with disabilities and other needs</h3>
+        <h3 class="govuk-heading-l remove-top-margin">Training with disabilities and other needs</h3>
         <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
 
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>dyslexia</li>
           <li>physical, hearing and visual impairments</li>
           <li>mental health conditions</li>
@@ -58,17 +55,17 @@
 
         {{ macros.textarea('training-with-a-disability', 'Training with disabilities and other needs', 14, '', 250, errors) }}
       </div>
-      <div class="column-one-third">
+      <div class="govuk-grid-column-one-third">
         {{ macros.formattingBox() }}
       </div>
     </div>
 
     <div class="add-double-bottom-margin">
-      <input type="submit" class="button" value="Save" />
+      <input type="submit" class="govuk-button" value="Save" />
     </div>
 
-    <a href="/about-your-organisation">Cancel changes</a>
+    <p>
+      <a href="/about-your-organisation">Cancel changes</a>
+    </p>
   </form>
-</main>
-
 {% endblock %}

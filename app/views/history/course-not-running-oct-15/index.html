@@ -1,40 +1,35 @@
-
 {% extends "layout.html" %}
 {% set title = 'Course statuses – Iteration 15 October' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>As a user looking at all of my courses imported from UCAS, I need to know which of those courses have been published, so that I know which courses applicants are seeing.</p>
 
       <p>An iteration on the <a href="/history/ucas-course-status">first UCAS course status design</a> and the <a href="/history/course-not-running">second UCAS course status design</a>. We have received Zendesk tickets where candidates took a course code from DfE Find and hit errors when they tried to apply. The investigation showed that this was caused by us publishing courses to DfE Find which were set to running on UCAS, but weren’t set to published on UCAS.</p>
 
       <p>The <a href="https://www.ucas.com/file/115581/download?token=mv-G6P53">UCAS Teacher Training Set-up Guide</a> says:</p>
-      <div class="panel panel-wide-border">
+      <div class="govuk-inset-text">
         <blockquote>
           <p>Once you have confirmation that a training programme has been allocated places, please check you have your training programmes set to both <strong class="bold-small">Running</strong> and <strong class="bold-small">Yes</strong> in <strong class="bold-small">Publish</strong>, so applicants can apply.</p>
         </blockquote>
       </div>
 
-      <h2 class="heading-large">A new publishing status</h2>
+      <h2 class="govuk-heading-l">A new publishing status</h2>
       <p>We need a new publishing status when a course is set to running but not yet been published on UCAS.</p>
 
       <p>Courses can have 1 of 4 statuses.</p>
 
-      <h3 class="heading-medium">1. Running</h3>
+      <h3 class="govuk-heading-m">1. Running</h3>
 
       <p>At least one location is set to running and publish is set to ‘yes’. The course is published and applicants can see it on search. It can be edited.</p>
 
-      <h3 class="heading-medium">2. Needs attention on UCAS</h3>
+      <h3 class="govuk-heading-m">2. Needs attention on UCAS</h3>
 
       <p>If the status isn’t running, but there are some training locations set to running with publish set to ‘no’.</p>
 
@@ -46,13 +41,13 @@
         <img src="/public/images/history/needs-attention-status.png" alt="Screenshot showing needs attention on UCAS status" style="width: 100%" />
       </p>
 
-      <h3 class="heading-medium">3. New - not yet running</h3>
+      <h3 class="govuk-heading-m">3. New - not yet running</h3>
 
       <p>If there’s no training location set to running, but at least one set to ‘new’.</p>
 
       <p>The course is not published, it can’t be found on search. It can be edited by publishers.</p>
 
-      <h3 class="heading-medium">4. Not running</h3>
+      <h3 class="govuk-heading-m">4. Not running</h3>
 
       <p>All locations are either suspended or discontinued.</p>
 
@@ -60,10 +55,10 @@
 
       <p>Whether or not a course has been published on UCAS isn’t relevant for ’Not running’ and ’New - not yet running’ statuses.</p>
 
-      <h2 class="heading-large">Training location status</h2>
+      <h2 class="govuk-heading-l">Training location status</h2>
       <p>When a training location is set to running but publish is set to ‘No’ it should have the following status:</p>
 
-      <div class="panel panel-wide-border">
+      <div class="govuk-inset-text">
         <p>
           Needs attention on UCAS: This location is set to ‘running’ but candidates can’t apply to it. To allow candidates to view and apply to this location, you must set its publish value to ‘Yes’ in UCAS web-link.
         </p>
@@ -74,12 +69,12 @@
       </p>
 
 
-        <h2 class="heading-large">If the course status is ‘Needs attention on UCAS’</h2>
+        <h2 class="govuk-heading-l">If the course status is ‘Needs attention on UCAS’</h2>
 
         <p>We need to show an error message at the top of the course page:</p>
 
         <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-          <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+          <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
             This course needs attention in UCAS
           </h3>
           <p>Candidates can’t apply to this course because no training location has a publish value set to ‘Yes’ in <a href="#">UCAS web-link</a>. This course will not appear in Find postgraduate teacher training.</p>
@@ -89,19 +84,19 @@
           </p>
         </div>
 
-        <h2 class="heading-large">If the course status is ‘Running’ but some training locations are wrong</h2>
+        <h2 class="govuk-heading-l">If the course status is ‘Running’ but some training locations are wrong</h2>
 
         <p>We need to show a different error message at the top of the course page:</p>
 
         <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-          <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+          <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
             Your training locations need attention in UCAS
           </h3>
           <p>
             Training locations for this course are set to ‘Running’ in <a href="#">UCAS web-link</a>, but their publish value hasn’t been set to ‘Yes’.
           </p>
           <p>These training locations will not appear in Find postgraduate teacher training:</p>
-          <ul class="list list-bullet bold">
+          <ul class="govuk-list govuk-list--bullet bold">
             <li>Matravers School (Code: M)</li>
           </ul>
           <p>
@@ -110,5 +105,5 @@
         </div>
     </div>
   </div>
-</main>
+
 {% endblock %}

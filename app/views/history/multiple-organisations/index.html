@@ -1,25 +1,20 @@
-
 {% extends "layout.html" %}
 {% set title = 'Managing multiple organisations' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>The way DfE models organisations is different to the way they’ve been modelled in UCAS. Some users will have access to multipe UCAS institutions.</p>
 
       <p>We are still tightly coupled with UCAS’s course model. To avoid creating mental load between our tool and UCAS’s we are not merging organisations and their courses. Users will instead see a list of organisations that they have access to when they log in.</p>
 
       <p>Examples of ‘SCITT-schools’:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>2Schools Consortium / Oakthorpe Primary School</li>
         <li>Astra SCITT / Dr Challoner's Grammar School</li>
         <li>Bishop Ramsey Church of England School / Hillingdon SCITT</li>
@@ -29,7 +24,7 @@
         <li>Cheshire East SCITT / Holmes Chapel Comprehensive School</li>
       </ul>
 
-      <h2 class="heading-medium">Differences from a single org user</h2>
+      <h2 class="govuk-heading-m">Differences from a single org user</h2>
 
       <p>The first page a user sees is the organisations view. This is not part of the journey for a user belonging to a single organisation.</p>
 
@@ -37,40 +32,40 @@
 
       <p>The top-level school and organisation links in the header have been removed as it’d be ambiguous which organisation they’d link to. The ‘Publish teacher training courses’ link goes to the organisations page.</p>
 
-      <h2 class="heading-medium">Requesting access for someone</h2>
+      <h2 class="govuk-heading-m">Requesting access for someone</h2>
 
       <p>Access requests need a design update for multiple organisations. As a user with access to multiple organisations I need to request access for other people so that they can either have the same access as me, or have access to a specific organisation.</p>
 
-      <a href="https://dfedigital.atlassian.net/browse/BATSA-451">BATSA-451</a>
+      <p><a href="https://dfedigital.atlassian.net/browse/BATSA-451">BATSA-451</a></p>
 
-      <h2 class="heading-medium">Organisations without courses</h2>
+      <h2 class="govuk-heading-m">Organisations without courses</h2>
       <p>Some organisations will have no courses because:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>they are new</li>
         <li>they are set up in UCAS so they can be listed as an accrediting provider</li>
       </ul>
       <p>This needs design work.</p>
 
-      <a href="https://dfedigital.atlassian.net/browse/BATSA-476">BATSA-476</a>
+      <p><a href="https://dfedigital.atlassian.net/browse/BATSA-476">BATSA-476</a></p>
 
-      <h2 class="heading-medium">Updated header</h2>
+      <h2 class="govuk-heading-m">Updated header</h2>
 
       <p>The name against the sign out link should be the DfE user, not the organisation – this is for all users.</p>
 
-      <h2 class="heading-medium">User research</h2>
+      <h2 class="govuk-heading-m">User research</h2>
 
       <p>We tested multiple organisations with Bromley Schools Collegiate who manage 5 different organisations: <a href="https://lookback.io/watch/sRRB74G75vSczMrY7">User research session</a></p>
 
       <p>The design worked without any supporting copy. The separation of organisations was understood by the user.</p>
 
-      <div class="panel panel-wide-border">
+      <div class="govuk-inset-text">
         <blockquote>
           <p>“Oh lovely, that’s really good”</p>
           <p>“It’s nice that you don’t have to log in somewhere else”</p>
         </blockquote>
       </div>
 
-      <hr />
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <p>Original story: <a href="https://dfedigital.atlassian.net/browse/BATSA-401">BATSA-401</a></p>
 
@@ -98,5 +93,5 @@
     <p>See breadcrumb again.</p>
   ') }}
 
-</main>
+
 {% endblock %}

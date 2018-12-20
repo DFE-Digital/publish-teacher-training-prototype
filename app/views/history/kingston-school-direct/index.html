@@ -1,19 +1,14 @@
-
 {% extends "layout.html" %}
 {% set title = 'Kingston School Direct' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p><a href="https://lookback.io/watch/FoHoHPQF7B5TwrFkw">Research video</a></p>
     </div>
   </div>
@@ -55,5 +50,5 @@
 
   {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/kingston-school-direct/thumbnails/11-organisation.png', '/public/images/history/kingston-school-direct/11-organisation.png', '') }}
 
-</main>
+
 {% endblock %}

@@ -1,18 +1,14 @@
 {% set title = 'Is it fee paying or salaried?' %}
 {% extends "layout.html" %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="{{ paths.back }}" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         {% set fields = [
             {
@@ -29,10 +25,10 @@
 
         {{ macros.radioGroup(code + '-new-type', fields, 0, false) }}
 
-        <input type="submit" class="button" value="Continue" />
+        <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

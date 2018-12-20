@@ -1,19 +1,14 @@
-
 {% extends "layout.html" %}
 {% set title = 'Preview course' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>Screenshots showing different preview states based on type and completeness of course.</p>
       <p>The <a href="https://github.com/fofr/manage-courses-prototype/blob/master/app/views/preview.html">prototype preview logic</a> may also help when building this.</p>
     </div>
@@ -40,5 +35,5 @@
   {{ macros.screenshot('Preview of salaried course with only required fields', 'preview-of-salaried-course-with-only-required-fields', '/public/images/history/preview-course/thumbnails/05-preview-of-salaried-course-with-only-required-fields.png', '/public/images/history/preview-course/05-preview-of-salaried-course-with-only-required-fields.png', '') }}
 
   {{ macros.screenshot('Preview of empty salaried course', 'preview-of-empty-salaried-course', '/public/images/history/preview-course/thumbnails/01-preview-of-empty-salaried-course.png', '/public/images/history/preview-course/01-preview-of-empty-salaried-course.png', '') }}
-</main>
+
 {% endblock %}

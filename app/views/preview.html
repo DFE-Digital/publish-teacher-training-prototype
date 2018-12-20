@@ -1,41 +1,36 @@
-{% extends "preview-layout.html" %}
-{% block page_title %}Preview{% endblock %}
+{% extends "layout.html" %}
+{% block pageTitle %}Preview{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path, 'Back to course') }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-
-  <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="link-back">Back to course</a>
-
-  <div class="status-box add-top-margin">
-    This is a preview of a course: {{ course.name }} ({{ course.programmeCode }}).
+  <div class="status-box govuk-!-margin-bottom-4" style="margin-top: -15px">
+    <p class="govuk-!-margin-bottom-0">This is a preview of a course: {{ course.name }} ({{ course.programmeCode }})</p>
   </div>
 
-  <h1 class="heading-xlarge" style="margin-top: 1.25em; margin-bottom: 0.55556em">
-    {{ course.name }} with {{ data['training-provider-name'] }}
-    {% if not accrediting.selfAccrediting %}<span class="heading-secondary">Accredited by {{ accrediting.name }}</span>{% endif %}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-!-font-size-36">{{ data['training-provider-name'] }}</span>
+    {{ course.name }} ({{ course.programmeCode }})
   </h1>
 
-  <dl class="aligned" style="margin-top: 60px;">
-    <dt>Course offered:</dt>
-    <dd>
-      {{ course.options[0] }}
-    </dd>
+  <p class="govuk-body-l">{{ course.options[0] }}</p>
+
+  <dl class="aligned">
     <dt>Qualification:</dt>
     <dd>
-      <details role="group">
+      <details class="govuk-details">
         {% if 'PGCE' in course.options[0] %}
-          <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">PGCE with QTS</span></summary>
-
-          <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">PGCE with QTS</span>
+          </summary>
+          <div class="govuk-details__text">
               <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally.</p>
               <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
           </div>
         {% else %}
-          <summary style="margin-bottom: 0;" role="button" aria-controls="details-content-0" aria-expanded="true"><span class="summary">QTS</span></summary>
-
-          <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="false">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">QTS</span>
+          </summary>
+          <div class="govuk-details__text">
               <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
               <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
           </div>
@@ -49,11 +44,6 @@
       {% else %}
         {{ data[prefix + '-duration'] or '1 year' }}
       {% endif %}
-      {% if 'full' in course.options[0] %}
-        full time
-      {% else %}
-        part time
-      {% endif %}
     </dd>
     <dt>Date you can apply from:</dt>
     <dd>26 October 2018</dd>
@@ -65,13 +55,19 @@
         <a href="{{ data['website'] }}">{{ data['website'] }}</a>
       {% endif %}
     </dd>
+    {% if not accrediting.selfAccrediting %}
+      {% if accrediting.name %}
+      <dt>Accredited provider:</dt>
+      <dd>{{ accrediting.name }}</dd>
+      {% endif %}
+    {% endif %}
   </dl>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <div class="course-contents">
-        <h2 class="heading-small">Contents</h2>
-        <ul class="list">
+        <h2 class="govuk-heading-m">Contents</h2>
+        <ul class="govuk-list">
           <li><a href="#section-about">About the course</a></li>
           {% if data[prefix + '-interview-process'] %}
             <li><a href="#section-interview">Interview process</a></li>
@@ -90,46 +86,46 @@
           <li><a href="#section-apply">Apply</a></li>
         </ul>
 
-        <h2 class="heading-medium" id="section-about">About the course</h2>
+        <h2 class="govuk-heading-l" id="section-about">About the course</h2>
         {{ macros.previewPart(prefix + '-about-this-course') }}
 
         {% if data[prefix + '-interview-process'] %}
-          <h2 class="heading-medium" id="section-interview">Interview process</h2>
+          <h2 class="govuk-heading-l" id="section-interview">Interview process</h2>
           {{ macros.previewPart(prefix + '-interview-process') }}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-schools">How school placements work</h2>
+        <h2 class="govuk-heading-l" id="section-schools">How school placements work</h2>
         {{ macros.previewPart(prefix + '-placement-school-policy') }}
 
         {% if course.salaried %}
-          <h2 class="heading-medium" id="section-salary">Salary</h2>
+          <h2 class="govuk-heading-l" id="section-salary">Salary</h2>
           {{ macros.previewPart(prefix + '-salary-details') }}
         {% else %}
-          <h2 class="heading-medium" id="section-fees">Fees</h2>
+          <h2 class="govuk-heading-l" id="section-fees">Fees</h2>
 
           {% if not data[prefix + '-fee'] %}
             {{ macros.previewPart(prefix + '-fee') }}
           {% else %}
             <p>The course fees for 2018/2019 are as follows:</p>
             <div class="body-text">
-              <table>
-                <tbody>
+              <table class="govuk-table">
+                <tbody class="govuk-table__body">
                   <tr class="visually-hidden">
-                    <th>Student type</th>
-                    <th>Fees to pay</th>
+                    <th class="govuk-table__header" scope="col">Student type</th>
+                    <th class="govuk-table__header" scope="col">Fees to pay</th>
                   </tr>
-                  <tr>
-                    <td>UK students</td>
-                    <td>£{{ data[prefix + '-fee'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">UK students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
                   </tr>
-                  <tr>
-                    <td>EU students</td>
-                    <td>£{{ data[prefix + '-fee'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">EU students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
                   </tr>
                   {% if data[prefix + '-fee-international'] %}
-                  <tr>
-                    <td>International students</td>
-                    <td>£{{ data[prefix + '-fee-international'] }}</td>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">International students</td>
+                    <td class="govuk-table__cell">£{{ data[prefix + '-fee-international'] }}</td>
                   </tr>
                   {% endif %}
                 </tbody>
@@ -142,44 +138,44 @@
           {% endif %}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-financial-support">Financial support</h3>
+        <h2 class="govuk-heading-l" id="section-financial-support">Financial support</h3>
         <p>You may be eligible for <a href="https://www.gov.uk/teacher-training-funding">financial support while you study, including bursaries, scholarships and loans</a>.</p>
         <p><a href="https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates">Financial support if you’re from outside of the UK</a>.</p>
 
         {% if data[prefix + '-financial-support'] %}
-          <h3 class="heading-small">Financial support from the training provider</h3>
+          <h3 class="govuk-heading-m">Financial support from the training provider</h3>
           {{ macros.previewPart(prefix + '-financial-support') }}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-entry">Requirements</h2>
+        <h2 class="govuk-heading-l" id="section-entry">Requirements</h2>
 
-        <h3 class="heading-small">Qualifications needed</h3>
+        <h3 class="govuk-heading-m">Qualifications needed</h3>
         {{ macros.previewPart(prefix + '-qualifications-required') }}
 
         {% if data[prefix + '-personal-qualities'] %}
-          <h3 class="heading-small">Personal qualities</h3>
+          <h3 class="govuk-heading-m">Personal qualities</h3>
           {{ macros.previewPart(prefix + '-personal-qualities') }}
         {% endif %}
 
         {% if data[prefix + '-other-requirements'] %}
-          <h3 class="heading-small">Other requirements</h3>
+          <h3 class="govuk-heading-m">Other requirements</h3>
           {{ macros.previewPart(prefix + '-other-requirements') }}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-about-provider">About the training provider</h2>
+        <h2 class="govuk-heading-l" id="section-about-provider">About the training provider</h2>
         {{ macros.previewPart('about-organisation', true) }}
 
         {% if not accrediting.selfAccrediting %}
           {% if data[accrediting.slug + '-about-accrediting-provider'] %}
-            <h3 class="heading-small">About {{ accrediting.name }}</h3>
+            <h3 class="govuk-heading-m">About {{ accrediting.name }}</h3>
             {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
           {% endif %}
         {% endif %}
 
-        <h2 class="heading-medium" id="section-access-needs">Training with disabilities and other needs</h2>
+        <h2 class="govuk-heading-l" id="section-access-needs">Training with disabilities and other needs</h2>
         {{ macros.previewPart('training-with-a-disability', true) }}
 
-        <h2 class="heading-medium" id="section-contact">Contact details</h2>
+        <h2 class="govuk-heading-l" id="section-contact">Contact details</h2>
 
         {% if not (data['email-address'] and data['telephone-number'] and data['website'] and data['postcode'] and data['building-and-street']) %}
           <p class="missing-section">
@@ -206,7 +202,7 @@
           </dd>
         </dl>
 
-        <h2 class="heading-medium" id="section-apply">
+        <h2 class="govuk-heading-l" id="section-apply">
           Apply
         </h2>
         <p>
@@ -215,7 +211,7 @@
         <p>
           You’ll need these codes for the Choices section of the application form:
         </p>
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>training provider code: {{ course.providerCode }}</li>
           <li>training programme code: {{ course.programmeCode }}</li>
         </ul>
@@ -223,20 +219,20 @@
         <p>You’ll also need to choose a training location and give the relevant training location code.</p>
 
         <p>Available training locations:</p>
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 30%">Name</th>
-              <th style="width: 60%">Address</th>
-              <th>Code</th>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col" style="width: 30%">Name</th>
+              <th class="govuk-table__header" scope="col" style="width: 60%">Address</th>
+              <th class="govuk-table__header" scope="col">Code</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="govuk-table__body">
             {% for school in course.schools %}
-            <tr>
-              <td>{{ school.name }}</td>
-              <td>{{ school.address }}</td>
-              <td>{{ school.code }}</td>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{ school.name }}</td>
+              <td class="govuk-table__cell">{{ school.address }}</td>
+              <td class="govuk-table__cell">{{ school.code }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -244,6 +240,6 @@
       </div>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

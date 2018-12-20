@@ -1,49 +1,48 @@
 {% extends "layout.html" %}
-{% block page_title %}Your organisation{% endblock %}
+{% block pageTitle %}Your organisation{% endblock %}
 
 {% block content %}
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <a href="/organisation" class="link-back">Back</a>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <a href="/organisation" class="govuk-back-link">Back</a>
 
       <form action="/organisation" method="post">
         <legend>
-          <h1 class="heading-xlarge">
+          <h1 class="govuk-heading-xl">
             {{ data['training-provider-name'] }}
           </h1>
         </legend>
 
         {{ macros.textbox('training-provider-name', 'Name', 'The name of your educational institution.')}}
 
-        <h2 class="heading-medium">Address</h2>
+        <h2 class="govuk-heading-m">Address</h2>
         {{ macros.textbox('address-line-1', 'Address line 1')}}
         {{ macros.textbox('address-line-2', 'Address line 2')}}
         {{ macros.textbox('town', 'City or town', false, 'form-control-small')}}
         {{ macros.textbox('postcode', 'Postcode', false, 'form-control-xsmall')}}
 
-        <h2 class="heading-medium">Contact details</h2>
+        <h2 class="govuk-heading-m">Contact details</h2>
         {{ macros.textbox('email', 'Email')}}
         {{ macros.textbox('telephone', 'Telephone')}}
 
-        <h2 class="heading-medium">Website</h2>
+        <h2 class="govuk-heading-m">Website</h2>
 
         {{ macros.textbox('website', 'Website')}}
 
         <div class="form-group">
-          <input type="submit" class="button" value="Save">
+          <input type="submit" class="govuk-button" value="Save">
         </div>
 
-        <div class="form-group">
+        <p>
           <a href="/organisation">Cancel changes</a>
         </p>
       </form>
     </div>
   </div>
-</main>
+
 {% endblock %}
 
 {% block footer_support_links %}

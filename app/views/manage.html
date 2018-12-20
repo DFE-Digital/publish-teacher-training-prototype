@@ -1,24 +1,24 @@
 {% extends "layout.html" %}
 {% set title = 'Publish teacher training courses' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
 
 {% block content %}
 
-<main id="content" role="main">
-  <h1 class="heading-xlarge">
+
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
 
-      <ul class="list">
+      <ul class="govuk-list">
         <li><a href="/">{{ data['training-provider-name'] }}</a></li>
         <li><a href="/schools">Schools</a></li>
         <li><a href="/organisation">Organisation</a></li>
       </ul>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

@@ -1,21 +1,20 @@
 {% extends "layout.html" %}
-{% block page_title %}Sign in{% endblock %}
+{% block pageTitle %}Sign in{% endblock %}
 
 {% block content %}
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form>
         <legend>
-          <h1 class="heading-xlarge">
+          <h1 class="govuk-heading-xl">
             Where do students spend their time?
           </h1>
         </legend>
 
-        <p class="lede">We use this information to help candidates find<br />courses close to them.</p>
+        <p class="govuk-body-l">We use this information to help candidates find<br />courses close to them.</p>
 
         {{ macros.textbox('uni-days', 'Days spent on University campus', 'Liverpool John Moores University')}}
 
@@ -23,10 +22,10 @@
 
         {{ macros.textbox('placement-school-days', 'Days spent at placement school(s)')}}
 
-        <input type="submit" class="button" value="Save">
+        <input type="submit" class="govuk-button" value="Save">
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

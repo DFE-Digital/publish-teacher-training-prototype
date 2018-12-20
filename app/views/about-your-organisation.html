@@ -1,22 +1,25 @@
 {% extends "layout.html" %}
 {% set title = 'About your organisation' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+
+{% block breadcrumbs %}
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          href: "/",
+          text: data['training-provider-name']
+        }
+      ]
+    })
+  }}
+{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-
-  <div class="breadcrumbs">
-    <ol>
-      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
-      <li><a href="/">{{ data['training-provider-name']}}</a></li>
-    </ol>
-  </div>
-
   {% set message %}
     {% if showMessage %}
       <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-        <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
           Your changes have been saved
         </h3>
       </div>
@@ -24,24 +27,15 @@
   {% endset %}
 
   {% if data['about-your-organisation-show-publish-errors'] and errors.length > 0 %}
-  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-      We couldn’t publish this because some information was missing
-    </h3>
-    <p>
-      Fix the following problems and try publishing again:
-    </p>
-    <ul class="error-summary-list">
-      {% for error in errors %}
-      <li><a href="{{ error.link }}">{{ error.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
+    {{ govukErrorSummary({
+      titleText: "We couldn’t publish this because some information was missing",
+      errorList: errors
+    }) }}
   {% endif %}
 
   {% if justPublished %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="heading-medium success-summary-heading" id="success-summary-heading-example-1">
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
       Your changes have been published
     </h3>
   </div>
@@ -49,8 +43,8 @@
 
   {{ macros.orgHeading('About your organisation', message) }}
 
-  <div class="grid-row add-top-margin">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row add-top-margin">
+    <div class="govuk-grid-column-two-thirds">
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <!-- <li class="course-parts-item">
@@ -131,11 +125,11 @@
         </ul>
       </div>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
       {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
     </div>
   </div>
-</main>
+
 
 {% endblock %}

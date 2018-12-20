@@ -1,23 +1,19 @@
 {% set title = 'Which phase is this course for?' %}
 {% extends "layout.html" %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/new/qualifications" class="link-back">Back</a>
-
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
   <form action="/new/duration" method="post">
     {{ macros.datefields('start-date', 'Course start date') }}
 
     <div class="form-group">
-      <input type="submit" class="button" value="Continue" />
+      <input type="submit" class="govuk-button" value="Continue" />
     </div>
   </form>
-</main>
+
 
 {% endblock %}

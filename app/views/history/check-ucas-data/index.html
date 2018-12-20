@@ -1,18 +1,14 @@
 {% extends "layout.html" %}
 {% set title = 'Check your UCAS data' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>When onboarding users to the publish courses tool, to begin with they’ll only have access to the data we've imported from UCAS.</p>
       <p>Users need to check their courses are there and showing correctly to validate our import. If there are problems we need users to report them to us.</p>
       <p>Providers need access for multiple users, we’re creating a secure mechanism to request access for these users.</p>
@@ -48,5 +44,5 @@
     <p>In user research we found that having <a href="/history/school-direct-view#course-details-from-ucas">multiple sets of UCAS course information on one page</a> and deep linking to them was confusing. This design splits them out into a single page per course.</p>
   ') }}
 
-</main>
+
 {% endblock %}

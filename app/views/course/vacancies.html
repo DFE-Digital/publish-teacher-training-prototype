@@ -1,115 +1,110 @@
 {% extends "layout.html" %}
 {% set title = 'Edit vacancies' %}
-{% block page_title %}{{ title }}{% endblock %}
-{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink() }}{% endblock %}
+
 {% block content %}
-
-{% set table %}
-  <div class="add-double-bottom-margin">
-    <table>
-      <thead>
-        <tr>
-          <th>Training locations with vacancies</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for s in course.schools %}
-          <tr>
-            <td>
-              <div class="multiple-choice">
-                <input
-                  id="checkbox-part-{{ loop.index }}"
-                  type="checkbox"
-                  name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
-                  value="Vacancies"
-                  {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
-                >
-                <label for="checkbox-part-{{ loop.index }}">
-                  {{ s.name }}
-                </label>
-              </div>
-            </td>
+  {% set table %}
+    <div class="add-double-bottom-margin">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Training locations with vacancies</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-{% endset %}
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for s in course.schools %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <div class="multiple-choice">
+                  <input
+                    id="checkbox-part-{{ loop.index }}"
+                    type="checkbox"
+                    name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
+                    value="Vacancies"
+                    {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
+                  >
+                  <label for="checkbox-part-{{ loop.index }}">
+                    {{ s.name }}
+                  </label>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endset %}
 
-{% set radioFields = [
-    {
-      name: 'There are no vacancies',
-      text: 'Close this course to new applications.<br />You can reopen a course later.'
-    },
-    {
-      or: true
-    },
-    {
-      name: 'There are some vacancies',
-      text: 'Pick the locations with vacancies',
-      more: table
-    }
-  ]
-%}
-
-{% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-  {% set fields = [
+  {% set radioFields = [
       {
         name: 'There are no vacancies',
         text: 'Close this course to new applications.<br />You can reopen a course later.'
-      }
-    ]
-  %}
-
-  {% if showErrors %}
-    {% set errors = [
-      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are no vacancies to close applications' }
-    ] %}
-  {% endif %}
-{% else %}
-  {% set fields = [
+      },
       {
-        name: 'There are vacancies',
-        text: 'Reopen this course to new applications.'
+        or: true
+      },
+      {
+        name: 'There are some vacancies',
+        text: 'Pick the locations with vacancies',
+        more: table
       }
     ]
   %}
 
-  {% if showErrors %}
-    {% set errors = [
-      { id: course.programmeCode + '-vacancies-choice', title: 'Please confirm there are vacancies to reopen applications' }
-    ] %}
-  {% endif %}
-{% endif %}
+  {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
+    {% set fields = [
+        {
+          name: 'There are no vacancies',
+          text: 'Close this course to new applications.<br />You can reopen a course later.'
+        }
+      ]
+    %}
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="/" class="link-back">Back</a>
+    {% if showErrors %}
+      {% set errors = [
+        {
+          id: course.programmeCode + '-vacancies-choice',
+          href: '#checkbox-part-1',
+          text: 'Please confirm there are no vacancies to close applications'
+        }
+      ] %}
+    {% endif %}
+  {% else %}
+    {% set fields = [
+        {
+          name: 'There are vacancies',
+          text: 'Reopen this course to new applications.'
+        }
+      ]
+    %}
+
+    {% if showErrors %}
+      {% set errors = [
+        {
+          id: course.programmeCode + '-vacancies-choice',
+          href: '#checkbox-part-1',
+          text: 'Please confirm there are vacancies to reopen applications'
+        }
+      ] %}
+    {% endif %}
+  {% endif %}
 
   {% if showErrors and errors %}
-    <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-      <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-        We couldn’t edit the vacancies for this course
-      </h3>
-      <p>
-        Fix the following problems and try again:
-      </p>
-      <ul class="error-summary-list">
-        {% for error in errors %}
-        <li><a href="#checkbox-part-1">{{ error.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
+    {{ govukErrorSummary({
+      titleText: "We couldn’t edit the vacancies for this course",
+      errorList: errors
+    }) }}
   {% endif %}
 
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <form action="{{ coursePath }}/vacancies" method="post">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ course.path }}/vacancies" method="post">
 
         {% if data[course.programmeCode + '-multi-location'] %}
           {% set fields = [
@@ -125,22 +120,22 @@
 
         <div class="add-double-bottom-margin">
           {% if data[course.programmeCode + '-multi-location'] %}
-            <input type="submit" class="button" value="Publish changes" />
+            <input type="submit" class="govuk-button" value="Publish changes" />
           {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-            <input type="submit" class="button" value="Close applications" />
+            <input type="submit" class="govuk-button" value="Close applications" />
           {% else %}
-            <input type="submit" class="button" value="Re-open applications" />
+            <input type="submit" class="govuk-button" value="Re-open applications" />
           {% endif %}
         </div>
 
         <p>
-          <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}">Cancel changes</a>
+          <p><a href="{{ course.path }}">Cancel changes</a></p>
         </p>
 
         <p>There may be a delay before your changes appear on UCAS Apply.</p>
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

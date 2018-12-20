@@ -1,16 +1,15 @@
 {% extends "email-layout.html" %}
-{% block page_title %}Sign in{% endblock %}
+{% block pageTitle %}Sign in{% endblock %}
 
 {% block content %}
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="/we-imported" method="post">
         <legend>
-          <h1 class="heading-xlarge">
+          <h1 class="govuk-heading-xl">
             Sign in
           </h1>
         </legend>
@@ -28,10 +27,10 @@
           <input class="form-control" id="password" type="password" name="password">
         </div>
 
-        <input type="submit" class="button" value="Sign in">
+        <input type="submit" class="govuk-button" value="Sign in">
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

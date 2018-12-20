@@ -1,13 +1,9 @@
 {% set title = 'Minimum course requirements' %}
 {% extends "layout.html" %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <a href="{{ paths.back }}" class="link-back">Back</a>
-
   <!-- examples:
       1: https://find-postgraduate-teacher-training.education.gov.uk/course/17B/225K
       2: https://find-postgraduate-teacher-training.education.gov.uk/course/12U/2527
@@ -15,11 +11,11 @@
       9: https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X341
   -->
 
-  <h1 class="heading-xlarge">
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         <!-- [ ] Applicants need a minimum GCSE grade A* to C, 4 or more, or an equivalent
           * Do not accept applications from candidates who need to take an equivalence test
@@ -29,12 +25,12 @@
 
         {% set moreText %}
           <p>You will accept applications from candidates:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <!-- <li>with the qualification</li> -->
             <li>who expect to have the qualification when the course begins</li>
             <li>who need to take an equivalency test</li>
           </ul>
-          <a href="#">Change</a>
+          <p><a href="#">Change</a></p>
         {% endset %}
 
         {{ macros.checkboxGroup(code + '-new-min-requirements', [
@@ -52,10 +48,10 @@
           }
         ], errors) }}
 
-        <input type="submit" class="button" value="Continue" />
+        <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
   </div>
-</main>
+
 
 {% endblock %}

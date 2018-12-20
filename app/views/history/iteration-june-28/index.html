@@ -1,23 +1,18 @@
-
 {% extends "layout.html" %}
 {% set title = 'Iteration 28 June 2018' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>As with the <a href="/history/iteration-june-26">previous iteration</a>, we ran an unmoderated research session with this design where we asked providers to complete a course listing, the user recorded their input to a <a href="https://lookback.io/watch/ACpaee3SkiuGxS5CD">session on Lookback</a>.</p>
 
       <p>In this iteration we:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>added character counts</li>
         <li>made interview process optional</li>
         <li>hid incomplete optional fields from preview</li>
@@ -51,5 +46,5 @@
 
   {{ macros.screenshot('Preview', 'preview', '/public/images/history/iteration-june-28/thumbnails/08-preview.png', '/public/images/history/iteration-june-28/08-preview.png', '') }}
 
-</main>
+
 {% endblock %}

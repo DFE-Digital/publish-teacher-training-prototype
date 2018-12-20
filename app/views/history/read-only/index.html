@@ -1,19 +1,14 @@
-
 {% extends "layout.html" %}
 {% set title = 'A read only view' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>As part of preparing providers for the upcoming service we wanted to give them read-only access to the service so they could see what information was needed and begin writing their content.</p>
       <p>The team instead chose to provide a document with guidance on the fields rather than a half built interface which would be confusing.</p>
     </div>
@@ -59,5 +54,5 @@
 
   {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/read-only/thumbnails/12-organisation.png', '/public/images/history/read-only/12-organisation.png', '') }}
 
-</main>
+
 {% endblock %}

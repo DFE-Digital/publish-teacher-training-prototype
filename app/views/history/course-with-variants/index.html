@@ -1,26 +1,20 @@
-
 {% extends "layout.html" %}
 {% set title = 'Course with variants' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>Exploration of a course page with fields to capture variants of a course and the differences between them.</p>
       <p>Based on UCAS course descriptions it’s often unclear how courses vary between qualification, funding, subject and accrediting provider – use fields on a course page to prompt providers to indicate these differences, helping candidates make an informed choice.</p>
 
-      <h3 class="heading-medium remove-top-margin">Qualification variants</h3>
+      <h3 class="govuk-heading-m remove-top-margin">Qualification variants</h3>
 
       <p>Providers set up courses with the following qualifications in UCAS:</p>
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>QTS, Postgraduate, Professional: 4661 courses</li>
         <li>QTS, Postgraduate: 3919 courses</li>
         <li>QTS: 3098 courses</li>
@@ -33,20 +27,20 @@
 
       <p>We cannot infer the variants available from the UCAS data.</p>
 
-      <h2 class="heading-medium">Salary variants</h2>
+      <h2 class="govuk-heading-m">Salary variants</h2>
 
       <p>Salaried courses have their own course and are defined by their route:</p>
 
       <p>Routes:</p>
 
-      <ul class="list list-bullet">
+      <ul class="govuk-list govuk-list--bullet">
         <li>School Direct: 7033</li>
         <li>School Direct (salaried): 1910</li>
         <li>SCITT: 1603</li>
         <li>Higher Education: 1235</li>
       </ul>
 
-      <h2 class="heading-medium">Schools</h2>
+      <h2 class="govuk-heading-m">Schools</h2>
 
       <p>Schools (campus/location in UCAS) will be imported with the course and associated with the training provider.<p>
 
@@ -86,5 +80,5 @@
     <p>Allow training providers to explain how this variant is different – eg more time in school, limited places, more experience needed. Note the salary provided – this is important for comparison with fees and financial support such as bursaries and scholarships.</p>
   ') }}
 
-</main>
+
 {% endblock %}

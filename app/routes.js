@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 var {
   generateCourseCode,
   getGeneratedTitle,
@@ -287,7 +287,7 @@ router.get('/course-not-running/:providerCode/:code', function (req, res) {
 
 router.get('/preview/:providerCode/:code', function (req, res) {
   var c = course(req);
-  var prefix = '';
+  var prefix = c.programmeCode;;
 
   res.render('preview', { course: c, prefix: prefix })
 })

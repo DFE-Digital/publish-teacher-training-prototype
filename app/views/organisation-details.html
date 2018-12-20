@@ -1,13 +1,9 @@
 {% extends "layout.html" %}
-{% block page_title %}Organisation{% endblock %}
+{% block pageTitle %}Organisation{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs"></div>
-
-  <h1 class="heading-xlarge">
-    <span class="heading-secondary">{{ data['training-provider-name'] }}</span>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ data['training-provider-name'] }}</span>
     Organisation details
   </h1>
 
@@ -24,6 +20,6 @@
   </p>
 
   <p>Courses accredited by University of Sussex</p>
-</main>
+
 
 {% endblock %}

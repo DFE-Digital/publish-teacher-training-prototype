@@ -1,24 +1,19 @@
-
 {% extends "layout.html" %}
 {% set title = 'New course wizard: Training locations' %}
-{% block page_title %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
 <main id="content" role="main design-history">
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
-  <h1 class="heading-xlarge">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <p>For providers with multiple training locations we need to ask them which of those locations the course will be running at. Otherwise we can default to their only location.</p>
 
       <p>Providers might want to add locations at this stage, if this need arises we’ll accommodate it.</p>
 
-      <h2 class="heading-large">Full time and part time</h2>
+      <h2 class="govuk-heading-l">Full time and part time</h2>
 
       <p>UCAS models full time and part time on the training location. If a course is full time, all training locations can be marked as full time. Similarly with part time. But if ‘full time or part time’ is selected, then we don’t know which training locations offer the full time places and which offer the part time ones.</p>
 
@@ -39,5 +34,5 @@
 
   {{ macros.screenshot('Show locations in summary', 'check-answers-showing-locations', '/public/images/history/new-course-locations/thumbnails/03-check-answers-showing-locations.png', '/public/images/history/new-course-locations/03-check-answers-showing-locations.png', '') }}
 
-</main>
+
 {% endblock %}

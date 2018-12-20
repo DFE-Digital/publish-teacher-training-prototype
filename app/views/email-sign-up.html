@@ -1,17 +1,12 @@
 {% extends "email-layout.html" %}
-{% block page_title %}Email: Sign up{% endblock %}
+{% block pageTitle %}Email: Sign up{% endblock %}
 
 {% block content %}
+  <h1 class="govuk-heading-l">Email received</h1>
 
-<main id="content" role="main">
-  {% include "includes/phase_banner_beta.html" %}
-  <div class="breadcrumbs"></div>
-
-  <h1 class="heading-large">Email received</h1>
-
-  <div class="grid-row">
-    <div class="column-two-thirds fake-email">
-      <h1 class="heading-small add-double-bottom-margin">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds fake-email">
+      <h1 class="govuk-heading-s add-double-bottom-margin">
         Publish teacher training courses - get started
       </h1>
 
@@ -21,7 +16,7 @@
 
       <p class="bold">How to create a new account</p>
 
-      <ol class="list list-number">
+      <ol class="govuk-list govuk-list--number">
         <li>
           <p>You’ll shortly receive an email from DfE Sign-in. This email will include a verification code, and a link to a page where you will need to enter this code and create a password for your new account.</p>
         </li>
@@ -41,6 +36,6 @@
     </div>
   </div>
 
-</main>
+
 
 {% endblock %}
