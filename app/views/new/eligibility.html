@@ -1,12 +1,9 @@
 {% set title = 'Minimum course requirements' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-
-  <a href="{{ paths.back }}" class="govuk-back-link">Back</a>
-
   <!-- examples:
       1: https://find-postgraduate-teacher-training.education.gov.uk/course/17B/225K
       2: https://find-postgraduate-teacher-training.education.gov.uk/course/12U/2527

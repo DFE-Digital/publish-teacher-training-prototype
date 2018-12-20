@@ -1,12 +1,9 @@
 {% set title = 'Pick the training locations for this course' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-
-
-  <a href="{{ paths.back }}" class="govuk-back-link">Back</a>
-
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>

@@ -1,10 +1,7 @@
 {% set title = 'What type of new course?' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
-
-{% block afterPhaseBanner %}
-  <a href="{{ paths.back }}" class="govuk-back-link">Back</a>
-{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">

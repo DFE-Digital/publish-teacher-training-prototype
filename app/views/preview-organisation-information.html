@@ -1,13 +1,8 @@
 {% extends "preview-layout.html" %}
 {% block pageTitle %}Preview{% endblock %}
+{% block backLink %}{{ macros.backLink('/about-your-organisation', 'Back to organisation information') }}{% endblock %}
 
 {% block content %}
-
-
-
-
-  <a href="/about-your-organisation" class="govuk-back-link">Back to organisation information</a>
-
   <div class="status-box add-top-margin">
     <p>This is a preview of your organisation information. It will display at the bottom of each course.</p>
     <p class="remove-bottom-margin">Preview a course to see a complete page.</p>
