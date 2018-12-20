@@ -21,7 +21,7 @@
 
       <form action="{{ paths.next }}" method="post">
         {% set moreTitle %}
-          {{ macros.textbox(code + '-new-title', 'New title', '', 'form-control-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
+          {{ macros.textbox(code + '-new-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
 
           <div class="notice add-double-bottom-margin">
             <i class="icon icon-important" style="margin-top: -17px;">

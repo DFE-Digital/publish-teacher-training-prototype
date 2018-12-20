@@ -323,22 +323,22 @@
 {% endmacro %}
 
 {% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false, v = false) %}
-{% set e = error(id, errors) %}
-<div class="form-group {% if e %} form-group-error{% endif %}">
-  <label class="form-label" for="{{id}}">{{label | safe}}</label>
-  {% if e %}
-    <span class="error-message">
-      {{ e.title }}
-    </span>
-  {% endif %}
-  {% if helpText %}
-    <span class="form-hint">{{helpText | safe}}</span>
-  {% endif %}
-  {% if prefix %}
-    <span class="form-control-prefix">{{ prefix }}</span>
-  {% endif %}
-  <input class="form-control {{ size }}" name="{{id}}" type="text" id="{{id}}" value="{{ v or value(id) }}">
-</div>
+  {% set e = error(id, errors) %}
+  <div class="govuk-form-group {% if e %} govuk-form-group--error{% endif %}">
+    <label class="govuk-label" for="{{id}}">{{label | safe}}</label>
+    {% if helpText %}
+      <span class="govuk-hint">{{helpText | safe}}</span>
+    {% endif %}
+    {% if e %}
+      <span class="govuk-error-message">
+        {{ e.title }}
+      </span>
+    {% endif %}
+    {% if prefix %}
+      <span class="form-control-prefix">{{ prefix }}</span>
+    {% endif %}
+    <input class="govuk-input {{ size or 'govuk-input--width-20' }}" name="{{id}}" type="text" id="{{id}}" value="{{ v or value(id) }}">
+  </div>
 {% endmacro %}
 
 {% macro textboxWithoutValue(id, label, helpText = false, size = '') %}
