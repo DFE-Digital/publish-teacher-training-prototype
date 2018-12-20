@@ -3,12 +3,9 @@
 // Spacing to the left of the task list
 $course-parts-indent: 35px;
 
-// .course-parts {
-//   margin-top: $govuk-gutter;
-//   @include govuk-media-query($from: tablet) {
-//     margin-top: ($govuk-gutter * 1.5);
-//   }
-// }
+.course-parts {
+  @include govuk-font(19);
+}
 
 .course-parts-section {
   display: table;
@@ -18,6 +15,7 @@ $course-parts-indent: 35px;
 }
 
 .course-parts-items {
+  padding-left: 0;
   margin-bottom: $govuk-gutter;
   @include govuk-media-query($from: tablet) {
     margin-bottom: ($govuk-gutter * 2);
@@ -25,9 +23,9 @@ $course-parts-indent: 35px;
 }
 
 .course-parts-item {
+  list-style: none;
   border-top: 1px solid $govuk-border-colour;
   padding-top: $govuk-gutter;
-  padding-bottom: $govuk-gutter;
   @include govuk-clearfix;
 }
 
@@ -109,7 +107,7 @@ $course-parts-indent: 35px;
     float: none;
     display: block;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     white-space: nowrap;
     overflow: hidden;
