@@ -7,6 +7,23 @@
 </ul>
 {% endmacro %}
 
+{% macro designHistoryBreadcrumbs() %}
+  {% from "breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+  <div class="dont-print">
+    {{
+      govukBreadcrumbs({
+        items: [
+          {
+            href: "/history",
+            text: "Design history"
+          }
+        ]
+      })
+    }}
+  </div>
+{% endmacro %}
+
 {% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'govuk-heading-l', headingLevel = 'h2') %}
 <div class="design-history-item">
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>

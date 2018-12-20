@@ -101,17 +101,12 @@ paths.forEach(function(item, index) {
 var title = directoryName.replace(/-/g, ' ');
 title = title.charAt(0).toUpperCase() + title.slice(1)
 
-var templateStart = `
-{% extends "layout.html" %}
+var templateStart = `{% extends "layout.html" %}
 {% set title = '${title}' %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
 
 {% block content %}
-  <div class="breadcrumbs dont-print">
-    <ol>
-      <li><a href="/history">Design history</a></li>
-    </ol>
-  </div>
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 `;
 

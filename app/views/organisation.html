@@ -2,14 +2,6 @@
 {% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
 
 {% block content %}
-
-
-  <div class="breadcrumbs">
-    <ol>
-      {% if value('multi-organisation') %}<li><a href="/">Organisations</a></li>{% endif %}
-    </ol>
-  </div>
-
   {% if justEditedVacancies %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
       <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">

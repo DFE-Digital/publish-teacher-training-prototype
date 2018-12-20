@@ -1,15 +1,24 @@
 {% extends "layout.html" %}
 {% block pageTitle %}Location{% endblock %}
 
+{% block breadcrumbs %}
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          href: "/",
+          text: data['training-provider-name']
+        },
+        {
+          href: "/locations",
+          text: "Locations"
+        }
+      ]
+    })
+  }}
+{% endblock %}
+
 {% block content %}
-
-  <div class="breadcrumbs">
-    <ol>
-      <li><a href="/">{{ data['training-provider-name']}}</a></li>
-      <li><a href="/locations">Locations</a></li>
-    </ol>
-  </div>
-
   <h1 class="govuk-heading-xl">
     {{ school.name }}
   </h1>

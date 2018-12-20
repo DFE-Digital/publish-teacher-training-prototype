@@ -6,22 +6,20 @@
 {% set publishLink = '/publish/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 
+{% block breadcrumbs %}
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          href: "/",
+          text: data['training-provider-name']
+        }
+      ]
+    })
+  }}
+{% endblock %}
+
 {% block content %}
-
-
-  <div class="breadcrumbs">
-    {% if data['multi-organisation'] %}
-      <ol>
-        <li><a href="/">Organisations</a></li>
-        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% else %}
-      <ol>
-        <li><a href="/">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% endif %}
-  </div>
-
   {% if justCreated %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
     <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">

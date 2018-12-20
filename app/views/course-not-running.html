@@ -2,22 +2,20 @@
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 {% block pageTitle %}{{ title }}{% endblock %}
 
+{% block breadcrumbs %}
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          href: "/",
+          text: data['training-provider-name']
+        }
+      ]
+    })
+  }}
+{% endblock %}
+
 {% block content %}
-
-
-  <div class="breadcrumbs">
-    {% if data['multi-organisation'] %}
-      <ol>
-        <li><a href="/">Organisations</a></li>
-        <li><a href="/courses">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% else %}
-      <ol>
-        <li><a href="/">{{ data['training-provider-name']}}</a></li>
-      </ol>
-    {% endif %}
-  </div>
-
   <h1 class="govuk-heading-xl">
     <span class="heading-secondary">{{ course.options }}</span>
     {{ title }}
