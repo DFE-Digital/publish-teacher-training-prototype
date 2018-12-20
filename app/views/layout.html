@@ -35,13 +35,17 @@
 {% endblock %}
 
 {% block header %}
-  {% include "includes/cookie-banner.html" %}
-  {# Set serviceName in config.js. #}
   {{ govukHeader({
     homepageUrl: "/",
     serviceName: serviceName,
     serviceUrl: "/",
-    containerClasses: "govuk-width-container"
+    containerClasses: "govuk-width-container",
+    navigation: [
+      {
+        href: "#",
+        text: "Sign out (Jane Doe)"
+      }
+    ]
   }) }}
 {% endblock %}
 
