@@ -33,12 +33,12 @@
         <dt>Training location code:</dt>
         <dd>{{ school.code }}</dd>
       </dl>
-      <hr class="govuk-section-break govuk-section-break--visible" /> -->
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" /> -->
 
       {{ macros.textbox(school.code + '-location-website', 'Website (optional)', 'For example, a school website', 'govuk-!-width-full', null, errors) }}
       {{ macros.textbox(school.code + '-urn', 'School Unique Reference Number (URN) (optional)', 'This is the unique reference number allocated to all schools by Edubase.', 'form-control-small', null, errors) }}
 
-      <hr class="govuk-section-break govuk-section-break--visible" />
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h2 class="govuk-heading-l add-double-bottom-margin" id="tell-us">Tell us about this location</h2>
 
@@ -119,7 +119,7 @@
 
       {{ macros.checkboxGroup(school.code + '-tell-us', fields, errors, 300) }}
 
-      <hr class="govuk-section-break govuk-section-break--visible" />
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h2 class="govuk-heading-l add-double-bottom-margin" id="type">Label this location</h2>
 
@@ -152,7 +152,7 @@
 
       {{ macros.checkboxGroup(school.code + '-type', fields, errors, 400) }}
 
-      <hr class="govuk-section-break govuk-section-break--visible" />
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h2 class="govuk-heading-l" id="address">Address</h2>
       <p>Not available in this prototype.</p>
@@ -166,7 +166,7 @@
       {{ macros.textbox(school.code + '-county', 'County', null, 'form-control', null, errors) }}
       {{ macros.textbox(school.code + '-postcode', 'Postcode', null, 'form-control-small', null, errors) }}
       -->
-      <hr class="govuk-section-break govuk-section-break--visible" />
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
 
       <input type="submit" class="govuk-button" value="Save" />
