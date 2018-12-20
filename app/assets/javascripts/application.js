@@ -7,7 +7,7 @@ if (window.console && window.console.info) {
 }
 
 $(document).ready(function () {
-  //GOVUK.modules.start();
+  GOVUK.modules.start();
 
   $(function(){
     // $('textarea').each(function() {
