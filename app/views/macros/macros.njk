@@ -294,37 +294,49 @@
 {% endmacro %}
 
 {% macro checkboxGroup(name, fields, errors = false, index = 0) %}
-{% set e = error(name, errors) %}
-<div class="form-group {% if e %} form-group-error{% endif %}">
-  {% if e %}
-    <span class="error-message">
-      {{ e.title }}
-    </span>
-  {% endif %}
-  {% for field in fields %}
-    {% set i = loop.index + index %}
-    <div class="multiple-choice" data-target="checkbox-part-{{ i }}-extra">
-      <input
-        id="checkbox-part-{{ i }}"
-        type="checkbox"
-        name="{{ name }}"
-        value="{{ field.name }}"
-        {{ checked(name, field.name) }}
-      >
-      <label for="checkbox-part-{{ i }}">
-        <span {% if field.text %}class="bold"{% endif %}>{{ field.name }}</span>
-        {% if field.text %}
-          <br />{{ field.text | safe }}
-        {% endif %}
-      </label>
-    </div>
-    {% if field.more %}
-      <div class="panel panel-border-wide js-hidden" id="checkbox-part-{{ i }}-extra">
-        {{ field.more | safe }}
-      </div>
+  {% set e = error(name, errors) %}
+  <div class="govuk-form-group {% if e %} govuk-form-group--error{% endif %}">
+    {% if e %}
+      <span class="govuk-error-message">
+        {{ e.title }}
+      </span>
     {% endif %}
-  {% endfor %}
-</div>
+    <div class="govuk-checkboxes" data-module="checkboxes">
+      {% for field in fields %}
+        {% set i = loop.index + index %}
+        <div class="govuk-checkboxes__item">
+          <input
+            id="checkbox-part-{{ i }}"
+            type="checkbox"
+            name="{{ name }}"
+            value="{{ field.name }}"
+            class="govuk-checkboxes__input"
+            {% if field.more %}data-aria-controls="checkbox-part-{{ i }}-extra"{% endif %}
+            {{ checked(name, field.name) }}
+          >
+          <label
+            for="checkbox-part-{{ i }}"
+            class="govuk-label govuk-checkboxes__label{% if field.text %} govuk-label--s{% endif %}"
+            {% if field.text %}aria-describedby="checkbox-part-{{ i }}-extra-hint"{% endif %}
+          >
+            {{ field.name }}
+          </label>
+          {% if field.text %}
+            <span
+              class="govuk-hint govuk-checkboxes__hint"
+              id="checkbox-{{ name }}-part-{{ i }}-hint">
+                {{ field.text | safe }}
+            </span>
+          {% endif %}
+        </div>
+        {% if field.more %}
+          <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="checkbox-part-{{ i }}-extra">
+            {{ field.more | safe }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 {% endmacro %}
 
 {% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false, v = false) %}
