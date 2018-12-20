@@ -12,6 +12,7 @@ const sessionInMemory = require('express-session')
 const cookieParser = require('cookie-parser')
 
 // Custom dependencies
+const marked = require('marked')
 const dateFormat = require('dateformat')
 
 // Run before other code to make sure variables from .env are available
@@ -266,8 +267,6 @@ app.use(function (req, res, next) {
 
   nunjucksAppEnv.addGlobal('error', function (id, errors) {
    var data = req.session.data;
-
-   console.log(data);
    var courseCode = id.split('-')[0];
 
    if (courseCode.length > 4) {

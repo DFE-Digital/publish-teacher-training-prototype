@@ -242,6 +242,7 @@ dt {
 
 dl.aligned {
   overflow: hidden;
+  @include govuk-font(19);
 }
 
 dl.aligned dt {
@@ -259,6 +260,10 @@ dl.aligned dd {
   width: 70%;
   float: right;
   margin: 0;
+
+  .govuk-details {
+    margin-bottom: 0;
+  }
 }
 
 dl.aligned.course-part-tasks dd {
@@ -355,4 +360,9 @@ dl.aligned.course-part-tasks dd {
     margin-top: -10px;
     margin-bottom: 20px;
   }
+}
+
+.markdown ul {
+  @extend .govuk-list;
+  @extend .govuk-list--bullet;
 }
