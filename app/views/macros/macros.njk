@@ -369,37 +369,37 @@
 {% endmacro %}
 
 {% macro textareaBasic(id, label, rows, helpText = false) %}
-<div class="form-group">
-  <label class="form-label" for="{{id}}">{{label}}</label>
-  {% if helpText %}
-    <span class="form-hint">{{helpText}}</span>
-  {% endif %}
-  <textarea class="form-control form-control-full" rows="{{ rows }}" name="{{ id }}" id="{{ id }}">{{ value(id) }}</textarea>
-</div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="{{id}}">{{label}}</label>
+    {% if helpText %}
+      <span class="govuk-hint">{{helpText}}</span>
+    {% endif %}
+    <textarea class="govuk-textarea" rows="{{ rows }}" name="{{ id }}" id="{{ id }}">{{ value(id) }}</textarea>
+  </div>
 {% endmacro %}
 
 {% macro textarea(id, label, rows, helpText = false, maxWords = 50, errors = false) %}
-{% set e = error(id, errors) %}
+  {% set e = error(id, errors) %}
 
-<div class="form-group{% if e %} form-group-error{% endif %}">
-  <label class="form-label form-label-bold" for="{{id}}">{{label}}</label>
-  {% if e %}
-    <span class="error-message">
-      {{ e.title }}
-    </span>
-  {% endif %}
-  {% if helpText %}
-    <span class="form-hint">{{helpText}}</span>
-  {% endif %}
-  <div class="textarea-wrapper">
-    <textarea
-      class="form-control form-control-full js-char-count"
-      rows="{{ rows }}"
-      name="{{ id }}"
-      id="{{ id }}"
-      data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
+  <div class="govuk-form-group{% if e %} govuk-form-group--error{% endif %}">
+    <label class="govuk-label govuk-label--s" for="{{id}}">{{label}}</label>
+    {% if helpText %}
+      <span class="govuk-hint">{{helpText}}</span>
+    {% endif %}
+    {% if e %}
+      <span class="govuk-error-message">
+        {{ e.title }}
+      </span>
+    {% endif %}
+    <div class="textarea-wrapper">
+      <textarea
+        class="govuk-textarea js-char-count"
+        rows="{{ rows }}"
+        name="{{ id }}"
+        id="{{ id }}"
+        data-maxwords="{{ maxWords }}">{{ value(id) }}</textarea>
+    </div>
   </div>
-</div>
 {% endmacro %}
 
 {% macro datefields(id, label) %}
