@@ -10,12 +10,6 @@ $(document).ready(function () {
   //GOVUK.modules.start();
 
   $(function(){
-    var charCount = new GOVUK.CharCount();
-    charCount.init({
-      selector: 'js-char-count',
-      wordCount: true
-    })
-
     // $('textarea').each(function() {
     //   var $textarea = $(this);
     //
