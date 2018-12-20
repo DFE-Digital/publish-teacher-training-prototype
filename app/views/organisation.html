@@ -29,11 +29,11 @@
 
       <p>
         {% if data['about-your-organisation-publish-state'] == 'draft' %}
-          <span class="phase-tag phase-tag-small phase-tag-draft">Draft</span>
+          <span class="govuk-tag phase-tag-small phase-tag-draft">Draft</span>
         {% elseif data['about-your-organisation-publish-state'] == 'published' %}
-          <span class="phase-tag phase-tag-small phase-tag-published">Published</span>
+          <span class="govuk-tag phase-tag-small phase-tag-published">Published</span>
         {% else %}
-          <span class="phase-tag phase-tag-small phase-tag-no-content">Empty</span>
+          <span class="govuk-tag phase-tag-small phase-tag-no-content">Empty</span>
         {% endif %}
         <a href="/about-your-organisation">Fill-in your organisation information</a>
       </p>
@@ -98,7 +98,7 @@
                       <br /><span class="govuk-body-s">{{ course.options }}</span>
                     </td>
                     <td class="govuk-table__cell">
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
+                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Not&nbsp;running</span>
                     </td>
                     <td class="govuk-table__cell"></td>
                     <td class="govuk-table__cell"></td>
@@ -109,7 +109,7 @@
                       <span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
                     </td>
                     <td class="govuk-table__cell">
-                      <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                     </td>
                     <td class="govuk-table__cell no-wrap">10 November 2018</td>
                     <td class="govuk-table__cell">
@@ -122,11 +122,11 @@
                     </td>
                     <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
                       {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                       {% else %}
-                        <span class="phase-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
+                        <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
                       {% endif %}
                     </td>
                     <td class="govuk-table__cell no-wrap">
