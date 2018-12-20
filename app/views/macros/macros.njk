@@ -210,12 +210,12 @@
 {% endmacro %}
 
 {% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = false) %}
-  <div class="form-group">
-    <label class="form-label" for="{{ name }}">{{ label }}</label>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="{{ name }}">{{ label }}</label>
     {% if helpText %}
-      <span class="form-hint">{{helpText | safe}}</span>
+      <span class="govuk-hint">{{helpText | safe}}</span>
     {% endif %}
-    <select class="form-control" id="{{ name }}" name="{{ name }}">
+    <select class="govuk-select" id="{{ name }}" name="{{ name }}">
       {% if emptyOption %}
         <option></option>
       {% endif %}

@@ -362,6 +362,10 @@ dl.aligned.course-part-tasks dd {
   }
 }
 
+.autocomplete__menu {
+  @include govuk-font(19);
+}
+
 .markdown ul {
   @extend .govuk-list;
   @extend .govuk-list--bullet;
