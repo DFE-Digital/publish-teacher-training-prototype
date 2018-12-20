@@ -16,6 +16,10 @@ $button-colour: #00823b;
 @import "patterns/task-list";
 @import "patterns/related-items";
 
+blockquote {
+  margin: 0;
+}
+
 .multiple-choice [type=checkbox] + label::before {
   background: #fff;
 }
