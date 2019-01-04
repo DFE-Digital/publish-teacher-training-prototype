@@ -24,10 +24,6 @@
 
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
       <form action="#" method="post">
-        <fieldset>
-          <legend></legend>
-        </fieldset>
-        <fieldset>
           {% set fields = [
               {
                 name: 'I agree to the terms and conditions'
@@ -38,7 +34,6 @@
           {{ macros.checkboxGroup('terms-and-conditions', fields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
 
           <input type="submit" class="govuk-button" value="Continue">
-        </fieldset>
       </form>
     </div>
   </div>
