@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% set title = 'Migrating publish statuses' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <style>
+    .new-status {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+    .new-status + td,
+    .new-status + th {
+      padding-left: 10px;
+    }
+  </style>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" style="width: 22%">Old<br />UCAS status</th>
+        <th class="govuk-table__header" style="width: 22%">Old<br />Enrichment status</th>
+        <th class="govuk-table__header new-status" style="width: 22%">New status</th>
+        <th class="govuk-table__header">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell">
+          Circumvent validation<br />
+          Publish minimum course<br />
+          When editing, use validation<br />
+          Chase providers?
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span><br />(not published before)</td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
+        <span class="govuk-body-s">* Unpublished changes</span></td>
+        <td class="govuk-table__cell">
+          Circumvent validation<br />
+          Publish minimum course<br />
+          Use draft enrichment as unpublished changes<br />
+          When editing, use validation<br />
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span><br />(published with unpublished changes)</td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
+        <span class="govuk-body-s">* Unpublished changes</span></td>
+        <td class="govuk-table__cell">
+          Use draft enrichment as unpublished changes
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell">None</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">New – not yet running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span></td>
+        <td class="govuk-table__cell">None</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">New – not yet running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell">None</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">New – not yet running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell">
+          Move course back to draft state<br />
+          Email provider
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span> ???</td>
+        <td class="govuk-table__cell">
+          ???<br />
+          It depends why it’s in this state.
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span> ???</td>
+        <td class="govuk-table__cell">
+          ???<br />
+          It depends why it’s in this state.
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell new-status">???</td>
+        <td class="govuk-table__cell">
+          ???<br />
+          It depends why it’s in this state.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
