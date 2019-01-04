@@ -14,7 +14,200 @@
     </div>
   </div>
 
-  <h2 class="govuk-heading-l">Example states</h2>
+  {% set contents = [
+    { text: 'Courses quiz', id: 'courses-quiz' },
+    { text: 'Example states (second iteration)', id: 'example-states-2' },
+    { text: 'Example states (initial design)', id: 'example-states' }
+  ] %}
+  {{ macros.screenshotContents(contents, 'Contents') }}
+
+  {{ macros.screenshot('Courses quiz', 'courses-quiz', '/public/images/history/quiz/thumbnails/01-courses-quiz.png', '/public/images/history/quiz/01-courses-quiz.png', '
+    <p>We tested this courses quiz with users to see if they understood each state given the information provided.</p>
+
+    <p><a href="/quiz">View quiz</a></p>
+  ') }}
+
+  <h2 class="govuk-heading-l" id="example-states-2">Example states (second iteration)</h2>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Changes in this design:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>replaced Last published column with an ‘Is it on Find?’ column, to be explicit</li>
+        <li>removed view on website link, making the Find status the link itself</li>
+        <li>changed the ‘Draft #2’ state to be clear that it is published and on Find, the concept of ‘second edition’ isn’t needed yet</li>
+      </ul>
+
+      <p>This is the design we tested in the quiz with users.</p>
+    </div>
+  </div>
+
+  <table class="govuk-table ucas-info-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header subject-col">Course</th>
+        <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+        <th class="govuk-table__header published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
+        <th class="govuk-table__header applications-col">Applications</th>
+        <th class="govuk-table__header type-col">Vacancies</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">New course, just added (N123)</a>
+          <span class="govuk-body-s">PGCE with QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
+        </td>
+        <td class="govuk-table__cell">
+          No – still in draft
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Draft course, not published (DD23)</a>
+          <span class="govuk-body-s">QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+        </td>
+        <td class="govuk-table__cell">
+          No – still in draft
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Published, but has unpublished changes (D123)</a>
+          <span class="govuk-body-s">QTS full time</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
+          <span class="govuk-body-s">* Unpublished changes</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          <a href="#">Yes – view online</a>
+        </td>
+        <td class="govuk-table__cell">
+          Open
+        </td>
+        <td class="govuk-table__cell">
+          Yes (<a href="#">Edit</a>)
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Published course (P123)</a>
+          <span class="govuk-body-s">PGCE with QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          <a href="#">Yes – view online</a>
+        </td>
+        <td class="govuk-table__cell">
+          Open
+        </td>
+        <td class="govuk-table__cell">
+          Yes (<a href="#">Edit</a>)
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Published before applications open (PP23)</a>
+          <span class="govuk-body-s">PGCE with QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          <a href="#">Yes – view online</a>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          Open from<br />3 Mar 2019
+        </td>
+        <td class="govuk-table__cell">
+          Yes (<a href="#">Edit</a>)
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Published but full (PC23)</a>
+          <span class="govuk-body-s">QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          <a href="#">Yes – view online</a>
+        </td>
+        <td class="govuk-table__cell">
+          Closed
+        </td>
+        <td class="govuk-table__cell">
+          No (<a href="#">Edit</a>)
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Withdrawn course (W123)</a>
+          <span class="govuk-body-s">QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
+        </td>
+        <td class="govuk-table__cell nowrap">
+          No – withdrawn
+        </td>
+        <td class="govuk-table__cell">
+          Closed
+        </td>
+        <td class="govuk-table__cell">
+          No
+        </td>
+      </tr>
+      <!-- <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Rolled over course (R123)</a>
+          <span class="govuk-body-s">QTS full time</span>
+        </td>
+        <td class="govuk-table__cell">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Rollover</span>
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+        <td class="govuk-table__cell">
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <h2 class="govuk-heading-l" id="example-states">Example states (initial design)</h2>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Problems identified with this design in peer review, before user research:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>‘View on website’ is not a clear enough indicator that the course is on Find</li>
+        <li>‘Draft #2’ was universally misunderstood – it’s live but has unpublished changes, people thought it was not live</li>
+        <li>The last published column wasn’t useful</li>
+      </ul>
+    </div>
+  </div>
+
   <table class="govuk-table ucas-info-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -163,6 +356,4 @@
       </tr>
     </tbody>
   </table>
-
-
 {% endblock %}

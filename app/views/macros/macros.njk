@@ -1,12 +1,12 @@
-{% macro screenshotContents(contents) %}
-<div class="govuk-!-margin-top-4 govuk-!-margin-bottom-9">
-  <h2 class="govuk-heading-m">Screenshots</h2>
-  <ul class="govuk-list">
-    {% for c in contents %}
-      <li><a href="#{{ c.id }}">{{ c.text }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+{% macro screenshotContents(contents, title = 'Screenshots') %}
+  <div class="govuk-!-margin-top-4 govuk-!-margin-bottom-9">
+    <h2 class="govuk-heading-m">{{ title }}</h2>
+    <ul class="govuk-list">
+      {% for c in contents %}
+        <li><a href="#{{ c.id }}">{{ c.text }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endmacro %}
 
 {% macro designHistoryBreadcrumbs() %}
