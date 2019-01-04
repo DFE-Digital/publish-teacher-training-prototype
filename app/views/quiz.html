@@ -2,11 +2,7 @@
 {% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
 
 {% block content %}
-
-
-
-  <h2 class="govuk-heading-xl" style="margin-top: 60px">Courses quiz</h2>
-
+  <h2 class="govuk-heading-xl">Courses quiz</h2>
   <p>Given the information shown in each row of the table, for each course, can you say:</p>
 
   <ul class="govuk-list govuk-list--bullet">
@@ -15,27 +11,26 @@
     <li>what the status means</li>
   </ul>
 
-  <table class="ucas-info-table">
+  <table class="govuk-table ucas-info-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th class="subject-col">Course</th>
-        <th class="status-col" style="width: 160px">Status</th>
-        <th class="published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
-        <th class="applications-col">Applications</th>
-        <th class="type-col">Vacancies</th>
+        <th class="govuk-table__header subject-col">Course</th>
+        <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+        <th class="govuk-table__header published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
+        <th class="govuk-table__header applications-col">Applications</th>
+        <th class="govuk-table__header type-col">Vacancies</th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Primary (P123)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Primary (P123)</a>
           <span class="govuk-body-s">PGCE with QTS full time</span>
         </td>
         <td class="govuk-table__cell">
           <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           <a href="#">Yes – view online</a>
         </td>
         <td class="govuk-table__cell">
@@ -47,14 +42,13 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Chemistry (PC23)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Chemistry (PC23)</a>
           <span class="govuk-body-s">QTS full time</span>
         </td>
         <td class="govuk-table__cell">
           <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           <a href="#">Yes – view online</a>
         </td>
         <td class="govuk-table__cell">
@@ -66,8 +60,7 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Mathematics (N123)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Mathematics (N123)</a>
           <span class="govuk-body-s">PGCE with QTS full time</span>
         </td>
         <td class="govuk-table__cell">
@@ -83,17 +76,16 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Geography (PP23)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Geography (PP23)</a>
           <span class="govuk-body-s">PGCE with QTS full time</span>
         </td>
         <td class="govuk-table__cell">
           <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           <a href="#">Yes – view online</a>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           Open from<br />3 Mar 2019
         </td>
         <td class="govuk-table__cell">
@@ -102,8 +94,7 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">History (DD23)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">History (DD23)</a>
           <span class="govuk-body-s">QTS full time</span>
         </td>
         <td class="govuk-table__cell">
@@ -119,15 +110,14 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Physics (D123)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Physics (D123)</a>
           <span class="govuk-body-s">QTS full time</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published&nbsp;*</span><br />
           <span class="govuk-body-s">* Unpublished changes</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           <a href="#">Yes – view online</a>
         </td>
         <td class="govuk-table__cell">
@@ -139,14 +129,13 @@
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Modern languages (French and Spanish)&nbsp;(W123)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Modern languages (French and Spanish)&nbsp;(W123)</a>
           <span class="govuk-body-s">QTS full time</span>
         </td>
         <td class="govuk-table__cell">
           <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
         </td>
-        <td class="nowrap">
+        <td class="govuk-table__cell nowrap">
           No – withdrawn
         </td>
         <td class="govuk-table__cell">
@@ -158,8 +147,7 @@
       </tr>
       <!-- <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <a href="/course/E65/28ZC" class="govuk-heading-s">Rolled over course (R123)</a>
-          <br>
+          <a href="/course/E65/28ZC" class="govuk-heading-s govuk-!-margin-bottom-0">Rolled over course (R123)</a>
           <span class="govuk-body-s">QTS full time</span>
         </td>
         <td class="govuk-table__cell">
