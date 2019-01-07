@@ -220,16 +220,45 @@ if (useCookieSessionStore === 'true') {
 // Automatically store all data users enter
 if (useAutoStoreData === 'true') {
   app.use(utils.autoStoreData)
-  utils.addCheckedFunction(nunjucksAppEnv)
-  if (useDocumentation) {
-    utils.addCheckedFunction(nunjucksDocumentationEnv)
-  }
-  if (useV6) {
-    utils.addCheckedFunction(nunjucksV6Env)
-  }
+  // utils.addCheckedFunction(nunjucksAppEnv)
+  // if (useDocumentation) {
+  //   utils.addCheckedFunction(nunjucksDocumentationEnv)
+  // }
+  // if (useV6) {
+  //   utils.addCheckedFunction(nunjucksV6Env)
+  // }
 }
 
 app.use(function (req, res, next) {
+  nunjucksAppEnv.addGlobal('checked', function (name, value) {
+    // check session data exists
+    if (req.session.data === undefined) {
+      return ''
+    }
+
+    var storedValue = req.session.data[name]
+
+    // check the requested data exists
+    if (storedValue === undefined) {
+      return ''
+    }
+
+    var checked = ''
+
+    // if data is an array, check it exists in the array
+    if (Array.isArray(storedValue)) {
+      if (storedValue.indexOf(value) !== -1) {
+        checked = 'checked'
+      }
+    } else {
+      // the data is just a simple value, check it matches
+      if (storedValue === value) {
+        checked = 'checked'
+      }
+    }
+    return checked
+  })
+
   nunjucksAppEnv.addGlobal('value', function (name) {
      if (req.session.data === undefined) {
        return ''
