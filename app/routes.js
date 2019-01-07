@@ -268,11 +268,16 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
       showErrors: true
     })
   } else {
-    if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are no vacancies') {
+    var choice = req.body[c.programmeCode + '-vacancies-choice'];
+    if (Array.isArray(choice)) {
+      choice = choice[0];
+    }
+
+    if (choice.includes('no vacancies')) {
       req.session.data[c.programmeCode + '-vacancies-flag'] = 'No';
-    } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are vacancies') {
+    } else if (choice.includes('are vacancies')) {
       req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
-    } else if (req.body[c.programmeCode + '-vacancies-choice'] == 'There are some vacancies') {
+    } else if (choice == 'There are some vacancies') {
       req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
     }
     res.redirect('/?editedVacancies=true')
