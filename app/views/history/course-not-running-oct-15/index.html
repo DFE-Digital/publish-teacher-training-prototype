@@ -9,6 +9,11 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {{ govukWarningText({
+        text: "We didn’t build this design.",
+        iconFallbackText: "Warning"
+      }) }}
+
       <p>As a user looking at all of my courses imported from UCAS, I need to know which of those courses have been published, so that I know which courses applicants are seeing.</p>
 
       <p>An iteration on the <a href="/history/ucas-course-status">first UCAS course status design</a> and the <a href="/history/course-not-running">second UCAS course status design</a>. We have received Zendesk tickets where candidates took a course code from DfE Find and hit errors when they tried to apply. The investigation showed that this was caused by us publishing courses to DfE Find which were set to running on UCAS, but weren’t set to published on UCAS.</p>
