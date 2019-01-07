@@ -5,34 +5,22 @@
 
 {% block content %}
   {% set table %}
-    <div class="add-double-bottom-margin">
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Training locations with vacancies</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% for s in course.schools %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">
-                <div class="multiple-choice">
-                  <input
-                    id="checkbox-part-{{ loop.index }}"
-                    type="checkbox"
-                    name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
-                    value="Vacancies"
-                    {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
-                  >
-                  <label for="checkbox-part-{{ loop.index }}">
-                    {{ s.name }}
-                  </label>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="govuk-checkboxes">
+      {% for s in course.schools %}
+        <div class="govuk-checkboxes__item">
+          <input
+            id="checkbox-part-{{ loop.index }}"
+            class="govuk-checkboxes__input"
+            type="checkbox"
+            name="{{ course.programmeCode + '-vacancies-' + loop.index }}"
+            value="Vacancies"
+            {{ checked(course.programmeCode + '-vacancies-' + loop.index, 'Vacancies') }}
+          >
+          <label class="govuk-label govuk-checkboxes__label" for="checkbox-part-{{ loop.index }}">
+            {{ s.name }}
+          </label>
+        </div>
+      {% endfor %}
     </div>
   {% endset %}
 
@@ -118,6 +106,8 @@
           {{ macros.checkboxGroup(course.programmeCode + '-vacancies-choice', fields, errors) }}
         {% endif %}
 
+        <!-- <p>There will be a delay before your changes are reflected on UCAS Apply.</p> -->
+
         <div class="add-double-bottom-margin">
           {% if data[course.programmeCode + '-multi-location'] %}
             <input type="submit" class="govuk-button" value="Publish changes" />
@@ -131,8 +121,6 @@
         <p>
           <p><a href="{{ course.path }}">Cancel changes</a></p>
         </p>
-
-        <p>There may be a delay before your changes appear on UCAS Apply.</p>
       </form>
     </div>
   </div>
