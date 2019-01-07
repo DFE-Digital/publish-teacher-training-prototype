@@ -43,7 +43,7 @@
   {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
     {% set fields = [
         {
-          name: 'There are no vacancies',
+          name: 'I confirm there are no vacancies',
           text: 'Close this course to new applications.<br />You can reopen a course later.'
         }
       ]
@@ -61,7 +61,7 @@
   {% else %}
     {% set fields = [
         {
-          name: 'There are vacancies',
+          name: 'I confirm there are vacancies',
           text: 'Reopen this course to new applications.'
         }
       ]
@@ -112,7 +112,7 @@
           {% if data[course.programmeCode + '-multi-location'] %}
             <input type="submit" class="govuk-button" value="Publish changes" />
           {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-            <input type="submit" class="govuk-button" value="Close applications" />
+            <input type="submit" class="govuk-button destructive-button" value="Close applications" />
           {% else %}
             <input type="submit" class="govuk-button" value="Re-open applications" />
           {% endif %}

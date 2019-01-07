@@ -1,0 +1,23 @@
+// based on
+// https://github.com/alphagov/govuk-design-system-backlog/issues/9
+// https://govuk-publishing-components.herokuapp.com/component-guide/button/destructive_button
+// https://github.com/alphagov/govuk_publishing_components/blob/master/app/assets/stylesheets/govuk_publishing_components/components/_button.scss
+$destructive-button-background-colour: govuk-colour("red");
+$destructive-button-hover-background-colour: darken($destructive-button-background-colour, 5%);
+$destructive-button-border-colour: govuk-colour("black");
+
+.destructive-button {
+  background-color: $destructive-button-background-colour;
+  box-shadow: 0 2px 0 $destructive-button-border-colour;
+
+  &:link,
+  &:visited,
+  &:active,
+  &:focus {
+    background-color: $destructive-button-background-colour;
+  }
+
+  &:hover {
+    background-color: $destructive-button-hover-background-colour;
+  }
+}
