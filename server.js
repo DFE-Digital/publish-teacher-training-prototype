@@ -303,9 +303,12 @@ app.use(function (req, res, next) {
    }
 
    // Temporarily disable hiding of publish errors
-   // if (!errors || data === undefined || !data[courseCode + '-show-publish-errors']) {
    if (!errors || data === undefined) {
-    return false
+     return false;
+   }
+
+   if (!data[courseCode + '-show-publish-errors'] && !id.includes('vacancies')) {
+     return false;
    }
 
    return errors.find(function(e) {
