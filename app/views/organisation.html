@@ -61,11 +61,11 @@
       <p>Use this section to:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>create, preview and publish courses</li>
+        <li>write about each course</li>
         <li>copy content between courses</li>
       </ul>
 
-      <p>Make sure you preview each course before you publish it, to see how it will look online to applicants.</p>
-      <p>Applicants can only see and apply to published courses.</p>
+      <p>Preview each course before you publish it to see how it will look online.</p>
     </div>
   </div>
 
@@ -81,11 +81,11 @@
         <table class="govuk-table ucas-info-table">
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
-              <th class="govuk-table__header subject-col" scope="col">Course</th>
-              <th class="govuk-table__header status-col" style="width: 170px" scope="col">Status</th>
-              <th class="govuk-table__header published-col" scope="col">Last&nbsp;published</th>
-              <th class="govuk-table__header applications-col" scope="col">Applications</th>
-              <th class="govuk-table__header type-col" scope="col">Vacancies</th>
+              <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
+              <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+              <th class="govuk-table__header published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
+              <th class="govuk-table__header applications-col">Applications</th>
+              <th class="govuk-table__header type-col">Vacancies</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -106,12 +106,14 @@
                   {% if (loop.index < 5) %}
                     <td class="govuk-table__cell">
                       <a href="#" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
-                      <span class="govuk-body-s">{{ course.options }} – <a href="#">View on website</a></span>
+                      <span class="govuk-body-s">{{ course.options }}</span>
                     </td>
                     <td class="govuk-table__cell">
                       <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
                     </td>
-                    <td class="govuk-table__cell no-wrap">10 November 2018</td>
+                    <td class="govuk-table__cell no-wrap">
+                      <a href="#">Yes – view online</a>
+                    </td>
                     <td class="govuk-table__cell">
                       {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}</td>
                     <td class="govuk-table__cell">{{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)</td>
@@ -131,7 +133,9 @@
                     </td>
                     <td class="govuk-table__cell no-wrap">
                       {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-                        {{ today() }}
+                        <a href="#">Yes – view online</a>
+                      {% else %}
+                        No – still in draft
                       {% endif %}
                     </td>
                     <td class="govuk-table__cell">
