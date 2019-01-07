@@ -88,30 +88,56 @@
         </td>
       </tr>
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell">Not running (but has been running in this cycle)</td>
         <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span></td>
-        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span> ???</td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span></td>
         <td class="govuk-table__cell">
-          ???<br />
-          It depends why it’s in this state.
+          Anything that’s been live but isn’t live any more should be marked as withdrawn.
         </td>
       </tr>
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell">Not running (but has been running in this cycle)</td>
         <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
-        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span> ???</td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span></td>
         <td class="govuk-table__cell">
-          ???<br />
-          It depends why it’s in this state.
+          Anything that’s been live but isn’t live any more should be marked as withdrawn.
         </td>
       </tr>
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">Not running</td>
+        <td class="govuk-table__cell">Not running (but has been running in this cycle)</td>
         <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
-        <td class="govuk-table__cell new-status">???</td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span></td>
         <td class="govuk-table__cell">
-          ???<br />
-          It depends why it’s in this state.
+          Anything that’s been live but isn’t live any more should be marked as withdrawn.
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running (not been running in this cycle)</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Empty</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Rollover</span></td>
+        <td class="govuk-table__cell">
+          Use whichever state we give to courses that have been rolled over.
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running (not been running in this cycle)</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell new-status"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span></td>
+        <td class="govuk-table__cell">
+          Not sure that courses can end up in this state. (eg Not running means you can’t enrich)<br />
+          None
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Not running (not been running in this cycle)</td>
+        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span></td>
+        <td class="govuk-table__cell new-status">
+          <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+        </td>
+        <td class="govuk-table__cell">
+          Not sure that courses can end up in this state. (eg Not running means you can’t enrich)<br />
+          Move course back to draft state<br />
+          Email provider
         </td>
       </tr>
     </tbody>
