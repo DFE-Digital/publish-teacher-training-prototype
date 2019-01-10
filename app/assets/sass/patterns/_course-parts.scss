@@ -35,14 +35,13 @@ $course-parts-indent: 35px;
     max-width: 300px;
   }
 
-  .app-check-your-answers__question {
-    // font-weight: normal;
+  .app-check-your-answers__question--error {
+    color: $govuk-error-colour;
+    border-left: 5px solid $govuk-error-colour !important;
+    padding-left: 10px;
 
-    &.app-check-your-answers__question--error {
-      font-weight: bold;
-      color: $govuk-error-colour;
-      border-left: 5px solid $govuk-error-colour !important;
-      padding-left: 10px;
+    a {
+      font-weight: normal;
     }
   }
 
