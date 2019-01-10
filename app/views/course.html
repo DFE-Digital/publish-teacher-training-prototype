@@ -153,7 +153,7 @@
                   Level
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Primary
+                  {{ course.level }}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">
@@ -161,9 +161,7 @@
                   SEND
                 </dt>
                 <dd class="app-check-your-answers__answer">
-
-                    Yes
-
+                  {{ course.sen }}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">
@@ -171,77 +169,71 @@
                   Subject
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Primary with Geography and History
+                  {{ course.subject }}
                 </dd>
               </div>
-
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Outcome
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  PGCE with QTS
+                  {{ course.outcome }}
                 </dd>
               </div>
-
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Fee or salary
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Salaried
-                </dd>
-                <dd class="app-check-your-answers__change" style="display: none">
-                  <a href="/new/E815/funding">
-                    Change<span class="govuk-visually-hidden"> fee or salary</span>
-                  </a>
+                  {{ course.type }}
                 </dd>
               </div>
-
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Full or part time
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Full time
-                </dd>
-                <dd class="app-check-your-answers__change" style="display: none">
-                  <a href="/new/E815/full-time-part-time">
-                    Change<span class="govuk-visually-hidden"> full time or part time</span>
-                  </a>
+                  {{ course['full-part'] }}
                 </dd>
               </div>
-
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Training locations
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Chelsea Academy SW10 0AB<br>Drayton Manor High School
-                </dd>
-                <dd class="app-check-your-answers__change" style="display: none">
-                  <a href="/new/E815/training-locations">
-                    Change<span class="govuk-visually-hidden"> training locations</span>
-                  </a>
+                  {% for s in course.schools %}
+                    {{ s.name }}<br />
+                  {% endfor %}
                 </dd>
               </div>
-
-
-
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Separate accredited provider?
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  No, we are the accredited provider
+                  {% if course.accrediting == data['training-provider-name'] %}
+                    No, we are the accredited provider
+                  {% else %}
+                    Yes
+                  {% endif %}
                 </dd>
               </div>
+              {% if course.accrediting != data['training-provider-name'] %}
+                <div class="app-check-your-answers__contents">
+                  <dt class="app-check-your-answers__question">
+                    Accredited provider
+                  </dt>
+                  <dd class="app-check-your-answers__answer">
+                    {{ course.accrediting }}
+                  </dd>
+                </div>
+              {% endif %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Minimum requirements
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  English
+                  {{ course.minRequirements }}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">
@@ -249,7 +241,7 @@
                   Title
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  Primary with Geography and History (with Special educational needs and disability)
+                  {{ course.name }}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">
@@ -257,7 +249,7 @@
                   Description
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  PGCE with QTS full time with salary
+                  {{ course.options[0] }}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">
@@ -265,7 +257,7 @@
                   Course code
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  E815
+                  {{ course.programmeCode }}
                 </dd>
               </div>
             </dl>
