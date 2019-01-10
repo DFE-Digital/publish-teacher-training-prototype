@@ -72,6 +72,17 @@ router.all('/new/:code/confirm', function (req, res) {
   });
 })
 
+router.all('/new/:code/edit', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new/edit', {
+    code: code,
+    paths: newCourseWizardPaths(req.path, code, data),
+    courseOffered: getCourseOffered(code, data)
+  });
+})
+
 router.post('/new/:code/languages', function (req, res) {
   var code = req.params.code;
   var data = req.session.data;
