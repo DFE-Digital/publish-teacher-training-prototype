@@ -257,12 +257,15 @@ router.get('/course/:providerCode/:code', function (req, res) {
 // Post to course page
 router.post('/course/:providerCode/:code', function (req, res) {
   var c = course(req);
-  req.session.data[c.programmeCode + '-publish-state'] = 'draft';
+  var data = req.session.data;
+  var state = data[c.programmeCode + '-published-before'] ? 'published-with-changes' : 'draft'
+
+  data[c.programmeCode + '-publish-state'] = state;
 
   res.render('course', {
     course: c,
-    errors: validate(req.session.data, c),
-    publishState : 'draft',
+    errors: validate(data, c),
+    publishState : state,
     showMessage: true
   })
 })
