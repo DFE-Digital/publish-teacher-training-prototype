@@ -66,18 +66,23 @@
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <li class="course-parts-item">
-            <h3 class="course-part-task">About this course</h3>
-            <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit about this course</a>
-            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-4">
+            <h3 class="course-part-task">
+              <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">About this course</a>
+            </h3>
+
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
             </dl>
           </li>
           <li class="course-parts-item">
-            <h3 class="course-part-task">Course length and {% if course.salaried %}salary{% else %}fees{% endif %}</h3>
-            <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">Edit course length and {% if course.salaried %}salary{% else %}fees{% endif %}</a>
-            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-4">
+            <h3 class="course-part-task">
+              <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">
+                Course length and {% if course.salaried %}salary{% else %}fees{% endif %}
+              </a>
+            </h3>
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {% if data[course.programmeCode + '-duration'] == 'Other' %}
                 {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
               {% else %}
@@ -95,11 +100,12 @@
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">
-              Requirements and eligibility
+              <a class="course-part-task-action" href="{{ coursePath }}/requirements">
+                Requirements and eligibility
+              </a>
             </h3>
-            <a class="course-part-task-action" href="{{ coursePath }}/requirements">Edit requirements and eligibility</a>
 
-            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-4">
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
@@ -144,10 +150,11 @@
           </li> -->
           <li class="course-parts-item">
             <h3 class="course-part-task">
-              Course information
+              <a class="course-part-task-action" href="/new/{{ course.programmeCode }}/edit">
+                Course information
+              </a>
             </h3>
-            <a class="course-part-task-action" href="/new/{{ course.programmeCode }}/edit">Change course information</a>
-            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-4">
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Level
