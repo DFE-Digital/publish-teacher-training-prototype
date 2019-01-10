@@ -18,7 +18,7 @@
 
       <form action="{{ paths.next }}" method="post">
         {% set moreTitle %}
-          {{ macros.textbox(code + '-new-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-new-title'] or generatedTitle or data[code + '-new-generated-title']) }}
+          {{ macros.textbox(code + '-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-title'] or generatedTitle or data[code + '-generated-title']) }}
 
           {{ govukWarningText({
             text: "All course title changes are subject to approval by the Becoming a Teacher team",
@@ -41,7 +41,7 @@
           </ul>
         {% endset %}
 
-        {{ macros.radioGroup(code + '-new-change-title', [
+        {{ macros.radioGroup(code + '-change-title', [
           {
             name: 'Yes, that’s correct'
           },

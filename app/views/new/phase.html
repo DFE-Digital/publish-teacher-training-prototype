@@ -25,7 +25,7 @@
           ]
         %}
 
-        {{ macros.radioGroup(code + '-new-phase', fields) }}
+        {{ macros.radioGroup(code + '-phase', fields) }}
 
         <h2 class="govuk-heading-m">Special educational needs and disability (SEND)</h2>
         {% set fields = [
@@ -35,7 +35,7 @@
           ]
         %}
 
-        {{ macros.checkboxGroup(code + '-new-sen', fields, 0, false) }}
+        {{ macros.checkboxGroup(code + '-sen', fields, 0, false) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
       </form>

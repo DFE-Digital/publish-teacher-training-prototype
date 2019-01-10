@@ -92,17 +92,17 @@ router.all('/new/:code/create', function (req, res) {
   var code = req.params.code;
   var languages = [];
 
-  if (data[code + '-new-first-language']) {
-    languages.push(data[code + '-new-first-language'])
+  if (data[code + '-first-language']) {
+    languages.push(data[code + '-first-language'])
   }
 
-  if (data[code + '-new-second-language']) {
-    languages.push(data[code + '-new-second-language'])
+  if (data[code + '-second-language']) {
+    languages.push(data[code + '-second-language'])
   }
 
   var schools = [];
-  if (Array.isArray(data[code + '-new-locations'])) {
-    data[code + '-new-locations'].forEach(name => {
+  if (Array.isArray(data[code + '-locations'])) {
+    data[code + '-locations'].forEach(name => {
       schools.push(data['schools'].find(school => school.name == name));
     });
   }
@@ -112,23 +112,23 @@ router.all('/new/:code/create', function (req, res) {
   }
 
   var course = {
-    "accrediting": data[code + '-new-accredited-provider'] || data['training-provider-name'],
-    "level": data[code + '-new-phase'],
-    "sen": data[code + '-new-sen'],
-    "subject": data[code + '-new-subject'],
+    "accrediting": data[code + '-accredited-provider'] || data['training-provider-name'],
+    "level": data[code + '-phase'],
+    "sen": data[code + '-sen'],
+    "subject": data[code + '-subject'],
     "languages": languages,
-    "name": data[code + '-new-title'] || data[code + '-new-generated-title'],
-    "full-part": data[code + '-new-full-part'],
-    "type": data[code + '-new-type'],
+    "name": data[code + '-title'] || data[code + '-generated-title'],
+    "full-part": data[code + '-full-part'],
+    "type": data[code + '-type'],
     "slug": "new-course",
     "route": "New",
-    "outcome": data[code + '-new-outcome'],
+    "outcome": data[code + '-outcome'],
     "providerCode": data['provider-code'],
     "programmeCode": code,
     "schools": schools,
-    "minRequirements": data[code + '-new-min-requirements'],
+    "minRequirements": data[code + '-min-requirements'],
     "options": [
-      data[code + '-new-generated-description']
+      data[code + '-generated-description']
     ]
   };
 

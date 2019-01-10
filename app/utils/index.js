@@ -6,25 +6,25 @@ function generateCourseCode() {
 }
 
 function getGeneratedTitle(code, data) {
-  var generatedTitle = data[code + '-new-subject'];
+  var generatedTitle = data[code + '-subject'];
 
   if (isModernLanguages(code, data)) {
-    if (data[code + '-new-second-language']) {
-      if (data[code + '-new-further-languages']) {
-        generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']}, ${data[code + '-new-second-language']}, ${data[code + '-new-further-languages'].join(', ')})`;
+    if (data[code + '-second-language']) {
+      if (data[code + '-further-languages']) {
+        generatedTitle = `${generatedTitle} (${data[code + '-first-language']}, ${data[code + '-second-language']}, ${data[code + '-further-languages'].join(', ')})`;
       } else {
-        generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']} and ${data[code + '-new-second-language']})`;
+        generatedTitle = `${generatedTitle} (${data[code + '-first-language']} and ${data[code + '-second-language']})`;
       }
     } else {
-      generatedTitle = `${generatedTitle} (${data[code + '-new-first-language']})`;
+      generatedTitle = `${generatedTitle} (${data[code + '-first-language']})`;
     }
   }
 
-  if (data[code + '-new-sen']) {
+  if (data[code + '-sen']) {
     generatedTitle = generatedTitle + ' (with Special educational needs and disability)';
   }
 
-  data[code + '-new-generated-title'] = generatedTitle;
+  data[code + '-generated-title'] = generatedTitle;
   return generatedTitle;
 }
 
@@ -59,28 +59,28 @@ function newCourseWizardPaths(currentPath, code, data) {
 }
 
 function getCourseOffered(code, data) {
-  var courseOffered = data[code + '-new-outcome'];
+  var courseOffered = data[code + '-outcome'];
 
-  if (data[code + '-new-full-part'] == 'Full time or part time') {
+  if (data[code + '-full-part'] == 'Full time or part time') {
     courseOffered = courseOffered + ', full time or part time';
-  } else if (data[code + '-new-full-part'])  {
-    courseOffered = courseOffered + ' ' + data[code + '-new-full-part'].toLowerCase();
+  } else if (data[code + '-full-part'])  {
+    courseOffered = courseOffered + ' ' + data[code + '-full-part'].toLowerCase();
   }
 
-  if (data[code + '-new-type'] == 'Salaried') {
+  if (data[code + '-type'] == 'Salaried') {
     courseOffered = courseOffered + ' with salary';
   }
 
-  if (data[code + '-new-type'] == 'Teaching apprenticeship') {
+  if (data[code + '-type'] == 'Teaching apprenticeship') {
     courseOffered = courseOffered + ' teaching apprenticeship';
   }
 
-  data[code + '-new-generated-description'] = courseOffered;
+  data[code + '-generated-description'] = courseOffered;
   return courseOffered;
 }
 
 function isModernLanguages(code, data) {
-  return data[code + '-new-subject'] == 'Modern languages'
+  return data[code + '-subject'] == 'Modern languages'
 }
 
 function subject(req) {

@@ -11,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         {% set otherAccreditedProviderFields %}
-          {{ macros.select(code + '-new-accredited-provider', 'Name of accredited provider', [
+          {{ macros.select(code + '-accredited-provider', 'Name of accredited provider', [
             {
               name: 'Goldsmiths, University of London'
             },
@@ -25,7 +25,7 @@
         {% endset %}
 
         {% set accreditedProviderFields %}
-          {{ macros.radioGroup(code + '-new-accredited-provider', [
+          {{ macros.radioGroup(code + '-accredited-provider', [
             {
               name: 'Sheffield Hallam University'
             },
@@ -53,7 +53,7 @@
           ]
         %}
 
-        {{ macros.radioGroup(code + '-new-has-accredited-provider', fields, errors) }}
+        {{ macros.radioGroup(code + '-has-accredited-provider', fields, errors) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
