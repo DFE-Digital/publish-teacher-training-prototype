@@ -176,6 +176,16 @@
                   {{ course.subject }}
                 </dd>
               </div>
+              {% if course.languages %}
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Languages
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.languages.join('<br />') | safe }}
+                </dd>
+              </div>
+              {% endif %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Outcome
@@ -210,19 +220,16 @@
                   {% endfor %}
                 </dd>
               </div>
+              {% if course.accrediting == data['training-provider-name'] %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Separate accredited provider?
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  {% if course.accrediting == data['training-provider-name'] %}
-                    No, we are the accredited provider
-                  {% else %}
-                    Yes
-                  {% endif %}
+                  No, we are the accredited provider
                 </dd>
               </div>
-              {% if course.accrediting != data['training-provider-name'] %}
+              {% else %}
                 <div class="app-check-your-answers__contents">
                   <dt class="app-check-your-answers__question">
                     Accredited provider
@@ -237,7 +244,11 @@
                   Minimum requirements
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  {{ course.minRequirements }}
+                  {% if course.minRequirements %}
+                    {{ course.minRequirements.join('<br />') | safe }}
+                  {% else %}
+                    None
+                  {% endif %}
                 </dd>
               </div>
               <div class="app-check-your-answers__contents">

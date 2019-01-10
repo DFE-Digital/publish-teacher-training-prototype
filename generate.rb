@@ -11,7 +11,6 @@ courses = data.select {|c| c['provider'] == provider }
 prototype_data = {
   'multi-organisation': false,
   'training-provider-name': provider,
-  'provider-code-name': courses.first['providerCodeName'],
   'provider-code': courses.first['providerCode']
 }
 
@@ -29,15 +28,62 @@ prototype_data['ucasCourses'] = courses.map do |c|
   fullTime = c['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
   salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
 
-  if partTime
+  if fullTime && partTime
+    options << "#{qual}, full time or part time#{salaried}"
+    fullPart = 'Full time or part time'
+  elsif partTime
     options << "#{qual} part time#{salaried}"
+    fullPart = 'Part time'
+  else
+    options << "#{qual} full time#{salaried}"
+    fullPart = 'Full time'
   end
 
-  if fullTime
-    options << "#{qual} full time#{salaried}"
+  schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } }
+
+  subjects = c['subjects'].map {|s| s.downcase.capitalize }
+
+  sen = subjects.include?('Special educational needs')
+  if subjects.include?('Primary')
+    level = 'Primary'
+  elsif subjects.include?('Secondary')
+    level = 'Secondary'
+  else
+    level = 'Further education'
   end
+
+  rejectedSubjects = [
+    'Primary',
+    'Secondary',
+    'Further education',
+    'Special educational needs',
+    'Science'
+  ]
+
+  subjectsWithoutLevel = subjects - rejectedSubjects
+  if subjectsWithoutLevel.length == 0
+    subject = level
+  else
+    subject = subjects[0]
+  end
+
+  type = c['route'] == "School Direct training programme (salaried)" ? 'Salaried' : 'Fee paying (no salary)'
+  minRequirements = [
+    'Mathematics',
+    'English'
+  ]
+
+  # TODO: Languages
 
   prototype_data[c['programmeCode'] + '-outcome'] = qual
+  prototype_data[c['programmeCode'] + '-type'] = type
+  prototype_data[c['programmeCode'] + '-phase'] = level
+  prototype_data[c['programmeCode'] + '-min-requirements'] = minRequirements
+  prototype_data[c['programmeCode'] + '-subject'] = subject
+  prototype_data[c['programmeCode'] + '-full-part'] = fullPart
+  prototype_data[c['programmeCode'] + '-locations'] = schools.map { |s| s[:name] }
+  prototype_data[c['programmeCode'] + '-sen'] = 'This is a SEND course' if sen
+  prototype_data[c['programmeCode'] + '-has-accredited-provider'] = c['accrediting'] ? 'Yes' : 'No, we are the accredited provider'
   prototype_data[c['programmeCode'] + '-accredited-provider'] = c['accrediting'] || provider
   prototype_data[c['programmeCode'] + '-vacancies-flag'] = 'Yes'
   prototype_data[c['programmeCode'] + '-vacancies-choice'] = 'There are some vacancies'
@@ -49,18 +95,21 @@ prototype_data['ucasCourses'] = courses.map do |c|
   end
 
   {
-    regions: c['regions'].join(', '),
+    level: level,
+    sen: sen,
     accrediting: c['accrediting'] || provider,
-    subjects: c['subjects'].map {|s| s.downcase.capitalize }.join(', '),
-    ageRange: c['ageRange'].capitalize,
+    subjects: subjectsWithoutLevel,
+    subject: subject,
+    outcome: qual,
+    type: type,
     name: c['name'],
-    slug: c['name'].downcase.gsub(/[^a-zA-Z0-9]/, '-').gsub(/--*/, '-').gsub(/-$/,''),
     route: c['route'],
-    qualifications: c['qualifications'] ? c['qualifications'].join(', ') : 'Unknown',
     providerCode: c['providerCode'],
     programmeCode: c['programmeCode'],
-    schools: c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } },
-    options: options
+    schools: schools,
+    options: options,
+    minRequirements: minRequirements,
+    'full-part': fullPart
   }
 end
 

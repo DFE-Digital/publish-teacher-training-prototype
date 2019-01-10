@@ -120,8 +120,6 @@ router.all('/new/:code/create', function (req, res) {
     "name": data[code + '-title'] || data[code + '-generated-title'],
     "full-part": data[code + '-full-part'],
     "type": data[code + '-type'],
-    "slug": "new-course",
-    "route": "New",
     "outcome": data[code + '-outcome'],
     "providerCode": data['provider-code'],
     "programmeCode": code,
