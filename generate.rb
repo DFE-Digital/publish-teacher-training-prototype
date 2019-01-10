@@ -75,6 +75,7 @@ prototype_data['ucasCourses'] = courses.map do |c|
 
   # TODO: Languages
 
+  prototype_data[c['programmeCode'] + '-generated-title'] = c['name']
   prototype_data[c['programmeCode'] + '-outcome'] = qual
   prototype_data[c['programmeCode'] + '-type'] = type
   prototype_data[c['programmeCode'] + '-phase'] = level
