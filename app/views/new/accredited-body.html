@@ -1,4 +1,4 @@
-{% set title = 'Is another organisation the accredited body?' %}
+{% set title = 'Who is the accredited body?' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -25,6 +25,7 @@
         {% endset %}
 
         {% set accreditedProviderFields %}
+          <p>Pick which organisation is the accredited body:</p>
           {{ macros.radioGroup(code + '-accredited-body', [
             {
               name: 'Sheffield Hallam University'
@@ -44,11 +45,11 @@
 
         {% set fields = [
             {
-              name: 'Yes',
-              more: accreditedProviderFields
+              name: 'We are the accredited body'
             },
             {
-              name: 'No, we are the accredited body'
+              name: 'Another organisation',
+              more: accreditedProviderFields
             }
           ]
         %}

@@ -135,7 +135,7 @@
           </div>
           {% endif %}
           {% if data['new-course']['include-accredited'] %}
-            {% if data[code + '-has-accredited-body'] == 'Yes' %}
+            {% if data[code + '-has-accredited-body'] == 'Another organisation' %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Accredited body
@@ -152,7 +152,7 @@
             {% else %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
-                  Separate accredited body?
+                  Who is the accredited body?
                 </dt>
                 <dd class="app-check-your-answers__answer">
                   {{ data[code + '-has-accredited-body'] }}

@@ -123,7 +123,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   prototype_data[courseCode + '-full-part'] = fullPart
   prototype_data[courseCode + '-locations'] = schools.map { |s| s[:name] }
   prototype_data[courseCode + '-sen'] = 'This is a SEND course' if sen
-  prototype_data[courseCode + '-has-accredited-body'] = c['accrediting'] ? 'Yes' : 'No, we are the accredited body'
+  prototype_data[courseCode + '-has-accredited-body'] = c['accrediting'] ? 'Another organisation' : 'We are the accredited body'
   prototype_data[courseCode + '-accredited-body'] = c['accrediting'] || provider
   prototype_data[courseCode + '-vacancies-flag'] = idx == 4 ? 'No' : 'Yes'
   prototype_data[courseCode + '-vacancies-choice'] = idx == 4 ? 'There are no vacancies' : 'There are some vacancies'

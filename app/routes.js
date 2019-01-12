@@ -167,16 +167,6 @@ router.all('/new/:code/create', function (req, res) {
   //     ]
   //   },
 
-  // "new-phase": "Secondary",
-  // "new-type": "Salaried",
-  // "new-subject": "Modern languages",
-  // "new-first-language": "French",
-  // "new-second-language": "German",
-  // "new-further-languages": "This course has more languages",
-  // "new-outcome": "PGCE with QTS",
-  // "new-full-part": "Full time",
-  // "new-has-accredited-body": "No, we are the accredited body",
-
   res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
 })
 
