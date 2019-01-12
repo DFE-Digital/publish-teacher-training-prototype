@@ -23,28 +23,93 @@
 
         <p>Applicants need a minimum of GCSE grade C (or 4), or an equivalent in:</p>
 
-        {% set moreText %}
-          <p>You will accept applications from candidates:</p>
-          <ul class="govuk-list govuk-list--bullet">
-            <!-- <li>with the qualification</li> -->
-            <li>who expect to have the qualification when the course begins</li>
-            <li>who need to take an equivalency test</li>
-          </ul>
-          <p><a href="#">Change</a></p>
+        {% set moreTextOptions = [
+          {
+            name: 'Option A (most flexible)',
+            text: '<p>Receive applications from candidates who:</p>
+                   <ul class="govuk-list govuk-list--bullet">
+                    <li>have the qualification when they apply</li>
+                    <li>expect to have it before the course begins</li>
+                    <li>need to take an equivalency test</li>
+                  </ul>',
+            selected: true
+          },
+          {
+            name: 'Option B',
+            text: '<p>Receive applications from candidates who:</p>
+                   <ul class="govuk-list govuk-list--bullet">
+                    <li>have the qualification when they apply</li>
+                    <li>expect to have it before the course begins</li>
+                  </ul>
+                  <p>Reject candidates who need to take an equivalency test</p>'
+          },
+          {
+            name: 'Option C (least flexible)',
+            text: '<p>Only receive applications from candidates who have the qualification when they apply.</p>
+                  <p>Reject candidates who:</p>
+                  <ul class="govuk-list govuk-list--bullet">
+                    <li>don’t have the qualification when they apply</li>
+                    <li>need to take an equivalency test</li>
+                  </ul>'
+          }
+        ] %}
+
+        {% set defaultText %}
+          <div class="js-hide-on-toggle">
+            <p>Receive applications from candidates who:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>have the qualification</li>
+              <li>expect to have it before the course begins</li>
+              <li>need to take an equivalency test</li>
+            </ul>
+            <p>
+              <a href="#change" class="js-toggle">Change</a>
+            </p>
+          </div>
+        {% endset %}
+
+        {% set englishMoreText %}
+          <div data-module="toggle-form">
+            <div style="display: none" class="js-hidden-form">
+              {{ macros.radioGroup(code + '-min-requirements-type-english', moreTextOptions, errors) }}
+            </div>
+
+            {{ defaultText | safe }}
+          </div>
+        {% endset %}
+
+        {% set mathsMoreText %}
+          <div data-module="toggle-form">
+            <div style="display: none" class="js-hidden-form">
+              {{ macros.radioGroup(code + '-min-requirements-type-maths', moreTextOptions, errors) }}
+            </div>
+
+            {{ defaultText | safe }}
+          </div>
+        {% endset %}
+
+        {% set scienceMoreText %}
+          <div data-module="toggle-form">
+            <div style="display: none" class="js-hidden-form">
+              {{ macros.radioGroup(code + '-min-requirements-type-science', moreTextOptions, errors) }}
+            </div>
+
+            {{ defaultText | safe }}
+          </div>
         {% endset %}
 
         {{ macros.checkboxGroup(code + '-min-requirements', [
           {
             name: 'English',
-            more: moreText
+            more: englishMoreText
           },
           {
             name: 'Mathematics',
-            more: moreText
+            more: mathsMoreText
           },
           {
             name: 'Science',
-            more: moreText
+            more: scienceMoreText
           }
         ], errors) }}
 
