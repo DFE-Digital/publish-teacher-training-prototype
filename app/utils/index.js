@@ -8,6 +8,10 @@ function generateCourseCode() {
 function getGeneratedTitle(code, data) {
   var generatedTitle = data[code + '-subject'];
 
+  if (data[code + '-second-subject']) {
+    generatedTitle = `${generatedTitle} with ${data[code + '-second-subject']}`;
+  }
+
   if (isModernLanguages(code, data)) {
     if (data[code + '-second-language']) {
       if (data[code + '-further-languages']) {

@@ -23,7 +23,6 @@
 
         {% set secondaryFields = [
            { name: 'Art and design'},
-           { name: 'Balanced science'},
            { name: 'Biology'},
            { name: 'Business studies'},
            { name: 'Chemistry'},
@@ -47,6 +46,7 @@
            { name: 'Physics'},
            { name: 'Psychology'},
            { name: 'Religious education'},
+           { name: 'Science'},
            { name: 'Social sciences'}
           ]
         %}
@@ -54,7 +54,19 @@
         {% if data[code + '-phase'] == 'Primary' %}
           {{ macros.select(code + '-subject', 'Primary subject', primaryFields) }}
         {% elseif data[code + '-phase'] == 'Secondary' %}
-          {{ macros.select(code + '-subject', 'Secondary subject', secondaryFields) }}
+          {{ macros.select(code + '-subject', 'Subject', secondaryFields) }}
+
+          {% set detailsHtml %}
+            <p>Your first subject is the main one. It’ll appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
+
+            {{ macros.select(code + '-second-subject', 'Second subject', secondaryFields, 'For example ‘Physics with Mathematics’') }}
+          {% endset %}
+
+          {{ govukDetails({
+            summaryText: "Add a second subject",
+            html: detailsHtml
+          }) }}
+
         {% endif %}
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
