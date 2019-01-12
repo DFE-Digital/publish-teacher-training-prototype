@@ -25,21 +25,46 @@ $course-parts-indent: 35px;
 
 .course-parts-item {
   list-style: none;
-  border-top: 1px solid $govuk-border-colour;
-  padding-top: $govuk-gutter;
+  padding-top: 0;
   @include govuk-clearfix;
+
+  .app-check-your-answers__answer--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+  }
+
+  .app-check-your-answers__question--error {
+    color: $govuk-error-colour;
+    border-left: 5px solid $govuk-error-colour !important;
+    padding-left: 10px;
+
+    a {
+      font-weight: normal;
+    }
+  }
+
+  .app-check-your-answers__contents:last-child {
+    .app-check-your-answers__answer,
+    .app-check-your-answers__question {
+      border: none;
+    }
+  }
 }
 
 .course-part-task {
-  float: left;
-  @include govuk-font(24, $weight: bold);
-  margin: 0;
+  @include govuk-font(27, $weight: bold);
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .course-part-task-action {
-  float: right;
-  margin-right: 0;
-  padding-top: 3px;
+
+}
+
+.course-part-task-action:after {
+  @include govuk-clearfix;
 }
 
 .course-part-tasks {

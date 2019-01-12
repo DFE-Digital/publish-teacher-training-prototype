@@ -23,15 +23,15 @@
           ]
         %}
 
-        {{ macros.select(code + '-new-first-language', 'Language', languageFields) }}
-        {{ macros.select(code + '-new-second-language', 'Second language (optional)', languageFields) }}
+        {{ macros.select(code + '-first-language', 'Language', languageFields) }}
+        {{ macros.select(code + '-second-language', 'Second language (optional)', languageFields) }}
 
         {% set furtherLanguages %}
           <h3 class="govuk-heading-m">Further languages</h3>
-          {{ macros.checkboxGroup(code + '-new-further-languages', languageFields, 0, false) }}
+          {{ macros.checkboxGroup(code + '-further-languages', languageFields, 0, false) }}
         {% endset %}
 
-        {{ macros.checkboxGroup(code + '-new-further-languages-check', [
+        {{ macros.checkboxGroup(code + '-further-languages-check', [
           {
             name: 'This course has more languages',
             more: furtherLanguages

@@ -1,13 +1,14 @@
-{% set title = 'Check your answers before confirming' %}
+{% set title = 'Change course information' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/course/' + data['provider-code'] + '/' + code) }}{% endblock %}
 
 {% block content %}
   <form action="{{ paths.next }}" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl add-double-bottom-margin">
+          <span class="govuk-caption-xl">{{ data[code + '-title'] or data[code + '-generated-title'] or generatedTitle }} ({{ code }})</span>
           {{ title }}
         </h1>
 
@@ -218,7 +219,7 @@
           </div>
         </dl>
 
-        <h2 class="govuk-heading-l">Preview</h2>
+        <!-- <h2 class="govuk-heading-l">Preview</h2>
 
         <p>See how this course will appear when it’s published on Find postgraduate teacher training:</p>
         <div class="govuk-inset-text">
@@ -227,12 +228,15 @@
             {{ data[code + '-title'] or generatedTitle }} ({{ code }})
           </h3>
           <p>Course: {{ courseOffered }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <input type="submit" class="govuk-button" value="Save new course" />
-    <p>Saving this course will not publish it.</p>
+    <input type="submit" class="govuk-button" value="Confirm changes" />
+
+    <p>
+      <a href="/course/{{ data['provider-code'] }}/{{ code }}">Cancel changes</a>
+    </p>
   </form>
 
 

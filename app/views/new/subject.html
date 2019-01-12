@@ -1,4 +1,4 @@
-{% set title %}Pick a {{ data[code + '-new-phase'] | lower }} subject{% endset %}
+{% set title %}Pick a {{ data[code + '-phase'] | lower }} subject{% endset %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -35,6 +35,8 @@
            { name: 'Design and technology'},
            { name: 'Drama'},
            { name: 'Economics'},
+           { name: 'English'},
+           { name: 'English literature'},
            { name: 'Geography'},
            { name: 'Health and social care'},
            { name: 'History'},
@@ -49,10 +51,10 @@
           ]
         %}
 
-        {% if data[code + '-new-phase'] == 'Primary' %}
-          {{ macros.select(code + '-new-subject', 'Primary subject', primaryFields) }}
-        {% elseif data[code + '-new-phase'] == 'Secondary' %}
-          {{ macros.select(code + '-new-subject', 'Secondary subject', secondaryFields) }}
+        {% if data[code + '-phase'] == 'Primary' %}
+          {{ macros.select(code + '-subject', 'Primary subject', primaryFields) }}
+        {% elseif data[code + '-phase'] == 'Secondary' %}
+          {{ macros.select(code + '-subject', 'Secondary subject', secondaryFields) }}
         {% endif %}
         <input type="submit" class="govuk-button" value="Continue" />
       </form>

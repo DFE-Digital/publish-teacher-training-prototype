@@ -72,6 +72,17 @@ router.all('/new/:code/confirm', function (req, res) {
   });
 })
 
+router.all('/new/:code/edit', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new/edit', {
+    code: code,
+    paths: newCourseWizardPaths(req.path, code, data),
+    courseOffered: getCourseOffered(code, data)
+  });
+})
+
 router.post('/new/:code/languages', function (req, res) {
   var code = req.params.code;
   var data = req.session.data;
@@ -92,17 +103,17 @@ router.all('/new/:code/create', function (req, res) {
   var code = req.params.code;
   var languages = [];
 
-  if (data[code + '-new-first-language']) {
-    languages.push(data[code + '-new-first-language'])
+  if (data[code + '-first-language']) {
+    languages.push(data[code + '-first-language'])
   }
 
-  if (data[code + '-new-second-language']) {
-    languages.push(data[code + '-new-second-language'])
+  if (data[code + '-second-language']) {
+    languages.push(data[code + '-second-language'])
   }
 
   var schools = [];
-  if (Array.isArray(data[code + '-new-locations'])) {
-    data[code + '-new-locations'].forEach(name => {
+  if (Array.isArray(data[code + '-locations'])) {
+    data[code + '-locations'].forEach(name => {
       schools.push(data['schools'].find(school => school.name == name));
     });
   }
@@ -112,22 +123,21 @@ router.all('/new/:code/create', function (req, res) {
   }
 
   var course = {
-    "accrediting": data[code + '-new-accredited-provider'] || data['training-provider-name'],
-    "level": data[code + '-new-phase'],
-    "sen": data[code + '-new-sen'],
-    "subject": data[code + '-new-subject'],
+    "accrediting": data[code + '-accredited-provider'] || data['training-provider-name'],
+    "level": data[code + '-phase'],
+    "sen": data[code + '-sen'],
+    "subject": data[code + '-subject'],
     "languages": languages,
-    "name": data[code + '-new-title'] || data[code + '-new-generated-title'],
-    "full-part": data[code + '-new-full-part'],
-    "type": data[code + '-new-type'],
-    "slug": "new-course",
-    "route": "New",
-    "outcome": data[code + '-new-outcome'],
+    "name": data[code + '-title'] || data[code + '-generated-title'],
+    "full-part": data[code + '-full-part'],
+    "type": data[code + '-type'],
+    "outcome": data[code + '-outcome'],
     "providerCode": data['provider-code'],
     "programmeCode": code,
     "schools": schools,
+    "minRequirements": data[code + '-min-requirements'],
     "options": [
-      data[code + '-new-generated-description']
+      data[code + '-generated-description']
     ]
   };
 
@@ -247,12 +257,15 @@ router.get('/course/:providerCode/:code', function (req, res) {
 // Post to course page
 router.post('/course/:providerCode/:code', function (req, res) {
   var c = course(req);
-  req.session.data[c.programmeCode + '-publish-state'] = 'draft';
+  var data = req.session.data;
+  var state = data[c.programmeCode + '-published-before'] ? 'published-with-changes' : 'draft'
+
+  data[c.programmeCode + '-publish-state'] = state;
 
   res.render('course', {
     course: c,
-    errors: validate(req.session.data, c),
-    publishState : 'draft',
+    errors: validate(data, c),
+    publishState : state,
     showMessage: true
   })
 })

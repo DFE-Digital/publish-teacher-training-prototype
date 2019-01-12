@@ -66,81 +66,159 @@
       <div class="course-parts course-parts--large">
         <ul class="course-parts-items">
           <li class="course-parts-item">
-            <h3 class="course-part-task">Course information</h3>
-            <!-- <a class="course-part-task-action" href="#">Edit</a> -->
-            <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
-            <p class="govuk-body-l">{{ course.options }}</p>
-            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
-              <dt>Level:</dt>
-              <dd>{{ course.level }}</dd>
-              <dt>Special educational needs:</dt>
-              <dd>
-                {% if course.sen %}
-                  Yes
-                {% else %}
-                  No
-                {% endif %}
-              </dd>
-              <dt>Subject:</dt>
-              <dd>{{ course.subject }}</dd>
-              {% if course.subject == 'Modern languages' %}
-                <dt>Languages:</dt>
-                <dd>{{ course.languages.join(', ') }}</dd>
+            <h3 class="course-part-task">
+              <a class="course-part-task-action" href="/new/{{ course.programmeCode }}/edit">
+                Course information
+              </a>
+            </h3>
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Level
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.level }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  SEND
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {% if course.sen %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Subject
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.subject }}
+                </dd>
+              </div>
+              {% if course.languages %}
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Languages
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.languages.join('<br />') | safe }}
+                </dd>
+              </div>
               {% endif %}
-              <dt>Outcome:</dt>
-              <dd>{{ course.outcome or data[course.programmeCode + '-outcome'] }}</dd>
-              <dt>Full time or part time:</dt>
-              <dd>{{ course['full-part'] }}</dd>
-              {% if data['new-course']['include-fee-or-salary'] %}
-                <dt>Fee or salary:</dt>
-                <dd>{{ course.type }}</dd>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Outcome
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.outcome }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Fee or salary
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.type }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Full or part time
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course['full-part'] }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Training locations
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {% for s in course.schools %}
+                    {{ s.name }}<br />
+                  {% endfor %}
+                </dd>
+              </div>
+              {% if course.accrediting == data['training-provider-name'] %}
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Separate accredited provider?
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  No, we are the accredited provider
+                </dd>
+              </div>
+              {% else %}
+                <div class="app-check-your-answers__contents">
+                  <dt class="app-check-your-answers__question">
+                    Accredited provider
+                  </dt>
+                  <dd class="app-check-your-answers__answer">
+                    {{ course.accrediting }}
+                  </dd>
+                </div>
               {% endif %}
-              {% if data['new-course']['include-accredited'] %}
-                <dt>Accredited provider:</dt>
-                <dd>{{ course.accrediting }}</dd>
-              {% endif %}
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Minimum requirements
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {% if course.minRequirements %}
+                    {{ course.minRequirements.join('<br />') | safe }}
+                  {% else %}
+                    None
+                  {% endif %}
+                </dd>
+              </div>
+              <!-- <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Title
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.name }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Description
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.options[0] }}
+                </dd>
+              </div>
+              <div class="app-check-your-answers__contents">
+                <dt class="app-check-your-answers__question">
+                  Course code
+                </dt>
+                <dd class="app-check-your-answers__answer">
+                  {{ course.programmeCode }}
+                </dd>
+              </div> -->
             </dl>
           </li>
-          <!-- <li class="course-parts-item">
-            <h3 class="course-part-task">Course information</h3>
-
-            <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
-
-            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
-              <dt>Status:</dt>
-              <dd>Running</dd>
-              <dt>Training provider code:</dt>
-              <dd>{{ course.providerCode }}</dd>
-              <dt>Training programme code:</dt>
-              <dd>{{ course.programmeCode }}</dd>
-              <dt>Accredited provider:</dt>
-              <dd>{{ course.accrediting }}</dd>
-              <dt>Route:</dt>
-              <dd>{{ course.route }}</dd>
-              <dt>Subjects:</dt>
-              <dd>{{ course.subjects }}</dd>
-              <dt>Age range:</dt>
-              <dd>{{ course.ageRange }}</dd>
-              <dt>Qualification:</dt>
-              <dd>{{ course.qualifications }}</dd>
-              <dt>Regions:</dt>
-              <dd>{{ course.regions }}</dd>
-            </dl>
-          </li> -->
           <li class="course-parts-item">
-            <h3 class="course-part-task">About this course</h3>
+            <h3 class="course-part-task">
+              <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">About this course</a>
+            </h3>
 
-            <a class="course-part-task-action" href="{{ coursePath }}/about-this-course">Edit</a>
-            <dl class="course-part-tasks">
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
             </dl>
           </li>
           <li class="course-parts-item">
-            <h3 class="course-part-task">Course length and {% if course.salaried %}salary{% else %}fees{% endif %}</h3>
-            <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">Edit</a>
-            <dl class="course-part-tasks">
+            <h3 class="course-part-task">
+              <a class="course-part-task-action" href="{{ coursePath }}/fees-and-length">
+                Course length and {% if course.salaried %}salary{% else %}fees{% endif %}
+              </a>
+            </h3>
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {% if data[course.programmeCode + '-duration'] == 'Other' %}
                 {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
               {% else %}
@@ -158,17 +236,18 @@
           </li>
           <li class="course-parts-item">
             <h3 class="course-part-task">
-              Requirements and eligibility
+              <a class="course-part-task-action" href="{{ coursePath }}/requirements">
+                Requirements and eligibility
+              </a>
             </h3>
-            <a class="course-part-task-action" href="{{ coursePath }}/requirements">Edit</a>
 
-            <dl class="course-part-tasks">
+            <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
               {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
               {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
               {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
             </dl>
           </li>
-          <li class="course-parts-item">
+          <!-- <li class="course-parts-item">
             <h3 class="course-part-task">Training locations</h3>
 
             <div style="clear: left; padding-top: 20px">
@@ -204,7 +283,7 @@
                 text: detailsText | safe
               }) }}
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

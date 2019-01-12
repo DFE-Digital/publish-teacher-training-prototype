@@ -155,31 +155,43 @@
 
 {% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
+  <h3 class="govuk-heading-m">Status</h3>
   {% if state == 'draft' %}
     <span class="govuk-tag phase-tag-draft add-bottom-margin">Draft</span>
-    <p>You have unpublished changes.</p>
-    <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+  {% elseif state == 'new' %}
+    <span class="govuk-tag phase-tag-no-content add-bottom-margin">New</span>
+  {% elseif state == 'published' %}
+    <span class="govuk-tag phase-tag-published add-bottom-margin">Published</span>
+  {% elseif state == 'published-with-changes' %}
+  <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-2">Published&nbsp;*</span>
+  <p>* With unpublished&nbsp;changes</p>
   {% endif %}
 
-  {% if state == 'published' %}
-    <span class="govuk-tag phase-tag-published add-bottom-margin">Published</span>
-  {% endif %}
+  <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">Is it on Find?</h3>
+  <p>
+    {% if publishedBefore or state == 'published' %}
+      <a href="#">Yes – view online</a>
+    {% else %}
+      No – still in draft
+    {% endif %}
+  </p>
 
   {% if publishedBefore or state == 'published' %}
-    <p>Last published:<br />{{ today() }} by Rita Cosca</p>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+    <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
+    <p>
+      Open
+    </p>
+
+    <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+    <p>
+      Yes (<a href="vacancies">Edit</a>)
+    </p>
   {% endif %}
 
-  {% if state == 'new' %}
-    <span class="govuk-tag phase-tag-no-content add-bottom-margin">Empty</span>
-    <p>You need to complete and publish this information.</p>
+  {% if state != 'published' %}
     <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-  {% endif %}
-
-  {% if state == 'new' or state == 'draft' %}
     <h3 class="govuk-heading-m">Preview</h3>
-    <p>See how this course looks with your changes.</p>
+    <p>See how your unpublished changes look.</p>
     <p>Preview your course to check for mistakes before publishing.</p>
     <p>
       <a href="{{ previewLink }}">Preview course</a>
@@ -190,14 +202,19 @@
     <p>Publish your changes.</p>
 
     <a href="{{ publishLink }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
+  {% endif %}
+
+  {% if state != 'new'%}
     <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
 
-  <h3 class="govuk-heading-m">View on website</h3>
-  <p>See how this course currently looks to applicants:</p>
-  <p class="govuk-!-margin-bottom-0">
-    <a href="#">View on website</a>
-  </p>
+  {% if state == 'draft' or state == 'published-with-changes' %}
+    <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+  {% endif %}
+
+  {% if publishedBefore or state == 'published' %}
+    <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+  {% endif %}
 </div>
 {% endmacro %}
 
@@ -436,43 +453,38 @@
 </div>
 {% endmacro %}
 
-{% macro coursePart(id, label, errors, coursePath) %}
-{% set e = error(id, errors) %}
-
-<div {% if e %}class="course-part-error"{% endif %}>
-  <dt class="course-part-label">
-    {{ label }}
-    {% if e %}<a href="{{ e.href }}" class="course-part-label-error">{{ e.text }}</a>{% endif %}
-  </dt>
-  {% if (value(id)) %}
-    <dd class="course-part-value">
-      {{ value(id) }}
+{% macro coursePart(id, label, errors, truncate = true) %}
+  {% set e = error(id, errors) %}
+  <div class="app-check-your-answers__contents">
+    <dt class="app-check-your-answers__question {% if e %}app-check-your-answers__question--error{% endif %}">
+      {{ label }}
+      {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
+    </dt>
+    <dd class="app-check-your-answers__answer {% if truncate %}app-check-your-answers__answer--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
+      {% if (value(id)) %}
+        {{ value(id) }}
+      {% else %}
+        Empty
+      {% endif %}
     </dd>
-  {% else %}
-    <dd class="course-part-value course-part-value--empty">
-      This field is empty
-    </dd>
-  {% endif %}
-</div>
+  </div>
 {% endmacro %}
 
 {% macro feesCoursePart(id, label, errors) %}
-{% set e = error(id, errors) %}
-<div {% if e %}class="course-part-error"{% endif %}>
-  <dt class="course-part-label">
-    {{ label }}
-    {% if e %}<a href="{{ e.href }}" class="course-part-label-error">{{ e.text }}</a>{% endif %}
-  </dt>
-  {% if (value(id)) %}
-    <dd class="course-part-value">
-      £{{ value(id) }}
+  {% set e = error(id, errors) %}
+  <div class="app-check-your-answers__contents">
+    <dt class="app-check-your-answers__question {% if e %}app-check-your-answers__question--error{% endif %}">
+      {{ label }}
+      {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
+    </dt>
+    <dd class="app-check-your-answers__answer {% if not value(id) %}empty{% endif %}">
+      {% if (value(id)) %}
+        £{{ value(id) }}
+      {% else %}
+        Empty
+      {% endif %}
     </dd>
-  {% else %}
-    <dd class="course-part-value course-part-value--empty">
-      This field is empty
-    </dd>
-  {% endif %}
-</div>
+  </div>
 {% endmacro %}
 
 {% macro previewPart(id, org = false) %}
