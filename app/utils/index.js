@@ -38,7 +38,7 @@ function newCourseWizardPaths(currentPath, code, data) {
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : []),
     `/new/${code}/full-time-part-time`,
     ...(data['new-course']['include-locations'] ? [`/new/${code}/training-locations`] : []),
-    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-provider`] : []),
+    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/eligibility`,
     `/new/${code}/title`,
     `/new/${code}/confirm`,

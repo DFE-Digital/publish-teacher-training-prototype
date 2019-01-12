@@ -134,31 +134,31 @@
           </div>
           {% endif %}
           {% if data['new-course']['include-accredited'] %}
-            {% if data[code + '-has-accredited-provider'] == 'Yes' %}
+            {% if data[code + '-has-accredited-body'] == 'Yes' %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
-                  Accredited provider
+                  Accredited body
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  {{ data[code + '-accredited-provider'] }}
+                  {{ data[code + '-accredited-body'] }}
                 </dd>
                 <dd class="app-check-your-answers__change">
-                  <a href="/new/{{ code }}/accredited-provider">
-                    Change<span class="govuk-visually-hidden"> accredited provider</span>
+                  <a href="/new/{{ code }}/accredited-body">
+                    Change<span class="govuk-visually-hidden"> accredited body</span>
                   </a>
                 </dd>
               </div>
             {% else %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
-                  Separate accredited provider?
+                  Separate accredited body?
                 </dt>
                 <dd class="app-check-your-answers__answer">
-                  {{ data[code + '-has-accredited-provider'] }}
+                  {{ data[code + '-has-accredited-body'] }}
                 </dd>
                 <dd class="app-check-your-answers__change">
-                  <a href="/new/{{ code }}/accredited-provider">
-                    Change<span class="govuk-visually-hidden"> accredited provider</span>
+                  <a href="/new/{{ code }}/accredited-body">
+                    Change<span class="govuk-visually-hidden"> accredited body</span>
                   </a>
                 </dd>
               </div>

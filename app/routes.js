@@ -123,7 +123,7 @@ router.all('/new/:code/create', function (req, res) {
   }
 
   var course = {
-    "accrediting": data[code + '-accredited-provider'] || data['training-provider-name'],
+    "accrediting": data[code + '-accredited-body'] || data['training-provider-name'],
     "level": data[code + '-phase'],
     "sen": data[code + '-sen'],
     "subject": data[code + '-subject'],
@@ -175,7 +175,7 @@ router.all('/new/:code/create', function (req, res) {
   // "new-further-languages": "This course has more languages",
   // "new-outcome": "PGCE with QTS",
   // "new-full-part": "Full time",
-  // "new-has-accredited-provider": "No, we are the accredited provider",
+  // "new-has-accredited-body": "No, we are the accredited body",
 
   res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
 })

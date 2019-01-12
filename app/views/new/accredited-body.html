@@ -1,4 +1,4 @@
-{% set title = 'Is another organisation the accredited provider?' %}
+{% set title = 'Is another organisation the accredited body?' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -11,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         {% set otherAccreditedProviderFields %}
-          {{ macros.select(code + '-accredited-provider', 'Name of accredited provider', [
+          {{ macros.select(code + '-accredited-body', 'Name of accredited body', [
             {
               name: 'Goldsmiths, University of London'
             },
@@ -25,7 +25,7 @@
         {% endset %}
 
         {% set accreditedProviderFields %}
-          {{ macros.radioGroup(code + '-accredited-provider', [
+          {{ macros.radioGroup(code + '-accredited-body', [
             {
               name: 'Sheffield Hallam University'
             },
@@ -48,12 +48,12 @@
               more: accreditedProviderFields
             },
             {
-              name: 'No, we are the accredited provider'
+              name: 'No, we are the accredited body'
             }
           ]
         %}
 
-        {{ macros.radioGroup(code + '-has-accredited-provider', fields, errors) }}
+        {{ macros.radioGroup(code + '-has-accredited-body', fields, errors) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
