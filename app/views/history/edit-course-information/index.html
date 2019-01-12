@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% set title = 'Course page – Iteration 11 January' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukWarningText({
+        text: 'This design needs validating with user research',
+        iconFallbackText: "Warning"
+      }) }}
+
+      <p>An iteration on the <a href="/history/enrichment-sept-6#course">current course page</a> which:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>replaces UCAS course information with a new course information section</li>
+        <li>updates the status column to match the <a href="/history/publish-states">latest course table</a></li>
+        <li>condenses the display of information to show more on the page</li>
+        <li>aligns more closely with the ‘<a href="https://design-system.service.gov.uk/patterns/check-answers/">check your answers</a>’ pattern, used by the <a href="#confirm-answers-for-comparison">confirm page</a></li>
+        <li>removes the training locations section in favour of a shorter list at the top</li>
+      </ul>
+
+      <h2 class="govuk-heading-l">Changing course information</h2>
+      <p>At the moment courses can only be enriched in Publish. Course facts/details/features/information (we’re not sure what to call it) are set and managed in UCAS web-link. As part of the UCAS transition we’ve designed a <a href="/history/new-course">new course wizard</a>, which ends in a <a href="#confirm-answers-for-comparison">confirmation page</a>.</p>
+
+      <p>Our current hypothesis is that editing course information should follow the same pattern as the wizard, which has tested well. Sometimes a new answer will mean other parts of the course must be changed – eg changing level from secondary to primary would mean a change to the subject.</p>
+
+      <h3 class="govuk-heading-m">Should all course information be editable?</h3>
+
+      <p>Fundamentally changing an already published course, which people have applied to, means people will have applied to something different to what’s advertised. Consider a course that changes subject, or accredited body.</p>
+
+      <p>The integrity of the course needs to be maintained, while at the same time it must be easy for providers to fix genuine mistakes – consider a course setup with the wrong accredited body.</p>
+
+      <p>Options include:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>edit anything, but put the honus on providers to do the right thing (eg a checkbox confirming that providers will contact anyone who has applied to this course)</li>
+        <li>edit anything, but when changes are fundamental, create a new course that supercedes the old one (this is the process providers follow on UCAS – they create a new course that’s correct and suspend the old one)</li>
+        <li>only allow editing up until the course has been published</li>
+        <li>only allow editing of certain aspects after the course has been published</li>
+      </ul>
+
+      <h2 class="govuk-heading-l">Status column changes</h2>
+
+      <p>An iteration on the <a href="/history/publish-changes/iteration-aug-15">original design</a> to bring it inline with <a href="/history/publish-states">new publish workflow changes</a>.</p>
+
+      <p>The new design:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>changes the second draft status to ‘Published *’, with ‘* unpublished changes’. The previous draft state was universally misunderstood – it’s live but has unpublished changes, people thought it was not live.</li>
+        <li>adds ‘Is it on Find?’, ‘Applications’ and ‘Vacancies’ labels to provide the same information as the course table</li>
+        <li>removes the ‘View on website’ section, replaced with ‘Is it on Find?’</li>
+        <li>moves the audit trail (eg when published, when saved) details to the bottom</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Published course', id: 'published-course' },
+    { text: 'Published with unpublished changes', id: 'published-with-unpublished-changes' },
+    { text: 'Draft course', id: 'draft-course' },
+    { text: 'New course', id: 'new-course' },
+    { text: 'Change course information', id: 'change-course-information' },
+    { text: 'Confirm answers (for comparison)', id: 'confirm-answers-for-comparison' },
+    { text: 'Organisation', id: 'organisation' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Published course', 'published-course', '/public/images/history/edit-course-information/thumbnails/02-published-course.png', '/public/images/history/edit-course-information/02-published-course.png', '') }}
+
+  {{ macros.screenshot('Published with unpublished changes', 'published-with-unpublished-changes', '/public/images/history/edit-course-information/thumbnails/03-published-with-unpublished-changes.png', '/public/images/history/edit-course-information/03-published-with-unpublished-changes.png', '') }}
+
+  {{ macros.screenshot('Draft course', 'draft-course', '/public/images/history/edit-course-information/thumbnails/04-draft-course.png', '/public/images/history/edit-course-information/04-draft-course.png', '') }}
+
+  {{ macros.screenshot('New course', 'new-course', '/public/images/history/edit-course-information/thumbnails/05-new-course.png', '/public/images/history/edit-course-information/05-new-course.png', '') }}
+
+  {{ macros.screenshot('Change course information', 'change-course-information', '/public/images/history/edit-course-information/thumbnails/06-change-course-information.png', '/public/images/history/edit-course-information/06-change-course-information.png', '') }}
+
+  {{ macros.screenshot('Confirm answers (for comparison)', 'confirm-answers-for-comparison', '/public/images/history/edit-course-information/thumbnails/07-confirm-answers-for-comparison.png', '/public/images/history/edit-course-information/07-confirm-answers-for-comparison.png', '') }}
+
+  {{ macros.screenshot('Organisation', 'organisation', '/public/images/history/edit-course-information/thumbnails/01-organisation.png', '/public/images/history/edit-course-information/01-organisation.png', '') }}
+
+{% endblock %}
