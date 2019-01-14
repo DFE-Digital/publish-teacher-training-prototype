@@ -38,7 +38,7 @@
             </dd>
             <dd class="app-check-your-answers__change">
               <a href="/new/{{ code }}/phase">
-                Change<span class="govuk-visually-hidden"> SEN</span>
+                Change<span class="govuk-visually-hidden"> SEND</span>
               </a>
             </dd>
           </div>
@@ -48,6 +48,9 @@
             </dt>
             <dd class="app-check-your-answers__answer">
               {{ data[code + '-subject'] }}
+              {% if data[code + '-second-subject'] %}
+                <br />{{ data[code + '-second-subject'] }}
+              {% endif %}
             </dd>
             <dd class="app-check-your-answers__change">
               <a href="/new/{{ code }}/subject">

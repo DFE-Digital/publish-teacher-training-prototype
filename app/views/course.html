@@ -98,9 +98,12 @@
                 </dt>
                 <dd class="app-check-your-answers__answer">
                   {{ course.subject }}
+                  {% if course.secondSubject %}
+                    <br />{{ course.secondSubject }}
+                  {% endif %}
                 </dd>
               </div>
-              {% if course.languages %}
+              {% if course.languages and course.languages.length > 0 %}
               <div class="app-check-your-answers__contents">
                 <dt class="app-check-your-answers__question">
                   Languages

@@ -127,6 +127,7 @@ router.all('/new/:code/create', function (req, res) {
     "level": data[code + '-phase'],
     "sen": data[code + '-sen'],
     "subject": data[code + '-subject'],
+    "secondSubject": data[code + '-second-subject'],
     "languages": languages,
     "name": data[code + '-title'] || data[code + '-generated-title'],
     "full-part": data[code + '-full-part'],
