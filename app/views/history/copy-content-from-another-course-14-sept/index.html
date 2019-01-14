@@ -9,6 +9,11 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {{ govukWarningText({
+        text: "We didn’t build this design. Instead we used an MVP ‘you can find copy here’ – ie a signpost where people were looking for the feature.",
+        iconFallbackText: "Warning"
+      }) }}
+
       <p>An iteration on where the copy content feature sits.</p>
 
       <p>Because of its position in the right hand column it’s too easily missed by users completing the form. For users who search for the feature because they’ve read about it, it’s missed because they’re searching on the course overview page.</p>
