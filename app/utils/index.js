@@ -12,6 +12,10 @@ function getGeneratedTitle(code, data) {
     generatedTitle = `${generatedTitle} with ${data[code + '-second-subject']}`;
   }
 
+  if (data[code + '-age-youngest']) {
+    generatedTitle = `${generatedTitle} (${data[code + '-age-youngest']} – ${data[code + '-age-oldest']})`;
+  }
+
   if (isModernLanguages(code, data)) {
     if (data[code + '-second-language']) {
       if (data[code + '-further-languages']) {
