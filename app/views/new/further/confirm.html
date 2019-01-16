@@ -1,0 +1,154 @@
+{% set title = 'Check your answers before confirming' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl add-double-bottom-margin">
+          {{ title }}
+        </h1>
+
+        <dl class="app-check-your-answers app-check-your-answers--short govuk-!-margin-top-9 govuk-!-margin-bottom-9">
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Level
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-phase'] }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/phase">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              SEND
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {% if data[code + '-sen'] %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/phase">
+                Change<span class="govuk-visually-hidden"> SEND</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Title
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-title'] or data[code + '-generated-title'] or generatedTitle }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/title">
+                Change<span class="govuk-visually-hidden"> title</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Outcome
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-outcome'] }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/outcome">
+                Change<span class="govuk-visually-hidden"> outcome</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Full or part time
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-full-part'] }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/full-time-part-time">
+                Change<span class="govuk-visually-hidden"> full time or part time</span>
+              </a>
+            </dd>
+          </div>
+          {% if data['new-course']['include-locations'] and data[code + '-locations'] %}
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Training locations
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-locations'] | join('<br>') | safe }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/training-locations">
+                Change<span class="govuk-visually-hidden"> training locations</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Course starts
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-start-date'] }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/further/start-date">
+                Change<span class="govuk-visually-hidden"> start date</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Description
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ courseOffered }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              Course code
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ code }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+
+            </dd>
+          </div>
+        </dl>
+
+        <h2 class="govuk-heading-l">Preview</h2>
+
+        <p>See how this course will appear when it’s published on Find postgraduate teacher training:</p>
+        <div class="govuk-inset-text">
+          <h3 class="govuk-heading-m">
+            <span class="govuk-heading-s govuk-!-margin-bottom-0">{{ data['training-provider-name'] }}</span>
+            {{ data[code + '-title'] or generatedTitle }} ({{ code }})
+          </h3>
+          <p>Course: {{ courseOffered }}</p>
+        </div>
+      </div>
+    </div>
+
+    <input type="submit" class="govuk-button" value="Save new course" />
+    <p>Saving this course will not publish it.</p>
+  </form>
+
+
+{% endblock %}

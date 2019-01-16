@@ -36,6 +36,29 @@ function getGeneratedTitle(code, data) {
   return generatedTitle;
 }
 
+function newFurtherEducationCourseWizardPaths(currentPath, code, data) {
+  var paths = [
+    '/',
+    `/new/${code}/phase`,
+    `/new/${code}/further/title`,
+    `/new/${code}/further/outcome`,
+    `/new/${code}/further/full-time-part-time`,
+    ...(data['new-course']['include-locations'] ? [`/new/${code}/further/training-locations`] : []),
+    `/new/${code}/further/start-date`,
+    `/new/${code}/further/confirm`,
+    `/new/${code}/further/create`
+  ];
+
+  var index = paths.indexOf(currentPath);
+  var next = paths[index + 1];
+  var back = paths[index - 1];
+
+  return {
+    next: next,
+    back: back
+  }
+}
+
 function newCourseWizardPaths(currentPath, code, data) {
   var paths = [
     '/',
@@ -70,6 +93,14 @@ function newCourseWizardPaths(currentPath, code, data) {
 function getCourseOffered(code, data) {
   var courseOffered = data[code + '-outcome'];
 
+  if (data[code + '-outcome'].includes('PGCE only')) {
+    courseOffered = 'PGCE';
+  }
+
+  if (data[code + '-outcome'].includes('PGDE only')) {
+    courseOffered = 'PGDE';
+  }
+
   if (data[code + '-full-part'] == 'Full time or part time') {
     courseOffered = courseOffered + ', full time or part time';
   } else if (data[code + '-full-part'])  {
@@ -90,6 +121,10 @@ function getCourseOffered(code, data) {
 
 function isModernLanguages(code, data) {
   return data[code + '-subject'] == 'Modern languages'
+}
+
+function isFurtherEducation(code, data) {
+  return data[code + '-phase'] == 'Further education'
 }
 
 function subject(req) {
@@ -289,7 +324,9 @@ module.exports = {
   getGeneratedTitle,
   getCourseOffered,
   isModernLanguages,
+  isFurtherEducation,
   newCourseWizardPaths,
+  newFurtherEducationCourseWizardPaths,
   subject,
   course,
   validate,
