@@ -129,6 +129,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   prototype_data[courseCode + '-vacancies-choice'] = idx == 4 ? 'There are no vacancies' : 'There are some vacancies'
   prototype_data[courseCode + '-full-time-and-part-time'] = partTime && fullTime
   prototype_data[courseCode + '-multi-location'] = c['campuses'].length > 1
+  prototype_data[courseCode + '-start-date'] = 'September 2019'
 
   c['campuses'].each_with_index do |campus, i|
     prototype_data["#{courseCode}-vacancies-#{i + 1}"] = 'Vacancies'
@@ -141,6 +142,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     subjects: subjectsWithoutLevel,
     subject: subject,
     outcome: qual,
+    starts: 'September 2019',
     type: type,
     name: c['name'],
     route: c['route'],
