@@ -136,6 +136,7 @@ router.all('/new/:code/create', function (req, res) {
     "providerCode": data['provider-code'],
     "programmeCode": code,
     "schools": schools,
+    "starts": data[code + '-start-date'],
     "minRequirements": data[code + '-min-requirements'],
     "options": [
       data[code + '-generated-description']

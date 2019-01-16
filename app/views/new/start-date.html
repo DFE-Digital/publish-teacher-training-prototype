@@ -1,4 +1,4 @@
-{% set title = 'When will this course start?' %}
+{% set title = 'When does the course start?' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -7,13 +7,27 @@
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <form action="/new/duration" method="post">
-    {{ macros.datefields('new-start-date', 'Course start date') }}
+  <form action="{{ paths.next }}" method="post">
+    {% set dateFields = [
+       { name: 'September 2019'},
+       { name: 'October 2019'},
+       { name: 'November 2019'},
+       { name: 'December 2019'},
+       { name: 'January 2020'},
+       { name: 'February 2020'},
+       { name: 'March 2020'},
+       { name: 'April 2020'},
+       { name: 'May 2020'},
+       { name: 'June 2020'},
+       { name: 'July 2020'},
+       { name: 'August 2020'}
+      ]
+    %}
+
+    {{ macros.select(code + '-start-date', '', dateFields) }}
 
     <div class="form-group">
       <input type="submit" class="govuk-button" value="Continue" />
     </div>
   </form>
-
-
 {% endblock %}

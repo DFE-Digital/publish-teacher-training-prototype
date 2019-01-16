@@ -187,6 +187,19 @@
           </div>
           <div class="app-check-your-answers__contents">
             <dt class="app-check-your-answers__question">
+              Course starts
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {{ data[code + '-start-date'] }}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="/new/{{ code }}/start-date">
+                Change<span class="govuk-visually-hidden"> start date</span>
+              </a>
+            </dd>
+          </div>
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
               Title
             </dt>
             <dd class="app-check-your-answers__answer">
