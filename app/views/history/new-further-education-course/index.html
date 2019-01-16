@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% set title = 'New course wizard – Further education' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>After selecting ‘Further education’ as a course type, the wizard goes down a different path.</p>
+
+      <p><a href="https://docs.google.com/drawings/d/1DAhz464j1XDyQPoOH0adIwAceUwuGU1rqsWkVn8ZQ8I/edit">Google diagram of new course workflow</a></p>
+
+      <p>Further education courses do not have:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>subjects (or languages)</li>
+        <li>accredited bodies</li>
+        <li>minimum GCSE requirements (there is no legal requirement)</li>
+        <li>a fee or salary choice</li>
+      </ul>
+
+      <p>Some screens need to differ:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Title – there is no subject to generate a title from, we must ask for the title</li>
+        <li>Outcome – the outcomes listed are PGCE or PGDE, there is no QTS option</li>
+      </ul>
+
+      <p>Some pages can be reused:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>training locations (if applicable, though no current providers need this screen)</li>
+        <li>full time or part time</li>
+        <li>course start date</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'What type of course?', id: 'what-type-of-course' },
+    { text: 'What is the course title?', id: 'what-is-the-course-title' },
+    { text: 'Pick a course outcome', id: 'pick-a-course-outcome' },
+    { text: 'Full time or part time?', id: 'full-time-or-part-time' },
+    { text: 'Pick training locations', id: 'pick-training-locations' },
+    { text: 'When does the course start?', id: 'when-does-the-course-start' },
+    { text: 'Check your answers', id: 'check-your-answers' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('What type of course?', 'what-type-of-course', '/public/images/history/new-further-education-course/thumbnails/01-what-type-of-course.png', '/public/images/history/new-further-education-course/01-what-type-of-course.png', '') }}
+
+  {{ macros.screenshot('What is the course title?', 'what-is-the-course-title', '/public/images/history/new-further-education-course/thumbnails/02-what-is-the-course-title.png', '/public/images/history/new-further-education-course/02-what-is-the-course-title.png', '') }}
+
+  {{ macros.screenshot('Pick a course outcome', 'pick-a-course-outcome', '/public/images/history/new-further-education-course/thumbnails/03-pick-a-course-outcome.png', '/public/images/history/new-further-education-course/03-pick-a-course-outcome.png', '') }}
+
+  {{ macros.screenshot('Full time or part time?', 'full-time-or-part-time', '/public/images/history/new-further-education-course/thumbnails/04-full-time-or-part-time.png', '/public/images/history/new-further-education-course/04-full-time-or-part-time.png', '') }}
+
+  {{ macros.screenshot('Pick training locations', 'pick-training-locations', '/public/images/history/new-further-education-course/thumbnails/05-pick-training-locations.png', '/public/images/history/new-further-education-course/05-pick-training-locations.png', '') }}
+
+  {{ macros.screenshot('When does the course start?', 'when-does-the-course-start', '/public/images/history/new-further-education-course/thumbnails/06-when-does-the-course-start.png', '/public/images/history/new-further-education-course/06-when-does-the-course-start.png', '') }}
+
+  {{ macros.screenshot('Check your answers', 'check-your-answers', '/public/images/history/new-further-education-course/thumbnails/07-check-your-answers.png', '/public/images/history/new-further-education-course/07-check-your-answers.png', '') }}
+
+{% endblock %}
