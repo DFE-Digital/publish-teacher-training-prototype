@@ -115,6 +115,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   # TODO: Languages
 
   prototype_data[courseCode + '-generated-title'] = c['name']
+  prototype_data[courseCode + '-title'] = c['name']
   prototype_data[courseCode + '-outcome'] = qual
   prototype_data[courseCode + '-type'] = type
   prototype_data[courseCode + '-phase'] = level
