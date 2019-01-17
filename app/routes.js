@@ -163,7 +163,7 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     "subject": data[code + '-subject'],
     "secondSubject": data[code + '-second-subject'],
     "languages": languages,
-    "name": data[code + '-title'] || data[code + '-generated-title'],
+    "name": data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'],
     "full-part": data[code + '-full-part'],
     "type": data[code + '-type'],
     "outcome": data[code + '-outcome'],
@@ -227,8 +227,6 @@ router.all('/new/:code/further/:view', function (req, res) {
     }
     res.send(html);
   });
-
-  //res.render(`new/${req.params.view}`, {code: code, paths: newFurtherEducationCourseWizardPaths(req)})
 })
 
 router.post('/request-access', function (req, res) {

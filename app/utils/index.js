@@ -43,16 +43,16 @@ function originalQuery(req) {
 
 function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) {
   var index = paths.indexOf(currentPath);
-  var next = paths[index + 1];
-  var back = paths[index - 1];
+  var next = paths[index + 1] || '';
+  var back = paths[index - 1] || '';
 
   if (back && back.includes('languages') && !isModernLanguages) {
     back = paths[index - 2];
   }
 
   return {
-    next: next + query,
-    back: back + query
+    next: next.includes('confirm') ? next : next + query,
+    back: back.includes('confirm') ? back : back + query
   }
 }
 
@@ -78,6 +78,22 @@ function newFurtherEducationCourseWizardPaths(req) {
 function newCourseWizardPaths(req) {
   var data = req.session.data;
   var code = req.params.code;
+
+  if (req.query.change == 'subject') {
+    return editSubjectPaths(req);
+  }
+
+  if (req.query.change == 'languages') {
+    return editLanguagePaths(req);
+  }
+
+  if (req.query.change && req.query.change != 'phase') {
+    return {
+      next: `/new/${code}/confirm`,
+      back: `/new/${code}/confirm`
+    }
+  }
+
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -93,6 +109,39 @@ function newCourseWizardPaths(req) {
     `/new/${code}/title`,
     `/new/${code}/confirm`,
     `/new/${code}/create`
+  ];
+
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
+
+  if (nextAndBack.back == '/?change=phase') {
+    nextAndBack.back = `/new/${code}/confirm`;
+  }
+
+  return nextAndBack;
+}
+
+function editSubjectPaths(req) {
+  var data = req.session.data;
+  var code = req.params.code;
+  var paths = [
+    `/new/${code}/confirm`,
+    `/new/${code}/subject`,
+    `/new/${code}/languages`,
+    `/new/${code}/title`,
+    `/new/${code}/confirm`
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
+}
+
+function editLanguagePaths(req) {
+  var data = req.session.data;
+  var code = req.params.code;
+  var paths = [
+    `/new/${code}/confirm`,
+    `/new/${code}/languages`,
+    `/new/${code}/title`,
+    `/new/${code}/confirm`
   ];
 
   return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
