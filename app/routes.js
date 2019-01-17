@@ -46,9 +46,9 @@ router.all(['/new/:code/training-locations', '/new/:code/further/training-locati
   });
 
   if (req.path.includes('further')) {
-    paths = newFurtherEducationCourseWizardPaths(req.path, code, data);
+    paths = newFurtherEducationCourseWizardPaths(req, code, data);
   } else {
-    paths = newCourseWizardPaths(req.path, code, data);
+    paths = newCourseWizardPaths(req, code, data);
   }
 
   res.render('new/training-locations', {
@@ -64,7 +64,7 @@ router.all('/new/:code/title', function (req, res) {
 
   res.render('new/title', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req, code, data),
     generatedTitle: getGeneratedTitle(code, data)
   });
 })
@@ -75,7 +75,7 @@ router.all('/new/:code/confirm', function (req, res) {
 
   res.render('new/confirm', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req, code, data),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -86,7 +86,7 @@ router.all('/new/:code/further/confirm', function (req, res) {
 
   res.render('new/further/confirm', {
     code: code,
-    paths: newFurtherEducationCourseWizardPaths(req.path, code, data),
+    paths: newFurtherEducationCourseWizardPaths(req, code, data),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -97,7 +97,7 @@ router.all('/new/:code/edit', function (req, res) {
 
   res.render('new/edit', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req, code, data),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -111,7 +111,7 @@ router.post('/new/:code/subject', function (req, res) {
   } else {
     res.render('new/subject', {
       code: code,
-      paths: newCourseWizardPaths(req.path, code, data)
+      paths: newCourseWizardPaths(req, code, data)
     });
   }
 })
@@ -123,7 +123,7 @@ router.post('/new/:code/languages', function (req, res) {
   if (isModernLanguages(code, data)) {
     res.render('new/languages', {
       code: code,
-      paths: newCourseWizardPaths(req.path, code, data)
+      paths: newCourseWizardPaths(req, code, data)
     });
   } else {
     res.redirect('/new/' + code + '/outcome');
@@ -207,14 +207,14 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
 
 router.all('/new/:code/:view', function (req, res) {
   var code = req.params.code;
-  res.render(`new/${req.params.view}`, {code: code, paths: newCourseWizardPaths(req.path, code, req.session.data)})
+  res.render(`new/${req.params.view}`, {code: code, paths: newCourseWizardPaths(req, code, req.session.data)})
 })
 
 router.all('/new/:code/further/:view', function (req, res) {
   var code = req.params.code;
   var locals = {
     code: code,
-    paths: newFurtherEducationCourseWizardPaths(req.path, code, req.session.data)
+    paths: newFurtherEducationCourseWizardPaths(req, code, req.session.data)
   }
 
   res.render(`new/further/${req.params.view}`, locals, function(err, html) {
@@ -227,7 +227,7 @@ router.all('/new/:code/further/:view', function (req, res) {
     res.send(html);
   });
 
-  //res.render(`new/${req.params.view}`, {code: code, paths: newFurtherEducationCourseWizardPaths(req.path, code, req.session.data)})
+  //res.render(`new/${req.params.view}`, {code: code, paths: newFurtherEducationCourseWizardPaths(req, code, req.session.data)})
 })
 
 router.post('/request-access', function (req, res) {

@@ -36,7 +36,8 @@ function getGeneratedTitle(code, data) {
   return generatedTitle;
 }
 
-function newFurtherEducationCourseWizardPaths(currentPath, code, data) {
+function newFurtherEducationCourseWizardPaths(req, code, data) {
+  var currentPath = req.path;
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -59,7 +60,8 @@ function newFurtherEducationCourseWizardPaths(currentPath, code, data) {
   }
 }
 
-function newCourseWizardPaths(currentPath, code, data) {
+function newCourseWizardPaths(req, code, data) {
+  var currentPath = req.path;
   var paths = [
     '/',
     `/new/${code}/phase`,
