@@ -36,10 +36,30 @@ function getGeneratedTitle(code, data) {
   return generatedTitle;
 }
 
-function newFurtherEducationCourseWizardPaths(req, code, data) {
-  var currentPath = req.path;
+function originalQuery(req) {
   var originalQueryString = req.originalUrl.split('?')[1];
-  var originalQuery = originalQueryString ? `?${originalQueryString}` : '';
+  return originalQueryString ? `?${originalQueryString}` : '';
+}
+
+function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) {
+  var index = paths.indexOf(currentPath);
+  var next = paths[index + 1];
+  var back = paths[index - 1];
+
+  if (back.includes('languages') && !isModernLanguages) {
+    back = paths[index - 2];
+  }
+
+  return {
+    next: next + query,
+    back: back + query
+  }
+}
+
+function newFurtherEducationCourseWizardPaths(req) {
+  var code = req.params.code;
+  var data = req.session.data
+
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -52,20 +72,12 @@ function newFurtherEducationCourseWizardPaths(req, code, data) {
     `/new/${code}/further/create`
   ];
 
-  var index = paths.indexOf(currentPath);
-  var next = paths[index + 1];
-  var back = paths[index - 1];
-
-  return {
-    next: next + originalQuery,
-    back: back + originalQuery
-  }
+  return nextAndBackPaths(paths, req.path, originalQuery(req));
 }
 
-function newCourseWizardPaths(req, code, data) {
-  var currentPath = req.path;
-  var originalQueryString = req.originalUrl.split('?')[1];
-  var originalQuery = originalQueryString ? `?${originalQueryString}` : '';
+function newCourseWizardPaths(req) {
+  var data = req.session.data;
+  var code = req.params.code;
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -82,18 +94,8 @@ function newCourseWizardPaths(req, code, data) {
     `/new/${code}/confirm`,
     `/new/${code}/create`
   ];
-  var index = paths.indexOf(currentPath);
-  var next = paths[index + 1];
-  var back = paths[index - 1];
 
-  if (back == `/new/${code}/languages` && !isModernLanguages(code, data)) {
-    back = paths[index - 2];
-  }
-
-  return {
-    next: next + originalQuery,
-    back: back + originalQuery
-  }
+  return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 }
 
 function getCourseOffered(code, data) {
