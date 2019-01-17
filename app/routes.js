@@ -156,28 +156,30 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     schools.push(data['schools'][0]);
   }
 
-  var course = {
-    "accrediting": data[code + '-accredited-body'] || data['training-provider-name'],
-    "level": data[code + '-phase'],
-    "sen": data[code + '-sen'],
-    "subject": data[code + '-subject'],
-    "secondSubject": data[code + '-second-subject'],
-    "languages": languages,
-    "name": data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'],
-    "full-part": data[code + '-full-part'],
-    "type": data[code + '-type'],
-    "outcome": data[code + '-outcome'],
-    "providerCode": data['provider-code'],
-    "programmeCode": code,
-    "schools": schools,
-    "starts": data[code + '-start-date'],
-    "minRequirements": data[code + '-min-requirements'],
-    "options": [
-      data[code + '-generated-description']
-    ]
-  };
+  var course = data['ucasCourses'].find(a => a.programmeCode == code);
+  if (!course) {
+    course = {};
+    data['ucasCourses'].push(course);
+  }
 
-  data['ucasCourses'].push(course);
+  course.accrediting = data[code + '-accredited-body'] || data['training-provider-name'];
+  course.level = data[code + '-phase'];
+  course.sen = data[code + '-sen'];
+  course.subject = data[code + '-subject'];
+  course.secondSubject = data[code + '-second-subject'];
+  course.languages = languages;
+  course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
+  course['full-part'] = data[code + '-full-part'];
+  course.type = data[code + '-type'];
+  course.outcome = data[code + '-outcome'];
+  course.providerCode = data['provider-code'];
+  course.programmeCode = code;
+  course.schools = schools;
+  course.starts = data[code + '-start-date'];
+  course.minRequirements = data[code + '-min-requirements'];
+  course.options = [
+    data[code + '-generated-description']
+  ];
 
   // "ucasCourses": [
   //   {

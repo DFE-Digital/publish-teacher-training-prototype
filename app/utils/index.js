@@ -51,8 +51,8 @@ function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) 
   }
 
   return {
-    next: next.includes('confirm') ? next : next + query,
-    back: back.includes('confirm') ? back : back + query
+    next: /confirm|edit/.test(next) ? next : next + query,
+    back: /confirm|edit/.test(back) ? back : back + query
   }
 }
 
@@ -78,19 +78,21 @@ function newFurtherEducationCourseWizardPaths(req) {
 function newCourseWizardPaths(req) {
   var data = req.session.data;
   var code = req.params.code;
+  var editing = data['ucasCourses'].some(a => a.programmeCode == code);
+  var summaryView = editing ? 'edit' : 'confirm';
 
   if (req.query.change == 'subject') {
-    return editSubjectPaths(req);
+    return editSubjectPaths(req, summaryView);
   }
 
   if (req.query.change == 'languages') {
-    return editLanguagePaths(req);
+    return editLanguagePaths(req, summaryView);
   }
 
   if (req.query.change && req.query.change != 'phase') {
     return {
-      next: `/new/${code}/confirm`,
-      back: `/new/${code}/confirm`
+      next: `/new/${code}/${summaryView}`,
+      back: `/new/${code}/${summaryView}`
     }
   }
 
@@ -107,41 +109,41 @@ function newCourseWizardPaths(req) {
     `/new/${code}/eligibility`,
     `/new/${code}/start-date`,
     `/new/${code}/title`,
-    `/new/${code}/confirm`,
+    `/new/${code}/${summaryView}`,
     `/new/${code}/create`
   ];
 
   var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 
   if (nextAndBack.back == '/?change=phase') {
-    nextAndBack.back = `/new/${code}/confirm`;
+    nextAndBack.back = `/new/${code}/${summaryView}`;
   }
 
   return nextAndBack;
 }
 
-function editSubjectPaths(req) {
+function editSubjectPaths(req, summaryView = 'confirm') {
   var data = req.session.data;
   var code = req.params.code;
   var paths = [
-    `/new/${code}/confirm`,
+    `/new/${code}/${summaryView}`,
     `/new/${code}/subject`,
     `/new/${code}/languages`,
     `/new/${code}/title`,
-    `/new/${code}/confirm`
+    `/new/${code}/${summaryView}`
   ];
 
   return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 }
 
-function editLanguagePaths(req) {
+function editLanguagePaths(req, summaryView = 'confirm') {
   var data = req.session.data;
   var code = req.params.code;
   var paths = [
-    `/new/${code}/confirm`,
+    `/new/${code}/${summaryView}`,
     `/new/${code}/languages`,
     `/new/${code}/title`,
-    `/new/${code}/confirm`
+    `/new/${code}/${summaryView}`
   ];
 
   return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));

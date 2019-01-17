@@ -179,9 +179,8 @@
   </dt>
   <dd class="app-check-your-answers__answer">
     {% if data[code + '-min-requirements'] %}
-      {{ data[code + '-min-requirements'].join('<br />') | safe }}
-
-      <br /><br />Grade C (or 4) or above
+      {{ data[code + '-min-requirements'].join(', ') | safe }}
+      <br />Grade C (or 4) or above
     {% else %}
       None
     {% endif %}
