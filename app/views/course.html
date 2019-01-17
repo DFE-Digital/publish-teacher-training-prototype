@@ -5,6 +5,7 @@
 {% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishLink = '/publish/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
+{% set code = course.programmeCode %}
 
 {% block breadcrumbs %}
   {{
@@ -72,144 +73,7 @@
               </a>
             </h3>
             <dl class="app-check-your-answers app-check-your-answers--long govuk-!-margin-top-6">
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Level
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.level }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  SEND
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {% if course.sen %}
-                    Yes
-                  {% else %}
-                    No
-                  {% endif %}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Subject
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.subject }}
-                  {% if course.secondSubject %}
-                    <br />{{ course.secondSubject }}
-                  {% endif %}
-                </dd>
-              </div>
-              {% if course.languages and course.languages.length > 0 %}
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Languages
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.languages.join('<br />') | safe }}
-                </dd>
-              </div>
-              {% endif %}
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Outcome
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.outcome }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Fee or salary
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.type }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Full or part time
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course['full-part'] }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Training locations
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {% for s in course.schools %}
-                    {{ s.name }}<br />
-                  {% endfor %}
-                </dd>
-              </div>
-              {% if course.accrediting == data['training-provider-name'] %}
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Who is the accredited body?
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  No, we are the accredited body
-                </dd>
-              </div>
-              {% else %}
-                <div class="app-check-your-answers__contents">
-                  <dt class="app-check-your-answers__question">
-                    Accredited body
-                  </dt>
-                  <dd class="app-check-your-answers__answer">
-                    {{ course.accrediting }}
-                  </dd>
-                </div>
-              {% endif %}
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Minimum GCSE requirements
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {% if course.minRequirements %}
-                    {{ course.minRequirements.join('<br />') | safe }}
-                  {% else %}
-                    None
-                  {% endif %}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Course starts
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.starts or 'September 2019' }}
-                </dd>
-              </div>
-              <!-- <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Title
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.name }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Description
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.options[0] }}
-                </dd>
-              </div>
-              <div class="app-check-your-answers__contents">
-                <dt class="app-check-your-answers__question">
-                  Course code
-                </dt>
-                <dd class="app-check-your-answers__answer">
-                  {{ course.programmeCode }}
-                </dd>
-              </div> -->
+              {% include "new/_answers.html" %}
             </dl>
           </li>
           <li class="course-parts-item">

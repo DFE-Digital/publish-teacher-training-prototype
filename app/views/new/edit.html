@@ -10,7 +10,13 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl add-double-bottom-margin">
-          <span class="govuk-caption-xl">{{ data[code + '-title'] or data[code + '-generated-title'] or generatedTitle }} ({{ code }})</span>
+          <span class="govuk-caption-xl">
+            {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+              {{ data[code + '-generated-title'] }} ({{ code }})
+            {% else %}
+              {{ data[code + '-title'] }} ({{ code }})
+            {% endif %}
+          </span>
           {{ title }}
         </h1>
 
