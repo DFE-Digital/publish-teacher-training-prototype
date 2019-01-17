@@ -46,7 +46,7 @@ function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) 
   var next = paths[index + 1];
   var back = paths[index - 1];
 
-  if (back.includes('languages') && !isModernLanguages) {
+  if (back && back.includes('languages') && !isModernLanguages) {
     back = paths[index - 2];
   }
 
@@ -99,13 +99,13 @@ function newCourseWizardPaths(req) {
 }
 
 function getCourseOffered(code, data) {
-  var courseOffered = data[code + '-outcome'];
+  var courseOffered = data[code + '-outcome'] || '';
 
-  if (data[code + '-outcome'].includes('PGCE only')) {
+  if (courseOffered.includes('PGCE only')) {
     courseOffered = 'PGCE';
   }
 
-  if (data[code + '-outcome'].includes('PGDE only')) {
+  if (courseOffered.includes('PGDE only')) {
     courseOffered = 'PGDE';
   }
 
