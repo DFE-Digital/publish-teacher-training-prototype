@@ -38,6 +38,8 @@ function getGeneratedTitle(code, data) {
 
 function newFurtherEducationCourseWizardPaths(req, code, data) {
   var currentPath = req.path;
+  var originalQueryString = req.originalUrl.split('?')[1];
+  var originalQuery = originalQueryString ? `?${originalQueryString}` : '';
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -55,13 +57,15 @@ function newFurtherEducationCourseWizardPaths(req, code, data) {
   var back = paths[index - 1];
 
   return {
-    next: next,
-    back: back
+    next: next + originalQuery,
+    back: back + originalQuery
   }
 }
 
 function newCourseWizardPaths(req, code, data) {
   var currentPath = req.path;
+  var originalQueryString = req.originalUrl.split('?')[1];
+  var originalQuery = originalQueryString ? `?${originalQueryString}` : '';
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -87,8 +91,8 @@ function newCourseWizardPaths(req, code, data) {
   }
 
   return {
-    next: next,
-    back: back
+    next: next + originalQuery,
+    back: back + originalQuery
   }
 }
 
