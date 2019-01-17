@@ -119,14 +119,15 @@ router.post('/new/:code/subject', function (req, res) {
 router.post('/new/:code/languages', function (req, res) {
   var code = req.params.code;
   var data = req.session.data;
+  var paths = newCourseWizardPaths(req, code, data);
 
   if (isModernLanguages(code, data)) {
     res.render('new/languages', {
       code: code,
-      paths: newCourseWizardPaths(req, code, data)
+      paths: paths
     });
   } else {
-    res.redirect('/new/' + code + '/outcome');
+    res.redirect(paths.next);
   }
 })
 
