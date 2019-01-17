@@ -99,9 +99,36 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     'Science'
   ]
 
+  languageSubjects = [
+    'French',
+    'Spanish',
+    'German',
+    'Italian',
+    'Japanese',
+    'Mandarin',
+    'Russian',
+    'Urdu',
+    'Languages',
+    'Languages (asian)',
+    'Languages (european)',
+    'Modern languages',
+    'Modern languages (other)'
+  ]
+
+  rejectedLanguageSubjects = [
+    'Languages',
+    'Languages (asian)',
+    'Languages (european)'
+  ]
+
   subjectsWithoutLevel = subjects - rejectedSubjects
+
   if subjectsWithoutLevel.length == 0
     subject = level
+  elsif !(subjectsWithoutLevel & languageSubjects).empty?
+    subject = 'Modern languages'
+    languages = subjectsWithoutLevel - rejectedLanguageSubjects
+    prototype_data[courseCode + '-languages'] = languages
   else
     subject = subjects[0]
   end
@@ -140,6 +167,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     level: level,
     sen: sen,
     accrediting: c['accrediting'] || provider,
+    languages: languages,
     subjects: subjectsWithoutLevel,
     subject: subject,
     outcome: qual,
