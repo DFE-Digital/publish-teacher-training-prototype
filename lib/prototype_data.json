@@ -88,9 +88,8 @@
   "X341-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "X341-publish-state": "draft",
   "X341-published-before": false,
-  "X341-generated-title": "Post-Compulsory Education",
-  "X341-title": "Post-Compulsory Education",
-  "X341-outcome": "PGCE with QTS",
+  "X341-fe-title": "Post-Compulsory Education",
+  "X341-outcome": "PGCE only (without QTS)",
   "X341-type": "Fee paying (no salary)",
   "X341-phase": "Further education",
   "X341-min-requirements": [
@@ -120,7 +119,7 @@
         "Post-compulsory"
       ],
       "subject": "Further education",
-      "outcome": "PGCE with QTS",
+      "outcome": "PGCE",
       "starts": "September 2019",
       "type": "Fee paying (no salary)",
       "name": "Post-Compulsory Education",
@@ -135,7 +134,7 @@
         }
       ],
       "options": [
-        "PGCE with QTS, full time or part time"
+        "PGCE, full time or part time"
       ],
       "minRequirements": [
         "Mathematics",
