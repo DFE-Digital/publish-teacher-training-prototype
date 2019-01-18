@@ -58,7 +58,16 @@ function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) 
 
 function newFurtherEducationCourseWizardPaths(req) {
   var code = req.params.code;
-  var data = req.session.data
+  var data = req.session.data;
+  var editing = data['ucasCourses'].some(a => a.programmeCode == code);
+  var summaryView = editing ? 'edit' : 'confirm';
+
+  if (req.query.change && req.query.change != 'phase') {
+    return {
+      next: `/new/${code}/further/${summaryView}`,
+      back: `/new/${code}/further/${summaryView}`
+    }
+  }
 
   var paths = [
     '/',
@@ -68,11 +77,19 @@ function newFurtherEducationCourseWizardPaths(req) {
     `/new/${code}/further/full-time-part-time`,
     ...(data['new-course']['include-locations'] ? [`/new/${code}/further/training-locations`] : []),
     `/new/${code}/further/start-date`,
-    `/new/${code}/further/confirm`,
+    `/new/${code}/further/${summaryView}`,
     `/new/${code}/further/create`
   ];
 
-  return nextAndBackPaths(paths, req.path, originalQuery(req));
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req));
+
+  if (nextAndBack.back == '/?change=phase') {
+    nextAndBack.back = `/new/${code}/further/${summaryView}`;
+  }
+
+  console.log(nextAndBack);
+
+  return nextAndBack;
 }
 
 function newCourseWizardPaths(req) {
@@ -80,6 +97,10 @@ function newCourseWizardPaths(req) {
   var code = req.params.code;
   var editing = data['ucasCourses'].some(a => a.programmeCode == code);
   var summaryView = editing ? 'edit' : 'confirm';
+
+  if (isFurtherEducation(code, data)) {
+    return newFurtherEducationCourseWizardPaths(req);
+  }
 
   if (req.query.change == 'subject') {
     return editSubjectPaths(req, summaryView);

@@ -4,6 +4,7 @@
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
+{% set isFe = (data[code + '-phase'] == 'Further education') %}
 
 {% block content %}
   <form action="{{ paths.next }}" method="post">
@@ -14,7 +15,11 @@
         </h1>
 
         <dl class="app-check-your-answers app-check-your-answers--short govuk-!-margin-top-9 govuk-!-margin-bottom-9">
-          {% include "new/_answers.html" %}
+          {% if isFe %}
+            {% include "new/further/_answers.html" %}
+          {% else %}
+            {% include "new/_answers.html" %}
+          {% endif %}
         </dl>
 
         <h2 class="govuk-heading-l">Preview</h2>
@@ -23,10 +28,15 @@
         <div class="govuk-inset-text">
           <h3 class="govuk-heading-m">
             <span class="govuk-heading-s govuk-!-margin-bottom-0">{{ data['training-provider-name'] }}</span>
-            {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
-              {{ data[code + '-generated-title'] }} ({{ code }})
+
+            {% if isFe %}
+              {{ data[code + '-fe-title'] }} ({{ code }})
             {% else %}
-              {{ data[code + '-title'] }} ({{ code }})
+              {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+                {{ data[code + '-generated-title'] }} ({{ code }})
+              {% else %}
+                {{ data[code + '-title'] }} ({{ code }})
+              {% endif %}
             {% endif %}
           </h3>
           <p>Course: {{ courseOffered }}</p>

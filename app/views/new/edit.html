@@ -4,6 +4,7 @@
 {% block backLink %}{{ macros.backLink('/course/' + data['provider-code'] + '/' + code) }}{% endblock %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
+{% set isFe = (data[code + '-phase'] == 'Further education') %}
 
 {% block content %}
   <form action="{{ paths.next }}" method="post">
@@ -11,17 +12,25 @@
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl add-double-bottom-margin">
           <span class="govuk-caption-xl">
-            {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
-              {{ data[code + '-generated-title'] }} ({{ code }})
+            {% if isFe %}
+              {{ data[code + '-fe-title'] }} ({{ code }})
             {% else %}
-              {{ data[code + '-title'] }} ({{ code }})
+              {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+                {{ data[code + '-generated-title'] }} ({{ code }})
+              {% else %}
+                {{ data[code + '-title'] }} ({{ code }})
+              {% endif %}
             {% endif %}
           </span>
           {{ title }}
         </h1>
 
         <dl class="app-check-your-answers app-check-your-answers--short govuk-!-margin-top-9 govuk-!-margin-bottom-9">
-          {% include "new/_answers.html" %}
+          {% if isFe %}
+            {% include "new/further/_answers.html" %}
+          {% else %}
+            {% include "new/_answers.html" %}
+          {% endif %}
         </dl>
 
         <!-- <h2 class="govuk-heading-l">Preview</h2>

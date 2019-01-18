@@ -69,35 +69,26 @@ router.all('/new/:code/title', function (req, res) {
   });
 })
 
-router.all('/new/:code/confirm', function (req, res) {
+router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
+  var isFE = req.originalUrl.includes('further');
 
   res.render('new/confirm', {
     code: code,
-    paths: newCourseWizardPaths(req),
+    paths: isFE ? newFurtherEducationCourseWizardPaths(req) : newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
 
-router.all('/new/:code/further/confirm', function (req, res) {
+router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
-
-  res.render('new/further/confirm', {
-    code: code,
-    paths: newFurtherEducationCourseWizardPaths(req),
-    courseOffered: getCourseOffered(code, data)
-  });
-})
-
-router.all('/new/:code/edit', function (req, res) {
-  var data = req.session.data;
-  var code = req.params.code;
+  var isFE = req.originalUrl.includes('further');
 
   res.render('new/edit', {
     code: code,
-    paths: newCourseWizardPaths(req),
+    paths: isFE ? newFurtherEducationCourseWizardPaths(req) : newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -168,7 +159,11 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   course.subject = data[code + '-subject'];
   course.secondSubject = data[code + '-second-subject'];
   course.languages = languages;
-  course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
+  if (data[code + '-phase'] == 'Further education') {
+    course.name = data[code + '-fe-title'];
+  } else {
+    course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
+  }
   course['full-part'] = data[code + '-full-part'];
   course.type = data[code + '-type'];
   course.outcome = data[code + '-outcome'];
