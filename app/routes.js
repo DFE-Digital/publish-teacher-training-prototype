@@ -45,15 +45,9 @@ router.all(['/new/:code/training-locations', '/new/:code/further/training-locati
     });
   });
 
-  if (req.path.includes('further')) {
-    paths = newFurtherEducationCourseWizardPaths(req);
-  } else {
-    paths = newCourseWizardPaths(req);
-  }
-
   res.render('new/training-locations', {
     code: code,
-    paths: paths,
+    paths: newCourseWizardPaths(req),
     locations: locations
   });
 })
@@ -72,11 +66,10 @@ router.all('/new/:code/title', function (req, res) {
 router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
-  var isFE = req.originalUrl.includes('further');
 
   res.render('new/confirm', {
     code: code,
-    paths: isFE ? newFurtherEducationCourseWizardPaths(req) : newCourseWizardPaths(req),
+    paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -84,11 +77,10 @@ router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, 
 router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
-  var isFE = req.originalUrl.includes('further');
 
   res.render('new/edit', {
     code: code,
-    paths: isFE ? newFurtherEducationCourseWizardPaths(req) : newCourseWizardPaths(req),
+    paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -176,30 +168,6 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     data[code + '-generated-description']
   ];
 
-  // "ucasCourses": [
-  //   {
-  //     "regions": "Eastern",
-  //     "accrediting": "University of Hertfordshire",
-  //     "subjects": "Art / art & design, Secondary",
-  //     "ageRange": "Secondary (11+ years)",
-  //     "name": "Art and Design",
-  //     "slug": "art-and-design",
-  //     "route": "Higher Education programme",
-  //     "qualifications": "QTS, Postgraduate, Professional",
-  //     "providerCode": "H36",
-  //     "programmeCode": "W1X1",
-  //     "schools": [
-  //       {
-  //         "name": "Main Site",
-  //         "address": "",
-  //         "code": ""
-  //       }
-  //     ],
-  //     "options": [
-  //       "PGCE with QTS full time"
-  //     ]
-  //   },
-
   res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
 })
 
@@ -215,6 +183,7 @@ router.all('/new/:code/further/:view', function (req, res) {
     paths: newFurtherEducationCourseWizardPaths(req)
   }
 
+  // Render the non-specific FE view
   res.render(`new/further/${req.params.view}`, locals, function(err, html) {
     if (err) {
       if (err.message.indexOf('template not found') !== -1) {
