@@ -10,7 +10,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        {{ macros.textbox(code + '-title', 'Course title', '', 'govuk-!-width-full', false, false, data[code + '-title'] or generatedTitle or data[code + '-generated-title']) }}
+        {{ macros.textbox(code + '-fe-title', 'Course title', '', 'govuk-!-width-full') }}
 
         {{ govukWarningText({
           text: "Titles are subject to approval by the Becoming a Teacher team",

@@ -45,15 +45,9 @@ router.all(['/new/:code/training-locations', '/new/:code/further/training-locati
     });
   });
 
-  if (req.path.includes('further')) {
-    paths = newFurtherEducationCourseWizardPaths(req.path, code, data);
-  } else {
-    paths = newCourseWizardPaths(req.path, code, data);
-  }
-
   res.render('new/training-locations', {
     code: code,
-    paths: paths,
+    paths: newCourseWizardPaths(req),
     locations: locations
   });
 })
@@ -64,40 +58,29 @@ router.all('/new/:code/title', function (req, res) {
 
   res.render('new/title', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req),
     generatedTitle: getGeneratedTitle(code, data)
   });
 })
 
-router.all('/new/:code/confirm', function (req, res) {
+router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
   res.render('new/confirm', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
 
-router.all('/new/:code/further/confirm', function (req, res) {
-  var data = req.session.data;
-  var code = req.params.code;
-
-  res.render('new/further/confirm', {
-    code: code,
-    paths: newFurtherEducationCourseWizardPaths(req.path, code, data),
-    courseOffered: getCourseOffered(code, data)
-  });
-})
-
-router.all('/new/:code/edit', function (req, res) {
+router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
   res.render('new/edit', {
     code: code,
-    paths: newCourseWizardPaths(req.path, code, data),
+    paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   });
 })
@@ -111,7 +94,7 @@ router.post('/new/:code/subject', function (req, res) {
   } else {
     res.render('new/subject', {
       code: code,
-      paths: newCourseWizardPaths(req.path, code, data)
+      paths: newCourseWizardPaths(req)
     });
   }
 })
@@ -119,14 +102,15 @@ router.post('/new/:code/subject', function (req, res) {
 router.post('/new/:code/languages', function (req, res) {
   var code = req.params.code;
   var data = req.session.data;
+  var paths = newCourseWizardPaths(req);
 
   if (isModernLanguages(code, data)) {
     res.render('new/languages', {
       code: code,
-      paths: newCourseWizardPaths(req.path, code, data)
+      paths: paths
     });
   } else {
-    res.redirect('/new/' + code + '/outcome');
+    res.redirect(paths.next);
   }
 })
 
@@ -155,68 +139,51 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     schools.push(data['schools'][0]);
   }
 
-  var course = {
-    "accrediting": data[code + '-accredited-body'] || data['training-provider-name'],
-    "level": data[code + '-phase'],
-    "sen": data[code + '-sen'],
-    "subject": data[code + '-subject'],
-    "secondSubject": data[code + '-second-subject'],
-    "languages": languages,
-    "name": data[code + '-title'] || data[code + '-generated-title'],
-    "full-part": data[code + '-full-part'],
-    "type": data[code + '-type'],
-    "outcome": data[code + '-outcome'],
-    "providerCode": data['provider-code'],
-    "programmeCode": code,
-    "schools": schools,
-    "starts": data[code + '-start-date'],
-    "minRequirements": data[code + '-min-requirements'],
-    "options": [
-      data[code + '-generated-description']
-    ]
-  };
+  var course = data['ucasCourses'].find(a => a.programmeCode == code);
+  if (!course) {
+    course = {};
+    data['ucasCourses'].push(course);
+  }
 
-  data['ucasCourses'].push(course);
-
-  // "ucasCourses": [
-  //   {
-  //     "regions": "Eastern",
-  //     "accrediting": "University of Hertfordshire",
-  //     "subjects": "Art / art & design, Secondary",
-  //     "ageRange": "Secondary (11+ years)",
-  //     "name": "Art and Design",
-  //     "slug": "art-and-design",
-  //     "route": "Higher Education programme",
-  //     "qualifications": "QTS, Postgraduate, Professional",
-  //     "providerCode": "H36",
-  //     "programmeCode": "W1X1",
-  //     "schools": [
-  //       {
-  //         "name": "Main Site",
-  //         "address": "",
-  //         "code": ""
-  //       }
-  //     ],
-  //     "options": [
-  //       "PGCE with QTS full time"
-  //     ]
-  //   },
+  course.accrediting = data[code + '-accredited-body'] || data['training-provider-name'];
+  course.level = data[code + '-phase'];
+  course.sen = data[code + '-sen'];
+  course.subject = data[code + '-subject'];
+  course.secondSubject = data[code + '-second-subject'];
+  course.languages = languages;
+  if (data[code + '-phase'] == 'Further education') {
+    course.name = data[code + '-fe-title'];
+  } else {
+    course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
+  }
+  course['full-part'] = data[code + '-full-part'];
+  course.type = data[code + '-type'];
+  course.outcome = data[code + '-outcome'];
+  course.providerCode = data['provider-code'];
+  course.programmeCode = code;
+  course.schools = schools;
+  course.starts = data[code + '-start-date'];
+  course.minRequirements = data[code + '-min-requirements'];
+  course.options = [
+    data[code + '-generated-description']
+  ];
 
   res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
 })
 
 router.all('/new/:code/:view', function (req, res) {
   var code = req.params.code;
-  res.render(`new/${req.params.view}`, {code: code, paths: newCourseWizardPaths(req.path, code, req.session.data)})
+  res.render(`new/${req.params.view}`, {code: code, paths: newCourseWizardPaths(req)})
 })
 
 router.all('/new/:code/further/:view', function (req, res) {
   var code = req.params.code;
   var locals = {
     code: code,
-    paths: newFurtherEducationCourseWizardPaths(req.path, code, req.session.data)
+    paths: newFurtherEducationCourseWizardPaths(req)
   }
 
+  // Render the non-specific FE view
   res.render(`new/further/${req.params.view}`, locals, function(err, html) {
     if (err) {
       if (err.message.indexOf('template not found') !== -1) {
@@ -226,8 +193,6 @@ router.all('/new/:code/further/:view', function (req, res) {
     }
     res.send(html);
   });
-
-  //res.render(`new/${req.params.view}`, {code: code, paths: newFurtherEducationCourseWizardPaths(req.path, code, req.session.data)})
 })
 
 router.post('/request-access', function (req, res) {

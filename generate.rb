@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'The University of Sheffield'
+provider = 'Oxford Brookes University'
 courses = data.select {|c| c['provider'] == provider }
 
 prototype_data = {
@@ -15,6 +15,10 @@ prototype_data = {
 }
 
 def course_qualification(c)
+  if c['subjects'].map {|s| s.downcase.capitalize }.include?('Further education')
+    return 'PGCE'
+  end
+
   if !c['qualifications'] || c['qualifications'].length == 0
     qual = "Unknown"
   else
@@ -85,6 +89,8 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   sen = subjects.include?('Special educational needs')
   if subjects.include?('Primary')
     level = 'Primary'
+  elsif subjects.include?('Further education')
+    level = 'Further education'
   elsif subjects.include?('Secondary')
     level = 'Secondary'
   else
@@ -99,9 +105,36 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     'Science'
   ]
 
+  languageSubjects = [
+    'French',
+    'Spanish',
+    'German',
+    'Italian',
+    'Japanese',
+    'Mandarin',
+    'Russian',
+    'Urdu',
+    'Languages',
+    'Languages (asian)',
+    'Languages (european)',
+    'Modern languages',
+    'Modern languages (other)'
+  ]
+
+  rejectedLanguageSubjects = [
+    'Languages',
+    'Languages (asian)',
+    'Languages (european)'
+  ]
+
   subjectsWithoutLevel = subjects - rejectedSubjects
+
   if subjectsWithoutLevel.length == 0
     subject = level
+  elsif !(subjectsWithoutLevel & languageSubjects).empty?
+    subject = 'Modern languages'
+    languages = subjectsWithoutLevel - rejectedLanguageSubjects
+    prototype_data[courseCode + '-languages'] = languages
   else
     subject = subjects[0]
   end
@@ -112,10 +145,15 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     'English'
   ]
 
-  # TODO: Languages
+  if level == 'Further education'
+    prototype_data[courseCode + '-fe-title'] = c['name']
+    prototype_data[courseCode + '-outcome'] = 'PGCE only (without QTS)'
+  else
+    prototype_data[courseCode + '-generated-title'] = c['name']
+    prototype_data[courseCode + '-title'] = c['name']
+    prototype_data[courseCode + '-outcome'] = qual
+  end
 
-  prototype_data[courseCode + '-generated-title'] = c['name']
-  prototype_data[courseCode + '-outcome'] = qual
   prototype_data[courseCode + '-type'] = type
   prototype_data[courseCode + '-phase'] = level
   prototype_data[courseCode + '-min-requirements'] = minRequirements
@@ -139,6 +177,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     level: level,
     sen: sen,
     accrediting: c['accrediting'] || provider,
+    languages: languages,
     subjects: subjectsWithoutLevel,
     subject: subject,
     outcome: qual,

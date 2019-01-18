@@ -36,7 +36,39 @@ function getGeneratedTitle(code, data) {
   return generatedTitle;
 }
 
-function newFurtherEducationCourseWizardPaths(currentPath, code, data) {
+function originalQuery(req) {
+  var originalQueryString = req.originalUrl.split('?')[1];
+  return originalQueryString ? `?${originalQueryString}` : '';
+}
+
+function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) {
+  var index = paths.indexOf(currentPath);
+  var next = paths[index + 1] || '';
+  var back = paths[index - 1] || '';
+
+  if (back && back.includes('languages') && !isModernLanguages) {
+    back = paths[index - 2];
+  }
+
+  return {
+    next: /confirm|edit/.test(next) ? next : next + query,
+    back: /confirm|edit/.test(back) ? back : back + query
+  }
+}
+
+function newFurtherEducationCourseWizardPaths(req) {
+  var code = req.params.code;
+  var data = req.session.data;
+  var editing = data['ucasCourses'].some(a => a.programmeCode == code);
+  var summaryView = editing ? 'edit' : 'confirm';
+
+  if (req.query.change && req.query.change != 'phase') {
+    return {
+      next: `/new/${code}/further/${summaryView}`,
+      back: `/new/${code}/further/${summaryView}`
+    }
+  }
+
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -45,21 +77,46 @@ function newFurtherEducationCourseWizardPaths(currentPath, code, data) {
     `/new/${code}/further/full-time-part-time`,
     ...(data['new-course']['include-locations'] ? [`/new/${code}/further/training-locations`] : []),
     `/new/${code}/further/start-date`,
-    `/new/${code}/further/confirm`,
+    `/new/${code}/further/${summaryView}`,
     `/new/${code}/further/create`
   ];
 
-  var index = paths.indexOf(currentPath);
-  var next = paths[index + 1];
-  var back = paths[index - 1];
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req));
 
-  return {
-    next: next,
-    back: back
+  if (nextAndBack.back == '/?change=phase') {
+    nextAndBack.back = `/new/${code}/further/${summaryView}`;
   }
+
+  console.log(nextAndBack);
+
+  return nextAndBack;
 }
 
-function newCourseWizardPaths(currentPath, code, data) {
+function newCourseWizardPaths(req) {
+  var data = req.session.data;
+  var code = req.params.code;
+  var editing = data['ucasCourses'].some(a => a.programmeCode == code);
+  var summaryView = editing ? 'edit' : 'confirm';
+
+  if (isFurtherEducation(code, data)) {
+    return newFurtherEducationCourseWizardPaths(req);
+  }
+
+  if (req.query.change == 'subject') {
+    return editSubjectPaths(req, summaryView);
+  }
+
+  if (req.query.change == 'languages') {
+    return editLanguagePaths(req, summaryView);
+  }
+
+  if (req.query.change && req.query.change != 'phase') {
+    return {
+      next: `/new/${code}/${summaryView}`,
+      back: `/new/${code}/${summaryView}`
+    }
+  }
+
   var paths = [
     '/',
     `/new/${code}/phase`,
@@ -73,31 +130,54 @@ function newCourseWizardPaths(currentPath, code, data) {
     `/new/${code}/eligibility`,
     `/new/${code}/start-date`,
     `/new/${code}/title`,
-    `/new/${code}/confirm`,
+    `/new/${code}/${summaryView}`,
     `/new/${code}/create`
   ];
-  var index = paths.indexOf(currentPath);
-  var next = paths[index + 1];
-  var back = paths[index - 1];
 
-  if (back == `/new/${code}/languages` && !isModernLanguages(code, data)) {
-    back = paths[index - 2];
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
+
+  if (nextAndBack.back == '/?change=phase') {
+    nextAndBack.back = `/new/${code}/${summaryView}`;
   }
 
-  return {
-    next: next,
-    back: back
-  }
+  return nextAndBack;
+}
+
+function editSubjectPaths(req, summaryView = 'confirm') {
+  var data = req.session.data;
+  var code = req.params.code;
+  var paths = [
+    `/new/${code}/${summaryView}`,
+    `/new/${code}/subject`,
+    `/new/${code}/languages`,
+    `/new/${code}/title`,
+    `/new/${code}/${summaryView}`
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
+}
+
+function editLanguagePaths(req, summaryView = 'confirm') {
+  var data = req.session.data;
+  var code = req.params.code;
+  var paths = [
+    `/new/${code}/${summaryView}`,
+    `/new/${code}/languages`,
+    `/new/${code}/title`,
+    `/new/${code}/${summaryView}`
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 }
 
 function getCourseOffered(code, data) {
-  var courseOffered = data[code + '-outcome'];
+  var courseOffered = data[code + '-outcome'] || '';
 
-  if (data[code + '-outcome'].includes('PGCE only')) {
+  if (courseOffered.includes('PGCE only')) {
     courseOffered = 'PGCE';
   }
 
-  if (data[code + '-outcome'].includes('PGDE only')) {
+  if (courseOffered.includes('PGDE only')) {
     courseOffered = 'PGDE';
   }
 
