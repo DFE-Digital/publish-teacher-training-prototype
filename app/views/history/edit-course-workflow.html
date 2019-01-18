@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% set title = 'Edit course information workflow' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>From the course summary page, where answers to questions are listed (<a href="/history/new-course-iteration-14-jan#check-your-answers">check your answers</a>, <a href="http://localhost:3000/history/new-course-iteration-14-jan#change-course-information">change course information</a>), users expect to edit one answer then return to this page.</p>
+
+      <p>We tried sending users through the whole course flow again, they didn’t expect this to happen. It was confusing. Though once users understood what was happening they clicked ‘continue’ until they got back to the summary.</p>
+
+      <p>For most questions this is ok, but for some there’s a knock-on effect to further questions. For example, if you change the subject, the title usually needs to change too.</p>
+      <p>
+        The diagram below documents which questions are simple, and which affect other questions. (<a href="https://docs.google.com/drawings/d/1OrJYSTmRSJD2GEAWFnr2lXLNo7A9J9GDsPMQUm0Pi0M/edit">Google diagram</a>)
+      </p>
+    </div>
+  </div>
+
+  <img src="/public/images/history/edit-course-workflow.svg" alt="Edit course workflow">
+{% endblock %}
