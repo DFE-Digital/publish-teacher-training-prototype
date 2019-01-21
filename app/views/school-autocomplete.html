@@ -29,8 +29,8 @@
             </li>
           {% endfor %}
         </ul>
-        <div class="form-group">
-          <label for="my-autocomplete">Choose a school by name, postcode or URN number</label>
+        <div class="govuk-form-group">
+          <label for="my-autocomplete" class="govuk-label">Choose a school by name, postcode or URN number</label>
           <div id="my-autocomplete-container"></div>
         </div>
 
@@ -41,7 +41,7 @@
 
 {% endblock %}
 
-{% block page_scripts %}
+{% block pageScripts %}
 <script src="/public/javascripts/schools.js"></script>
 <script>
   var createSimpleEngine = function (values) {
