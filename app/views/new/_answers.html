@@ -198,6 +198,27 @@
 </div>
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
+    Applications open
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {% if data[code + '-applications-open'] == 'On a specific date' %}
+      On {{ data[code + '-applications-open-date-day'] }}-{{ data[code + '-applications-open-date-month'] }}-{{ data[code + '-applications-open-date-year'] }}
+    {% elseif data[code + '-applications-open'] == 'When I publish the course' %}
+        When the course is published
+    {% else %}
+      {{ data[code + '-applications-open'] }}
+    {% endif %}
+  </dd>
+  {% if showChangeLinks %}
+  <dd class="app-check-your-answers__change">
+    <a href="/new/{{ code }}/applications-open?change=applications-open">
+      Change<span class="govuk-visually-hidden"> start date</span>
+    </a>
+  </dd>
+  {% endif %}
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
     Course starts
   </dt>
   <dd class="app-check-your-answers__answer">

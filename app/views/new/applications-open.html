@@ -1,4 +1,4 @@
-{% set title = 'When do applications open?' %}
+{% set title = 'When will applications open?' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -7,13 +7,47 @@
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <form action="/new/application-codes" method="post">
-    {{ macros.datefields('applications-open', 'Applications open') }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        {% set specificDate %}
+          {{ govukDateInput({
+            id: code + "-applications-open-date",
+            namePrefix: code + "-applications-open-date",
+            fieldset: {
+              legend: {
+                text: "What date will applications open?"
+              }
+            },
+            hint: {
+              text: "For example, 31 10 2019"
+            }
+          }) }}
+        {% endset %}
 
-    <div class="form-group">
-      <input type="submit" class="govuk-button" value="Continue" />
+        <!--
+          If before cycle has opened:
+          {
+            name: 'On 21 October 2019 when applications for this cycle open'
+          }
+        -->
+        {% set fields = [
+            {
+              name: 'When I publish the course'
+            },
+            {
+              name: 'On a specific date',
+              more: specificDate
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(code + '-applications-open', fields, errors) }}
+
+        <input type="submit" class="govuk-button" value="Continue" />
+      </form>
     </div>
-  </form>
+  </div>
 
 
 {% endblock %}

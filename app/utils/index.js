@@ -76,6 +76,7 @@ function newFurtherEducationCourseWizardPaths(req) {
     `/new/${code}/further/outcome`,
     `/new/${code}/further/full-time-part-time`,
     ...(data['new-course']['include-locations'] ? [`/new/${code}/further/training-locations`] : []),
+    `/new/${code}/further/applications-open`,
     `/new/${code}/further/start-date`,
     `/new/${code}/further/${summaryView}`,
     `/new/${code}/further/create`
@@ -128,6 +129,7 @@ function newCourseWizardPaths(req) {
     ...(data['new-course']['include-locations'] ? [`/new/${code}/training-locations`] : []),
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/eligibility`,
+    `/new/${code}/applications-open`,
     `/new/${code}/start-date`,
     `/new/${code}/title`,
     `/new/${code}/${summaryView}`,
