@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Organisation{% endblock %}
+{% set title = 'Training locations' %}
+{% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
   {{
@@ -16,10 +17,16 @@
 
 {% block content %}
   <h1 class="govuk-heading-xl">
-    Locations
+    {{ title }}
   </h1>
 
-  <div class="govuk-grid-row">
+  <p>Use this section to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>edit your training locations</li>
+    <li>add new training locations</li>
+  </ul>
+
+  <!-- <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l">Locations applicants can choose</h2>
       <p>Each location has a name, address and a code. Applicants use the name to choose a training location on their UCAS application form.</p>
@@ -29,7 +36,7 @@
       <p>You are limited to 36 training locations by UCAS.</p>
       {% set schools = data['schools'] %}
     </div>
-  </div>
+  </div> -->
 
   <table class="govuk-table">
     <thead class="govuk-table__head">
@@ -64,5 +71,7 @@
     </tbody>
   </table>
 
-
+  <p class="add-top-margin">
+    <a href="/new/start" class="govuk-button">Add a new training location</a>
+  </p>
 {% endblock %}
