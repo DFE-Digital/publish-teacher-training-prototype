@@ -70,7 +70,7 @@ function newFurtherEducationCourseWizardPaths(req) {
   }
 
   var paths = [
-    '/',
+    '/courses',
     `/new/${code}/phase`,
     `/new/${code}/further/title`,
     `/new/${code}/further/outcome`,
@@ -84,11 +84,9 @@ function newFurtherEducationCourseWizardPaths(req) {
 
   var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req));
 
-  if (nextAndBack.back == '/?change=phase') {
+  if (nextAndBack.back == '/courses?change=phase') {
     nextAndBack.back = `/new/${code}/further/${summaryView}`;
   }
-
-  console.log(nextAndBack);
 
   return nextAndBack;
 }
@@ -119,7 +117,7 @@ function newCourseWizardPaths(req) {
   }
 
   var paths = [
-    '/',
+    '/courses',
     `/new/${code}/phase`,
     `/new/${code}/subject`,
     `/new/${code}/languages`,
@@ -138,7 +136,7 @@ function newCourseWizardPaths(req) {
 
   var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 
-  if (nextAndBack.back == '/?change=phase') {
+  if (nextAndBack.back == '/courses?change=phase') {
     nextAndBack.back = `/new/${code}/${summaryView}`;
   }
 
