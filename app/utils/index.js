@@ -46,6 +46,10 @@ function originalQuery(req) {
   return originalQueryString ? `?${originalQueryString}` : '';
 }
 
+function includeLocationsInWizard(data) {
+  return data['schools'].length > 1;
+}
+
 function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) {
   var index = paths.indexOf(currentPath);
   var next = paths[index + 1] || '';
@@ -80,7 +84,7 @@ function newFurtherEducationCourseWizardPaths(req) {
     `/new/${code}/further/title`,
     `/new/${code}/further/outcome`,
     `/new/${code}/further/full-time-part-time`,
-    ...(data['new-course']['include-locations'] ? [`/new/${code}/further/training-locations`] : []),
+    ...(includeLocationsInWizard(data) ? [`/new/${code}/further/training-locations`] : []),
     `/new/${code}/further/applications-open`,
     `/new/${code}/further/start-date`,
     `/new/${code}/further/${summaryView}`,
@@ -129,7 +133,7 @@ function newCourseWizardPaths(req) {
     `/new/${code}/outcome`,
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : []),
     `/new/${code}/full-time-part-time`,
-    ...(data['new-course']['include-locations'] ? [`/new/${code}/training-locations`] : []),
+    ...(includeLocationsInWizard(data) ? [`/new/${code}/training-locations`] : []),
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/eligibility`,
     `/new/${code}/applications-open`,
