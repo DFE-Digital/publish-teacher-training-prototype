@@ -1,0 +1,51 @@
+{% set title = 'Pick a school or university' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        <div class="govuk-form-group">
+          <label for="my-autocomplete" class="govuk-label">Find by name, postcode or URN number</label>
+          <div id="my-autocomplete-container"></div>
+        </div>
+
+        {{ govukDetails({
+          summaryText: "Can’t find your location?",
+          text: "We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post."
+        }) }}
+
+        <input type="submit" class="govuk-button" value="Continue" />
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script src="/public/javascripts/schools.js"></script>
+<script>
+  var createSimpleEngine = function (values) {
+    return function (query, syncResults) {
+      var matches = values
+        .filter(function(r) {
+          return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        })
+        .slice(0, 10)
+      syncResults(matches)
+    }
+  }
+
+  accessibleAutocomplete({
+    element: document.querySelector('#my-autocomplete-container'),
+    id: 'my-autocomplete', // To match it to the existing <label>.
+    source: createSimpleEngine(autocomplete_options),
+    name: '{{ code }}-location-picked',
+    minLength: 2
+  })
+</script>
+{% endblock %}

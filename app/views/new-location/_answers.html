@@ -1,0 +1,102 @@
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Type
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ data[code + '-location-type'] }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/type?change=type">
+      Change<span class="govuk-visually-hidden"> type</span>
+    </a>
+  </dd>
+</div>
+<!-- <div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Location
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ data[code + '-location-picked'] }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div> -->
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Name
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ location.name }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Address
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    First line of address<br />
+    Second line of address<br />
+    Not in prototype
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Town or city
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ location.city }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Postcode
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ location.postcode }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    <abbr title="Unique Reference Number">URN</abbr>
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ location.urn }}
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> location</span>
+    </a>
+  </dd>
+</div>
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Location code
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    {{ code }}
+  </dd>
+  <dd class="app-check-your-answers__change"></dd>
+</div>

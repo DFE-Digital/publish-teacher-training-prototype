@@ -1,0 +1,33 @@
+{% set title = 'What type of training location?' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        {% set fields = [
+            {
+              name: 'A school or university'
+            },
+            {
+              name: 'A region or area'
+            },
+            {
+              name: 'A place that’s not a school or university'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup(code + '-location-type', fields) }}
+        <input type="submit" class="govuk-button" value="Continue" />
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

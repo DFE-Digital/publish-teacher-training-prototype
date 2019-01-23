@@ -2,12 +2,15 @@ const express = require('express')
 const router = express.Router()
 var {
   generateCourseCode,
+  generateLocationCode,
   getGeneratedTitle,
   getCourseOffered,
+  getLocationFromChoice,
   isModernLanguages,
   isFurtherEducation,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
+  newLocationWizardPaths,
   subject,
   course,
   validate,
@@ -193,6 +196,27 @@ router.all('/new/:code/further/:view', function (req, res) {
     }
     res.send(html);
   });
+})
+
+router.get('/new-location/start', function (req, res) {
+  var code = generateLocationCode();
+  res.redirect('/new-location/' + code + '/type');
+})
+
+router.all('/new-location/:code/confirm', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new-location/confirm', {
+    code: code,
+    paths: newLocationWizardPaths(req),
+    location: getLocationFromChoice(code, data)
+  });
+})
+
+router.all('/new-location/:code/:view', function (req, res) {
+  var code = req.params.code;
+  res.render(`new-location/${req.params.view}`, {code: code, paths: newLocationWizardPaths(req)})
 })
 
 router.post('/request-access', function (req, res) {

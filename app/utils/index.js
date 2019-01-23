@@ -5,6 +5,11 @@ function generateCourseCode() {
   return code;
 }
 
+function generateLocationCode() {
+  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789'.split('');
+  return letters[ Math.floor(Math.random() * letters.length) ];
+}
+
 function getGeneratedTitle(code, data) {
   var generatedTitle = data[code + '-subject'];
 
@@ -170,6 +175,21 @@ function editLanguagePaths(req, summaryView = 'confirm') {
   return nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data));
 }
 
+function newLocationWizardPaths(req) {
+  var code = req.params.code;
+  var data = req.session.data;
+
+  var paths = [
+    '/locations',
+    `/new-location/${code}/type`,
+    `/new-location/${code}/pick-location`,
+    `/new-location/${code}/confirm`,
+    `/new-location/${code}/create`
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req));
+}
+
 function getCourseOffered(code, data) {
   var courseOffered = data[code + '-outcome'] || '';
 
@@ -197,6 +217,20 @@ function getCourseOffered(code, data) {
 
   data[code + '-generated-description'] = courseOffered;
   return courseOffered;
+}
+
+function getLocationFromChoice(code, data) {
+  var choice = data[code + '-location-picked'];
+  var parts = choice.split(' (');
+  var location = {
+    name: parts[0]
+  }
+
+  location.urn = parts[1].split(',')[0];
+  location.city = parts[1].split(',')[1];
+  location.postcode = parts[1].split(',')[2].replace(')', '');
+
+  return location;
 }
 
 function isModernLanguages(code, data) {
@@ -401,12 +435,15 @@ function validateOrg(data, view) {
 
 module.exports = {
   generateCourseCode,
+  generateLocationCode,
   getGeneratedTitle,
   getCourseOffered,
+  getLocationFromChoice,
   isModernLanguages,
   isFurtherEducation,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
+  newLocationWizardPaths,
   subject,
   course,
   validate,
