@@ -200,7 +200,13 @@ function newLocationWizardPaths(req) {
     `/new-location/${code}/create`
   ];
 
-  return nextAndBackPaths(paths, req.path, originalQuery(req));
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req));
+
+  if (nextAndBack.back == '/locations?change=type') {
+    nextAndBack.back = `/new-location/${code}/${summaryView}`;
+  }
+
+  return nextAndBack;
 }
 
 function getCourseOffered(code, data) {
