@@ -1,4 +1,4 @@
-{% set title = 'Change location information' %}
+{% set title = location.name %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/locations') }}{% endblock %}
@@ -8,9 +8,6 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl add-double-bottom-margin">
-          <span class="govuk-caption-xl">
-            {{ location.name }} ({{ code }})
-          </span>
           {{ title }}
         </h1>
 
