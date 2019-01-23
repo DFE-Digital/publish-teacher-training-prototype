@@ -214,6 +214,17 @@ router.all('/new-location/:code/confirm', function (req, res) {
   });
 })
 
+router.all('/new-location/:code/edit', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new-location/edit', {
+    code: code,
+    paths: newLocationWizardPaths(req),
+    location: getLocationFromChoice(code, data)
+  });
+})
+
 // Take new data and make it into a location
 router.all('/new-location/:code/create', function (req, res) {
   var data = req.session.data;

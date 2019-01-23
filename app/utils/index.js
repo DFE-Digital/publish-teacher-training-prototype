@@ -178,12 +178,21 @@ function editLanguagePaths(req, summaryView = 'confirm') {
 function newLocationWizardPaths(req) {
   var code = req.params.code;
   var data = req.session.data;
+  var editing = data['schools'].some(a => a.code == code);
+  var summaryView = editing ? 'edit' : 'confirm';
+
+  if (req.query.change && req.query.change != 'type') {
+    return {
+      next: `/new-location/${code}/${summaryView}`,
+      back: `/new-location/${code}/${summaryView}`
+    }
+  }
 
   var paths = [
     '/locations',
     `/new-location/${code}/type`,
     `/new-location/${code}/pick-location`,
-    `/new-location/${code}/confirm`,
+    `/new-location/${code}/${summaryView}`,
     `/new-location/${code}/create`
   ];
 
