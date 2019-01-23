@@ -199,7 +199,8 @@ router.all('/new/:code/further/:view', function (req, res) {
 })
 
 router.get('/new-location/start', function (req, res) {
-  var code = generateLocationCode();
+  var existingCodes = req.session.data['schools'].map (s => s.code);
+  var code = generateLocationCode(existingCodes);
   res.redirect('/new-location/' + code + '/type');
 })
 

@@ -5,8 +5,8 @@ function generateCourseCode() {
   return code;
 }
 
-function generateLocationCode() {
-  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789'.split('');
+function generateLocationCode(exclude = []) {
+  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789'.split('').filter( ( l ) => !exclude.includes( l ) );
   return letters[ Math.floor(Math.random() * letters.length) ];
 }
 
