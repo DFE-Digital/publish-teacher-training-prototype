@@ -231,7 +231,7 @@ router.all('/new-location/:code/create', function (req, res) {
   var code = req.params.code;
   var location = getLocationFromChoice(code, data);
 
-  var school = data['ucasCourses'].find(a => a.code == code);
+  var school = data['schools'].find(a => a.code == code);
   if (!school) {
     school = {};
     data['schools'].push(school);
