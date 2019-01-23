@@ -214,6 +214,26 @@ router.all('/new-location/:code/confirm', function (req, res) {
   });
 })
 
+// Take new data and make it into a location
+router.all('/new-location/:code/create', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+  var location = getLocationFromChoice(code, data);
+
+  var school = data['ucasCourses'].find(a => a.code == code);
+  if (!school) {
+    school = {};
+    data['schools'].push(school);
+  }
+
+  school.type = data[code + '-location-type'];
+  school.name = location.name;
+  school.address = `Address line 1, ${location.city}, ${location.postcode}`;
+  school.code = code;
+
+  res.redirect(`/locations?created=true`);
+})
+
 router.all('/new-location/:code/:view', function (req, res) {
   var code = req.params.code;
   res.render(`new-location/${req.params.view}`, {code: code, paths: newLocationWizardPaths(req)})
