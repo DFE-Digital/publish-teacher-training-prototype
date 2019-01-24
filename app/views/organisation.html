@@ -2,14 +2,6 @@
 {% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
 
 {% block content %}
-  {% if justEditedVacancies %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-        Course vacancies published
-      </h3>
-    </div>
-  {% endif %}
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>

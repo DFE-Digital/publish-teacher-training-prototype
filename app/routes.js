@@ -22,9 +22,12 @@ router.all('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
     res.render('your-organisations');
   } else {
-
-    res.render('organisation', { justEditedVacancies: req.query.editedVacancies });
+    res.render('organisation');
   }
+})
+
+router.all('/courses', function(req, res) {
+  res.render('courses', { justEditedVacancies: req.query.editedVacancies });
 })
 
 router.get('/design-history', function (req, res) {
@@ -359,7 +362,7 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
     } else if (choice == 'There are some vacancies') {
       req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
     }
-    res.redirect('/?editedVacancies=true')
+    res.redirect('/courses?editedVacancies=true')
   }
 })
 
