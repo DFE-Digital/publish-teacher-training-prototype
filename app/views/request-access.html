@@ -1,18 +1,6 @@
 {% extends "layout.html" %}
 {% block pageTitle %}Request access for someone{% endblock %}
-
-{% block breadcrumbs %}
-  {{
-    govukBreadcrumbs({
-      items: [
-        {
-          href: "/",
-          text: data['training-provider-name']
-        }
-      ]
-    })
-  }}
-{% endblock %}
+{% block backLink %}{{ macros.backLink() }}{% endblock %}
 
 {% block content %}
   {% set message %}
