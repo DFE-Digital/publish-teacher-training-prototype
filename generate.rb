@@ -208,7 +208,9 @@ prototype_data['schools'].sort_by! { |k| k[:name] }
 
 prototype_data['schools'].each do |school|
   school[:urn] = 100000
-  school[:postcode] = postcodeRegex.match(school[:address])[0]
+  postcodeMatched = postcodeRegex.match(school[:address])
+
+  school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
   prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
   prototype_data["#{school[:code]}-location-type"] = "A school or university"
 end
