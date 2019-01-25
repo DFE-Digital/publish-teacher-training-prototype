@@ -26,7 +26,10 @@
     <li>add new training locations</li>
   </ul>
 
-  <p>You are limited to 37 training locations by UCAS Apply.</p>
+  {{ govukWarningText({
+    text: "You are limited to 37 training locations by UCAS Apply",
+    iconFallbackText: "Warning"
+  }) }}
 
   <!-- <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
