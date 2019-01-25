@@ -26,7 +26,7 @@
 
         {{ govukDetails({
           summaryText: "Can’t find your location?",
-          text: "We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post."
+          html: '<a href="#">Enter your location name and address manually</a>'
         }) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
@@ -40,13 +40,19 @@
 <script>
   var createSimpleEngine = function (values) {
     return function (query, syncResults) {
+      var cleanQuery = cleanString(query);
+
       var matches = values
         .filter(function(r) {
-          return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+          return cleanString(r).indexOf(cleanQuery) !== -1
         })
-        .slice(0, 10)
+        .slice(0, 30)
       syncResults(matches)
     }
+  }
+
+  function cleanString(s) {
+    return s.toLowerCase().replace(/[,\'\"\(\)\.]/g, '').replace(/\-/g, ' ');
   }
 
   accessibleAutocomplete({
