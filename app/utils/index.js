@@ -245,11 +245,16 @@ function getLocationFromChoice(code, data, callback) {
   var parts = choice.split(' (');
   var urn = parts[1].split(',')[0];
 
+  if (data[urn]) {
+    callback(data[urn]);
+  }
+
   request({
       url: `https://raw.githubusercontent.com/fofr/schools-json/master/schools/${urn}.json`,
       json: true
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
+      data[urn] = body
       callback(body);
     }
   })
