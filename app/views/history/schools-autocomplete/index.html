@@ -8,8 +8,6 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>We need to test this with providers.</p>
-
       <p>
         <a href="https://manage-courses-prototype.herokuapp.com/school-autocomplete">Live demo</a> and <a href="https://github.com/DFE-Digital/manage-courses-prototype/pull/18">pull request</a>.
       </p>
@@ -27,6 +25,28 @@
       </ul>
 
       <p>This allows searching for schools by each of these properties (eg all schools in ‘BN1’). The text is also necessary as a differentiator when choosing a school with a common name – for example St Mary’s Catholic Primary School.</p>
+
+      <h2 class="govuk-heading-l">User research</h2>
+
+      <p>We’ve begun testing this pattern as part of the UCAS Transition work. It is being used in the "add training location" flow.</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="https://lookback.io/watch/oDwREDkfjwjW5SpCi">Canterbury Christ Church University</a></li>
+        <li><a href="https://lookback.io/watch/vw6eDzqmL4s24rR2Y">East of England Teacher Training</a> (a SCITT)</li>
+      </ul>
+
+      <p>We’ve found that:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>if many schools have the same name, the right one is hard to find, eg St Patrick’s or St Mary’s (<a href="https://lookback.io/watch/vw6eDzqmL4s24rR2Y?t=48m48s">example</a>)</li>
+        <li>imprecise punctuation meant that an exact match wasn’t shown (eg missing comma or apostrophe)</li>
+        <li>users don’t necessarily know the postcode, when they do the search works well</li>
+      </ul>
+
+      <p>We’ve tweaked the prototype so that:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>punctuation is ignored</li>
+        <li>30 results show, rather than 10</li>
+      </ul>
     </div>
   </div>
 
