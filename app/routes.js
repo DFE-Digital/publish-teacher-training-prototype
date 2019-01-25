@@ -211,10 +211,12 @@ router.all('/new-location/:code/confirm', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  res.render('new-location/confirm', {
-    code: code,
-    paths: newLocationWizardPaths(req),
-    location: getLocationFromChoice(code, data)
+  getLocationFromChoice(code, data, function(location) {
+    res.render('new-location/confirm', {
+      code: code,
+      paths: newLocationWizardPaths(req),
+      location: location
+    });
   });
 })
 
@@ -222,10 +224,12 @@ router.all('/new-location/:code/edit', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  res.render('new-location/edit', {
-    code: code,
-    paths: newLocationWizardPaths(req),
-    location: getLocationFromChoice(code, data)
+  getLocationFromChoice(code, data, function(location) {
+    res.render('new-location/edit', {
+      code: code,
+      paths: newLocationWizardPaths(req),
+      location: location
+    });
   });
 })
 

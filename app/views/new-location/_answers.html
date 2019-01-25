@@ -42,9 +42,9 @@
     Address
   </dt>
   <dd class="app-check-your-answers__answer">
-    First line of address<br />
-    Second line of address<br />
-    Not in prototype
+    {{ location.address }}<br />
+    {{ location.town or location.county }}<br />
+    {{ location.postcode }}
   </dd>
   <dd class="app-check-your-answers__change">
     <a href="/new-location/{{ code }}/pick-location?change=pick-location">
@@ -52,7 +52,7 @@
     </a>
   </dd>
 </div>
-<div class="app-check-your-answers__contents">
+<!-- <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
     Town or city
   </dt>
@@ -77,13 +77,27 @@
       Change<span class="govuk-visually-hidden"> location</span>
     </a>
   </dd>
+</div> -->
+<div class="app-check-your-answers__contents">
+  <dt class="app-check-your-answers__question">
+    Website
+  </dt>
+  <dd class="app-check-your-answers__answer">
+    <a href="{{ location.url }}" rel="noopener noreferrer" target="_blank">{{ location.url }}</a>
+  </dd>
+  <dd class="app-check-your-answers__change">
+    <a href="/new-location/{{ code }}/pick-location?change=pick-location">
+      Change<span class="govuk-visually-hidden"> website</span>
+    </a>
+  </dd>
 </div>
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
-    <abbr title="Unique Reference Number">URN</abbr>
+    Unique reference number (URN)
   </dt>
   <dd class="app-check-your-answers__answer">
-    {{ location.urn }}
+    {{ location.urn }}<br />
+    <a rel="noopener noreferrer" target="_blank" class="govuk-body-s" href="https://get-information-schools.service.gov.uk/Establishments/Establishment/Details/{{ location.urn }}">View on the Get information about schools service</a>
   </dd>
   <dd class="app-check-your-answers__change">
     <a href="/new-location/{{ code }}/pick-location?change=pick-location">
@@ -93,7 +107,7 @@
 </div>
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
-    Location code
+    UCAS campus code
   </dt>
   <dd class="app-check-your-answers__answer">
     {{ code }}

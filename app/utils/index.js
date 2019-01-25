@@ -1,3 +1,5 @@
+const request = require("request")
+
 function generateCourseCode() {
   var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ'.split('');
   var letter = letters[ Math.floor(Math.random() * letters.length) ];
@@ -238,18 +240,29 @@ function getCourseOffered(code, data) {
   return courseOffered;
 }
 
-function getLocationFromChoice(code, data) {
+function getLocationFromChoice(code, data, callback) {
   var choice = data[code + '-location-picked'];
   var parts = choice.split(' (');
-  var location = {
-    name: parts[0]
-  }
+  var urn = parts[1].split(',')[0];
 
-  location.urn = parts[1].split(',')[0];
-  location.city = parts[1].split(',')[1];
-  location.postcode = parts[1].split(',')[2].replace(')', '');
+  request({
+      url: `https://raw.githubusercontent.com/fofr/schools-json/master/schools/${urn}.json`,
+      json: true
+  }, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      callback(body);
+    }
+  })
 
-  return location;
+  // var location = {
+  //   name: parts[0]
+  // }
+  //
+  // location.urn = parts[1].split(',')[0];
+  // location.city = parts[1].split(',')[1];
+  // location.postcode = parts[1].split(',')[2].replace(')', '');
+  //
+  // return location;
 }
 
 function isModernLanguages(code, data) {
