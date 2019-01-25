@@ -1,6 +1,6 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "East of England Teacher Training",
+  "training-provider-name": "East of England Teacher Training Centre",
   "provider-code": "2B6",
   "2TNC-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "2TNC-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -31,7 +31,7 @@
     "Main Site"
   ],
   "2TNC-has-accredited-body": "We are the accredited body",
-  "2TNC-accredited-body": "East of England Teacher Training",
+  "2TNC-accredited-body": "East of England Teacher Training Centre",
   "2TNC-vacancies-flag": "Yes",
   "2TNC-vacancies-choice": "There are some vacancies",
   "2TNC-full-time-and-part-time": false,
@@ -52,8 +52,8 @@
   "2TND-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "2TND-publish-state": "draft",
   "2TND-published-before": false,
-  "2TND-generated-title": "Primary",
-  "2TND-title": "Primary",
+  "2TND-generated-title": "Primary + PGCE",
+  "2TND-title": "Primary + PGCE",
   "2TND-outcome": "PGCE with QTS",
   "2TND-type": "Fee paying (no salary)",
   "2TND-phase": "Primary",
@@ -67,7 +67,7 @@
     "Main Site"
   ],
   "2TND-has-accredited-body": "We are the accredited body",
-  "2TND-accredited-body": "East of England Teacher Training",
+  "2TND-accredited-body": "East of England Teacher Training Centre",
   "2TND-vacancies-flag": "Yes",
   "2TND-vacancies-choice": "There are some vacancies",
   "2TND-full-time-and-part-time": false,
@@ -78,7 +78,7 @@
     {
       "level": "Primary",
       "sen": false,
-      "accrediting": "East of England Teacher Training",
+      "accrediting": "East of England Teacher Training Centre",
       "languages": null,
       "subjects": [
 
@@ -110,7 +110,7 @@
     {
       "level": "Primary",
       "sen": false,
-      "accrediting": "East of England Teacher Training",
+      "accrediting": "East of England Teacher Training Centre",
       "languages": null,
       "subjects": [
 
@@ -119,7 +119,7 @@
       "outcome": "PGCE with QTS",
       "starts": "September 2019",
       "type": "Fee paying (no salary)",
-      "name": "Primary",
+      "name": "Primary + PGCE",
       "route": "SCITT (School Centred Initial Teacher Training) programme",
       "providerCode": "2B6",
       "programmeCode": "2TND",
@@ -151,9 +151,13 @@
   ],
   "--location-picked": "Main Site (100000, City, )",
   "--location-type": "A school or university",
+  "--name": "Main Site",
+  "--urn": 100000,
+  "--postcode": "",
+  "--address": "New Dawn Trust, Carrington Drive, Lincoln, LN6 ODE",
   "accreditors": [
     {
-      "name": "East of England Teacher Training",
+      "name": "East of England Teacher Training Centre",
       "slug": "east-of-england-teacher-training-centre",
       "subjects": [
         {
@@ -161,7 +165,7 @@
           "slug": "primary"
         },
         {
-          "name": "Primary",
+          "name": "Primary + PGCE",
           "slug": "primary-pgce"
         }
       ]
@@ -174,7 +178,7 @@
       "slug": "primary"
     },
     {
-      "name": "Primary",
+      "name": "Primary + PGCE",
       "slug": "primary-pgce"
     }
   ],

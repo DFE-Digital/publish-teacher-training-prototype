@@ -213,6 +213,10 @@ prototype_data['schools'].each do |school|
   school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
   prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
   prototype_data["#{school[:code]}-location-type"] = "A school or university"
+  prototype_data["#{school[:code]}-name"] = school[:name]
+  prototype_data["#{school[:code]}-urn"] = school[:urn]
+  prototype_data["#{school[:code]}-postcode"] = school[:postcode]
+  prototype_data["#{school[:code]}-address"] = school[:address]
 end
 
 # Create a list of accreditors
