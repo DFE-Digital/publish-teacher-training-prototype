@@ -187,6 +187,10 @@ function newLocationWizardPaths(req) {
   var editing = data['schools'].some(a => a.code == code);
   var summaryView = editing ? 'edit' : 'confirm';
 
+  if (req.query.change == 'pick-location') {
+    return editPickedLocationPaths(req, summaryView);
+  }
+
   if (req.query.change && req.query.change != 'type') {
     return {
       next: `/new-location/${code}/${summaryView}`,
@@ -198,6 +202,7 @@ function newLocationWizardPaths(req) {
     '/locations',
     `/new-location/${code}/type`,
     `/new-location/${code}/pick-location`,
+    `/new-location/${code}/address`,
     `/new-location/${code}/${summaryView}`,
     `/new-location/${code}/create`
   ];
@@ -209,6 +214,19 @@ function newLocationWizardPaths(req) {
   }
 
   return nextAndBack;
+}
+
+function editPickedLocationPaths(req, summaryView = 'confirm') {
+  var data = req.session.data;
+  var code = req.params.code;
+  var paths = [
+    `/new-location/${code}/${summaryView}`,
+    `/new-location/${code}/pick-location`,
+    `/new-location/${code}/address`,
+    `/new-location/${code}/${summaryView}`
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req));
 }
 
 function getCourseOffered(code, data) {
@@ -244,9 +262,11 @@ function getLocationFromChoice(code, data, callback) {
   var choice = data[code + '-location-picked'];
   var parts = choice.split(' (');
   var urn = parts[1].split(',')[0];
+  data[code + '-urn'] = urn;
 
   if (data[urn]) {
     callback(data[urn]);
+    return;
   }
 
   request({
@@ -254,20 +274,16 @@ function getLocationFromChoice(code, data, callback) {
       json: true
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      data[urn] = body
-      callback(body);
+      var location = body;
+
+      if (location.url && !location.url.startsWith('http')) {
+        location.url = `http://${location.url}`;
+      }
+
+      data[urn] = location
+      callback(location);
     }
   })
-
-  // var location = {
-  //   name: parts[0]
-  // }
-  //
-  // location.urn = parts[1].split(',')[0];
-  // location.city = parts[1].split(',')[1];
-  // location.postcode = parts[1].split(',')[2].replace(')', '');
-  //
-  // return location;
 }
 
 function isModernLanguages(code, data) {

@@ -207,16 +207,26 @@ router.get('/new-location/start', function (req, res) {
   res.redirect('/new-location/' + code + '/type');
 })
 
-router.all('/new-location/:code/confirm', function (req, res) {
+router.all('/new-location/:code/address', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
   getLocationFromChoice(code, data, function(location) {
-    res.render('new-location/confirm', {
+    res.render('new-location/address', {
       code: code,
       paths: newLocationWizardPaths(req),
       location: location
     });
+  });
+})
+
+router.all('/new-location/:code/confirm', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new-location/confirm', {
+    code: code,
+    paths: newLocationWizardPaths(req)
   });
 })
 
@@ -224,12 +234,9 @@ router.all('/new-location/:code/edit', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  getLocationFromChoice(code, data, function(location) {
-    res.render('new-location/edit', {
-      code: code,
-      paths: newLocationWizardPaths(req),
-      location: location
-    });
+  res.render('new-location/edit', {
+    code: code,
+    paths: newLocationWizardPaths(req)
   });
 })
 
@@ -237,7 +244,6 @@ router.all('/new-location/:code/edit', function (req, res) {
 router.all('/new-location/:code/create', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
-  var location = getLocationFromChoice(code, data);
 
   var school = data['schools'].find(a => a.code == code);
   if (!school) {
@@ -246,8 +252,11 @@ router.all('/new-location/:code/create', function (req, res) {
   }
 
   school.type = data[code + '-location-type'];
-  school.name = location.name;
-  school.address = `Address line 1, ${location.city}, ${location.postcode}`;
+  school.name = data[code + '-name'];
+  school.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
+  school.url = data[code + '-url'];
+  school.urn = data[code + '-urn'];
+  school.picked = data[code + '-location-picked'];
   school.code = code;
 
   res.redirect(`/locations?created=true`);

@@ -1,4 +1,4 @@
-{% set title = location.name %}
+{% set title = data[code + '-name'] %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/locations') }}{% endblock %}
