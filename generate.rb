@@ -5,8 +5,11 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'The University of Sheffield'
+provider = 'Doncaster ITT Partnership'
 courses = data.select {|c| c['provider'] == provider }
+
+# https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
+postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
 prototype_data = {
   'multi-organisation': false,
@@ -202,6 +205,19 @@ prototype_data['ucasCourses'].sort_by! { |k| k[:name] }
 # Find all schools across all courses and flatten into array of schools
 prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
+
+prototype_data['schools'].each do |school|
+  school[:urn] = 100000
+  postcodeMatched = postcodeRegex.match(school[:address])
+
+  school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
+  prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
+  prototype_data["#{school[:code]}-location-type"] = "A school or university"
+  prototype_data["#{school[:code]}-name"] = school[:name]
+  prototype_data["#{school[:code]}-urn"] = school[:urn]
+  prototype_data["#{school[:code]}-postcode"] = school[:postcode]
+  prototype_data["#{school[:code]}-address"] = school[:address]
+end
 
 # Create a list of accreditors
 prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|

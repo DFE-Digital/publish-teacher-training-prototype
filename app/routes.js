@@ -2,12 +2,15 @@ const express = require('express')
 const router = express.Router()
 var {
   generateCourseCode,
+  generateLocationCode,
   getGeneratedTitle,
   getCourseOffered,
+  getLocationFromChoice,
   isModernLanguages,
   isFurtherEducation,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
+  newLocationWizardPaths,
   subject,
   course,
   validate,
@@ -19,9 +22,12 @@ router.all('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
     res.render('your-organisations');
   } else {
-
-    res.render('organisation', { justEditedVacancies: req.query.editedVacancies });
+    res.render('organisation');
   }
+})
+
+router.all('/courses', function(req, res) {
+  res.render('courses', { justEditedVacancies: req.query.editedVacancies });
 })
 
 router.get('/design-history', function (req, res) {
@@ -195,6 +201,72 @@ router.all('/new/:code/further/:view', function (req, res) {
   });
 })
 
+router.get('/new-location/start', function (req, res) {
+  var existingCodes = req.session.data['schools'].map (s => s.code);
+  var code = generateLocationCode(existingCodes);
+  res.redirect('/new-location/' + code + '/type');
+})
+
+router.all('/new-location/:code/address', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  getLocationFromChoice(code, data, function(location) {
+    res.render('new-location/address', {
+      code: code,
+      paths: newLocationWizardPaths(req),
+      location: location
+    });
+  });
+})
+
+router.all('/new-location/:code/confirm', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new-location/confirm', {
+    code: code,
+    paths: newLocationWizardPaths(req)
+  });
+})
+
+router.all('/new-location/:code/edit', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new-location/edit', {
+    code: code,
+    paths: newLocationWizardPaths(req)
+  });
+})
+
+// Take new data and make it into a location
+router.all('/new-location/:code/create', function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  var school = data['schools'].find(a => a.code == code);
+  if (!school) {
+    school = {};
+    data['schools'].push(school);
+  }
+
+  school.type = data[code + '-location-type'];
+  school.name = data[code + '-name'];
+  school.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
+  school.url = data[code + '-url'];
+  school.urn = data[code + '-urn'];
+  school.picked = data[code + '-location-picked'];
+  school.code = code;
+
+  res.redirect(`/locations?created=true`);
+})
+
+router.all('/new-location/:code/:view', function (req, res) {
+  var code = req.params.code;
+  res.render(`new-location/${req.params.view}`, {code: code, paths: newLocationWizardPaths(req)})
+})
+
 router.post('/request-access', function (req, res) {
   res.render('request-access', { showMessage: true })
 })
@@ -303,7 +375,7 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
     } else if (choice == 'There are some vacancies') {
       req.session.data[c.programmeCode + '-vacancies-flag'] = 'Yes';
     }
-    res.redirect('/?editedVacancies=true')
+    res.redirect('/courses?editedVacancies=true')
   }
 })
 

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Organisation{% endblock %}
+{% set title = 'Training locations' %}
+{% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
   {{
@@ -16,53 +17,53 @@
 
 {% block content %}
   <h1 class="govuk-heading-xl">
-    Locations
+    {{ title }}
   </h1>
 
-  <div class="govuk-grid-row">
+  <p>Use this section to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>edit your training locations</li>
+    <li>add new training locations</li>
+  </ul>
+
+  {{ govukWarningText({
+    text: "You are limited to 37 training locations by UCAS Apply",
+    iconFallbackText: "Warning"
+  }) }}
+
+  <!-- <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l">Locations applicants can choose</h2>
       <p>Each location has a name, address and a code. Applicants use the name to choose a training location on their UCAS application form.</p>
 
       <p>When an applicant searches by location we use the address of each location to determine how far away each course is from them.</p>
 
-      <p>You are limited to 36 training locations by UCAS.</p>
       {% set schools = data['schools'] %}
     </div>
-  </div>
+  </div> -->
 
-  <table class="govuk-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" style="width: 40px">Code</th>
-        <th class="govuk-table__header" scope="col">Name</th>
-        <th class="govuk-table__header" scope="col">Label</th>
-        <!-- <th class="govuk-table__header" style="width: 20%">Courses</th>
-        <th class="govuk-table__header" style="width: 20%">Content</th> -->
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      {% for school in schools %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><strong class="bold-medium">{{ school.code }}</strong></td>
-        <td class="govuk-table__cell">
-          <a href="/location/{{ school.code }}" class="bold">{{ school.name }}</a><br />
-          {{ school.address }}
-        </td>
-        <td class="govuk-table__cell">
-          {% for type in data[school.code + '-type'] %}
-            <span class="govuk-tag phase-tag-small">{{ type }}</span><br />
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for school in schools %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="/new-location/{{ school.code }}/edit" class="govuk-!-font-weight-bold">{{ school.name }}</a>
+            </td>
+          </tr>
           {% endfor %}
-          {% if not data[school.code + '-type'] %}
-            <span class="govuk-tag phase-tag-small phase-tag-no-content">None</span>
-          {% endif %}
-        </td>
-        <!-- <td class="govuk-table__cell">5 courses</td>
-        <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-no-content">Empty</span></td> -->
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        </tbody>
+      </table>
 
-
+      <p class="add-top-margin">
+        <a href="/new-location/start" class="govuk-button">Add a new training location</a>
+      </p>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,54 @@
+{% set title = 'Is this name and address correct?' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+
+        <div class="govuk-inset-text remove-top-margin">
+          <h2 class="govuk-heading-m remove-top-margin">{{ location.name }}</h2>
+          <p>
+            {{ location.address }}<br />
+            {{ (location.town + '<br />' if location.town) | safe }}
+            {{ (location.county + '<br />' if location.county) | safe }}
+            {{ location.postcode }}
+            {% if location.url %}
+              <br /><br />
+              <a href="{{ location.url }}" rel="noopener noreferrer" target="_blank">{{ location.url }}</a>
+            {% endif %}
+          </p>
+        </div>
+
+        {% set more %}
+
+          {{ macros.textbox(code + '-name', '<h2 class="govuk-heading-m govuk-!-padding-top-4">Name</h2>', null, 'govuk-!-width-full', null, errors, location.name) }}
+
+          <h2 class="govuk-heading-m govuk-!-margin-top-8">Address</h2>
+          {{ macros.textbox(code + '-address', 'Building and street', null, 'govuk-!-width-full', null, errors, location.address) }}
+          {{ macros.textbox(code + '-town', 'Town or city', null, 'form-control', null, errors, location.town) }}
+          {{ macros.textbox(code + '-county', 'County', null, 'form-control', null, errors, location.county) }}
+          {{ macros.textbox(code + '-postcode', 'Postcode', null, 'form-control-small', null, errors, location.postcode) }}
+
+          {{ macros.textbox(code + '-url', '<h2 class="govuk-heading-m govuk-!-padding-top-4">Website</h2>', null, 'govuk-!-width-full', null, errors, location.url) }}
+        {% endset %}
+
+        {{ macros.radioGroup(code + '-change-name-address', [
+          {
+            name: 'Yes, that’s correct'
+          },
+          {
+            name: 'No, I need to change something',
+            more: more
+          }
+        ], errors) }}
+        <input type="submit" class="govuk-button" value="Continue" />
+      </form>
+    </div>
+  </div>
+{% endblock %}

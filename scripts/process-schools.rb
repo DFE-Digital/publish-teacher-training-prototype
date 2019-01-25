@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # Run './process-schools.rb'
 require 'csv'
+require 'open-uri'
 
 class UpdateSchoolData
   def run
@@ -8,22 +9,20 @@ class UpdateSchoolData
     schools = []
 
     puts csv_file_location
+    puts "Processing schools…"
 
     CSV.foreach(csv_file_location, headers: true, encoding: 'windows-1251:utf-8').each do |row|
-      # puts row if row.to_s.downcase.include?('cardiff')
-      # puts row['DistrictAdministrative (name)']
-      # puts row if row['country']
       next if row['EstablishmentStatus (name)'].eql?('Closed')
+      next if row['Postcode'].start_with?('CF', 'LL', 'NP', 'SA')
       school = convert_to_school(row)
       schools << school
     end
-
+    puts "Found #{schools.length} schools"
+    puts "Writing autocomplete options…"
     autocomplete_strings =  schools.map do |s|
                               "#{s['name']} (#{s['urn']}, #{s['town']}, #{s['postcode']})"
                             end
 
-    # puts autocomplete_strings[0]
-    # puts autocomplete_strings.uniq.count
     File.open('app/assets/javascripts/schools.js', 'w') { |file| file.write("var autocomplete_options = " + autocomplete_strings.uniq.inspect + ";") }
   end
 
@@ -63,17 +62,7 @@ class UpdateSchoolData
   end
 
   def save_csv_file(location: csv_file_location)
-    # File.open(location, 'wb') do |f|
-    #   request = HTTParty.get(csv_url)
-    #
-    #   if request.code == 200
-    #     f.write request.body
-    #   elsif request.code == 404
-    #     raise HTTParty::ResponseError, 'School CSV file not found.'
-    #   else
-    #     raise HTTParty::ResponseError, 'Unexpected problem downloading School CSV file.'
-    #   end
-    # end
+    File.open(location, 'wb') { |f| f.write(open(csv_url).read) } unless File.exist?(location)
   end
 
   def csv_url
