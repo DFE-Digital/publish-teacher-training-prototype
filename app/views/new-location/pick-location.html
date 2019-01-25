@@ -60,7 +60,7 @@
     id: 'my-autocomplete', // To match it to the existing <label>.
     source: createSimpleEngine(autocomplete_options),
     name: '{{ code }}-location-picked',
-    defaultValue: '{{ data[code + '-location-picked'] }}',
+    defaultValue: "{{ data[code + '-location-picked'] | safe }}",
     minLength: 2
   })
 </script>
