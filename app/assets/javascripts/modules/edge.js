@@ -10,7 +10,10 @@
 
       function alertUser(evt) {
         evt.preventDefault();
-        alert('Sorry, this hasn’t been built yet')
+        var target = $(evt.target);
+        var message = target.data('message') || 'Sorry, this hasn’t been built yet'
+
+        alert(message);
       }
     }
   }
