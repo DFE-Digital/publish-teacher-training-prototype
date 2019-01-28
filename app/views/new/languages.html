@@ -19,26 +19,10 @@
           { name: 'Mandarin'},
           { name: 'Russian'},
           { name: 'Spanish'},
-          { name: 'Urdu'},
-          { name: 'Other modern language'}
+          { name: 'Urdu'}
           ]
         %}
-
-        {{ macros.select(code + '-first-language', 'Language', languageFields) }}
-        {{ macros.select(code + '-second-language', 'Second language (optional)', languageFields) }}
-
-        {% set furtherLanguages %}
-          <h3 class="govuk-heading-m">Further languages</h3>
-          {{ macros.checkboxGroup(code + '-further-languages', languageFields, 0, false) }}
-        {% endset %}
-
-        {{ macros.checkboxGroup(code + '-further-languages-check', [
-          {
-            name: 'This course has more languages',
-            more: furtherLanguages
-          }
-        ]) }}
-
+        {{ macros.checkboxGroup(code + '-languages', languageFields, 0, false) }}
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>

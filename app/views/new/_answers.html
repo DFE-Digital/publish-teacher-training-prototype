@@ -59,14 +59,6 @@
     {% if data[code + '-languages'] %}
       {{ data[code + '-languages'].join('<br />') | safe }}
     {% endif %}
-    {{ data[code + '-first-language'] }}
-    {% if data[code + '-second-language'] %}
-      <br />{{ data[code + '-second-language'] }}
-    {% endif %}
-    {% if data[code + '-further-languages'] %}
-      <br />
-      {{ data[code + '-further-languages'].join('<br />') | safe }}
-    {% endif %}
   </dd>
   {% if showChangeLinks %}
   <dd class="app-check-your-answers__change">

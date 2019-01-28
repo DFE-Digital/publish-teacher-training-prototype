@@ -24,14 +24,11 @@ function getGeneratedTitle(code, data) {
   }
 
   if (isModernLanguages(code, data)) {
-    if (data[code + '-second-language']) {
-      if (data[code + '-further-languages']) {
-        generatedTitle = `${generatedTitle} (${data[code + '-first-language']}, ${data[code + '-second-language']}, ${data[code + '-further-languages'].join(', ')})`;
-      } else {
-        generatedTitle = `${generatedTitle} (${data[code + '-first-language']} and ${data[code + '-second-language']})`;
-      }
-    } else {
-      generatedTitle = `${generatedTitle} (${data[code + '-first-language']})`;
+    var languages = data[code + '-languages'] || [];
+    if (languages.length == 1 || languages.length == 3) {
+      generatedTitle = `${generatedTitle} (${languages.join(', ')})`;
+    } else if (languages.length == 2) {
+      generatedTitle = `${generatedTitle} (${languages[0]} and ${languages[1]})`;
     }
   }
 
