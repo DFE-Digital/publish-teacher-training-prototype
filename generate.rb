@@ -157,6 +157,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-outcome'] = qual
   end
 
+  prototype_data[courseCode + '-applications-open'] = '10 October 2018'
   prototype_data[courseCode + '-who-apply-type'] = "Option A (most flexible)"
   prototype_data[courseCode + '-type'] = type
   prototype_data[courseCode + '-phase'] = level
