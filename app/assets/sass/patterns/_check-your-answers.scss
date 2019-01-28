@@ -6,6 +6,10 @@
   @include govuk-media-query($from: desktop) {
     display: table;
   }
+
+  .govuk-details {
+    margin-bottom: 0
+  }
 }
 
 .app-check-your-answers--short {

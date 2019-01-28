@@ -176,17 +176,48 @@
     </div>
   {% endif %}
 {% endif %}
-<!-- <div class="app-check-your-answers__contents">
+<div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
-    Minimum GCSE requirements
+    Who will you consider?
   </dt>
   <dd class="app-check-your-answers__answer">
-    {% if data[code + '-min-requirements'] %}
-      {{ data[code + '-min-requirements'].join(', ') | safe }}
-      <br />Grade C (or 4) or above
-    {% else %}
-      None
-    {% endif %}
+    {% set expansion %}
+      <p class="govuk-body-s">Applicants will need a minimum GCSE grade of C (or 4), or an equivalent,&nbsp;in:</p>
+      <ul class="govuk-list govuk-list--bullet govuk-body-s">
+        <li>English</li>
+        <li>Mathematics</li>
+        {% if data[code + '-phase'] == 'Primary' %}
+          <li>Science</li>
+        {% endif %}
+      </ul>
+
+      {% if data[code + '-who-apply-type'].includes('Option A') %}
+        <p class="govuk-body-s">Receive applications from candidates who:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-body-s">
+          <li>have these qualifications when they apply</li>
+          <li>expect to have them before the course begins</li>
+          <li>need to take an equivalency test</li>
+        </ul>
+      {% elseif data[code + '-who-apply-type'] == 'Option B' %}
+        <p class="govuk-body-s">Receive applications from candidates who:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-body-s">
+          <li>have these qualifications when they apply</li>
+          <li>expect to have them before the course begins</li>
+        </ul>
+      {% else %}
+        <p class="govuk-body-s">Only receive applications from candidates who have these qualifications when they apply.</p>
+        <p class="govuk-body-s">Reject candidates who:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-body-s">
+          <li>don’t have all the qualifications when they apply</li>
+          <li>need to take an equivalency test</li>
+        </ul>
+      {% endif %}
+    {% endset %}
+    {{ govukDetails({
+      summaryText: data[code + '-who-apply-type'],
+      html: expansion,
+      class: 'govuk-!-margin-bottom-0'
+    }) }}
   </dd>
   {% if showChangeLinks %}
   <dd class="app-check-your-answers__change">
@@ -195,7 +226,7 @@
     </a>
   </dd>
   {% endif %}
-</div> -->
+</div>
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
     Applications open
