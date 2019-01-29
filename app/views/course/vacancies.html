@@ -106,7 +106,7 @@
           {{ macros.checkboxGroup(course.programmeCode + '-vacancies-choice', fields, errors) }}
         {% endif %}
 
-        <p>Changes will appear in Find and on UCAS Apply after a short delay.</p>
+        <p>Changes will appear on Find straight away. UCAS Apply will be updated overnight.</p>
 
         <div class="add-double-bottom-margin">
           {% if data[course.programmeCode + '-multi-location'] %}
@@ -119,7 +119,7 @@
         </div>
 
         <p>
-          <p><a href="/courses">Cancel changes</a></p>
+          <a href="/courses">Cancel changes</a>
         </p>
       </form>
     </div>
