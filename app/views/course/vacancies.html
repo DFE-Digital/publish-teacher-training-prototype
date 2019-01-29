@@ -106,9 +106,9 @@
           {{ macros.checkboxGroup(course.programmeCode + '-vacancies-choice', fields, errors) }}
         {% endif %}
 
-        <p>Changes will appear on Find straight away. UCAS Apply will be updated overnight.</p>
+        <div class="govuk-!-margin-top-8">
+          <p>Changes will appear on Find straight away. UCAS Apply will be updated overnight.</p>
 
-        <div class="add-double-bottom-margin">
           {% if data[course.programmeCode + '-multi-location'] %}
             <input type="submit" class="govuk-button" value="Publish changes" />
           {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}

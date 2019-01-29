@@ -145,6 +145,11 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     schools.push(data['schools'][0]);
   }
 
+  data[code + '-multi-location'] = schools.length > 1
+
+  // TODO:
+  // If training location added – it'll affect vacancies
+
   var course = data['ucasCourses'].find(a => a.programmeCode == code);
   if (!course) {
     course = {};
