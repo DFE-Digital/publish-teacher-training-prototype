@@ -79,7 +79,7 @@
   </dd>
   {% endif %}
 </div>
-{% if data['new-course']['include-locations'] and data[code + '-locations'] %}
+{% if data['schools'].length > 1 and data[code + '-locations'] %}
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
     Training locations

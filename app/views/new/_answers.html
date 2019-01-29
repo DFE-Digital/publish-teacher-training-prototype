@@ -116,7 +116,6 @@
   </dd>
   {% endif %}
 </div>
-{% if data['new-course']['include-locations'] and data[code + '-locations'] %}
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
     Training locations
@@ -125,14 +124,15 @@
     {{ data[code + '-locations'] | join('<br>') | safe }}
   </dd>
   {% if showChangeLinks %}
-  <dd class="app-check-your-answers__change">
-    <a href="/new/{{ code }}/training-locations?change=training-locations">
-      Change<span class="govuk-visually-hidden"> training locations</span>
-    </a>
-  </dd>
+    <dd class="app-check-your-answers__change">
+      {% if data['schools'].length > 1 and data[code + '-locations'] %}
+      <a href="/new/{{ code }}/training-locations?change=training-locations">
+        Change<span class="govuk-visually-hidden"> training locations</span>
+      </a>
+      {% endif %}
+    </dd>
   {% endif %}
 </div>
-{% endif %}
 {% if data['new-course']['include-accredited'] %}
   {% if data[code + '-has-accredited-body'] == 'Another organisation' %}
     <div class="app-check-your-answers__contents">
