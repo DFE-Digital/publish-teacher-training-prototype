@@ -10,13 +10,19 @@
 
       var createSimpleEngine = function (values) {
         return function (query, syncResults) {
+          var cleanQuery = cleanString(query);
+
           var matches = values
             .filter(function(r) {
-              return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+              return cleanString(r).indexOf(cleanQuery) !== -1
             })
-            .slice(0, 10)
+            .slice(0, 30)
           syncResults(matches)
         }
+      }
+
+      function cleanString(s) {
+        return s.toLowerCase().replace(/[,\'\"\(\)\.]/g, '').replace(/\-/g, ' ');
       }
 
       accessibleAutocomplete({
