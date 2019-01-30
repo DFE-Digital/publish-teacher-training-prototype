@@ -321,6 +321,20 @@ app.use(function (req, res, next) {
    return dateFormat(now, "d mmm yyyy");
   })
 
+  nunjucksAppEnv.addGlobal('isArray', something => Array.isArray(something));
+
+  nunjucksAppEnv.addGlobal('locationFromString', function(string) {
+    var urn = string.match(/\d{6}/)[0];
+    var name = string.split('(')[0];
+    var location = string.split('(')[1].split(',')[1];
+
+    return {
+      urn: urn,
+      name: name,
+      location: location
+    }
+  })
+
   next()
 });
 

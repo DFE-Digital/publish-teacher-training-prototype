@@ -46,9 +46,6 @@
                 ${location}
               </td>
               <td class="govuk-table__cell">
-                ${urn}
-              </td>
-              <td class="govuk-table__cell">
                 <a href="#remove" class="js-remove">Remove</a>
               </td>
             </tr>
@@ -56,6 +53,7 @@
 
           $('#hidden-inputs').append(`
             <input type="hidden" name="${code}-area-schools" value="${school}" id="school-${urn}">
+            <input type="hidden" name="${code}-area-school-names" value="${name}" id="school-name-${urn}">
           `);
 
           hideShowSection();
@@ -68,6 +66,7 @@
         var urn = row.data('urn');
         row.remove();
         $('#school-' + urn).remove();
+        $('#school-name-' + urn).remove();
         hideShowSection();
       }
 
