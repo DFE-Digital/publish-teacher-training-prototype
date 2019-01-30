@@ -212,6 +212,11 @@ router.get('/new-location/start', function (req, res) {
   res.redirect('/new-location/' + code + '/type');
 })
 
+router.post('/new-location/:code/type', function (req, res) {
+  var paths = newLocationWizardPaths(req);
+  res.redirect(paths.next);
+})
+
 router.all('/new-location/:code/address', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;

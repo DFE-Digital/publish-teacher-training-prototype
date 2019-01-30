@@ -9,14 +9,13 @@
   </h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
+      <form action="{{ paths.current }}" method="post">
         {% set fields = [
             {
               name: 'A school, college or university'
             },
             {
-              name: 'A region or area',
-              more: '<p class="govuk-error-message">Sorry, this option hasn’t been built yet</p>'
+              name: 'A region or area'
             },
             {
               name: 'A place that’s not a school, college or university',
@@ -30,6 +29,4 @@
       </form>
     </div>
   </div>
-
-
 {% endblock %}

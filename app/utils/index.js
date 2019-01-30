@@ -60,7 +60,8 @@ function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) 
 
   return {
     next: /confirm|edit/.test(next) ? next : next + query,
-    back: /confirm|edit/.test(back) ? back : back + query
+    back: /confirm|edit/.test(back) ? back : back + query,
+    current: /confirm|edit/.test(back) ? currentPath : currentPath + query,
   }
 }
 
@@ -184,6 +185,10 @@ function newLocationWizardPaths(req) {
   var editing = data['schools'].some(a => a.code == code);
   var summaryView = editing ? 'edit' : 'confirm';
 
+  if (isRegionLocation(code, data)) {
+    return newRegionLocationWizardPaths(req);
+  }
+
   if (req.query.change == 'pick-location') {
     return editPickedLocationPaths(req, summaryView);
   }
@@ -200,6 +205,37 @@ function newLocationWizardPaths(req) {
     `/new-location/${code}/type`,
     `/new-location/${code}/pick-location`,
     `/new-location/${code}/address`,
+    `/new-location/${code}/${summaryView}`,
+    `/new-location/${code}/create`
+  ];
+
+  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req));
+
+  if (nextAndBack.back == '/locations?change=type') {
+    nextAndBack.back = `/new-location/${code}/${summaryView}`;
+  }
+
+  return nextAndBack;
+}
+
+function newRegionLocationWizardPaths(req) {
+  var code = req.params.code;
+  var data = req.session.data;
+  var editing = data['schools'].some(a => a.code == code);
+  var summaryView = editing ? 'edit' : 'confirm';
+
+  if (req.query.change && req.query.change != 'type') {
+    return {
+      next: `/new-location/${code}/${summaryView}`,
+      back: `/new-location/${code}/${summaryView}`
+    }
+  }
+
+  var paths = [
+    '/locations',
+    `/new-location/${code}/type`,
+    `/new-location/${code}/region-name`,
+    `/new-location/${code}/region-schools`,
     `/new-location/${code}/${summaryView}`,
     `/new-location/${code}/create`
   ];
@@ -285,6 +321,10 @@ function getLocationFromChoice(code, data, callback) {
 
 function isModernLanguages(code, data) {
   return data[code + '-subject'] == 'Modern languages'
+}
+
+function isRegionLocation(code, data) {
+  return data[code + '-location-type'] == 'A region or area'
 }
 
 function isFurtherEducation(code, data) {
