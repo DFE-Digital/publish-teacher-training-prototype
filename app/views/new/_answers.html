@@ -56,8 +56,10 @@
     Languages
   </dt>
   <dd class="app-check-your-answers__answer">
-    {% if data[code + '-languages'] %}
+    {% if isArray(data[code + '-languages']) %}
       {{ data[code + '-languages'].join('<br />') | safe }}
+    {% else %}
+      {{ data[code + '-languages'] }}
     {% endif %}
   </dd>
   {% if showChangeLinks %}
