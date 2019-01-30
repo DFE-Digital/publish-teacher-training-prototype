@@ -29,6 +29,7 @@
         element: document.querySelector('#my-autocomplete-container'),
         id: 'my-autocomplete',
         source: createSimpleEngine(autocomplete_options),
+        autoselect: true,
         minLength: 2
       })
 

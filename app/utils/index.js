@@ -531,6 +531,7 @@ module.exports = {
   getLocationFromChoice,
   isModernLanguages,
   isFurtherEducation,
+  isRegionLocation,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,

@@ -8,6 +8,7 @@ var {
   getLocationFromChoice,
   isModernLanguages,
   isFurtherEducation,
+  isRegionLocation,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,
@@ -255,19 +256,27 @@ router.all('/new-location/:code/create', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  var school = data['schools'].find(a => a.code == code);
-  if (!school) {
-    school = {};
-    data['schools'].push(school);
+  var loc = data['schools'].find(a => a.code == code);
+  if (!loc) {
+    loc = {};
+    data['schools'].push(loc);
   }
 
-  school.type = data[code + '-location-type'];
-  school.name = data[code + '-name'];
-  school.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
-  school.url = data[code + '-url'];
-  school.urn = data[code + '-urn'];
-  school.picked = data[code + '-location-picked'];
-  school.code = code;
+  loc.type = data[code + '-location-type'];
+  loc.urn = data[code + '-urn'];
+  loc.code = code;
+
+  if (isRegionLocation(code, data)) {
+    loc.name = data[code + '-region-name'];
+    loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
+    loc.schools = data[code + '-area-school-names'];
+    loc.pickedSchools = data[code + '-area-schools'];
+  } else {
+    loc.name = data[code + '-name'];
+    loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
+    loc.url = data[code + '-url'];
+    loc.picked = data[code + '-location-picked'];
+  }
 
   res.redirect(`/locations?created=true`);
 })
