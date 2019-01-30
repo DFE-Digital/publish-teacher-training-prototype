@@ -11,7 +11,7 @@
     </a>
   </dd>
 </div>
-{% if data[code + '-location-type'] == 'A region or area' %}
+{% if data[code + '-location-type'] and data[code + '-location-type'].includes('A region or area') %}
   <div class="app-check-your-answers__contents">
     <dt class="app-check-your-answers__question">
       Region name

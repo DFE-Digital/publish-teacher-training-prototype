@@ -324,7 +324,7 @@ function isModernLanguages(code, data) {
 }
 
 function isRegionLocation(code, data) {
-  return data[code + '-location-type'] == 'A region or area'
+  return data[code + '-location-type'] && data[code + '-location-type'].includes('A region or area')
 }
 
 function isFurtherEducation(code, data) {

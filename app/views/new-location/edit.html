@@ -1,4 +1,8 @@
-{% set title = data[code + '-name'] %}
+{% if data[code + '-location-type'] and data[code + '-location-type'].includes('A region or area') %}
+  {% set title = data[code + '-region-name'] %}
+{% else %}
+  {% set title = data[code + '-name'] %}
+{% endif %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/locations') }}{% endblock %}
