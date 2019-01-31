@@ -8,6 +8,7 @@ var {
   getGeneratedTitle,
   getCourseOffered,
   getLocationFromChoice,
+  getLocations,
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
@@ -230,7 +231,10 @@ router.all('/new-location/:code/address', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  getLocationFromChoice(code, data, function(location) {
+  getLocationFromChoice(data, data[code + '-location-picked'], function(location, urn) {
+    data[code + '-location'] = location;
+    data[code + '-urn'] = urn;
+
     res.render('new-location/address', {
       code: code,
       paths: newLocationWizardPaths(req),
@@ -243,9 +247,12 @@ router.all('/new-location/:code/confirm', function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
-  res.render('new-location/confirm', {
-    code: code,
-    paths: newLocationWizardPaths(req)
+  getLocations(code, data, function(locations) {
+    res.render('new-location/confirm', {
+      code: code,
+      paths: newLocationWizardPaths(req),
+      locations: locations
+    });
   });
 })
 

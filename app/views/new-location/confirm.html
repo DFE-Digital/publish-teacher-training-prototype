@@ -4,17 +4,42 @@
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-  <form action="{{ paths.next }}" method="post">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl add-double-bottom-margin">
-          {{ title }}
-        </h1>
-        <dl class="govuk-summary-list govuk-!-margin-top-9 govuk-!-margin-bottom-9">
-          {% include "new-location/_answers.html" %}
-        </dl>
-      </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl add-double-bottom-margin">
+        {{ title }}
+      </h1>
     </div>
+  </div>
+
+  <div class="govuk-grid-row govuk-!-margin-top-9">
+    <div class="govuk-grid-column-two-thirds">
+      <dl class="govuk-summary-list govuk-!-margin-top-9 govuk-!-margin-bottom-9">
+        {% include "new-location/_answers.html" %}
+      </dl>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div id="locations-map" class="google-map--locations" style="height: 300px"></div>
+    </div>
+  </div>
+
+  <form action="{{ paths.next }}" method="post">
     <input type="submit" class="govuk-button" value="Save new training location" />
   </form>
+{% endblock %}
+
+{% block pageScripts %}
+  <script>
+  window.trainingLocations = [
+    {
+      "code": "{{ code }}",
+      "name": "{{ data[code + '-name'] }}",
+      "lat": {{ data[code + '-location'].lat }},
+      "lng": {{ data[code + '-location'].lng }},
+      "address": "{{ data[code + '-address']}}<br />{{ data[code + '-town'] or data[code + '-county'] }}<br />{{ data[code + '-postcode'] }}"
+    }
+  ]
+  </script>
+  <script src="/public/javascripts/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMEl6fpV97Mo3NnkIqm-eRPhfkvKI5RcQ&callback=initLocationsMap"></script>
 {% endblock %}
