@@ -292,16 +292,24 @@ function getCourseOffered(code, data) {
 }
 
 function getLocations(code, data, callback) {
+  var promises = [];
   var choices = data[code + '-area-schools'];
   if (!Array.isArray(choices)) {
     choices = [choices];
   }
 
-  callback([]);
+  choices.forEach(function(choice) {
+    var p = new Promise(function(resolve, reject) {
+              getLocationFromChoice(data, choice, function(location, urn) {
+                resolve(location)
+              })
+            });
+    promises.push(p);
+  });
 
-  // choices.forEach(function(choice)) {
-  //   getLocationFromChoice(data, choice, callback)
-  // }
+  Promise.all(promises).then(function(values) {
+    callback(values);
+  });
 }
 
 function getLocationFromChoice(data, choice, callback) {

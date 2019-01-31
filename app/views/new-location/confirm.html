@@ -9,17 +9,14 @@
       <h1 class="govuk-heading-xl add-double-bottom-margin">
         {{ title }}
       </h1>
-    </div>
-  </div>
 
-  <div class="govuk-grid-row govuk-!-margin-top-9">
-    <div class="govuk-grid-column-two-thirds">
       <dl class="govuk-summary-list govuk-!-margin-top-9 govuk-!-margin-bottom-9">
         {% include "new-location/_answers.html" %}
       </dl>
+
+      <div id="locations-map" class="google-map--locations govuk-!-margin-bottom-7" style="height: 300px"></div>
     </div>
     <div class="govuk-grid-column-one-third">
-      <div id="locations-map" class="google-map--locations" style="height: 300px"></div>
     </div>
   </div>
 
@@ -31,6 +28,17 @@
 {% block pageScripts %}
   <script>
   window.trainingLocations = [
+    {% if data[code + '-location-type'] and data[code + '-location-type'].includes('A region or area') %}
+      {% for loc in locations %}
+        {
+          "code": "None",
+          "name": "{{ loc.name }}",
+          "lat": {{ loc.lat }},
+          "lng": {{ loc.lng }},
+          "address": "{{ loc.address }}<br />{{ loc.town or loc.county }}<br />{{ loc.postcode }}"
+        },
+      {% endfor %}
+    {% else %}
     {
       "code": "{{ code }}",
       "name": "{{ data[code + '-name'] }}",
@@ -38,6 +46,7 @@
       "lng": {{ data[code + '-location'].lng }},
       "address": "{{ data[code + '-address']}}<br />{{ data[code + '-town'] or data[code + '-county'] }}<br />{{ data[code + '-postcode'] }}"
     }
+    {% endif %}
   ]
   </script>
   <script src="/public/javascripts/map.js"></script>
