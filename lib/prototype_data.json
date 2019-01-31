@@ -1,107 +1,893 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Claremont Primary School",
-  "provider-code": "1TP",
-  "2BVM-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-duration": "1 year",
-  "2BVM-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-fee": "9,000",
-  "2BVM-fee-international": "14,000",
-  "2BVM-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "2BVM-publish-state": "published",
-  "2BVM-published-before": true,
-  "2BVM-generated-title": "Primary",
-  "2BVM-title": "Primary",
-  "2BVM-outcome": "PGCE with QTS",
-  "2BVM-applications-open": "10 October 2018",
-  "2BVM-who-apply-type": "Option A (most flexible)",
-  "2BVM-type": "Fee paying (no salary)",
-  "2BVM-languages": null,
-  "2BVM-phase": "Primary",
-  "2BVM-min-requirements": [
+  "training-provider-name": "The University of Huddersfield",
+  "provider-code": "H60",
+  "X105-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-duration": "1 year",
+  "X105-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-fee": "9,000",
+  "X105-fee-international": "14,000",
+  "X105-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "X105-publish-state": "published",
+  "X105-published-before": true,
+  "X105-generated-title": "Primary Education (Early Years and Key Stage 1)",
+  "X105-title": "Primary Education (Early Years and Key Stage 1)",
+  "X105-outcome": "PGCE with QTS",
+  "X105-applications-open": "10 October 2018",
+  "X105-who-apply-type": "Option A (most flexible)",
+  "X105-type": "Fee paying (no salary)",
+  "X105-languages": null,
+  "X105-phase": "Primary",
+  "X105-min-requirements": [
     "Mathematics",
     "English"
   ],
-  "2BVM-subject": "Primary",
-  "2BVM-full-part": "Full time",
-  "2BVM-locations": [
+  "X105-subject": "Early years",
+  "X105-full-part": "Full time",
+  "X105-locations": [
     "Main Site"
   ],
-  "2BVM-has-accredited-body": "Another organisation",
-  "2BVM-accredited-body": "Teach Kent and Sussex",
-  "2BVM-vacancies-flag": "Yes",
-  "2BVM-vacancies-choice": "There are some vacancies",
-  "2BVM-full-time-and-part-time": false,
-  "2BVM-multi-location": false,
-  "2BVM-start-date": "September 2019",
-  "2BVM-vacancies-1": "Vacancies",
-  "36QT-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-duration": "1 year",
-  "36QT-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-fee": "9,000",
-  "36QT-fee-international": "14,000",
-  "36QT-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "36QT-publish-state": "draft",
-  "36QT-published-before": false,
-  "36QT-generated-title": "Primary",
-  "36QT-title": "Primary",
-  "36QT-outcome": "PGCE with QTS",
-  "36QT-applications-open": "10 October 2018",
-  "36QT-who-apply-type": "Option A (most flexible)",
-  "36QT-type": "Salaried",
-  "36QT-languages": null,
-  "36QT-phase": "Primary",
-  "36QT-min-requirements": [
+  "X105-has-accredited-body": "We are the accredited body",
+  "X105-accredited-body": "The University of Huddersfield",
+  "X105-vacancies-flag": "Yes",
+  "X105-vacancies-choice": "There are some vacancies",
+  "X105-full-time-and-part-time": false,
+  "X105-multi-location": false,
+  "X105-start-date": "September 2019",
+  "X105-vacancies-1": "Vacancies",
+  "2CZ7-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-duration": "1 year",
+  "2CZ7-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-fee": "9,000",
+  "2CZ7-fee-international": "14,000",
+  "2CZ7-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "2CZ7-publish-state": "draft",
+  "2CZ7-published-before": false,
+  "2CZ7-generated-title": "Primary Education PGCE with QTS",
+  "2CZ7-title": "Primary Education PGCE with QTS",
+  "2CZ7-outcome": "PGCE with QTS",
+  "2CZ7-applications-open": "10 October 2018",
+  "2CZ7-who-apply-type": "Option A (most flexible)",
+  "2CZ7-type": "Fee paying (no salary)",
+  "2CZ7-languages": null,
+  "2CZ7-phase": "Primary",
+  "2CZ7-min-requirements": [
     "Mathematics",
     "English"
   ],
-  "36QT-subject": "Primary",
-  "36QT-full-part": "Full time",
-  "36QT-locations": [
+  "2CZ7-subject": "Primary",
+  "2CZ7-full-part": "Full time",
+  "2CZ7-locations": [
     "Main Site"
   ],
-  "36QT-has-accredited-body": "Another organisation",
-  "36QT-accredited-body": "Teach Kent and Sussex",
-  "36QT-vacancies-flag": "Yes",
-  "36QT-vacancies-choice": "There are some vacancies",
-  "36QT-full-time-and-part-time": false,
-  "36QT-multi-location": false,
-  "36QT-start-date": "September 2019",
-  "36QT-vacancies-1": "Vacancies",
+  "2CZ7-has-accredited-body": "We are the accredited body",
+  "2CZ7-accredited-body": "The University of Huddersfield",
+  "2CZ7-vacancies-flag": "Yes",
+  "2CZ7-vacancies-choice": "There are some vacancies",
+  "2CZ7-full-time-and-part-time": false,
+  "2CZ7-multi-location": false,
+  "2CZ7-start-date": "September 2019",
+  "2CZ7-vacancies-1": "Vacancies",
+  "38DV-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-duration": "1 year",
+  "38DV-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-fee": "9,000",
+  "38DV-fee-international": "14,000",
+  "38DV-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "38DV-publish-state": "draft",
+  "38DV-published-before": false,
+  "38DV-generated-title": "Art and Design",
+  "38DV-title": "Art and Design",
+  "38DV-outcome": "QTS",
+  "38DV-applications-open": "10 October 2018",
+  "38DV-who-apply-type": "Option A (most flexible)",
+  "38DV-type": "Fee paying (no salary)",
+  "38DV-languages": null,
+  "38DV-phase": "Secondary",
+  "38DV-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DV-subject": "Art / art & design",
+  "38DV-full-part": "Full time",
+  "38DV-locations": [
+    "Main Site"
+  ],
+  "38DV-has-accredited-body": "We are the accredited body",
+  "38DV-accredited-body": "The University of Huddersfield",
+  "38DV-vacancies-flag": "Yes",
+  "38DV-vacancies-choice": "There are some vacancies",
+  "38DV-full-time-and-part-time": false,
+  "38DV-multi-location": false,
+  "38DV-start-date": "September 2019",
+  "38DV-vacancies-1": "Vacancies",
+  "C1X1-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-duration": "1 year",
+  "C1X1-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-fee": "10,000",
+  "C1X1-fee-international": "14,000",
+  "C1X1-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "C1X1-publish-state": "published-with-changes",
+  "C1X1-published-before": true,
+  "C1X1-generated-title": "Science with Biology",
+  "C1X1-title": "Science with Biology",
+  "C1X1-outcome": "PGCE with QTS",
+  "C1X1-applications-open": "10 October 2018",
+  "C1X1-who-apply-type": "Option A (most flexible)",
+  "C1X1-type": "Fee paying (no salary)",
+  "C1X1-languages": null,
+  "C1X1-phase": "Secondary",
+  "C1X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "C1X1-subject": "Biology",
+  "C1X1-full-part": "Full time",
+  "C1X1-locations": [
+    "Main Site"
+  ],
+  "C1X1-has-accredited-body": "We are the accredited body",
+  "C1X1-accredited-body": "The University of Huddersfield",
+  "C1X1-vacancies-flag": "Yes",
+  "C1X1-vacancies-choice": "There are some vacancies",
+  "C1X1-full-time-and-part-time": false,
+  "C1X1-multi-location": false,
+  "C1X1-start-date": "September 2019",
+  "C1X1-vacancies-1": "Vacancies",
+  "N1X1-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-duration": "1 year",
+  "N1X1-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-fee": "9,000",
+  "N1X1-fee-international": "14,000",
+  "N1X1-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "N1X1-publish-state": "published",
+  "N1X1-published-before": true,
+  "N1X1-generated-title": "Business Education",
+  "N1X1-title": "Business Education",
+  "N1X1-outcome": "PGCE with QTS",
+  "N1X1-applications-open": "10 October 2018",
+  "N1X1-who-apply-type": "Option A (most flexible)",
+  "N1X1-type": "Fee paying (no salary)",
+  "N1X1-languages": null,
+  "N1X1-phase": "Secondary",
+  "N1X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "N1X1-subject": "Business education",
+  "N1X1-full-part": "Full time",
+  "N1X1-locations": [
+    "Main Site"
+  ],
+  "N1X1-has-accredited-body": "We are the accredited body",
+  "N1X1-accredited-body": "The University of Huddersfield",
+  "N1X1-vacancies-flag": "No",
+  "N1X1-vacancies-choice": "There are no vacancies",
+  "N1X1-full-time-and-part-time": false,
+  "N1X1-multi-location": false,
+  "N1X1-start-date": "September 2019",
+  "N1X1-vacancies-1": "Vacancies",
+  "F1X1-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-placement-school-policy": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-duration": "1 year",
+  "F1X1-salary-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-fee": "9,000",
+  "F1X1-fee-international": "14,000",
+  "F1X1-fee-details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-financial-support": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-qualifications-required": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-personal-qualities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "F1X1-publish-state": "published",
+  "F1X1-published-before": true,
+  "F1X1-generated-title": "Science with Chemistry",
+  "F1X1-title": "Science with Chemistry",
+  "F1X1-outcome": "PGCE with QTS",
+  "F1X1-applications-open": "10 October 2018",
+  "F1X1-who-apply-type": "Option A (most flexible)",
+  "F1X1-type": "Fee paying (no salary)",
+  "F1X1-languages": null,
+  "F1X1-phase": "Secondary",
+  "F1X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "F1X1-subject": "Chemistry",
+  "F1X1-full-part": "Full time",
+  "F1X1-locations": [
+    "Main Site"
+  ],
+  "F1X1-has-accredited-body": "We are the accredited body",
+  "F1X1-accredited-body": "The University of Huddersfield",
+  "F1X1-vacancies-flag": "Yes",
+  "F1X1-vacancies-choice": "There are some vacancies",
+  "F1X1-full-time-and-part-time": false,
+  "F1X1-multi-location": false,
+  "F1X1-start-date": "September 2019",
+  "F1X1-vacancies-1": "Vacancies",
+  "IX00-generated-title": "Computer Science",
+  "IX00-title": "Computer Science",
+  "IX00-outcome": "PGCE with QTS",
+  "IX00-applications-open": "10 October 2018",
+  "IX00-who-apply-type": "Option A (most flexible)",
+  "IX00-type": "Fee paying (no salary)",
+  "IX00-languages": null,
+  "IX00-phase": "Secondary",
+  "IX00-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "IX00-subject": "Computer studies",
+  "IX00-full-part": "Full time",
+  "IX00-locations": [
+    "Main Site"
+  ],
+  "IX00-has-accredited-body": "We are the accredited body",
+  "IX00-accredited-body": "The University of Huddersfield",
+  "IX00-vacancies-flag": "Yes",
+  "IX00-vacancies-choice": "There are some vacancies",
+  "IX00-full-time-and-part-time": false,
+  "IX00-multi-location": false,
+  "IX00-start-date": "September 2019",
+  "IX00-vacancies-1": "Vacancies",
+  "38DW-generated-title": "Drama",
+  "38DW-title": "Drama",
+  "38DW-outcome": "QTS",
+  "38DW-applications-open": "10 October 2018",
+  "38DW-who-apply-type": "Option A (most flexible)",
+  "38DW-type": "Fee paying (no salary)",
+  "38DW-languages": null,
+  "38DW-phase": "Secondary",
+  "38DW-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DW-subject": "Drama and theatre studies",
+  "38DW-full-part": "Full time",
+  "38DW-locations": [
+    "Main Site"
+  ],
+  "38DW-has-accredited-body": "We are the accredited body",
+  "38DW-accredited-body": "The University of Huddersfield",
+  "38DW-vacancies-flag": "Yes",
+  "38DW-vacancies-choice": "There are some vacancies",
+  "38DW-full-time-and-part-time": false,
+  "38DW-multi-location": false,
+  "38DW-start-date": "September 2019",
+  "38DW-vacancies-1": "Vacancies",
+  "32P4-generated-title": "English",
+  "32P4-title": "English",
+  "32P4-outcome": "PGCE with QTS",
+  "32P4-applications-open": "10 October 2018",
+  "32P4-who-apply-type": "Option A (most flexible)",
+  "32P4-type": "Fee paying (no salary)",
+  "32P4-languages": null,
+  "32P4-phase": "Secondary",
+  "32P4-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "32P4-subject": "English",
+  "32P4-full-part": "Full time",
+  "32P4-locations": [
+    "Main Site"
+  ],
+  "32P4-has-accredited-body": "We are the accredited body",
+  "32P4-accredited-body": "The University of Huddersfield",
+  "32P4-vacancies-flag": "Yes",
+  "32P4-vacancies-choice": "There are some vacancies",
+  "32P4-full-time-and-part-time": false,
+  "32P4-multi-location": false,
+  "32P4-start-date": "September 2019",
+  "32P4-vacancies-1": "Vacancies",
+  "X371-fe-title": "Lifelong Learning (Pre-Service)",
+  "X371-outcome": "PGCE only (without QTS)",
+  "X371-applications-open": "10 October 2018",
+  "X371-who-apply-type": "Option A (most flexible)",
+  "X371-type": "Fee paying (no salary)",
+  "X371-languages": null,
+  "X371-phase": "Further education",
+  "X371-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "X371-subject": "Further education",
+  "X371-full-part": "Full time",
+  "X371-locations": [
+    "Main Site"
+  ],
+  "X371-has-accredited-body": "We are the accredited body",
+  "X371-accredited-body": "The University of Huddersfield",
+  "X371-vacancies-flag": "Yes",
+  "X371-vacancies-choice": "There are some vacancies",
+  "X371-full-time-and-part-time": false,
+  "X371-multi-location": false,
+  "X371-start-date": "September 2019",
+  "X371-vacancies-1": "Vacancies",
+  "38DX-generated-title": "Geography",
+  "38DX-title": "Geography",
+  "38DX-outcome": "QTS",
+  "38DX-applications-open": "10 October 2018",
+  "38DX-who-apply-type": "Option A (most flexible)",
+  "38DX-type": "Fee paying (no salary)",
+  "38DX-languages": null,
+  "38DX-phase": "Secondary",
+  "38DX-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DX-subject": "Geography",
+  "38DX-full-part": "Full time",
+  "38DX-locations": [
+    "Main Site"
+  ],
+  "38DX-has-accredited-body": "We are the accredited body",
+  "38DX-accredited-body": "The University of Huddersfield",
+  "38DX-vacancies-flag": "Yes",
+  "38DX-vacancies-choice": "There are some vacancies",
+  "38DX-full-time-and-part-time": false,
+  "38DX-multi-location": false,
+  "38DX-start-date": "September 2019",
+  "38DX-vacancies-1": "Vacancies",
+  "38DR-languages": [
+
+  ],
+  "38DR-generated-title": "Modern Foreign Languages",
+  "38DR-title": "Modern Foreign Languages",
+  "38DR-outcome": "QTS",
+  "38DR-applications-open": "10 October 2018",
+  "38DR-who-apply-type": "Option A (most flexible)",
+  "38DR-type": "Fee paying (no salary)",
+  "38DR-phase": "Secondary",
+  "38DR-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DR-subject": "Modern languages",
+  "38DR-full-part": "Full time",
+  "38DR-locations": [
+    "Main Site"
+  ],
+  "38DR-has-accredited-body": "We are the accredited body",
+  "38DR-accredited-body": "The University of Huddersfield",
+  "38DR-vacancies-flag": "Yes",
+  "38DR-vacancies-choice": "There are some vacancies",
+  "38DR-full-time-and-part-time": false,
+  "38DR-multi-location": false,
+  "38DR-start-date": "September 2019",
+  "38DR-vacancies-1": "Vacancies",
+  "G1X1-generated-title": "Mathematics",
+  "G1X1-title": "Mathematics",
+  "G1X1-outcome": "PGCE with QTS",
+  "G1X1-applications-open": "10 October 2018",
+  "G1X1-who-apply-type": "Option A (most flexible)",
+  "G1X1-type": "Fee paying (no salary)",
+  "G1X1-languages": null,
+  "G1X1-phase": "Secondary",
+  "G1X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "G1X1-subject": "Mathematics",
+  "G1X1-full-part": "Full time",
+  "G1X1-locations": [
+    "Main Site"
+  ],
+  "G1X1-has-accredited-body": "We are the accredited body",
+  "G1X1-accredited-body": "The University of Huddersfield",
+  "G1X1-vacancies-flag": "Yes",
+  "G1X1-vacancies-choice": "There are some vacancies",
+  "G1X1-full-time-and-part-time": false,
+  "G1X1-multi-location": false,
+  "G1X1-start-date": "September 2019",
+  "G1X1-vacancies-1": "Vacancies",
+  "W3X1-generated-title": "Music",
+  "W3X1-title": "Music",
+  "W3X1-outcome": "PGCE with QTS",
+  "W3X1-applications-open": "10 October 2018",
+  "W3X1-who-apply-type": "Option A (most flexible)",
+  "W3X1-type": "Fee paying (no salary)",
+  "W3X1-languages": null,
+  "W3X1-phase": "Secondary",
+  "W3X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "W3X1-subject": "Music",
+  "W3X1-full-part": "Full time",
+  "W3X1-locations": [
+    "Main Site"
+  ],
+  "W3X1-has-accredited-body": "We are the accredited body",
+  "W3X1-accredited-body": "The University of Huddersfield",
+  "W3X1-vacancies-flag": "Yes",
+  "W3X1-vacancies-choice": "There are some vacancies",
+  "W3X1-full-time-and-part-time": false,
+  "W3X1-multi-location": false,
+  "W3X1-start-date": "September 2019",
+  "W3X1-vacancies-1": "Vacancies",
+  "38DS-generated-title": "Physical Education",
+  "38DS-title": "Physical Education",
+  "38DS-outcome": "QTS",
+  "38DS-applications-open": "10 October 2018",
+  "38DS-who-apply-type": "Option A (most flexible)",
+  "38DS-type": "Fee paying (no salary)",
+  "38DS-languages": null,
+  "38DS-phase": "Secondary",
+  "38DS-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DS-subject": "Physical education",
+  "38DS-full-part": "Full time",
+  "38DS-locations": [
+    "Main Site"
+  ],
+  "38DS-has-accredited-body": "We are the accredited body",
+  "38DS-accredited-body": "The University of Huddersfield",
+  "38DS-vacancies-flag": "Yes",
+  "38DS-vacancies-choice": "There are some vacancies",
+  "38DS-full-time-and-part-time": false,
+  "38DS-multi-location": false,
+  "38DS-start-date": "September 2019",
+  "38DS-vacancies-1": "Vacancies",
+  "F3X1-generated-title": "Science with Physics",
+  "F3X1-title": "Science with Physics",
+  "F3X1-outcome": "PGCE with QTS",
+  "F3X1-applications-open": "10 October 2018",
+  "F3X1-who-apply-type": "Option A (most flexible)",
+  "F3X1-type": "Fee paying (no salary)",
+  "F3X1-languages": null,
+  "F3X1-phase": "Secondary",
+  "F3X1-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "F3X1-subject": "Physics",
+  "F3X1-full-part": "Full time",
+  "F3X1-locations": [
+    "Main Site"
+  ],
+  "F3X1-has-accredited-body": "We are the accredited body",
+  "F3X1-accredited-body": "The University of Huddersfield",
+  "F3X1-vacancies-flag": "Yes",
+  "F3X1-vacancies-choice": "There are some vacancies",
+  "F3X1-full-time-and-part-time": false,
+  "F3X1-multi-location": false,
+  "F3X1-start-date": "September 2019",
+  "F3X1-vacancies-1": "Vacancies",
+  "38DT-generated-title": "Religious Education",
+  "38DT-title": "Religious Education",
+  "38DT-outcome": "QTS",
+  "38DT-applications-open": "10 October 2018",
+  "38DT-who-apply-type": "Option A (most flexible)",
+  "38DT-type": "Fee paying (no salary)",
+  "38DT-languages": null,
+  "38DT-phase": "Secondary",
+  "38DT-min-requirements": [
+    "Mathematics",
+    "English"
+  ],
+  "38DT-subject": "Religious education",
+  "38DT-full-part": "Full time",
+  "38DT-locations": [
+    "Main Site"
+  ],
+  "38DT-has-accredited-body": "We are the accredited body",
+  "38DT-accredited-body": "The University of Huddersfield",
+  "38DT-vacancies-flag": "Yes",
+  "38DT-vacancies-choice": "There are some vacancies",
+  "38DT-full-time-and-part-time": false,
+  "38DT-multi-location": false,
+  "38DT-start-date": "September 2019",
+  "38DT-vacancies-1": "Vacancies",
   "ucasCourses": [
     {
-      "level": "Primary",
+      "level": "Secondary",
       "sen": false,
-      "accrediting": "Teach Kent and Sussex",
+      "accrediting": "The University of Huddersfield",
       "languages": null,
       "subjects": [
-
+        "Art / art & design"
       ],
-      "subject": "Primary",
-      "outcome": "PGCE with QTS",
+      "subject": "Art / art & design",
+      "outcome": "QTS",
       "starts": "September 2019",
       "type": "Fee paying (no salary)",
-      "name": "Primary",
-      "route": "School Direct training programme",
-      "providerCode": "1TP",
-      "programmeCode": "2BVM",
+      "name": "Art and Design",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DV",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Banner Farm Road, Tunbridge Wells, TN2 5EB",
-          "code": "-"
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Business education"
+      ],
+      "subject": "Business education",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Business Education",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "N1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Computer studies"
+      ],
+      "subject": "Computer studies",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Computer Science",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "IX00",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Drama and theatre studies"
+      ],
+      "subject": "Drama and theatre studies",
+      "outcome": "QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Drama",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DW",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "English"
+      ],
+      "subject": "English",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "English",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "32P4",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Geography"
+      ],
+      "subject": "Geography",
+      "outcome": "QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Geography",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DX",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Further education",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Post-compulsory"
+      ],
+      "subject": "Further education",
+      "outcome": "PGCE",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Lifelong Learning (Pre-Service)",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "X371",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Mathematics"
+      ],
+      "subject": "Mathematics",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Mathematics",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "G1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": [
+
+      ],
+      "subjects": [
+        "Languages"
+      ],
+      "subject": "Modern languages",
+      "outcome": "QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Modern Foreign Languages",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DR",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Music"
+      ],
+      "subject": "Music",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Music",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "W3X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Physical education"
+      ],
+      "subject": "Physical education",
+      "outcome": "QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Physical Education",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DS",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Primary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Early years"
+      ],
+      "subject": "Early years",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Primary Education (Early Years and Key Stage 1)",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "X105",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
         }
       ],
       "options": [
@@ -116,7 +902,7 @@
     {
       "level": "Primary",
       "sen": false,
-      "accrediting": "Teach Kent and Sussex",
+      "accrediting": "The University of Huddersfield",
       "languages": null,
       "subjects": [
 
@@ -124,20 +910,148 @@
       "subject": "Primary",
       "outcome": "PGCE with QTS",
       "starts": "September 2019",
-      "type": "Salaried",
-      "name": "Primary",
-      "route": "School Direct training programme (salaried)",
-      "providerCode": "1TP",
-      "programmeCode": "36QT",
+      "type": "Fee paying (no salary)",
+      "name": "Primary Education PGCE with QTS",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "2CZ7",
       "schools": [
         {
           "name": "Main Site",
-          "address": "Banner Farm Road, Tunbridge Wells, TN2 5EB",
-          "code": "-"
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
         }
       ],
       "options": [
-        "PGCE with QTS full time with salary"
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Religious education"
+      ],
+      "subject": "Religious education",
+      "outcome": "QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Religious Education",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "38DT",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Biology"
+      ],
+      "subject": "Biology",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Science with Biology",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "C1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Chemistry"
+      ],
+      "subject": "Chemistry",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Science with Chemistry",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "F1X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
+      ],
+      "minRequirements": [
+        "Mathematics",
+        "English"
+      ],
+      "full-part": "Full time"
+    },
+    {
+      "level": "Secondary",
+      "sen": false,
+      "accrediting": "The University of Huddersfield",
+      "languages": null,
+      "subjects": [
+        "Physics"
+      ],
+      "subject": "Physics",
+      "outcome": "PGCE with QTS",
+      "starts": "September 2019",
+      "type": "Fee paying (no salary)",
+      "name": "Science with Physics",
+      "route": "Higher Education programme",
+      "providerCode": "H60",
+      "programmeCode": "F3X1",
+      "schools": [
+        {
+          "name": "Main Site",
+          "address": "Queensgate, Huddersfield, HD1 3DH",
+          "code": ""
+        }
+      ],
+      "options": [
+        "PGCE with QTS full time"
       ],
       "minRequirements": [
         "Mathematics",
@@ -149,40 +1063,168 @@
   "schools": [
     {
       "name": "Main Site",
-      "address": "Banner Farm Road, Tunbridge Wells, TN2 5EB",
-      "code": "-",
+      "address": "Queensgate, Huddersfield, HD1 3DH",
+      "code": "",
       "urn": 100000,
-      "postcode": "TN2 5EB"
+      "postcode": "HD1 3DH"
     }
   ],
-  "--location-picked": "Main Site (100000, City, TN2 5EB)",
-  "--location-type": "A school or university",
-  "--name": "Main Site",
-  "--urn": 100000,
-  "--postcode": "TN2 5EB",
-  "--address": "Banner Farm Road, Tunbridge Wells, TN2 5EB",
+  "-location-picked": "Main Site (100000, City, HD1 3DH)",
+  "-location-type": "A school or university",
+  "-name": "Main Site",
+  "-urn": 100000,
+  "-postcode": "HD1 3DH",
+  "-address": "Queensgate, Huddersfield, HD1 3DH",
   "accreditors": [
     {
-      "name": "Teach Kent and Sussex",
-      "slug": "teach-kent-and-sussex",
+      "name": "The University of Huddersfield",
+      "slug": "the-university-of-huddersfield",
       "subjects": [
         {
-          "name": "Primary",
-          "slug": "primary"
+          "name": "Art and Design",
+          "slug": "art-and-design"
+        },
+        {
+          "name": "Business Education",
+          "slug": "business-education"
+        },
+        {
+          "name": "Computer Science",
+          "slug": "computer-science"
+        },
+        {
+          "name": "Drama",
+          "slug": "drama"
+        },
+        {
+          "name": "English",
+          "slug": "english"
+        },
+        {
+          "name": "Geography",
+          "slug": "geography"
+        },
+        {
+          "name": "Lifelong Learning (Pre-Service)",
+          "slug": "lifelong-learning-pre-service"
+        },
+        {
+          "name": "Mathematics",
+          "slug": "mathematics"
+        },
+        {
+          "name": "Modern Foreign Languages",
+          "slug": "modern-foreign-languages"
+        },
+        {
+          "name": "Music",
+          "slug": "music"
+        },
+        {
+          "name": "Physical Education",
+          "slug": "physical-education"
+        },
+        {
+          "name": "Primary Education (Early Years and Key Stage 1)",
+          "slug": "primary-education-early-years-and-key-stage-1"
+        },
+        {
+          "name": "Primary Education PGCE with QTS",
+          "slug": "primary-education-pgce-with-qts"
+        },
+        {
+          "name": "Religious Education",
+          "slug": "religious-education"
+        },
+        {
+          "name": "Science with Biology",
+          "slug": "science-with-biology"
+        },
+        {
+          "name": "Science with Chemistry",
+          "slug": "science-with-chemistry"
+        },
+        {
+          "name": "Science with Physics",
+          "slug": "science-with-physics"
         }
       ]
     }
   ],
-  "self_accrediting": false,
+  "self_accrediting": true,
   "subjects": [
     {
-      "name": "Primary",
-      "slug": "primary"
+      "name": "Art and Design",
+      "slug": "art-and-design"
+    },
+    {
+      "name": "Business Education",
+      "slug": "business-education"
+    },
+    {
+      "name": "Computer Science",
+      "slug": "computer-science"
+    },
+    {
+      "name": "Drama",
+      "slug": "drama"
+    },
+    {
+      "name": "English",
+      "slug": "english"
+    },
+    {
+      "name": "Geography",
+      "slug": "geography"
+    },
+    {
+      "name": "Lifelong Learning (Pre-Service)",
+      "slug": "lifelong-learning-pre-service"
+    },
+    {
+      "name": "Mathematics",
+      "slug": "mathematics"
+    },
+    {
+      "name": "Modern Foreign Languages",
+      "slug": "modern-foreign-languages"
+    },
+    {
+      "name": "Music",
+      "slug": "music"
+    },
+    {
+      "name": "Physical Education",
+      "slug": "physical-education"
+    },
+    {
+      "name": "Primary Education (Early Years and Key Stage 1)",
+      "slug": "primary-education-early-years-and-key-stage-1"
+    },
+    {
+      "name": "Primary Education PGCE with QTS",
+      "slug": "primary-education-pgce-with-qts"
+    },
+    {
+      "name": "Religious Education",
+      "slug": "religious-education"
+    },
+    {
+      "name": "Science with Biology",
+      "slug": "science-with-biology"
+    },
+    {
+      "name": "Science with Chemistry",
+      "slug": "science-with-chemistry"
+    },
+    {
+      "name": "Science with Physics",
+      "slug": "science-with-physics"
     }
   ],
   "new-course": {
-    "include-accredited": true,
-    "include-fee-or-salary": true,
+    "include-accredited": false,
+    "include-fee-or-salary": false,
     "include-locations": false
   }
 }
