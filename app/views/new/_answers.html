@@ -123,7 +123,13 @@
     Training locations
   </dt>
   <dd class="app-check-your-answers__answer">
-    {{ data[code + '-locations'] | join('<br>') | safe }}
+    {% if isArray(data[code + '-locations']) %}
+      {{ data[code + '-locations'] | join('<br>') | safe }}
+    {% elseif data[code + '-locations'] %}
+      {{ data[code + '-locations'] }}
+    {% else %}
+      {{ data['schools'][0].name }}
+    {% endif %}
   </dd>
   {% if showChangeLinks %}
     <dd class="app-check-your-answers__change">
