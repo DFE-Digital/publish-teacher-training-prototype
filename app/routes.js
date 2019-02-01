@@ -37,6 +37,12 @@ router.get('/design-history', function (req, res) {
 
 router.get('/new/start', function (req, res) {
   var code = generateCourseCode();
+  var data = req.session.data;
+
+  if (data['schools'].length == 1) {
+    data[code + '-locations'] = [data['schools'][0].name];
+  }
+
   res.redirect('/new/' + code + '/phase');
 })
 
