@@ -429,12 +429,38 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
   })
 })
 
-router.get('/location/:id', function (req, res) {
+router.get('/location/start', function (req, res) {
+  var existingCodes = req.session.data['schools'].map (s => s.code);
+  var code = generateLocationCode(existingCodes);
+  res.redirect(`/location/${code}`);
+})
+
+router.get('/location/:code', function (req, res) {
+  var code = req.params.code;
   var school = req.session.data['schools'].find(function(school) {
-    return school.code == req.params.id;
+    return school.code == req.params.code;
+  });
+  var isNew = !school;
+  res.render('location', { school: school, code: code, isNew: isNew })
+})
+
+router.post('/location/:code', function (req, res) {
+  var code = req.params.code;
+  var data = req.session.data;
+  var loc = data['schools'].find(function(school) {
+    return school.code == req.params.code;
   });
 
-  res.render('location', { school: school })
+  if (!loc) {
+    loc = {}
+    data['schools'].push(loc);
+  }
+
+  loc.name = data[code + '-name'];
+  loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
+  loc.code = code;
+
+  res.redirect('/locations')
 })
 
 router.get('/location/:id/edit', function (req, res) {
