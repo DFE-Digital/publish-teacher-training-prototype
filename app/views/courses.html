@@ -37,6 +37,12 @@
     </div>
   </div>
 
+  {% if data['ucasCourses'].length > 10 %}
+    <p class="add-top-margin">
+      <a href="/new/start" class="govuk-button">Add a new course</a>
+    </p>
+  {% endif %}
+
   {% if data['ucasCourses'].length > 0 %}
     {% for accrediting in data['accreditors'] %}
       {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
