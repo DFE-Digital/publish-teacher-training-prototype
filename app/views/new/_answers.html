@@ -193,7 +193,7 @@
 </div>
 <div class="app-check-your-answers__contents">
   <dt class="app-check-your-answers__question">
-    Who will you consider?
+    UCAS Apply setting
   </dt>
   <dd class="app-check-your-answers__answer">
     {% set expansion %}
@@ -221,11 +221,6 @@
         </ul>
       {% elseif data[code + '-who-apply-type'] %}
         <p class="govuk-body-s">Only receive applications from candidates who have these qualifications when they apply.</p>
-        <p class="govuk-body-s">Reject candidates who:</p>
-        <ul class="govuk-list govuk-list--bullet govuk-body-s">
-          <li>don’t have all the qualifications when they apply</li>
-          <li>need to take an equivalency test</li>
-        </ul>
       {% endif %}
     {% endset %}
     {{ govukDetails({

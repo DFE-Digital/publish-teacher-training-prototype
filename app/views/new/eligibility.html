@@ -1,4 +1,4 @@
-{% set title = 'Who will you consider?' %}
+{% set title = 'Minimum GCSE requirements' %}
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
@@ -23,7 +23,7 @@
           * Do not accept applications from candidates who need to take an equivalence test
           * Do not accept applications from candidates who do not have the qualification but expect to have it before the course begins -->
 
-        <p>For {{ data[code + '-phase'] | lower }} courses applicants will need a minimum GCSE grade of C (or 4), or an equivalent,&nbsp;in:</p>
+        <p>All applicants need a minimum GCSE grade of C (or 4), or an equivalent,&nbsp;in:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>English</li>
           <li>Mathematics</li>
@@ -32,7 +32,8 @@
           {% endif %}
         </ul>
 
-        <h2 class="govuk-heading-l">Pick an option</h2>
+        <h2 class="govuk-heading-l">Pick a UCAS Apply setting</h2>
+        <p class="govuk-!-margin-bottom-6">Pick how flexible you will be when receiving applications from candidates still to gain these qualifications, or who need to take an equivalency test.</p>
 
         {% set moreTextOptions = [
           {
@@ -51,14 +52,14 @@
                     <li>have these qualifications when they apply</li>
                     <li>expect to have them before the course begins</li>
                   </ul>
-                  <p>Reject candidates who need to take an equivalency test</p>'
+                  <p>Candidates won’t be able to submit their UCAS application to you if they need to take an equivalency test.</p>'
           },
           {
             name: 'Option C (least flexible)',
             text: '<p>Only receive applications from candidates who have these qualifications when they apply.</p>
-                  <p>Reject candidates who:</p>
+                  <p>Candidates won’t be able to submit their UCAS application to you if they:</p>
                   <ul class="govuk-list govuk-list--bullet">
-                    <li>don’t have all the qualifications when they apply</li>
+                    <li>don’t have all their qualifications yet</li>
                     <li>need to take an equivalency test</li>
                   </ul>'
           }
