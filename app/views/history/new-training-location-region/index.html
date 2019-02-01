@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% set title = 'Add a region or area workflow' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Following on from the <a href="/history/new-training-location">specific school or university</a> workflow, this design builds out the ‘region’ training type.</p>
+
+      <p>Providers have filled in UCAS training locations with names and addresses that correspond to areas, for example ‘United Teaching Northamptonshire’, ‘East Midlands’ or ‘London’. In Find we try to geocode these as best we can, but a point in the middle of London, or another type of best guess, doesn’t yielf the best results.</p>
+
+      <p>This design aims to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>allow providers the freedom to specify regions, using whatever name they choose</li>
+        <li>use a school autocomplete to list schools in the area, to get a proper geographical understanding of the region</li>
+      </ul>
+
+      <p>Concerns we expect from providers that the design would need to address:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>I have too many schools to list</li>
+        <li>I don’t know which schools to list</li>
+        <li>Will candidates see these schools?</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'What type of location?', id: 'what-type-of-location' },
+    { text: 'Region name', id: 'region-name' },
+    { text: 'Schools in the area', id: 'schools-in-the-area' },
+    { text: 'Confirm', id: 'confirm' },
+    { text: 'Confirm (with a map)', id: 'confirm-with-map' },
+    { text: 'Edit', id: 'edit' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('What type of location?', 'what-type-of-location', '/public/images/history/new-training-location-region/thumbnails/01-what-type-of-location.png', '/public/images/history/new-training-location-region/01-what-type-of-location.png', '') }}
+
+  {{ macros.screenshot('Region name', 'region-name', '/public/images/history/new-training-location-region/thumbnails/02-region-name.png', '/public/images/history/new-training-location-region/02-region-name.png', '') }}
+
+  {{ macros.screenshot('Schools in the area', 'schools-in-the-area', '/public/images/history/new-training-location-region/thumbnails/03-schools-in-the-area.png', '/public/images/history/new-training-location-region/03-schools-in-the-area.png', '
+    <p>Note that the screenshot hasn’t picked up the autocompete dialogue in the `Add` box.</p>
+  ') }}
+
+  {{ macros.screenshot('Confirm', 'confirm', '/public/images/history/new-training-location-region/thumbnails/05-confirm.png', '/public/images/history/new-training-location-region/05-confirm.png', '') }}
+
+  {{ macros.screenshot('Confirm (with a map)', 'confirm-with-map', '/public/images/history/new-training-location-region/thumbnails/05-confirm-with-map.png', '/public/images/history/new-training-location-region/05-confirm-with-map.png', '') }}
+
+  {{ macros.screenshot('Edit', 'edit', '/public/images/history/new-training-location-region/thumbnails/06-edit.png', '/public/images/history/new-training-location-region/06-edit.png', '') }}
+
+{% endblock %}
