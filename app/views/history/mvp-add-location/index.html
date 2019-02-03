@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% set title = 'Minimum viable Add training location' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>A much simplified training location flow. It replicates what is available on UCAS, without any extras.</p>
+
+      <p>This design represents a baseline we could build first. We’d then iterate towards the training location wizards, adding a <a href="/history/schools-autocomplete">school autocomplete</a>, <a href="/history/new-training-location">then different types of location</a> along with <a href="/history/new-training-location-region">regions or areas</a>.</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Add training location', id: 'add-new-training-location' },
+    { text: 'Edit training location', id: 'edit-training-location' },
+    { text: 'Locations', id: 'locations' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Add training location', 'add-new-training-location', '/public/images/history/mvp-add-location/thumbnails/01-add-new-training-location.png', '/public/images/history/mvp-add-location/01-add-new-training-location.png', '') }}
+
+  {{ macros.screenshot('Edit training location', 'edit-training-location', '/public/images/history/mvp-add-location/thumbnails/02-edit-training-location.png', '/public/images/history/mvp-add-location/02-edit-training-location.png', '') }}
+
+  {{ macros.screenshot('Locations', 'locations', '/public/images/history/mvp-add-location/thumbnails/03-locations.png', '/public/images/history/mvp-add-location/03-locations.png', '') }}
+
+{% endblock %}
