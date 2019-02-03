@@ -22,7 +22,7 @@
 
       <p>This prototype does a URN lookup from <a href="https://github.com/fofr/schools-json">a flat-file repository</a>, as a sort of MVP schools API – <a href="https://github.com/fofr/schools-json/blob/master/schools/100005.json">example response</a>.</p>
 
-      <h2 class="govuk-heading-l">User research</h2>
+      <h2 class="govuk-heading-l" id="user-research">User research</h2>
       <ul class="govuk-list govuk-list--bullet">
         <li><a href="https://lookback.io/watch/oDwREDkfjwjW5SpCi">Canterbury Christ Church University</a></li>
         <li><a href="https://lookback.io/watch/vw6eDzqmL4s24rR2Y">East of England Teacher Training</a> (a SCITT)</li>
@@ -32,6 +32,16 @@
         <li><a href="https://lookback.io/watch/pWYBvEpr8YfeF7pAx">University of Huddersfield</a></li>
         <li><a href="https://lookback.io/watch/iviAKDMGPxMK68voe">The Royal Borough Teaching School Alliance</a></li>
       </ul>
+
+      <p>The ‘pick a school’ workflow works well if the provider can find the school they’re after. If the <a href="/history/schools-autocomplete#user-research">quirks around the autocomplete</a> can be fixed then this should work well.</p>
+
+      <p>An FE provider got confused with the label ‘School or university’, they wanted to add a college. We renamed type to include ‘college’.</p>
+
+      <p>One user wanted to enter their school manually.</p>
+
+      <p>No one has needed to edit the details pulled in from Edubase.</p>
+
+      <p>On the summary screens we started with ‘Code’, which a user misunderstood. We renamed it to ‘UCAS campus code’ and haven’t seen any further issues. <a href="https://lookback.io/watch/vw6eDzqmL4s24rR2Y?t=51m43s">One provider wanted to change the code</a> to something which aligns with the schools, eg St Mary’s could be M, and St Peter’s could be P.</p>
     </div>
   </div>
 
