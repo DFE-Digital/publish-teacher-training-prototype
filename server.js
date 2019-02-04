@@ -3,7 +3,6 @@ const path = require('path')
 
 // NPM dependencies
 const bodyParser = require('body-parser')
-const browserSync = require('browser-sync')
 const dotenv = require('dotenv')
 const express = require('express')
 const nunjucks = require('nunjucks')
@@ -19,7 +18,9 @@ const dateFormat = require('dateformat')
 dotenv.config()
 
 // Local dependencies
+const authentication = require('./lib/middleware/authentication/authentication.js')
 const config = require('./app/config.js')
+const documentationRoutes = require('./docs/documentation_routes.js')
 const packageJson = require('./package.json')
 const routes = require('./app/routes.js')
 const utils = require('./lib/utils.js')
@@ -54,20 +55,13 @@ documentationApp.use(handleCookies)
 
 // Set up configuration variables
 var releaseVersion = packageJson.version
-var username = process.env.USERNAME
-var password = process.env.PASSWORD
-var env = process.env.NODE_ENV || 'development'
-var useAuth = process.env.USE_AUTH || config.useAuth
+var env = (process.env.NODE_ENV || 'development').toLowerCase()
 var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
 var useHttps = process.env.USE_HTTPS || config.useHttps
-var useBrowserSync = config.useBrowserSync
 var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
 
-env = env.toLowerCase()
-useAuth = useAuth.toLowerCase()
 useHttps = useHttps.toLowerCase()
-useBrowserSync = useBrowserSync.toLowerCase()
 
 var useDocumentation = (config.useDocumentation === 'true')
 
@@ -86,10 +80,8 @@ if (isSecure) {
   app.set('trust proxy', 1) // needed for secure cookies on heroku
 }
 
-// Ask for username and password on production
-if (env === 'production' && useAuth === 'true') {
-  app.use(utils.basicAuth(username, password))
-}
+// Authentication middleware
+app.use(authentication)
 
 // Set up App
 var appViews = [
@@ -99,12 +91,19 @@ var appViews = [
   path.join(__dirname, '/lib/')
 ]
 
-var nunjucksAppEnv = nunjucks.configure(appViews, {
+var nunjucksConfig = {
   autoescape: true,
-  express: app,
   noCache: true,
   watch: true
-})
+}
+
+if (env === 'development') {
+  nunjucksConfig.watch = true
+}
+
+nunjucksConfig.express = app
+
+var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
@@ -128,12 +127,8 @@ if (useDocumentation) {
     path.join(__dirname, '/lib/')
   ]
 
-  var nunjucksDocumentationEnv = nunjucks.configure(documentationViews, {
-    autoescape: true,
-    express: documentationApp,
-    noCache: true,
-    watch: true
-  })
+  nunjucksConfig.express = documentationApp
+  var nunjucksDocumentationEnv = nunjucks.configure(documentationViews, nunjucksConfig)
   // Nunjucks filters
   utils.addNunjucksFilters(nunjucksDocumentationEnv)
 
@@ -154,13 +149,9 @@ if (useV6) {
     path.join(__dirname, '/app/v6/views/'),
     path.join(__dirname, '/lib/v6') // for old unbranded template
   ]
+  nunjucksConfig.express = v6App
+  var nunjucksV6Env = nunjucks.configure(v6Views, nunjucksConfig)
 
-  var nunjucksV6Env = nunjucks.configure(v6Views, {
-    autoescape: true,
-    express: v6App,
-    noCache: true,
-    watch: true
-  })
   // Nunjucks filters
   utils.addNunjucksFilters(nunjucksV6Env)
 
@@ -382,6 +373,20 @@ if (typeof (routes) !== 'function') {
   app.use('/', routes)
 }
 
+if (useDocumentation) {
+  // Clone app locals to documentation app locals
+  // Use Object.assign to ensure app.locals is cloned to prevent additions from
+  // updating the original app.locals
+  documentationApp.locals = Object.assign({}, app.locals)
+  documentationApp.locals.serviceName = 'Prototype Kit'
+
+  // Create separate router for docs
+  app.use('/docs', documentationApp)
+
+  // Docs under the /docs namespace
+  documentationApp.use('/', documentationRoutes)
+}
+
 if (useV6) {
   // Clone app locals to v6 app locals
   v6App.locals = Object.assign({}, app.locals)
@@ -447,26 +452,5 @@ app.use(function (err, req, res, next) {
 
 console.log('\nGOV.UK Prototype Kit v' + releaseVersion)
 console.log('\nNOTICE: the kit is for building prototypes, do not use it for production services.')
-
-// Find a free port and start the server
-utils.findAvailablePort(app, function (port) {
-  console.log('Listening on port ' + port + '   url: http://localhost:' + port)
-  if (env === 'production' || useBrowserSync === 'false') {
-    app.listen(port)
-  } else {
-    app.listen(port - 50, function () {
-      browserSync({
-        proxy: 'localhost:' + (port - 50),
-        port: port,
-        ui: false,
-        files: ['public/**/*.*', 'app/views/**/*.*'],
-        ghostmode: false,
-        open: false,
-        notify: false,
-        logLevel: 'error'
-      })
-    })
-  }
-})
 
 module.exports = app
