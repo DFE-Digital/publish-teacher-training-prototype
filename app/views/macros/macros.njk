@@ -228,7 +228,7 @@
 
 {% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = false) %}
   <div class="govuk-form-group">
-    <label class="govuk-label" for="{{ name }}">{{ label }}</label>
+    <label class="govuk-label" for="{{ name }}">{{ label | safe }}</label>
     {% if helpText %}
       <span class="govuk-hint">{{helpText | safe}}</span>
     {% endif %}

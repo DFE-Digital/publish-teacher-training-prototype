@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Location{% endblock %}
+{% set title = school.name or 'Add training location' %}
+{% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
   {{
@@ -11,7 +12,7 @@
         },
         {
           href: "/locations",
-          text: "Locations"
+          text: "Training locations"
         }
       ]
     })
@@ -20,148 +21,43 @@
 
 {% block content %}
   <h1 class="govuk-heading-xl">
-    {{ school.name }}
+    {{ title }}
   </h1>
 
-  <form action="/locations" class="govuk-grid-row">
+  <form action="/location/{{ code }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ macros.textbox(school.code + '-location-website', 'Website (optional)', 'For example, a school website', 'govuk-!-width-full', null, errors) }}
-      {{ macros.textbox(school.code + '-urn', 'School Unique Reference Number (URN) (optional)', 'This is the unique reference number allocated to all schools by Edubase.', 'form-control-small', null, errors) }}
+      {{ macros.textbox(code + '-name', '<h2 class="govuk-heading-m">Name</h2>', null, 'govuk-!-width-full', null, errors) }}
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+      <h2 class="govuk-heading-m govuk-!-margin-top-8">Address</h2>
+      {{ macros.textbox(code + '-address', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
+      {{ macros.textbox(code + '-town', 'Town or city', null, 'form-control', null, errors) }}
+      {{ macros.textbox(code + '-county', 'County', null, 'form-control', null, errors) }}
+      {{ macros.textbox(code + '-postcode', 'Postcode', null, 'form-control-small', null, errors) }}
 
-      <h2 class="govuk-heading-l add-double-bottom-margin" id="tell-us">Tell us about this location</h2>
+      {{ macros.select(code + '-ucas-region', 'Region of UK', [
+        { name: 'London' },
+        { name: 'South East' },
+        { name: 'South West' },
+        { name: 'Wales' },
+        { name: 'West Midlands' },
+        { name: 'East Midlands' },
+        { name: 'Eastern' },
+        { name: 'North West' },
+        { name: 'Yorkshire and the Humber' },
+        { name: 'North East' },
+        { name: 'Scotland' },
+        { name: 'Northern Ireland' },
+        { name: 'No region' }
+      ])}}
 
-      <p>Pick one or more statements that describe this location.</p>
-
-      {% set howManyField %}
-        {{ macros.textbox(school.code + '-location-count', 'How many other locations does this represent?', null, 'form-control-small', null, errors) }}
-      {% endset %}
-
-      {% set areaField %}
-        {{ macros.textbox(school.code + '-area-radius', 'Roughly how big is this area?', 'Radius of area in miles', 'form-control-small', null, errors) }}
-        {{ howManyField | safe }}
-      {% endset %}
-
-      <h3 class="govuk-heading-m">This location represents:</h3>
-
-      {% set fields = [
-          {
-            name: 'a building or specific address'
-          },
-          {
-            name: 'an area rather than a specific address',
-            more: areaField
-          },
-          {
-            name: 'a specific address and other locations',
-            more: howManyField
-          },
-          {
-            name: 'many places because of the limit of 36 training locations in UCAS',
-            more: howManyField
-          }
-        ]
-      %}
-
-      {{ macros.checkboxGroup(school.code + '-represents', fields, errors, 100) }}
-
-      <h3 class="govuk-heading-m">What happens at this location</h3>
-
-      {% set fields = [
-          {
-            name: 'Students train here'
-          },
-          {
-            name: 'Students have academic training here'
-          },
-          {
-            name: 'Students have professional training here'
-          },
-          {
-            name: 'Students teach in a classroom here'
-          },
-          {
-            name: 'No training happens here'
-          }
-        ]
-      %}
-
-      {{ macros.checkboxGroup(school.code + '-what-happens', fields, errors, 200) }}
-
-      <h3 class="govuk-heading-m">Time that students spend here</h3>
-
-      {% set fields = [
-          {
-            name: 'Students need to travel to this address'
-          },
-          {
-            name: 'Students go to this location the most'
-          },
-          {
-            name: 'Students spend some time here but will mostly be elsewhere'
-          },
-          {
-            name: 'Time spent here depends on the course'
-          }
-        ]
-      %}
-
-      {{ macros.checkboxGroup(school.code + '-tell-us', fields, errors, 300) }}
-
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-      <h2 class="govuk-heading-l add-double-bottom-margin" id="type">Label this location</h2>
-
-      <p>Pick one or more label that best describes this location.</p>
-
-      {% set fields = [
-          {
-            name: 'Host school',
-            text: 'A school where a student is based for most of their time. Also known as a parent school or home school.'
-          },
-          {
-            name: 'University campus',
-            text: 'A university campus where a student will be based for a large part of their training, when not on school placements.'
-          },
-          {
-            name: 'Training site',
-            text: 'Students will spend some time training here, but it is not their main location. There can be multiple training centres throughout the training time.'
-          },
-          {
-            name: 'Regional hub',
-            text: 'This represents a number of training locations in an area - students apply to that area. It isn’t a specific address that students visit.'
-          },
-          {
-            name: 'Administrative address',
-            text: '<p>No training takes place here. Students do not need to go to this location. This might be the headquarters or registered address of your organisation.
-</p><p>If students do go to this location, it is not purely administrative - please choose another option.</p>'
-          }
-        ]
-      %}
-
-      {{ macros.checkboxGroup(school.code + '-type', fields, errors, 400) }}
-
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-      <h2 class="govuk-heading-l" id="address">Address</h2>
-      <p>Not available in this prototype.</p>
-
-
-      <!--
-      {{ macros.textbox(school.code + '-building-and-street', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
-      {{ macros.textbox(school.code + '-building-and-street-2', null, null, 'govuk-!-width-full', null, errors) }}
-
-      {{ macros.textbox(school.code + '-organisation-town-or-city', 'Town or city', null, 'form-control', null, errors) }}
-      {{ macros.textbox(school.code + '-county', 'County', null, 'form-control', null, errors) }}
-      {{ macros.textbox(school.code + '-postcode', 'Postcode', null, 'form-control-small', null, errors) }}
-      -->
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-
-      <input type="submit" class="govuk-button" value="Save" />
+      {% if isNew %}
+        <input type="submit" class="govuk-button" value="Save" />
+      {% else %}
+        <input type="submit" class="govuk-button" value="Publish changes" />
+        <p>
+          <a href="/locations">Cancel changes</a>
+        </p>
+      {% endif %}
     </div>
   </form>
-
-
 {% endblock %}
