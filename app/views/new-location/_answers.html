@@ -1,35 +1,35 @@
-<div class="app-check-your-answers__contents">
-  <dt class="app-check-your-answers__question">
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
     Type
   </dt>
-  <dd class="app-check-your-answers__answer">
+  <dd class="govuk-summary-list__value">
     {{ data[code + '-location-type'] }}
   </dd>
-  <dd class="app-check-your-answers__change">
+  <dd class="govuk-summary-list__actions">
     <a href="/new-location/{{ code }}/type?change=type">
       Change<span class="govuk-visually-hidden"> type</span>
     </a>
   </dd>
 </div>
 {% if data[code + '-location-type'] and data[code + '-location-type'].includes('A region or area') %}
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Region name
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       {{ data[code + '-region-name'] }}
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <a href="/new-location/{{ code }}/region-name?change=region-name">
         Change<span class="govuk-visually-hidden"> region name</span>
       </a>
     </dd>
   </div>
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Schools
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       {% if data[code + '-area-school-names'] %}
         <ul class="govuk-list remove-bottom-margin">
           {% if isArray(data[code + '-area-school-names']) %}
@@ -44,92 +44,92 @@
         None
       {% endif %}
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <a href="/new-location/{{ code }}/region-schools?change=region-schools">
         Change<span class="govuk-visually-hidden"> schools</span>
       </a>
     </dd>
   </div>
 {% else %}
-  <!-- <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <!-- <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Location
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       {{ data[code + '-location-picked'] }}
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <a href="/new-location/{{ code }}/pick-location?change=pick-location">
         Change<span class="govuk-visually-hidden"> location</span>
       </a>
     </dd>
   </div> -->
   {% if data[code + '-location-picked'] %}
-    <div class="app-check-your-answers__contents">
-      <dt class="app-check-your-answers__question">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
         Location picked
       </dt>
-      <dd class="app-check-your-answers__answer">
+      <dd class="govuk-summary-list__value">
         {{ data[code + '-location-picked'] }}
       </dd>
-      <dd class="app-check-your-answers__change">
+      <dd class="govuk-summary-list__actions">
         <a href="/new-location/{{ code }}/pick-location?change=pick-location">
           Change<span class="govuk-visually-hidden"> location</span>
         </a>
       </dd>
     </div>
   {% endif %}
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Name
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       {{ data[code + '-name'] }}
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <!-- <a href="/new-location/{{ code }}/pick-location?change=pick-location">
         Change<span class="govuk-visually-hidden"> location</span>
       </a> -->
     </dd>
   </div>
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Address
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       {{ data[code + '-address']}}<br />
       {{ data[code + '-town'] or data[code + '-county'] }}<br />
       {{ data[code + '-postcode'] }}
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <!-- <a href="/new-location/{{ code }}/pick-location?change=pick-location">
         Change<span class="govuk-visually-hidden"> location</span>
       </a> -->
     </dd>
   </div>
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Website
     </dt>
-    <dd class="app-check-your-answers__answer">
+    <dd class="govuk-summary-list__value">
       <a href="{{ data[code + '-url'] }}" rel="noopener noreferrer" target="_blank">{{ data[code + '-url'] }}</a>
     </dd>
-    <dd class="app-check-your-answers__change">
+    <dd class="govuk-summary-list__actions">
       <!-- <a href="/new-location/{{ code }}/pick-location?change=pick-location">
         Change<span class="govuk-visually-hidden"> website</span>
       </a> -->
     </dd>
   </div>
   {% if data[code + '-urn'] %}
-    <div class="app-check-your-answers__contents">
-      <dt class="app-check-your-answers__question">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
         Unique reference number (URN)
       </dt>
-      <dd class="app-check-your-answers__answer">
+      <dd class="govuk-summary-list__value">
         {{ data[code + '-urn'] }}<br />
         <a rel="noopener noreferrer" target="_blank" class="govuk-body-s" href="https://get-information-schools.service.gov.uk/Establishments/Establishment/Details/{{ data[code + '-urn'] }}">View on the Get information about schools service</a>
       </dd>
-      <dd class="app-check-your-answers__change">
+      <dd class="govuk-summary-list__actions">
         <!-- <a href="/new-location/{{ code }}/pick-location?change=pick-location">
           Change<span class="govuk-visually-hidden"> location</span>
         </a> -->
@@ -137,12 +137,12 @@
     </div>
   {% endif %}
 {% endif %}
-<div class="app-check-your-answers__contents">
-  <dt class="app-check-your-answers__question">
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
     UCAS campus code
   </dt>
-  <dd class="app-check-your-answers__answer">
+  <dd class="govuk-summary-list__value">
     {{ code }}
   </dd>
-  <dd class="app-check-your-answers__change"></dd>
+  <dd class="govuk-summary-list__actions"></dd>
 </div>

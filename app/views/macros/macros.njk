@@ -459,12 +459,12 @@
 
 {% macro coursePart(id, label, errors, truncate = true) %}
   {% set e = error(id, errors) %}
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question {% if e %}app-check-your-answers__question--error{% endif %}">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>
-    <dd class="app-check-your-answers__answer {% if truncate %}app-check-your-answers__answer--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
+    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
       {% if (value(id)) %}
         {{ value(id) }}
       {% else %}
@@ -476,12 +476,12 @@
 
 {% macro feesCoursePart(id, label, errors) %}
   {% set e = error(id, errors) %}
-  <div class="app-check-your-answers__contents">
-    <dt class="app-check-your-answers__question {% if e %}app-check-your-answers__question--error{% endif %}">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>
-    <dd class="app-check-your-answers__answer {% if not value(id) %}empty{% endif %}">
+    <dd class="govuk-summary-list__value {% if not value(id) %}empty{% endif %}">
       {% if (value(id)) %}
         £{{ value(id) }}
       {% else %}

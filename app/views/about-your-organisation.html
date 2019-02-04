@@ -45,85 +45,61 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <div class="course-parts course-parts--large">
-        <ul class="course-parts-items">
-          <!-- <li class="course-parts-item">
-            <h3 class="course-part-task">Contact details from UCAS</h3>
-            <div style="overflow: hidden; clear: left; margin-bottom: 30px;"></div>
-            <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
-              <dt>Training provider code:</dt>
-              <dd>{{ data['provider-code'] }}</dd>
-              <dt>Email:</dt>
-              <dd>{{ data['email'] }}</dd>
-              <dt>Telephone:</dt>
-              <dd>{{ data['telephone'] }}</dd>
-              <dt>Website:</dt>
-              <dd><a href="{{ data['website'] }}" style="padding: 0">{{ data['website'] }}</a></dd>
-              <dt>Address:</dt>
-              <dd>
-                {{ data['training-provider-name'] }}<br />
-                {{ data['address-line-1'] }}<br />
-                {{ data['town'] }}<br />
-                {{ data['postcode'] }}
-              </dd>
-            </dl>
-          </li> -->
-          <li class="course-parts-item">
-            <h3 class="course-part-task">Contact details</h3>
-            <a class="course-part-task-action" href="/about-your-organisation/contact">Edit</a>
+      <h3 class="govuk-heading-27 remove-top-margin">
+        <a href="/about-your-organisation/contact">Contact details</a>
+      </h3>
 
-            <dl class="course-part-tasks">
-              {{ macros.coursePart('email-address', 'Email address', errors) }}
-              {{ macros.coursePart('telephone-number', 'Telephone number', errors) }}
-              {{ macros.coursePart('website', 'Website', errors) }}
+      <dl class="govuk-summary-list govuk-summary-list--short">
+        {{ macros.coursePart('email-address', 'Email address', errors) }}
+        {{ macros.coursePart('telephone-number', 'Telephone number', errors) }}
+        {{ macros.coursePart('website', 'Website', errors) }}
 
-              <div {% if e %}class="course-part-error"{% endif %}>
-                <dt class="course-part-label">
-                  Contact address
-                  {% if e %}<a href="{{ coursePath }}{{ e.link }}" class="course-part-label-error">{{ e.title }}</a>{% endif %}
-                </dt>
-                {% if data['building-and-street'] or data['building-and-street-2'] or data['organisation-town-or-city'] or data['county'] or data['postcode'] %}
-                  <dd class="course-part-value">
-                    {% if data['building-and-street'] %}
-                      {{ data['building-and-street'] }}<br />
-                    {% endif %}
-                    {% if data['building-and-street-2'] %}
-                      {{ data['building-and-street-2'] }}<br />
-                    {% endif %}
-                    {% if data['organisation-town-or-city'] %}
-                      {{ data['organisation-town-or-city'] }}<br />
-                    {% endif %}
-                    {% if data['county'] %}
-                      {{ data['county'] }}<br />
-                    {% endif %}
-                    {% if data['postcode'] %}
-                      {{ data['postcode'] }}<br />
-                    {% endif %}
-                  </dd>
-                {% else %}
-                  <dd class="course-part-value course-part-value--empty">
-                    This field is empty
-                  </dd>
-                {% endif %}
-              </div>
-            </dl>
-          </li>
-          <li class="course-parts-item">
-            <h3 class="course-part-task">About your organisation</h3>
-            <a class="course-part-task-action" href="/about-your-organisation/edit">Edit</a>
-
-            <dl class="course-part-tasks">
-              {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
-              {% if not data['self_accrediting'] %}
-                {% for a in data['accreditors'] %}
-                  {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
-                {% endfor %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
+            Contact address
+            {% if e %}<a href="{{ coursePath }}{{ e.link }}">{{ e.title }}</a>{% endif %}
+          </dt>
+          {% if data['building-and-street'] or data['building-and-street-2'] or data['organisation-town-or-city'] or data['county'] or data['postcode'] %}
+            <dd class="govuk-summary-list__value">
+              {% if data['building-and-street'] %}
+                {{ data['building-and-street'] }}<br />
               {% endif %}
-              {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
-            </dl>
-          </li>
-        </ul>
-      </div>
+              {% if data['building-and-street-2'] %}
+                {{ data['building-and-street-2'] }}<br />
+              {% endif %}
+              {% if data['organisation-town-or-city'] %}
+                {{ data['organisation-town-or-city'] }}<br />
+              {% endif %}
+              {% if data['county'] %}
+                {{ data['county'] }}<br />
+              {% endif %}
+              {% if data['postcode'] %}
+                {{ data['postcode'] }}<br />
+              {% endif %}
+            </dd>
+          {% else %}
+            <dd class="govuk-summary-list__value empty">
+              Empty
+            </dd>
+          {% endif %}
+        </div>
+      </dl>
+
+      <h3 class="govuk-heading-27">
+        <a href="/about-your-organisation/edit">
+          About your organisation
+        </a>
+      </h3>
+
+      <dl class="govuk-summary-list govuk-summary-list--short">
+        {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
+        {% if not data['self_accrediting'] %}
+          {% for a in data['accreditors'] %}
+            {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
+          {% endfor %}
+        {% endif %}
+        {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
+      </dl>
     </div>
     <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}

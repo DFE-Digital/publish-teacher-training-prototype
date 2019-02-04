@@ -9,9 +9,7 @@ $button-colour: #00823b;
 
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 @import 'patterns/simplemde-theme';
-@import 'patterns/course-parts';
 @import 'patterns/success-summary';
-@import "patterns/check-your-answers";
 @import "patterns/step-by-step-navigation";
 @import "patterns/task-list";
 @import "patterns/related-items";
@@ -381,4 +379,41 @@ dl.aligned.course-part-tasks dd {
 .markdown ul {
   @extend .govuk-list;
   @extend .govuk-list--bullet;
+}
+
+.govuk-summary-list--short {
+  margin-top: govuk-spacing(6);
+  margin-bottom: govuk-spacing(8);
+
+  .govuk-summary-list__key {
+    width: 50%;
+  }
+
+  .govuk-summary-list__row:last-child {
+    .govuk-summary-list__key,
+    .govuk-summary-list__value {
+      border: none;
+    }
+  }
+}
+
+.govuk-summary-list__key--error {
+  color: $govuk-error-colour;
+  border-left: 5px solid $govuk-error-colour !important;
+  padding-left: 10px;
+
+  a {
+    font-weight: normal;
+  }
+}
+
+.govuk-summary-list__value--truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 295px;
+}
+
+.govuk-heading-27 {
+  @include govuk-font(27, $weight: bold);
 }
