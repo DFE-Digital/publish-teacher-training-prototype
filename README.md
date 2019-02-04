@@ -27,3 +27,25 @@ Design history of the frontend at:<br />
 * Commit the changes to master, which auto-deploys to Heroku
 
 ![Screenshot of prototype](https://raw.githubusercontent.com/DFE-Digital/manage-courses-prototype/master/app/assets/images/history/iteration-aug-23/01-organisation.png)
+
+## Upgrade the prototype kit
+
+Based on https://govuk-prototype-kit.herokuapp.com/docs/updating-the-kit
+
+Add upstream to remotes:
+
+```bash
+git remote add upstream https://github.com/alphagov/govuk-prototype-kit.git
+```
+
+Merge upstream to a new branch:
+
+```bash
+git checkout -b upgrade-kit
+git fetch upstream latest-release
+git checkout upgrade-kit && git merge FETCH_HEAD --allow-unrelated-histories
+```
+
+You’ll get a few merge conflicts where both apps are trying to add the same files.
+
+When merging the upgrade, do a squash and merge to avoid adding 1500 new commits to the timeline.
