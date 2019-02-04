@@ -77,7 +77,7 @@
     </h3>
 
     <div class="success-summary success-summary-small js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none;">
-      <h3 class="govuk-heading-s success-summary-heading add-bottom-margin remove-top-margin" id="success-summary-heading-example-1">
+      <h3 class="govuk-heading-s success-summary-heading govuk-!-margin-bottom-4 remove-top-margin" id="success-summary-heading-example-1">
         Fields copied:
       </h3>
       <div class="js-what-copied"></div>
@@ -117,7 +117,7 @@
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
     <div class="unpublished-changes">
-      <span class="govuk-tag phase-tag-draft add-bottom-margin">Draft</span>
+      <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
       <p>You have unpublished changes.</p>
       <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
     </div>
@@ -125,7 +125,7 @@
   {% endif %}
 
   {% if state == 'published' %}
-    <span class="govuk-tag phase-tag-published add-bottom-margin">Published</span>
+    <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
   {% endif %}
   {% if publishedBefore or state == 'published' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
@@ -134,7 +134,7 @@
   {% endif %}
 
   {% if state == 'new' %}
-    <span class="govuk-tag phase-tag-no-content add-bottom-margin">Empty</span>
+    <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">Empty</span>
     <p>You need to complete and publish this information.</p>
     <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
@@ -157,11 +157,11 @@
 <div class="add-double-bottom-margin status-box">
   <h3 class="govuk-heading-m">Status</h3>
   {% if state == 'draft' %}
-    <span class="govuk-tag phase-tag-draft add-bottom-margin">Draft</span>
+    <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
   {% elseif state == 'new' %}
-    <span class="govuk-tag phase-tag-no-content add-bottom-margin">New</span>
+    <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">New</span>
   {% elseif state == 'published' %}
-    <span class="govuk-tag phase-tag-published add-bottom-margin">Published</span>
+    <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
   {% elseif state == 'published-with-changes' %}
   <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-2">Published&nbsp;*</span>
   <p>* With unpublished&nbsp;changes</p>

@@ -128,42 +128,6 @@
         {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
         {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
       </dl>
-    <!--
-      <h3 class="govuk-heading-27">Training locations</h3>
-
-      <div style="clear: left; padding-top: 20px">
-        {% for school in course.schools %}
-        <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
-        <dl class="aligned add-top-margin add-double-bottom-margin">
-          <dt>Address:</dt>
-          <dd>{{ school.address }}</dd>
-          <dt>Status:</dt>
-          <dd>Running</dd>
-          <dt>Vacancies:</dt>
-          <dd>Full time vacancies</dd>
-          <dt>Apply from:</dt>
-          <dd>October 2018</dd>
-        </dl>
-        {% endfor %}
-
-        {% set detailsText %}
-          <p>These locations won’t appear on the page for this course and candidates won’t be able apply for them.</p>
-
-          {% for school in course.schools %}
-          <h4 class="govuk-heading-s add-top-margin">{{ school.name }} (Code: {{ school.code }})</h4>
-          <dl class="aligned add-top-margin add-double-bottom-margin">
-            <dt>Address:</dt>
-            <dd>{{ school.address }}</dd>
-            <dt>Status:</dt>
-            <dd>Suspended</dd>
-          </dl>
-          {% endfor %}
-        {% endset %}
-        {{ govukDetails({
-          summaryText: "There are 4 suspended or discontinued training locations for this course",
-          text: detailsText | safe
-        }) }}
-      </div>-->
     </div>
     <div class="govuk-grid-column-one-third">
       {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], previewLink, publishLink) }}

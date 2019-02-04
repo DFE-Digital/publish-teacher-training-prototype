@@ -25,16 +25,6 @@
 
   <form action="/locations" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <h2 class="govuk-heading-m">Information from UCAS</h2>
-      <p>You can only change this information using <a href="https://update.ucas.co.uk/netupdate2/Welcome.htm">UCAS web-link</a>. Changes will usually appear here within one working day.</p>
-      <dl class="course-part-tasks aligned add-top-margin add-bottom-margin">
-        <dt>Name:</dt>
-        <dd>{{ school.name }}</dd>
-        <dt>Training location code:</dt>
-        <dd>{{ school.code }}</dd>
-      </dl>
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" /> -->
-
       {{ macros.textbox(school.code + '-location-website', 'Website (optional)', 'For example, a school website', 'govuk-!-width-full', null, errors) }}
       {{ macros.textbox(school.code + '-urn', 'School Unique Reference Number (URN) (optional)', 'This is the unique reference number allocated to all schools by Edubase.', 'form-control-small', null, errors) }}
 

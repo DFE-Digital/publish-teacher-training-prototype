@@ -15,6 +15,8 @@ $button-colour: #00823b;
 @import "patterns/related-items";
 @import "patterns/destructive-button";
 
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
 blockquote {
   margin: 0;
 }
@@ -49,13 +51,7 @@ table thead th {
 }
 
 .phase-tag-small {
-  // padding-top: 4px;
-  // padding-bottom: 1px;
   padding: 4px 8px 1px;
-}
-
-.phase-tag-table {
-  // display: block;
 }
 
 .phase-tag-no-content {
@@ -100,31 +96,11 @@ table thead th {
   @include govuk-font(16);
 }
 
-// Related items
-// (These styles will be moved to GOV.UK elements, duplicating here for now.)
-.govuk-related-items {
-  margin-top: $govuk-gutter;
-  border-top: 10px solid govuk-colour("blue");
-  padding-top: 5px;
-
-  .govuk-heading-m {
-    margin-top: 0.3em;
-    margin-bottom: 0.5em;
-  }
-
-  li {
-    margin-bottom: 10px;
-    list-style-type: none;
-  }
-}
-
 .doc-image {
   max-width: 100%;
   border: 1px solid $govuk-border-colour;
   margin-bottom: $govuk-gutter * 2;
 }
-
-// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
 .remove-top-margin {
   margin-top: 0;
@@ -134,96 +110,12 @@ table thead th {
   margin-bottom: 0;
 }
 
-.add-bottom-margin {
-  margin-bottom: $govuk-gutter / 2;
-}
-
 .add-double-bottom-margin {
   margin-bottom: $govuk-gutter;
 }
 
 .add-top-margin {
   margin-top: $govuk-gutter / 2;
-}
-
-.add-margin-for-label {
-  margin-top: 25px;
-}
-
-.add-margin-for-label-with-help {
-  margin-top: 45px;
-}
-
-.form-control-full {
-  width: 100%;
-}
-
-.results-item {
-  margin-bottom: $govuk-gutter;
-}
-
-.metadata dt,
-.metadata dd {
-  display: inline-block;
-}
-
-.metadata dt {
-  width: 20%;
-}
-
-.metadata dd {
-  width: 79%;
-  margin-left: 0;
-}
-
-.filter-category {
-  background-color: govuk-colour("grey-3");
-  padding: 12px;
-  margin-bottom: 10px;
-}
-
-.filters {
-  background-color: govuk-colour("white");
-  padding: 10px;
-}
-
-.filter-heading {
-  margin-top: 3px;
-}
-
-.filter-link {
-  padding-top: 10px;
-}
-
-.tabs {
-  background: govuk-colour("grey-4");
-  padding-left: 0;
-  @include govuk-font(19, $weight: bold);
-  margin-bottom: $govuk-gutter;
-
-  li {
-    margin-bottom: -1px;
-    display: inline-block;
-  }
-
-  a {
-    display: block;
-    padding: 15px 20px 10px;
-    text-decoration: none;
-    border-bottom: 5px solid govuk-colour("grey-4");
-
-    &:visited {
-      color: $govuk-link-colour;
-    }
-
-    &:focus {
-      border-color: $govuk-focus-colour;
-    }
-  }
-
-  .active a {
-    border-bottom-color: govuk-colour("blue");
-  }
 }
 
 .form-control-xsmall {
@@ -255,10 +147,6 @@ dl.aligned dt {
   clear: both;
 }
 
-dl.aligned.course-part-tasks dt {
-  width: 40%;
-}
-
 dl.aligned dd {
   width: 70%;
   float: right;
@@ -273,46 +161,11 @@ dl.aligned.course-part-tasks dd {
   width: 60%;
 }
 
-.study-options-table-code {
-  width: 120px;
-}
-
-.study-options-table-vacancies {
-  width: 120px;
-}
-
-.multiple-options li {
-  margin-bottom: 5px;
-  border-bottom: 1px solid #ccc;
-}
-
 .fake-email {
   margin-left: 15px;
   margin-top: 20px;
   border: 5px solid $govuk-border-colour;
   padding: 60px;
-}
-
-.ucas-info-table tr:last-child td {
-  border-bottom: 0;
-}
-
-.ucas-info-table  {
-  // .subject-col {
-  //   width: 40%;
-  // }
-  //
-  // .type-col {
-  //   width: 40%;
-  // }
-  //
-  // .status-col {
-  //   width: 20%;
-  // }
-
-  .ucas-view-link {
-    text-align: right;
-  }
 }
 
 .missing-section {
@@ -358,18 +211,6 @@ dl.aligned.course-part-tasks dd {
   bottom: 7px;
   left: 15px;
   relative: absolute;
-}
-
-.form-block--or {
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-@media (min-width: 641px) {
-  .form-block--or {
-    margin-top: -10px;
-    margin-bottom: 20px;
-  }
 }
 
 .autocomplete__menu {
