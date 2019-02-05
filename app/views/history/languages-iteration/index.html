@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% set title = 'Modern Languages – 5 February iteration' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Providers model their modern languages courses differently.</p>
+
+      <p>For example:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>One modern language course for all languages they offer</li>
+        <li>A separate course for each language, or language combination</li>
+        <li>Sometimes pairs of languages have a hierarchy – a dominant language and one or more other languages</li>
+        <li>Sometimes the languages are equal</li>
+      </ul>
+
+      <p>The original design only catered for the dominant use case. For MVP we can ask for all of the languages on offer without inferring anything.</p>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Pick the languages for this course', id: 'pick-the-languages-for-this-course' },
+    { text: 'Original design', id: 'original-design' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Pick the languages for this course', 'pick-the-languages-for-this-course', '/public/images/history/languages-iteration/thumbnails/01-pick-the-languages-for-this-course.png', '/public/images/history/languages-iteration/01-pick-the-languages-for-this-course.png', '') }}
+  {{ macros.screenshot('Original design', 'original-design', '/public/images/history/new-course-iteration-14-jan/thumbnails/03-pick-languages.png', '/public/images/history/new-course-iteration-14-jan/03-pick-languages.png', '') }}
+
+{% endblock %}
