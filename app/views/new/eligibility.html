@@ -42,7 +42,6 @@
             </tr>
             <tr class="govuk-table__row">
               <th class="govuk-table__header" scope="col" style="width: 40%"><span class="govuk-visually-hidden">Options</span></th>
-              <!-- <th class="govuk-table__header govuk-!-font-weight-regular" scope="col" style="vertical-align: bottom">have the qualifications</th> -->
               <th class="govuk-table__header govuk-!-font-weight-regular" scope="col" style="width: 30%; vertical-align: top">Expect to have the qualifications</th>
               <th class="govuk-table__header govuk-!-font-weight-regular" scope="col" style="width: 30%; vertical-align: top">Require an equivalency test</th>
             </tr>
@@ -51,40 +50,37 @@
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-1" type="radio" name="{{ code }}-who-apply-type" value="Option A">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-1" type="radio" name="{{ code }}-who-apply-type" value="Option A" {{ checked(code + '-who-apply-type', 'Option A') }}>
                   <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-1" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
                     Option&nbsp;A<br /><span class="govuk-!-font-weight-regular">Most&nbsp;flexible</span>
                   </label>
                 </div>
               </td>
-              <!-- <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td> -->
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-1" type="radio" name="{{ code }}-who-apply-type" value="Option B">
-                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-1" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-2" type="radio" name="{{ code }}-who-apply-type" value="Option B" {{ checked(code + '-who-apply-type', 'Option B') }}>
+                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-2" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
                     Option&nbsp;B
                   </label>
                 </div>
               </td>
-              <!-- <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td> -->
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-1" type="radio" name="{{ code }}-who-apply-type" value="Option B">
-                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-1" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-3" type="radio" name="{{ code }}-who-apply-type" value="Option C" {{ checked(code + '-who-apply-type', 'Option C') }}>
+                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-3" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
                     Option&nbsp;C
                     <br /><span class="govuk-!-font-weight-regular">Least&nbsp;flexible</span>
                   </label>
                 </div>
               </td>
-              <!-- <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td> -->
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
               <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
             </tr>
