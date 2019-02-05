@@ -6,6 +6,21 @@
 {% block content %}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>In this iteration we changed:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>A second secondary subject</li>
+        <li>Primary age ranges</li>
+        <li>When does the course start?</li>
+        <li>Minimum GCSE requirements with a change option</li>
+        <li>Title in main wizard flow</li>
+        <li>Accredited body title tweaks</li>
+      </ul>
+    </div>
+  </div>
+
   {% set contents = [
     { text: 'What type of course?', id: 'what-type-of-course' },
     { text: 'Pick a subject', id: 'pick-a-subject' },
