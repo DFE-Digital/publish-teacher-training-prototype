@@ -291,12 +291,34 @@ function getCourseOffered(code, data) {
   return courseOffered;
 }
 
-function getLocationFromChoice(code, data, callback) {
-  var choice = data[code + '-location-picked'];
+function getLocations(code, data, callback) {
+  var promises = [];
+  var choices = data[code + '-area-schools'];
+  if (!Array.isArray(choices)) {
+    choices = [choices];
+  }
+
+  choices.forEach(function(choice) {
+    var p = new Promise(function(resolve, reject) {
+              getLocationFromChoice(data, choice, function(location, urn) {
+                resolve(location)
+              })
+            });
+    promises.push(p);
+  });
+
+  Promise.all(promises).then(function(values) {
+    callback(values);
+  });
+}
+
+function getLocationFromChoice(data, choice, callback) {
   var parts = choice.split(' (');
   var urn = parts[1].split(',')[0];
-  data[code + '-urn'] = urn;
+  requestLocation(data, urn, callback);
+}
 
+function requestLocation(data, urn, callback) {
   if (data[urn]) {
     callback(data[urn]);
     return;
@@ -314,7 +336,7 @@ function getLocationFromChoice(code, data, callback) {
       }
 
       data[urn] = location
-      callback(location);
+      callback(location, urn);
     }
   })
 }
@@ -529,6 +551,7 @@ module.exports = {
   getGeneratedTitle,
   getCourseOffered,
   getLocationFromChoice,
+  getLocations,
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
