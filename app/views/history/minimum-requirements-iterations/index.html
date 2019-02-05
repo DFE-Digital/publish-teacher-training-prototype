@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% set title = 'Minimum course requirements – iterations' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Progression of the minimum requirements page design:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Started with a subject choice and a sensible default</li>
+        <li>Added the ability to change the choice</li>
+        <li>Remove subject choice, instead defaulting to legal minimums. Page only asks for preference</li>
+        <li>Make it clearer that this affects UCAS Apply</li>
+        <li>Simplify preference choice using a table</li>
+      </ul>
+    </div>
+  </div>
+
+  {% set contents = [
+    { text: 'Options in a table', id: 'options-in-a-table' },
+    { text: 'Explicitly reference UCAS', id: 'explicitly-reference-ucas' },
+    { text: 'Pick an option, remove subject choice', id: 'pick-an-option' },
+    { text: 'Introduce options', id: 'minimum-gcse-requirements' },
+    { text: 'Original design', id: 'minimum-course-requirements' }
+  ] %}
+  {{ macros.screenshotContents(contents) }}
+
+  {{ macros.screenshot('Options in a table', 'options-in-a-table', '/public/images/history/minimum-requirements-iterations/thumbnails/01-options-in-a-table.png', '/public/images/history/minimum-requirements-iterations/01-options-in-a-table.png', '') }}
+
+  {{ macros.screenshot('Explicitly reference UCAS', 'explicitly-reference-ucas', '/public/images/history/minimum-requirements-iterations/thumbnails/01-explicitly-reference-ucas.png', '/public/images/history/minimum-requirements-iterations/01-explicitly-reference-ucas.png', '') }}
+
+  {{ macros.screenshot('Pick an option, remove subject choice', 'pick-an-option', '/public/images/history/minimum-requirements-iterations/thumbnails/01-pick-an-option.png', '/public/images/history/minimum-requirements-iterations/01-pick-an-option.png', '') }}
+
+  {{ macros.screenshot('Introduce options', 'minimum-gcse-requirements', '/public/images/history/new-course-iteration-14-jan/thumbnails/09-minimum-gcse-requirements.png', '/public/images/history/new-course-iteration-14-jan/09-minimum-gcse-requirements.png', '') }}
+
+  {{ macros.screenshot('Original design', 'minimum-course-requirements', '/public/images/history/minimum-course-requirements/thumbnails/01-minimum-course-requirements.png', '/public/images/history/minimum-course-requirements/01-minimum-course-requirements.png', '') }}
+{% endblock %}
