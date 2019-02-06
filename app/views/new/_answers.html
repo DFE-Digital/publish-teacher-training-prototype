@@ -130,6 +130,10 @@
     {% else %}
       {{ data['schools'][0].name }}
     {% endif %}
+    {% if data['schools'].length == 1 %}
+      <br>
+      <span class="empty">You can’t change this because you only have <a href="/locations">1 training location</a></span>
+    {% endif %}
   </dd>
   {% if showChangeLinks %}
     <dd class="govuk-summary-list__actions">
