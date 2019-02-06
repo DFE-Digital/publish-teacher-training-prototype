@@ -10,15 +10,12 @@
       3: https://find-postgraduate-teacher-training.education.gov.uk/course/1PJ/236Y
       9: https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X341
   -->
-
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-
-
         <!-- [ ] Applicants need a minimum GCSE grade A* to C, 4 or more, or an equivalent
           * Do not accept applications from candidates who need to take an equivalence test
           * Do not accept applications from candidates who do not have the qualification but expect to have it before the course begins -->
@@ -32,8 +29,63 @@
           {% endif %}
         </ul>
 
-        <h2 class="govuk-heading-l">Pick a UCAS Apply setting</h2>
-        <p class="govuk-!-margin-bottom-6">Pick how flexible you will be when receiving applications from candidates still to gain these qualifications, or who need to take an equivalency test.</p>
+        <h2 class="govuk-heading-l">Pick an option for UCAS Apply</h2>
+        <p class="govuk-!-margin-bottom-6">Say how flexible you’ll be towards candidates who haven’t gained these qualifications yet, or who need to take an equivalency test.</p>
+
+        <table class="govuk-table govuk-!-margin-top-6 govuk-!-margin-bottom-6">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" style="border-bottom: none"></th>
+              <th class="govuk-table__header" colspan="2" style="border-bottom: none">
+                Receive applications from candidates who:
+              </th>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col" style="width: 40%"><span class="govuk-visually-hidden">Options</span></th>
+              <th class="govuk-table__header govuk-!-font-weight-regular" scope="col" style="width: 30%; vertical-align: top">Expect to have the qualifications</th>
+              <th class="govuk-table__header govuk-!-font-weight-regular" scope="col" style="width: 30%; vertical-align: top">Require an equivalency test</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-1" type="radio" name="{{ code }}-who-apply-type" value="Option A" {{ checked(code + '-who-apply-type', 'Option A') }}>
+                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-1" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
+                    Option&nbsp;A<br /><span class="govuk-!-font-weight-regular">Most&nbsp;flexible</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-2" type="radio" name="{{ code }}-who-apply-type" value="Option B" {{ checked(code + '-who-apply-type', 'Option B') }}>
+                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-2" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
+                    Option&nbsp;B
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Yes</span></td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="radio-{{ code }}-who-apply-type-part-3" type="radio" name="{{ code }}-who-apply-type" value="Option C" {{ checked(code + '-who-apply-type', 'Option C') }}>
+                  <label class="govuk-label govuk-radios__label govuk-label--s" for="radio-{{ code }}-who-apply-type-part-3" aria-describedby="radio-{{ code }}-who-apply-type-part-1-hint">
+                    Option&nbsp;C
+                    <br /><span class="govuk-!-font-weight-regular">Least&nbsp;flexible</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
+              <td class="govuk-table__cell"><span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">No</span></td>
+            </tr>
+          </tbody>
+        </table>
 
         {% set moreTextOptions = [
           {
@@ -65,7 +117,7 @@
           }
         ] %}
 
-        {{ macros.radioGroup(code + '-who-apply-type', moreTextOptions, errors) }}
+        {# macros.radioGroup(code + '-who-apply-type', moreTextOptions, errors) #}
 
         <div class="govuk-form-group">
           <input type="submit" class="govuk-button" value="Continue" />
