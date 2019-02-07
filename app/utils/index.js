@@ -65,6 +65,20 @@ function nextAndBackPaths(paths, currentPath, query, isModernLanguages = false) 
   }
 }
 
+function rolloverWizardPaths(req) {
+  var data = req.session.data;
+
+  var paths = [
+    '/rollover/start',
+    '/rollover/courses',
+    '/rollover/locations',
+    '/rollover/confirm',
+    '/rollover/create'
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req));
+}
+
 function newFurtherEducationCourseWizardPaths(req) {
   var code = req.params.code;
   var data = req.session.data;
@@ -555,6 +569,7 @@ module.exports = {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  rolloverWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,

@@ -12,6 +12,7 @@ var {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  rolloverWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,
@@ -47,6 +48,27 @@ router.get('/new/start', function (req, res) {
   }
 
   res.redirect('/new/' + code + '/phase');
+})
+
+router.all('/rollover/courses', function (req, res) {
+  var data = req.session.data;
+  var courses = [];
+
+  data['ucasCourses'].forEach(course => {
+    courses.push({
+      name: `${course.name} (${course.programmeCode})`,
+      text: course.options[0]
+    });
+  });
+
+  res.render('rollover/courses', {
+    courses: courses,
+    paths: rolloverWizardPaths(req)
+  });
+})
+
+router.all('/rollover/:view', function (req, res) {
+  res.render(`rollover/${req.params.view}`, {paths: rolloverWizardPaths(req)})
 })
 
 router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {

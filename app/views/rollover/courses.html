@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% set title = 'Pick which courses will be rolled over' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <p>Once selected, you can edit details of these courses, for example the outcome.</p>
+
+      {{ macros.checkboxGroup('rollover-courses', courses) }}
+
+      <div class="form-group">
+        <a href="/rollover/courses" class="govuk-button">Continue</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% set title = 'Start rollover' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <p>Pick the training locations and courses you will offer for the 2019-2020 recruitment cycle.</p>
+
+      <p>In the 2019-2020 cycle you’ll be able to choose a new outcome for your courses, ‘QTS with optional PGCE’, for some providers this means you won’t need to advertise QTS and PGCE with QTS courses separately.</p>
+
+      <div class="govuk-form-group govuk-!-margin-top-6">
+        <a href="{{ paths.next }}" class="govuk-button govuk-button--start">Start now</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
