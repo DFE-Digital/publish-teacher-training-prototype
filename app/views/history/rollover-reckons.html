@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% set title = 'Rollover reckons' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.designHistoryBreadcrumbs() }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Thoughts on what rollover might look like.</p>
+
+      <h2 class="govuk-heading-l">UCAS rollover</h2>
+      <p>Around the end of May each year, UCAS will make a duplicate of a provider’s data and spin up a new instance of UCAS web-link. Within this new instance providers can begin preparing next cycle’s courses.</p>
+
+      <p>UCAS will not copy any course-training location combination marked as discontinued. This is the only mechanism providers can use to say ‘this course won’t run next year’. There’s a flaw – providers can’t set any courses currently running this year, for which they are actively recruiting, to discontinued. Which means some courses they know will not be offered next year could still be copied.</p>
+
+      <p>The process is automatic and happens across all providers.</p>
+
+      <h2 class="govuk-heading-l">A rollover wizard</h2>
+
+      <p>We could create a journey for providers to go through at rollover. Giving them full control over what courses and training locations should be copied into the next cycle.</p>
+
+      <p>This would present an opportunity to clean up our data. The wizard could include:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>selection of courses to copy to next cycle</li>
+        <li>selection of locations to copy to next cycle</li>
+        <li>correction of course titles, for providers to approve</li>
+        <li>automatic assignment of URN to training location, that providers can approve</li>
+      </ul>
+
+      <p>A rollover wizard also gives a place to communicate things that are new in this cycle, for example ‘QTS with optional PGCE’.</p>
+
+      <h2 class="govuk-heading-l">Allocations</h2>
+
+      <p>The allocations window is open through June and providers learn what they’ve been allocated in September. Rollover happens before allocations. Courses that are rolled over will not have allocations until September.</p>
+
+      <p>With rollover now happening on a DfE service, there is a risk that a ‘choose your courses’ screen could be misconstrued – either as something being requested or as something receiving DfE’s approval.</p>
+
+      <h2 class="govuk-heading-l">Between cycles</h2>
+
+      <p>While there are two cycles, providers need to easily manage courses and locations in both. They need to manage vacancies in the current cycle, for example closing courses for summer when they aren’t recruiting.</p>
+
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible" />
+      <h2 class="govuk-heading-l">First designs</h2>
+
+      {% set contents = [
+        { text: 'Start rollover', id: 'start-rollover' },
+        { text: 'Pick which courses', id: 'pick-which-courses' },
+        { text: 'Multiple cycles', id: 'multiple-cycles' }
+      ] %}
+      {{ macros.screenshotContents(contents) }}
+
+      {{ macros.screenshot('Start rollover', 'start-rollover', '/public/images/history/rollover-reckons/thumbnails/02-start-rollover.png', '/public/images/history/rollover-reckons/02-start-rollover.png', '') }}
+
+      {{ macros.screenshot('Pick which courses', 'pick-which-courses', '/public/images/history/rollover-reckons/thumbnails/03-pick-which-courses.png', '/public/images/history/rollover-reckons/03-pick-which-courses.png', '') }}
+
+      {{ macros.screenshot('Multiple cycles', 'multiple-cycles', '/public/images/history/rollover-reckons/thumbnails/01-multiple-cycles.png', '/public/images/history/rollover-reckons/01-multiple-cycles.png', '') }}
+    </div>
+  </div>
+{% endblock %}
