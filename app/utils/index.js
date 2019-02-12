@@ -69,9 +69,10 @@ function rolloverWizardPaths(req) {
   var data = req.session.data;
 
   var paths = [
+    '/',
     '/rollover/start',
     '/rollover/courses',
-    '/rollover/locations',
+    '#',
     '/rollover/confirm',
     '/rollover/create'
   ];

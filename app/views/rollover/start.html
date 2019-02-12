@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% set title = 'Rollover your courses and training locations' %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -23,7 +24,7 @@
       <p>We are standardising course titles – titles must not contain qualifications or routes.</p>
 
       <div class="govuk-form-group govuk-!-margin-top-6">
-        <a href="{{ paths.next }}" class="govuk-button govuk-button--start">Start now</a>
+        <a href="{{ paths.next }}" class="govuk-button">Continue</a>
       </div>
     </div>
   </div>
