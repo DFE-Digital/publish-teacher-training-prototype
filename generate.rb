@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Anton Andover Alliance'
+provider = 'Surrey South Farnham SCITT (School Direct)'
 courses = data.select {|c| c['provider'] == provider }
 
 # https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
