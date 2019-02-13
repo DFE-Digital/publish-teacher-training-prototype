@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = school.name or 'Add location' %}
+{% set title = school.name or 'Add a location' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
@@ -51,6 +51,17 @@
       ])}}
 
       {% if isNew %}
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
+
+        {% set fields = [
+            {
+              name: 'I confirm that candidates can choose this as a place of training when they complete their UCAS application form'
+            }
+          ]
+        %}
+
+        {{ macros.checkboxGroup('terms-and-conditions', fields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
+
         <input type="submit" class="govuk-button" value="Save" />
       {% else %}
         <input type="submit" class="govuk-button" value="Publish changes" />
