@@ -20,6 +20,21 @@
 {% endblock %}
 
 {% block content %}
+  {% if showErrors %}
+    {% set errors = [
+      {
+        id: code + '-location-confirm',
+        href: '#checkbox-part-1',
+        text: 'Please confirm that candidates can pick this location when they apply'
+      }
+    ] %}
+
+    {{ govukErrorSummary({
+      titleText: "We couldn’t save this location",
+      errorList: errors
+    }) }}
+  {% endif %}
+
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
@@ -60,11 +75,11 @@
           ]
         %}
 
-        {{ macros.checkboxGroup('terms-and-conditions', fields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
+        {{ macros.checkboxGroup(code + '-location-confirm', fields, errors) }}
 
         <input type="submit" class="govuk-button" value="Save" />
       {% else %}
-        <input type="submit" class="govuk-button" value="Publish changes" />
+        <input type="submit" class="govuk-button" value="Save and publish changes" />
         <p>
           <a href="/locations">Cancel changes</a>
         </p>

@@ -470,7 +470,11 @@ router.get('/location/:code', function (req, res) {
     return school.code == req.params.code;
   });
   var isNew = !school;
-  res.render('location', { school: school, code: code, isNew: isNew })
+  res.render('location', {
+        school: school,
+        code: code,
+        isNew: isNew
+      })
 })
 
 router.post('/location/:code', function (req, res) {
@@ -480,6 +484,17 @@ router.post('/location/:code', function (req, res) {
     return school.code == req.params.code;
   });
   var isNew = false;
+
+  if (!loc && req.body[code + '-location-confirm'] == '_unchecked') {
+    res.render('location', {
+          school: loc,
+          code: code,
+          showErrors: true,
+          isNew: true
+        })
+
+    return
+  }
 
   if (!loc) {
     loc = {}
