@@ -16,6 +16,32 @@
 {% endblock %}
 
 {% block content %}
+  {% if justCreated %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      Your location has been added
+    </h3>
+    <p>
+      Before candidates can pick this location you must assign it to a course.<br />
+      Edit a course, or pick this location when adding a new one.
+    </p>
+    <p class="govuk-!-margin-bottom-0">
+      <a href="/courses">Your courses</a>
+    </p>
+  </div>
+  {% endif %}
+
+  {% if justEdited %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      Your changes have been published
+    </h3>
+    <p class="govuk-!-margin-bottom-0">
+      Changes will appear on courses in Find straight away.<br />UCAS Apply will be updated overnight.
+    </p>
+  </div>
+  {% endif %}
+
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>

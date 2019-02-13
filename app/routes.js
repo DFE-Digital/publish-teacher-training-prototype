@@ -479,17 +479,19 @@ router.post('/location/:code', function (req, res) {
   var loc = data['schools'].find(function(school) {
     return school.code == req.params.code;
   });
+  var isNew = false;
 
   if (!loc) {
     loc = {}
     data['schools'].push(loc);
+    isNew = true;
   }
 
   loc.name = data[code + '-name'];
   loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
   loc.code = code;
 
-  res.redirect('/locations')
+  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${loc.code}`);
 })
 
 router.get('/location/:id/edit', function (req, res) {
@@ -498,6 +500,14 @@ router.get('/location/:id/edit', function (req, res) {
   });
 
   res.render('edit-location', { school: school })
+})
+
+router.all('/locations', function (req, res) {
+  res.render('locations', {
+    justCreated: req.query.success == 'new',
+    justEdited: req.query.success == 'edited',
+    justChangedCode: req.query.code
+  })
 })
 
 module.exports = router
