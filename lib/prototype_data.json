@@ -1,6 +1,6 @@
 {
   "multi-organisation": false,
-  "training-provider-name": "Surrey South Farnham SCITT",
+  "training-provider-name": "Surrey South Farnham SCITT (School Direct)",
   "provider-code": "13S",
   "2ML3-about-this-course": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "2ML3-interview-process": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -16,8 +16,8 @@
   "2ML3-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "2ML3-publish-state": "published",
   "2ML3-published-before": true,
-  "2ML3-generated-title": "Primary with Mathematics",
-  "2ML3-title": "Primary with Mathematics",
+  "2ML3-generated-title": "Primary - General (with Mathematics)",
+  "2ML3-title": "Primary - General (with Mathematics)",
   "2ML3-outcome": "QTS",
   "2ML3-applications-open": "10 October 2018",
   "2ML3-who-apply-type": "Option A",
@@ -55,8 +55,8 @@
   "2ML6-other-requirements": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "2ML6-publish-state": "draft",
   "2ML6-published-before": false,
-  "2ML6-generated-title": "Primary with Mathematics",
-  "2ML6-title": "Primary with Mathematics",
+  "2ML6-generated-title": "Primary - General (with Mathematics)",
+  "2ML6-title": "Primary - General (with Mathematics)",
   "2ML6-outcome": "QTS",
   "2ML6-applications-open": "10 October 2018",
   "2ML6-who-apply-type": "Option A",
@@ -306,7 +306,7 @@
       "outcome": "QTS",
       "starts": "September 2019",
       "type": "Fee paying (no salary)",
-      "name": "Primary with Mathematics",
+      "name": "Primary - General (with Mathematics)",
       "route": "School Direct training programme",
       "providerCode": "13S",
       "programmeCode": "2ML3",
@@ -338,7 +338,7 @@
       "outcome": "QTS",
       "starts": "September 2019",
       "type": "Salaried",
-      "name": "Primary with Mathematics",
+      "name": "Primary - General (with Mathematics)",
       "route": "School Direct training programme (salaried)",
       "providerCode": "13S",
       "programmeCode": "2ML6",
@@ -384,7 +384,7 @@
           "slug": "primary"
         },
         {
-          "name": "Primary with Mathematics",
+          "name": "Primary - General (with Mathematics)",
           "slug": "primary-general-with-mathematics"
         }
       ]
@@ -397,7 +397,7 @@
       "slug": "primary"
     },
     {
-      "name": "Primary with Mathematics",
+      "name": "Primary - General (with Mathematics)",
       "slug": "primary-general-with-mathematics"
     }
   ],
@@ -405,5 +405,658 @@
     "include-accredited": true,
     "include-fee-or-salary": true,
     "include-locations": false
-  }
+  },
+  "accredited-bodies-choices": [
+    {
+      "name": "2Schools Consortium"
+    },
+    {
+      "name": "AA Teamworks West Yorkshire SCITT"
+    },
+    {
+      "name": "ARK Teacher Training"
+    },
+    {
+      "name": "Alban Federation"
+    },
+    {
+      "name": "Anton Andover Alliance"
+    },
+    {
+      "name": "Ashton on Mersey School SCITT"
+    },
+    {
+      "name": "Associated Merseyside Partnership SCITT"
+    },
+    {
+      "name": "Astra SCITT"
+    },
+    {
+      "name": "Bath Spa University"
+    },
+    {
+      "name": "Billericay Educational Consortium"
+    },
+    {
+      "name": "Birmingham City University"
+    },
+    {
+      "name": "Bishop Grosseteste University"
+    },
+    {
+      "name": "Bishop's Stortford SCITT"
+    },
+    {
+      "name": "Bluecoat SCITT Alliance Nottingham"
+    },
+    {
+      "name": "Bournemouth Poole & Dorset Secondary Training Partnership"
+    },
+    {
+      "name": "Bourton Meadow Initial Teacher Training Centre"
+    },
+    {
+      "name": "Bradford Birth to 19 SCITT"
+    },
+    {
+      "name": "Bradford College"
+    },
+    {
+      "name": "Bromley Schools Collegiate"
+    },
+    {
+      "name": "Brunel University London"
+    },
+    {
+      "name": "Buckingham Partnership"
+    },
+    {
+      "name": "Buile Hill VA College SCITT"
+    },
+    {
+      "name": "CREC Early Years Partnership"
+    },
+    {
+      "name": "Cabot Learning Federation SCITT"
+    },
+    {
+      "name": "Canterbury Christ Church University"
+    },
+    {
+      "name": "Carmel Teacher Training (SCITT"
+    },
+    {
+      "name": "Carmel Teacher Training Partnership (CTTP"
+    },
+    {
+      "name": "Chepping View Primary Academy SCITT"
+    },
+    {
+      "name": "Cheshire East SCITT"
+    },
+    {
+      "name": "Chiltern Training Group"
+    },
+    {
+      "name": "Colchester Teacher Training Consortium"
+    },
+    {
+      "name": "Compton SCITT"
+    },
+    {
+      "name": "Cornwall School Centred Initial Teacher Training (Cornwall SCITT"
+    },
+    {
+      "name": "Cumbria Primary Teacher Training"
+    },
+    {
+      "name": "Doncaster ITT Partnership"
+    },
+    {
+      "name": "Durham SCITT"
+    },
+    {
+      "name": "Durham University"
+    },
+    {
+      "name": "East London Alliance SCITT"
+    },
+    {
+      "name": "East Midlands Teacher Training Partnership"
+    },
+    {
+      "name": "East Sussex Teacher Training Partnership"
+    },
+    {
+      "name": "East of England Teacher Training Centre"
+    },
+    {
+      "name": "Edge Hill University"
+    },
+    {
+      "name": "Educate Teacher Training"
+    },
+    {
+      "name": "Endeavour Learning SCITT"
+    },
+    {
+      "name": "Essex Primary SCITT"
+    },
+    {
+      "name": "Essex Teacher Training"
+    },
+    {
+      "name": "Essex and Thames Primary SCITT"
+    },
+    {
+      "name": "Exceed SCITT"
+    },
+    {
+      "name": "Forest Independent Primary Collegiate SCITT"
+    },
+    {
+      "name": "GLF Schools' Teacher Training"
+    },
+    {
+      "name": "George Abbot SCITT"
+    },
+    {
+      "name": "George Spencer Academy SCITT"
+    },
+    {
+      "name": "Gloucestershire Initial Teacher Education Partnership (GITEP"
+    },
+    {
+      "name": "Goldsmiths, University of London"
+    },
+    {
+      "name": "Gorse Scitt"
+    },
+    {
+      "name": "Harris ITE"
+    },
+    {
+      "name": "Haybridge Alliance SCITT"
+    },
+    {
+      "name": "Henry Maynard Training E17"
+    },
+    {
+      "name": "High Force Education (SCITT"
+    },
+    {
+      "name": "Hillingdon SCITT"
+    },
+    {
+      "name": "Huddersfield Horizon SCITT"
+    },
+    {
+      "name": "Hull SCITT"
+    },
+    {
+      "name": "Inspiration Teacher Training"
+    },
+    {
+      "name": "Inspiring Leaders - Teacher Training"
+    },
+    {
+      "name": "Jewish Teacher Training Partnership"
+    },
+    {
+      "name": "Keele and North Staffordshire Teacher Education"
+    },
+    {
+      "name": "Kent and Medway Training"
+    },
+    {
+      "name": "King Edward's Consortium"
+    },
+    {
+      "name": "King's College London (University of London"
+    },
+    {
+      "name": "Kingsbridge EIP SCITT"
+    },
+    {
+      "name": "Kingston University"
+    },
+    {
+      "name": "Kirklees and Calderdale SCITT"
+    },
+    {
+      "name": "Lampton LWA SCITT"
+    },
+    {
+      "name": "Landau Forte College Derby SCITT"
+    },
+    {
+      "name": "Leeds Beckett University"
+    },
+    {
+      "name": "Leeds SCITT"
+    },
+    {
+      "name": "Leeds Trinity University"
+    },
+    {
+      "name": "Leicester and Leicestershire SCITT"
+    },
+    {
+      "name": "Leicestershire Secondary SCITT"
+    },
+    {
+      "name": "Lincolnshire Teaching School Alliance SCITT"
+    },
+    {
+      "name": "Liverpool Hope University"
+    },
+    {
+      "name": "Liverpool John Moores University"
+    },
+    {
+      "name": "London East Teacher Training Alliance"
+    },
+    {
+      "name": "London Metropolitan University"
+    },
+    {
+      "name": "London South Bank University"
+    },
+    {
+      "name": "Loughborough University"
+    },
+    {
+      "name": "Merseyside, Cheshire and Greater Manchester Teacher Training Consortium"
+    },
+    {
+      "name": "Mid Essex Initial Teacher Training"
+    },
+    {
+      "name": "Mid Somerset Consortium for Teacher Training"
+    },
+    {
+      "name": "Middlesex University"
+    },
+    {
+      "name": "NELTA (North East London Teaching Alliance"
+    },
+    {
+      "name": "Newman University"
+    },
+    {
+      "name": "Norfolk Teacher Training Centre"
+    },
+    {
+      "name": "North East Partnership SCITT (Physical Education"
+    },
+    {
+      "name": "North Essex Teacher Training (NETT"
+    },
+    {
+      "name": "North Lincolnshire SCITT Partnership"
+    },
+    {
+      "name": "North Manchester ITT Partnership"
+    },
+    {
+      "name": "North Tyneside SCITT"
+    },
+    {
+      "name": "North West SHARES SCITT"
+    },
+    {
+      "name": "North Wiltshire SCITT"
+    },
+    {
+      "name": "Northampton Teacher Training Partnership"
+    },
+    {
+      "name": "Northern Lights SCITT"
+    },
+    {
+      "name": "Nottingham Trent University"
+    },
+    {
+      "name": "Nottinghamshire TORCH SCITT"
+    },
+    {
+      "name": "Oxford Brookes University"
+    },
+    {
+      "name": "Oxford University"
+    },
+    {
+      "name": "Partnership London SCITT (PLS"
+    },
+    {
+      "name": "Pennine Lancashire SCITT"
+    },
+    {
+      "name": "Pioneers Partnership SCITT"
+    },
+    {
+      "name": "Poole SCITT"
+    },
+    {
+      "name": "Primary Catholic Partnership SCITT"
+    },
+    {
+      "name": "Prince Henry's High School & South Worcestershire SCITT"
+    },
+    {
+      "name": "Redcar and Cleveland Teacher Training Partnership"
+    },
+    {
+      "name": "Roehampton University"
+    },
+    {
+      "name": "SCITT in East London Schools (SCITTELS"
+    },
+    {
+      "name": "Sacred Heart Newcastle SCITT"
+    },
+    {
+      "name": "Services for Education"
+    },
+    {
+      "name": "Sheffield Hallam University"
+    },
+    {
+      "name": "Shotton Hall SCITT"
+    },
+    {
+      "name": "Somerset SCITT Consortium"
+    },
+    {
+      "name": "South Birmingham SCITT"
+    },
+    {
+      "name": "South West Teacher Training"
+    },
+    {
+      "name": "Southend SCITT"
+    },
+    {
+      "name": "Southfields Academy Teaching School SCITT"
+    },
+    {
+      "name": "St Joseph's College SCITT"
+    },
+    {
+      "name": "St Mary's University, Twickenham"
+    },
+    {
+      "name": "St. George's Academy Partnership"
+    },
+    {
+      "name": "St. Joseph's College Stoke Secondary Partnership"
+    },
+    {
+      "name": "Staffordshire University"
+    },
+    {
+      "name": "Suffolk and Norfolk Primary SCITT"
+    },
+    {
+      "name": "Suffolk and Norfolk Secondary SCITT"
+    },
+    {
+      "name": "Surrey South Farnham SCITT"
+    },
+    {
+      "name": "Sutton SCITT"
+    },
+    {
+      "name": "Swindon SCITT"
+    },
+    {
+      "name": "TKAT SCITT"
+    },
+    {
+      "name": "Teach East"
+    },
+    {
+      "name": "Teach Kent and Sussex"
+    },
+    {
+      "name": "Teach SouthEast"
+    },
+    {
+      "name": "Teaching London: LDBS SCITT"
+    },
+    {
+      "name": "Tes Institute"
+    },
+    {
+      "name": "Thamesmead SCITT"
+    },
+    {
+      "name": "The Arthur Terry School SCITT"
+    },
+    {
+      "name": "The Basingstoke Alliance SCITT"
+    },
+    {
+      "name": "The Bedfordshire Schools Training Partnership"
+    },
+    {
+      "name": "The Buckingham Partnership"
+    },
+    {
+      "name": "The Cambridge Partnership"
+    },
+    {
+      "name": "The Cambridge Teaching Schools Network SCITT"
+    },
+    {
+      "name": "The Cherwell OTSA SCITT"
+    },
+    {
+      "name": "The Coventry SCITT"
+    },
+    {
+      "name": "The Deepings SCITT"
+    },
+    {
+      "name": "The Duston Education Trust"
+    },
+    {
+      "name": "The Grand Union Training Partnership"
+    },
+    {
+      "name": "The Hampshire LEARN SCITT Partnership"
+    },
+    {
+      "name": "The Havering Teacher Training Partnership"
+    },
+    {
+      "name": "The John Taylor SCITT"
+    },
+    {
+      "name": "The Learning Institute South West"
+    },
+    {
+      "name": "The Manchester Metropolitan University"
+    },
+    {
+      "name": "The National Modern Languages SCITT"
+    },
+    {
+      "name": "The OAKS (Ormiston and Keele SCITT"
+    },
+    {
+      "name": "The Pilgrim Partnership School Centred Teacher Training"
+    },
+    {
+      "name": "The Pimlico-London SCITT"
+    },
+    {
+      "name": "The Royal Borough of Windsor and Maidenhead SCITT"
+    },
+    {
+      "name": "The Sheffield SCITT"
+    },
+    {
+      "name": "The Shire Foundation"
+    },
+    {
+      "name": "The Solent SCITT"
+    },
+    {
+      "name": "The South Downs SCITT"
+    },
+    {
+      "name": "The Tommy Flowers SCITT Milton Keynes"
+    },
+    {
+      "name": "The University of Buckingham"
+    },
+    {
+      "name": "The University of Gloucestershire"
+    },
+    {
+      "name": "The University of Huddersfield"
+    },
+    {
+      "name": "The University of Hull"
+    },
+    {
+      "name": "The University of Manchester"
+    },
+    {
+      "name": "The University of Nottingham"
+    },
+    {
+      "name": "The University of Reading"
+    },
+    {
+      "name": "The University of Sheffield"
+    },
+    {
+      "name": "The University of Warwick"
+    },
+    {
+      "name": "The University of York"
+    },
+    {
+      "name": "Titan Partnership Ltd"
+    },
+    {
+      "name": "Tudor Grange SCITT"
+    },
+    {
+      "name": "Two Mile Ash ITT Partnership"
+    },
+    {
+      "name": "UCL, University College London (University of London"
+    },
+    {
+      "name": "United Teaching National SCITT"
+    },
+    {
+      "name": "University College Birmingham"
+    },
+    {
+      "name": "University of Bedfordshire"
+    },
+    {
+      "name": "University of Birmingham"
+    },
+    {
+      "name": "University of Brighton"
+    },
+    {
+      "name": "University of Bristol"
+    },
+    {
+      "name": "University of Chester"
+    },
+    {
+      "name": "University of Chichester"
+    },
+    {
+      "name": "University of Cumbria"
+    },
+    {
+      "name": "University of Derby"
+    },
+    {
+      "name": "University of East Anglia"
+    },
+    {
+      "name": "University of East London"
+    },
+    {
+      "name": "University of Exeter"
+    },
+    {
+      "name": "University of Greenwich"
+    },
+    {
+      "name": "University of Hertfordshire"
+    },
+    {
+      "name": "University of Leicester"
+    },
+    {
+      "name": "University of Newcastle Upon Tyne"
+    },
+    {
+      "name": "University of Northampton"
+    },
+    {
+      "name": "University of Northumbria at Newcastle"
+    },
+    {
+      "name": "University of Plymouth"
+    },
+    {
+      "name": "University of Portsmouth"
+    },
+    {
+      "name": "University of Southampton"
+    },
+    {
+      "name": "University of St Mark & St John"
+    },
+    {
+      "name": "University of Sunderland"
+    },
+    {
+      "name": "University of Sussex"
+    },
+    {
+      "name": "University of Winchester"
+    },
+    {
+      "name": "University of Wolverhampton"
+    },
+    {
+      "name": "University of Worcester"
+    },
+    {
+      "name": "University of the West of England, Bristol"
+    },
+    {
+      "name": "West Berkshire Training Partnership"
+    },
+    {
+      "name": "West Essex SCITT"
+    },
+    {
+      "name": "West Midlands Consortium"
+    },
+    {
+      "name": "Wildern Partnership"
+    },
+    {
+      "name": "York St John University"
+    },
+    {
+      "name": "Yorkshire and Humber Teacher Training"
+    },
+    {
+      "name": "e-Qualitas"
+    }
+  ]
 }

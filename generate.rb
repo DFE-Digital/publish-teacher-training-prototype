@@ -8,6 +8,8 @@ data = JSON.parse(file)
 provider = 'Surrey South Farnham SCITT (School Direct)'
 courses = data.select {|c| c['provider'] == provider }
 
+all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
+
 # https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
 postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
@@ -282,6 +284,7 @@ prototype_data['new-course'] = {
 }
 
 prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.uniq! }
+prototype_data['accredited-bodies-choices'] = all_accredited_bodies.map { |k| { name: k } }
 
 # Output to prototype
 File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data) + "\n") }
