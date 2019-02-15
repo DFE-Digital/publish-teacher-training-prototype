@@ -82,7 +82,7 @@
 {% if data['schools'].length > 1 and data[code + '-locations'] %}
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Training locations
+    Locations
   </dt>
   <dd class="govuk-summary-list__value">
     {{ data[code + '-locations'] | join('<br>') | safe }}
@@ -90,7 +90,7 @@
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
     <a href="/new/{{ code }}/further/training-locations?change=training-locations">
-      Change<span class="govuk-visually-hidden"> training locations</span>
+      Change<span class="govuk-visually-hidden"> locations</span>
     </a>
   </dd>
   {% endif %}

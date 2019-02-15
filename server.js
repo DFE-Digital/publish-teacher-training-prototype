@@ -298,7 +298,11 @@ app.use(function (req, res, next) {
      return false;
    }
 
-   if (!data[courseCode + '-show-publish-errors'] && !id.includes('vacancies')) {
+   if (
+        !data[courseCode + '-show-publish-errors']
+        && !id.includes('vacancies')
+        && !id.includes('location-confirm')
+      ) {
      return false;
    }
 

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = school.name or 'Add training location' %}
+{% set title = school.name or 'Add a location' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
@@ -12,7 +12,7 @@
         },
         {
           href: "/locations",
-          text: "Training locations"
+          text: "Locations"
         }
       ]
     })
@@ -20,6 +20,21 @@
 {% endblock %}
 
 {% block content %}
+  {% if showErrors %}
+    {% set errors = [
+      {
+        id: code + '-location-confirm',
+        href: '#checkbox-part-1',
+        text: 'Please confirm that candidates can pick this location when they apply'
+      }
+    ] %}
+
+    {{ govukErrorSummary({
+      titleText: "We couldn’t save this location",
+      errorList: errors
+    }) }}
+  {% endif %}
+
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
@@ -51,9 +66,20 @@
       ])}}
 
       {% if isNew %}
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
+
+        {% set fields = [
+            {
+              name: 'I confirm that candidates can choose this as a place of training when they complete their UCAS application form'
+            }
+          ]
+        %}
+
+        {{ macros.checkboxGroup(code + '-location-confirm', fields, errors) }}
+
         <input type="submit" class="govuk-button" value="Save" />
       {% else %}
-        <input type="submit" class="govuk-button" value="Publish changes" />
+        <input type="submit" class="govuk-button" value="Save and publish changes" />
         <p>
           <a href="/locations">Cancel changes</a>
         </p>

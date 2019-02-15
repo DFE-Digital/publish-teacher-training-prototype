@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Training locations' %}
+{% set title = 'Locations' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
@@ -16,24 +16,35 @@
 {% endblock %}
 
 {% block content %}
+  {% if justCreated %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      Your location has been added
+    </h3>
+    <p>
+      Before candidates can pick this location, you must assign it to one or more courses.<br />
+      You can do this when adding or editing courses.
+    </p>
+    <p class="govuk-!-margin-bottom-0">
+      <a href="/courses">Your courses</a>
+    </p>
+  </div>
+  {% endif %}
+
+  {% if justEdited %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      Your changes have been published
+    </h3>
+    <p class="govuk-!-margin-bottom-0">
+      Changes will appear on courses in Find straight away.<br />UCAS Apply will be updated overnight.
+    </p>
+  </div>
+  {% endif %}
+
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-
-  <p>Use this section to:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>edit your training locations</li>
-    <li>add new training locations</li>
-  </ul>
-
-  <p>
-    Candidates choose from a list of training locations when they apply for a&nbsp;course.
-  </p>
-
-  {{ govukWarningText({
-    text: "You are limited to 37 training locations by UCAS Apply",
-    iconFallbackText: "Warning"
-  }) }}
 
   <!-- <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -48,6 +59,19 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <p>In this section, you can add and edit information about your locations.</p>
+
+      <div class="govuk-inset-text">
+        <p>By ‘locations’ we mean the places that a candidate can select when making their application - choosing from the list that will appear on the course page in Find and on the UCAS application form.</p>
+
+        <p><a href="#">Guidance on setting up your locations</a></p>
+      </div>
+
+      {{ govukWarningText({
+        html: "You are limited to 37 locations by UCAS Apply",
+        iconFallbackText: "Warning"
+      }) }}
+
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
@@ -66,7 +90,7 @@
       </table>
 
       <p class="add-top-margin">
-        <a href="/location/start" class="govuk-button">Add a new training location</a>
+        <a href="/location/start" class="govuk-button">Add a location</a>
       </p>
     </div>
   </div>

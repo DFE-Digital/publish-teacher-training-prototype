@@ -120,7 +120,7 @@
 </div>
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Training locations
+    Locations
   </dt>
   <dd class="govuk-summary-list__value">
     {% if isArray(data[code + '-locations']) %}
@@ -132,14 +132,14 @@
     {% endif %}
     {% if data['schools'].length == 1 %}
       <br>
-      <span class="empty">You can’t change this because you only have <a href="/locations">1 training location</a></span>
+      <span class="empty">You can’t change this because you only have <a href="/locations">1 location</a></span>
     {% endif %}
   </dd>
   {% if showChangeLinks %}
     <dd class="govuk-summary-list__actions">
       {% if data['schools'].length > 1 and data[code + '-locations'] %}
       <a href="/new/{{ code }}/training-locations?change=training-locations">
-        Change<span class="govuk-visually-hidden"> training locations</span>
+        Change<span class="govuk-visually-hidden"> locations</span>
       </a>
       {% endif %}
     </dd>

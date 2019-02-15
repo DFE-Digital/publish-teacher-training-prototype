@@ -470,7 +470,11 @@ router.get('/location/:code', function (req, res) {
     return school.code == req.params.code;
   });
   var isNew = !school;
-  res.render('location', { school: school, code: code, isNew: isNew })
+  res.render('location', {
+        school: school,
+        code: code,
+        isNew: isNew
+      })
 })
 
 router.post('/location/:code', function (req, res) {
@@ -479,17 +483,30 @@ router.post('/location/:code', function (req, res) {
   var loc = data['schools'].find(function(school) {
     return school.code == req.params.code;
   });
+  var isNew = false;
+
+  if (!loc && req.body[code + '-location-confirm'] == '_unchecked') {
+    res.render('location', {
+          school: loc,
+          code: code,
+          showErrors: true,
+          isNew: true
+        })
+
+    return
+  }
 
   if (!loc) {
     loc = {}
     data['schools'].push(loc);
+    isNew = true;
   }
 
   loc.name = data[code + '-name'];
   loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`;
   loc.code = code;
 
-  res.redirect('/locations')
+  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${loc.code}`);
 })
 
 router.get('/location/:id/edit', function (req, res) {
@@ -498,6 +515,14 @@ router.get('/location/:id/edit', function (req, res) {
   });
 
   res.render('edit-location', { school: school })
+})
+
+router.all('/locations', function (req, res) {
+  res.render('locations', {
+    justCreated: req.query.success == 'new',
+    justEdited: req.query.success == 'edited',
+    justChangedCode: req.query.code
+  })
 })
 
 module.exports = router

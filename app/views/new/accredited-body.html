@@ -11,17 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
         {% set otherAccreditedProviderFields %}
-          {{ macros.select(code + '-new-accredited-body', 'Name of accredited body', [
-            {
-              name: 'Goldsmiths, University of London'
-            },
-            {
-              name: 'The University of Warwick'
-            },
-            {
-              name: 'UCL, University College London (University of London)'
-            }
-          ], false, true, false, true) }}
+          {{ macros.select(code + '-new-accredited-body', 'Name of accredited body', data['accredited-bodies-choices'], false, true, false, true) }}
         {% endset %}
 
         {% set options = data['accreditors'].slice() %}
@@ -35,8 +25,11 @@
           }
           ), options) %}
 
-        {{ macros.radioGroup(code + '-accredited-body', options) }}
-
+        {% if data['accreditors'].length > 0 %}
+          {{ macros.radioGroup(code + '-accredited-body', options) }}
+        {% else %}
+          {{ otherAccreditedProviderFields | safe }}
+        {% endif %}
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
