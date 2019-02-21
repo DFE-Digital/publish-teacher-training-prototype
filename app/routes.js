@@ -31,6 +31,10 @@ router.all('/', function (req, res) {
   }
 })
 
+router.all('/next-cycle', function (req, res) {
+  res.render('organisation', { nextCycle: true });
+})
+
 router.all('/courses', function(req, res) {
   res.render('courses', { justEditedVacancies: req.query.editedVacancies });
 })
@@ -93,8 +97,19 @@ router.all('/rollover/locations', function (req, res) {
   });
 })
 
+router.post('/rollover/create', function (req, res) {
+  var data = req.session.data;
+  data['rolled-over'] = true;
+
+  res.redirect('/cycles?rolled=true')
+})
+
 router.all('/rollover/:view', function (req, res) {
   res.render(`rollover/${req.params.view}`, {paths: rolloverWizardPaths(req)})
+})
+
+router.all('/cycles', function (req, res) {
+  res.render('cycles', { justRolledOver: req.query.rolled })
 })
 
 router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {

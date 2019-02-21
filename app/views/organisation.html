@@ -1,31 +1,57 @@
 {% extends "layout.html" %}
 {% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
+{% block breadcrumbs %}
+  {% if data['rolled-over'] %}
+    {{
+      govukBreadcrumbs({
+        items: [
+          {
+            href: "/cycles",
+            text: data['training-provider-name']
+          }
+        ]
+      })
+    }}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>
+      <h1 class="govuk-heading-xl">
+        {% if data['rolled-over'] %}
+          {% if nextCycle %}
+            Next cycle (2020/2021)
+          {% else %}
+            Current cycle (2019/2020)
+          {% endif %}
+        {% else %}
+          {{ data['training-provider-name'] }}
+        {% endif %}
+      </h1>
     </div>
   </div>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-!-margin-bottom-8 status-box" style="border: none">
-        <h2 class="govuk-heading-m">
-          Prepare for the 2020/2021 recruitment cycle
-        </h2>
-        <p>Use this section to:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>choose courses for the next cycle</li>
-          <li>choose training locations for the next cycle</li>
-        </ul>
+      {% if not data['rolled-over'] %}
+        <div class="govuk-!-margin-bottom-8 status-box" style="border: none">
+          <h2 class="govuk-heading-m">
+            Prepare for the 2020/2021 recruitment cycle
+          </h2>
+          <p>Use this section to:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>choose courses for the next cycle</li>
+            <li>choose training locations for the next cycle</li>
+          </ul>
 
-        <a href="/rollover/start" class="govuk-button govuk-button--start govuk-!-margin-bottom-2">Start now</a>
-      </div>
+          <a href="/rollover/start" class="govuk-button govuk-button--start govuk-!-margin-bottom-2">Start now</a>
+        </div>
+      {% endif %}
 
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="/about-your-organisation">About your organisation</a>
+          <a href="{% if nextCycle %}#{% else %}/about-your-organisation{% endif %}">About your organisation</a>
         </h2>
 
         <!-- <p>
@@ -47,7 +73,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="/locations">Locations</a>
+          <a href="{% if nextCycle %}#{% else %}/locations{% endif %}">Locations</a>
         </h2>
 
         <p>Use this section to:</p>
@@ -59,7 +85,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="/courses">Courses</a>
+          <a href="{% if nextCycle %}#{% else %}/courses{% endif %}">Courses</a>
         </h2>
 
         <p>Use this section to:</p>
