@@ -76,6 +76,23 @@ router.all('/rollover/courses', function (req, res) {
   });
 })
 
+router.all('/rollover/locations', function (req, res) {
+  var data = req.session.data;
+  var locations = [];
+
+  data['schools'].forEach(location => {
+    locations.push({
+      name: `${location.name} (${location.code})`,
+      selected: true
+    });
+  });
+
+  res.render('rollover/locations', {
+    locations: locations,
+    paths: rolloverWizardPaths(req)
+  });
+})
+
 router.all('/rollover/:view', function (req, res) {
   res.render(`rollover/${req.params.view}`, {paths: rolloverWizardPaths(req)})
 })
