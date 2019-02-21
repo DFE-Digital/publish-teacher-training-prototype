@@ -2,6 +2,17 @@
 {% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
 
 {% block content %}
+  {% if justRolledOver %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      We’ve copied your courses and locations to the next cycle.
+    </h3>
+
+    <p class="govuk-!-margin-bottom-0">
+      You can now prepare for the next cycle, or edit the current cycle.
+    </p>
+  </div>
+  {% endif %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>
@@ -12,14 +23,14 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="#">Current cycle (2019-2020)</a>
+          <a href="/">Current cycle (2019-2020)</a>
         </h2>
 
         <p>Manage courses, training locations and vacancies in the current cycle.</p>
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="#">Next cycle (2020-2021)</a>
+          <a href="/next-cycle">Next cycle (2020-2021)</a>
         </h2>
         <p>Prepare your courses and training locations for the next cycle.</p>
       </div>

@@ -72,7 +72,7 @@ function rolloverWizardPaths(req) {
     '/',
     '/rollover/start',
     '/rollover/courses',
-    '#',
+    '/rollover/locations',
     '/rollover/confirm',
     '/rollover/create'
   ];

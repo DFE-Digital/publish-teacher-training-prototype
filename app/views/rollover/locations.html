@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Pick courses' %}
+{% set title = 'Pick locations' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
@@ -11,7 +11,7 @@
       </h1>
 
       <form action="{{ paths.next }}" method="post">
-        {{ macros.checkboxGroup('rollover-courses', courses) }}
+        {{ macros.checkboxGroup('rollover-locations', locations) }}
 
         <div class="form-group">
           <input type="submit" class="govuk-button" value="Continue">

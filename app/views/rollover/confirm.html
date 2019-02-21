@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% set title = 'Check your answers before confirming' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <p>After confirming you can:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>add new courses or locations</li>
+        <li>edit or delete any of these courses</li>
+        <li>add new locations to these courses</li>
+      </ul>
+
+      <dl class="govuk-summary-list  govuk-!-margin-top-9 govuk-!-margin-bottom-9">
+        {% include "rollover/_answers.html" %}
+      </dl>
+
+      <form action="{{ paths.next }}" method="post">
+        <input type="submit" class="govuk-button" value="Confirm choices" />
+      </form>
+    </div>
+  </div>
+{% endblock %}
