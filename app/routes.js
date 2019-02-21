@@ -65,7 +65,8 @@ router.all('/rollover/courses', function (req, res) {
   data['ucasCourses'].forEach(course => {
     courses.push({
       name: `${course.name} (${course.programmeCode})`,
-      text: course.options[0]
+      text: course.options[0],
+      selected: true
     });
   });
 
