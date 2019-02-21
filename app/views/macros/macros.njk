@@ -337,7 +337,7 @@
             value="{{ field.name }}"
             class="govuk-checkboxes__input"
             {% if field.more %}data-aria-controls="checkbox-part-{{ i }}-extra"{% endif %}
-            {{ checked(name, field.name) }}
+            {% if field.selected %}checked="checked"{% else %}{{ checked(name, field.name) }}{% endif %}
           >
           <label
             for="checkbox-part-{{ i }}"
