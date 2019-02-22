@@ -1,24 +1,23 @@
 {% extends "layout.html" %}
 {% set title = 'Contact details' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}
-{% include "about-your-organisation/_errors.html" %}
 
-<h1 class="govuk-heading-xl">
-  <span class="govuk-caption-xl">{{ data['training-provider-name'] }}</span>
-  {{ title }}
-</h1>
+  <h1 class="govuk-heading-xl">
+    Ways candidates can contact you
+  </h1>
 
-  <form action="/about-your-organisation" method="post">
+  <form action="{{ paths.next }}" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {{ macros.textbox('email-address', 'Email address', 'Give an email address that applicants can use to contact you', false, null, errors) }}
-        {{ macros.textbox('telephone-number', 'Telephone number', 'Give a telephone number that applicants can use to call you', 'govuk-input--width-10', null, errors) }}
-        {{ macros.textbox('website', 'Website', 'Add a link to the initial teacher training or course pages of your website', 'govuk-!-width-full', null, errors) }}
+        {{ macros.textbox('email-address', 'Email address', false, null, errors) }}
+        {{ macros.textbox('telephone-number', 'Telephone number', false, 'govuk-input--width-10', null, errors) }}
+        {{ macros.textbox('website', 'Website', 'Add a link to the most relevant page on your website', 'govuk-!-width-full', null, errors) }}
 
-        <h2 class="govuk-heading-m" id="contact-address">Contact address</h2>
+        <hr class="govuk-section-break govuk-section-break--m" />
+        <h2 class="govuk-heading-l" id="contact-address">Contact address</h2>
         {{ macros.textbox('building-and-street', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
         {{ macros.textbox('building-and-street-2', null, null, 'govuk-!-width-full', null, errors) }}
 
@@ -44,14 +43,7 @@
       </div>
     </div>
 
-    <div class="add-double-bottom-margin">
-      <input type="submit" class="govuk-button" value="Save" />
-    </div>
-
-    <p>
-      <a href="/about-your-organisation">Cancel changes</a>
-    </p>
+    <hr class="govuk-section-break govuk-section-break--m" />
+    <input type="submit" class="govuk-button" value="Continue" />
   </form>
-
-
 {% endblock %}

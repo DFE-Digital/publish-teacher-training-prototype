@@ -80,6 +80,23 @@ function rolloverWizardPaths(req) {
   return nextAndBackPaths(paths, req.path, originalQuery(req));
 }
 
+function onboardingWizardPaths(req) {
+  var data = req.session.data;
+
+  var paths = [
+    '/onboarding/accept-terms',
+    '/onboarding/name',
+    '/onboarding/code',
+    '/onboarding/contact',
+    '/onboarding/location',
+    '/onboarding/apply-settings',
+    '/onboarding/request-access',
+    '/'
+  ];
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req));
+}
+
 function newFurtherEducationCourseWizardPaths(req) {
   var code = req.params.code;
   var data = req.session.data;
@@ -571,6 +588,7 @@ module.exports = {
   isFurtherEducation,
   isRegionLocation,
   rolloverWizardPaths,
+  onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% set title = 'Your UCAS training provider code' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+{% set originalName = 'University of Hayes' %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Your UCAS training provider&nbsp;code
+      </h1>
+
+      <p>We’ve generated a unique code for your organisation:</p>
+      <div class="govuk-inset-text add-double-bottom-margin">
+        <p class="govuk-heading-l">
+          UH1
+        </p>
+      </div>
+
+      <p>Candidates can use this (or your organisation name) to find your courses. They will also see it during the UCAS application process.</p>
+
+      <a href="{{ paths.next }}" class="govuk-button">Continue</a>
+    </div>
+  </div>
+{% endblock %}

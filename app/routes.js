@@ -13,6 +13,7 @@ var {
   isFurtherEducation,
   isRegionLocation,
   rolloverWizardPaths,
+  onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,
@@ -362,6 +363,10 @@ router.all('/new-location/:code/create', function (req, res) {
 router.all('/new-location/:code/:view', function (req, res) {
   var code = req.params.code;
   res.render(`new-location/${req.params.view}`, {code: code, paths: newLocationWizardPaths(req)})
+})
+
+router.all('/onboarding/:view', function (req, res) {
+  res.render(`onboarding/${req.params.view}`, {paths: onboardingWizardPaths(req)})
 })
 
 router.post('/request-access', function (req, res) {
