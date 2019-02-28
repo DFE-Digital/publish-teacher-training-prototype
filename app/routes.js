@@ -139,7 +139,8 @@ router.all('/new/:code/title', function (req, res) {
   res.render('new/title', {
     code: code,
     paths: newCourseWizardPaths(req),
-    generatedTitle: getGeneratedTitle(code, data)
+    generatedTitle: getGeneratedTitle(code, data),
+    courseOffered: getCourseOffered(code, data)
   });
 })
 

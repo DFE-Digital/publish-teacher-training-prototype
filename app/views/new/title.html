@@ -11,9 +11,10 @@
     <div class="govuk-grid-column-two-thirds">
       <p>From your answers we’ve created this title for your course:</p>
       <div class="govuk-inset-text add-double-bottom-margin">
-        <p class="govuk-body-l">
+        <p class="govuk-heading-m govuk-!-margin-bottom-2">
           {{ generatedTitle }}
         </p>
+        <p>{{ courseOffered }}</p>
       </div>
 
       <form action="{{ paths.next }}" method="post">
