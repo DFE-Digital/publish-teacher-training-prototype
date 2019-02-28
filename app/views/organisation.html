@@ -35,17 +35,19 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if not data['rolled-over'] %}
-        <div class="govuk-!-margin-bottom-8 status-box" style="border: none">
+        <div class="govuk-!-margin-bottom-8">
           <h2 class="govuk-heading-m">
-            Prepare for the 2020/2021 recruitment cycle
+            <a href="/rollover/start">Prepare for the 2020/2021 recruitment cycle</a>
           </h2>
           <p>Use this section to:</p>
           <ul class="govuk-list govuk-list--bullet">
             <li>choose courses for the next cycle</li>
             <li>choose training locations for the next cycle</li>
           </ul>
-
-          <a href="/rollover/start" class="govuk-button govuk-button--start govuk-!-margin-bottom-2">Start now</a>
+          {{ govukWarningText({
+              text: 'Complete before 1 June',
+              iconFallbackText: 'Warning'
+          }) }}
         </div>
       {% endif %}
 
