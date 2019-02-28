@@ -11,7 +11,7 @@
         {{ title }}
       </h1>
 
-      <p>By ‘location’ we mean the places that a candidate can select when making their application - choosing from the list that will appear on the course page in Find, and on the UCAS application form.</p>
+      <p>By ‘location’ we mean the places that a candidate selects when making an application. They do this by choosing from a list on both the course page in Find and the UCAS application form.</p>
 
       <p>Find uses locations to allow candidates to search by town, city or postcode</p>
 
@@ -46,7 +46,7 @@
         <h2 class="govuk-heading-m govuk-!-margin-top-8">Address</h2>
         {{ macros.radioGroup('onboarding-name-title', [
           {
-            name: 'Use our contact address'
+            name: 'Use your contact address'
           },
           {
             name: 'Specify a new address',
@@ -58,7 +58,7 @@
 
         {% set fields = [
             {
-              name: 'I confirm that candidates can choose this as a place of training when they complete their UCAS application form'
+              name: 'I confirm that candidates can choose this as a place of training when completing the UCAS application form'
             }
           ]
         %}
