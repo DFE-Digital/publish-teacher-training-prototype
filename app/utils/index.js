@@ -89,8 +89,10 @@ function onboardingWizardPaths(req) {
     '/onboarding/code',
     '/onboarding/contact',
     '/onboarding/location',
-    '/onboarding/apply-settings',
     '/onboarding/request-access',
+    '/onboarding/apply-settings',
+    '/onboarding/gt12',
+    '/onboarding/alerts',
     '/'
   ];
 

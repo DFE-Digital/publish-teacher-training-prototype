@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'UCAS Apply preferences' %}
+{% set title = 'Email alerts for new applications' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
@@ -10,11 +10,20 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-body-l">The next questions will set some preferences for the UCAS Teacher Training (UTT) Apply system.</p>
-
-      <hr class="govuk-section-break govuk-section-break--l">
-
       <form action="{{ paths.next }}" method="post">
+        {% set fields = [
+            {
+              name: 'Get an email for each application you receive',
+              more: macros.textbox('email-to', 'Email address UCAS should send alerts to')
+            },
+            {
+              name: 'Don’t get an email'
+            }
+          ]
+        %}
+
+        {{ macros.radioGroup('alerts', fields) }}
+
         <div class="form-group">
           <input type="submit" class="govuk-button" value="Continue">
         </div>
