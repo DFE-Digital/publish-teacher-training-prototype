@@ -16,6 +16,9 @@ postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha
 prototype_data = {
   'rolled-over': false,
   'multi-organisation': false,
+  'ucas-gt12': 'Applicants must confirm their place',
+  'ucas-alerts': 'Get an email for each application you receive',
+  'ucas-alert-email-to': 'janedoe-fake-email@myorg.uk',
   'training-provider-name': provider,
   'provider-code': courses.first['providerCode']
 }
