@@ -26,8 +26,6 @@ Design history of the frontend at:<br />
 * Run the ruby script: `./generate.rb`, which generates a new `prototype_data.json` file
 * Commit the changes to master, which auto-deploys to Heroku
 
-![Screenshot of prototype](https://raw.githubusercontent.com/DFE-Digital/manage-courses-prototype/master/app/assets/images/history/iteration-aug-23/01-organisation.png)
-
 ## Upgrade the prototype kit
 
 Based on https://govuk-prototype-kit.herokuapp.com/docs/updating-the-kit
