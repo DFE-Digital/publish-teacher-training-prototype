@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = 'UCAS Apply preferences' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/') }}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
@@ -19,7 +19,7 @@
 
       <hr class="govuk-section-break govuk-section-break--l" />
 
-      <form action="/about-your-organisation" method="post">
+      <form action="/" method="post">
         <h2 class="govuk-heading-l">Pick which letter to send to successful applicants</h2>
 
         {% include "ucas/_gt12.html" %}
@@ -31,6 +31,8 @@
         {% include "ucas/_alerts.html" %}
 
         <hr class="govuk-section-break govuk-section-break--l" />
+
+        <p>UCAS Apply will be updated overnight.</p>
 
         <div class="form-group add-double-bottom-margin">
           <input type="submit" class="govuk-button" value="Save">

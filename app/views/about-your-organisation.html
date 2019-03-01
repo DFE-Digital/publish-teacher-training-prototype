@@ -100,17 +100,6 @@
         {% endif %}
         {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
       </dl>
-
-      <h3 class="govuk-heading-27">
-        <a href="/about-your-organisation/ucas-apply-preferences">
-          UCAS Apply preferences
-        </a>
-      </h3>
-
-      <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart('ucas-gt12', 'Letter sent to applicants', errors, false) }}
-        {{ macros.coursePart('ucas-alerts', 'Application alerts', errors, false) }}
-      </dl>
     </div>
     <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
