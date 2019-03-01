@@ -5,10 +5,7 @@ The course management tool for https://find-postgraduate-teacher-training.educat
 Prototype:<br /> https://manage-courses-prototype.herokuapp.com/
 
 Design history:<br />
-https://manage-courses-prototype.herokuapp.com/history
-
-Private design documentation in Confluence:<br />
-https://dfedigital.atlassian.net/wiki/spaces/BaT/pages/319258632/Manage+courses+designs
+https://bat-design-history.herokuapp.com/publish-teacher-training
 
 ## Find postgraduate teacher training courses service
 
@@ -17,7 +14,7 @@ The live service lives at:<br />
 * https://github.com/DFE-Digital/search-and-compare-ui
 
 Design history of the frontend at:<br />
-* https://search-and-compare.herokuapp.com/history
+* https://bat-design-history.herokuapp.com/find-teacher-training
 
 ## Change the provider in the prototype
 
