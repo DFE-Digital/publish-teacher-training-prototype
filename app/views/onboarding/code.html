@@ -2,7 +2,6 @@
 {% set title = 'Your UCAS training provider code' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
-{% set originalName = 'University of Hayes' %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -14,7 +13,7 @@
       <p>We’ve generated a unique code for your organisation:</p>
       <div class="govuk-inset-text add-double-bottom-margin">
         <p class="govuk-heading-l">
-          UH1
+          {{ data['provider-code'] }}
         </p>
       </div>
 

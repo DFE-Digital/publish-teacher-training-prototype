@@ -2,7 +2,7 @@
 {% set title = 'Is your organisation name right?' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
-{% set originalName = 'University of Hayes' %}
+{% set originalName = data['training-provider-name'] %}
 
 {% block content %}
   <div class="govuk-grid-row">
