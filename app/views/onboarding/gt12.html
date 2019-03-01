@@ -10,49 +10,8 @@
         {{ title }}
       </h1>
 
-      <p>UCAS sends all successful applicants a letter – this is known as a ‘GT12 letter’.</p>
-      <p class="govuk-!-margin-bottom-5">Choose which letter you’d like UCAS to send (the content of each letter is summarised below):</p>
-
-      {% set confirmLetter %}
-        <div class="status-box" style="border: none">
-          <p>
-            To confirm whether or not you intend to take up this place,
-            you must contact the training provider at [GT12 reply email
-            or URL].
-          </p>
-          <p>
-            If you are replying to the training provider’s email
-            address, you must include your:
-          </p>
-          <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0">
-            <li>full name</li>
-            <li>Personal ID</li>
-            <li>training programme code</li>
-            <li>reason for not taking the place (if applicable)</li>
-          </ul>
-        </div>
-      {% endset %}
-
-      {% set noResponseLetter %}
-        <div class="status-box" style="border: none">
-          <p class="govuk-!-margin-bottom-0">{{ data['training-provider-name'] }} will assume you are taking up your place, and will be sending you joining instructions before you start your training programme.</p>
-        </div>
-      {% endset %}
-
       <form action="{{ paths.next }}" method="post">
-        {% set fields = [
-            {
-              name: 'Applicants must confirm their place',
-              text: confirmLetter
-            },
-            {
-              name: 'Applicants don’t need to respond',
-              text: noResponseLetter
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup('gt12', fields) }}
+        {% include "ucas/_gt12.html" %}
 
         <div class="form-group">
           <input type="submit" class="govuk-button" value="Continue">

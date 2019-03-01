@@ -108,9 +108,8 @@
       </h3>
 
       <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart('ucas-gt12', 'Letter sent to applicants', errors) }}
-        {{ macros.coursePart('ucas-gt12-address', 'Email applicants respond to', errors) }}
-        {{ macros.coursePart('ucas-alerts', 'Email alerts for new applications', errors) }}
+        {{ macros.coursePart('ucas-gt12', 'Letter sent to applicants', errors, false) }}
+        {{ macros.coursePart('ucas-alerts', 'Application alerts', errors, false) }}
       </dl>
     </div>
     <div class="govuk-grid-column-one-third">

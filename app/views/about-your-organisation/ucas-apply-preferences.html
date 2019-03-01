@@ -17,29 +17,29 @@
         <li>what happens when you receive an application</li>
       </ul>
 
-      <p>Your preferences are listed below. <a href="#">Get in touch with the Becoming a Teacher team</a> to change any of them.</p>
+      <hr class="govuk-section-break govuk-section-break--l" />
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
+      <form action="/about-your-organisation" method="post">
+        <h2 class="govuk-heading-l">Pick which letter to send to successful applicants</h2>
 
-      <h2 class="govuk-heading-m">Which letter will successful applicants receive?</h2>
+        {% include "ucas/_gt12.html" %}
 
-      <p>Successful candidates will receive the following email from UCAS:</p>
+        <hr class="govuk-section-break govuk-section-break--l" />
 
-      <div class="govuk-inset-text">
+        <h2 class="govuk-heading-l">Email alerts for new applications</h2>
+
+        {% include "ucas/_alerts.html" %}
+
+        <hr class="govuk-section-break govuk-section-break--l" />
+
+        <div class="form-group add-double-bottom-margin">
+          <input type="submit" class="govuk-button" value="Save">
+        </div>
+
         <p>
-          {{ data['training-provider-name'] }} will assume you are taking up your
-          place, and will be sending you joining instructions before you
-          start your training programme.
+          <a href="/about-your-organisation">Cancel changes</a>
         </p>
-      </div>
-
-      <p>In UCAS this is known as the “No response” type of letter, with the code:&nbsp;GT12</p>
-
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
-
-      <h2 class="govuk-heading-m">Receive email alerts for new applications?</h2>
-
-      <p class="govuk-inset-text">Yes. Emails are sent to <a href="#">janedoe@myorg.co.uk</a> as soon as new applications are received.</p>
+      </form>
     </div>
   </div>
 {% endblock %}
