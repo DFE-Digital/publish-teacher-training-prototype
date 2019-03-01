@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% set title = 'UCAS Apply preferences' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row add-top-margin">
+    <div class="govuk-grid-column-two-thirds">
+      <p>These are UCAS Teacher Training (UTT) Apply preferences that relate to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>what applicants receive when they are successful</li>
+        <li>what happens when you receive an application</li>
+      </ul>
+
+      <p>Your preferences are listed below. <a href="#">Get in touch with the Becoming a Teacher team</a> to change any of them.</p>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
+
+      <h2 class="govuk-heading-m">Which letter will successful applicants receive?</h2>
+
+      <p>Successful candidates will receive the following email from UCAS:</p>
+
+      <div class="govuk-inset-text">
+        <p>
+          {{ data['training-provider-name'] }} will assume you are taking up your
+          place, and will be sending you joining instructions before you
+          start your training programme.
+        </p>
+      </div>
+
+      <p>In UCAS this is known as the “No response” type of letter, with the code:&nbsp;GT12</p>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l" />
+
+      <h2 class="govuk-heading-m">Receive email alerts for new applications?</h2>
+
+      <p class="govuk-inset-text">Yes. Emails are sent to <a href="#">janedoe@myorg.co.uk</a> as soon as new applications are received.</p>
+    </div>
+  </div>
+{% endblock %}
