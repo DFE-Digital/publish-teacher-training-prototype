@@ -93,6 +93,7 @@ function onboardingWizardPaths(req) {
     '/onboarding/apply-settings',
     '/onboarding/gt12',
     '/onboarding/alerts',
+    '/onboarding/ucas-contacts',
     '/'
   ];
 

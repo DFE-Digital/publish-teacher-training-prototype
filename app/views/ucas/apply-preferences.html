@@ -22,17 +22,7 @@
       <form action="/" method="post">
         <h2 class="govuk-heading-l">Contacts for UCAS</h2>
 
-        <h3 class="govuk-heading-m">Fraud contact</h3>
-        <p>They will receive alerts about any fraudulent activity, such as similarity detection for a plagiarised personal statement.</p>
-        {{ macros.textbox('fraud-contact-email', 'Email address (optional)') }}
-
-        <h3 class="govuk-heading-m">UCAS correspondent</h3>
-        <p>They will receive the UCAS monthly bulletin, these include key information about deadlines for making decisions. UCAS allow only one correspondent and they should forward information to relevant staff.</p>
-        {{ macros.textbox('correspondent-contact-email', 'Email address (optional)') }}
-
-        <h3 class="govuk-heading-m">UCAS finance contact</h3>
-        <p>UCAS will invoice them for payment of fees.</p>
-        {{ macros.textbox('finance-contact-email', 'Email address (optional)') }}
+        {% include "ucas/_contacts.html" %}
 
         <hr class="govuk-section-break govuk-section-break--l" />
 
