@@ -260,3 +260,18 @@ dl.aligned.course-part-tasks dd {
 .govuk-heading-27 {
   @include govuk-font(27, $weight: bold);
 }
+
+.interruption-card {
+  background: $govuk-brand-colour;
+  padding: govuk-spacing(7) govuk-spacing(6) govuk-spacing(2);
+
+  p, h1, h2, h3, ul, a:visited, a:link  {
+    color: govuk-colour("white");
+  }
+
+  .govuk-button {
+    background: govuk-colour("white");
+    color: $govuk-brand-colour !important;
+    font-weight: bold;
+  }
+}
