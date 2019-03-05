@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'The Northworthy Alliance'
+provider = 'University of Exeter'
 courses = data.select {|c| c['provider'] == provider }
 
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
