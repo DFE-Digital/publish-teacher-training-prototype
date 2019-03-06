@@ -223,7 +223,17 @@
       <p>Remove this course from Find and close applications.</p>
 
       <p class="remove-bottom-margin">
-        <a href="/course/{{ linkPath }}/withdraw">Withdraw course</a>
+        <a href="/course/{{ linkPath }}/withdraw">Withdraw this course</a>
+      </p>
+    {% else %}
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+
+      {# <h3 class="govuk-heading-m">Delete course</h3>
+
+      <p>You can only delete courses that haven’t been published this cycle.</p> #}
+
+      <p class="remove-bottom-margin">
+        <a href="/course/{{ linkPath }}/delete">Delete this course</a>
       </p>
     {% endif %}
   </div>

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% set title = 'Delete this course' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/courses') }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ course.path }}/vacancies" method="post">
+        <p>You can only delete a course if it hasn’t been published in this cycle.</p>
+
+        <p>Delete a course if it:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>was created by mistake</li>
+          <li>will never be offered again</li>
+        </ul>
+
+        <p>Deleting a course removes it from your Courses table. It cannot be undone. If you need to recreate a course it will have a new course code.</p>
+
+        <hr class="govuk-section-break govuk-section-break--m">
+
+        <h2 class="govuk-heading-m">Confirm deletion</h2>
+
+        {{ macros.textbox('confirm-code', 'Type in the course code to confirm', false, 'govuk-input--width-5') }}
+
+        <hr class="govuk-section-break govuk-section-break--m">
+
+        <input type="submit" class="govuk-button destructive-button" value="Delete course" />
+
+        <p class="govuk-!-margin-top-5">
+          <a href="/courses">Cancel</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}
