@@ -3,7 +3,6 @@
 {% block pageTitle %}{{ title }}{% endblock %}
 {% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
 {% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
-{% set publishLink = '/publish/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 {% set code = course.programmeCode %}
 
@@ -130,7 +129,7 @@
       </dl>
     </div>
     <div class="govuk-grid-column-one-third">
-      {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], previewLink, publishLink) }}
+      {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
     </div>
   </div>
 

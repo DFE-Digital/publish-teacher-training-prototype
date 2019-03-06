@@ -153,69 +153,80 @@
 </div>
 {% endmacro %}
 
-{% macro coursePublish(state = 'new', publishedBefore = false, previewLink = '#', publishLink = '#') %}
-<div class="add-double-bottom-margin status-box">
-  <h3 class="govuk-heading-m">Status</h3>
-  {% if state == 'draft' %}
-    <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
-  {% elseif state == 'new' %}
-    <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">New</span>
-  {% elseif state == 'published' %}
-    <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
-  {% elseif state == 'published-with-changes' %}
-  <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-2">Published&nbsp;*</span>
-  <p>* With unpublished&nbsp;changes</p>
-  {% endif %}
-
-  <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">Is it on Find?</h3>
-  <p>
-    {% if publishedBefore or state == 'published' %}
-      <a href="#">Yes – view online</a>
-    {% else %}
-      No – still in draft
+{% macro coursePublish(state = 'new', publishedBefore = false, providerCode = '', courseCode = '') %}
+  {% set linkPath = providerCode + '/' + courseCode %}
+  <div class="add-double-bottom-margin status-box">
+    <h3 class="govuk-heading-m">Status</h3>
+    {% if state == 'draft' %}
+      <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
+    {% elseif state == 'new' %}
+      <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">New</span>
+    {% elseif state == 'published' %}
+      <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
+    {% elseif state == 'published-with-changes' %}
+    <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-2">Published&nbsp;*</span>
+    <p>* With unpublished&nbsp;changes</p>
     {% endif %}
-  </p>
 
-  {% if publishedBefore or state == 'published' %}
-    <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
+    <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">Is it on Find?</h3>
     <p>
-      Open
+      {% if publishedBefore or state == 'published' %}
+        <a href="#">Yes – view online</a>
+      {% else %}
+        No – still in draft
+      {% endif %}
     </p>
 
-    <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
-    <p>
-      Yes (<a href="vacancies">Edit</a>)
-    </p>
-  {% endif %}
+    {% if publishedBefore or state == 'published' %}
+      <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
+      <p>
+        Open
+      </p>
 
-  {% if state != 'published' %}
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-    <h3 class="govuk-heading-m">Preview</h3>
-    <p>See how your unpublished changes look.</p>
-    <p>Preview your course to check for mistakes before publishing.</p>
-    <p>
-      <a href="{{ previewLink }}">Preview course</a>
-    </p>
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+      <p>
+        Yes (<a href="/course/{{ linkPath }}/vacancies">Edit</a>)
+      </p>
+    {% endif %}
 
-    <h3 class="govuk-heading-m">Publish</h3>
-    <p>Publish your changes.</p>
+    {% if state != 'published' %}
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+      <h3 class="govuk-heading-m">Preview</h3>
+      <p>See how your unpublished changes look.</p>
+      <p>Preview your course to check for mistakes before publishing.</p>
+      <p>
+        <a href="/preview/{{ linkPath }}">Preview course</a>
+      </p>
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-    <a href="{{ publishLink }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
-  {% endif %}
+      <h3 class="govuk-heading-m">Publish</h3>
+      <p>Publish your changes.</p>
 
-  {% if state != 'new'%}
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-  {% endif %}
+      <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
+    {% endif %}
 
-  {% if state == 'draft' or state == 'published-with-changes' %}
-    <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
-  {% endif %}
+    {% if state != 'new'%}
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+    {% endif %}
 
-  {% if publishedBefore or state == 'published' %}
-    <p>Last published:<br />{{ today() }} by Rita Cosca</p>
-  {% endif %}
-</div>
+    {% if state == 'draft' or state == 'published-with-changes' %}
+      <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+    {% endif %}
+
+    {% if publishedBefore or state == 'published' %}
+      <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+
+      <h3 class="govuk-heading-s">Withdraw course</h3>
+
+      <p>Remove this course from Find and close applications.</p>
+
+      <p class="remove-bottom-margin">
+        <a href="/withdraw/{{ linkPath }}">Withdraw course</a>
+      </p>
+    {% endif %}
+  </div>
 {% endmacro %}
 
 {% macro orgHeading(activeTab, message = '') %}
