@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Withdraw course' %}
+{% set title = 'Withdraw this course' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/courses') }}{% endblock %}
 
@@ -12,16 +12,20 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ course.path }}/vacancies" method="post">
-        <p>Withdrawing will remove this course from Find and close applications. It will be removed from Find straight away. Applications will be closed when UCAS&nbsp;Apply is updated&nbsp;overnight.</p>
+        <p>Withdrawing a course:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>immediately removes it from Find</li>
+          <li>closes applications for it (this happens when UCAS Apply updates overnight)</li>
+        </ul>
 
-        <p>After you have withdrawn a course you can’t publish it again.</p>
+        <p>Once you’ve withdrawn a course, you can’t publish it again.</p>
 
         <hr class="govuk-section-break govuk-section-break--m">
 
         <h2 class="govuk-heading-m">Why are you withdrawing this?</h2>
         {% set otherReason %}
           {{ govukWarningText({
-              html: 'Do not withdraw a course because it is full, to stop new applications <a href="{{ course.path }}/vacancies">edit&nbsp;vacancies instead</a>',
+              html: 'You must not withdraw a course because it’s full - if you want to stop applications for it, <a href="' + course.path + '/vacancies">edit its vacancies instead</a>',
               iconFallbackText: 'Warning'
           }) }}
 
