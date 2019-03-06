@@ -86,10 +86,18 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
+      {% set sectionTitle %}
+        {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
+          Course information
+        {% else %}
+          Edit course information
+        {% endif %}
+      {% endset %}
+
       {% if course.level == 'Further education' %}
         <h3 class="govuk-heading-27 remove-top-margin">
           <a href="/new/{{ course.programmeCode }}/further/edit">
-            Edit course information
+            {{ sectionTitle }}
           </a>
         </h3>
         <dl class="govuk-summary-list govuk-summary-list--short">
@@ -98,7 +106,7 @@
       {% else %}
         <h3 class="govuk-heading-27 remove-top-margin">
           <a href="/new/{{ course.programmeCode }}/edit">
-            Edit course information
+            {{ sectionTitle }}
           </a>
         </h3>
         <dl class="govuk-summary-list govuk-summary-list--short govuk-summary-list--short">
