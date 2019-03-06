@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% set title = school.name or 'Add a location' %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
+  {
+    href: "/locations",
+    text: 'Locations'
+  }
+]))}}{% endblock %}
 
 {% block breadcrumbs %}
   {{

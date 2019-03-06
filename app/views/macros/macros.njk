@@ -9,21 +9,9 @@
   </div>
 {% endmacro %}
 
-{% macro designHistoryBreadcrumbs() %}
+{% macro breadcrumbs(items) %}
   {% from "breadcrumbs/macro.njk" import govukBreadcrumbs %}
-
-  <div class="dont-print">
-    {{
-      govukBreadcrumbs({
-        items: [
-          {
-            href: "/history",
-            text: "Design history"
-          }
-        ]
-      })
-    }}
-  </div>
+  {{ govukBreadcrumbs({ items: items }) }}
 {% endmacro %}
 
 {% macro backLink(href = "/", text = "Back") %}

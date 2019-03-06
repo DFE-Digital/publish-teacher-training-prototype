@@ -330,6 +330,19 @@ app.use(function (req, res, next) {
     }
   })
 
+  nunjucksAppEnv.addGlobal('breadcrumbItems', function(items = []) {
+    var data = req.session.data;
+    var defaultItems = [];
+
+    if (data['rolled-over']) {
+      defaultItems.push({ text: data['training-provider-name'], href: '/cycles' });
+      defaultItems.push({ text: 'Current cycle (2019-2020)', href: '/' });
+    } else {
+      defaultItems.push({ text: data['training-provider-name'], href: '/' });
+    }
+    return defaultItems.concat(items);
+  });
+
   next()
 });
 

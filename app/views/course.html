@@ -5,23 +5,12 @@
 {% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 {% set code = course.programmeCode %}
-
-{% block breadcrumbs %}
-  {{
-    govukBreadcrumbs({
-      items: [
-        {
-          href: "/",
-          text: data['training-provider-name']
-        },
-        {
-          href: "/courses",
-          text: 'Courses'
-        }
-      ]
-    })
-  }}
-{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
+  {
+    href: "/courses",
+    text: 'Courses'
+  }
+]))}}{% endblock %}
 
 {% block content %}
   {% if justCreated %}
