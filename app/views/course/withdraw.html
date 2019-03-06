@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% set title = 'Withdraw course' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/courses') }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ course.path }}/vacancies" method="post">
+        <p>Withdrawing will remove this course from Find and close applications. It will be removed from Find straight away. Applications will be closed when UCAS&nbsp;Apply is updated&nbsp;overnight.</p>
+
+        <p>After you have withdrawn a course you can’t publish it again.</p>
+
+        <hr class="govuk-section-break govuk-section-break--m">
+
+        <h2 class="govuk-heading-m">Why are you withdrawing this?</h2>
+        {% set otherReason %}
+          {{ govukWarningText({
+              html: 'Do not withdraw a course because it is full, to stop new applications <a href="{{ course.path }}/vacancies">edit&nbsp;vacancies instead</a>',
+              iconFallbackText: 'Warning'
+          }) }}
+
+          {{ macros.textarea(course.programmeCode + '-withdraw-other-reason', 'Reason for withdrawing', 5)}}
+        {% endset %}
+        {% set fields = [
+            {
+              name: 'It was published by mistake'
+            },
+            {
+              name: 'We are no longer offering this course'
+            },
+            {
+              or: true
+            },
+            {
+              name: 'Another reason',
+              more: otherReason
+            }
+          ]
+        %}
+        {{ macros.radioGroup(course.programmeCode + '-withdraw-reason', fields) }}
+
+        <hr class="govuk-section-break govuk-section-break--m">
+
+        <h2 class="govuk-heading-m">Confirm withdrawal</h2>
+
+        {{ macros.textbox('confirm-code', 'Type in the course code to confirm', false, 'govuk-input--width-5') }}
+
+        <hr class="govuk-section-break govuk-section-break--m">
+
+        <input type="submit" class="govuk-button destructive-button" value="Withdraw course" />
+
+        <p class="govuk-!-margin-top-5">
+          <a href="/courses">Cancel</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}
