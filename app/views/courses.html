@@ -24,6 +24,14 @@
     </div>
   {% endif %}
 
+  {% if justDeleted %}
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
+        Course deleted
+      </h3>
+    </div>
+  {% endif %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{ title }}</h1>

@@ -37,7 +37,10 @@ router.all('/next-cycle', function (req, res) {
 })
 
 router.all('/courses', function(req, res) {
-  res.render('courses', { justEditedVacancies: req.query.editedVacancies });
+  res.render('courses', {
+    justEditedVacancies: req.query.editedVacancies,
+    justDeleted: req.query.deleted
+  });
 })
 
 router.get('/design-history', function (req, res) {
@@ -480,6 +483,13 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
     }
     res.redirect('/courses?editedVacancies=true')
   }
+})
+
+router.post('/course/:providerCode/:code/delete', function (req, res) {
+  var c = course(req);
+  var data = req.session.data;
+  data['ucasCourses'] = data['ucasCourses'].filter(function(c) { return c.programmeCode != req.params.code; });
+  res.redirect('/courses?deleted=true');
 })
 
 router.get('/course-not-running/:providerCode/:code', function (req, res) {
