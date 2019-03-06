@@ -37,10 +37,12 @@
 {% endblock %}
 
 {% block header %}
+  {% set serviceUrl %}{% if value('rolled-over') %}/cycles{% else %}/{% endif %}{% endset %}
+
   {{ govukHeader({
-    homepageUrl: "/",
+    homepageUrl: '#',
     serviceName: serviceName,
-    serviceUrl: "/",
+    serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: [
       {
