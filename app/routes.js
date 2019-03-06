@@ -438,6 +438,7 @@ router.get('/course/:providerCode/:code', function (req, res) {
     course: c,
     errors: errors,
     justCreated: req.query.created,
+    justWithdrawn: req.query.withdrawn,
     justPublished: (req.query.publish && errors.length == 0)
   })
 })
@@ -490,6 +491,12 @@ router.post('/course/:providerCode/:code/delete', function (req, res) {
   var data = req.session.data;
   data['ucasCourses'] = data['ucasCourses'].filter(function(c) { return c.programmeCode != req.params.code; });
   res.redirect('/courses?deleted=true');
+})
+
+router.post('/course/:providerCode/:code/withdraw', function (req, res) {
+  var c = course(req);
+  req.session.data[c.programmeCode + '-publish-state'] = 'withdrawn';
+  res.redirect('/course/' + req.params.providerCode + '/' + req.params.code + '?withdrawn=true');
 })
 
 router.get('/course-not-running/:providerCode/:code', function (req, res) {

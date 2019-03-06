@@ -159,6 +159,8 @@
     <h3 class="govuk-heading-m">Status</h3>
     {% if state == 'draft' %}
       <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
+    {% elseif state == 'withdrawn' %}
+      <span class="govuk-tag phase-tag-not-running govuk-!-margin-bottom-4">Withdrawn</span>
     {% elseif state == 'new' %}
       <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">New</span>
     {% elseif state == 'published' %}
@@ -170,14 +172,26 @@
 
     <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">Is it on Find?</h3>
     <p>
-      {% if publishedBefore or state == 'published' %}
+      {% if state == 'withdrawn' %}
+        No – withdrawn
+      {% elseif publishedBefore or state == 'published' %}
         <a href="#">Yes – view online</a>
       {% else %}
         No – still in draft
       {% endif %}
     </p>
 
-    {% if publishedBefore or state == 'published' %}
+    {% if state == 'withdrawn' %}
+      <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
+      <p>
+        Closed
+      </p>
+
+      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+      <p>
+        No
+      </p>
+    {% elseif publishedBefore or state == 'published' %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
       <p>
         Open
@@ -189,7 +203,7 @@
       </p>
     {% endif %}
 
-    {% if state != 'published' %}
+    {% if state != 'published' and state != 'withdrawn' %}
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
       <h3 class="govuk-heading-m">Preview</h3>
       <p>See how your unpublished changes look.</p>
@@ -214,23 +228,26 @@
     {% endif %}
 
     {% if publishedBefore or state == 'published' %}
-      <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+      {% if state == 'withdrawn' %}
+        <h3 class="govuk-heading-s govuk-!-margin-0">Withdrawn</h3>
+        <p class="govuk-!-margin-bottom-3">{{ today() }} by Jane Doe</p>
+        <p class="govuk-inset-text govuk-!-margin-bottom-0 govuk-!-margin-top-0">{{ value(courseCode + '-withdraw-other-reason') or value(courseCode + '-withdraw-reason') }}</p>
+      {% else %}
+        <p>Last published:<br />{{ today() }} by Rita Cosca</p>
+      {% endif %}
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+      {% if state != 'withdrawn'%}
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+        <h3 class="govuk-heading-m">Withdraw</h3>
 
-      <h3 class="govuk-heading-m">Withdraw</h3>
+        <p>Remove this course from Find and close applications.</p>
 
-      <p>Remove this course from Find and close applications.</p>
-
-      <p class="remove-bottom-margin">
-        <a href="/course/{{ linkPath }}/withdraw">Withdraw this course</a>
-      </p>
+        <p class="remove-bottom-margin">
+          <a href="/course/{{ linkPath }}/withdraw">Withdraw this course</a>
+        </p>
+      {% endif %}
     {% else %}
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-      {# <h3 class="govuk-heading-m">Delete course</h3>
-
-      <p>You can only delete courses that haven’t been published this cycle.</p> #}
 
       <p class="remove-bottom-margin">
         <a href="/course/{{ linkPath }}/delete">Delete this course</a>

@@ -35,10 +35,29 @@
   </div>
   {% endif %}
 
+  {% if justWithdrawn %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
+      This course has been withdrawn
+    </h3>
+  </div>
+  {% endif %}
+
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">{{ course.options }}</span>
     {{ title }}
   </h1>
+
+  {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
+    <div class="govuk-grid-row govuk-!-margin-bottom-5">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukWarningText({
+            html: 'This course has been withdrawn.<br />It can’t be published again in this cycle.',
+            iconFallbackText: 'Warning'
+        }) }}
+      </div>
+    </div>
+  {% endif %}
 
   {% if showMessage %}
     <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
