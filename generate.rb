@@ -43,7 +43,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   courseCode = c['programmeCode']
   lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-  if idx < 6
+  if idx < 7
     prototype_data[courseCode + '-about-this-course'] = lorem
     prototype_data[courseCode + '-interview-process'] = lorem
     prototype_data[courseCode + '-placement-school-policy'] = lorem
@@ -72,6 +72,12 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-fee'] = '10,000'
     prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
     prototype_data[courseCode + '-published-before'] = true
+  end
+
+  if idx == 3
+    prototype_data[courseCode + '-publish-state'] = 'withdrawn'
+    prototype_data[courseCode + '-published-before'] = true
+    prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
   end
 
   qual = course_qualification(c)
