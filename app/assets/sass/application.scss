@@ -4,8 +4,8 @@ $govuk-global-styles: true;
 // Not in design system:
 $button-colour: #00823b;
 
-// Import GOV.UK Frontend
-@import "node_modules/govuk-frontend/all";
+// Import GOV.UK Frontend and any extension styles if extensions have been configured
+@import "lib/extensions/extensions";
 
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 @import 'patterns/simplemde-theme';
