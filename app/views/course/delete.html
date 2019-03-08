@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = 'Delete this course' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/courses') }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
@@ -20,7 +20,7 @@
           <li>won’t offer it again</li>
         </ul>
 
-        <p>Deleting a course is permanent - you can’t undo it. If you need to recreate a course after deleting it, it will have a new course code.</p>
+        <p>Deleting a course is permanent – you can’t undo it. If you need to recreate a course after deleting it, it will have a new course code.</p>
 
         <hr class="govuk-section-break govuk-section-break--m">
 
@@ -33,7 +33,7 @@
         <input type="submit" class="govuk-button destructive-button" value="Delete course" />
 
         <p class="govuk-!-margin-top-5">
-          <a href="/courses">Cancel</a>
+          <a href="{{ course.path }}">Cancel</a>
         </p>
       </form>
     </div>

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = 'Withdraw this course' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/courses') }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
@@ -60,7 +60,7 @@
         <input type="submit" class="govuk-button destructive-button" value="Withdraw course" />
 
         <p class="govuk-!-margin-top-5">
-          <a href="/courses">Cancel</a>
+          <a href="{{ course.path }}">Cancel</a>
         </p>
       </form>
     </div>
