@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = 'UCAS Apply settings' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/') }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
