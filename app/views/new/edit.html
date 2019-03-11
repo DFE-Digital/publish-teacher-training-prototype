@@ -12,14 +12,10 @@
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl add-double-bottom-margin">
           <span class="govuk-caption-xl">
-            {% if isFe %}
-              {{ data[code + '-fe-title'] }} ({{ code }})
+            {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+              {{ data[code + '-generated-title'] }} ({{ code }})
             {% else %}
-              {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
-                {{ data[code + '-generated-title'] }} ({{ code }})
-              {% else %}
-                {{ data[code + '-title'] }} ({{ code }})
-              {% endif %}
+              {{ data[code + '-title'] }} ({{ code }})
             {% endif %}
           </span>
           {{ title }}

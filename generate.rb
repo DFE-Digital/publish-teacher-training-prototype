@@ -161,14 +161,13 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   ]
 
   if level == 'Further education'
-    prototype_data[courseCode + '-fe-title'] = c['name']
     prototype_data[courseCode + '-outcome'] = 'PGCE only (without QTS)'
   else
-    prototype_data[courseCode + '-generated-title'] = c['name']
-    prototype_data[courseCode + '-title'] = c['name']
     prototype_data[courseCode + '-outcome'] = qual
   end
 
+  prototype_data[courseCode + '-generated-title'] = c['name']
+  prototype_data[courseCode + '-title'] = c['name']
   prototype_data[courseCode + '-applications-open'] = '10 October 2018'
   prototype_data[courseCode + '-who-apply-type'] = "Option A"
   prototype_data[courseCode + '-type'] = type

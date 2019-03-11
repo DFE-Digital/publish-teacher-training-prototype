@@ -15,6 +15,13 @@ function generateLocationCode(exclude = []) {
 function getGeneratedTitle(code, data) {
   var generatedTitle = data[code + '-subject'];
 
+  if (isFurtherEducation(code, data)) {
+    generatedTitle = 'Further education';
+    data[code + '-generated-title'] = generatedTitle;
+
+    return generatedTitle;
+  }
+
   if (data[code + '-second-subject']) {
     generatedTitle = `${generatedTitle} with ${data[code + '-second-subject']}`;
   }
@@ -116,9 +123,9 @@ function newFurtherEducationCourseWizardPaths(req) {
   var paths = [
     '/courses',
     `/new/${code}/phase`,
-    `/new/${code}/further/title`,
     `/new/${code}/further/outcome`,
     `/new/${code}/further/full-time-part-time`,
+    `/new/${code}/further/title`,
     ...(includeLocationsInWizard(data) ? [`/new/${code}/further/training-locations`] : []),
     `/new/${code}/further/applications-open`,
     `/new/${code}/further/start-date`,

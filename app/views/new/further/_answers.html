@@ -38,7 +38,11 @@
     Title
   </dt>
   <dd class="govuk-summary-list__value">
-    {{ data[code + '-fe-title'] }}
+    {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+      {{ data[code + '-generated-title'] }}
+    {% else %}
+      {{ data[code + '-title'] }}
+    {% endif %}
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">

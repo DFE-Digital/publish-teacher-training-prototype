@@ -135,7 +135,7 @@ router.all(['/new/:code/training-locations', '/new/:code/further/training-locati
   });
 })
 
-router.all('/new/:code/title', function (req, res) {
+router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
 
@@ -174,7 +174,7 @@ router.post('/new/:code/subject', function (req, res) {
   var data = req.session.data;
 
   if (isFurtherEducation(code, data)) {
-    res.redirect('/new/' + code + '/further/title');
+    res.redirect('/new/' + code + '/further/outcome');
   } else {
     res.render('new/subject', {
       code: code,
@@ -240,11 +240,7 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   course.subject = data[code + '-subject'];
   course.secondSubject = data[code + '-second-subject'];
   course.languages = languages;
-  if (data[code + '-phase'] == 'Further education') {
-    course.name = data[code + '-fe-title'];
-  } else {
-    course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
-  }
+  course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
   course['full-part'] = data[code + '-full-part'];
   course.type = data[code + '-type'];
   course.outcome = data[code + '-outcome'];

@@ -28,15 +28,10 @@
         <div class="govuk-inset-text">
           <h3 class="govuk-heading-m">
             <span class="govuk-heading-s govuk-!-margin-bottom-0">{{ data['training-provider-name'] }}</span>
-
-            {% if isFe %}
-              {{ data[code + '-fe-title'] }} ({{ code }})
+            {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+              {{ data[code + '-generated-title'] }} ({{ code }})
             {% else %}
-              {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
-                {{ data[code + '-generated-title'] }} ({{ code }})
-              {% else %}
-                {{ data[code + '-title'] }} ({{ code }})
-              {% endif %}
+              {{ data[code + '-title'] }} ({{ code }})
             {% endif %}
           </h3>
           <p>Course: {{ courseOffered }}</p>
