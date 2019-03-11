@@ -21,3 +21,10 @@ $destructive-button-border-colour: govuk-colour("black");
     background-color: $destructive-button-hover-background-colour;
   }
 }
+
+.destructive-link,
+.destructive-link:link,
+.destructive-link:visited,
+.destructive-link:active {
+  color: govuk-colour("red");
+}
