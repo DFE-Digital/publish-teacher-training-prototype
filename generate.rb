@@ -6,6 +6,7 @@ require 'json'
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
 provider = 'University of Derby'
+next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
@@ -15,6 +16,7 @@ postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha
 
 prototype_data = {
   'rolled-over': true,
+  'next-cycle': next_cycle,
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',
@@ -58,29 +60,31 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-other-requirements'] = lorem
   end
 
-  # if idx == 0 || idx == 4 || idx == 5
-  #   prototype_data[courseCode + '-publish-state'] = 'published'
-  #   prototype_data[courseCode + '-published-before'] = true
-  # end
-  #
-  # if idx == 1 || idx == 2
-  #   prototype_data[courseCode + '-publish-state'] = 'draft'
-  #   prototype_data[courseCode + '-published-before'] = false
-  # end
-  #
-  # if idx == 3
-  #   prototype_data[courseCode + '-fee'] = '10,000'
-  #   prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
-  #   prototype_data[courseCode + '-published-before'] = true
-  # end
-  #
-  # if idx == 3
-  #   prototype_data[courseCode + '-publish-state'] = 'withdrawn'
-  #   prototype_data[courseCode + '-published-before'] = true
-  #   prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
-  # end
+  if next_cycle
+    prototype_data[courseCode + '-publish-state'] = 'rolled-over'
+  else
+    if idx == 0 || idx == 4 || idx == 5
+      prototype_data[courseCode + '-publish-state'] = 'published'
+      prototype_data[courseCode + '-published-before'] = true
+    end
 
-  prototype_data[courseCode + '-publish-state'] = 'rolled-over'
+    if idx == 1 || idx == 2
+      prototype_data[courseCode + '-publish-state'] = 'draft'
+      prototype_data[courseCode + '-published-before'] = false
+    end
+
+    if idx == 3
+      prototype_data[courseCode + '-fee'] = '10,000'
+      prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
+      prototype_data[courseCode + '-published-before'] = true
+    end
+
+    if idx == 3
+      prototype_data[courseCode + '-publish-state'] = 'withdrawn'
+      prototype_data[courseCode + '-published-before'] = true
+      prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
+    end
+  end
 
   qual = course_qualification(c)
 

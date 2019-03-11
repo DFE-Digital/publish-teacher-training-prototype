@@ -23,14 +23,14 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
-          <a href="/current-cycle">Current cycle (2019&thinsp;–&thinsp;2020)</a>
+          <a href="{% if data['next-cycle'] %}{{ currentCyclePrototype }}{% else %}/{% endif %}">Current cycle (2019&thinsp;–&thinsp;2020)</a>
         </h2>
 
         <p>Manage courses, locations and vacancies in the current cycle.</p>
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
-          <a href="/">Next cycle (2020&thinsp;–&thinsp;2021)</a>
+          <a href="{% if data['next-cycle'] %}/{% else %}{{ nextCyclePrototype }}{% endif %}">Next cycle (2020&thinsp;–&thinsp;2021)</a>
         </h2>
         <p>Prepare your courses and locations for the next cycle.</p>
       </div>

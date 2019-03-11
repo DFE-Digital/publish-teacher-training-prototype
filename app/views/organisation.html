@@ -20,7 +20,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
         {% if data['rolled-over'] %}
-          {% if nextCycle %}
+          {% if data['next-cycle'] %}
             Next cycle (2020&thinsp;–&thinsp;2021)
           {% else %}
             Current cycle (2019&thinsp;–&thinsp;2020)
@@ -59,7 +59,7 @@
 
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if currentCycle %}#{% else %}/about-your-organisation{% endif %}">About your organisation</a>
+          <a href="/about-your-organisation">About your organisation</a>
         </h2>
 
         <!-- <p>
@@ -81,7 +81,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if currentCycle %}#{% else %}/locations{% endif %}">Locations</a>
+          <a href="/locations">Locations</a>
         </h2>
 
         <p>Use this section to:</p>
@@ -93,7 +93,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if currentCycle %}#{% else %}/courses{% endif %}">Courses</a>
+          <a href="/courses">Courses</a>
         </h2>
 
         <p>Use this section to:</p>
@@ -102,7 +102,7 @@
           <li>preview and publish courses</li>
           <li>write about each course</li>
           <li>copy content between courses</li>
-          {% if not nextCycle %}
+          {% if not data['next-cycle'] %}
           <li>manage vacancies for each course</li>
           {% endif %}
         </ul>

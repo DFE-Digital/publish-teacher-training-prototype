@@ -182,6 +182,8 @@ app.locals.cookieText = config.cookieText
 app.locals.promoMode = promoMode
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
+app.locals.currentCyclePrototype = config.currentCyclePrototype
+app.locals.nextCyclePrototype = config.nextCyclePrototype
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 
@@ -338,7 +340,12 @@ app.use(function (req, res, next) {
 
     if (data['rolled-over']) {
       defaultItems.push({ text: data['training-provider-name'], href: '/cycles' });
-      defaultItems.push({ text: 'Next cycle (2019 – 2020)', href: '/' });
+
+      if (data['next-cycle']) {
+        defaultItems.push({ text: 'Next cycle (2020 – 2021)', href: '/' });
+      } else {
+        defaultItems.push({ text: 'Current cycle (2019 – 2020)', href: '/' });
+      }
     } else {
       defaultItems.push({ text: data['training-provider-name'], href: '/' });
     }
