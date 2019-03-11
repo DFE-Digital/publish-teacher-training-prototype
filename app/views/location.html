@@ -8,23 +8,6 @@
   }
 ]))}}{% endblock %}
 
-{% block breadcrumbs %}
-  {{
-    govukBreadcrumbs({
-      items: [
-        {
-          href: "/",
-          text: data['training-provider-name']
-        },
-        {
-          href: "/locations",
-          text: "Locations"
-        }
-      ]
-    })
-  }}
-{% endblock %}
-
 {% block content %}
   {% if showErrors %}
     {% set errors = [
