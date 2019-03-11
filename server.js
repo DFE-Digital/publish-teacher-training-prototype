@@ -338,7 +338,7 @@ app.use(function (req, res, next) {
 
     if (data['rolled-over']) {
       defaultItems.push({ text: data['training-provider-name'], href: '/cycles' });
-      defaultItems.push({ text: 'Current cycle (2019-2020)', href: '/' });
+      defaultItems.push({ text: 'Current cycle (2019 – 2020)', href: '/' });
     } else {
       defaultItems.push({ text: data['training-provider-name'], href: '/' });
     }
