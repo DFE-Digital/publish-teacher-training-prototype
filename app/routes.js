@@ -28,12 +28,16 @@ router.all('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
     res.render('your-organisations');
   } else {
-    res.render('organisation');
+    res.render('organisation', { nextCycle: true, currentCycle: false });
   }
 })
 
 router.all('/next-cycle', function (req, res) {
-  res.render('organisation', { nextCycle: true });
+  res.render('organisation', { nextCycle: true, currentCycle: false });
+})
+
+router.all('/current-cycle', function (req, res) {
+  res.render('organisation', { nextCycle: false, currentCycle: true });
 })
 
 router.all('/courses', function(req, res) {

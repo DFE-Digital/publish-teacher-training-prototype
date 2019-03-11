@@ -59,7 +59,7 @@
 
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if nextCycle %}#{% else %}/about-your-organisation{% endif %}">About your organisation</a>
+          <a href="{% if currentCycle %}#{% else %}/about-your-organisation{% endif %}">About your organisation</a>
         </h2>
 
         <!-- <p>
@@ -81,7 +81,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if nextCycle %}#{% else %}/locations{% endif %}">Locations</a>
+          <a href="{% if currentCycle %}#{% else %}/locations{% endif %}">Locations</a>
         </h2>
 
         <p>Use this section to:</p>
@@ -93,7 +93,7 @@
       </div>
       <div class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">
-          <a href="{% if nextCycle %}#{% else %}/courses{% endif %}">Courses</a>
+          <a href="{% if currentCycle %}#{% else %}/courses{% endif %}">Courses</a>
         </h2>
 
         <p>Use this section to:</p>

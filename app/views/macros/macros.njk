@@ -151,6 +151,8 @@
       <span class="govuk-tag phase-tag-not-running govuk-!-margin-bottom-4">Withdrawn</span>
     {% elseif state == 'new' %}
       <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">New</span>
+    {% elseif state == 'rolled-over' %}
+      <span class="govuk-tag phase-tag-no-content govuk-!-margin-bottom-4">Rolled over</span>
     {% elseif state == 'published' %}
       <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
     {% elseif state == 'published-with-changes' %}
@@ -207,7 +209,7 @@
       <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
     {% endif %}
 
-    {% if state != 'new'%}
+    {% if state != 'new' and state != 'rolled-over' %}
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
     {% endif %}
 

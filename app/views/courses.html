@@ -80,6 +80,8 @@
                       <span class="govuk-body-s">* Unpublished changes</span>
                     {% elseif data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
                       <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
+                    {% elseif data[course.programmeCode + '-publish-state'] == 'rolled-over' %}
+                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Rolled over</span>
                     {% else %}
                       <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
                     {% endif %}

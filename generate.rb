@@ -58,27 +58,29 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-other-requirements'] = lorem
   end
 
-  if idx == 0 || idx == 4 || idx == 5
-    prototype_data[courseCode + '-publish-state'] = 'published'
-    prototype_data[courseCode + '-published-before'] = true
-  end
+  # if idx == 0 || idx == 4 || idx == 5
+  #   prototype_data[courseCode + '-publish-state'] = 'published'
+  #   prototype_data[courseCode + '-published-before'] = true
+  # end
+  #
+  # if idx == 1 || idx == 2
+  #   prototype_data[courseCode + '-publish-state'] = 'draft'
+  #   prototype_data[courseCode + '-published-before'] = false
+  # end
+  #
+  # if idx == 3
+  #   prototype_data[courseCode + '-fee'] = '10,000'
+  #   prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
+  #   prototype_data[courseCode + '-published-before'] = true
+  # end
+  #
+  # if idx == 3
+  #   prototype_data[courseCode + '-publish-state'] = 'withdrawn'
+  #   prototype_data[courseCode + '-published-before'] = true
+  #   prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
+  # end
 
-  if idx == 1 || idx == 2
-    prototype_data[courseCode + '-publish-state'] = 'draft'
-    prototype_data[courseCode + '-published-before'] = false
-  end
-
-  if idx == 3
-    prototype_data[courseCode + '-fee'] = '10,000'
-    prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
-    prototype_data[courseCode + '-published-before'] = true
-  end
-
-  if idx == 3
-    prototype_data[courseCode + '-publish-state'] = 'withdrawn'
-    prototype_data[courseCode + '-published-before'] = true
-    prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
-  end
+  prototype_data[courseCode + '-publish-state'] = 'rolled-over'
 
   qual = course_qualification(c)
 
