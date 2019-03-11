@@ -235,7 +235,7 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   var course = data['ucasCourses'].find(a => a.programmeCode == code);
   if (!course) {
     course = {};
-    data['ucasCourses'].push(course);
+    data['ucasCourses'].unshift(course);
   }
 
   course.name = data[code + '-generated-title'];
