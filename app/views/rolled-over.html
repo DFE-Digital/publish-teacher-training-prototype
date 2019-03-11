@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% set title = 'Begin preparing for the next cycle' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/transition') }}{% endblock %}
+
+{% block content %}
+  <div class="">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          Begin preparing for the next&nbsp;cycle
+        </h1>
+
+        <p>All your courses, locations and details have been rolled over from the current cycle. You can now begin preparing them for the next recruitment cycle&nbsp;(2020&thinsp;–&thinsp;2021).</p>
+
+        <p>When preparing for the next cycle you can:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>add new courses</li>
+          <li>delete courses you won’t be running</li>
+          <li>edit titles, outcomes and locations</li>
+        </ul>
+
+        <hr class="govuk-section-break govuk-section-break--m" />
+
+        <a href="/cycles" class="govuk-button">Continue</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
