@@ -99,7 +99,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     fullPart = 'Full time'
   end
 
-  schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } }
+  schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
 
@@ -219,7 +219,7 @@ prototype_data['ucasCourses'].sort_by! { |k| k[:name] }
 # prototype_data['ucasCourses'] = []
 
 # Find all schools across all courses and flatten into array of schools
-prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] } } }.flatten.uniq
+prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } } }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
 
 prototype_data['schools'].each do |school|

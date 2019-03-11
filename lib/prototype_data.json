@@ -217,7 +217,7 @@
         {
           "name": "Main Site",
           "address": "",
-          "code": ""
+          "code": "-"
         }
       ],
       "options": [
@@ -249,7 +249,7 @@
         {
           "name": "Main Site",
           "address": "",
-          "code": ""
+          "code": "-"
         }
       ],
       "options": [
@@ -281,7 +281,7 @@
         {
           "name": "Main Site",
           "address": "",
-          "code": ""
+          "code": "-"
         }
       ],
       "options": [
@@ -313,7 +313,7 @@
         {
           "name": "Main Site",
           "address": "",
-          "code": ""
+          "code": "-"
         }
       ],
       "options": [
@@ -345,7 +345,7 @@
         {
           "name": "Main Site",
           "address": "",
-          "code": ""
+          "code": "-"
         }
       ],
       "options": [
@@ -362,17 +362,17 @@
     {
       "name": "Main Site",
       "address": "",
-      "code": "",
+      "code": "-",
       "urn": 100000,
       "postcode": ""
     }
   ],
-  "-location-picked": "Main Site (100000, City, )",
-  "-location-type": "A school or university",
-  "-name": "Main Site",
-  "-urn": 100000,
-  "-postcode": "",
-  "-address": "",
+  "--location-picked": "Main Site (100000, City, )",
+  "--location-type": "A school or university",
+  "--name": "Main Site",
+  "--urn": 100000,
+  "--postcode": "",
+  "--address": "",
   "accreditors": [
     {
       "name": "University of Derby",
