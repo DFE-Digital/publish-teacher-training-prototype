@@ -16,11 +16,23 @@
   {% if justCreated %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
     <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-      Your course is saved and ready to complete
+      Your course has been created
     </h3>
     <p class="govuk-!-margin-bottom-0">
-      Add the rest of your details and publish the course, so that candidates can find it and apply to it.
+      Add the rest of your details and publish the course, so that candidates can find and apply to it.
     </p>
+
+    {% if course.titleRequested %}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      <h3 class="govuk-heading-m">
+        Your request for a new title is being reviewed
+      </h3>
+      <p class="govuk-!-margin-bottom-0">Requested title:</p>
+      <p class="govuk-heading-s">
+        {{ course.titleRequested }} ({{ course.programmeCode }})
+      </p>
+      <p class="govuk-!-margin-bottom-0">You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+    {% endif %}
   </div>
   {% endif %}
 
@@ -145,6 +157,19 @@
       </dl>
     </div>
     <div class="govuk-grid-column-one-third">
+      {% if course.titleRequested and not justCreated %}
+        <div class="neutral-summary govuk-!-margin-bottom-5" role="alert" tabindex="-1">
+          <h3 class="govuk-heading-m">
+            Your request for a new title is being reviewed
+          </h3>
+          <p class="govuk-!-margin-bottom-0">Requested title:</p>
+          <p class="govuk-heading-s">
+            {{ course.titleRequested }} ({{ course.programmeCode }})
+          </p>
+          <p class="govuk-!-margin-bottom-0">You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+        </div>
+      {% endif %}
+
       {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
     </div>
   </div>

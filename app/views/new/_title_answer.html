@@ -1,0 +1,19 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Title
+  </dt>
+  <dd class="govuk-summary-list__value">
+    {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
+      {{ data[code + '-generated-title'] }}
+    {% else %}
+      {{ data[code + '-title'] }}
+    {% endif %}
+  </dd>
+  {% if showChangeLinks %}
+  <dd class="govuk-summary-list__actions">
+    <a href="/new/{{ code }}/further/title?change=title">
+      Change<span class="govuk-visually-hidden"> title</span>
+    </a>
+  </dd>
+  {% endif %}
+</div>

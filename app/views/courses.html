@@ -59,13 +59,16 @@
             </tr>
           </thead>
           <tbody class="govuk-table__body">
-            {% set subjectName = '' %}
             {% for course in data['ucasCourses'] %}
               {% if course.accrediting == accrediting.name %}
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell">
                     <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
                     <span class="govuk-body-s">{{ course.options }}</span>
+
+                    {% if course.titleRequested %}
+                      <br /><span class="govuk-body-s">Requested title: {{ course.titleRequested }}</span>
+                    {% endif %}
                   </td>
                   <td class="govuk-table__cell">
                     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
@@ -105,7 +108,6 @@
                     {% endif %}
                   </td>
                 </tr>
-                {% set subjectName = course.name %}
               {% endif %}
             {% endfor %}
           </tbody>

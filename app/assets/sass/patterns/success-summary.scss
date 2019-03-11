@@ -25,6 +25,20 @@ $success-green: $button-colour;
   }
 }
 
+.neutral-summary {
+  @extend .govuk-error-summary;
+  border-color: $govuk-border-colour;
+
+  .neutral-summary-list {
+    @extend .govuk-error-summary__list;
+  }
+
+  .neutral-summary-heading {
+    @extend .govuk-error-summary__title;
+  }
+}
+
+.neutral-summary-small,
 .error-summary-small,
 .success-summary-small {
   padding-top: 0;

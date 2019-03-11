@@ -234,13 +234,19 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     data['ucasCourses'].push(course);
   }
 
+  course.name = data[code + '-generated-title'];
+  if (data[code + '-change-title'] == 'Yes, that’s correct') {
+    course.titleRequested = false;
+  } else {
+    course.titleRequested = data[code + '-title'];
+  }
+
   course.accrediting = data[code + '-accredited-body'] || data['training-provider-name'];
   course.level = data[code + '-phase'];
   course.sen = data[code + '-sen'];
   course.subject = data[code + '-subject'];
   course.secondSubject = data[code + '-second-subject'];
   course.languages = languages;
-  course.name = data[code + '-change-title'] == 'Yes, that’s correct' ? data[code + '-generated-title'] : data[code + '-title'];
   course['full-part'] = data[code + '-full-part'];
   course.type = data[code + '-type'];
   course.outcome = data[code + '-outcome'];

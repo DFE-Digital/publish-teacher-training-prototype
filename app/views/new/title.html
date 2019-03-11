@@ -20,10 +20,10 @@
 
       <form action="{{ paths.next }}" method="post">
         {% set moreTitle %}
-          {{ macros.textbox(code + '-title', 'New title', '', 'govuk-!-width-full', false, false, data[code + '-title'] or generatedTitle or data[code + '-generated-title']) }}
+          {{ macros.textbox(code + '-title', 'Requested title', '', 'govuk-!-width-full', false, false, data[code + '-title'] or generatedTitle or data[code + '-generated-title']) }}
 
           {{ govukWarningText({
-            text: "All course title changes are subject to approval by the Becoming a Teacher team",
+            text: "Title changes are subject to approval by the Becoming a Teacher team",
             iconFallbackText: "Warning"
           }) }}
 
@@ -49,6 +49,8 @@
               <li>qualifications or outcomes, eg PGCE with QTS full time</li>
               <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
             </ul>
+
+            <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
           {% endif %}
         {% endset %}
 

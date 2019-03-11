@@ -33,25 +33,39 @@
   {% endif %}
 </div>
 {% if showTitleAndDescription %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Title
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
-      {{ data[code + '-generated-title'] }}
-    {% else %}
-      {{ data[code + '-title'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/further/title?change=title">
-      Change<span class="govuk-visually-hidden"> title</span>
-    </a>
-  </dd>
+  {% if data[code + '-change-title'] != 'Yes, that’s correct' %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Title requested
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data[code + '-title'] }}
+      </dd>
+      {% if showChangeLinks %}
+      <dd class="govuk-summary-list__actions">
+        <a href="/new/{{ code }}/title?change=title">
+          Change<span class="govuk-visually-hidden"> title</span>
+        </a>
+      </dd>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Title
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data[code + '-generated-title'] }}
+      </dd>
+      {% if showChangeLinks %}
+      <dd class="govuk-summary-list__actions">
+        <a href="/new/{{ code }}/title?change=title">
+          Change<span class="govuk-visually-hidden"> title</span>
+        </a>
+      </dd>
+      {% endif %}
+    </div>
   {% endif %}
-</div>
 {% endif %}
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
