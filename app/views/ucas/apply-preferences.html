@@ -23,19 +23,77 @@
       <form action="/" method="post">
         <h2 class="govuk-heading-l">Who UCAS will contact</h2>
 
-        <p>UCAS don’t have permission to share the contact details you gave them in web-link with the Becoming a Teacher team. To find out your details or to change them contact the UCAS HEP Team on 0344 984 1111, or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
+        <p>UCAS don’t have permission to share the contact details you gave them in web-link with the Becoming a Teacher team. To find out those details contact the UCAS HEP Team on 0344 984 1111, or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
 
-        <p>Alternatively you can set a new contact below, this will overwrite the contacts that UCAS already have. We will share this information with UCAS.</p>
+        <p>Alternatively, you can choose new contacts below.</p>
 
-        {% set detailsHtml %}
-          <h3 class="govuk-heading-m">Lead UCAS contact</h3>
-          {% include "ucas/_contacts.html" %}
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "Set a new lead UCAS contact",
-          html: detailsHtml
-        }) }}
+        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              UCAS correspondent
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="#">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Application alerts contact
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="#">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              web-link correspondent
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="#">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Finance contact
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="#">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Fraud contact
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="#">
+                Change<span class="govuk-visually-hidden"> phase</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
 
         <hr class="govuk-section-break govuk-section-break--l" />
 
