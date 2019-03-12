@@ -10,3 +10,5 @@
 {{ macros.textbox('lead-contact-name', 'Name') }}
 {{ macros.textbox('lead-contact-email', 'Email address') }}
 {{ macros.textbox('lead-contact-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
+
+{{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this information with UCAS' }], false) }}
