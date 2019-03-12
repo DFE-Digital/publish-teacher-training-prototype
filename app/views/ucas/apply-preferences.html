@@ -10,19 +10,32 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <p>These are UCAS Teacher Training (UTT) Apply preferences that relate to:</p>
+      <p>These are UCAS Teacher Training Apply (UTT Apply) preferences that relate&nbsp;to:</p>
 
       <ul class="govuk-list govuk-list--bullet">
         <li>what UCAS sends to successful applicants</li>
         <li>what happens when you receive an application</li>
+        <li>who UCAS can contact</li>
       </ul>
 
       <hr class="govuk-section-break govuk-section-break--l" />
 
       <form action="/" method="post">
-        <h2 class="govuk-heading-l">Contacts for UCAS</h2>
+        <h2 class="govuk-heading-l">Who UCAS will contact</h2>
 
-        {% include "ucas/_contacts.html" %}
+        <p>UCAS don’t have permission to share the contact details you gave them in web-link with the Becoming a Teacher team. To find out your details or to change them you should contact UCAS support at <a href="#">support@ucas.com</a>.</p>
+
+        <p>Alternatively you can set a new contact below, this will overwrite the contacts that UCAS already have. We will share this information with UCAS.</p>
+
+        {% set detailsHtml %}
+          <h3 class="govuk-heading-m">Lead UCAS contact</h3>
+          {% include "ucas/_contacts.html" %}
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "Set a new lead UCAS contact",
+          html: detailsHtml
+        }) }}
 
         <hr class="govuk-section-break govuk-section-break--l" />
 

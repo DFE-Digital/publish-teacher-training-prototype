@@ -1,7 +1,11 @@
+{% set more %}
+  <p>Because of GDPR UCAS can’t share with us the contact details you’ve given them. You should contact UCAS to find out who will receive these alerts.</p>
+{% endset %}
+
 {% set fields = [
     {
       name: 'Get an email for each application you receive',
-      more: macros.textbox('ucas-alert-email-to', 'Email address UCAS should send alerts to')
+      more: more
     },
     {
       name: 'Don’t get an email'
