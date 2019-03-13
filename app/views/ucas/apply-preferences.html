@@ -37,143 +37,33 @@
 
       <hr class="govuk-section-break govuk-section-break--l" />
 
-      <form action="/" method="post">
-        <h2 class="govuk-heading-l">Who will UCAS contact?</h2>
+      <h2 class="govuk-heading-l">Who will UCAS contact?</h2>
 
-        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              UTT correspondent
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/ucas-correspondent">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              web-link correspondent
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive notices about UCAS systems and planned downtime.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/web-link-correspondent">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Finance contact
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Jane Doe<br />
-              jane.doe@myscitt.org.uk<br />
-              07912345678
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive invoices from UCAS for payment of fees</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/finance-contact">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Fraud contact
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive alerts about fradulent activity, for example similarity detection for a plagiarised personal statement.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/fraud-contact">
-                Change
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+        {{ macros.ucasPart('utt-contact', 'UTT correspondent', 'This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.', '/ucas/ucas-correspondent', true)}}
+        {{ macros.ucasPart('web-link-contact', 'web-link correspondent', 'This person will receive notices about UCAS systems and planned downtime.', '/ucas/web-link-correspondent', true)}}
+        {{ macros.ucasPart('finance-contact', 'Finance contact', 'This person will receive invoices from UCAS for payment of fees', '/ucas/finance-contact', true)}}
+        {{ macros.ucasPart('fraud-contact', 'Fraud contact', 'This person will receive alerts about fradulent activity, for example similarity detection for a plagiarised personal statement.', '/ucas/fraud-contact', true)}}
+      </dl>
 
-        <hr class="govuk-section-break govuk-section-break--l" />
+      <hr class="govuk-section-break govuk-section-break--l" />
 
-        <h2 class="govuk-heading-l">Letters for successful applicants</h2>
-        <p>UCAS sends all successful applicants a letter – this is known as a ‘GT12&nbsp;letter’.</p>
+      <h2 class="govuk-heading-l">Letters for successful applicants</h2>
+      <p>UCAS sends all successful applicants a letter – this is known as a ‘GT12&nbsp;letter’.</p>
 
-        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Letter template
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Applicants must confirm their place
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/gt12">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Email address (or URL) printed in the letter
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive responses from successful applicants replying to a GT12 letter.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/gt12">
-                Change
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+        {{ macros.ucasPart('ucas-gt12', 'Letter template', false, '/ucas/gt12')}}
+        {{ macros.ucasPart('gt12-reply-to', 'Email address (or URL) printed in the letter', 'This person or website will receive responses from successful applicants replying to a GT12 letter.', '/ucas/gt12')}}
+      </dl>
 
-        <hr class="govuk-section-break govuk-section-break--l" />
+      <hr class="govuk-section-break govuk-section-break--l" />
 
-        <h2 class="govuk-heading-l">Email alerts for new applications</h2>
+      <h2 class="govuk-heading-l">Email alerts for new applications</h2>
 
-        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Get alerts from UCAS?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Yes, get an email for each new application received
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/alerts">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Who are the alerts sent to?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/ucas/alerts">
-                Change
-              </a>
-            </dd>
-          </div>
-        </dl>
-      </form>
+      <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+        {{ macros.ucasPart('ucas-alerts', 'Get alerts from UCAS?', false, '/ucas/alerts')}}
+        {{ macros.ucasPart('ucas-alert-email-to', 'Who are the alerts sent to?', false, '/ucas/alerts')}}
+      </dl>
     </div>
   </div>
 {% endblock %}

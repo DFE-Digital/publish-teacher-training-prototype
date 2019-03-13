@@ -19,6 +19,34 @@
   {{ govukBackLink({ text: text, href: href }) }}
 {% endmacro %}
 
+{% macro ucasPart(id, label, help, changeLink = '#', contact = false) %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      {{ label }}
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if (contact and (value(id + '-email'))) %}
+        {{ value(id + '-name') }}<br />
+        {{ value(id + '-email') }}<br />
+        {{ value(id + '-telephone') }}
+      {% elseif (value(id)) %}
+        {{ value(id) }}
+      {% else %}
+        Information unknown
+      {% endif %}
+      {% if (help) %}
+        <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
+        <p class="govuk-body-s" style="color: #777">{{ help }}</p>
+      {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="{{ changeLink }}">
+        Change
+      </a>
+    </dd>
+  </div>
+{% endmacro %}
+
 {% macro screenshot(title, id, thumbnail, full, text = '', headingClass = 'govuk-heading-l', headingLevel = 'h2') %}
 <div class="design-history-item govuk-!-margin-bottom-9">
   <{{headingLevel}} class="{{headingClass}}" id="{{ id }}">{{ title }}</{{headingLevel}}>

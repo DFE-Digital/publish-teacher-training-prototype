@@ -20,7 +20,6 @@ prototype_data = {
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',
-  'ucas-alert-email-to': 'janedoe-fake-email@myorg.uk',
   'training-provider-name': provider,
   'provider-code': courses.first['providerCode']
 }
