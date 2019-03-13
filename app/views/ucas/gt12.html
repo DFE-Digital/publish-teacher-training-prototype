@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'UCAS teacher training correspondent' %}
+{% set title = 'Pick a letter for successful applicants' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/ucas/apply-preferences') }}{% endblock %}
 
@@ -8,19 +8,15 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-grid-row add-top-margin">
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.</p>
-
-      {{ macros.textbox('lead-contact-name', 'Name') }}
-      {{ macros.textbox('lead-contact-email', 'Email address') }}
-      {{ macros.textbox('lead-contact-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
-      {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this information with UCAS' }], false) }}
-
       <form action="/ucas/apply-preferences" method="post">
+        {% include "ucas/_gt12.html" %}
+
         <div class="form-group add-double-bottom-margin">
           <input type="submit" class="govuk-button" value="Save">
         </div>
+
         <p>
           <a href="/ucas/apply-preferences">Cancel changes</a>
         </p>

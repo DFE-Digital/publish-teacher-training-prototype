@@ -4,8 +4,7 @@
 
 {% set fields = [
     {
-      name: 'Get an email for each application you receive',
-      more: more
+      name: 'Get an email for each application you receive'
     },
     {
       name: 'Don’t get an email'
@@ -14,3 +13,10 @@
 %}
 
 {{ macros.radioGroup('ucas-alerts', fields) }}
+
+<hr class="govuk-section-break govuk-section-break--l">
+<h2 class="govuk-heading-l">Who are the alerts sent to?</h2>
+
+{{ macros.textbox('ucas-alert-email-to', 'Email address UCAS should send alerts to') }}
+{{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this email with UCAS' }], false) }}
+<hr class="govuk-section-break govuk-section-break--l">

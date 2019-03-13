@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% set title = 'UCAS Apply settings' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% set breadcrumbLink = '/cycles' if data['rolled-over'] else '/' %}
+{% block breadcrumbs %}{{ macros.breadcrumbs([{ text: data['training-provider-name'], href: breadcrumbLink }])}}{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
@@ -10,7 +11,7 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <p>These are UCAS Teacher Training Apply (UTT Apply) preferences that relate&nbsp;to:</p>
+      <p>These are UCAS Teacher Training Apply (UTT Apply) settings that relate&nbsp;to:</p>
 
       <ul class="govuk-list govuk-list--bullet">
         <li>what UCAS sends to successful applicants</li>
@@ -18,19 +19,31 @@
         <li>who UCAS can contact</li>
       </ul>
 
+      {{ govukDetails({
+        summaryText: "Why are my UCAS settings in Publish?",
+        html: '<p>These are settings that you could previously set in the UCAS course management tool, NetUpdate. This was turned off by UCAS when Publish took responsibility for all course management.</p>
+        <p>These settings have been included so that UCAS Apply continues to work as normal.</p>'
+      }) }}
+
+      <div class="govuk-inset-text">
+        <h2 class="govuk-heading-m">Information unknown</h2>
+
+        <p>Some of the fields below are labelled ‘Information unknown’. This is because UCAS don’t have permission under <abbr title="EU General Data Protection Regulation ">GDPR</abbr> to share those contact details with us.</p>
+
+        <p>To get hold of them yourself, contact the UCAS HEP Team on 0344 984 1111 or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
+
+        <p>Alternatively you can choose new contacts and we will send them to UCAS to update.</p>
+      </div>
+
       <hr class="govuk-section-break govuk-section-break--l" />
 
       <form action="/" method="post">
         <h2 class="govuk-heading-l">Who will UCAS contact?</h2>
 
-        <p>UCAS don’t have permission to share your contact details with us. To get hold of these details yourself, contact the UCAS HEP Team on 0344 984 1111 or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
-
-        <p>Alternatively, you can choose new contacts below.</p>
-
         <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              UCAS correspondent
+              UTT correspondent
             </dt>
             <dd class="govuk-summary-list__value">
               Information unknown
@@ -45,36 +58,6 @@
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Application alerts contact
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive new application alerts if you’ve enabled them.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="#">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              GT12 reply email or URL
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Information unknown
-              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
-              <p class="govuk-body-s" style="color: #777">This person will receive responses from successful applicants replying to a GT12 letter.</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="#">
-                Change
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
               web-link correspondent
             </dt>
             <dd class="govuk-summary-list__value">
@@ -83,7 +66,7 @@
               <p class="govuk-body-s" style="color: #777">This person will receive notices about UCAS systems and planned downtime.</p>
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a href="#">
+              <a href="/ucas/web-link-correspondent">
                 Change
               </a>
             </dd>
@@ -100,7 +83,7 @@
               <p class="govuk-body-s" style="color: #777">This person will receive invoices from UCAS for payment of fees</p>
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a href="#">
+              <a href="/ucas/finance-contact">
                 Change
               </a>
             </dd>
@@ -115,7 +98,7 @@
               <p class="govuk-body-s" style="color: #777">This person will receive alerts about fradulent activity, for example similarity detection for a plagiarised personal statement.</p>
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a href="#">
+              <a href="/ucas/fraud-contact">
                 Change
               </a>
             </dd>
@@ -124,27 +107,72 @@
 
         <hr class="govuk-section-break govuk-section-break--l" />
 
-        <h2 class="govuk-heading-l">Pick a letter for successful applicants</h2>
+        <h2 class="govuk-heading-l">Letters for successful applicants</h2>
+        <p>UCAS sends all successful applicants a letter – this is known as a ‘GT12&nbsp;letter’.</p>
 
-        {% include "ucas/_gt12.html" %}
+        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Letter template
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Applicants must confirm their place
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="/ucas/gt12">
+                Change
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Email address (or URL) printed in the letter
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Information unknown
+              <hr class="govuk-section-break govuk-section-break--s govuk-!-margin-top-2">
+              <p class="govuk-body-s" style="color: #777">This person will receive responses from successful applicants replying to a GT12 letter.</p>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="/ucas/gt12">
+                Change
+              </a>
+            </dd>
+          </div>
+        </dl>
 
         <hr class="govuk-section-break govuk-section-break--l" />
 
         <h2 class="govuk-heading-l">Email alerts for new applications</h2>
 
-        {% include "ucas/_alerts.html" %}
-
-        <hr class="govuk-section-break govuk-section-break--l" />
-
-        <p>UCAS Apply will be updated overnight.</p>
-
-        <div class="form-group add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save">
-        </div>
-
-        <p>
-          <a href="/about-your-organisation">Cancel changes</a>
-        </p>
+        <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Get alerts from UCAS?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Yes, get an email for each new application received
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="/ucas/alerts">
+                Change
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Who are the alerts sent to?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Information unknown
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="/ucas/alerts">
+                Change
+              </a>
+            </dd>
+          </div>
+        </dl>
       </form>
     </div>
   </div>

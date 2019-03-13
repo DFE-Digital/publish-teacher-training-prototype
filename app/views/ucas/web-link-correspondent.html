@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'UCAS teacher training correspondent' %}
+{% set title = 'UCAS web-link correspondent' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/ucas/apply-preferences') }}{% endblock %}
 
@@ -10,11 +10,11 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <p>This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.</p>
+      <p>This person will receive notices about UCAS systems and planned downtime.</p>
 
-      {{ macros.textbox('lead-contact-name', 'Name') }}
-      {{ macros.textbox('lead-contact-email', 'Email address') }}
-      {{ macros.textbox('lead-contact-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
+      {{ macros.textbox('web-link-contact-name', 'Name') }}
+      {{ macros.textbox('web-link-contact-email', 'Email address') }}
+      {{ macros.textbox('web-link-contact-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
       {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this information with UCAS' }], false) }}
 
       <form action="/ucas/apply-preferences" method="post">
