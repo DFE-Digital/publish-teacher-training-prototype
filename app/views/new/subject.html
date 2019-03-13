@@ -53,17 +53,6 @@
 
         {% if data[code + '-phase'] == 'Primary' %}
           {{ macros.select(code + '-subject', 'Primary subject', primaryFields) }}
-
-          {% set detailsHtml %}
-            <p>Enter an age range in years, for example: 5 to 11.</p>
-            {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
-            {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
-          {% endset %}
-
-          {{ govukDetails({
-            summaryText: "Specify an age range (optional)",
-            html: detailsHtml
-          }) }}
         {% elseif data[code + '-phase'] == 'Secondary' %}
           {{ macros.select(code + '-subject', 'Subject', secondaryFields) }}
 
@@ -73,12 +62,25 @@
             {{ macros.select(code + '-second-subject', 'Second subject (optional)', secondaryFields, 'For example ‘Physics with Mathematics’') }}
           {% endset %}
 
-          {{ govukDetails({
-            summaryText: "Add a second subject",
-            html: detailsHtml
-          }) }}
-
+          <div style="margin-bottom: -20px">
+            {{ govukDetails({
+              summaryText: "Add a second subject (optional)",
+              html: detailsHtml
+            }) }}
+          </div>
         {% endif %}
+
+        {% set ageRangeHtml %}
+          <p>Enter an age range in years, for example: 5 to 11.</p>
+          {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
+          {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "Specify an age range (optional)",
+          html: ageRangeHtml
+        }) }}
+
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
