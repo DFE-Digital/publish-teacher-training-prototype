@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
-{% set title = 'Withdraw this course' %}
+{% set title = 'Are you sure you want to withdraw this course?' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
-    {{ title }}
-  </h1>
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+        {{ title }}
+      </h1>
+
       <form action="{{ course.path }}/withdraw" method="post">
         <p>Withdrawing this course will:</p>
         <ul class="govuk-list govuk-list--bullet">
