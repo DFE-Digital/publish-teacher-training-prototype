@@ -27,7 +27,7 @@
     <dd class="govuk-summary-list__value">
       {% if (contact and (value(id + '-email'))) %}
         {{ value(id + '-name') }}<br />
-        {{ value(id + '-email') }}<br />
+        <span class="truncate">{{ value(id + '-email') }}</span><br />
         {{ value(id + '-telephone') }}
       {% elseif (value(id)) %}
         {{ value(id) }}
