@@ -2,6 +2,7 @@
 {% set title = 'Courses' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+{% set newCourseFormUrl = 'https://goo.gl/forms/HJ17Hob3728X3mTc2' if data['new-course']['include-accredited'] else 'https://goo.gl/forms/kdNksCuwcz7TVtNF2' %}
 
 {% block content %}
   {% if justEditedVacancies %}
@@ -34,9 +35,10 @@
   </div>
 
   {% if data['ucasCourses'].length > 10 %}
-    <p class="add-top-margin">
-      <a href="/new/start" class="govuk-button">Add a new course</a>
-    </p>
+    <div class="add-top-margin">
+      <a href="{{ newCourseFormUrl }}" class="govuk-button">Request a new course</a>
+      <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to make this request.</p>
+    </div>
   {% endif %}
 
   {% if data['ucasCourses'].length > 0 %}
@@ -118,7 +120,8 @@
     {% endfor %}
   {% endif %}
 
-  <p class="add-top-margin">
-    <a href="/new/start" class="govuk-button">Add a new course</a>
-  </p>
+  <div class="add-top-margin">
+    <a href="{{ newCourseFormUrl }}" class="govuk-button">Request a new course</a>
+    <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to complete this request.</p>
+  </div>
 {% endblock %}
