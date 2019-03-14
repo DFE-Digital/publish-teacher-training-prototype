@@ -11,26 +11,22 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <p>These are UCAS Teacher Training Apply (UTT Apply) settings that relate&nbsp;to:</p>
+      <p>These are preferences that you previously selected in UCAS NetUpdate. They relate to:</p>
 
       <ul class="govuk-list govuk-list--bullet">
+        <li>your contact details, for use by UCAS</li>
         <li>what UCAS sends to successful applicants</li>
         <li>what happens when you receive an application</li>
-        <li>who UCAS can contact</li>
       </ul>
 
-      {{ govukDetails({
-        summaryText: "Why are my UCAS settings in Publish?",
-        html: '<p>These are settings that you could previously set in the UCAS course management tool, NetUpdate. This was turned off by UCAS when Publish took responsibility for all course management.</p>
-        <p>These settings have been included so that UCAS Apply continues to work as normal.</p>'
-      }) }}
+      <p>You can no longer change these settings in NetUpdate, as NetUpdate has now been turned off. These settings are included here so that UCAS Apply can continue to work as normal.</p>
 
       <div class="govuk-inset-text">
-        <h2 class="govuk-heading-m">Information unknown</h2>
+        <h2 class="govuk-heading-m">What does ‘information unknown’ mean?</h2>
 
-        <p>Some of the fields below are labelled ‘Information unknown’. This is because UCAS don’t have permission under <abbr title="EU General Data Protection Regulation ">GDPR</abbr> to share those contact details with us.</p>
+        <p>Some of the fields below are labelled ‘Information unknown’. This is because UCAS doesn’t have permission under the <a href="https://www.gov.uk/government/publications/guide-to-the-general-data-protection-regulation">General Data Protection Regulation</a> (GDPR) to share these details with us.</p>
 
-        <p>To get hold of them yourself, contact the UCAS HEP Team on 0344 984 1111 or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
+        <p>You can get hold of these details by contacting the UCAS Higher Education Provider Team (HEP Team) on 0344 984 1111 or at <a href="#">hep_team@ucas.ac.uk</a>.</p>
 
         <p>Alternatively you can choose new contacts and we will send them to UCAS to update.</p>
       </div>
@@ -39,11 +35,13 @@
 
       <h2 class="govuk-heading-l">Who will UCAS contact?</h2>
 
+      <p>UCAS will contact these people at your organisation:</p>
+
       <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
-        {{ macros.ucasPart('utt-contact', 'UTT correspondent', 'This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.', '/ucas/ucas-correspondent', true)}}
-        {{ macros.ucasPart('web-link-contact', 'web-link correspondent', 'This person will receive notices about UCAS systems and planned downtime.', '/ucas/web-link-correspondent', true)}}
+        {{ macros.ucasPart('utt-contact', 'UCAS Teacher Training (UTT) correspondent', 'This person will receive the UCAS monthly bulletin, which includes information about deadlines for application decisions', '/ucas/ucas-correspondent', true)}}
+        {{ macros.ucasPart('web-link-contact', 'web-link correspondent', 'This person will receive notices about UCAS systems and planned downtime', '/ucas/web-link-correspondent', true)}}
         {{ macros.ucasPart('finance-contact', 'Finance contact', 'This person will receive invoices from UCAS for payment of fees', '/ucas/finance-contact', true)}}
-        {{ macros.ucasPart('fraud-contact', 'Fraud contact', 'This person will receive alerts about fradulent activity, for example similarity detection for a plagiarised personal statement.', '/ucas/fraud-contact', true)}}
+        {{ macros.ucasPart('fraud-contact', 'Fraud contact', 'This person will receive alerts about fradulent activity (for example when a plagiarised personal statement is detected).', '/ucas/fraud-contact', true)}}
       </dl>
 
       <hr class="govuk-section-break govuk-section-break--l" />

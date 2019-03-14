@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'UCAS teacher training correspondent' %}
+{% set title = 'UCAS Teacher Training (UTT) correspondent' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/ucas/apply-preferences') }}{% endblock %}
 
@@ -11,7 +11,7 @@
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
       <form action="/ucas/apply-preferences" method="post">
-        <p>This person will receive the UCAS monthly bulletin, which will include information about deadlines for making decisions.</p>
+        <p>This person will receive the UCAS monthly bulletin, which includes deadlines for application decisions.</p>
 
         {{ macros.textbox('utt-contact-name', 'Name') }}
         {{ macros.textbox('utt-contact-email', 'Email address') }}
