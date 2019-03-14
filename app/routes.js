@@ -151,6 +151,18 @@ router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res)
   });
 })
 
+router.all(['/new/:code/editing-title', '/new/:code/further/editing-title'], function (req, res) {
+  var data = req.session.data;
+  var code = req.params.code;
+
+  res.render('new/editing-title', {
+    code: code,
+    paths: newCourseWizardPaths(req),
+    generatedTitle: getGeneratedTitle(code, data),
+    courseOffered: getCourseOffered(code, data)
+  });
+})
+
 router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, res) {
   var data = req.session.data;
   var code = req.params.code;
