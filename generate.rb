@@ -6,7 +6,7 @@ require 'json'
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
 provider = 'The Manchester Metropolitan University'
-next_cycle = true
+next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
