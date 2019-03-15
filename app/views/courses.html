@@ -27,16 +27,17 @@
 
       <p>Use this section to:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>create, preview and publish courses</li>
+        <li>preview and publish courses</li>
         <li>write about each course</li>
         <li>copy content between courses</li>
+        <li>request new courses</li>
       </ul>
     </div>
   </div>
 
   {% if data['ucasCourses'].length > 10 %}
     <div class="add-top-margin">
-      <a href="{{ newCourseFormUrl }}" class="govuk-button">Request a new course</a>
+      <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Request a new course</a>
       <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to make this request.</p>
     </div>
   {% endif %}
@@ -121,7 +122,7 @@
   {% endif %}
 
   <div class="add-top-margin">
-    <a href="{{ newCourseFormUrl }}" class="govuk-button">Request a new course</a>
+    <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Request a new course</a>
     <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to complete this request.</p>
   </div>
 {% endblock %}
