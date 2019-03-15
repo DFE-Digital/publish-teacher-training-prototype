@@ -133,6 +133,20 @@
       {% endif %}
 
       <h3 class="govuk-heading-27">
+        <a href="/new/{{ course.programmeCode }}/training-locations">
+          Locations
+        </a>
+      </h3>
+      <ul class="govuk-list location-list">
+        {% for school in course.schools %}
+          <li>
+            <strong>{{ school.name }} (Code: {{ school.code }})</strong><br />
+            {{ school.address }}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h3 class="govuk-heading-27">
         <a href="{{ coursePath }}/about-this-course">About this course</a>
       </h3>
       <dl class="govuk-summary-list govuk-summary-list--short">
