@@ -9,6 +9,8 @@
   </h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <!-- <p>Only published courses will appear on Find and be open to applications.</p> -->
+
       <form action="{{ paths.next }}" method="post">
         {% set specificDate %}
           {{ govukDateInput({
@@ -33,19 +35,27 @@
         -->
         {% set fields = [
             {
-              name: 'When applications for the 2020/21 cycle open'
+              name: 'When applications for the 2020 – 2021 cycle open',
+              text: 'You will need to publish this course beforehand'
             },
             {
-              name: 'When I publish the course'
+              name: 'When I publish this course',
+              text: 'If you want to publish this course later in the year, after the cycle has opened'
             },
             {
               name: 'On a specific date',
+              text: 'If you want to publish the course but leave applications closed until a certain date.',
               more: specificDate
             }
           ]
         %}
 
         {{ macros.radioGroup(code + '-applications-open', fields, errors) }}
+
+        {{ govukWarningText({
+            text: 'You must publish this course if you want people to apply to it',
+            iconFallbackText: 'Warning'
+        }) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
