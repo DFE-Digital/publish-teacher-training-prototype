@@ -42,6 +42,29 @@
         {{ macros.ucasPart('web-link-contact', 'web-link correspondent', 'This person will receive notices about UCAS systems and planned downtime', '/ucas/web-link-correspondent', true)}}
         {{ macros.ucasPart('finance-contact', 'Finance contact', 'This person will receive invoices from UCAS for payment of fees', '/ucas/finance-contact', true)}}
         {{ macros.ucasPart('fraud-contact', 'Fraud contact', 'This person will receive alerts about fradulent activity (for example when a plagiarised personal statement is detected).', '/ucas/fraud-contact', true)}}
+        {{ macros.ucasPart('ucas-admin', 'UCAS Administrator', 'This person is responsible for setting up and maintaining UCAS user accounts.', '/ucas/admin', true)}}
+      </dl>
+
+      <p>UCAS will use this address to send you letters and documents:</p>
+
+      <dl class="govuk-summary-list govuk-!-margin-top-6 govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Postal address
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ value('ucas-postal-address-building-and-street') }}<br />
+            {% if value('ucas-postal-address-building-and-street-2') %}{{ value('ucas-postal-address-building-and-street-2') }}<br />{% endif %}
+            {{ value('ucas-postal-address-organisation-town-or-city') }}<br />
+            {{ value('ucas-postal-address-county') }}<br />
+            {{ value('ucas-postal-address-postcode') }}<br />
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/ucas/postal-address">
+              Change
+            </a>
+          </dd>
+        </div>
       </dl>
 
       <hr class="govuk-section-break govuk-section-break--l" />

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% set title = 'UCAS administrator' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/ucas/apply-preferences') }}{% endblock %}
+
+{% block content %}
+  {{ macros.summary('You made a request to change this in the last 7 days', false, 'neutral') }}
+
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row add-top-margin">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/ucas/apply-preferences" method="post">
+        <p>This person is responsible for creating and maintaining UCAS user&nbsp;accounts.</p>
+
+        <h2 class="govuk-heading-l">Request a change to your UCAS administrator</h2>
+
+        <p>Changes can take up to 7 days to process.</p>
+
+        {{ macros.textbox('ucas-admin-name', 'Name') }}
+        {{ macros.textbox('ucas-admin-email', 'Email address') }}
+        {{ macros.textbox('ucas-admin-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
+        {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this information with UCAS' }], false) }}
+
+        <div class="form-group add-double-bottom-margin">
+          <input type="submit" class="govuk-button" value="Request changes">
+        </div>
+        <p>
+          <a href="/ucas/apply-preferences">Cancel changes</a>
+        </p>
+      </form>
+    </div>
+  </div>
+{% endblock %}
