@@ -21,7 +21,7 @@
 
 {% macro summary(title, html = false, type = "success") %}
   <div class="{{ type }}-summary" role="alert" tabindex="-1">
-    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 {{ type }}-heading">
+    <h3 class="govuk-heading-m {% if not html %}govuk-!-margin-bottom-0{% endif %} {{ type }}-heading">
       {{ title }}
     </h3>
     {% if html %}

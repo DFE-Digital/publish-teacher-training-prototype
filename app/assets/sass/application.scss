@@ -91,7 +91,6 @@ table thead th {
 .status-box {
   background-color: govuk-colour("grey-4");
   padding: 20px;
-  border-top: 5px solid govuk-colour("blue");
 }
 
 .who-saved {
@@ -232,12 +231,13 @@ dl.aligned.course-part-tasks dd {
     width: 50%;
   }
 
-  .govuk-summary-list__row:last-child {
-    .govuk-summary-list__key,
-    .govuk-summary-list__value {
-      border: none;
-    }
-  }
+  // .govuk-summary-list__row:last-child {
+  //   .govuk-summary-list__key,
+  //   .govuk-summary-list__actions,
+  //   .govuk-summary-list__value {
+  //     border: none;
+  //   }
+  // }
 }
 
 .govuk-summary-list__key--error {
@@ -296,5 +296,28 @@ dl.aligned.course-part-tasks dd {
 
   &:last-child {
     border: none;
+  }
+}
+
+.course-tabs {
+  .govuk-tabs__tab {
+    font-weight: bold;
+    color: $govuk-link-colour;
+    text-decoration: underline;
+  }
+
+  .govuk-tabs__tab--selected {
+    color: $govuk-text-colour;
+    background-color: govuk-colour('white');
+
+    text-decoration: none;
+    a {
+      outline-offset: -3px;
+    }
+  }
+
+  .govuk-tabs__panel {
+    border: none;
+    padding: 30px 0 0;
   }
 }

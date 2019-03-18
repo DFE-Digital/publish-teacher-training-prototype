@@ -5,6 +5,8 @@
 {% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
 {% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
 {% set code = course.programmeCode %}
+{% set showChangeLinks = true %}
+{% set showTitleAndDescription = true %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
   {
     href: "/courses",
@@ -12,53 +14,95 @@
   }
 ]))}}{% endblock %}
 
+{% set titleRequestedHtml %}
+  <p class="govuk-!-margin-bottom-0">Requested title:</p>
+  <p class="govuk-heading-s">
+    {{ course.titleRequested }} ({{ course.programmeCode }})
+  </p>
+  <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+
+  <p class="govuk-!-margin-bottom-0"><a href="#">Cancel this request</a></p>
+{% endset %}
+
 {% block content %}
   {% if justCreated %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-      Your course has been created
-    </h3>
-    <p class="govuk-!-margin-bottom-0">
-      Add the rest of your details and publish the course, so that candidates can find and apply to it.
-    </p>
-
-    {% if course.titleRequested %}
-      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-      <h3 class="govuk-heading-m">
-        Your request for a new title is being reviewed
-      </h3>
-      <p class="govuk-!-margin-bottom-0">Requested title:</p>
-      <p class="govuk-heading-s">
-        {{ course.titleRequested }} ({{ course.programmeCode }})
+    {% set createdHtml %}
+      <p class="govuk-!-margin-bottom-0">
+        Add the rest of your details and publish the course, so that candidates can find and apply to it.
       </p>
-      <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+      {% if course.titleRequested %}
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h3 class="govuk-heading-m">
+          Your request for a new title is being reviewed
+        </h3>
 
-      <p class="govuk-!-margin-bottom-0"><a href="#">Cancel this request</a></p>
-    {% endif %}
-  </div>
+        {{ titleRequestedHtml | safe }}
+      {% endif %}
+    {% endset %}
+    {{ macros.summary('Your course has been created', createdHtml) }}
   {% endif %}
 
-  {% if course.titleRequested and not justCreated %}
-    <div class="neutral-summary govuk-!-margin-bottom-8" role="alert" tabindex="-1">
-      <h3 class="govuk-heading-m">
-        Your request for a new title is being reviewed
-      </h3>
-      <p class="govuk-!-margin-bottom-0">Requested title:</p>
-      <p class="govuk-heading-s">
-        {{ course.titleRequested }} ({{ course.programmeCode }})
+  {% if justEdited %}
+    {% set createdHtml %}
+      <p class="govuk-!-margin-bottom-0">
+        Add the rest of your details and publish the course, so that candidates can find and apply to it.
       </p>
-      <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
 
-      <p class="govuk-!-margin-bottom-0"><a href="#">Cancel this request</a></p>
-    </div>
+      {% if course.titleRequested %}
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h3 class="govuk-heading-m">
+          Your request for a new title is being reviewed
+        </h3>
+
+        {{ titleRequestedHtml | safe }}
+      {% endif %}
+    {% endset %}
+    {{ macros.summary('Your changes have been saved', createdHtml) }}
+  {% endif %}
+
+  {% if justEditedAndPublished %}
+    {% set createdHtml %}
+      <p class="govuk-!-margin-bottom-0">
+        Your changes are now <a href="#">live on Find</a>. They will be updated overnight on UCAS Apply.
+      </p>
+
+      {% if course.titleRequested %}
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h3 class="govuk-heading-m">
+          Your request for a new title is being reviewed
+        </h3>
+
+        {{ titleRequestedHtml | safe }}
+      {% endif %}
+    {% endset %}
+    {{ macros.summary('Your changes have been published', createdHtml) }}
+  {% endif %}
+
+  {% if course.titleRequested and not justCreated and not justEdted and not justEditedAndPublished %}
+    {{ macros.summary('Your request for a new title is being reviewed', titleRequestedHtml, 'neutral') }}
   {% endif %}
 
   {% if justWithdrawn %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-      This course has been withdrawn
-    </h3>
-  </div>
+    {{ macros.summary('This course has been withdrawn') }}
+  {% endif %}
+
+  {% if showMessage %}
+    {% set savedChangesHtml %}
+      <p class="govuk-!-margin-bottom-0">
+        <a href="{{ previewLink }}">Preview your course</a> to check for mistakes before publishing.
+      </p>
+    {% endset %}
+    {{ macros.summary('Your changes have been saved', savedChangesHtml)}}
+  {% endif %}
+
+  {% if justPublished %}
+    {% set publishedHtml %}
+      <p class="govuk-!-margin-bottom-0 ">
+        See how this course looks to applicants:<br />
+        <a href="#">View on website</a>
+      </p>
+    {% endset %}
+    {{ macros.summary('Your changes have been published', publishedHtml)}}
   {% endif %}
 
   <h1 class="govuk-heading-xl">
@@ -77,119 +121,109 @@
     </div>
   {% endif %}
 
-  {% if showMessage %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-        Your changes have been saved
-      </h3>
-      <p class="govuk-!-margin-bottom-0">
-        <a href="{{ previewLink }}">Preview your course</a> to check for mistakes before publishing.
-      </p>
-    </div>
-  {% endif %}
-
-  {% if justPublished %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-      Your changes have been published
-    </h3>
-    <p class="govuk-!-margin-bottom-0 ">
-      See how this course looks to applicants:<br />
-      <a href="#">View on website</a>
-    </p>
-  </div>
-  {% endif %}
-
   {% include "course/_errors.html" %}
 
-  <div class="govuk-grid-row add-top-margin">
-    <div class="govuk-grid-column-two-thirds">
-      {% set sectionTitle %}
-        {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-          Course information
-        {% else %}
-          Edit course information
-        {% endif %}
-      {% endset %}
+  {% set descriptionHtml %}
+    <div class="govuk-grid-row govuk-!-margin-top-4">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">
+          <a href="{{ coursePath }}/about-this-course">About this course</a>
+        </h3>
+        <dl class="govuk-summary-list govuk-summary-list--short">
+          {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
+          {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
+          {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
+        </dl>
 
-      {% if course.level == 'Further education' %}
-        <h3 class="govuk-heading-27 remove-top-margin">
-          <a href="/new/{{ course.programmeCode }}/further/edit">
-            {{ sectionTitle }}
+        <h3 class="govuk-heading-m">
+          <a href="{{ coursePath }}/fees-and-length">
+            Course length and {% if course.salaried %}salary{% else %}fees{% endif %}
           </a>
         </h3>
+        <dl class="govuk-summary-list govuk-summary-list--short">
+          {% if data[course.programmeCode + '-duration'] == 'Other' %}
+            {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
+          {% else %}
+            {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
+          {% endif %}
+          {% if course.salaried %}
+            {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary', errors, coursePath) }}
+          {% else %}
+            {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students', errors, coursePath) }}
+            {{ macros.feesCoursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
+            {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
+            {{ macros.coursePart(course.programmeCode + '-financial-support', 'Financial support you offer (optional)') }}
+          {% endif %}
+        </dl>
+
+        <h3 class="govuk-heading-m">
+          <a href="{{ coursePath }}/requirements">
+            Requirements and eligibility
+          </a>
+        </h3>
+        <dl class="govuk-summary-list govuk-summary-list--short">
+          {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
+          {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
+          {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
+        </dl>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
+      </div>
+    </div>
+  {% endset %}
+
+  {% set informationHtml %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if course.level == 'Further education' %}
         <dl class="govuk-summary-list govuk-summary-list--short">
           {% include "new/further/_answers.html" %}
         </dl>
       {% else %}
-        <h3 class="govuk-heading-27 remove-top-margin">
-          <a href="/new/{{ course.programmeCode }}/edit">
-            {{ sectionTitle }}
-          </a>
-        </h3>
-        <dl class="govuk-summary-list govuk-summary-list--short govuk-summary-list--short">
+        <dl class="govuk-summary-list">
           {% include "new/_answers.html" %}
         </dl>
       {% endif %}
-
-      <h3 class="govuk-heading-27">
-        <a href="/new/{{ course.programmeCode }}/training-locations">
-          Locations
-        </a>
-      </h3>
-      <ul class="govuk-list location-list">
-        {% for school in course.schools %}
-          <li>
-            <strong>{{ school.name }} (Code: {{ school.code }})</strong><br />
-            {{ school.address }}
-          </li>
-        {% endfor %}
-      </ul>
-
-      <h3 class="govuk-heading-27">
-        <a href="{{ coursePath }}/about-this-course">About this course</a>
-      </h3>
-      <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
-        {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
-        {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
-      </dl>
-
-      <h3 class="govuk-heading-27">
-        <a href="{{ coursePath }}/fees-and-length">
-          Course length and {% if course.salaried %}salary{% else %}fees{% endif %}
-        </a>
-      </h3>
-      <dl class="govuk-summary-list govuk-summary-list--short">
-        {% if data[course.programmeCode + '-duration'] == 'Other' %}
-          {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
-        {% else %}
-          {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
-        {% endif %}
-        {% if course.salaried %}
-          {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary', errors, coursePath) }}
-        {% else %}
-          {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students', errors, coursePath) }}
-          {{ macros.feesCoursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
-          {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
-          {{ macros.coursePart(course.programmeCode + '-financial-support', 'Financial support you offer (optional)') }}
-        {% endif %}
-      </dl>
-
-      <h3 class="govuk-heading-27">
-        <a href="{{ coursePath }}/requirements">
-          Requirements and eligibility
-        </a>
-      </h3>
-      <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
-        {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
-        {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
-      </dl>
     </div>
-    <div class="govuk-grid-column-one-third">
-      {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
-    </div>
+  </div>
+  {% endset %}
+
+  {% set locationsHtml %}
+    <h3 class="govuk-heading-m">
+      <a href="/new/{{ course.programmeCode }}/training-locations">
+        Locations
+      </a>
+    </h3>
+    <ul class="govuk-list location-list">
+      {% for school in course.schools %}
+        <li>
+          <strong>{{ school.name }} (Code: {{ school.code }})</strong><br />
+          {{ school.address }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endset %}
+
+  <div class="course-tabs">
+    {{ govukTabs({
+      items: [
+        {
+          label: "Description",
+          id: "description",
+          panel: {
+            html: descriptionHtml
+          }
+        },
+        {
+          label: "Details",
+          id: "information",
+          panel: {
+            html: informationHtml
+          }
+        }
+      ]
+    }) }}
   </div>
 
 

@@ -7,9 +7,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/phase?change=phase">
-      Change<span class="govuk-visually-hidden"> phase</span>
-    </a>
+    {% if isNotPublished %}
+      <a href="/new/{{ code }}/phase?change=phase">
+        Change<span class="govuk-visually-hidden"> phase</span>
+      </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -26,9 +28,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/phase?change=phase">
       Change<span class="govuk-visually-hidden"> SEND</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -96,9 +100,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/funding?change=funding">
       Change<span class="govuk-visually-hidden"> fee or salary</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -283,7 +289,7 @@
       Description
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ courseOffered }}
+      {{ courseOffered or course.options }}
     </dd>
     {% if showChangeLinks %}
     <dd class="govuk-summary-list__actions"></dd>

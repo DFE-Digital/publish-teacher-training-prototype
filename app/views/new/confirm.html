@@ -4,6 +4,7 @@
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
+{% set isNotPublished = true %}
 {% set isFe = (data[code + '-phase'] == 'Further education') %}
 
 {% block content %}
