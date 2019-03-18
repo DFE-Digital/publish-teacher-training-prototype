@@ -78,7 +78,7 @@
     {{ macros.summary('Your changes have been published', createdHtml) }}
   {% endif %}
 
-  {% if course.titleRequested and not justCreated and not justEdted and not justEditedAndPublished %}
+  {% if course.titleRequested and not (justCreated or justEdited or justEditedAndPublished) %}
     {{ macros.summary('Your request for a new title is being reviewed', titleRequestedHtml, 'neutral') }}
   {% endif %}
 
