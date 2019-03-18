@@ -19,6 +19,17 @@
   {{ govukBackLink({ text: text, href: href }) }}
 {% endmacro %}
 
+{% macro summary(title, html = false, type = "success") %}
+  <div class="{{ type }}-summary" role="alert" tabindex="-1">
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 {{ type }}-heading">
+      {{ title }}
+    </h3>
+    {% if html %}
+      {{ html | safe }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
 {% macro ucasPart(id, label, help, changeLink = '#', contact = false) %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
