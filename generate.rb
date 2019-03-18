@@ -179,7 +179,8 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   end
 
   prototype_data[courseCode + '-generated-title'] = c['name']
-  prototype_data[courseCode + '-title'] = c['name']
+  prototype_data[courseCode + '-change-title'] = 'Yes, that’s correct'
+  #prototype_data[courseCode + '-title'] = c['name']
   prototype_data[courseCode + '-applications-open'] = '10 October 2018'
   prototype_data[courseCode + '-who-apply-type'] = "Option A"
   prototype_data[courseCode + '-type'] = type
