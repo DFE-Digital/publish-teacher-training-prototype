@@ -7,6 +7,7 @@
 {% set code = course.programmeCode %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
+{% set isNotPublished = not data[code + '-published-before'] %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
   {
     href: "/courses",
@@ -185,6 +186,21 @@
           {% include "new/_answers.html" %}
         </dl>
       {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="status-box">
+        <h2 class="govuk-heading-m">Changing the details of this course</h2>
+        {% if isNotPublished %}
+          <p>You can change every detail of this course before it’s published.</p>
+          <p>After it’s published, you can only change some details – as candidates may have started applying for it</p>
+        {% else %}
+          <p>You can only change some details of this course because it has been published and candidates may have started applying for it.</p>
+
+          <p>If you need to make significant changes to this course you should consider <a href="#">withdrawing it</a>, and creating a new course.</p>
+
+          <p>Alternatively, to make other changes you should <a href="#">contact the Becoming a teacher team</a>.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
   {% endset %}

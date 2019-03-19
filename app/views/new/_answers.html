@@ -48,9 +48,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/subject?change=subject">
       Change<span class="govuk-visually-hidden"> subject</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -84,9 +86,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/outcome?change=outcome">
       Change<span class="govuk-visually-hidden"> outcome</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -118,9 +122,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/full-time-part-time?change=full-time-part-time">
       Change<span class="govuk-visually-hidden"> full time or part time</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -137,8 +143,8 @@
       {{ data['schools'][0].name }}
     {% endif %}
     {% if data['schools'].length == 1 and showChangeLinks %}
-      <br>
-      <span class="empty">You can’t change this because you only have <a href="/locations">1 location</a></span>
+      <p class="empty">You can’t change this because you only have 1 location</p>
+      <p><a href="/locations">Manage all your locations</a></p>
     {% endif %}
   </dd>
   {% if showChangeLinks %}
@@ -161,9 +167,11 @@
     </dd>
     {% if showChangeLinks %}
     <dd class="govuk-summary-list__actions">
+      {% if isNotPublished %}
       <a href="/new/{{ code }}/accredited-body?change=accredited-body">
         Change<span class="govuk-visually-hidden"> accredited body</span>
       </a>
+      {% endif %}
     </dd>
     {% endif %}
   </div>
@@ -183,9 +191,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/applications-open?change=applications-open">
       Change<span class="govuk-visually-hidden"> start date</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -244,9 +254,11 @@
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
+    {% if isNotPublished %}
     <a href="/new/{{ code }}/start-date?change=start-date">
       Change<span class="govuk-visually-hidden"> start date</span>
     </a>
+    {% endif %}
   </dd>
   {% endif %}
 </div>
@@ -261,9 +273,11 @@
       </dd>
       {% if showChangeLinks %}
       <dd class="govuk-summary-list__actions">
+        {% if isNotPublished %}
         <a href="/new/{{ code }}/title?change=title">
           Change<span class="govuk-visually-hidden"> title</span>
         </a>
+        {% endif %}
       </dd>
       {% endif %}
     </div>
@@ -277,9 +291,11 @@
       </dd>
       {% if showChangeLinks %}
       <dd class="govuk-summary-list__actions">
+        {% if isNotPublished %}
         <a href="/new/{{ code }}/title?change=title">
           Change<span class="govuk-visually-hidden"> title</span>
         </a>
+        {% endif %}
       </dd>
       {% endif %}
     </div>
