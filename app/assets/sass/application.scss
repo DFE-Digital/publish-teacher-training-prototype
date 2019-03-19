@@ -309,6 +309,8 @@ dl.aligned.course-part-tasks dd {
   .govuk-tabs__tab--selected {
     color: $govuk-text-colour;
     background-color: govuk-colour('white');
+    border-top: 5px solid govuk-colour('blue');
+    padding-top: govuk-spacing(3) - 5;
 
     text-decoration: none;
     a {
