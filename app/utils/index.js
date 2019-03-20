@@ -178,7 +178,7 @@ function newCourseWizardPaths(req) {
     ...(includeLocationsInWizard(data) ? [`/new/${code}/training-locations`] : []),
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/applications-open`,
-    `/new/${code}/eligibility`,
+    `/new/${code}/ucas-not-yet-got`,
     `/new/${code}/start-date`,
     `/new/${code}/title`,
     `/new/${code}/${summaryView}`,
