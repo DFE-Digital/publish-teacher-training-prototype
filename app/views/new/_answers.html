@@ -201,45 +201,43 @@
 </div>
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    UCAS Apply setting
+    UCAS applications: GCSEs pending
   </dt>
   <dd class="govuk-summary-list__value">
-    {% set expansion %}
-      <p class="govuk-body-s">Applicants will need a minimum GCSE grade of C (or 4), or an equivalent,&nbsp;in:</p>
-      <ul class="govuk-list govuk-list--bullet govuk-body-s">
-        <li>English</li>
-        <li>Mathematics</li>
-        {% if data[code + '-phase'] == 'Primary' %}
-          <li>Science</li>
-        {% endif %}
-      </ul>
-
-      {% if data[code + '-who-apply-type'] and data[code + '-who-apply-type'].includes('Option A') %}
-        <p class="govuk-body-s">Receive applications from candidates who:</p>
-        <ul class="govuk-list govuk-list--bullet govuk-body-s">
-          <li>have these qualifications when they apply</li>
-          <li>expect to have them before the course begins</li>
-          <li>need to take an equivalency test</li>
-        </ul>
-      {% elseif data[code + '-who-apply-type'] and data[code + '-who-apply-type'] == 'Option B' %}
-        <p class="govuk-body-s">Receive applications from candidates who:</p>
-        <ul class="govuk-list govuk-list--bullet govuk-body-s">
-          <li>have these qualifications when they apply</li>
-          <li>expect to have them before the course begins</li>
-        </ul>
-      {% elseif data[code + '-who-apply-type'] %}
-        <p class="govuk-body-s">Only receive applications from candidates who have these qualifications when they apply.</p>
-      {% endif %}
-    {% endset %}
-    {{ govukDetails({
-      summaryText: data[code + '-who-apply-type'],
-      html: expansion,
-      class: 'govuk-!-margin-bottom-0'
-    }) }}
+    {% if data[code + '-no-qualifications-yet'] == 'Yes (recommended)' %}
+      Receive applications from candidates who haven’t gained the minimum qualifications yet
+    {% else %}
+      UCAS will block applications from candidates who haven’t gained the minimum qualifications yet
+    {% endif %}
   </dd>
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/eligibility?change=eligibility">
+    <a href="/new/{{ code }}/ucas-not-yet-got?change=ucas-not-yet-got">
+      Change<span class="govuk-visually-hidden"> minimum requirements</span>
+    </a>
+  </dd>
+  {% endif %}
+</div>
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    UCAS applications: Equivalency tests
+  </dt>
+  <dd class="govuk-summary-list__value">
+    {% if data[code + '-equivalency-test'] == 'Yes (recommended)' %}
+      <p>Accept equivalency tests in
+      {% if isArray(data[code + '-equivalency-subjects']) %}
+        {{ data[code + '-equivalency-subjects'].join(' and ') }}
+      {% else %}
+        {{ data[code + '-equivalency-subjects'] }}
+      {% endif %}
+       </p>
+    {% else %}
+      <p>UCAS will block applications from candidates who need to take an equivalency test</p>
+    {% endif %}
+  </dd>
+  {% if showChangeLinks %}
+  <dd class="govuk-summary-list__actions">
+    <a href="/new/{{ code }}/ucas-not-yet-got?change=ucas-not-yet-got">
       Change<span class="govuk-visually-hidden"> minimum requirements</span>
     </a>
   </dd>
