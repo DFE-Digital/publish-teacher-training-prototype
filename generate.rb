@@ -178,6 +178,9 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-outcome'] = qual
   end
 
+  prototype_data[courseCode + '-no-qualifications-yet'] = 'Yes (recommended)'
+  prototype_data[courseCode + '-equivalency-test'] = 'Yes (recommended)'
+  prototype_data[courseCode + '-equivalency-subjects'] = level == 'Primary' ? ['English', 'Mathematics', 'Science'] : ['English', 'Mathematics']
   prototype_data[courseCode + '-generated-title'] = c['name']
   prototype_data[courseCode + '-change-title'] = 'Yes, that’s correct'
   #prototype_data[courseCode + '-title'] = c['name']
