@@ -9,15 +9,9 @@
   </h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <p>What will a trainee get when they complete this course?</p> -->
       <form action="{{ paths.next }}" method="post">
         {% set more %}
-          <!--{{ govukWarningText({
-              text: 'The course must not cover fewer than 4 school years',
-              iconFallbackText: 'Warning'
-          }) }}-->
-
-          <p>Enter an age range in years, for example: 5 to 11.</p>
+          <p>Enter an age range in years, for example: 5 to 11. The course must cover 4 or more school years.</p>
           {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
           {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
         {% endset %}
@@ -69,13 +63,8 @@
         {% endif %}
 
         {{ macros.radioGroup(code + '-age-range', fields) }}
-
-
-
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>
   </div>
-
-
 {% endblock %}
