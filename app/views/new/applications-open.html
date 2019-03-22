@@ -27,35 +27,35 @@
           }) }}
         {% endset %}
 
-        <!--
-          If before cycle has opened:
-          {
-            name: 'On 21 October 2019 when applications for the 2020/21 cycle open'
-          }
-        -->
-        {% set fields = [
-            {
-              name: 'When applications for the 2020 – 2021 cycle open',
-              text: 'You will need to publish this course beforehand'
-            },
-            {
-              name: 'When I publish this course',
-              text: 'If you want to publish this course later in the year, after the cycle has opened'
-            },
-            {
-              name: 'On a specific date',
-              text: 'If you want to publish the course but leave applications closed until a certain date.',
-              more: specificDate
-            }
-          ]
-        %}
+        {% if data['next-cycle'] %}
+          {% set fields = [
+              {
+                name: 'On 21 October when applications for the 2020 – 2021 cycle open',
+                text: 'You will need to publish this course beforehand'
+              },
+              {
+                name: 'On a specific date',
+                text: 'If you want to publish the course but leave applications closed until a date after 21 October',
+                more: specificDate
+              }
+            ]
+          %}
+        {% else %}
+          {% set fields = [
+              {
+                name: 'When I publish this course',
+                text: 'Applications will open as soon as you publish this course'
+              },
+              {
+                name: 'On a specific date',
+                text: 'If you want to publish the course but leave applications closed until a certain date',
+                more: specificDate
+              }
+            ]
+          %}
+        {% endif %}
 
         {{ macros.radioGroup(code + '-applications-open', fields, errors) }}
-
-        {{ govukWarningText({
-            text: 'You must publish this course if you want people to apply to it',
-            iconFallbackText: 'Warning'
-        }) }}
 
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
