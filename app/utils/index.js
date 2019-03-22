@@ -172,6 +172,7 @@ function newCourseWizardPaths(req) {
     `/new/${code}/phase`,
     `/new/${code}/subject`,
     `/new/${code}/languages`,
+    `/new/${code}/age-range`,
     `/new/${code}/outcome`,
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : []),
     `/new/${code}/full-time-part-time`,
@@ -201,6 +202,7 @@ function editSubjectPaths(req, summaryView = 'confirm') {
     `/new/${code}/${summaryView}`,
     `/new/${code}/subject`,
     `/new/${code}/languages`,
+    `/new/${code}/age-range`,
     `/new/${code}/title`,
     `/new/${code}/${summaryView}`
   ];

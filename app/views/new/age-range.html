@@ -1,0 +1,81 @@
+{% set title = 'Specify an age range' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <!-- <p>What will a trainee get when they complete this course?</p> -->
+      <form action="{{ paths.next }}" method="post">
+        {% set more %}
+          <!--{{ govukWarningText({
+              text: 'The course must not cover fewer than 4 school years',
+              iconFallbackText: 'Warning'
+          }) }}-->
+
+          <p>Enter an age range in years, for example: 5 to 11.</p>
+          {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
+          {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
+        {% endset %}
+
+        {% if data[code + '-phase'] == 'Primary' %}
+          {% set fields = [
+            {
+              name: '3 to 7'
+            },
+            {
+              name: '5 to 11'
+            },
+            {
+              name: '7 to 11'
+            },
+            {
+              name: '7 to 14 (middle years)'
+            },
+            {
+              or: true
+            },
+            {
+              name: 'Another age range',
+              more: more
+            }
+          ]%}
+        {% else %}
+        {% set fields = [
+          {
+            name: '11 to 16'
+          },
+          {
+            name: '11 to 18'
+          },
+          {
+            name: '14 to 19'
+          },
+          {
+            name: '7 to 14 (middle years)'
+          },
+          {
+            or: true
+          },
+          {
+            name: 'Another age range',
+            more: more
+          }
+        ]%}
+        {% endif %}
+
+        {{ macros.radioGroup(code + '-age-range', fields) }}
+
+
+
+        <input type="submit" class="govuk-button" value="Continue" />
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}
