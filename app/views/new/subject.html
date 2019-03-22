@@ -70,17 +70,6 @@
           </div>
         {% endif %}
 
-        {% set ageRangeHtml %}
-          <p>Enter an age range in years, for example: 5 to 11.</p>
-          {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
-          {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "Specify an age range (optional)",
-          html: ageRangeHtml
-        }) }}
-
         <input type="submit" class="govuk-button" value="Continue" />
       </form>
     </div>

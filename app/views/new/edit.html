@@ -1,4 +1,11 @@
-{% set title = 'Edit course information' %}
+{% set isNotPublished = not data[code + '-published-before'] %}
+
+{% if isNotPublished %}
+  {% set title = 'Check your answers before confirming' %}
+{% else %}
+  {% set title = 'Check your answers before publishing' %}
+{% endif %}
+
 {% extends "layout.html" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/course/' + data['provider-code'] + '/' + code) }}{% endblock %}
@@ -42,7 +49,7 @@
       </div>
     </div>
 
-    <input type="submit" class="govuk-button" value="Confirm changes" />
+    <input type="submit" class="govuk-button" value="{% if isNotPublished %}Confirm changes{% else %}Publish changes{% endif %}" />
 
     <p>
       <a href="/course/{{ data['provider-code'] }}/{{ code }}">Cancel changes</a>

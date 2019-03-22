@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Bath Spa University'
+provider = 'Berkshire Teaching School Alliance'
 next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 
@@ -15,7 +15,7 @@ all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
 prototype_data = {
-  'rolled-over': true,
+  'rolled-over': false,
   'next-cycle': next_cycle,
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
@@ -178,8 +178,12 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     prototype_data[courseCode + '-outcome'] = qual
   end
 
+  prototype_data[courseCode + '-no-qualifications-yet'] = 'Yes (recommended)'
+  prototype_data[courseCode + '-equivalency-test'] = 'Yes (recommended)'
+  prototype_data[courseCode + '-equivalency-subjects'] = level == 'Primary' ? ['English', 'Mathematics', 'Science'] : ['English', 'Mathematics']
   prototype_data[courseCode + '-generated-title'] = c['name']
-  prototype_data[courseCode + '-title'] = c['name']
+  prototype_data[courseCode + '-change-title'] = 'Yes, that’s correct'
+  #prototype_data[courseCode + '-title'] = c['name']
   prototype_data[courseCode + '-applications-open'] = '10 October 2018'
   prototype_data[courseCode + '-who-apply-type'] = "Option A"
   prototype_data[courseCode + '-type'] = type

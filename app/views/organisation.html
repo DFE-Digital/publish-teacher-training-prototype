@@ -34,27 +34,14 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {% if not data['rolled-over'] %}
-        <div class="govuk-!-margin-bottom-8">
-          <h2 class="govuk-heading-m">
-            <a href="/rollover/start">Rollover your courses and locations</a>
-          </h2>
-          <p>Use this section to:</p>
-          <ul class="govuk-list govuk-list--bullet">
-            <li>choose courses for the next cycle</li>
-            <li>choose training locations for the next cycle</li>
-          </ul>
-          {{ govukWarningText({
-              text: 'We recommend starting rollover early',
-              iconFallbackText: 'Warning'
-          }) }}
-        </div>
-      {% elseif data['next-cycle'] %}
-        <p class="govuk-body-l">Prepare your courses and locations for the next cycle. All your courses, locations and details have been copied from the current cycle.</p>
-        <hr class="govuk-section-break govuk-section-break--m">
-      {% else %}
-        <p class="govuk-body-l">Manage courses, locations and vacancies in the current&nbsp;cycle.</p>
-        <hr class="govuk-section-break govuk-section-break--m">
+      {% if data['rolled-over'] %}
+        {% if data['next-cycle'] %}
+          <p class="govuk-body-l">Prepare your courses and locations for the next cycle. All your courses, locations and details have been copied from the current cycle.</p>
+          <hr class="govuk-section-break govuk-section-break--m">
+        {% else %}
+          <p class="govuk-body-l">Manage courses, locations and vacancies in the current&nbsp;cycle.</p>
+          <hr class="govuk-section-break govuk-section-break--m">
+        {% endif %}
       {% endif %}
 
       <div class="govuk-!-margin-bottom-8">
@@ -98,13 +85,13 @@
 
         <p>Use this section to:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>add and delete courses</li>
           <li>preview and publish courses</li>
           <li>write about each course</li>
           <li>copy content between courses</li>
           {% if not data['next-cycle'] %}
           <li>manage vacancies for each course</li>
           {% endif %}
+          <li>request new courses</li>
         </ul>
       </div>
 

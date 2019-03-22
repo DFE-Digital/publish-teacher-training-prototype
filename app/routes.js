@@ -245,9 +245,15 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   // If training location added – it'll affect vacancies
 
   var course = data['ucasCourses'].find(a => a.programmeCode == code);
+  var editing = true;
+  var publishedBefore = false;
+
   if (!course) {
     course = {};
     data['ucasCourses'].unshift(course);
+    editing = false;
+  } else if (data[code + '-published-before']) {
+    publishedBefore = true;
   }
 
   course.name = data[code + '-generated-title'];
@@ -275,7 +281,16 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     data[code + '-generated-description']
   ];
 
-  res.redirect(`/course/${data['provider-code']}/${code}?created=true`);
+  var query = '';
+  if (publishedBefore) {
+    query = 'editedAndPublished=true';
+  } else if (editing) {
+    query = 'edited=true'
+  } else {
+    query = 'created=true'
+  }
+
+  res.redirect(`/course/${data['provider-code']}/${code}?${query}`);
 })
 
 router.all('/new/:code/:view', function (req, res) {
@@ -456,6 +471,8 @@ router.get('/course/:providerCode/:code', function (req, res) {
     course: c,
     errors: errors,
     justCreated: req.query.created,
+    justEdited: req.query.edited,
+    justEditedAndPublished: req.query.editedAndPublished,
     justWithdrawn: req.query.withdrawn,
     justPublished: (req.query.publish && errors.length == 0)
   })
