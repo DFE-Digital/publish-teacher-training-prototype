@@ -16,10 +16,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        <!-- [ ] Applicants need a minimum GCSE grade A* to C, 4 or more, or an equivalent
-          * Do not accept applications from candidates who need to take an equivalence test
-          * Do not accept applications from candidates who do not have the qualification but expect to have it before the course begins -->
-
         <p>By law, all applicants need a GCSE grade C (or level 4), or an equivalent,&nbsp;in:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>English</li>
@@ -46,7 +42,7 @@
 
         <hr class="govuk-section-break govuk-section-break--m">
         <h2 class="govuk-heading-m">Will you accept equivalency tests instead of GSCEs?</h2>
-        <p>If candidates don’t have the minimum GCSEs, they can take an equivalency test, to show they have the required knowledge to start the course. </p>
+        <p>If candidates don’t have the minimum GCSEs (or they have no NARIC equivalent), they can take an equivalency test, to show they have the required knowledge to start the course. </p>
 
         {% set primarySubjects = [
           {
