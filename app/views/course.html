@@ -225,14 +225,14 @@
     {{ govukTabs({
       items: [
         {
-          label: "Description",
+          label: 'Description<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Content, fees and eligibility</span>' | safe,
           id: "description",
           panel: {
             html: descriptionHtml
           }
         },
         {
-          label: "Edit course details",
+          label: 'Basic details<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Locations, outcome, subject</span>' | safe,
           id: "information",
           panel: {
             html: informationHtml
