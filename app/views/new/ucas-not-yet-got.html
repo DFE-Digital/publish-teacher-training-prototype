@@ -16,7 +16,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ paths.next }}" method="post">
-        <p>By law, all applicants need a GCSE grade C (or level 4), or an equivalent,&nbsp;in:</p>
+        <p>By law, all applicants of a {% if data[code + '-phase'] == 'Primary' %}primary{% else %}secondary{% endif %} course need a GCSE grade C (or level 4), or an equivalent,&nbsp;in:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>English</li>
           <li>Mathematics</li>
