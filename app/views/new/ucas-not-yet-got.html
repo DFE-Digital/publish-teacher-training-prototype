@@ -41,8 +41,8 @@
         {{ macros.radioGroup(code + '-no-qualifications-yet', notYetFields)}}
 
         <hr class="govuk-section-break govuk-section-break--m">
-        <h2 class="govuk-heading-m">Will you accept equivalency tests instead of GSCEs?</h2>
-        <p>If candidates don’t have the minimum GCSEs (or they have no NARIC equivalent), they can take an equivalency test, to show they have the required knowledge to start the course. </p>
+        <h2 class="govuk-heading-m">Do you offer equivalency tests (for candidates who don’t have the qualifications)?</h2>
+        <p>These are for candidates who don’t have the minimum GCSEs (or NARIC-recognised equivalents). They are designed to show that the candidate has the required knowledge to start the course. They may be conducted by you or your accredited body.</p>
 
         {% set primarySubjects = [
           {
@@ -71,17 +71,17 @@
         ] %}
 
         {% set moreEquivalency %}
-          <h3 class="govuk-heading-s">Which subjects will you accept equivalency tests in?</h3>
+          <h3 class="govuk-heading-s">Which subjects do you offer tests in?</h3>
           {{ macros.checkboxGroup(code + '-equivalency-subjects', primarySubjects if (data[code + '-phase'] == 'Primary') else secondarySubjects)}}
         {% endset %}
 
         {% set notYetFields = [
           {
-            name: 'Yes (recommended)',
+            name: 'Yes – you’ll receive applications from candidates seeking equivalency tests',
             more: moreEquivalency
           },
           {
-            name: 'No – UCAS will block applications from these candidates'
+            name: 'No – UCAS will block applications from candidates seeking equivalency tests'
           }
         ] %}
 
