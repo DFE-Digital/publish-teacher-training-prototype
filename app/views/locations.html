@@ -56,21 +56,30 @@
       </div>
 
       {{ govukWarningText({
-        html: "You are limited to 37 locations by UCAS Apply",
+        html: 'You are limited to 37 locations by UCAS Apply.<br /><span class="govuk-!-font-weight-regular">Each location has a single character code</span>.',
         iconFallbackText: "Warning"
       }) }}
 
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Name</th>
+            <th class="govuk-table__header" scope="col" style="width: 75%">Name</th>
+            <th class="govuk-table__header" scope="col">UCAS code</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           {% for school in schools %}
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a>
+              <!-- <a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a> -->
+              {{ school.name }}
+            </td>
+            <td class="govuk-table__cell">
+              {% if school.code == '-' %}
+                - (dash)
+              {% else %}
+                {{ school.code }}
+              {% endif %}
             </td>
           </tr>
           {% endfor %}
