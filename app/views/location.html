@@ -28,6 +28,7 @@
     {{ title }}
   </h1>
 
+  {% set editHtml %}
   <form action="/location/{{ code }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {{ macros.textbox(code + '-name', '<h2 class="govuk-heading-m">Name</h2>', null, 'govuk-!-width-full', null, errors) }}
@@ -75,4 +76,56 @@
       {% endif %}
     </div>
   </form>
+  {% endset %}
+
+  {% if isNew %}
+    {{ editHtml | safe }}
+  {% else %}
+    {% set coursesHtml %}
+      <table class="govuk-table ucas-info-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
+            <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+            <th class="govuk-table__header published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
+            <th class="govuk-table__header applications-col">Applications</th>
+            <th class="govuk-table__header type-col">Vacancies</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for course in courses %}
+            {% include "includes/_courses-table-row.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endset %}
+
+    <div class="course-tabs">
+      {{ govukTabs({
+        items: [
+          {
+            label: 'Edit location',
+            id: "edit",
+            panel: {
+              html: editHtml
+            }
+          },
+          {
+            label: 'Courses using this location' | safe,
+            id: "courses",
+            panel: {
+              html: coursesHtml
+            }
+          },
+          {
+            label: 'History',
+            id: "history",
+            panel: {
+              html: historyHtml
+            }
+          }
+        ]
+      }) }}
+    </div>
+  {% endif %}
 {% endblock %}

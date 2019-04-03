@@ -71,8 +71,8 @@
           {% for school in schools %}
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <!-- <a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a> -->
-              {{ school.name }}
+              <a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a>
+              <!-- {{ school.name }} -->
             </td>
             <td class="govuk-table__cell">
               {% if school.code == '-' %}

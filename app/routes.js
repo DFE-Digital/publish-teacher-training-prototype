@@ -565,14 +565,16 @@ router.get('/location/start', function (req, res) {
 
 router.get('/location/:code', function (req, res) {
   var code = req.params.code;
-  var school = req.session.data['schools'].find(function(school) {
-    return school.code == req.params.code;
-  });
+  var data = req.session.data;
+  var school = data['schools'].find(school => school.code == code);
+  var courses = data['ucasCourses'].filter(a => a.schools.find(school => school.code == code));
+
   var isNew = !school;
   res.render('location', {
         school: school,
         code: code,
-        isNew: isNew
+        isNew: isNew,
+        courses: courses
       })
 })
 

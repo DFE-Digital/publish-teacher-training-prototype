@@ -64,55 +64,7 @@
           <tbody class="govuk-table__body">
             {% for course in data['ucasCourses'] %}
               {% if course.accrediting == accrediting.name %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell">
-                    <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
-                    <span class="govuk-body-s">{{ course.options }}</span>
-
-                    {% if course.titleRequested %}
-                      <br /><span class="govuk-body-s">Requested title: {{ course.titleRequested }}</span>
-                    {% endif %}
-                  </td>
-                  <td class="govuk-table__cell">
-                    {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'published-with-changes' %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-1">Published&nbsp;*</span><br />
-                      <span class="govuk-body-s">* Unpublished changes</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
-                    {% elseif data[course.programmeCode + '-publish-state'] == 'rolled-over' %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Rolled over</span>
-                    {% else %}
-                      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
-                    {% endif %}
-                  </td>
-                  <td class="govuk-table__cell no-wrap">
-                    {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-                      No – withdrawn
-                    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-                      <a href="#">Yes – view online</a>
-                    {% else %}
-                      No – still in draft
-                    {% endif %}
-                  </td>
-                  <td class="govuk-table__cell">
-                    {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-                      Closed
-                    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-                      {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}
-                    {% endif %}
-                  </td>
-                  <td class="govuk-table__cell">
-                    {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-                      No
-                    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-                      {{ data[course.programmeCode + '-vacancies-flag'] }}  (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
-                    {% endif %}
-                  </td>
-                </tr>
+                {% include "includes/_courses-table-row.html" %}
               {% endif %}
             {% endfor %}
           </tbody>
