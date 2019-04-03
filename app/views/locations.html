@@ -63,16 +63,20 @@
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col" style="width: 75%">Name</th>
+            <th class="govuk-table__header" scope="col" style="width: 65%">Name</th>
+            <th class="govuk-table__header" scope="col">Courses</th>
             <th class="govuk-table__header" scope="col">UCAS code</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-          {% for school in schools %}
+          {% for school in locations %}
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
               <a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a>
               <!-- {{ school.name }} -->
+            </td>
+            <td class="govuk-table__cell">
+              <a href="/location/{{ school.code }}#courses">{{ school.courses }}&nbsp;{{ 'course' if (school.courses == 1) else 'courses' }}</a>
             </td>
             <td class="govuk-table__cell">
               {% if school.code == '-' %}

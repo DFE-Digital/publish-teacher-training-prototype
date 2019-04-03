@@ -619,7 +619,13 @@ router.get('/location/:id/edit', function (req, res) {
 })
 
 router.all('/locations', function (req, res) {
+  var data = req.session.data;
+  var locations = JSON.parse(JSON.stringify(data['schools']));
+
+  locations.forEach(location => location.courses = data['ucasCourses'].filter(a => a.schools.find(school => school.code == location.code)).length)
+
   res.render('locations', {
+    locations: locations,
     justCreated: req.query.success == 'new',
     justEdited: req.query.success == 'edited',
     justChangedCode: req.query.code
