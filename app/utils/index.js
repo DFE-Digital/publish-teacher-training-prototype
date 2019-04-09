@@ -174,7 +174,7 @@ function newCourseWizardPaths(req) {
     `/new/${code}/languages`,
     `/new/${code}/age-range`,
     `/new/${code}/outcome`,
-    ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : []),
+    ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : [`/new/${code}/apprenticeship`]),
     `/new/${code}/full-time-part-time`,
     ...(includeLocationsInWizard(data) ? [`/new/${code}/training-locations`] : []),
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
@@ -327,7 +327,7 @@ function getCourseOffered(code, data) {
     courseOffered = courseOffered + ' with salary';
   }
 
-  if (data[code + '-type'] == 'Teaching apprenticeship') {
+  if (data[code + '-type'] == 'Teaching apprenticeship' || data[code + '-apprenticeship'] == 'Yes') {
     courseOffered = courseOffered + ' teaching apprenticeship';
   }
 

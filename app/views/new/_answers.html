@@ -116,23 +116,41 @@
   {% endif %}
 </div>
 {% if data['new-course']['include-fee-or-salary'] %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Fee or salary
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-type'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/funding?change=funding">
-      Change<span class="govuk-visually-hidden"> fee or salary</span>
-    </a>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Fee or salary
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-type'] }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      {% if isNotPublished %}
+      <a href="/new/{{ code }}/funding?change=funding">
+        Change<span class="govuk-visually-hidden"> fee or salary</span>
+      </a>
+      {% endif %}
+    </dd>
     {% endif %}
-  </dd>
-  {% endif %}
-</div>
+  </div>
+{% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Apprenticeship
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-apprenticeship'] }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      {% if isNotPublished %}
+      <a href="/new/{{ code }}/apprenticeship?change=apprenticeship">
+        Change<span class="govuk-visually-hidden"> apprenticeship</span>
+      </a>
+      {% endif %}
+    </dd>
+    {% endif %}
+  </div>
 {% endif %}
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">

@@ -187,6 +187,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   prototype_data[courseCode + '-applications-open'] = '10 October 2018'
   prototype_data[courseCode + '-who-apply-type'] = "Option A"
   prototype_data[courseCode + '-type'] = type
+  prototype_data[courseCode + '-apprenticeship'] = "No"
   prototype_data[courseCode + '-languages'] = languages
   prototype_data[courseCode + '-phase'] = level
   prototype_data[courseCode + '-min-requirements'] = minRequirements
