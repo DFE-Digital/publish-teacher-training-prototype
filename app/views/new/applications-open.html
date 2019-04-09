@@ -30,12 +30,10 @@
         {% if data['next-cycle'] %}
           {% set fields = [
               {
-                name: 'On 21 October when applications for the 2020 – 2021 cycle open',
-                text: 'You will need to publish this course beforehand'
+                name: 'On 21 October when applications for the 2020 – 2021 cycle open'
               },
               {
                 name: 'On a specific date',
-                text: 'If you want to publish the course but leave applications closed until a date after 21 October',
                 more: specificDate
               }
             ]
@@ -43,12 +41,10 @@
         {% else %}
           {% set fields = [
               {
-                name: 'When I publish this course',
-                text: 'Applications will open as soon as you publish this course'
+                name: 'As soon as the course is on Find (recommended)'
               },
               {
                 name: 'On a specific date',
-                text: 'If you want to publish the course but leave applications closed until a certain date',
                 more: specificDate
               }
             ]
