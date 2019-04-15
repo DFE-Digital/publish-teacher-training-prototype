@@ -33,6 +33,21 @@
     <div class="govuk-grid-column-two-thirds">
       {{ macros.textbox(code + '-name', '<h2 class="govuk-heading-m">Name</h2>', null, 'govuk-!-width-full', null, errors) }}
 
+      <h2 class="govuk-heading-m govuk-!-margin-top-8">Type of location</h2>
+      {% set fields = [
+          {
+            name: 'A specific place',
+            text: 'For example a school, college or university'
+          },
+          {
+            name: 'An area representing many schools',
+            text: 'For example a town, city or county'
+          }
+        ]
+      %}
+
+      {{ macros.radioGroup(code + '-location-type', fields) }}
+
       <h2 class="govuk-heading-m govuk-!-margin-top-8">Address</h2>
       {{ macros.textbox(code + '-address', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
       {{ macros.textbox(code + '-town', 'Town or city', null, 'form-control', null, errors) }}
