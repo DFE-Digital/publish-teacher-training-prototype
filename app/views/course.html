@@ -111,6 +111,20 @@
     {{ title }}
   </h1>
 
+  <div class="error" style="margin-top: -45px; margin-bottom: 45px">
+    {{ govukWarningText({
+      html: '<a href="' + coursePath + '/problems" class="destructive-link">We’ve found problems with this course</a>',
+      iconFallbackText: 'Warning'
+    }) }}
+  </div>
+
+  <!-- <div style="margin-top: -40px; margin-bottom: 40px">
+    {{ govukWarningText({
+      html: '<a href="#">This course can be improved</a>',
+      iconFallbackText: 'Warning'
+    }) }}
+  </div> -->
+
   {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
     <div class="govuk-grid-row govuk-!-margin-bottom-5">
       <div class="govuk-grid-column-two-thirds">

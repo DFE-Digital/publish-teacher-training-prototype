@@ -378,3 +378,8 @@ dl.aligned.course-part-tasks dd {
     margin-bottom: 5px;
   }
 }
+
+.error .govuk-warning-text__icon {
+  background-color: $govuk-error-colour;
+  border-color: $govuk-error-colour;
+}

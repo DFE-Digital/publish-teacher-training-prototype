@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% set title = 'Problems with this course' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Title
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Titles must not include qualifications or outcomes, eg PGCE with QTS full time
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="#">
+              Fix problem<span class="govuk-visually-hidden"> with course title</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age range
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Enter an age range
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="#">
+              Fix problem<span class="govuk-visually-hidden"> with age range</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Outcome
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Confirm the outcome we imported from UCAS
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="#">
+              Fix problem<span class="govuk-visually-hidden"> with course outcome</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            About this course
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Content is too similar to another course. About this course should be unique for each course.
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="#">
+              Fix problem<span class="govuk-visually-hidden"> with About this course</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            About your organisation
+          </dt>
+          <dd class="govuk-summary-list__value">
+            You haven’t published your organisation content yet
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="#">
+              Fix problem<span class="govuk-visually-hidden"> with About your organisation</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+{% endblock %}
