@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Yorkshire and Humber Teacher Training'
+provider = 'West London Teaching School Alliance (Secondary)'
 next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 
