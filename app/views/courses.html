@@ -23,7 +23,10 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{ title }}</h1>
+      <h1 class="govuk-heading-xl">
+        {% if data['next-cycle'] %}<span class="govuk-caption-xl">Next cycle (2020 – 2021)</span>{% endif %}
+        {{ title }}
+      </h1>
 
       <p>Use this section to:</p>
       <ul class="govuk-list govuk-list--bullet">
@@ -56,7 +59,9 @@
             <tr class="govuk-table__row">
               <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
               <th class="govuk-table__header status-col" style="width: 160px">Status</th>
-              <th class="govuk-table__header published-col">Is it on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?</th>
+              <th class="govuk-table__header published-col" style="width: 150px">
+                {% if data['next-cycle'] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?
+              </th>
               <th class="govuk-table__header applications-col">Applications</th>
               <th class="govuk-table__header type-col">Vacancies</th>
             </tr>

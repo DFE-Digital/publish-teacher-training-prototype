@@ -97,13 +97,23 @@
   {% endif %}
 
   {% if justPublished %}
-    {% set publishedHtml %}
-      <p class="govuk-!-margin-bottom-0 ">
-        See how this course looks to applicants:<br />
-        <a href="#">View on website</a>
-      </p>
-    {% endset %}
-    {{ macros.summary('Your changes have been published', publishedHtml)}}
+    {% if data['next-cycle'] %}
+      {% set publishedHtml %}
+        <p>Applications will open on 10 October.</p>
+        <p class="govuk-!-margin-bottom-0">
+          You can still edit your course but changes will need to be published again.
+        </p>
+      {% endset %}
+      {{ macros.summary('Your course will appear on Find in October', publishedHtml)}}
+    {% else %}
+      {% set publishedHtml %}
+        <p class="govuk-!-margin-bottom-0 ">
+          The link for this course is:<br />
+          <a href="#">https://find-postgraduate-teacher-training.education.gov.uk/course/E65/38NP</a>
+        </p>
+      {% endset %}
+      {{ macros.summary('Your course has been published', publishedHtml)}}
+    {% endif %}
   {% endif %}
 
   <h1 class="govuk-heading-xl">
@@ -111,12 +121,12 @@
     {{ title }}
   </h1>
 
-  <div class="error" style="margin-top: -45px; margin-bottom: 45px">
+  <!-- <div class="error" style="margin-top: -45px; margin-bottom: 45px">
     {{ govukWarningText({
       html: '<a href="' + coursePath + '/problems" class="destructive-link">We’ve found problems with this course</a>',
       iconFallbackText: 'Warning'
     }) }}
-  </div>
+  </div> -->
 
   <!-- <div style="margin-top: -40px; margin-bottom: 40px">
     {{ govukWarningText({
