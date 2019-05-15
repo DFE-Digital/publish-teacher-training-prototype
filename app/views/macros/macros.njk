@@ -154,7 +154,7 @@
   {% if state == 'published' %}
     <span class="govuk-tag phase-tag-published govuk-!-margin-bottom-4">Published</span>
   {% endif %}
-  {% if publishedBefore or state == 'published' %}
+  {% if publishedBefore or state == 'published' or state == 'published-with-changes' %}
     <p>Last published:<br />{{ today() }} by Rita Cosca</p>
 
     {% if state == 'draft' %}<hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />{% endif %}
@@ -182,6 +182,8 @@
 
 {% macro coursePublish(state = 'new', publishedBefore = false, providerCode = '', courseCode = '') %}
   {% set linkPath = providerCode + '/' + courseCode %}
+  {% set nextCycle = value('next-cycle') %}
+
   <div class="add-double-bottom-margin status-box">
     <h3 class="govuk-heading-m">Status</h3>
     {% if state == 'draft' %}
@@ -199,12 +201,22 @@
     <p>* With unpublished&nbsp;changes</p>
     {% endif %}
 
-    <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">Is it on Find?</h3>
+    <h3 class="govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">
+      {% if nextCycle %}
+        Will it be on Find?
+      {% else %}
+        Is it on Find?
+      {% endif %}
+    </h3>
     <p>
       {% if state == 'withdrawn' %}
         No – withdrawn
-      {% elseif publishedBefore or state == 'published' %}
-        <a href="#">Yes – view online</a>
+      {% elseif publishedBefore or state == 'published' or state == 'published-with-changes' %}
+        {% if nextCycle %}
+          Yes – in October
+        {% else %}
+          <a href="#">Yes – view online</a>
+        {% endif %}
       {% else %}
         No – still in draft
       {% endif %}
@@ -220,10 +232,14 @@
       <p>
         No
       </p>
-    {% elseif publishedBefore or state == 'published' %}
+    {% elseif publishedBefore or state == 'published' or state == 'published-with-changes' %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
       <p>
-        Open
+        {% if nextCycle %}
+          Opening on 10 October
+        {% else %}
+          Open
+        {% endif %}
       </p>
 
       <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
@@ -243,9 +259,18 @@
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h3 class="govuk-heading-m">Publish</h3>
-      <p>Publish your changes.</p>
-
-      <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
+      {% if nextCycle %}
+        {% if state == 'published-with-changes' %}
+          <p>Publish your changes and they will appear on Find when the cycle opens in October.</p>
+          <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish in October</a>
+        {% else %}
+          <p>Publish this course and it will appear on Find when the cycle opens in October.</p>
+          <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish in October</a>
+        {% endif %}
+      {% else %}
+        <p>Publish your changes.</p>
+        <a href="/publish/{{ linkPath }}" class="govuk-button govuk-!-margin-bottom-2">Publish</a>
+      {% endif %}
     {% endif %}
 
     {% if state != 'new' and state != 'rolled-over' %}
@@ -256,7 +281,7 @@
       <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
     {% endif %}
 
-    {% if publishedBefore or state == 'published' %}
+    {% if publishedBefore or state == 'published' or state == 'published-with-changes' %}
       {% if state == 'withdrawn' %}
         <h3 class="govuk-heading-s govuk-!-margin-0">Withdrawn</h3>
         <p class="govuk-!-margin-bottom-3">{{ today() }} by Jane Doe</p>

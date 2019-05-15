@@ -26,24 +26,30 @@
   <td class="govuk-table__cell no-wrap">
     {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
       No – withdrawn
-    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-      <a href="#">Yes – view online</a>
+    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}
+      {% if data['next-cycle'] %}
+        Yes – in October
+      {% else %}
+        <a href="#">Yes – view online</a>
+      {% endif %}
     {% else %}
       No – still in draft
     {% endif %}
   </td>
   <td class="govuk-table__cell">
-    {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-      Closed
-    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-      {% if data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}Open{% else %}Closed{% endif %}
+    {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}
+      {% if data['next-cycle'] %}
+        Opening on 10 October
+      {% else %}
+        Open
+      {% endif %}
     {% endif %}
   </td>
   <td class="govuk-table__cell">
     {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
       No
-    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-published-before'] == true) %}
-      {{ data[course.programmeCode + '-vacancies-flag'] }}  (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
+    {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}
+      {{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
     {% endif %}
   </td>
 </tr>

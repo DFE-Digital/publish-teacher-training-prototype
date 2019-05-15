@@ -5,8 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'West London Teaching School Alliance (Secondary)'
-next_cycle = false
+provider = 'The University of Warwick'
+next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
@@ -15,7 +15,7 @@ all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
 prototype_data = {
-  'rolled-over': false,
+  'rolled-over': true,
   'next-cycle': next_cycle,
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
