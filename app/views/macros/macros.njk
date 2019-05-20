@@ -456,10 +456,10 @@
   </div>
 {% endmacro %}
 
-{% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false, v = false) %}
+{% macro textbox(id, label, helpText = false, size = '', prefix = false, errors = false, v = false, labelClass = '') %}
   {% set e = error(id, errors) %}
   <div class="govuk-form-group {% if e %} govuk-form-group--error{% endif %}">
-    <label class="govuk-label" for="{{id}}">{{label | safe}}</label>
+    <label class="govuk-label {{ labelClass }}" for="{{id}}">{{label | safe}}</label>
     {% if helpText %}
       <span class="govuk-hint">{{helpText | safe}}</span>
     {% endif %}
@@ -485,9 +485,9 @@
 </div>
 {% endmacro %}
 
-{% macro textareaBasic(id, label, rows, helpText = false) %}
+{% macro textareaBasic(id, label, rows, helpText = false, labelClass = '') %}
   <div class="govuk-form-group">
-    <label class="govuk-label" for="{{id}}">{{label}}</label>
+    <label class="govuk-label {{ labelClass }}" for="{{id}}">{{label}}</label>
     {% if helpText %}
       <span class="govuk-hint">{{helpText}}</span>
     {% endif %}
