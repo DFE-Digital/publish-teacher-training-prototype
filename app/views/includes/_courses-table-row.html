@@ -44,6 +44,8 @@
     {% if (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}
       {% if data['next-cycle'] %}
         Opening on 10 October
+      {% elseif data[course.programmeCode + '-vacancies-flag'] == 'No' %}
+        Closed
       {% else %}
         Open
       {% endif %}

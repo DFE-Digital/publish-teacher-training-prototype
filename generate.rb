@@ -234,6 +234,8 @@ prototype_data['ucasCourses'].sort_by! { |k| k[:name] }
 prototype_data['accreditedCourses'] = accredited_courses.each_with_index.map do |c, idx|
   options = []
   courseCode = c['programmeCode']
+  prototype_data[courseCode + '-publish-state'] = 'published'
+  prototype_data[courseCode + '-vacancies-flag'] = idx % 4 == 0 ? 'No' : 'Yes'
 
   # if next_cycle
   #   prototype_data[courseCode + '-publish-state'] = 'rolled-over'
