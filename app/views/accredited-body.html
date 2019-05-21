@@ -24,7 +24,7 @@
           <li>
             <h3 class="govuk-heading-m">
               <a href="/accredited-body/{{ provider.code }}">{{ provider.name }}</a>
-              <span class="govuk-body govuk-!-font-weight-regular govuk-!-display-block">{{ provider.count }}&nbsp;courses</span>
+              <span class="govuk-body govuk-!-font-weight-regular govuk-!-display-block">{{ provider.count }}&nbsp;course{% if not (provider.count == 1) %}s{% endif %}</span>
             </h3>
           </li>
         {% endfor %}
