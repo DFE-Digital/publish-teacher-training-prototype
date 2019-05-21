@@ -19,6 +19,7 @@ var {
   newLocationWizardPaths,
   subject,
   course,
+  provider,
   validate,
   validateOrg
 } = require('./utils')
@@ -630,6 +631,11 @@ router.all('/locations', function (req, res) {
     justEdited: req.query.success == 'edited',
     justChangedCode: req.query.code
   })
+})
+
+router.get('/accredited-body/:code', function (req, res) {
+  var p = provider(req);
+  res.render('accredited-body/provider-courses', { provider: p })
 })
 
 module.exports = router

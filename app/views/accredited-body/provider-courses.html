@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% set title = provider.name %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
+  {
+    href: "/accredited-body",
+    text: 'Courses as an accredited body'
+  }
+]))}}{% endblock %}
+{% set readOnlyCourses = true %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">Training provider</span>
+    {{ title }}
+  </h1>
+
+  {% if data['accreditedCourses'].length > 0 %}
+    <div class="body-text">
+      <table class="govuk-table ucas-info-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
+            <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+            <th class="govuk-table__header published-col" style="width: 150px">
+              {% if data['next-cycle'] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?
+            </th>
+            <th class="govuk-table__header applications-col">Applications</th>
+            <th class="govuk-table__header type-col">Vacancies</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for course in data['accreditedCourses'] %}
+            {% if course.provider == provider.name %}
+              {% include "includes/_courses-table-row.html" %}
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}

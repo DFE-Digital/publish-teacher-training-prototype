@@ -324,6 +324,7 @@ end
 prototype_data['providers'] = accredited_courses.uniq {|c| c['provider'] }.map  do |c|
   {
     name: c['provider'],
+    code: c['providerCode'],
     count: accredited_courses.select {|a| a['provider'] == c['provider'] }.length
   }
 end

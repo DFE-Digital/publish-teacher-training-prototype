@@ -26,110 +26,57 @@
     {{ title }}
   </h1>
 
-  {% set yourCoursesHtml %}
-    <!-- <p>Use this section to:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>preview and publish courses</li>
-      <li>write about each course</li>
-      <li>copy content between courses</li>
-      <li>add new courses</li>
-    </ul> -->
+  <p>Use this section to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>preview and publish courses</li>
+    <li>write about each course</li>
+    <li>copy content between courses</li>
+    <li>add new courses</li>
+  </ul>
 
-    {% if data['ucasCourses'].length > 10 %}
-      <div class="add-top-margin">
-        <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Add a new course</a>
-        <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to fill in your course details.</p>
-      </div>
-    {% endif %}
-
-    {% if data['ucasCourses'].length > 0 %}
-      {% for accrediting in data['accreditors'] %}
-        {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
-          <h3 class="govuk-heading-m">
-            <span class="govuk-caption-m">Accredited body</span>
-            {{ accrediting.name }}
-          </h3>
-        {% endif %}
-        <div class="body-text">
-          <table class="govuk-table ucas-info-table">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
-                <th class="govuk-table__header status-col" style="width: 160px">Status</th>
-                <th class="govuk-table__header published-col" style="width: 150px">
-                  {% if data['next-cycle'] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?
-                </th>
-                <th class="govuk-table__header applications-col">Applications</th>
-                <th class="govuk-table__header type-col">Vacancies</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              {% for course in data['ucasCourses'] %}
-                {% if course.accrediting == accrediting.name %}
-                  {% include "includes/_courses-table-row.html" %}
-                {% endif %}
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      {% endfor %}
-    {% endif %}
-
+  {% if data['ucasCourses'].length > 10 %}
     <div class="add-top-margin">
       <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Add a new course</a>
       <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to fill in your course details.</p>
     </div>
-  {% endset %}
+  {% endif %}
 
-  {% set accreditedCourses %}
-    <!-- <p>Use this section to:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>preview and publish courses</li>
-      <li>write about each course</li>
-      <li>copy content between courses</li>
-      <li>add new courses</li>
-    </ul> -->
-
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <table class="govuk-table">
+  {% if data['ucasCourses'].length > 0 %}
+    {% for accrediting in data['accreditors'] %}
+      {% if data['accreditors'][0]['name'] != data['training-provider-name'] %}
+        <h3 class="govuk-heading-m">
+          <span class="govuk-caption-m">Accredited body</span>
+          {{ accrediting.name }}
+        </h3>
+      {% endif %}
+      <div class="body-text">
+        <table class="govuk-table ucas-info-table">
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
-              <th class="govuk-table__header">Training provider</th>
-              <th class="govuk-table__header">Courses</th>
+              <th class="govuk-table__header subject-col" style="width: 380px">Course</th>
+              <th class="govuk-table__header status-col" style="width: 160px">Status</th>
+              <th class="govuk-table__header published-col" style="width: 150px">
+                {% if data['next-cycle'] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training" style="text-decoration: underline; text-decoration-style: dotted;">Find</abbr>?
+              </th>
+              <th class="govuk-table__header applications-col">Applications</th>
+              <th class="govuk-table__header type-col">Vacancies</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
-            {% for provider in data['providers'] %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">{{ provider.name }}</td>
-              <td class="govuk-table__cell"><a href="#">{{ provider.count }}&nbsp;courses</a></td>
-            </tr>
+            {% for course in data['ucasCourses'] %}
+              {% if course.accrediting == accrediting.name %}
+                {% include "includes/_courses-table-row.html" %}
+              {% endif %}
             {% endfor %}
           </tbody>
         </table>
       </div>
-    </div>
-  {% endset %}
+    {% endfor %}
+  {% endif %}
 
-  <div class="course-tabs">
-    {{ govukTabs({
-      items: [
-        {
-          label: 'Your courses' | safe,
-          id: "your-courses",
-          panel: {
-            html: yourCoursesHtml
-          }
-        },
-        {
-          label: 'As accredited body' | safe,
-          id: "accredited-courses",
-          panel: {
-            html: accreditedCourses
-          }
-        }
-      ]
-    }) }}
+  <div class="add-top-margin">
+    <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Add a new course</a>
+    <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to fill in your course details.</p>
   </div>
+
 {% endblock %}

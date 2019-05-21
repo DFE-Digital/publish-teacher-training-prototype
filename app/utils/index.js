@@ -420,6 +420,14 @@ function course(req) {
   return course;
 }
 
+function provider(req) {
+  var provider = req.session.data['providers'].find(function(a) {
+    return a.code == req.params.code;
+  });
+
+  return provider;
+}
+
 function validate(data, course, view) {
   var prefix = course.programmeCode;
   var view = view || 'all';
@@ -607,6 +615,7 @@ module.exports = {
   newLocationWizardPaths,
   subject,
   course,
+  provider,
   validate,
   validateOrg
 }

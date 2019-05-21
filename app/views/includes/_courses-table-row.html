@@ -1,6 +1,10 @@
 <tr class="govuk-table__row">
   <td class="govuk-table__cell">
-    <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+    {% if not readOnlyCourses %}
+      <a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</a>
+    {% else %}
+      <span  class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.programmeCode }})</span>
+    {% endif %}
     <span class="govuk-body-s">{{ course.options }}</span>
 
     {% if course.titleRequested %}
@@ -49,7 +53,7 @@
     {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
       No
     {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}
-      {{ data[course.programmeCode + '-vacancies-flag'] }} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>)
+      {{ data[course.programmeCode + '-vacancies-flag'] }}{% if not readOnlyCourses %} (<a href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/vacancies">Edit</a>){% endif %}
     {% endif %}
   </td>
 </tr>
