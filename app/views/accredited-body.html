@@ -10,15 +10,16 @@
     {{ title }}
   </h1>
 
+  <p>Use this section to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>see who lists you as their accredited body</li>
+    <li>see which courses you’re the accredited body for</li>
+  </ul>
+
+  <h2 class="govuk-heading-l govuk-!-margin-top-6">Training providers</h2>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>Use this section to:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>see who lists you as their accredited body</li>
-        <li>see which courses you’re the accredited body for</li>
-      </ul>
 
-      <h2 class="govuk-heading-l">Training providers</h2>
       <ul class="govuk-list">
         {% for provider in data['providers'] %}
           <li>
@@ -48,6 +49,15 @@
           {% endfor %}
         </tbody>
       </table> -->
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="status-box">
+        <h2 class="govuk-heading-m">Download</h2>
+        <p>Export all the courses you’re the accredited body for.</p>
+        <p class="govuk-!-margin-bottom-0">
+          <a href="#">Download as a CSV file</a>
+        </p>
+      </div>
     </div>
   </div>
 {% endblock %}
