@@ -5,9 +5,10 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'The University of Warwick'
-next_cycle = true
+provider = 'Canterbury Christ Church University'
+next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
+accredited_courses = data.select {|c| c['accrediting'] == provider }
 
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 
@@ -15,7 +16,7 @@ all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
 prototype_data = {
-  'rolled-over': true,
+  'rolled-over': false,
   'next-cycle': next_cycle,
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
@@ -230,6 +231,60 @@ end
 
 prototype_data['ucasCourses'].sort_by! { |k| k[:name] }
 
+prototype_data['accreditedCourses'] = accredited_courses.each_with_index.map do |c, idx|
+  options = []
+  courseCode = c['programmeCode']
+
+  # if next_cycle
+  #   prototype_data[courseCode + '-publish-state'] = 'rolled-over'
+  # else
+  #   if idx == 0 || idx == 4 || idx == 5
+  #     prototype_data[courseCode + '-publish-state'] = 'published'
+  #     prototype_data[courseCode + '-published-before'] = true
+  #   end
+  #
+  #   if idx == 1 || idx == 2
+  #     prototype_data[courseCode + '-publish-state'] = 'draft'
+  #     prototype_data[courseCode + '-published-before'] = false
+  #   end
+  #
+  #   if idx == 3
+  #     prototype_data[courseCode + '-fee'] = '10,000'
+  #     prototype_data[courseCode + '-publish-state'] = 'published-with-changes'
+  #     prototype_data[courseCode + '-published-before'] = true
+  #   end
+  #
+  #   if idx == 3
+  #     prototype_data[courseCode + '-publish-state'] = 'withdrawn'
+  #     prototype_data[courseCode + '-published-before'] = true
+  #     prototype_data[courseCode + '-withdraw-reason'] = 'It was published by mistake'
+  #   end
+  # end
+
+  qual = course_qualification(c)
+  partTime = c['campuses'].map {|g| g['partTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+  fullTime = c['campuses'].map {|g| g['fullTime'] }.uniq.reject {|r| r == "n/a"}.count > 0
+  salaried = c['route'] == "School Direct training programme (salaried)" ? ' with salary' : ''
+
+  if fullTime && partTime
+    options << "#{qual}, full time or part time#{salaried}"
+  elsif partTime
+    options << "#{qual} part time#{salaried}"
+  else
+    options << "#{qual} full time#{salaried}"
+  end
+
+  {
+    provider: c['provider'],
+    name: c['name'],
+    providerCode: c['providerCode'],
+    programmeCode: courseCode,
+    options: options
+  }
+end
+
+prototype_data['accreditedCourses'].sort_by! { |k| k[:name] }
+
 # Temporarily empty
 # prototype_data['ucasCourses'] = []
 
@@ -265,7 +320,16 @@ prototype_data['accreditors'] = courses.uniq {|c| c['accrediting'] }.map  do |c|
   }
 end
 
+# Create a list of providers
+prototype_data['providers'] = accredited_courses.uniq {|c| c['provider'] }.map  do |c|
+  {
+    name: c['provider'],
+    count: accredited_courses.select {|a| a['provider'] == c['provider'] }.length
+  }
+end
+
 prototype_data['accreditors'].sort_by! { |k| k[:name] }
+prototype_data['providers'].sort_by! { |k| k[:name] }
 prototype_data['self_accrediting'] = (prototype_data['accreditors'].length == 1 && prototype_data['accreditors'][0][:name] == provider)
 
 # Create a list of subjects
