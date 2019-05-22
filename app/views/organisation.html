@@ -95,17 +95,19 @@
         </ul>
       </div>
 
-      <div class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m">
-          <a href="/accredited-body">Courses as an accredited body</a>
-        </h2>
+      {% if data['is-accredited-body'] %}
+        <div class="govuk-!-margin-bottom-8">
+          <h2 class="govuk-heading-m">
+            <a href="/accredited-body">Courses as an accredited body</a>
+          </h2>
 
-        <p>Use this section to:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>see who lists you as their accredited body</li>
-          <li>see which courses you’re the accredited body for</li>
-        </ul>
-      </div>
+          <p>Use this section to:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>see who lists you as their accredited body</li>
+            <li>see which courses you’re the accredited body for</li>
+          </ul>
+        </div>
+      {% endif %}
 
       {% if not data['rolled-over'] %}
         {% include "includes/_access-and-preferences.html" %}
