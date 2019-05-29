@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Liverpool Hope University'
+provider = 'East of England Teacher Training Centre'
 next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
