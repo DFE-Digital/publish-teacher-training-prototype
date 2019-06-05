@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = provider.name %}
+{% set title = provider.name + ' (' + provider.code + ')'%}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
   {
@@ -12,7 +12,7 @@
 {% block content %}
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">Training provider</span>
-    {{ title }}
+    {{ provider.name }}&nbsp;({{ provider.code }})
   </h1>
 
   {% if data['accreditedCourses'].length > 0 %}
