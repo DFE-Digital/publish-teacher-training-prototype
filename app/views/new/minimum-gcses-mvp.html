@@ -1,0 +1,85 @@
+{% set title = 'GCSE requirements for applicants' %}
+{% extends "layout.html" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+  <!-- examples:
+      1: https://find-postgraduate-teacher-training.education.gov.uk/course/17B/225K
+      2: https://find-postgraduate-teacher-training.education.gov.uk/course/12U/2527
+      3: https://find-postgraduate-teacher-training.education.gov.uk/course/1PJ/236Y
+      9: https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X341
+  -->
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        By law, all applicants need GCSE grade C/level 4, or an equivalent, in English and Mathematics - plus Science for Primary courses.
+      </p>
+
+      <p class="govuk-body">
+        Candidates may still be taking a GCSE when they apply. Alternatively, they can take an equivalency test to demonstrate they have the required skills to start a course.
+      </p>
+
+      <p class="govuk-body">
+        The codes you pick determine how flexible you are towards those candidates.
+      </p>
+
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">More about these <span class="govuk-visually-hidden">UCAS GCSE </span>codes</span>
+        </summary>
+        <div class="govuk-details__text">
+          <h3 class="govuk-heading-l">Codes</h3>
+
+          <h3 class="govuk-heading-m">1: Must have (least flexible)</h3>
+          <p>UCAS will block applications from candidates who haven’t gained their GCSE yet or who need to take an equivalency test.</p>
+
+          <h3 class="govuk-heading-m">2: Taking</h3>
+          <p>You will consider candidates with a pending GCSE. But UCAS will block applications from someone who needs to take an equivalency test.</p>
+
+          <h3 class="govuk-heading-m">3: Equivalence test (recommended)</h3>
+          <p>You will consider candidates who need to take an equivalency test as well as those with a pending GCSE.</p>
+
+          <h3 class="govuk-heading-m">No code (for when there is no legal requirement)</h3>
+          <p>You have no GCSE requirement for the chosen subject.</p>
+        </div>
+      </details>
+
+      <form action="{{ paths.next }}" method="post">
+        {% set options = [
+          {
+            name: '1. Must have (least flexible)',
+            more: '<p>UCAS will block applications from candidates who haven’t gained their GCSE yet or who need to take an equivalency test.</p>'
+          },
+          {
+            name: '2: Taking',
+            more: '<p>You will consider candidates with a pending GCSE. But UCAS will block applications from someone who needs to take an equivalency test.</p>'
+          },
+          {
+            name: '3: Equivalence test (recommended)',
+            more: '<p>You will consider candidates who need to take an equivalency test as well as those with a pending GCSE.</p>'
+          }
+        ] %}
+
+
+        <h2 class="govuk-heading-m">Maths GCSE</h2>
+        {{ macros.radioGroup('maths-gcse', options)}}
+
+        <h2 class="govuk-heading-m">English GCSE</h2>
+        {{ macros.radioGroup('english-gcse', options)}}
+
+        <!--<h2 class="govuk-heading-m">Science GCSE</h2>
+        {{ macros.radioGroup('science-gcse', options)}}-->
+
+        <div class="govuk-form-group">
+          <input type="submit" class="govuk-button" value="Continue" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}
