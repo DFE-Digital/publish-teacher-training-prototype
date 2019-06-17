@@ -22,20 +22,52 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+        <h2 class="govuk-heading-m">
           <a href="{% if data['next-cycle'] %}{{ currentCyclePrototype }}{% else %}/{% endif %}">Current cycle (2019&thinsp;–&thinsp;2020)</a>
         </h2>
 
-        <p>Manage courses, locations and vacancies in the current cycle.</p>
+        <p>Use this section to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>manage courses in the current cycle</li>
+          <li>edit locations and vacancies in the current cycle</li>
+        </ul>
       </div>
       <div class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+        <h2 class="govuk-heading-m">
           <a href="{% if data['next-cycle'] %}/{% else %}{{ nextCyclePrototype }}{% endif %}">Next cycle (2020&thinsp;–&thinsp;2021)</a>
         </h2>
-        <p>Prepare your courses and locations for the next cycle.</p>
+        <p>Use this section to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>prepare courses for the next cycle</li>
+          <li>manage locations needed for the next cycle</li>
+        </ul>
+      </div>
+
+      <div class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-m">
+          <a href="/about-your-organisation">About your organisation</a>
+        </h2>
+        <p>Use this section to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>write about your organisation</li>
+          <li>set your contact details</li>
+          <li>publish this information on all course pages</li>
+        </ul>
       </div>
 
       {% include "includes/_access-and-preferences.html" %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="status-box">
+        <h2 class="govuk-heading-m">New features in Publish</h2>
+        <p class="govuk-body"><a href="/new-features">View a list of new features</a> we plan to introduce in the coming months.</p>
+
+        <h2 class="govuk-heading-m">Support and guidance</h2>
+        <p class="govuk-body">If you have a question, or you’ve had a problem using Publish, you can email:</p>
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Support%20and%20guidance">becomingateacher<wbr>@digital.education.gov.uk</a>
+        </p>
+      </div>
     </div>
   </div>
 {% endblock %}
