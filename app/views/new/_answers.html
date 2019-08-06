@@ -56,7 +56,7 @@
   <dd class="govuk-summary-list__actions">
     {% if isNotPublished %}
     <a href="/new/{{ code }}/subject?change=subject">
-      Request&nbsp;change<span class="govuk-visually-hidden"> subject</span>
+      Change<span class="govuk-visually-hidden"> subject</span>
     </a>
     {% endif %}
   </dd>
@@ -366,3 +366,19 @@
     {% endif %}
   </div>
 {% endif %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Allocations
+  </dt>
+  <dd class="govuk-summary-list__value">
+    {% if data[code + '-subject'] == 'Physical education' and data[code + '-type'] == 'Fee paying (no salary)' %}
+      <p>Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
+      <p>If you haven’t already, you must <a href="#">request allocations</a>.</p>
+    {% else %}
+      Recruitment is not restricted
+    {% endif %}
+  </dd>
+  {% if showChangeLinks %}
+  <dd class="govuk-summary-list__actions"></dd>
+  {% endif %}
+</div>
