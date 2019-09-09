@@ -58,17 +58,17 @@ table thead th {
 
 .phase-tag-no-content {
   background: govuk-colour("white");
-  color: govuk-colour("dark-grey");
   border: 2px solid lighten(govuk-colour("dark-grey"), 10%);
-  margin-top: -1px;
+  color: govuk-colour("dark-grey");
   margin-bottom: -1px;
+  margin-top: -1px;
 }
 
 .phase-tag-not-running {
   background: govuk-colour("light-grey");
   color: govuk-colour("black");
-  margin-top: -1px;
   margin-bottom: -1px;
+  margin-top: -1px;
 }
 
 .phase-tag-draft {
@@ -98,9 +98,9 @@ table thead th {
 }
 
 .doc-image {
-  max-width: 100%;
   border: 1px solid $govuk-border-colour;
   margin-bottom: $govuk-gutter * 2;
+  max-width: 100%;
 }
 
 .remove-top-margin {
@@ -142,16 +142,16 @@ dl.aligned {
 }
 
 dl.aligned dt {
-  width: 30%;
+  clear: both;
   float: left;
   margin: 0;
-  clear: both;
+  width: 30%;
 }
 
 dl.aligned dd {
-  width: 70%;
   float: right;
   margin: 0;
+  width: 70%;
 
   .govuk-details {
     margin-bottom: 0;
@@ -163,9 +163,9 @@ dl.aligned.course-part-tasks dd {
 }
 
 .fake-email {
+  border: 5px solid $govuk-border-colour;
   margin-left: 15px;
   margin-top: 20px;
-  border: 5px solid $govuk-border-colour;
   padding: 60px;
 }
 
@@ -187,11 +187,11 @@ dl.aligned.course-part-tasks dd {
   position: relative;
 
   .custom-toolbar {
-    text-align: right;
-    width: 320px;
     position: absolute;
     right: 12px;
+    text-align: right;
     top: 12px;
+    width: 320px;
     z-index: 2;
 
     label {
@@ -224,8 +224,8 @@ dl.aligned.course-part-tasks dd {
 }
 
 .govuk-summary-list--short {
-  margin-top: govuk-spacing(6);
   margin-bottom: govuk-spacing(8);
+  margin-top: govuk-spacing(6);
 
   .govuk-summary-list__key {
     width: 50%;
@@ -241,8 +241,8 @@ dl.aligned.course-part-tasks dd {
 }
 
 .govuk-summary-list__key--error {
-  color: $govuk-error-colour;
   border-left: 5px solid $govuk-error-colour !important;
+  color: $govuk-error-colour;
   padding-left: 10px;
 
   a {
@@ -251,19 +251,19 @@ dl.aligned.course-part-tasks dd {
 }
 
 .govuk-summary-list__value--truncate {
-  white-space: nowrap;
+  max-width: 295px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 295px;
+  white-space: nowrap;
 }
 
 .truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
   display: inline-block;
   margin-bottom: -8px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .govuk-heading-27 {
@@ -291,8 +291,8 @@ dl.aligned.course-part-tasks dd {
 
 .location-list li {
   border-bottom: 1px solid $govuk-border-colour;
-  padding-top: govuk-spacing(2);
   padding-bottom: govuk-spacing(2);
+  padding-top: govuk-spacing(2);
 
   &:last-child {
     border: none;
@@ -301,15 +301,15 @@ dl.aligned.course-part-tasks dd {
 
 .course-tabs {
   .govuk-tabs__tab {
-    font-weight: bold;
     color: $govuk-link-colour;
+    font-weight: bold;
     text-align: left;
   }
 
   .govuk-tabs__tab--selected {
-    color: $govuk-text-colour;
     background-color: govuk-colour('white');
     border-top: 5px solid govuk-colour('blue');
+    color: $govuk-text-colour;
     padding-top: govuk-spacing(3) - 5;
 
     text-decoration: none;
@@ -325,18 +325,18 @@ dl.aligned.course-part-tasks dd {
 }
 
 .timeline {
-  padding-left: 0;
   list-style-type: none;
+  padding-left: 0;
 
   .edition-timeline {
-    padding-left: 0;
     list-style-type: none;
+    padding-left: 0;
   }
 
   .timeline-day-wrapper {
     border-left: 5px solid govuk-colour("mid-grey");
-    position: relative;
     margin-top: 10px;
+    position: relative;
   }
 
   .timeline-day {
@@ -346,20 +346,20 @@ dl.aligned.course-part-tasks dd {
     top: -10px;
 
     &:before {
-      content: " ";
-      height: 5px;
-      width: 15px;
       background: govuk-colour("mid-grey");
+      content: " ";
       display: inline-block;
+      height: 5px;
+      left: 0;
       position: absolute;
       top: 10px;
-      left: 0;
+      width: 15px;
     }
   }
 
   .events {
-    padding-left: 0;
     list-style-type: none;
+    padding-left: 0;
   }
 
   .event {
@@ -382,4 +382,11 @@ dl.aligned.course-part-tasks dd {
 .error .govuk-warning-text__icon {
   background-color: $govuk-error-colour;
   border-color: $govuk-error-colour;
+}
+
+// Adjust text alignment in tables
+// Required since govuk-frontend 3.0.0
+.app-table--vertical-align-middle .govuk-table__header,
+.app-table--vertical-align-middle .govuk-table__cell {
+  vertical-align: middle;
 }
