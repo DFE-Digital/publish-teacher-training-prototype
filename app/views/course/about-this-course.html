@@ -53,7 +53,7 @@
 
         {{ macros.radioGroup(course.programmeCode + '-outcome', fields, errors) }}
 
-        <details {% if data[course.programmeCode + '-outcome'] == 'PGDE with QTS' %}open{% endif %}>
+        <details {% if data[course.programmeCode + '-outcome'] == 'PGDE with QTS' %}open{% endif %} data-module="govuk-details">
           <summary><span class="summary">More options</span></summary>
           <div class="govuk-inset-text">
             {% set fields = [
