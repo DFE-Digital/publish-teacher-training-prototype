@@ -28,7 +28,7 @@ blockquote {
 }
 
 .not-running-notice {
-  border: 5px solid govuk-colour("grey-3");
+  border: 5px solid govuk-colour("light-grey");
   padding: 20px;
 }
 
@@ -58,14 +58,14 @@ table thead th {
 
 .phase-tag-no-content {
   background: govuk-colour("white");
-  color: govuk-colour("grey-1");
-  border: 2px solid lighten(govuk-colour("grey-1"), 10%);
+  color: govuk-colour("dark-grey");
+  border: 2px solid lighten(govuk-colour("dark-grey"), 10%);
   margin-top: -1px;
   margin-bottom: -1px;
 }
 
 .phase-tag-not-running {
-  background: govuk-colour("grey-3");
+  background: govuk-colour("light-grey");
   color: govuk-colour("black");
   margin-top: -1px;
   margin-bottom: -1px;
@@ -80,16 +80,16 @@ table thead th {
 }
 
 .empty {
-  color: govuk-colour("grey-1");
+  color: govuk-colour("dark-grey");
 }
 
 .status {
-  background: govuk-colour("grey-3");
+  background: govuk-colour("light-grey");
   padding: 20px;
 }
 
 .status-box {
-  background-color: govuk-colour("grey-4");
+  background-color: govuk-colour("light-grey");
   padding: 20px;
 }
 
@@ -334,7 +334,7 @@ dl.aligned.course-part-tasks dd {
   }
 
   .timeline-day-wrapper {
-    border-left: 5px solid govuk-colour("grey-2");
+    border-left: 5px solid govuk-colour("mid-grey");
     position: relative;
     margin-top: 10px;
   }
@@ -349,7 +349,7 @@ dl.aligned.course-part-tasks dd {
       content: " ";
       height: 5px;
       width: 15px;
-      background: govuk-colour("grey-2");
+      background: govuk-colour("mid-grey");
       display: inline-block;
       position: absolute;
       top: 10px;
