@@ -306,18 +306,6 @@ dl.aligned.course-part-tasks dd {
     text-align: left;
   }
 
-  .govuk-tabs__tab--selected {
-    background-color: govuk-colour('white');
-    border-top: 5px solid govuk-colour('blue');
-    color: $govuk-text-colour;
-    padding-top: govuk-spacing(3) - 5;
-
-    text-decoration: none;
-    a {
-      outline-offset: -3px;
-    }
-  }
-
   .govuk-tabs__panel {
     border: none;
     padding: 30px 0 0;

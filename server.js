@@ -116,7 +116,7 @@ app.set('view engine', 'html')
 app.use('/public', express.static(path.join(__dirname, '/public')))
 
 // Serve govuk-frontend in from node_modules (so not to break pre-extenstions prototype kits)
-app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/govuk/assets')))
+app.use('/node_modules/govuk-frontend', express.static(path.join(__dirname, '/node_modules/govuk-frontend')))
 
 // Set up documentation app
 if (useDocumentation) {
