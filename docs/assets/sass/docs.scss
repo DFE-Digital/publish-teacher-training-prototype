@@ -27,7 +27,7 @@ img{
 }
 
 .app-code {
-  background-color: govuk-colour("grey-4");
+  background-color: govuk-colour("light-grey");
   border: 1px solid $govuk-border-colour;
   font-size: 16px;
   margin: 0;
@@ -93,7 +93,7 @@ img{
   }
 
   p code {
-    background-color: govuk-colour("grey-4");
+    background-color: govuk-colour("light-grey");
     border: 1px solid $govuk-border-colour;
     padding: 0 govuk-spacing(2);
   }
