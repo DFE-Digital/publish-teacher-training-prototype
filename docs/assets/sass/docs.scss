@@ -1,4 +1,4 @@
-@import "node_modules/govuk-frontend/all";
+@import "node_modules/govuk-frontend/govuk/all";
 
 img{
   max-width: 100%;
@@ -27,14 +27,14 @@ img{
 }
 
 .app-code {
-  font-size: 16px;
-  position: relative;
-  margin: 0;
-  padding: govuk-spacing(3);
-  overflow: auto;
-  border: 1px solid $govuk-border-colour;
   background-color: govuk-colour("grey-4");
+  border: 1px solid $govuk-border-colour;
+  font-size: 16px;
+  margin: 0;
   max-width: 38em;
+  overflow: auto;
+  padding: govuk-spacing(3);
+  position: relative;
   @include govuk-responsive-margin(5, "bottom");
 }
 
@@ -93,8 +93,8 @@ img{
   }
 
   p code {
-    border: 1px solid $govuk-border-colour;
     background-color: govuk-colour("grey-4");
+    border: 1px solid $govuk-border-colour;
     padding: 0 govuk-spacing(2);
   }
 
