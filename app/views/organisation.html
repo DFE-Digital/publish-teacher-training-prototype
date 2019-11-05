@@ -34,20 +34,6 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-l">New cycle (2020 – 2021)</h2>
-      <p>Before 1 October you must:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>publish your organisation information</li>
-        <li>publish the courses you are running this year</li>
-        <li>remove any mention of the skills test requirement</li>
-      </ul>
-
-      <p>Courses you publish will be listed on <a href="https://find-postgraduate-teacher-training.education.gov.uk/">Find postgraduate teacher training</a> from 1 October. Applications will open on 8 October.</p>
-
-      <p>Candidates can only apply to published courses.</p>
-
-      <hr class="govuk-section-break govuk-section-break--l">
-
       {% if data['rolled-over'] %}
         {% if data['next-cycle'] %}
           <p class="govuk-body-l">Prepare your courses and locations for the next cycle. All your courses, locations and details have been copied from the current cycle.</p>
@@ -90,7 +76,7 @@
       </div>
 
       {% if data['is-accredited-body'] and not (data['rolled-over'] and data['next-cycle']) %}
-        <!-- <div class="govuk-!-margin-bottom-8">
+        <div class="govuk-!-margin-bottom-8">
           <h2 class="govuk-heading-m">
             <a href="/accredited-body">Courses as an accredited body</a>
           </h2>
@@ -100,7 +86,7 @@
             <li>see who lists you as their accredited body</li>
             <li>see which courses you’re the accredited body for</li>
           </ul>
-        </div> -->
+        </div>
       {% endif %}
 
       <div class="govuk-!-margin-bottom-8">
@@ -115,14 +101,6 @@
           <li>add locations</li>
         </ul>
       </div>
-
-      <h2 class="govuk-heading-l">Previous cycles</h2>
-
-      <h2 class="govuk-heading-m">
-        <a href="/locations">2019 – 2020</a>
-      </h2>
-
-      <p>View your courses and locations from the 2019 – 2020 recruitment cycle.</p>
     </div>
     <div class="govuk-grid-column-one-third">
       {% if not data['rolled-over'] %}
