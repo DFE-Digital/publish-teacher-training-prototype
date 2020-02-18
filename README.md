@@ -5,7 +5,7 @@ The course management tool for https://find-postgraduate-teacher-training.educat
 Prototype:<br /> https://manage-courses-prototype.herokuapp.com/
 
 Design history:<br />
-https://bat-design-history.herokuapp.com/publish-teacher-training
+https://bat-design-history.netlify.com/publish-teacher-training-courses/
 
 ## Find postgraduate teacher training courses service
 
@@ -14,7 +14,7 @@ The live service lives at:<br />
 * https://github.com/DFE-Digital/search-and-compare-ui
 
 Design history of the frontend at:<br />
-* https://bat-design-history.herokuapp.com/find-teacher-training
+* https://bat-design-history.netlify.com/find-teacher-training/
 
 ## Change the provider in the prototype
 
