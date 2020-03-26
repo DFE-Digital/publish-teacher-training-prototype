@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% set title = 'Notifications' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<div class="body-text">
+			<h1 class="govuk-heading-xl">
+				{{ title }}
+			</h1>
+			<h2 class="govuk-heading-m">
+				System notifications
+			</h2>
+			<p>You'll receieve notifications related to your account and the Publish teacher training courses service.</p>
+			<a href="/manage-notifications" class="govuk-body">Enable this notification</a>
+			{# <table class="govuk-table ucas-info-table">
+				<thead class="govuk-table__head">
+					<tr class="govuk-table__row">
+						<th class="govuk-table__header subject-col" style="width: 60%">Email</th>
+						<th class="govuk-table__header status-col" style="width: 25%">Freqency</th>
+						<th class="govuk-table__header status-col"></th>
+					</tr>
+				</thead>
+				<tbody class="govuk-table__body">
+
+				<tr class="govuk-table__row">
+					<td class="govuk-table__cell">
+						jesse.yuen@digital.education.gov.uk
+					</td>
+					<td class="govuk-table__cell">
+						Daily
+					</td>
+					<td class="govuk-table__cell" style="text-align: right">
+						<a href="/manage-notifications">Manage</a>
+					</td>
+				</tr>
+				</tbody>
+			</table> #}
+			<h2 class="govuk-heading-m govuk-!-margin-top-8">
+				Updates to courses as an accredited body
+			</h2>
+			<p>You'll receive a notification if there’s been a change to a course that you’re the accredited body for.</p>
+			{# <a href="/manage-notifications" class="govuk-body">Enable this notification</a> #}
+			<table class="govuk-table ucas-info-table">
+				<thead class="govuk-table__head">
+					<tr class="govuk-table__row">
+						<th class="govuk-table__header subject-col" style="width: 60%">Email</th>
+						<th class="govuk-table__header status-col" style="width: 25%">Freqency</th>
+						<th class="govuk-table__header status-col"></th>
+						<th class="govuk-table__header status-col"></th>
+					</tr>
+				</thead>
+				<tbody class="govuk-table__body">
+
+				<tr class="govuk-table__row">
+					<td class="govuk-table__cell">
+						{{ data['system-notify-email'] }}
+					</td>
+					<td class="govuk-table__cell">
+						{{ data['frequency'] }}
+					</td>
+					<td class="govuk-table__cell" style="text-align: right">
+						<a href="/manage-notifications">Manage</a>
+					</td>
+					<td class="govuk-table__cell" style="text-align: right">
+						<a href="/notifications">Remove</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
