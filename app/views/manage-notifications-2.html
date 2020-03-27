@@ -10,12 +10,12 @@
 {% block content %}
 <div class="govuk-grid-row">
 	<div class="govuk-grid-column-two-thirds">
-		<form action="/notifications-enabled" method="post" class="form">
+		<form action="/notifications-enabled-2" method="post" class="form">
 		<fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
             <span class="govuk-caption-xl">Manage notifications</span>
-            Updates to courses as an accredited body
+            Changes to courses as an accredited body
           </h1>
         </legend>
 		<h2 class="govuk-heading-l govuk-!-margin-top-4">
@@ -24,26 +24,26 @@
 		<label class="govuk-label" for="event-name">
 			Email address
 		</label>
-        <input class="govuk-input govuk-input govuk-input--width-20" id="system-notify-email" name="system-notify-email" value="{{ data['system-notify-email'] }}" type="text">
+        <input class="govuk-input govuk-input govuk-input--width-20" id="system-notify-email-2" name="system-notify-email-2" value="{{ data['system-notify-email-2'] }}" type="text">
 		<h2 class="govuk-heading-l govuk-!-margin-top-6">
 			How often should notifications be delivered? 
 		</h2>
 		<div class="govuk-radios govuk-!-margin-top-6 govuk-!-margin-bottom-8">
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="frequency-1" name="frequency" type="radio" value="As it happens" {{ checked("frequency", "As it happens") }}>
-            <label class="govuk-label govuk-radios__label" for="frequency-1">
+            <input class="govuk-radios__input" id="frequency-2-1" name="frequency-2" type="radio" value="As it happens" {{ checked("frequency-2", "As it happens") }}>
+            <label class="govuk-label govuk-radios__label" for="frequency-2-1">
             	As it happens
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="frequency-2" name="frequency" type="radio" value="Daily" {{ checked("frequency", "Daily") }}>
-            <label class="govuk-label govuk-radios__label" for="frequency-2">
+            <input class="govuk-radios__input" id="frequency-2-3" name="frequency-2" type="radio" value="Daily" {{ checked("frequency-2", "Daily") }}>
+            <label class="govuk-label govuk-radios__label" for="frequency-2-2">
 				Daily
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="frequency-3" name="frequency" type="radio" value="Weekly" {{ checked("frequency", "Weekly") }}>
-            <label class="govuk-label govuk-radios__label" for="frequency-3">
+            <input class="govuk-radios__input" id="frequency-2-3" name="frequency-2" type="radio" value="Weekly" {{ checked("frequency-2", "Weekly") }}>
+            <label class="govuk-label govuk-radios__label" for="frequency-2-3">
 				Weekly
             </label>
           </div>
