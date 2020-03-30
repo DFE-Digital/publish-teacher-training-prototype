@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Manage: Updates to courses as an accredited body' %}
+{% set title = 'Manage Notifications: Updates to courses as an accredited body' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block beforeContent %}
 {{ govukBackLink({
@@ -20,10 +20,10 @@
     </legend>
     {% set fields = [
       {
-        name: 'Get an email each time there is a change'
+        name: 'Get email notifications about changes to courses'
       },
       {
-        name: 'Don’t get an email'
+        name: 'Don’t get email notifications'
       }
     ]
     %}
