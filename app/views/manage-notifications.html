@@ -30,7 +30,7 @@ href: "/notifications"
     %}
     {{ macros.radioGroup('ab-notifications', fields) }}
     <h2 class="govuk-heading-l govuk-!-margin-top-4">
-      Who are the notifications sent to?
+      Who should the notifications be sent to?
     </h2>
     <label class="govuk-label" for="event-name">
     Email address
@@ -41,21 +41,27 @@ href: "/notifications"
     </h2>
     <div class="govuk-radios govuk-!-margin-top-6 govuk-!-margin-bottom-8">
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="frequency-1" name="frequency" type="radio" value="As it happens" {{ checked("frequency", "As it happens") }}>
+        <input class="govuk-radios__input" id="frequency-1" name="frequency" type="radio" value="Each time a change is made" {{ checked("frequency", "Each time a change is made") }}>
         <label class="govuk-label govuk-radios__label" for="frequency-1">
-        As it happens (Recommended)
+        Each time a change is made (Recommended)
         </label>
       </div>
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="frequency-2" name="frequency" type="radio" value="Daily" {{ checked("frequency", "Daily") }}>
+        <input class="govuk-radios__input" id="frequency-2" name="frequency" type="radio" value="Daily digest" {{ checked("frequency", "Daily digest") }}>
         <label class="govuk-label govuk-radios__label" for="frequency-2">
-        Daily
+        Daily digest
         </label>
       </div>
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="frequency-3" name="frequency" type="radio" value="Weekly" {{ checked("frequency", "Weekly") }}>
+        <input class="govuk-radios__input" id="frequency-3" name="frequency" type="radio" value="Weekly digest" {{ checked("frequency", "Weekly digest") }}>
         <label class="govuk-label govuk-radios__label" for="frequency-3">
-        Weekly
+        Weekly digest
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="frequency-4" name="frequency" type="radio" value="Monthly digest" {{ checked("frequency", "Monthly digest") }}>
+        <label class="govuk-label govuk-radios__label" for="frequency-4">
+        Monthly digest
         </label>
       </div>
     </div>
