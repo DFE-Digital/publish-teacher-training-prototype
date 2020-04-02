@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 {% set title = 'Notifications' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "University of Warwick",
+  href: "/"
+}) }}
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
