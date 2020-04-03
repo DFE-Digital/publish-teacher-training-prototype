@@ -383,3 +383,32 @@ dl.aligned.course-part-tasks dd {
   background-color: $govuk-error-colour;
   border-color: $govuk-error-colour;
 }
+
+.dm-alert {
+  @include govuk-focusable;
+  @include govuk-responsive-padding(4);
+  @include govuk-responsive-margin(8, "bottom");
+  border: govuk-spacing(1) solid;
+}
+.dm-alert--success {
+  border-color: govuk-colour("green");
+  color: govuk-colour("green");
+}
+.dm-alert--error {
+  border-color: $govuk-error-colour;
+}
+.dm-alert--notice {
+  border-color: govuk-colour("blue");
+}
+.dm-alert__title {
+  @include govuk-font(19, $weight: bold);
+  margin: 0px;
+}
+.dm-alert__title--large {
+  @include govuk-font(24, $weight: bold);
+}
+.dm-alert__body {
+  @include govuk-font(19);
+  @include govuk-responsive-padding(4,"top");
+  @include govuk-responsive-padding(0,"bottom");
+}
