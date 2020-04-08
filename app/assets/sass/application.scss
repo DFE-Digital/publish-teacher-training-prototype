@@ -18,6 +18,7 @@ $button-colour: #00823b;
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
 @import "components/map";
+@import "components/notification-banner";
 
 blockquote {
   margin: 0;
