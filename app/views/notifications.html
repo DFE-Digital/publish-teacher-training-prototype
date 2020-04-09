@@ -6,7 +6,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/notifications-enabled" method="post" class="form">
+    <form action="/" method="post" class="form">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
@@ -21,15 +21,19 @@
 
         {% set fields = [
           {
-            name: 'Get notificatons sent to email@domain.com'
+            name: "Get notificatons sent to email@domain.com",
+            value: "get-notifications",
+            checked: checked("notifications", "get-notifications")
           },
           {
-            name: 'Don’t get notifications'
+            name: "Don’t get notifications",
+            value: "no-notifications",
+            checked: checked("notifications", "no-notifications")
           }
         ]
         %}
         {{ macros.radioGroup('ab-notifications', fields) }}
-      
+
         {# {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to receive emails from Publish teacher training courses' }], false) }} #}
       <input type="submit" class="govuk-button govuk-!-margin-bottom-8 govuk-!-margin-top-2" value="Save">
     </form>
