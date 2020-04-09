@@ -1,88 +1,41 @@
 {% extends "layout.html" %}
-{% set title = 'Notifications' %}
+{% set title = 'Manage: Updates to courses as an accredited body' %}
 {% block pageTitle %}{{ title }}{% endblock %}
-{% block beforeContent %}
-{{ govukBackLink({
-  text: "University of Warwick",
-  href: "/"
-}) }}
-{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
-	<div class="govuk-grid-column-two-thirds">
-		<div class="body-text">
-			<h1 class="govuk-heading-xl">
-				{{ title }}
-			</h1>
-			<h2 class="govuk-heading-m">
-				Changes to courses as an accredited body
-			</h2>
-			<p>You'll receive notifications for courses that you're the accredited body for.</p> 
-			<p>You'll receive a notification:</p>
-			<ul class="govuk-list govuk-list--bullet">
-				<li>if there are any changes to a course’s basic details</li>
-				<li>when a course is created</li>
-				<li>when a course is published</li>
-				<li>when a course is withdrawn</li>
-				<li>if all vacancies are filled for a course</li>
-				<li>if a course’s accredited body changes</li>
-			</ul>
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/notifications-enabled" method="post" class="form">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
+            <span class="govuk-caption-xl">Manage notifications</span>
+            Changes to courses as an accredited body
+          </h1>
+        </legend>
 
-			<a href="/manage-notifications" class="govuk-body">Subscribe to this notification</a>
-			{# <table class="govuk-table ucas-info-table">
-				<thead class="govuk-table__head">
-					<tr class="govuk-table__row">
-						<th class="govuk-table__header subject-col" style="width: 60%">Email</th>
-						<th class="govuk-table__header status-col" style="width: 25%">Frequency</th>
-						<th class="govuk-table__header status-col"></th>
-					</tr>
-				</thead>
-				<tbody class="govuk-table__body">
+        <div class="govuk-!-margin-bottom-6">
+          <p>Receive notifications about courses that you’re the accredited body for. You’ll be told about any new courses added and updated about changes to existing courses.</p>
+        </div>
 
-				<tr class="govuk-table__row">
-					<td class="govuk-table__cell">
-						jesse.yuen@digital.education.gov.uk
-					</td>
-					<td class="govuk-table__cell">
-						Daily
-					</td>
-					<td class="govuk-table__cell" style="text-align: right">
-						<a href="/manage-notifications">Manage</a>
-					</td>
-				</tr>
-				</tbody>
-			</table> #}
-			<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-			<h2 class="govuk-heading-m">
-				System notifications
-			</h2>
-			<p>You'll receive notifications related to your account and the Publish teacher training courses service.</p>
-			<a href="#" class="govuk-body">Subscribe to this notification</a>
-			{# <table class="govuk-table ucas-info-table">
-				<thead class="govuk-table__head">
-					<tr class="govuk-table__row">
-						<th class="govuk-table__header subject-col" style="width: 60%">Email</th>
-						<th class="govuk-table__header status-col" style="width: 25%">Frequency</th>
-						<th class="govuk-table__header status-col"></th>
-					</tr>
-				</thead>
-				<tbody class="govuk-table__body">
-
-				<tr class="govuk-table__row">
-					<td class="govuk-table__cell">
-						name@organisaton.gov.uk
-					</td>
-					<td class="govuk-table__cell">
-						As it happens
-					</td>
-					<td class="govuk-table__cell" style="text-align: right">
-						<a href="/manage-notifications">Manage</a>
-					</td>
-				</tr>
-				</tbody>
-			</table> #}
-		</div>
-	</div>
+        {% set fields = [
+          {
+            name: 'Get notificatons sent to email@domain.com'
+          },
+          {
+            name: 'Don’t get notifications'
+          }
+        ]
+        %}
+        {{ macros.radioGroup('ab-notifications', fields) }}
+      
+        {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to receive emails from Publish teacher training courses' }], false) }}
+      <input type="submit" class="govuk-button govuk-!-margin-bottom-8" value="Save">
+    </form>
+    <p>
+      <a href="#">Cancel changes</a>
+    </p>
+  </div>
 </div>
 {% endblock %}
