@@ -17,9 +17,9 @@ all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
 prototype_data = {
-  'rolled-over': true,
+  'rolled-over': false,
   'next-cycle': next_cycle,
-  'multi-organisation': true,
+  'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',
   'training-provider-name': provider,
