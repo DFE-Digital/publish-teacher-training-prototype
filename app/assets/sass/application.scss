@@ -19,6 +19,8 @@ $button-colour: #00823b;
 
 @import "components/map";
 @import "components/notification-banner";
+@import "components/application-card";
+@import "components/new-header";
 
 blockquote {
   margin: 0;
@@ -411,4 +413,89 @@ dl.aligned.course-part-tasks dd {
   @include govuk-font(19);
   @include govuk-responsive-padding(4,"top");
   @include govuk-responsive-padding(0,"bottom");
+}
+
+// // Navigation
+// .govuk__navigation {
+//   color: govuk-colour("white");
+//   margin-top: govuk-spacing(1)-2px;
+// }
+
+.govuk-header__logo {
+  // width: 
+}
+
+.govuk-header__new {
+  font-size: 0; // Removes white space when using inline-block on child element.
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .dm-admin-header {
+    .govuk-header__container {
+      border-bottom-color: govuk-colour("red");
+    }
+  }
+  
+  .govuk-header__logo {
+    width: auto;
+  }
+  
+  .govuk-header__content {
+    @include govuk-media-query(desktop) {
+      width: auto;
+      float: none;
+      text-align: right;
+    }
+  }
+
+  .govuk-header__navigation-item {
+    display: inline-block;
+    margin-right: govuk-spacing(4);
+    
+    &:nth-child(2) {
+      
+      a {
+        font-weight: 700;
+        border: none;
+        text-decoration: none;
+      }
+    }
+    
+    &:last-child {
+      margin-right: 0;
+    }
+    
+    a {   
+      @include govuk-font(19);
+      text-decoration: underline;
+    }
+  
+  }
+  
+  .govuk-header__link {
+    font-weight: normal;
+
+    &:link,
+    &:visited,
+    &:active {
+      color: inherit;
+    }
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  
+    &:focus {
+      color: govuk-colour("black");
+    }
+  
+  }
+  
+  .govuk-header__navigation-link[aria-current=page] {
+    text-decoration: none;
+    font-weight: bold;
+    display: none;
+  }
+
 }

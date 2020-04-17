@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout-new.html" %}
 {% block pageTitle %}Users{% endblock %}
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
@@ -16,7 +16,23 @@
     {% endif %}
   {% endset %}
 
-  {{ macros.orgHeading('Manage users', message) }}
+  {{ macros.orgHeading('Users', message) }}
+
+  <style>
+  .full {
+    width: 100%
+  }
+
+  .left {
+    {# float: left; #}
+  }    
+  
+  .right {
+    margin: 10px 0 0 0;
+    {# display: block; #}
+  }    
+
+  </style>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -26,20 +42,33 @@
       <h1 class="govuk-heading-xl">{{title}}</h1>
       {{govukButton({
         text: 'Invite user',
-        href: '/users/new'
+        href: '/request-access'
       })}}
       <div class="app-application-card">
-        <div>
-          <h2 class="govuk-heading-m govuk-!-margin-bottom-1"><a class="govuk-link govuk-link--no-visited-state" href="/users/show">Ross Anderson</a></h2>
-          <p class="govuk-!-margin-bottom-1">ross.anderson@titan.org.uk</p>
-          <p class="govuk-!-font-size-16 govuk-caption-m govuk-!-margin-bottom-0">Aston Manor Academy and Titan Partnership Ltd</p>
+        <div class="full">
+          <div class="left">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Ross Anderson</h2>
+            <p class="govuk-!-margin-bottom-3">ross.anderson@titan.org.uk</p>
+          </div>
+          <a href="#" class="govuk-body right">Delete user</a>
         </div>
       </div>
       <div class="app-application-card">
-        <div>
-          <h2 class="govuk-heading-m govuk-!-margin-bottom-1"><a class="govuk-link govuk-link--no-visited-state" href="/users/show">Hermione Granger</a></h2>
-          <p class="govuk-!-margin-bottom-1">hermione.granger@wizardschool.com</p>
-          <p class="govuk-!-font-size-16 govuk-caption-m govuk-!-margin-bottom-0">Somerset SCITT consortium and one more</p>
+        <div class="full">
+          <div class="left">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Hermione Granger</h2>
+            <p class="govuk-!-margin-bottom-3">hermione.granger@wizardschool.com</p>
+          </div>
+          <a href="#" class="govuk-body right">Delete user</a>
+        </div>
+      </div>
+      <div class="app-application-card">
+        <div class="full">
+          <div class="left">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Billy Boyo</h2>
+            <p class="govuk-!-margin-bottom-3">billy.boyo@wizardschool.com</p>
+          </div>
+          <a href="#" class="govuk-body right">Delete user</a>
         <div>
       </div>
     </div>
