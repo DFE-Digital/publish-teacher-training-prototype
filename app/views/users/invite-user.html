@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout-new.html" %}
 {% block pageTitle %}Invite a user{% endblock %}
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
@@ -16,7 +16,7 @@
     {% endif %}
   {% endset %}
 
-  {{ macros.orgHeading('Invite User', message) }}
+  {{ macros.orgHeading('Invite user', message) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
