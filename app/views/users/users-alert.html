@@ -3,46 +3,23 @@
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
 {% block content %}
-  {% set message %}
-    {% if showMessage %}
-      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-          DfE has received your request to give access to {{ data['request-first-name']}} {{ data['request-last-name'] }}.
-        </h3>
-        <p>
-          They will receive sign-up instructions if their account is approved.
-        </p>
-      </div>
-    {% endif %}
-  {% endset %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
+      DfE has received your request to invite Firstname Lastname.
+    </h3>
+    <p class="govuk-!-margin-bottom-0">
+      They will receive sign-up instructions if their account is approved.
+    </p>
+  </div>
 
-  {{ macros.orgHeading('Users', message) }}
-
-  <style>
-  .full {
-    width: 100%
-  }
-
-  .left {
-    {# float: left; #}
-  }    
-  
-  .right {
-    margin: 10px 0 0 0;
-    {# display: block; #}
-  }    
-
-  </style>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>These users are able to manage your courses.</p>
-      <div class="govuk-grid">
-    <div class="govuk-grid-column-two-third">
+      <p>These users are able to manage your courses and details of your organisation.</p>
       <h1 class="govuk-heading-xl">{{title}}</h1>
       {{govukButton({
         text: 'Invite user',
-        href: '/request-access'
+        href: '/invite-user'
       })}}
       <div class="app-application-card">
         <div class="full">
@@ -50,7 +27,7 @@
             <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Ross Anderson</h2>
             <p class="govuk-!-margin-bottom-3">ross.anderson@titan.org.uk</p>
           </div>
-          <a href="#" class="govuk-body right">Delete user</a>
+          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
         </div>
       </div>
       <div class="app-application-card">
@@ -59,7 +36,7 @@
             <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Hermione Granger</h2>
             <p class="govuk-!-margin-bottom-3">hermione.granger@wizardschool.com</p>
           </div>
-          <a href="#" class="govuk-body right">Delete user</a>
+          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
         </div>
       </div>
       <div class="app-application-card">
@@ -68,13 +45,10 @@
             <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Billy Boyo</h2>
             <p class="govuk-!-margin-bottom-3">billy.boyo@wizardschool.com</p>
           </div>
-          <a href="#" class="govuk-body right">Delete user</a>
+          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
         <div>
       </div>
     </div>
   </div>
-    </div>
-  </div>
-
 
 {% endblock %}

@@ -415,16 +415,6 @@ dl.aligned.course-part-tasks dd {
   @include govuk-responsive-padding(0,"bottom");
 }
 
-// // Navigation
-// .govuk__navigation {
-//   color: govuk-colour("white");
-//   margin-top: govuk-spacing(1)-2px;
-// }
-
-.govuk-header__logo {
-  // width: 
-}
-
 .govuk-header__new {
   font-size: 0; // Removes white space when using inline-block on child element.
   list-style: none;
