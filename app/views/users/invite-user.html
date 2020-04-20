@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Request access for someone{% endblock %}
+{% block pageTitle %}Invite a user{% endblock %}
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
 {% block content %}
@@ -16,15 +16,15 @@
     {% endif %}
   {% endset %}
 
-  {{ macros.orgHeading('Request access for someone', message) }}
+  {{ macros.orgHeading('Invite User', message) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>You can request a DfE Sign-in account for others who manage your courses.</p>
+      <p>You can invite a user to this account. They will be able to manage your courses and details of the organisation.</p>
 
-      <form action="/request-access" method="post">
+      <form action="/users/invite-user" method="post">
         <legend>
-          <h2 class="govuk-heading-m">Request an account for:</h2>
+          <h2 class="govuk-visually-hidden">Invite this person:</h2>
         </legend>
         {{ macros.textbox('request-first-name', 'First name') }}
         {{ macros.textbox('request-last-name', 'Last name') }}
@@ -44,8 +44,8 @@
         {# macros.radioGroup('request-scope', fields) #}
 
         {{ macros.textbox('request-organisation', 'Their organisation') }}
-        {{ macros.textareaBasic('request-reason', 'Reason they need access', 2) }}
-        <input type="submit" class="govuk-button" value="Request access">
+        {{ macros.textareaBasic('request-reason', 'Reason they need access', 4) }}
+        <input type="submit" class="govuk-button" value="Invite user">
       </form>
     </div>
   </div>

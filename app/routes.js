@@ -407,8 +407,8 @@ router.all('/onboarding/:view', function (req, res) {
   res.render(`onboarding/${req.params.view}`, {paths: onboardingWizardPaths(req)})
 })
 
-router.post('/invite-user', function (req, res) {
-  res.render('invite-user', { showMessage: true })
+router.post('/users/invite-user', function (req, res) {
+  res.render('/users/invite-user', { showMessage: true })
 })
 
 router.get('/about-your-organisation', function (req, res) {
