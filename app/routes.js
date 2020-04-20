@@ -408,7 +408,7 @@ router.all('/onboarding/:view', function (req, res) {
 })
 
 router.post('/users/invite-user', function (req, res) {
-  res.render('/users/invite-user', { showMessage: true })
+  res.render('users/invite-user', { showMessage: true })
 })
 
 router.get('/about-your-organisation', function (req, res) {
