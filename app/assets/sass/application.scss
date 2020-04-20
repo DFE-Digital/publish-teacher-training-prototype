@@ -472,7 +472,7 @@ dl.aligned.course-part-tasks dd {
       color: inherit;
     }
   
-    &:hover {
+    &:not(.govuk-header__link--homepage):hover {
       text-decoration: underline;
     }
   
@@ -486,6 +486,10 @@ dl.aligned.course-part-tasks dd {
     text-decoration: none;
     font-weight: bold;
     display: none;
+  }
+
+  .govuk-header__logotype-text {
+    text-decoration: none;
   }
 
 }
