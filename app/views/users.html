@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block pageTitle %}Users{% endblock %}
 {% set navActive = 'users' %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% block content %}
   {% set message %}
@@ -10,7 +10,7 @@
         <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
           DfE has received your request to give access to {{ data['request-first-name']}} {{ data['request-last-name'] }}.
         </h3>
-        <p>
+        <p class="govuk-!-margin-bottom-0">
           They will receive sign-up instructions if their account is approved.
         </p>
       </div>
@@ -30,17 +30,17 @@
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Ross Anderson</h2>
         <p class="govuk-!-margin-bottom-3">ross.anderson@ucl.ac.uk </p>
-        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
+        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2 govuk-link--no-visited-state">Delete user</a>
       </div>
       <div class="app-application-card">
           <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Hermione Granger</h2>
           <p class="govuk-!-margin-bottom-3">hermione.granger@ucl.ac.uk </p>
-          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
+          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2 govuk-link--no-visited-state">Delete user</a>
       </div>
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Billy Boyo</h2>
         <p class="govuk-!-margin-bottom-3">billy.boyo@ucl.ac.uk</p>
-        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
+        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2 govuk-link--no-visited-state">Delete user</a>
       </div>
     </div>
   </div>

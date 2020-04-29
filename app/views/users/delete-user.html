@@ -1,6 +1,6 @@
-{% extends "layout-new.html" %}
+{% extends "layout.html" %}
 {% block pageTitle %}Users{% endblock %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/users') }}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -9,10 +9,11 @@
         <span class="govuk-caption-xl">Firstname Lastname</span>
         Are you sure you want to delete this user’s account?
       </h1>
-      {{ govukButton({
+      {# {{ govukButton({
         text: "Yes I’m sure - delete this account",
         classes: "govuk-button--warning"
-      }) }}
+      }) }} #}
+      <a href="#" role="button" draggable="false" class="govuk-button govuk-button--warning" data-module="govuk-button">Yes I’m sure - delete this user</a>
     </div>
   </div>
 {% endblock %}

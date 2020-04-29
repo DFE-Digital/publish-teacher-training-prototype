@@ -1,6 +1,6 @@
-{% extends "layout-new.html" %}
+{% extends "layout.html" %}
 {% block pageTitle %}Invite a user{% endblock %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/users') }}{% endblock %}
 
 {% block content %}
   {% set message %}
