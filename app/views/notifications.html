@@ -20,14 +20,16 @@
           <p>Receive notifications about courses that you’re the accredited body for. You’ll be told about any new courses added and updated about changes to existing courses.</p>
         </div>
 
+        <h2 class="govuk-heading-m">Would you like to be notified?</h2>
+
         {% set fields = [
           {
-            name: "Get notificatons sent to email@domain.com",
+            name: "Yes, send notificatons to email@domain.com",
             value: "get-notifications",
             checked: checked("notifications", "get-notifications")
           },
           {
-            name: "Don’t get notifications",
+            name: "No",
             value: "no-notifications",
             checked: checked("notifications", "no-notifications")
           }

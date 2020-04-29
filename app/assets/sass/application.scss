@@ -427,7 +427,15 @@ dl.aligned.course-part-tasks dd {
   }
   
   .govuk-header__logo {
-    width: auto;
+    width: 100%;
+
+    @include govuk-media-query($from: 1000px) {
+      width: auto;
+    }
+    
+    // @media (min-width: 1000px) {
+    //   width: auto;
+    // }
   }
 
   .govuk-header__logotype-text {
@@ -437,11 +445,14 @@ dl.aligned.course-part-tasks dd {
   }
   
   .govuk-header__content {
-    @include govuk-media-query(desktop) {
+    text-align: left;
+
+    @include govuk-media-query($from: 1000px) {
       width: auto;
       float: none;
       text-align: right;
     }
+    
   }
 
   .govuk-header__navigation-item {
