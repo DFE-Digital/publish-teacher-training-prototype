@@ -39,7 +39,7 @@
 {% block header %}
   {% set serviceUrl %}{% if value('rolled-over') %}/cycles{% else %}/{% endif %}{% endset %}
 
-  {{ govukHeader({
+  {# {{ govukHeader({
     homepageUrl: '#',
     serviceName: serviceName,
     serviceUrl: serviceUrl,
@@ -50,7 +50,31 @@
         text: "Sign out (Jane Doe)"
       }
     ]
-  }) }}
+  }) }} #}
+  {{
+    govukHeader({
+      productName: 'Publish teacher training courses',
+      'serviceName': productName,
+      'homepageUrl': '/',
+      'classes': 'govuk-header__new',
+      navigation: [
+        {
+          href: "/notifications",
+          text: "Notifications",
+          active: true if (navActive == 'notifications')
+        },
+        {
+          href: "/users",
+          text: "Users",
+          active: true if (navActive == 'users')
+        },
+        {
+          href: "#",
+          text: "Sign out (Jane Doe)"
+        }
+      ]
+    })
+  }}
 {% endblock %}
 
 {% block beforeContent %}

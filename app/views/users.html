@@ -1,5 +1,6 @@
-{% extends "layout-new.html" %}
+{% extends "layout.html" %}
 {% block pageTitle %}Users{% endblock %}
+{% set navActive = 'users' %}
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
 {% block content %}
@@ -27,31 +28,19 @@
         href: '/users/invite-user'
       })}}
       <div class="app-application-card">
-        <div class="full">
-          <div class="left">
-            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Ross Anderson</h2>
-            <p class="govuk-!-margin-bottom-3">ross.anderson@titan.org.uk</p>
-          </div>
-          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
-        </div>
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Ross Anderson</h2>
+        <p class="govuk-!-margin-bottom-3">ross.anderson@ucl.ac.uk </p>
+        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
       </div>
       <div class="app-application-card">
-        <div class="full">
-          <div class="left">
-            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Hermione Granger</h2>
-            <p class="govuk-!-margin-bottom-3">hermione.granger@wizardschool.com</p>
-          </div>
+          <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Hermione Granger</h2>
+          <p class="govuk-!-margin-bottom-3">hermione.granger@ucl.ac.uk </p>
           <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
-        </div>
       </div>
       <div class="app-application-card">
-        <div class="full">
-          <div class="left">
-            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Billy Boyo</h2>
-            <p class="govuk-!-margin-bottom-3">billy.boyo@wizardschool.com</p>
-          </div>
-          <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
-        <div>
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Billy Boyo</h2>
+        <p class="govuk-!-margin-bottom-3">billy.boyo@ucl.ac.uk</p>
+        <a href="/users/delete-user" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-2">Delete user</a>
       </div>
     </div>
   </div>
