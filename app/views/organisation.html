@@ -11,17 +11,36 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {% if data["rolled-over"] %}
-      {% if data["next-cycle"] %}
-        Next cycle (2020&thinsp;–&thinsp;2021)
-      {% else %}
-        Current cycle (2019&thinsp;–&thinsp;2020)
-      {% endif %}
-    {% else %}
-      {{ data['training-provider-name'] }}
-    {% endif %}
-  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {% if data['rolled-over'] %}
+          {% if data['next-cycle'] %}
+            Next cycle (2020&thinsp;–&thinsp;2021)
+          {% else %}
+            Current cycle (2019&thinsp;–&thinsp;2020)
+          {% endif %}
+        {% else %}
+          {{ data['training-provider-name'] }}
+        {% endif %}
+      </h1>
+    </div>
+  </div>
+
+  {# <div class="app-banner app-banner--information app-banner--temporary-message">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="app-banner__heading">
+          New features
+        </h2>
+        <p class="govuk-body">We’ve added two features to further support accredited bodies.</p>
+        <ul class="govuk-list govuk-list--bullet app-banner__message">
+          <li><a href="/accredited-body">See which courses</a> you're the accredited body for</li>
+          <li><a href="/notifications">Get notifications</a> about changes to these courses</li>
+        </ul>
+      </div>
+    </div>
+  </div> #}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -62,7 +81,7 @@
         <li>add new courses</li>
       </ul>
 
-      {% if data['is-accredited-body'] and not (data["rolled-over"] and data["next-cycle"]) %}
+      {% if data["is-accredited-body"] and not (data["rolled-over"] and data["next-cycle"]) %}
         <h2 class="govuk-heading-m">
           <a href="/accredited-body">Courses as an accredited body</a>
         </h2>
@@ -85,14 +104,23 @@
         <li>add locations</li>
       </ul>
     </div>
-
     <div class="govuk-grid-column-one-third">
-      {% if not data["rolled-over"] %}
+      {% if not data['rolled-over'] %}
         <div class="status-box">
-          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
-            <a href="/request-access">Request access</a>
+          {# <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/notifications">Notifications</a>
           </h2>
-          <p>Request a DfE Sign-in account for others who manage your courses.</p>
+          <p>Recieve notifications about courses that you’re the accredited body for.</p>
+
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/users/users">Users</a>
+          </h2>
+          <p>See who has access to this account and invite new users.</p> #}
+
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/ucas/apply-preferences">UCAS contacts</a>
+          </h2>
+          <p>Update or request UCAS contact details.</p>
 
           <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
             <a href="/ucas/apply-preferences">UCAS contacts</a>
@@ -100,6 +128,7 @@
           <p>Update or request UCAS contact details.</p>
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
           <h2 class="govuk-heading-s">Support and guidance</h2>
           <p class="govuk-body">If you have a question, or you’ve had a problem using Publish, you can email:</p>
           <p class="govuk-body govuk-!-margin-bottom-0">
