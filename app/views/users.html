@@ -18,9 +18,10 @@
     {% endif %}
   {% endset %}
 
+  {{ macros.orgHeading('Users', message) }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{title}}</h1>
       <p>These users currently have access to this account. They can manage all your course and organisation details, including publishing, closing and withdrawing courses.</p>
       {{govukButton({
         text: 'Invite user',
