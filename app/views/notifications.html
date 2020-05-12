@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Manage: Updates to courses as an accredited body' %}
+{% set title = 'Manage notifications' %}
 {% set navActive = 'notifications' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {# {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %} #}
@@ -12,19 +12,23 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
             <span class="govuk-caption-xl">Manage notifications</span>
-            Changes to courses as an accredited body
+            Changes to your courses as an accredited body
           </h1>
         </legend>
 
         <div class="govuk-!-margin-bottom-6">
-          <p>Receive notifications about courses that you’re the accredited body for. You’ll be told about any new courses added and updated about changes to existing courses.</p>
+          <p>You can sign up for email notifications about these courses. We’ll tell you when a training provider:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>adds a new course</li>
+            <li>makes a change to an existing course</li>
+          </ul>
         </div>
 
         <h2 class="govuk-heading-m">Would you like to be notified?</h2>
 
         {% set fields = [
           {
-            name: "Yes, send email notificatons to pgce.admissions@beds.ac.uk",
+            name: "Yes, send email notification to [email address]",
             value: "get-notifications",
             checked: checked("notifications", "get-notifications")
           },
