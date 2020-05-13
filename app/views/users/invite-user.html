@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% set title = "Invite a user" %}
 {% set backLink = "/cycles" if data["rolled-over"] else "/users" %}
+{% set navActive = "users" %}
 
 {% block content %}
   {% set message %}
