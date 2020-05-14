@@ -549,7 +549,7 @@
 </div>
 {% endmacro %}
 
-{% macro coursePart(id, label, errors, truncate = true) %}
+{% macro coursePart(id, label, errors, truncate = true, appendText = false) %}
   {% set e = error(id, errors) %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
@@ -558,7 +558,7 @@
     </dt>
     <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
       {% if (value(id)) %}
-        {{ value(id) }}
+        {{ value(id) }} {% if appendText %}{{ appendText }}{% endif %}
       {% else %}
         Empty
       {% endif %}

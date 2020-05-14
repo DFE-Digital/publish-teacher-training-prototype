@@ -88,6 +88,17 @@
         {% endif %}
         {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
       </dl>
+
+      <h3 class="govuk-heading-27">
+        <a href="/about-your-organisation/placement">
+          Placement schools
+        </a>
+      </h3>
+
+      <dl class="govuk-summary-list govuk-summary-list--short">
+        {{ macros.coursePart('number-of-schools', 'Number of schools', errors, false, 'schools') }}
+        {{ macros.coursePart('average-distance', 'Average distance from university', errors, false, 'miles') }}
+      </dl>
     </div>
     <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}

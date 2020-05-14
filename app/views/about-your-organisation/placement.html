@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% set title = 'Placement schools' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+
+{% block content %}
+{% include "about-your-organisation/_errors.html" %}
+
+<h1 class="govuk-heading-xl">
+  <span class="govuk-caption-xl">{{ data['training-provider-name'] }}</span>
+  {{ title }}
+</h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p>Tell us about the schools you work with. We use this information to improve your ranking in search results.</p>
+  </div>
+</div>
+
+  <form action="/about-your-organisation" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ macros.textbox('number-of-schools', 'How many placement schools do you work with?', 'Give an approximate number, for example 150', false, null, errors) }}
+        {{ macros.textbox('average-distance', 'Average distance from a school to the university (in miles)', false, 'govuk-input--width-10', null, errors) }}
+      </div>
+    </div>
+
+    <div class="add-double-bottom-margin">
+      <input type="submit" class="govuk-button" value="Save" />
+    </div>
+
+    <p>
+      <a href="/about-your-organisation">Cancel changes</a>
+    </p>
+  </form>
+
+
+{% endblock %}
