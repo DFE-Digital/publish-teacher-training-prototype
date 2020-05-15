@@ -106,6 +106,42 @@
           {{ macros.checkboxGroup(course.programmeCode + '-vacancies-choice', fields, errors) }}
         {% endif %}
 
+        <h2 class="govuk-heading-m" style="margin-top: 50px">Why are you closing this course?</h2>
+
+        {% set fields = [
+          {
+            name: 'We’ve invited enough people to interview'
+          },
+          {
+            name: 'We can’t interview at the moment'
+          },
+          {
+            name: 'We’ve confirmed all course places'
+          },
+          {
+            or: true
+          },
+          {
+            name: 'Another reason',
+            more: more
+          }
+        ]%}
+
+        {{ macros.radioGroup(code + '-why-close', fields) }}
+
+        <h2 class="govuk-heading-m">Will you consider candidates who have already submitted their application but are still waiting for their references?</h2>
+
+        {% set fields = [
+          {
+            name: 'Yes, we will consider their application'
+          },
+          {
+            name: 'No, if we received their application we would reject them'
+          }
+        ]%}
+
+        {{ macros.radioGroup(code + '-will-accept-pending', fields) }}
+
         <div class="govuk-!-margin-top-8">
           <p>Changes will appear on Find straight away. UCAS Apply will be updated overnight.</p>
 
