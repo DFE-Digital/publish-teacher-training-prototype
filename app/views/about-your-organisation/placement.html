@@ -20,8 +20,19 @@
   <form action="/about-your-organisation" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l" style="margin-top: 40px">Number of schools</h2>
         {{ macros.textbox('number-of-schools', 'How many placement schools do you work with?', 'Give an approximate number, for example 150', false, null, errors) }}
-        {{ macros.textbox('average-distance', 'Average distance from a school to the university (in miles)', false, 'govuk-input--width-10', null, errors) }}
+
+        {{ macros.textbox('number-of-schools-5', 'How many schools are within 5 miles?', false, 'govuk-input--width-5', null, errors) }}
+
+        {{ macros.textbox('number-of-schools-10', 'How many schools are within 10 miles?', false, 'govuk-input--width-5', null, errors) }}
+
+        {{ macros.textbox('number-of-schools-15', 'How many schools are within 15 miles?', false, 'govuk-input--width-5', null, errors) }}
+
+        <h2 class="govuk-heading-l" style="margin-top: 40px">Distance of schools</h2>
+        {{ macros.textbox('range-distance', 'Range from a school to the university (in miles)', 'Consider the distances of your furthest schools', 'govuk-input--width-5', null, errors) }}
+
+        {{ macros.textbox('average-distance', 'Average distance from a school to the university (in miles)', 'Consider the distances of the majority of your schools, excluding outliers', 'govuk-input--width-5', null, errors) }}
       </div>
     </div>
 

@@ -97,6 +97,10 @@
 
       <dl class="govuk-summary-list govuk-summary-list--short">
         {{ macros.coursePart('number-of-schools', 'Number of schools', errors, false, 'schools') }}
+        {{ macros.coursePart('number-of-schools-5', 'Number of schools within 5 miles', errors, false, 'schools') }}
+        {{ macros.coursePart('number-of-schools-10', 'Number of schools within 10 miles', errors, false, 'schools') }}
+        {{ macros.coursePart('number-of-schools-15', 'Number of schools within 15 miles', errors, false, 'schools') }}
+        {{ macros.coursePart('range-distance', 'Range of distance from university', errors, false, 'miles') }}
         {{ macros.coursePart('average-distance', 'Average distance from university', errors, false, 'miles') }}
       </dl>
     </div>
