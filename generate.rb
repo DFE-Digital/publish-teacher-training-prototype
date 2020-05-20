@@ -5,8 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Academies Enterprise Trust: London'
-next_cycle = true
+provider = 'The University of Reading'
+next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
 isAccreditedBody = !courses.first['route'].include?('School Direct')
