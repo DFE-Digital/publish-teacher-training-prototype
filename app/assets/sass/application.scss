@@ -503,3 +503,15 @@ dl.aligned.course-part-tasks dd {
   }
 
 }
+
+.govuk-header {
+  
+  .govuk-header__logo {
+    width: auto !important;
+  }
+
+  .govuk-header__content {
+    width: auto !important;
+    float: right;
+  }
+}
