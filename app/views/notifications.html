@@ -12,19 +12,21 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
             <span class="govuk-caption-xl">Manage notifications</span>
-            Changes to your courses as an accredited body
+            Changes to courses
           </h1>
         </legend>
 
         <div class="govuk-!-margin-bottom-6">
-          <p>You can sign up for email notifications about these courses. We’ll tell you when a training provider:</p>
+          <p>You can sign up for email notifications about changes to courses you accredit. We’ll tell you when a training provider:</p>
           <ul class="govuk-list govuk-list--bullet">
             <li>publishes a new course on Find postgraduate teacher training</li>
 				    <li>makes a change to an existing course</li>
+				    <li>withdraws a course</li>
+				    <li>confirms a course has no vacancies</li>
           </ul>
         </div>
 
-        <h2 class="govuk-heading-m">Would you like to be notified?</h2>
+        <h2 class="govuk-heading-l">Would you like to be notified?</h2>
 
         {% set fields = [
           {
@@ -41,7 +43,6 @@
         %}
         {{ macros.radioGroup('ab-notifications', fields) }}
 
-        {# {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to receive emails from Publish teacher training courses' }], false) }} #}
       <input type="submit" class="govuk-button govuk-!-margin-bottom-8 govuk-!-margin-top-2" value="Save">
     </form>
     <p>
