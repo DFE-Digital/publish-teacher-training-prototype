@@ -105,12 +105,20 @@
       </ul>
     </div>
     <div class="govuk-grid-column-one-third">
-      {% if not data["rolled-over"] %}
+      {% if not data['rolled-over'] %}
         <div class="status-box">
           {# <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
             <a href="/notifications">Email notifications</a>
           </h2>
-          <p>Get email notifications about your courses</p>
+          <p>Get email notifications about your courses</p> #}
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/users">Users</a>
+          </h2>
+          <p>View users who manage your courses.</p>
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/ucas/apply-preferences">UCAS contacts</a>
+          </h2>
+          <p>Update or request UCAS contact details.</p>
 
           <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
             <a href="/users/users">Users</a>
