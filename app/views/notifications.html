@@ -11,13 +11,13 @@
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
-            <span class="govuk-caption-xl">Manage notifications</span>
+            <span class="govuk-caption-xl">Notifications for accredited bodies</span>
             Changes to courses
           </h1>
         </legend>
 
         <div class="govuk-!-margin-bottom-6">
-          <p>You can sign up for email notifications about changes to courses you accredit. We’ll tell you when a training provider:</p>
+          <p>We'll tell you when a training provider:</p>
           <ul class="govuk-list govuk-list--bullet">
             <li>publishes a new course on Find postgraduate teacher training</li>
 				    <li>makes a change to an existing course</li>
@@ -30,7 +30,7 @@
 
         {% set fields = [
           {
-            name: "Yes, send email notification to [email address]",
+            name: "Yes, send me email notifications",
             value: "get-notifications",
             checked: checked("notifications", "get-notifications")
           },
