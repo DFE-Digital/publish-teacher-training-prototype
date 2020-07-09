@@ -2,11 +2,12 @@
 {% set title = 'Manage notifications' %}
 {% set navActive = 'notifications' %}
 {% block pageTitle %}{{ title }}{% endblock %}
+{# {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %} #}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/organisation" method="post" class="form">
+    <form action="/" method="post" class="form">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
@@ -25,34 +26,24 @@
           </ul>
         </div>
 
-        {{ govukCheckboxes({
-          name: "notifications",
-          fieldset: {
-            legend: {
-              text: "Which organisations would you like to receive email notifications about?",
-              classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-6"
-            }
-          },
-          items: [
-            {
-              text: "Academies Enterprise Trust: Eastern",
-              value: "value1",
-              checked: checked("notifications", "value1")
-            },
-            {
-              text: "Oakham Alliance",
-              value: "value2",
-              checked: checked("notifications", "value2")
-            },
-            {
-              text: "Temple Newsam Learning Partnership",
-              value: "value3",
-              checked: checked("notifications", "value3")
-            }
-          ]
-        }) }}
+        <h2 class="govuk-heading-l">Would you like would you like to receive email notifications?</h2>
 
-      <input type="submit" class="govuk-button govuk-!-margin-bottom-7 govuk-!-margin-top-2" value="Save">
+        {% set fields = [
+          {
+            name: "Yes, send me notifications",
+            value: "get-notifications",
+            checked: checked("notifications", "get-notifications")
+          },
+          {
+            name: "No",
+            value: "no-notifications",
+            checked: checked("notifications", "no-notifications")
+          }
+        ]
+        %}
+        {{ macros.radioGroup('ab-notifications', fields) }}
+
+      <input type="submit" class="govuk-button govuk-!-margin-bottom-8 govuk-!-margin-top-2" value="Save">
     </form>
     <p>
       <a href="/">Cancel changes</a>
