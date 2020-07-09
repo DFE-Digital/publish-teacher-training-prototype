@@ -623,4 +623,9 @@ router.get('/accredited-body/:code', function (req, res) {
   res.render('accredited-body/provider-courses', { provider: p })
 })
 
+// notifications
+router.post('/notifications', function (req, res) {
+  res.render('organisation', { showMessage: true })
+})
+
 module.exports = router

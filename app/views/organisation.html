@@ -12,6 +12,19 @@
 
 {% block content %}
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full-width">
+      {% set message %}
+        {% if showMessage %}
+          <div class="govuk-success-summary" role="alert" aria-labelledby="success-summary-heading" tabindex="-1" data-module="govuk-error-summary" data-ga-event-form="success">
+            <h3 class="govuk-success-summary__title" id="success-summary-heading">Email notification preferences for name@email.co.uk have been saved.</h3>
+          </div>
+        </div>
+        {% endif %}
+      {% endset %}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
         {% if data['rolled-over'] %}
@@ -105,7 +118,7 @@
       </ul>
     </div>
     <div class="govuk-grid-column-one-third">
-      {% if not data['rolled-over'] %}
+      {% if not data["rolled-over"] %}
         <div class="status-box">
           {# <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
             <a href="/notifications">Email notifications</a>
