@@ -16,7 +16,7 @@
         </legend>
 
         <div class="govuk-!-margin-bottom-6">
-          <p>We'll tell you when a training provider makes changes.</p>
+          <p>Receive instant email notifications about changes to courses for which you are the accredited body.</p>
         </div>
 
         {% set options1 %}
@@ -25,8 +25,8 @@
             classes: "govuk-!-margin-bottom-6",
             fieldset: {
               legend: {
-                text: "Which events do you want to be notified about?",
-                classes: "govuk-fieldset__legend--s govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
               }
             },
             items: [
@@ -68,8 +68,8 @@
             classes: "govuk-!-margin-bottom-6",
             fieldset: {
               legend: {
-                text: "Which events do you want to be notified about?",
-                classes: "govuk-fieldset__legend--s govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
               }
             },
             items: [
@@ -111,8 +111,8 @@
             classes: "govuk-!-margin-bottom-6",
             fieldset: {
               legend: {
-                text: "Which events do you want to be notified about?",
-                classes: "govuk-fieldset__legend--s govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
               }
             },
             items: [
@@ -159,8 +159,8 @@
           },
           items: [
             {
-              text: "Academies Enterprise Trust: Eastern",
               value: "value1",
+              html: "<strong>Academies Enterprise Trust: Eastern</strong>",
               checked: checked("notifications", "value1"),
               conditional: {
                 html: options1
@@ -169,6 +169,7 @@
             {
               text: "Oakham Alliance",
               value: "value2",
+              html: "<strong>Oakham Alliance</strong>",
               checked: checked("notifications", "value2"),
               conditional: {
                 html: options2
@@ -177,6 +178,7 @@
             {
               text: "Temple Newsam Learning Partnership",
               value: "value3",
+              html: "<strong>Temple Newsam Learning Partnership</strong>",
               checked: checked("notifications", "value3"), 
               conditional: {
                 html: options3
