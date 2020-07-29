@@ -393,15 +393,6 @@ router.all('/onboarding/:view', function (req, res) {
   res.render(`onboarding/${req.params.view}`, { paths: onboardingWizardPaths(req) })
 })
 
-router.post('/users/invite-user', function (req, res) {
-  res.render('users', { showMessage: true })
-})
-
-// notification
-// router.post('/notifications', function (req, res) {
-//   res.render('organisation', { showMessage: true })
-// })
-
 router.get('/about-your-organisation', function (req, res) {
   const errors = validateOrg(req.session.data)
   res.render('about-your-organisation/index', { errors: errors, justPublished: (req.query.publish && errors.length === 0) })
@@ -632,5 +623,41 @@ router.get('/accredited-body/:code', function (req, res) {
 router.post('/notifications', function (req, res) {
   res.render('organisation', { showMessage: true })
 })
+
+// User flow
+
+// router.post('/users/invite-user', function (req, res) {
+//   res.render('users', { showMessage: true })
+// })
+
+router.post('/users/invite-user', (req, res) => {
+  res.redirect('/users/organisations')
+})
+
+router.post('/users/organisations', (req, res) => {
+  res.redirect('/users/manage-courses-1')
+})
+
+router.post('/users/manage-courses-1', (req, res) => {
+  res.redirect('/users/whose-courses-1')
+})
+
+router.post('/users/whose-courses-1', (req, res) => {
+  res.redirect('/users/manage-users-1')
+})
+
+router.post('/users/manage-users-1', (req, res) => {
+  res.redirect('/users/manage-courses-2')
+})
+
+router.post('/users/manage-courses-2', (req, res) => {
+  res.redirect('/users/manage-users-2')
+})
+
+router.post('/users/manage-users-2', (req, res) => {
+  res.redirect('/users/check')
+})
+
+// check answers
 
 module.exports = router

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% set title = 'Permissions for Beech Hill: Can this user manage courses?' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% set navActive = 'users' %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users/manage-users-1"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set h1 %}
+        <span class="govuk-caption-xl">Invite user</span>
+        {{title}}
+      {% endset %}
+
+      <form action="/users/manage-courses-2" method="post">
+        
+        {{ govukRadios({
+          idPrefix: "manage-courses-2",
+          name: "manage-courses-2",
+          fieldset: {
+            legend: {
+              html: h1,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          hint: {
+            text: "This includes creating, editing, withdrawing and closing courses."
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              checked: checked("manage-courses-2", "yes")
+            },
+            {
+              value: "no",
+              text: "No, grant read-only access for this user",
+              checked: checked("manage-courses-2", "no")
+            }
+          ]
+        }) }}
+        
+        {{govukButton({
+          text: "Continue"
+        })}}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

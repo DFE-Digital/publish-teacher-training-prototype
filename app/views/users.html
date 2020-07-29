@@ -2,6 +2,7 @@
 {% set title = 'Users' %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% set navActive = 'users' %}
+
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% block content %}
@@ -9,7 +10,7 @@
     {% if showMessage %}
       <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
         <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-          DfE has received your request to give access to {{ data['request-first-name']}} {{ data['request-last-name'] }}.
+          DfE has received your request to invite {{ data['request-first-name']}} {{ data['request-last-name'] }}.
         </h3>
         <p class="govuk-!-margin-bottom-0">
           They will receive sign-up instructions if their account is approved.
@@ -18,13 +19,15 @@
     {% endif %}
   {% endset %}
 
+  {{ message | safe }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{title}}</h1>
       <p>These users currently have access to this account. They can manage all your course and organisation details, including publishing, closing and withdrawing courses.</p>
       {{govukButton({
         text: 'Invite user',
-        href: '/users/invite-user'
+        href: '/users/basic-details'
       })}}
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">

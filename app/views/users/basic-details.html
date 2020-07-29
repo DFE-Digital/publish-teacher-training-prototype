@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% set title = 'Basic details' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% set navActive = 'users' %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set h1 %}
+        <span class="govuk-caption-xl">Invite user</span>
+        {{title}}
+      {% endset %}
+
+      <form action="/users/invite-user" method="post">
+        <legend>
+          <h2 class="govuk-visually-hidden">Invite this person:</h2>
+        </legend>
+
+        {% call govukFieldset({
+            legend: {
+              html: h1,
+              classes: "govuk-fieldset__legend--xl",
+              isPageHeading: true
+            }
+          }) %}
+                    
+          {{ govukInput({
+            label: {
+              text: "Email address"
+            },
+            id: "email-address",
+            name: "email-address",
+            type: "email",
+            autocomplete: "email",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "First name"
+            },
+            id: "first-name",
+            name: "first-name",
+            type: "text",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Last name"
+            },
+            id: "last-name",
+            name: "last-name",
+            type: "text",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+        {% endcall %}
+        
+        {{govukButton({
+          text: "Continue"
+        })}}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
