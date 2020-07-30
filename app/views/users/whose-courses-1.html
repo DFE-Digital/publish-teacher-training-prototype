@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Permissions for Achieve with TELA: Whose courses can the user edit?' %}
+{% set title = 'Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit' %}
+
 {% block pageTitle %}{{ title }}{% endblock %}
 {% set navActive = 'users' %}
 
@@ -16,7 +17,7 @@
 
       {% set h1 %}
         <span class="govuk-caption-xl">Invite user</span>
-        Permissions for Achieve with TELA: Whose courses can the user edit?
+        Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit
       {% endset %}
 
       <form action="/users/whose-courses-1" method="post">
@@ -28,11 +29,8 @@
             legend: {
               html: h1,
               isPageHeading: true,
-              classes: "govuk-fieldset__legend--xl"
+              classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8"
             }
-          },
-          hint: {
-            text: "Specify the relevant accredited bodies."
           },
           items: [
             {

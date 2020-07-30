@@ -1,0 +1,256 @@
+      {% set permissionsCourses1Html %}
+        <p class="govuk-!-font-weight-bold">{{ appIcon({
+              classes: "govuk-!-margin-right-1",
+              icon: "tick",
+              hidden: true
+            }) }} Manage courses accredited by: 
+        </p>
+        <div class="govuk-!-margin-left-5">
+          <ul class="govuk-list">
+            <li>Essex and Thames Primary SCITT</li>
+            <li>Middlesex University</li>
+          </ul>
+        </div>
+      {% endset %}
+      {% set permissionsUsers1Html %}
+        <p class="govuk-!-font-weight-bold">{{ appIcon({
+              classes: "govuk-!-margin-right-1",
+              icon: "tick",
+              hidden: true
+            }) }} Manage users
+        </p>
+      {% endset %}
+      
+      {% set permissionsCourses2Html %}
+        <p class="govuk-!-font-weight-bold">{{ appIcon({
+              classes: "govuk-!-margin-right-1",
+              icon: "tick",
+              hidden: true
+            }) }} Manage all courses
+        </p>
+      {% endset %}
+      
+      {% set permissionsUsers2Html %}
+        <p class="govuk-!-font-weight-bold">{{ appIcon({
+              classes: "govuk-!-margin-right-1",
+              icon: "tick",
+              hidden: true
+            }) }} Manage users
+        </p>
+      {% endset %}
+      
+      {% set permissionsCourses3Html %}
+        <p>
+          This user can only view courses
+        </p>
+      {% endset %}
+
+      {% set permissionsUsers3Html %}
+        <p>
+          This user can not manage users
+        </p>
+      {% endset %}
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-6',
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: "Ross"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/basic-details",
+                  text: "Change",
+                  visuallyHiddenText: "first name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: "Anderson"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/basic-details",
+                  text: "Change",
+                  visuallyHiddenText: "last name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              html: "ross.anderson@address.uk"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/basic-details",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Organisations this user will have access to"
+            },
+            value: {
+              html: "<ul class='govuk-list'>
+                      <li>Achieve with TELA</li>
+                      <li>Beech Hill</li>
+                      <li>TeachSlough</li>
+                    </ul>"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/organisations",
+                  text: "Change",
+                  visuallyHiddenText: "organisation access settings"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Permissions: Achieve with TELA</h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-6',
+        rows: [
+          {
+            key: {
+              html: "Courses"
+            },
+            value: {
+              html: permissionsCourses1Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/manage-courses-1",
+                  text: "Change",
+                  visuallyHiddenText: "course management settings"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              html: "Users"
+            },
+            value: {
+              html: permissionsUsers1Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/manage-users-1",
+                  text: "Change",
+                  visuallyHiddenText: "user management settings"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+      
+      <h2 class="govuk-heading-m">Permissions: Beech Hill</h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-6',
+        rows: [
+          {
+            key: {
+              html: "Courses"
+            },
+            value: {
+              html: permissionsCourses2Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/manage-courses-2",
+                  text: "Change",
+                  visuallyHiddenText: "course management settings"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              html: "Users"
+            },
+            value: {
+              html: permissionsUsers1Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/manage-users-2",
+                  text: "Change",
+                  visuallyHiddenText: "user management settings"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+      
+      <h2 class="govuk-heading-m">Permissions: TeachSlough</h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-8',
+        rows: [
+          {
+            key: {
+              html: "Courses"
+            },
+            value: {
+              html: permissionsCourses3Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "course management settings"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              html: "Users"
+            },
+            value: {
+              html: permissionsUsers3Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "user management settings"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}

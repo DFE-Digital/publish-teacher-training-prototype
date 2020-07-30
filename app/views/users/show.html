@@ -9,39 +9,12 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{title}}</h1>
 
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "First name"
-            },
-            value: {
-              text: "Ross"
-            }
-          },
-          {
-            key: {
-              text: "Last name"
-            },
-            value: {
-              text: "Anderson"
-            }
-          },
-          {
-            key: {
-              text: "Email address"
-            },
-            value: {
-              text: "ross.anderson@address.uk"
-            }
-          }
-        ]
-      }) }}
+      {% include "users/_user-profile.html" %}
 
       {{ govukButton({
         text: "Delete user",
         classes: "govuk-button--warning",
-        href: "/users/delete-user"
+        href: "/users/delete"
       }) }}
     </div>
   </div>
