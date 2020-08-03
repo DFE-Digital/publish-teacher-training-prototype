@@ -1,16 +1,18 @@
       {% set permissionsCourses1Html %}
-        <p class="govuk-!-font-weight-bold">{{ appIcon({
-              classes: "govuk-!-margin-right-1",
-              icon: "tick",
-              hidden: true
-            }) }} Manage courses accredited by: 
-        </p>
-        <div class="govuk-!-margin-left-5">
-          <ul class="govuk-list">
-            <li>Essex and Thames Primary SCITT</li>
-            <li>Middlesex University</li>
-          </ul>
-        </div>
+        {# <p class="govuk-!-font-weight-bold">Applies to: 
+        </p> #}
+        <ul class="govuk-list">
+          <li>{{ appIcon({
+            classes: "govuk-!-margin-right-1",
+            icon: "tick",
+            hidden: true
+          }) }} Essex and Thames Primary SCITT</li>
+          <li>{{ appIcon({
+            classes: "govuk-!-margin-right-1",
+            icon: "tick",
+            hidden: true
+          }) }} Middlesex University</li>
+        </ul>
       {% endset %}
       {% set permissionsUsers1Html %}
         <p class="govuk-!-font-weight-bold">{{ appIcon({
@@ -26,7 +28,7 @@
               classes: "govuk-!-margin-right-1",
               icon: "tick",
               hidden: true
-            }) }} Manage all courses
+            }) }} Manage courses
         </p>
       {% endset %}
       
@@ -136,7 +138,24 @@
         rows: [
           {
             key: {
-              html: "Courses"
+              html: "Course management"
+            },
+            value: {
+              html: permissionsCourses2Html
+            },
+            actions: {
+              items: [
+                {
+                  href: "/users/manage-courses-2",
+                  text: "Change",
+                  visuallyHiddenText: "course management settings"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              html: "Accredited bodies whose courses the user can edit"
             },
             value: {
               html: permissionsCourses1Html
@@ -153,7 +172,7 @@
           },
           {
             key: {
-              html: "Users"
+              html: "User management"
             },
             value: {
               html: permissionsUsers1Html
@@ -178,7 +197,7 @@
         rows: [
           {
             key: {
-              html: "Courses"
+              html: "Course management"
             },
             value: {
               html: permissionsCourses2Html
@@ -195,7 +214,7 @@
           },
           {
             key: {
-              html: "Users"
+              html: "User management"
             },
             value: {
               html: permissionsUsers1Html
@@ -220,7 +239,7 @@
         rows: [
           {
             key: {
-              html: "Courses"
+              html: "Course management"
             },
             value: {
               html: permissionsCourses3Html
@@ -237,7 +256,7 @@
           },
           {
             key: {
-              html: "Users"
+              html: "User management"
             },
             value: {
               html: permissionsUsers3Html

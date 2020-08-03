@@ -31,20 +31,6 @@
               isPageHeading: true
             }
           }) %}
-                    
-          {{ govukInput({
-            label: {
-              text: "Email address"
-            },
-            id: "email-address",
-            name: "email-address",
-            type: "email",
-            autocomplete: "email",
-            classes: "govuk-!-width-two-thirds",
-            attributes: {
-              spellcheck: "false"
-            }
-          }) }}
 
           {{ govukInput({
             label: {
@@ -66,6 +52,20 @@
             id: "last-name",
             name: "last-name",
             type: "text",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Email address"
+            },
+            id: "email-address",
+            name: "email-address",
+            type: "email",
+            autocomplete: "email",
             classes: "govuk-!-width-two-thirds",
             attributes: {
               spellcheck: "false"
