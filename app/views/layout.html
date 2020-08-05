@@ -33,7 +33,7 @@
 
 {% from "_components/icon/macro.njk"                     import appIcon %}
 
-{% import 'macros/macros.njk' as macros %}
+{% import "macros/macros.njk" as macros %}
 
 {% block head %}
   {% include "includes/head.html" %}
@@ -54,6 +54,10 @@
       href: "/notifications",
       text: "Notifications",
       active: true if (navActive == "notifications")
+    }, {
+      href: "/users",
+      text: "Users",
+      active: true if (navActive == "users")
     }, {
       href: "#",
       text: "Sign out (Jane Doe)"
