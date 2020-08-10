@@ -619,44 +619,52 @@ router.get('/accredited-body/:code', function (req, res) {
   res.render('accredited-body/provider-courses', { provider: p })
 })
 
-// notifications
+// Notifications
 router.post('/notifications', function (req, res) {
   res.render('organisation', { showMessage: true })
 })
 
-// User flow
+// Invite user flow
 
-// router.post('/users/invite-user', function (req, res) {
-//   res.render('users', { showMessage: true })
-// })
+router.post('/users/basic-details', (req, res) => {
+  res.redirect('/users/what-access')
+})
 
-router.post('/users/invite-user', (req, res) => {
-  res.redirect('/users/organisations')
+router.post('/users/what-access', function (req, res) {
+
+  let whatAccess = req.session.data['what-access']
+
+  if (whatAccess === 'same') {
+    res.redirect('/users/permissions-1')
+  } else {
+    res.redirect('/users/organisations')
+  }
 })
 
 router.post('/users/organisations', (req, res) => {
-  res.redirect('/users/manage-courses-1')
+  res.redirect('/users/permissions-1')
 })
 
-router.post('/users/manage-courses-1', (req, res) => {
+router.post('/users/permissions-1', (req, res) => {
   res.redirect('/users/whose-courses-1')
 })
 
 router.post('/users/whose-courses-1', (req, res) => {
-  res.redirect('/users/next-org')
+  res.redirect('/users/permissions-2')
 })
 
-router.post('/users/manage-users-1', (req, res) => {
-  res.redirect('/users/manage-courses-2')
+router.post('/users/permissions-2', (req, res) => {
+  res.redirect('/users/permissions-3')
 })
 
-router.post('/users/manage-courses-2', (req, res) => {
-  res.redirect('/users/manage-users-2')
-})
-
-router.post('/users/manage-users-2', (req, res) => {
+router.post('/users/permissions-3', (req, res) => {
   res.redirect('/users/check')
 })
+
+router.post('/users/check', function (req, res) {
+  res.render('users', { showMessage: true })
+})
+
 
 // check answers
 

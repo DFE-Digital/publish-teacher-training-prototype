@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% set title = 'What access should this user have?' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% set navActive = 'users' %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users/basic-details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set h1 %}
+        <span class="govuk-caption-xl">Invite user</span>
+        {{title}}
+      {% endset %}
+
+      <form action="/users/what-access" method="post">
+
+        {{ govukRadios({
+            classes: "govuk-radios",
+            idPrefix: "what-access",
+            name: "what-access",
+            fieldset: {
+              legend: {
+                html: h1,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-6"
+              }
+            },
+            items: [
+              {
+                value: "same",
+                text: "Access to the same organisations as me"
+              },
+              {
+                value: "custom",
+                text: "Access to organisations I specify"
+              }
+            ]
+          }) }}
+        
+        {{govukButton({
+          text: "Continue"
+        })}}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

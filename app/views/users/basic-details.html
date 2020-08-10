@@ -19,10 +19,7 @@
         {{title}}
       {% endset %}
 
-      <form action="/users/invite-user" method="post">
-        <legend>
-          <h2 class="govuk-visually-hidden">Invite this person:</h2>
-        </legend>
+      <form novalidate action="/users/basic-details" method="post">
 
         {% call govukFieldset({
             legend: {

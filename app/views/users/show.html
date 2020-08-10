@@ -9,12 +9,12 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{title}}</h1>
 
-      {% include "users/_user-profile.html" %}
+      {% include "users/_user-profile-ross.html" %}
 
       {{ govukButton({
         text: "Delete user",
         classes: "govuk-button--warning",
-        href: "/users/delete"
+        href: "/users/delete-user"
       }) }}
     </div>
   </div>
