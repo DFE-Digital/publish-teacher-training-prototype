@@ -94,17 +94,47 @@
 
         <h3 class="govuk-heading-l remove-top-margin">How school placements work</h3>
 
-        <p>Tell applicants more about the schools they’ll be teaching in.</p>
+        <p>Give applicants more information about the schools they’ll be teaching in. Tell them:</p>
 
-        <p>You could include:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>how the candidate’s schools are selected</li>
+          <li>how many placements a candidate will have</li>
+          <li>how much time they’ll spend in each school</li>
+          <li>if mentors are available within the schools</li>
           <li>the average distance candidates have to travel from home to school</li>
-          <li>the age ranges they’ll be teaching (eg 11 to 16 or 11 to 18)</li>
-          <li>how many schools you partner with in total</li>
-          <li>the number of placements a candidate will have</li>
-          <li>how much time candidates spend in each school</li>
         </ul>
+
+        <p>You could also mention:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>the age ranges taught (eg 11 to 16 or 11 to 18)</li>
+          <li>how many schools you partner with in total</li>
+          <li>whether candidates are able to change schools</li>
+          <li>how placement schools are selected</li>
+        </ul>
+
+        <p>We show guidance in this section. It tells candidates:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>where your school placements are</li>
+          <li>that they will be placed in different schools</li>
+          <li>that you will take their commute into account</li>
+        </ul>
+
+        {# Guidance for non-HEI route shown #}
+        {% set schoolPlacementsHtml %}
+          <h3 class="govuk-!-margin-top-0">Where you will train</h3>
+
+          <p>You’ll be placed in schools for most of your course. This university is based in <mark>[show provider location(s)]</mark>, and your school placements will be within commuting distance.</p>
+
+          <p>You can’t pick which schools you want to be in, but your university will try to take your journey time into consideration.<p>
+
+          <p>Universities can work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "See the guidance",
+          html: schoolPlacementsHtml
+        }) }}
 
         {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 350, errors) }}
 
