@@ -7,12 +7,12 @@ module.exports = function (env) {
    */
   var filters = {}
 
-  filters.addMoreToFields = function(fields, more) {
+  filters.addMoreToFields = function (fields, more) {
     fields.forEach(f => {
-      f.more = more;
-    });
+      f.more = more
+    })
 
-    return fields;
+    return fields
   }
 
   /* ------------------------------------------------------------------

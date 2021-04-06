@@ -58,7 +58,7 @@
   accessibleAutocomplete({
     element: document.querySelector('#my-autocomplete-container'),
     id: 'my-autocomplete', // To match it to the existing <label>.
-    source: createSimpleEngine(autocomplete_options),
+    source: createSimpleEngine(autocompleteOptions),
     minLength: 2,
     onConfirm: function(school) {
       if (school) {

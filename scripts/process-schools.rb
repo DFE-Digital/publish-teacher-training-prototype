@@ -23,7 +23,7 @@ class UpdateSchoolData
                               "#{s['name']} (#{s['urn']}, #{s['town']}, #{s['postcode']})"
                             end
 
-    File.open('app/assets/javascripts/schools.js', 'w') { |file| file.write("var autocomplete_options = " + autocomplete_strings.uniq.inspect + ";") }
+    File.open('app/assets/javascripts/schools.js', 'w') { |file| file.write("var autocompleteOptions = " + autocomplete_strings.uniq.inspect + ";") }
   end
 
   private
