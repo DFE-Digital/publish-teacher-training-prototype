@@ -4,19 +4,24 @@ $govuk-global-styles: true;
 // Not in design system:
 $button-colour: #00823b;
 
+// We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework.
+$govuk-assets-path: '/govuk/assets/';
+
 // Import GOV.UK Frontend and any extension styles if extensions have been configured
 @import "lib/extensions/extensions";
 
-// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+// Patterns that aren't in Frontend
+@import "patterns/step-by-step-header";
+@import "patterns/step-by-step-nav";
+@import "patterns/step-by-step-related";
+@import "patterns/task-list";
+@import "patterns/related-items";
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 @import 'patterns/simplemde-theme';
 @import 'patterns/success-summary';
 @import "patterns/step-by-step-navigation";
-@import "patterns/task-list";
-@import "patterns/related-items";
 @import "patterns/destructive-button";
-
-// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
-
 @import "components/map";
 
 blockquote {
@@ -211,7 +216,7 @@ dl.aligned.course-part-tasks dd {
   @include govuk-font($size: 19, $weight: bold);
   bottom: 7px;
   left: 15px;
-  relative: absolute;
+  position: absolute;
 }
 
 .autocomplete__menu {

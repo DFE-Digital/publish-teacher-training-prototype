@@ -9,7 +9,7 @@ If you’ve got an idea or suggestion you can:
 
 * email [govuk-design-system-support@digital.cabinet-office.gov.uk](mailto:govuk-design-system-support@digital.cabinet-office.gov.uk)
 * [get in touch on developer Slack channel](https://ukgovernmentdigital.slack.com/messages/prototype-kit-dev)([open in app](slack://channel?team=T04V6EBTR&amp;id=C0E1063DW))
-* [create a GitHub issue](https://github.com/alphagov/govuk-prototype-kit/issues)       
+* [create a GitHub issue](https://github.com/alphagov/govuk-prototype-kit/issues)
 
 ## Raising bugs
 
@@ -49,19 +49,3 @@ branches.
 
 Please see our [git style guide](https://github.com/alphagov/styleguides/blob/master/git.md)
 which describes how we prefer git history and commit messages to read.
-
-## To release a new version
-
-Checkout a new branch for the release.
-
-Update [CHANGELOG.md](https://github.com/alphagov/govuk-prototype-kit/blob/master/CHANGELOG.md) to summarise the changes made since the last release.
-
-To see the commits to be summarised in the changelog since the last release, [compare the latest-release branch with master](https://github.com/alphagov/govuk-prototype-kit/compare/latest-release...master).
-
-Propose a new version number in [VERSION.txt](https://github.com/alphagov/govuk-prototype-kit/blob/master/VERSION.txt) and update line 4 in [package.json](https://github.com/alphagov/govuk-prototype-kit/blob/master/package.json#L4) with the new version number.
-
-Open a new pull request with a single commit including the above changes.
-
-[Here is an example for v6.1.0](https://github.com/alphagov/govuk-prototype-kit/commit/53e36d79a994ce3649b53f4008370cd75068c27c).
-
-Once merged into master a new version will be built.
