@@ -36,11 +36,11 @@ i.separator {
 }
 
 .editor-preview-active {
-  background: govuk-colour("grey-4");
+  background: govuk-colour("light-grey");
 
   &:before {
     content: 'Content preview';
-    background-color: govuk-colour("grey-1");
+    background-color: govuk-colour("dark-grey");
     color: govuk-colour("white");
     display: block;
     margin: -10px -10px 10px;
