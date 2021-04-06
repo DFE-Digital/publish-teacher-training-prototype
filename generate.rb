@@ -384,4 +384,4 @@ prototype_data['accreditors'].each {|a| a[:subjects].sort_by! { |k| k[:name] }.u
 prototype_data['accredited-bodies-choices'] = all_accredited_bodies.map { |k| { name: k } }
 
 # Output to prototype
-File.open('lib/prototype_data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data) + "\n") }
+File.open('app/data/prototype-data.json', 'w') { |file| file.write(JSON.pretty_generate(prototype_data) + "\n") }

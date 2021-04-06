@@ -10,12 +10,12 @@
 {% endmacro %}
 
 {% macro breadcrumbs(items) %}
-  {% from "breadcrumbs/macro.njk" import govukBreadcrumbs %}
+  {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
   {{ govukBreadcrumbs({ items: items }) }}
 {% endmacro %}
 
 {% macro backLink(href = "/", text = "Back") %}
-  {% from "back-link/macro.njk" import govukBackLink %}
+  {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
   {{ govukBackLink({ text: text, href: href }) }}
 {% endmacro %}
 

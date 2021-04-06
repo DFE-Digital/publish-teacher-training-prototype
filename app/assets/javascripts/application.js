@@ -1,5 +1,4 @@
-/* global $ */
-/* global GOVUK */
+/* global $ GOVUK */
 
 // Warn about using the kit in production
 if (window.console && window.console.info) {
@@ -7,9 +6,9 @@ if (window.console && window.console.info) {
 }
 
 $(document).ready(function () {
-  GOVUK.modules.start();
+  GOVUK.modules.start()
 
-  $(function(){
+  $(function () {
     // $('textarea').each(function() {
     //   var $textarea = $(this);
     //
@@ -40,6 +39,7 @@ $(document).ready(function () {
     //     styleSelectedText: false
     //   });
     // });
-  });
+  })
+
   window.GOVUKFrontend.initAll()
 })

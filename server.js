@@ -1,4 +1,5 @@
 // Core dependencies
+const fs = require('fs')
 const path = require('path')
 
 // NPM dependencies
@@ -8,7 +9,6 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
-const cookieParser = require('cookie-parser')
 
 // Custom dependencies
 const marked = require('marked')
@@ -35,11 +35,9 @@ var useV6 = false
 var v6App
 var v6Routes
 
-try {
+if (fs.existsSync('./app/v6/routes.js')) {
   v6Routes = require('./app/v6/routes.js')
   useV6 = true
-} catch (e) {
-  // No routes.js in app/v6 so we can continue with useV6 false
 }
 
 const app = express()
@@ -50,20 +48,13 @@ if (useV6) {
   v6App = express()
 }
 
-// Set cookies for use in cookie banner.
-app.use(cookieParser())
-documentationApp.use(cookieParser())
-const handleCookies = utils.handleCookies(app)
-app.use(handleCookies)
-documentationApp.use(handleCookies)
-
 // Set up configuration variables
 var releaseVersion = packageJson.version
-var env = (process.env.NODE_ENV || 'development').toLowerCase()
+var glitchEnv = (process.env.PROJECT_REMIX_CHAIN) ? 'production' : false // glitch.com
+var env = (process.env.NODE_ENV || glitchEnv || 'development').toLowerCase()
 var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
 var useHttps = process.env.USE_HTTPS || config.useHttps
-var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
 
 useHttps = useHttps.toLowerCase()
 
@@ -95,7 +86,7 @@ var appViews = extensions.getAppViews([
 var nunjucksConfig = {
   autoescape: true,
   noCache: true,
-  watch: true
+  watch: false // We are now setting this to `false` (it's by default false anyway) as having it set to `true` for production was making the tests hang
 }
 
 if (env === 'development') {
@@ -164,32 +155,19 @@ if (useV6) {
   app.use('/public/v6/javascripts/govuk/', express.static(path.join(__dirname, '/node_modules/govuk_frontend_toolkit/javascripts/govuk/')))
 }
 
-// Add global variable to determine if DoNotTrack is enabled.
-// This indicates a user has explicitly opted-out of tracking.
-// Therefore we can avoid injecting third-party scripts that do not respect this decision.
-app.use(function (req, res, next) {
-  // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/DNT
-  res.locals.doNotTrackEnabled = (req.header('DNT') === '1')
-  next()
-})
-
 // Add variables that are available in all views
-app.locals.gtmId = gtmId
 app.locals.asset_path = '/public/'
 app.locals.useAutoStoreData = (useAutoStoreData === 'true')
 app.locals.useCookieSessionStore = (useCookieSessionStore === 'true')
-app.locals.cookieText = config.cookieText
 app.locals.promoMode = promoMode
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
-app.locals.currentCyclePrototype = config.currentCyclePrototype
-app.locals.nextCyclePrototype = config.nextCyclePrototype
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')
-let sessionOptions = {
+const sessionOptions = {
   secret: sessionName,
   cookie: {
     maxAge: 1000 * 60 * 60 * 4, // 4 hours
@@ -215,15 +193,16 @@ if (useCookieSessionStore === 'true') {
 // Automatically store all data users enter
 if (useAutoStoreData === 'true') {
   app.use(utils.autoStoreData)
-  // utils.addCheckedFunction(nunjucksAppEnv)
-  // if (useDocumentation) {
-  //   utils.addCheckedFunction(nunjucksDocumentationEnv)
-  // }
-  // if (useV6) {
-  //   utils.addCheckedFunction(nunjucksV6Env)
-  // }
+  utils.addCheckedFunction(nunjucksAppEnv)
+  if (useDocumentation) {
+    utils.addCheckedFunction(nunjucksDocumentationEnv)
+  }
+  if (useV6) {
+    utils.addCheckedFunction(nunjucksV6Env)
+  }
 }
 
+// Nunjucks globals
 app.use(function (req, res, next) {
   nunjucksAppEnv.addGlobal('checked', function (name, value) {
     // check session data exists
@@ -255,77 +234,77 @@ app.use(function (req, res, next) {
   })
 
   nunjucksAppEnv.addGlobal('value', function (name) {
-     if (req.session.data === undefined) {
-       return ''
-     }
+    if (req.session.data === undefined) {
+      return ''
+    }
 
-     var value = req.session.data[name]
-     if (value === undefined) {
-       return ''
-     }
+    var value = req.session.data[name]
+    if (value === undefined) {
+      return ''
+    }
 
-     return value;
-   })
-
-  nunjucksAppEnv.addGlobal('markdown', function(name) {
-   if (req.session.data === undefined) {
-     return ''
-   }
-
-   var text = req.session.data[name]
-   if (text === undefined) {
-     return ''
-   }
-
-   return marked(text);
+    return value
   })
 
-  nunjucksAppEnv.addGlobal('courseOptions', function() {
-   var o = ['<option value=""></option>'];
-   req.session.data['ucasCourses'].forEach(function(course) {
-     o.push(`<option value="${course.programmeCode}">${course.name} (${course.programmeCode})</option>`);
-   });
+  nunjucksAppEnv.addGlobal('markdown', function (name) {
+    if (req.session.data === undefined) {
+      return ''
+    }
 
-   return o;
+    var text = req.session.data[name]
+    if (text === undefined) {
+      return ''
+    }
+
+    return marked(text)
+  })
+
+  nunjucksAppEnv.addGlobal('courseOptions', function () {
+    var o = ['<option value=""></option>']
+    req.session.data['ucasCourses'].forEach(function (course) {
+      o.push(`<option value="${course.programmeCode}">${course.name} (${course.programmeCode})</option>`)
+    })
+
+    return o
   })
 
   nunjucksAppEnv.addGlobal('error', function (id, errors) {
-   var data = req.session.data;
-   var courseCode = id.split('-')[0];
+    var { data } = req.session
+    var courseCode = id.split('-')[0]
 
-   if (courseCode.length > 4) {
-     courseCode = 'about-your-organisation';
-   }
+    if (courseCode.length > 4) {
+      courseCode = 'about-your-organisation'
+    }
 
-   // Temporarily disable hiding of publish errors
-   if (!errors || data === undefined) {
-     return false;
-   }
+    // Temporarily disable hiding of publish errors
+    if (!errors || data === undefined) {
+      return false
+    }
 
-   if (
-        !data[courseCode + '-show-publish-errors']
-        && !id.includes('vacancies')
-        && !id.includes('location-confirm')
-      ) {
-     return false;
-   }
+    if (
+      !data[courseCode + '-show-publish-errors'] &&
+      !id.includes('vacancies') &&
+      !id.includes('location-confirm')
+    ) {
+      return false
+    }
 
-   return errors.find(function(e) {
-            return e.id == id;
-          });
+    return errors.find(function (e) {
+      return e.id === id
+    })
   })
 
   nunjucksAppEnv.addGlobal('today', function () {
-   var now = new Date();
-   return dateFormat(now, "d mmm yyyy");
+    var now = new Date()
+    return dateFormat(now, 'd mmm yyyy')
   })
 
-  nunjucksAppEnv.addGlobal('isArray', something => Array.isArray(something));
+  nunjucksAppEnv.addGlobal('isArray', something => Array.isArray(something))
 
-  nunjucksAppEnv.addGlobal('locationFromString', function(string) {
-    var urn = string.match(/\d{6}/)[0];
-    var name = string.split('(')[0];
-    var location = string.split('(')[1].split(',')[1];
+  nunjucksAppEnv.addGlobal('locationFromString', function (string) {
+    var urn = string.match(/\d{6}/)[0]
+    var name = string.split('(')[0]
+    var location = string.split('(')[1].split(',')[1]
 
     return {
       urn: urn,
@@ -334,26 +313,26 @@ app.use(function (req, res, next) {
     }
   })
 
-  nunjucksAppEnv.addGlobal('breadcrumbItems', function(items = []) {
-    var data = req.session.data;
-    var defaultItems = [];
+  nunjucksAppEnv.addGlobal('breadcrumbItems', function (items = []) {
+    var { data } = req.session
+    var defaultItems = []
 
     if (data['rolled-over']) {
-      defaultItems.push({ text: data['training-provider-name'], href: '/cycles' });
+      defaultItems.push({ text: data['training-provider-name'], href: '/cycles' })
 
       if (data['next-cycle']) {
-        defaultItems.push({ text: 'Next cycle (2020 – 2021)', href: '/' });
+        defaultItems.push({ text: 'Next cycle (2020 – 2021)', href: '/' })
       } else {
-        defaultItems.push({ text: 'Current cycle (2019 – 2020)', href: '/' });
+        defaultItems.push({ text: 'Current cycle (2019 – 2020)', href: '/' })
       }
     } else {
-      defaultItems.push({ text: data['training-provider-name'], href: '/' });
+      defaultItems.push({ text: data['training-provider-name'], href: '/' })
     }
-    return defaultItems.concat(items);
-  });
+    return defaultItems.concat(items)
+  })
 
   next()
-});
+})
 
 // Clear all data in session if you open /prototype-admin/clear-data
 app.post('/prototype-admin/clear-data', function (req, res) {
@@ -364,8 +343,6 @@ app.post('/prototype-admin/clear-data', function (req, res) {
 // Redirect root to /docs when in promo mode.
 if (promoMode === 'true') {
   console.log('Prototype Kit running in promo mode')
-
-  app.locals.cookieText = 'GOV.UK uses cookies to make the site simpler. <a href="/docs/cookies">Find out more about cookies</a>'
 
   app.get('/', function (req, res) {
     res.redirect('/docs')
