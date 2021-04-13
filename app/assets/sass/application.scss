@@ -1,9 +1,6 @@
 // global styles for <a> and <p> tags
 $govuk-global-styles: true;
 
-// Not in design system:
-$button-colour: #00823b;
-
 // We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework.
 $govuk-assets-path: '/govuk/assets/';
 
@@ -15,6 +12,9 @@ $govuk-assets-path: '/govuk/assets/';
 @import 'patterns/success-summary';
 @import "patterns/destructive-button";
 @import "components/map";
+
+// Utilities
+@import "utilities/overrides";
 
 blockquote {
   margin: 0;
@@ -73,7 +73,7 @@ table thead th {
 }
 
 .phase-tag-published {
-  background: $button-colour;
+  background: govuk-colour("green");
 }
 
 .empty {

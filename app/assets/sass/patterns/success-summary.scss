@@ -6,17 +6,15 @@
   font-weight: bold;
 }
 
-$success-green: $button-colour;
-
 .success-summary {
   @extend .govuk-error-summary;
-  border-color: $success-green;
+  border-color: $govuk-success-colour;
 
   .success-summary-list {
     @extend .govuk-error-summary__list;
 
     a {
-      color: $success-green;
+      color: $govuk-success-colour;
     }
   }
 
