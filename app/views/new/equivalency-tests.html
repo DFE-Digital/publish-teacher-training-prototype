@@ -1,7 +1,6 @@
-{% set title = 'Tests for candidates without GCSE requirements' %}
 {% extends "layout.html" %}
+{% set title = "Tests for candidates without GCSE requirements" %}
 {% set isPrimary = data[code + '-phase'] == 'Primary' %}
-{% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}

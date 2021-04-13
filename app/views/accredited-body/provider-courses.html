@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% set title = provider.name + ' (' + provider.code + ')'%}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title = provider.name + " (" + provider.code + ")" %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
   {
     href: "/accredited-body",

@@ -1,13 +1,12 @@
+{% extends "layout.html" %}
 {% set isNotPublished = not data[code + '-published-before'] %}
 
 {% if isNotPublished %}
-  {% set title = 'Check your answers before confirming' %}
+  {% set title = "Check your answers before confirming" %}
 {% else %}
-  {% set title = 'Check your answers before publishing' %}
+  {% set title = "Check your answers before publishing" %}
 {% endif %}
 
-{% extends "layout.html" %}
-{% block pageTitle %}{{ title }}{% endblock %}
 {% block backLink %}{{ macros.backLink('/course/' + data['provider-code'] + '/' + code) }}{% endblock %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}

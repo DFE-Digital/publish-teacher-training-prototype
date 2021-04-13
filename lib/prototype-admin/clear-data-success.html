@@ -1,23 +1,10 @@
 {% extends "layout.html" %}
-
-{% block pageTitle %}
-  Data cleared - GOV.UK Prototype Kit
-{% endblock %}
+{% set title = "Data cleared" %}
 
 {% block content %}
-
   <h1 class="govuk-heading-m">
-    Data cleared
+    {{ title }}
   </h1>
-
-  <p>
-    The session data has been cleared.
-  </p>
-
-  <p>
-    <a href="/">
-      Prototype home page
-    </a>
-  </p>
-
+  <p>The session data has been cleared.</p>
+  <p><a href="/">Prototype home page</a></p>
 {% endblock %}

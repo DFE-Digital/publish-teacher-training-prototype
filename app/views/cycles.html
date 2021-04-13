@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
+{% set title = data["training-provider-name"] %}
 
 {% block content %}
   {% if justRolledOver %}

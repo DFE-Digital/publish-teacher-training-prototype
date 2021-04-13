@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Request access for someone{% endblock %}
+{% set title = "Request access for someone" %}
 {% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
 
 {% block content %}

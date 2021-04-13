@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'UCAS Apply settings' %}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title = "UCAS Apply settings" %}
 {% set breadcrumbLink = '/cycles' if data['rolled-over'] else '/' %}
 {% block breadcrumbs %}{{ macros.breadcrumbs([{ text: data['training-provider-name'], href: breadcrumbLink }])}}{% endblock %}
 

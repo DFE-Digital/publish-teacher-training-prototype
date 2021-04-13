@@ -1,6 +1,5 @@
-{% set title %}Pick a {{ data[code + '-phase'] | lower }} subject{% endset %}
 {% extends "layout.html" %}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title %}Pick a {{ data[code + "-phase"] | lower }} subject{% endset %}
 {% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
 
 {% block content %}

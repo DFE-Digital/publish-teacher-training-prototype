@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block pageTitle %}Your organisation{% endblock %}
+{% set title = "Your organisation" %}
 {% block backLink %}{{ macros.backLink('/school/' + school.id) }}{% endblock %}
 
 {% block content %}

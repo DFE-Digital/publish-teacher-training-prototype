@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
-{% set title = 'Requirements and eligibility' %}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title = "Requirements and eligibility" %}
 {% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
 
 {% block content %}
-
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
