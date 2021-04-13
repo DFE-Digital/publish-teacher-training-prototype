@@ -1,18 +1,13 @@
 {% extends "layout.html" %}
 {% set title = data["training-provider-name"] %}
-{% block breadcrumbs %}
-  {% if data['rolled-over'] %}
-    {{
-      govukBreadcrumbs({
-        items: [
-          {
-            href: "/cycles",
-            text: data['training-provider-name']
-          }
-        ]
-      })
-    }}
-  {% endif %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      href: "/cycles",
+      text: data['training-provider-name']
+    }]
+  }) if data["rolled-over"] }}
 {% endblock %}
 
 {% block content %}

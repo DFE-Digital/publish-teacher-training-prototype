@@ -1,11 +1,16 @@
 {% extends "layout.html" %}
 {% set title = "Courses as an accredited body" %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
-{% set newCourseFormUrl = 'https://goo.gl/forms/HJ17Hob3728X3mTc2' if data['new-course']['include-accredited'] else 'https://goo.gl/forms/kdNksCuwcz7TVtNF2' %}
+{% set newCourseFormUrl = "https://goo.gl/forms/HJ17Hob3728X3mTc2" if data["new-course"]["include-accredited"] else "https://goo.gl/forms/kdNksCuwcz7TVtNF2" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems()
+  }) }}
+{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">
-    {% if data['next-cycle'] %}<span class="govuk-caption-xl">Next cycle (2020 – 2021)</span>{% endif %}
+    {% if data["next-cycle"] %}<span class="govuk-caption-xl">Next cycle (2020 – 2021)</span>{% endif %}
     {{ title }}
   </h1>
 

@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 {% set title = "UCAS Apply settings" %}
-{% set breadcrumbLink = '/cycles' if data['rolled-over'] else '/' %}
-{% block breadcrumbs %}{{ macros.breadcrumbs([{ text: data['training-provider-name'], href: breadcrumbLink }])}}{% endblock %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: data["training-provider-name"],
+      href: "/cycles" if data["rolled-over"] else "/"
+    }]
+  }) }}
+{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">

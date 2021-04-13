@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 {% set title = "Courses" %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 {% set newCourseFormUrl = 'https://goo.gl/forms/HJ17Hob3728X3mTc2' if data['new-course']['include-accredited'] else 'https://goo.gl/forms/kdNksCuwcz7TVtNF2' %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems()
+  }) }}
+{% endblock %}
 
 {% block content %}
   {% if justEditedVacancies %}

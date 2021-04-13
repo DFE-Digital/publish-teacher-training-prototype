@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 {% set title = school.name or "Add a location" %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
-  {
-    href: "/locations",
-    text: 'Locations'
-  }
-]))}}{% endblock %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      href: "/locations",
+      text: "Locations"
+    }])
+  )) }}
+{% endblock %}
 
 {% block content %}
   {% if showErrors %}

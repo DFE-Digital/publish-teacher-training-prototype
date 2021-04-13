@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 {% set title = provider.name + " (" + provider.code + ")" %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
-  {
-    href: "/accredited-body",
-    text: 'Courses as an accredited body'
-  }
-]))}}{% endblock %}
 {% set readOnlyCourses = true %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      href: "/accredited-body",
+      text: "Courses as an accredited body"
+    }])
+  }) }}
+{% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">

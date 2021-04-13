@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 {% set title = "About your organisation" %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems()
+  }) }}
+{% endblock %}
 
 {% block content %}
   {% set message %}

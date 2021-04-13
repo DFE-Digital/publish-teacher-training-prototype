@@ -1,8 +1,3 @@
-{% macro breadcrumbs(items) %}
-  {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-  {{ govukBreadcrumbs({ items: items }) }}
-{% endmacro %}
-
 {% macro summary(title, html = false, type = "success") %}
   <div class="{{ type }}-summary" role="alert" tabindex="-1">
     <h3 class="govuk-heading-m {% if not html %}govuk-!-margin-bottom-0{% endif %} {{ type }}-heading">

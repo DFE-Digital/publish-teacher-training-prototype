@@ -1,17 +1,13 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
 
-{% block breadcrumbs %}
-  {{
-    govukBreadcrumbs({
-      items: [
-        {
-          href: "/",
-          text: data['training-provider-name']
-        }
-      ]
-    })
-  }}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      href: "/",
+      text: data["training-provider-name"]
+    }]
+  }) }}
 {% endblock %}
 
 {% block content %}

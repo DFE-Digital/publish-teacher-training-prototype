@@ -7,12 +7,15 @@
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
 {% set isNotPublished = not data[code + '-published-before'] %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems([
-  {
-    href: "/courses",
-    text: 'Courses'
-  }
-]))}}{% endblock %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      href: "/courses",
+      text: "Courses"
+    }])
+  }) }}
+{% endblock %}
 
 {% set titleRequestedHtml %}
   <p class="govuk-!-margin-bottom-0">Requested title:</p>
