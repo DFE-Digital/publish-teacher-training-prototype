@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Contact details" %}
-{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+{% set backLink = "/about-your-organisation" %}
 
 {% block content %}
 {% include "about-your-organisation/_errors.html" %}

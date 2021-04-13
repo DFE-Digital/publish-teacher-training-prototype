@@ -7,7 +7,7 @@
   {% set title = "Check your answers before publishing" %}
 {% endif %}
 
-{% block backLink %}{{ macros.backLink('/course/' + data['provider-code'] + '/' + code) }}{% endblock %}
+{% set backLink = "/course/" + data["provider-code"] + "/" + code %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
 {% set isFe = (data[code + '-phase'] == 'Further education') %}

@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% set title = "Preview" %}
-{% block backLink %}{{ macros.backLink(course.path, 'Back to course') }}{% endblock %}
+{% set backLink = course.path %}
+{% set backLinkText = "Back to course" %}
 
 {% block content %}
   <div class="status-box govuk-!-margin-bottom-4" style="margin-top: -15px">

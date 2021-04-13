@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Are you sure you want to delete this course?" %}
-{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
+{% set backLink = course.path %}
 
 {% block content %}
   <div class="govuk-grid-row">

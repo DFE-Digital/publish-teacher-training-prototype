@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% set title = "Edit ‘About your organisation’" %}
-{% block backLink %}{{ macros.backLink('/about-your-organisation') }}{% endblock %}
+{% set backLink = "/about-your-organisation" %}
 
 {% block content %}
-{% include "about-your-organisation/_errors.html" %}
+  {% include "about-your-organisation/_errors.html" %}
 
-<h1 class="govuk-heading-xl">
-  {{ title }}
-</h1>
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
 
   <form action="/about-your-organisation" method="post">
     <div class="govuk-grid-row">

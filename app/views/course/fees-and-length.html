@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title %}Course length and {% if course.salaried %}salary{% else %}fees{% endif %}{% endset %}
-{% block backLink %}{{ macros.backLink(course.path) }}{% endblock %}
+{% set backLink = course.path %}
 
 {% block content %}
   {% include "course/_errors.html" %}

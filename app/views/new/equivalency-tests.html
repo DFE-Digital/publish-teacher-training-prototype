@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = "Tests for candidates without GCSE requirements" %}
 {% set isPrimary = data[code + '-phase'] == 'Primary' %}
-{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+{% set backLink = paths.back %}
 
 {% block content %}
   <!-- examples:

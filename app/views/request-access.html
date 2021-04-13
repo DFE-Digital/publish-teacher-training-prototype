@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Request access for someone" %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% set backLink = "/cycles" if data['rolled-over'] else "/" %}
 
 {% block content %}
   {% set message %}

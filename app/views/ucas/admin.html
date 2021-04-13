@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "UCAS administrator" %}
-{% block backLink %}{{ macros.backLink('/ucas/apply-preferences') }}{% endblock %}
+{% set backLink = "/ucas/apply-preferences" %}
 
 {% block content %}
   {{ macros.summary('You made a request to change this in the last 7 days', false, 'neutral') }}

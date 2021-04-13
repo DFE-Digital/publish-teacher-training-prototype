@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Is this course title right?" %}
-{% block backLink %}{{ macros.backLink(paths.back) }}{% endblock %}
+{% set backLink = paths.back %}
 {% set isFe = (data[code + '-phase'] == 'Further education') %}
 
 {% block content %}

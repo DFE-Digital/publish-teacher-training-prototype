@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Your organisation" %}
-{% block backLink %}{{ macros.backLink('/school/' + school.id) }}{% endblock %}
+{% set backLink = "/school/" + school.id %}
 
 {% block content %}
   <div class="govuk-grid-row">

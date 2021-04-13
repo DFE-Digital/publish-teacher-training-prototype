@@ -1,12 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Clear data?" %}
-
-{% block beforeContent %}
-  {{ govukBackLink({
-    "text": "Back",
-    "href": "javascript: window.history.go(-1)"
-  }) }}
-{% endblock %}
+{% set backLink = "javascript: window.history.go(-1)" %}
 
 {% block content %}
   <form method="post">

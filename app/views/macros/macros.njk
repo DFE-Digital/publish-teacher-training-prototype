@@ -3,11 +3,6 @@
   {{ govukBreadcrumbs({ items: items }) }}
 {% endmacro %}
 
-{% macro backLink(href = "/", text = "Back") %}
-  {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
-  {{ govukBackLink({ text: text, href: href }) }}
-{% endmacro %}
-
 {% macro summary(title, html = false, type = "success") %}
   <div class="{{ type }}-summary" role="alert" tabindex="-1">
     <h3 class="govuk-heading-m {% if not html %}govuk-!-margin-bottom-0{% endif %} {{ type }}-heading">

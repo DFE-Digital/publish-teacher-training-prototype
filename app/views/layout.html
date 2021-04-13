@@ -60,14 +60,17 @@
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
-      text: "prototype"
+      text: "Prototype"
     },
-    html: 'This is a prototype of a new service. Some parts of this prototype do not work yet.'
+    html: "This is a prototype of a new service. Some parts of this prototype do not work yet."
   }) }}
 
   {% block breadcrumbs %}{% endblock %}
-  {% block backLink %}{% endblock %}
-  {% block afterPhaseBanner %}{% endblock %}
+
+  {{ govukBackLink({
+    text: backLinkText or "Back",
+    href: backLink
+  }) if backLink }}
 {% endblock %}
 
 {% if useAutoStoreData %}
