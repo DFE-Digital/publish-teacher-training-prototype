@@ -399,7 +399,7 @@ router.post('/request-access', function (req, res) {
 
 router.get('/about-your-organisation', function (req, res) {
   const errors = validateOrg(req.session.data)
-  res.render('about-your-organisation', { errors: errors, justPublished: (req.query.publish && errors.length === 0) })
+  res.render('about-your-organisation/index', { errors: errors, justPublished: (req.query.publish && errors.length === 0) })
 })
 
 router.get('/about-your-organisation/edit', function (req, res) {
@@ -454,7 +454,7 @@ router.get('/course/:providerCode/:code', function (req, res) {
   const c = course(req)
   const errors = validate(req.session.data, c)
 
-  res.render('course', {
+  res.render('course/index', {
     course: c,
     errors: errors,
     justCreated: req.query.created,
@@ -523,7 +523,7 @@ router.post('/course/:providerCode/:code/withdraw', function (req, res) {
 router.get('/course-not-running/:providerCode/:code', function (req, res) {
   const c = course(req)
 
-  res.render('course-not-running', { course: c })
+  res.render('course/not-running', { course: c })
 })
 
 router.get('/preview/:providerCode/:code', function (req, res) {
