@@ -1,19 +1,19 @@
 const request = require('request')
 
 function generateCourseCode () {
-  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ'.split('')
-  var letter = letters[Math.floor(Math.random() * letters.length)]
-  var code = letter + Math.floor(Math.random() * (999 - 100 + 1) + 100)
+  const letters = 'ABCDEFGHJKMNPQRSTUVWXYZ'.split('')
+  const letter = letters[Math.floor(Math.random() * letters.length)]
+  const code = letter + Math.floor(Math.random() * (999 - 100 + 1) + 100)
   return code
 }
 
 function generateLocationCode (exclude = []) {
-  var letters = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789'.split('').filter((l) => !exclude.includes(l))
+  const letters = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789'.split('').filter((l) => !exclude.includes(l))
   return letters[Math.floor(Math.random() * letters.length)]
 }
 
 function getGeneratedTitle (code, data) {
-  var generatedTitle = data[code + '-subject']
+  let generatedTitle = data[code + '-subject']
 
   if (isFurtherEducation(code, data)) {
     generatedTitle = 'Further education'
@@ -31,7 +31,7 @@ function getGeneratedTitle (code, data) {
   }
 
   if (isModernLanguages(code, data)) {
-    var languages = data[code + '-languages'] || []
+    const languages = data[code + '-languages'] || []
     if (languages.length === 1 || languages.length === 3) {
       generatedTitle = `${generatedTitle} (${languages.join(', ')})`
     } else if (languages.length === 2) {
@@ -48,7 +48,7 @@ function getGeneratedTitle (code, data) {
 }
 
 function originalQuery (req) {
-  var originalQueryString = req.originalUrl.split('?')[1]
+  const originalQueryString = req.originalUrl.split('?')[1]
   return originalQueryString ? `?${originalQueryString}` : ''
 }
 
@@ -57,9 +57,9 @@ function includeLocationsInWizard (data) {
 }
 
 function nextAndBackPaths (paths, currentPath, query, isModernLanguages = false) {
-  var index = paths.indexOf(currentPath)
-  var next = paths[index + 1] || ''
-  var back = paths[index - 1] || ''
+  const index = paths.indexOf(currentPath)
+  const next = paths[index + 1] || ''
+  let back = paths[index - 1] || ''
 
   if (back && back.includes('languages') && !isModernLanguages) {
     back = paths[index - 2]
@@ -73,7 +73,7 @@ function nextAndBackPaths (paths, currentPath, query, isModernLanguages = false)
 }
 
 function rolloverWizardPaths (req) {
-  var paths = [
+  const paths = [
     '/',
     '/rollover/start',
     '/rollover/courses',
@@ -86,7 +86,7 @@ function rolloverWizardPaths (req) {
 }
 
 function onboardingWizardPaths (req) {
-  var paths = [
+  const paths = [
     '/onboarding/accept-terms',
     '/onboarding/name',
     '/onboarding/code',
@@ -104,10 +104,10 @@ function onboardingWizardPaths (req) {
 }
 
 function newFurtherEducationCourseWizardPaths (req) {
-  var code = req.params.code
-  var data = req.session.data
-  var editing = data.ucasCourses.some(a => a.programmeCode === code)
-  var summaryView = editing ? 'edit' : 'confirm'
+  const code = req.params.code
+  const data = req.session.data
+  const editing = data.ucasCourses.some(a => a.programmeCode === code)
+  const summaryView = editing ? 'edit' : 'confirm'
 
   if (req.query.change && req.query.change !== 'phase') {
     return {
@@ -116,7 +116,7 @@ function newFurtherEducationCourseWizardPaths (req) {
     }
   }
 
-  var paths = [
+  const paths = [
     '/courses',
     `/new/${code}/phase`,
     `/new/${code}/further/outcome`,
@@ -129,7 +129,7 @@ function newFurtherEducationCourseWizardPaths (req) {
     `/new/${code}/further/create`
   ]
 
-  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
 
   if (nextAndBack.back === '/courses?change=phase') {
     nextAndBack.back = `/new/${code}/further/${summaryView}`
@@ -139,10 +139,10 @@ function newFurtherEducationCourseWizardPaths (req) {
 }
 
 function newCourseWizardPaths (req) {
-  var data = req.session.data
-  var code = req.params.code
-  var editing = data.ucasCourses.some(a => a.programmeCode === code)
-  var summaryView = editing ? 'edit' : 'confirm'
+  const data = req.session.data
+  const code = req.params.code
+  const editing = data.ucasCourses.some(a => a.programmeCode === code)
+  const summaryView = editing ? 'edit' : 'confirm'
 
   if (isFurtherEducation(code, data)) {
     return newFurtherEducationCourseWizardPaths(req)
@@ -163,7 +163,7 @@ function newCourseWizardPaths (req) {
     }
   }
 
-  var paths = [
+  const paths = [
     '/courses',
     `/new/${code}/phase`,
     `/new/${code}/subject`,
@@ -183,7 +183,7 @@ function newCourseWizardPaths (req) {
     `/new/${code}/create`
   ]
 
-  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data))
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data))
 
   if (nextAndBack.back === '/courses?change=phase') {
     nextAndBack.back = `/new/${code}/${summaryView}`
@@ -193,9 +193,9 @@ function newCourseWizardPaths (req) {
 }
 
 function editSubjectPaths (req, summaryView = 'confirm') {
-  var data = req.session.data
-  var code = req.params.code
-  var paths = [
+  const data = req.session.data
+  const code = req.params.code
+  const paths = [
     `/new/${code}/${summaryView}`,
     `/new/${code}/subject`,
     `/new/${code}/languages`,
@@ -208,9 +208,9 @@ function editSubjectPaths (req, summaryView = 'confirm') {
 }
 
 function editLanguagePaths (req, summaryView = 'confirm') {
-  var data = req.session.data
-  var code = req.params.code
-  var paths = [
+  const data = req.session.data
+  const code = req.params.code
+  const paths = [
     `/new/${code}/${summaryView}`,
     `/new/${code}/languages`,
     `/new/${code}/title`,
@@ -221,10 +221,10 @@ function editLanguagePaths (req, summaryView = 'confirm') {
 }
 
 function newLocationWizardPaths (req) {
-  var code = req.params.code
-  var data = req.session.data
-  var editing = data.schools.some(a => a.code === code)
-  var summaryView = editing ? 'edit' : 'confirm'
+  const code = req.params.code
+  const data = req.session.data
+  const editing = data.schools.some(a => a.code === code)
+  const summaryView = editing ? 'edit' : 'confirm'
 
   if (isRegionLocation(code, data)) {
     return newRegionLocationWizardPaths(req)
@@ -241,7 +241,7 @@ function newLocationWizardPaths (req) {
     }
   }
 
-  var paths = [
+  const paths = [
     '/locations',
     `/new-location/${code}/type`,
     `/new-location/${code}/pick-location`,
@@ -250,7 +250,7 @@ function newLocationWizardPaths (req) {
     `/new-location/${code}/create`
   ]
 
-  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
 
   if (nextAndBack.back === '/locations?change=type') {
     nextAndBack.back = `/new-location/${code}/${summaryView}`
@@ -260,10 +260,10 @@ function newLocationWizardPaths (req) {
 }
 
 function newRegionLocationWizardPaths (req) {
-  var code = req.params.code
-  var data = req.session.data
-  var editing = data.schools.some(a => a.code === code)
-  var summaryView = editing ? 'edit' : 'confirm'
+  const code = req.params.code
+  const data = req.session.data
+  const editing = data.schools.some(a => a.code === code)
+  const summaryView = editing ? 'edit' : 'confirm'
 
   if (req.query.change && req.query.change !== 'type') {
     return {
@@ -272,7 +272,7 @@ function newRegionLocationWizardPaths (req) {
     }
   }
 
-  var paths = [
+  const paths = [
     '/locations',
     `/new-location/${code}/type`,
     `/new-location/${code}/region-name`,
@@ -281,7 +281,7 @@ function newRegionLocationWizardPaths (req) {
     `/new-location/${code}/create`
   ]
 
-  var nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
 
   if (nextAndBack.back === '/locations?change=type') {
     nextAndBack.back = `/new-location/${code}/${summaryView}`
@@ -291,8 +291,8 @@ function newRegionLocationWizardPaths (req) {
 }
 
 function editPickedLocationPaths (req, summaryView = 'confirm') {
-  var { code } = req.params
-  var paths = [
+  const { code } = req.params
+  const paths = [
     `/new-location/${code}/${summaryView}`,
     `/new-location/${code}/pick-location`,
     `/new-location/${code}/address`,
@@ -303,7 +303,7 @@ function editPickedLocationPaths (req, summaryView = 'confirm') {
 }
 
 function getCourseOffered (code, data) {
-  var courseOffered = data[code + '-outcome'] || ''
+  let courseOffered = data[code + '-outcome'] || ''
 
   if (courseOffered.includes('PGCE only')) {
     courseOffered = 'PGCE'
@@ -332,14 +332,14 @@ function getCourseOffered (code, data) {
 }
 
 function getLocations (code, data, callback) {
-  var promises = []
-  var choices = data[code + '-area-schools']
+  const promises = []
+  let choices = data[code + '-area-schools']
   if (!Array.isArray(choices)) {
     choices = [choices]
   }
 
   choices.forEach(function (choice) {
-    var p = new Promise(function (resolve, reject) {
+    const p = new Promise(function (resolve, reject) {
       getLocationFromChoice(data, choice, function (location, urn) {
         resolve(location)
       })
@@ -353,8 +353,8 @@ function getLocations (code, data, callback) {
 }
 
 function getLocationFromChoice (data, choice, callback) {
-  var parts = choice.split(' (')
-  var urn = parts[1].split(',')[0]
+  const parts = choice.split(' (')
+  const urn = parts[1].split(',')[0]
   requestLocation(data, urn, callback)
 }
 
@@ -369,7 +369,7 @@ function requestLocation (data, urn, callback) {
     json: true
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      var location = body
+      const location = body
 
       if (location.url && !location.url.startsWith('http')) {
         location.url = `http://${location.url}`
@@ -394,8 +394,8 @@ function isFurtherEducation (code, data) {
 }
 
 function subject (req) {
-  var accrediting = accreditor(req)
-  var subject = accrediting.subjects.find(function (s) {
+  const accrediting = accreditor(req)
+  const subject = accrediting.subjects.find(function (s) {
     return s.slug === req.params.subject
   })
 
@@ -406,7 +406,7 @@ function subject (req) {
 }
 
 function course (req) {
-  var course = req.session.data.ucasCourses.find(function (a) {
+  const course = req.session.data.ucasCourses.find(function (a) {
     return a.programmeCode === req.params.code
   })
 
@@ -416,7 +416,7 @@ function course (req) {
 }
 
 function provider (req) {
-  var provider = req.session.data.providers.find(function (a) {
+  const provider = req.session.data.providers.find(function (a) {
     return a.code === req.params.code
   })
 
@@ -424,8 +424,8 @@ function provider (req) {
 }
 
 function validate (data, course, view) {
-  var prefix = course.programmeCode
-  var errors = []
+  const prefix = course.programmeCode
+  const errors = []
   view = view || 'all'
 
   if (view === 'all' || view === 'about-this-course') {
@@ -497,7 +497,7 @@ function validate (data, course, view) {
 }
 
 function validateOrg (data, view) {
-  var errors = []
+  const errors = []
   view = view || 'all'
 
   if (view === 'all' || view === 'about-your-organisation') {

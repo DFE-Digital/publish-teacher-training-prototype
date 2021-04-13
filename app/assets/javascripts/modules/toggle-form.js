@@ -3,7 +3,7 @@
 
   Modules.ToggleForm = function () {
     this.start = function ($el) {
-      var toggleSelector = '.js-toggle'
+      const toggleSelector = '.js-toggle'
 
       $el.on('click', toggleSelector, toggle)
 

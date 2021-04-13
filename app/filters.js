@@ -5,7 +5,7 @@ module.exports = function (env) {
    * gov.uk core filters by creating filter methods of the same name.
    * @type {Object}
    */
-  var filters = {}
+  const filters = {}
 
   filters.addMoreToFields = function (fields, more) {
     fields.forEach(f => {

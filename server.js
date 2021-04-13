@@ -1,5 +1,4 @@
 // Core dependencies
-const fs = require('fs')
 const path = require('path')
 
 // NPM dependencies
@@ -30,18 +29,18 @@ const extensions = require('./lib/extensions/extensions.js')
 const app = express()
 
 // Set up configuration variables
-var releaseVersion = packageJson.version
-var glitchEnv = (process.env.PROJECT_REMIX_CHAIN) ? 'production' : false // glitch.com
-var env = (process.env.NODE_ENV || glitchEnv || 'development').toLowerCase()
-var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
-var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
-var useHttps = process.env.USE_HTTPS || config.useHttps
+const releaseVersion = packageJson.version
+const glitchEnv = (process.env.PROJECT_REMIX_CHAIN) ? 'production' : false // glitch.com
+const env = (process.env.NODE_ENV || glitchEnv || 'development').toLowerCase()
+const useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
+const useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
+let useHttps = process.env.USE_HTTPS || config.useHttps
 
 useHttps = useHttps.toLowerCase()
 
 // Force HTTPS on production. Do this before using basicAuth to avoid
 // asking for username/password twice (for `http`, then `https`).
-var isSecure = (env === 'production' && useHttps === 'true')
+const isSecure = (env === 'production' && useHttps === 'true')
 if (isSecure) {
   app.use(utils.forceHttps)
   app.set('trust proxy', 1) // needed for secure cookies on heroku
@@ -50,12 +49,12 @@ if (isSecure) {
 middleware.forEach(func => app.use(func))
 
 // Set up App
-var appViews = extensions.getAppViews([
+const appViews = extensions.getAppViews([
   path.join(__dirname, '/app/views/'),
   path.join(__dirname, '/lib/')
 ])
 
-var nunjucksConfig = {
+const nunjucksConfig = {
   autoescape: true,
   noCache: true,
   watch: false // We are now setting this to `false` (it's by default false anyway) as having it set to `true` for production was making the tests hang
@@ -67,7 +66,7 @@ if (env === 'development') {
 
 nunjucksConfig.express = app
 
-var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
+const nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
@@ -135,14 +134,14 @@ app.use(function (req, res, next) {
       return ''
     }
 
-    var storedValue = req.session.data[name]
+    const storedValue = req.session.data[name]
 
     // check the requested data exists
     if (storedValue === undefined) {
       return ''
     }
 
-    var checked = ''
+    let checked = ''
 
     // if data is an array, check it exists in the array
     if (Array.isArray(storedValue)) {
@@ -163,7 +162,7 @@ app.use(function (req, res, next) {
       return ''
     }
 
-    var value = req.session.data[name]
+    const value = req.session.data[name]
     if (value === undefined) {
       return ''
     }
@@ -176,7 +175,7 @@ app.use(function (req, res, next) {
       return ''
     }
 
-    var text = req.session.data[name]
+    const text = req.session.data[name]
     if (text === undefined) {
       return ''
     }
@@ -185,7 +184,7 @@ app.use(function (req, res, next) {
   })
 
   nunjucksAppEnv.addGlobal('courseOptions', function () {
-    var o = ['<option value=""></option>']
+    const o = ['<option value=""></option>']
     req.session.data.ucasCourses.forEach(function (course) {
       o.push(`<option value="${course.programmeCode}">${course.name} (${course.programmeCode})</option>`)
     })
@@ -194,8 +193,8 @@ app.use(function (req, res, next) {
   })
 
   nunjucksAppEnv.addGlobal('error', function (id, errors) {
-    var { data } = req.session
-    var courseCode = id.split('-')[0]
+    const { data } = req.session
+    let courseCode = id.split('-')[0]
 
     if (courseCode.length > 4) {
       courseCode = 'about-your-organisation'
@@ -220,16 +219,16 @@ app.use(function (req, res, next) {
   })
 
   nunjucksAppEnv.addGlobal('today', function () {
-    var now = new Date()
+    const now = new Date()
     return dateFormat(now, 'd mmm yyyy')
   })
 
   nunjucksAppEnv.addGlobal('isArray', something => Array.isArray(something))
 
   nunjucksAppEnv.addGlobal('locationFromString', function (string) {
-    var urn = string.match(/\d{6}/)[0]
-    var name = string.split('(')[0]
-    var location = string.split('(')[1].split(',')[1]
+    const urn = string.match(/\d{6}/)[0]
+    const name = string.split('(')[0]
+    const location = string.split('(')[1].split(',')[1]
 
     return {
       urn: urn,
@@ -239,8 +238,8 @@ app.use(function (req, res, next) {
   })
 
   nunjucksAppEnv.addGlobal('breadcrumbItems', function (items = []) {
-    var { data } = req.session
-    var defaultItems = []
+    const { data } = req.session
+    const defaultItems = []
 
     if (data['rolled-over']) {
       defaultItems.push({ text: data['training-provider-name'], href: '/cycles' })
@@ -288,8 +287,8 @@ if (typeof (routes) !== 'function') {
 
 // Strip .html and .htm if provided
 app.get(/\.html?$/i, function (req, res) {
-  var path = req.path
-  var parts = path.split('.')
+  let path = req.path
+  const parts = path.split('.')
   parts.pop()
   path = parts.join('.')
   res.redirect(path)
@@ -309,7 +308,7 @@ app.post(/^\/([^.]+)$/, function (req, res) {
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error(`Page not found: ${req.path}`)
+  const err = new Error(`Page not found: ${req.path}`)
   err.status = 404
   next(err)
 })

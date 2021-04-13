@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // Add your routes here - above the module.exports line
-var {
+const {
   generateCourseCode,
   generateLocationCode,
   getGeneratedTitle,
@@ -48,8 +48,8 @@ router.all('/courses', function (req, res) {
 })
 
 router.get('/new/start', function (req, res) {
-  var code = generateCourseCode()
-  var data = req.session.data
+  const code = generateCourseCode()
+  const data = req.session.data
 
   if (data.schools.length === 1) {
     data[code + '-locations'] = [data.schools[0].name]
@@ -59,8 +59,8 @@ router.get('/new/start', function (req, res) {
 })
 
 router.all('/rollover/courses', function (req, res) {
-  var data = req.session.data
-  var courses = []
+  const data = req.session.data
+  const courses = []
 
   data.ucasCourses.forEach(course => {
     courses.push({
@@ -77,8 +77,8 @@ router.all('/rollover/courses', function (req, res) {
 })
 
 router.all('/rollover/locations', function (req, res) {
-  var data = req.session.data
-  var locations = []
+  const data = req.session.data
+  const locations = []
 
   data.schools.forEach(location => {
     locations.push({
@@ -94,7 +94,7 @@ router.all('/rollover/locations', function (req, res) {
 })
 
 router.post('/rollover/create', function (req, res) {
-  var data = req.session.data
+  const data = req.session.data
   data['rolled-over'] = true
 
   res.redirect('/cycles?rolled=true')
@@ -109,9 +109,9 @@ router.all('/cycles', function (req, res) {
 })
 
 router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
-  var locations = []
+  const data = req.session.data
+  const code = req.params.code
+  const locations = []
 
   data.schools.forEach(school => {
     locations.push({
@@ -128,8 +128,8 @@ router.all(['/new/:code/training-locations', '/new/:code/further/training-locati
 })
 
 router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   res.render('new/title', {
     code: code,
@@ -140,8 +140,8 @@ router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res)
 })
 
 router.all(['/new/:code/editing-title', '/new/:code/further/editing-title'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   res.render('new/editing-title', {
     code: code,
@@ -152,8 +152,8 @@ router.all(['/new/:code/editing-title', '/new/:code/further/editing-title'], fun
 })
 
 router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   res.render('new/confirm', {
     code: code,
@@ -163,8 +163,8 @@ router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, 
 })
 
 router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   res.render('new/edit', {
     code: code,
@@ -174,8 +174,8 @@ router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
 })
 
 router.post('/new/:code/subject', function (req, res) {
-  var code = req.params.code
-  var data = req.session.data
+  const code = req.params.code
+  const data = req.session.data
 
   if (isFurtherEducation(code, data)) {
     res.redirect('/new/' + code + '/further/outcome')
@@ -188,9 +188,9 @@ router.post('/new/:code/subject', function (req, res) {
 })
 
 router.post('/new/:code/languages', function (req, res) {
-  var code = req.params.code
-  var data = req.session.data
-  var paths = newCourseWizardPaths(req)
+  const code = req.params.code
+  const data = req.session.data
+  const paths = newCourseWizardPaths(req)
 
   if (isModernLanguages(code, data)) {
     res.render('new/languages', {
@@ -204,9 +204,9 @@ router.post('/new/:code/languages', function (req, res) {
 
 // Take new data and make it into a course
 router.all(['/new/:code/create', '/new/:code/further/create'], function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
-  var languages = []
+  const data = req.session.data
+  const code = req.params.code
+  const languages = []
 
   if (data[code + '-first-language']) {
     languages.push(data[code + '-first-language'])
@@ -216,7 +216,7 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     languages.push(data[code + '-second-language'])
   }
 
-  var schools = []
+  const schools = []
   if (Array.isArray(data[code + '-locations'])) {
     data[code + '-locations'].forEach(name => {
       schools.push(data.schools.find(school => school.name === name))
@@ -232,9 +232,9 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   // TODO:
   // If training location added – it'll affect vacancies
 
-  var course = data.ucasCourses.find(a => a.programmeCode === code)
-  var editing = true
-  var publishedBefore = false
+  let course = data.ucasCourses.find(a => a.programmeCode === code)
+  let editing = true
+  let publishedBefore = false
 
   if (!course) {
     course = {}
@@ -269,7 +269,7 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
     data[code + '-generated-description']
   ]
 
-  var query = ''
+  let query = ''
   if (publishedBefore) {
     query = 'editedAndPublished=true'
   } else if (editing) {
@@ -282,13 +282,13 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
 })
 
 router.all('/new/:code/:view', function (req, res) {
-  var code = req.params.code
+  const code = req.params.code
   res.render(`new/${req.params.view}`, { code: code, paths: newCourseWizardPaths(req) })
 })
 
 router.all('/new/:code/further/:view', function (req, res) {
-  var code = req.params.code
-  var locals = {
+  const code = req.params.code
+  const locals = {
     code: code,
     paths: newFurtherEducationCourseWizardPaths(req)
   }
@@ -306,19 +306,19 @@ router.all('/new/:code/further/:view', function (req, res) {
 })
 
 router.get('/new-location/start', function (req, res) {
-  var existingCodes = req.session.data.schools.map(s => s.code)
-  var code = generateLocationCode(existingCodes)
+  const existingCodes = req.session.data.schools.map(s => s.code)
+  const code = generateLocationCode(existingCodes)
   res.redirect('/new-location/' + code + '/type')
 })
 
 router.post('/new-location/:code/type', function (req, res) {
-  var paths = newLocationWizardPaths(req)
+  const paths = newLocationWizardPaths(req)
   res.redirect(paths.next)
 })
 
 router.all('/new-location/:code/address', function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   getLocationFromChoice(data, data[code + '-location-picked'], function (location, urn) {
     data[code + '-location'] = location
@@ -333,8 +333,8 @@ router.all('/new-location/:code/address', function (req, res) {
 })
 
 router.all('/new-location/:code/confirm', function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
   getLocations(code, data, function (locations) {
     res.render('new-location/confirm', {
@@ -346,7 +346,7 @@ router.all('/new-location/:code/confirm', function (req, res) {
 })
 
 router.all('/new-location/:code/edit', function (req, res) {
-  var code = req.params.code
+  const code = req.params.code
 
   res.render('new-location/edit', {
     code: code,
@@ -356,10 +356,10 @@ router.all('/new-location/:code/edit', function (req, res) {
 
 // Take new data and make it into a location
 router.all('/new-location/:code/create', function (req, res) {
-  var data = req.session.data
-  var code = req.params.code
+  const data = req.session.data
+  const code = req.params.code
 
-  var loc = data.schools.find(a => a.code === code)
+  let loc = data.schools.find(a => a.code === code)
   if (!loc) {
     loc = {}
     data.schools.push(loc)
@@ -385,7 +385,7 @@ router.all('/new-location/:code/create', function (req, res) {
 })
 
 router.all('/new-location/:code/:view', function (req, res) {
-  var code = req.params.code
+  const code = req.params.code
   res.render(`new-location/${req.params.view}`, { code: code, paths: newLocationWizardPaths(req) })
 })
 
@@ -398,17 +398,17 @@ router.post('/request-access', function (req, res) {
 })
 
 router.get('/about-your-organisation', function (req, res) {
-  var errors = validateOrg(req.session.data)
+  const errors = validateOrg(req.session.data)
   res.render('about-your-organisation', { errors: errors, justPublished: (req.query.publish && errors.length === 0) })
 })
 
 router.get('/about-your-organisation/edit', function (req, res) {
-  var errors = validateOrg(req.session.data, 'about-your-organisation')
+  const errors = validateOrg(req.session.data, 'about-your-organisation')
   res.render('about-your-organisation/edit', { errors: errors })
 })
 
 router.get('/about-your-organisation/contact', function (req, res) {
-  var errors = validateOrg(req.session.data, 'contact-details')
+  const errors = validateOrg(req.session.data, 'contact-details')
   res.render('about-your-organisation/contact', { errors: errors })
 })
 
@@ -422,7 +422,7 @@ router.get('/preview/about-your-organisation', function (req, res) {
 })
 
 router.get('/publish/about-your-organisation', function (req, res) {
-  var errors = validateOrg(req.session.data)
+  const errors = validateOrg(req.session.data)
 
   if (errors.length > 0) {
     req.session.data['about-your-organisation-show-publish-errors'] = errors.length > 0
@@ -436,8 +436,8 @@ router.get('/publish/about-your-organisation', function (req, res) {
 
 // Publish course action
 router.get('/publish/:providerCode/:code', function (req, res) {
-  var c = course(req)
-  var errors = validate(req.session.data, c)
+  const c = course(req)
+  const errors = validate(req.session.data, c)
 
   if (errors.length > 0) {
     req.session.data[c.programmeCode + '-show-publish-errors'] = errors.length > 0
@@ -451,8 +451,8 @@ router.get('/publish/:providerCode/:code', function (req, res) {
 
 // Course page
 router.get('/course/:providerCode/:code', function (req, res) {
-  var c = course(req)
-  var errors = validate(req.session.data, c)
+  const c = course(req)
+  const errors = validate(req.session.data, c)
 
   res.render('course', {
     course: c,
@@ -467,9 +467,9 @@ router.get('/course/:providerCode/:code', function (req, res) {
 
 // Post to course page
 router.post('/course/:providerCode/:code', function (req, res) {
-  var c = course(req)
-  var data = req.session.data
-  var state = data[c.programmeCode + '-published-before'] ? 'published-with-changes' : 'draft'
+  const c = course(req)
+  const data = req.session.data
+  const state = data[c.programmeCode + '-published-before'] ? 'published-with-changes' : 'draft'
 
   data[c.programmeCode + '-publish-state'] = state
 
@@ -483,8 +483,8 @@ router.post('/course/:providerCode/:code', function (req, res) {
 
 // Post to vacancies page
 router.post('/course/:providerCode/:code/vacancies', function (req, res) {
-  var c = course(req)
-  var data = req.session.data
+  const c = course(req)
+  const data = req.session.data
 
   if (!data[course.programmeCode + '-multi-location'] && req.body[c.programmeCode + '-vacancies-choice'] === '_unchecked') {
     res.render('course/vacancies', {
@@ -492,7 +492,7 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
       showErrors: true
     })
   } else {
-    var choice = req.body[c.programmeCode + '-vacancies-choice']
+    let choice = req.body[c.programmeCode + '-vacancies-choice']
     if (Array.isArray(choice)) {
       choice = choice[0]
     }
@@ -509,33 +509,33 @@ router.post('/course/:providerCode/:code/vacancies', function (req, res) {
 })
 
 router.post('/course/:providerCode/:code/delete', function (req, res) {
-  var data = req.session.data
+  const data = req.session.data
   data.ucasCourses = data.ucasCourses.filter(function (c) { return c.programmeCode !== req.params.code })
   res.redirect('/courses?deleted=true')
 })
 
 router.post('/course/:providerCode/:code/withdraw', function (req, res) {
-  var c = course(req)
+  const c = course(req)
   req.session.data[c.programmeCode + '-publish-state'] = 'withdrawn'
   res.redirect('/course/' + req.params.providerCode + '/' + req.params.code + '?withdrawn=true')
 })
 
 router.get('/course-not-running/:providerCode/:code', function (req, res) {
-  var c = course(req)
+  const c = course(req)
 
   res.render('course-not-running', { course: c })
 })
 
 router.get('/preview/:providerCode/:code', function (req, res) {
-  var c = course(req)
-  var prefix = c.programmeCode
+  const c = course(req)
+  const prefix = c.programmeCode
 
   res.render('preview', { course: c, prefix: prefix })
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
-  var view = req.params.view
-  var c = course(req)
+  const view = req.params.view
+  const c = course(req)
 
   res.render(`course/${view}`, {
     course: c,
@@ -544,18 +544,18 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
 })
 
 router.get('/location/start', function (req, res) {
-  var existingCodes = req.session.data.schools.map(s => s.code)
-  var code = generateLocationCode(existingCodes)
+  const existingCodes = req.session.data.schools.map(s => s.code)
+  const code = generateLocationCode(existingCodes)
   res.redirect(`/location/${code}`)
 })
 
 router.get('/location/:code', function (req, res) {
-  var code = req.params.code
-  var data = req.session.data
-  var school = data.schools.find(school => school.code === code)
-  var courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === code))
+  const code = req.params.code
+  const data = req.session.data
+  const school = data.schools.find(school => school.code === code)
+  const courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === code))
 
-  var isNew = !school
+  const isNew = !school
   res.render('location', {
     school: school,
     code: code,
@@ -565,12 +565,12 @@ router.get('/location/:code', function (req, res) {
 })
 
 router.post('/location/:code', function (req, res) {
-  var code = req.params.code
-  var data = req.session.data
-  var loc = data.schools.find(function (school) {
+  const code = req.params.code
+  const data = req.session.data
+  let loc = data.schools.find(function (school) {
     return school.code === req.params.code
   })
-  var isNew = false
+  let isNew = false
 
   if (!loc && req.body[code + '-location-confirm'] === '_unchecked') {
     res.render('location', {
@@ -597,7 +597,7 @@ router.post('/location/:code', function (req, res) {
 })
 
 router.get('/location/:id/edit', function (req, res) {
-  var school = req.session.data.schools.find(function (school) {
+  const school = req.session.data.schools.find(function (school) {
     return school.id === req.params.id
   })
 
@@ -605,8 +605,8 @@ router.get('/location/:id/edit', function (req, res) {
 })
 
 router.all('/locations', function (req, res) {
-  var data = req.session.data
-  var locations = JSON.parse(JSON.stringify(data.schools))
+  const data = req.session.data
+  const locations = JSON.parse(JSON.stringify(data.schools))
 
   locations.forEach(location => location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length)
 
@@ -619,7 +619,7 @@ router.all('/locations', function (req, res) {
 })
 
 router.get('/accredited-body/:code', function (req, res) {
-  var p = provider(req)
+  const p = provider(req)
   res.render('accredited-body/provider-courses', { provider: p })
 })
 

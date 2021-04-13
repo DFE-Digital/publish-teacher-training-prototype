@@ -8,13 +8,13 @@
       $el.on('click', '.js-remove', deleteTableRow)
       $el.on('click', '.js-add', addSchool)
       $el.on('submit', '.js-add-form', addSchool)
-      var code = $el.data('code')
+      const code = $el.data('code')
 
-      var createSimpleEngine = function (values) {
+      const createSimpleEngine = function (values) {
         return function (query, syncResults) {
-          var cleanQuery = cleanString(query)
+          const cleanQuery = cleanString(query)
 
-          var matches = values
+          const matches = values
             .filter(function (r) {
               return cleanString(r).indexOf(cleanQuery) !== -1
             })
@@ -38,13 +38,13 @@
       function addSchool (evt) {
         evt.preventDefault()
 
-        var school = $('#my-autocomplete-container input').val()
+        const school = $('#my-autocomplete-container input').val()
         $('#my-autocomplete-container input').val('')
 
         if (school) {
-          var urn = school.match(/\d{6}/)[0]
-          var name = school.split('(')[0]
-          var location = school.split('(')[1].split(',')[1]
+          const urn = school.match(/\d{6}/)[0]
+          const name = school.split('(')[0]
+          const location = school.split('(')[1].split(',')[1]
 
           $('#selected-schools-table tbody').append(`
             <tr class="govuk-table__row" data-urn="${urn}">
@@ -71,8 +71,8 @@
 
       function deleteTableRow (evt) {
         evt.preventDefault()
-        var row = $(evt.target).parents('tr')
-        var urn = row.data('urn')
+        const row = $(evt.target).parents('tr')
+        const urn = row.data('urn')
         row.remove()
         $('#school-' + urn).remove()
         $('#school-name-' + urn).remove()

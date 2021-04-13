@@ -3,7 +3,7 @@
 ;(function (global) {
   'use strict'
 
-  var GOVUK = global.GOVUK || {}
+  const GOVUK = global.GOVUK || {}
   GOVUK.Modules = GOVUK.Modules || {}
 
   GOVUK.Modules.CopyContent = function () {
@@ -13,8 +13,8 @@
 
       function prepareSelectOptions () {
         element.find('select option').each(function () {
-          var option = $(this)
-          var v = option.attr('value')
+          const option = $(this)
+          const v = option.attr('value')
 
           // Remove options that have no saved data yet
           if (!Object.keys(data).some(function (k) { return ~k.indexOf(v) })) {
@@ -31,13 +31,13 @@
 
       function copyContent (evt) {
         evt.preventDefault()
-        var code = element.find('select').val()
-        var copied = []
+        const code = element.find('select').val()
+        const copied = []
 
         $('.form-control').each(function () {
-          var field = $(this)
-          var fieldType = this.id.slice(4)
-          var newValue = data[code + fieldType]
+          const field = $(this)
+          const fieldType = this.id.slice(4)
+          const newValue = data[code + fieldType]
 
           if (newValue) {
             field.val(newValue)
@@ -49,9 +49,9 @@
         })
 
         $('.multiple-choice input').each(function () {
-          var field = $(this)
-          var fieldType = $(this).attr('name').slice(4)
-          var newValue = data[code + fieldType]
+          const field = $(this)
+          const fieldType = $(this).attr('name').slice(4)
+          const newValue = data[code + fieldType]
 
           if (newValue === field.attr('value')) {
             field.prop('checked', true)
@@ -67,10 +67,10 @@
           element.find('.js-success-copy').hide()
           element.find('.js-error-copy').show()
         } else {
-          var $ul = $('<ul class="govuk-list remove-bottom-margin">')
-          var $whatCopied = element.find('.js-what-copied')
+          const $ul = $('<ul class="govuk-list remove-bottom-margin">')
+          const $whatCopied = element.find('.js-what-copied')
 
-          for (var i = 0, l = copied.length; i < l; i++) {
+          for (let i = 0, l = copied.length; i < l; i++) {
             $ul.append('<li>' + copied[i] + '</li>')
           }
 
