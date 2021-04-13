@@ -47,18 +47,6 @@ router.all('/courses', function (req, res) {
   })
 })
 
-router.get('/design-history', function (req, res) {
-  res.redirect('/history')
-})
-
-router.all('/history', function (req, res) {
-  res.redirect('https://bat-design-history.herokuapp.com/publish-teacher-training')
-})
-
-router.all('/history/:path', function (req, res) {
-  res.redirect(`https://bat-design-history.herokuapp.com/publish-teacher-training/${req.params.path}`)
-})
-
 router.get('/new/start', function (req, res) {
   var code = generateCourseCode()
   var data = req.session.data
