@@ -385,7 +385,6 @@ dl.aligned.course-part-tasks dd {
 }
 
 .dm-alert {
-  @include govuk-focusable;
   @include govuk-responsive-padding(4);
   @include govuk-responsive-margin(8, "bottom");
   border: govuk-spacing(1) solid;
@@ -423,14 +422,14 @@ dl.aligned.course-part-tasks dd {
       border-bottom-color: govuk-colour("red");
     }
   }
-  
+
   .govuk-header__logo {
     width: 100%;
 
     @include govuk-media-query($from: 1000px) {
       width: auto;
     }
-    
+
     // @media (min-width: 1000px) {
     //   width: auto;
     // }
@@ -441,7 +440,7 @@ dl.aligned.course-part-tasks dd {
     line-height: 1.25;
     font-weight: 700;
   }
-  
+
   .govuk-header__content {
     text-align: left;
 
@@ -450,26 +449,26 @@ dl.aligned.course-part-tasks dd {
       float: none;
       text-align: right;
     }
-    
+
   }
 
   .govuk-header__navigation-item {
     display: inline-block;
     margin-right: govuk-spacing(4);
-    
+
     &:last-child {
       margin-right: 0;
     }
-    
-    a {   
+
+    a {
       @include govuk-font(19);
       text-decoration: underline;
     }
-    
+
     a:hover {
       text-decoration: none;
     }
-  
+
   }
 
   .govuk-header__navigation-item--active {
@@ -483,7 +482,7 @@ dl.aligned.course-part-tasks dd {
       text-decoration: none;
     }
   }
-  
+
   .govuk-header__link {
     font-weight: normal;
 
@@ -492,11 +491,11 @@ dl.aligned.course-part-tasks dd {
     &:active {
       color: inherit;
     }
-  
+
     &:focus {
       color: govuk-colour("black");
     }
-  
+
   }
 
   .govuk-header__logotype-text {
