@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% set title = "What is the minimum degree classification required?" %}
+{% set backLink = course.path + "/degree" %}
+
+{% block content %}
+  {% include "course/_errors.html" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree-subject" method="post">
+
+        {{ govukRadios({
+          idPrefix: "degree-minimum",
+          name: "degree-minimum",
+          fieldset: {
+            legend: {
+              text: title,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: ""
+          },
+          items: [
+            {
+              value: "21",
+              text: "2:1 or above (or equivalent)"
+            },
+            {
+              value: "22",
+              text: "2:2 or above (or equivalent)"
+            },
+            {
+              value: "3",
+              text: "3rd or above (or equivalent)"
+            }
+          ]
+        }) }}
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="govuk-button" value="Save" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

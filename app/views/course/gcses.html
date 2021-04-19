@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% set title = "Degree requirements" %}
+{% set backLink = course.path + "/requirements" %}
+
+{% block content %}
+  <!-- <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+  </h1> -->
+
+  {% include "course/_errors.html" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/requirements" method="post">
+
+        <h1 class="govuk-heading-l">GCSEs (or equivalent)</h1>
+
+        <p>Candidates will be advised that they need to have an English and Maths GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
+
+        {% set gcseRequirementsHtml %}
+          {{ govukTextarea({
+            id: "gcse-requirements",
+            name: "gcse-requirements",
+            spellcheck: true,
+            label: {
+              text: "GCSE (or equivalent) requirements"
+            }
+          }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          idPrefix: "degree-subject",
+          name: "degree-subject",
+          fieldset: {
+            legend: {
+              text: "Do you have more specific requirements?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "No"
+            },
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: gcseRequirementsHtml
+              }
+            }
+          ]
+        }) }}
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="govuk-button" value="Save" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

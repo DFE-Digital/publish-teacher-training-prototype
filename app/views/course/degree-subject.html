@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% set title = "Degree subject requirements" %}
+{% set backLink = course.path + "/degree" %}
+
+{% block content %}
+  {% include "course/_errors.html" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/requirements" method="post">
+
+        <h1 class="govuk-heading-l">Degree subject</h1>
+
+        <p>Candidates will be advised that their degree subject should match or be closely related to {{ course.subject }}.</p>
+
+        {% set degreeSubjectRequirementsHtml %}
+          {{ govukTextarea({
+            id: "degree-subject-requirements",
+            name: "degree-subject-requirements",
+            spellcheck: true,
+            label: {
+              text: "Degree subject requirements"
+            }
+          }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          idPrefix: "degree-subject",
+          name: "degree-subject",
+          fieldset: {
+            legend: {
+              text: "Do you have more specific degree subject requirements?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "No"
+            },
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: degreeSubjectRequirementsHtml
+              }
+            }
+          ]
+        }) }}
+
+        <div class="add-double-bottom-margin">
+          <input type="submit" class="govuk-button" value="Save" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

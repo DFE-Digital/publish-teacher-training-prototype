@@ -13,43 +13,15 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
-        <h2 class="govuk-heading-l remove-top-margin">Qualifications needed</h2>
-        <p>State the minimum academic qualifications needed for this course. You could also say what happens if these requirements aren’t met.</p>
 
-        <p>We show guidance in this section. It tells candidates:</p>
+        <h2 class="govuk-heading-l">Degree</h2>
+        <p class="govuk-body">TODO summary</p>
+        <p class="govuk-body"><a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree">Change</a></p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>what qualifications they need to teach in England</li>
-          <li>where to go to find out about international qualifications</li>
-          <li>why they might need to do a subject knowledge enhancement course</li>
-        </ul>
+        <h2 class="govuk-heading-l">GCSEs (or equivalent)</h2>
+        <p class="govuk-body">TODO summary</p>
+        <p class="govuk-body"><a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/gcses">Change</a></p>
 
-        {% set qualificationsHtml %}
-          <h3 class="govuk-!-margin-top-0">Qualifications</h3>
-
-          <p>To be a teacher in England you need:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>a degree or an equivalent qualification</li>
-            <li>English and Maths GCSEs at grade 4 (C) or above</li>
-            <li>For primary teaching, a science subject GCSE at grade 4 (C) or above</li>
-          </ul>
-
-          <p>You can find out more about entry requirements, and how it works if you have studied overseas, at <a href="https://beta-getintoteaching.education.gov.uk/steps-to-become-a-teacher">Get Into Teaching</a>.</p>
-
-          <h4>Refreshing your subject knowledge</h4>
-
-          <p>If you have the right qualities and qualifications to teach but need to refresh your subject knowledge, you might be asked to complete a <a href="https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses">subject knowledge enhancement (SKE) course</a>.</p>
-
-          <p>You’ll find out if you need to complete an SKE course after the interview stage.</p>
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "See the guidance",
-          html: qualificationsHtml
-        }) }}
-
-        {{ macros.textarea(course.programmeCode + '-qualifications-required', 'Qualifications needed', 8, null, 100, errors) }}
 
         <h2 class="govuk-heading-l">Personal qualities</h2>
         <p>Tell applicants about the skills and motivation you’re looking for (eg experience with children, a genuine passion for teaching, or a talent for public speaking).</p>
