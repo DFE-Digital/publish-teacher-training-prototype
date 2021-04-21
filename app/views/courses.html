@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Courses" %}
-{% set newCourseFormUrl = 'https://goo.gl/forms/HJ17Hob3728X3mTc2' if data['new-course']['include-accredited'] else 'https://goo.gl/forms/kdNksCuwcz7TVtNF2' %}
+{% set newCourseFormUrl = "/new/start" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -41,7 +41,6 @@
   {% if data['ucasCourses'].length > 10 %}
     <div class="add-top-margin">
       <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Add a new course</a>
-      <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to fill in your course details.</p>
     </div>
   {% endif %}
 
@@ -80,7 +79,6 @@
 
   <div class="add-top-margin">
     <a href="{{ newCourseFormUrl }}" class="govuk-button" target="_blank">Add a new course</a>
-    <p class="govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You’ll be taken to a Google Form to fill in your course details.</p>
   </div>
 
 {% endblock %}
