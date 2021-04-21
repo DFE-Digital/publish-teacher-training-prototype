@@ -205,9 +205,12 @@
                 {% elif minDegreeClass == "3" %}
                   3rd class degree or above, or equivalent
                 {% endif %}
-
               {% else %}
                 Empty
+              {% endif %}
+              {% if data[course.programmeCode + '-degree-subject-required'] === "Yes" %}
+                <br><br>
+                {{ data[course.programmeCode + '-degree-subject-requirements'] }}
               {% endif %}
             </dd>
             <dd class="govuk-summary-list__actions">

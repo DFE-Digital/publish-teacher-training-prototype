@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Do you require a minimum degree classification?" %}
-{% set backLink = course.path + "/requirements" %}
+{% set backLink = course.path %}
 
 {% block content %}
 
@@ -8,7 +8,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree-level" method="post">
+      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree" method="post">
 
       {% set radioName = course.programmeCode + '-degree-minimum-required' %}
 

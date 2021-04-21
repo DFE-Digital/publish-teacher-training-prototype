@@ -477,6 +477,27 @@ router.post('/course/:providerCode/:code', function (req, res) {
   })
 })
 
+// Post to course degree requirements page
+router.post('/course/:providerCode/:code/degree', function (req, res) {
+  const c = course(req)
+  const choice = req.body[req.params.code + '-degree-minimum-required']
+
+  if (choice == "Yes") {
+    // Redirect to minimum course requirements page
+    res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-level`)
+  } else if (c.subject != "Primary") {
+    // Redirect to degree subject requirements page (unless it’s a Primary course)
+    res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-subject`)
+  } else if (req.session.data[c.programmeCode + '-gcse-additional-requirements']) {
+    // Redirect back to course page
+    res.redirect(`/course/${req.params.providerCode}/${req.params.code}`)
+  } else {
+    // Redirect GCSE requirements page (as that hasn’t been answered yet)
+    res.redirect(`/course/${req.params.providerCode}/${req.params.code}/gcses`)
+  }
+})
+
+
 // Post to vacancies page
 router.post('/course/:providerCode/:code/vacancies', function (req, res) {
   const c = course(req)
