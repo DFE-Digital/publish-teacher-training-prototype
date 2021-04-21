@@ -1,34 +1,24 @@
 {% extends "layout.html" %}
-{% set title = "Requirements and eligibility" %}
+{% set title = "Personal qualities and other requirements" %}
 {% set backLink = course.path %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
-    {{ title }}
-  </h1>
-
   {% include "course/_errors.html" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+        {{ title }}
+      </h1>
+
+
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
 
-        <h2 class="govuk-heading-l">Degree</h2>
-        <p class="govuk-body">TODO summary</p>
-        <p class="govuk-body"><a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree">Change</a></p>
-
-        <h2 class="govuk-heading-l">GCSEs (or equivalent)</h2>
-        <p class="govuk-body">TODO summary</p>
-        <p class="govuk-body"><a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/gcses">Change</a></p>
-
-
-        <h2 class="govuk-heading-l">Personal qualities</h2>
         <p>Tell applicants about the skills and motivation you’re looking for (eg experience with children, a genuine passion for teaching, or a talent for public speaking).</p>
         {{ macros.textarea(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)', 8, null, 100) }}
 
-        <h2 class="govuk-heading-l">Other requirements</h2>
-        <p>If applicants need any non-academic qualifications or documents, list them here (eg criminal record checks, or relevant work experience).</p>
+        <p id="other-requirements">If applicants need any non-academic qualifications or documents, list them here (eg criminal record checks, or relevant work experience).</p>
         {{ macros.textarea(course.programmeCode + '-other-requirements', 'Other requirements (optional)', 8, null, 100) }}
 
         <div class="add-double-bottom-margin">

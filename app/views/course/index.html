@@ -184,14 +184,94 @@
         </dl>
 
         <h3 class="govuk-heading-m">
-          <a href="{{ coursePath }}/requirements">
-            Requirements and eligibility
-          </a>
+          Requirements and eligibility
         </h3>
         <dl class="govuk-summary-list govuk-summary-list--short">
-          {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
-          {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
-          {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key ">
+              Degree
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data[course.programmeCode + '-degree-minimum-required'] === "No" %}
+                An undergraduate degree, or equivalent
+              {% elif data[course.programmeCode + '-degree-minimum-required'] === "Yes" %}
+
+                {% set minDegreeClass = data[course.programmeCode + '-degree-minimum-classification'] %}
+
+                {% if minDegreeClass == "21" %}
+                  2:1 or above, or equivalent
+                {% elif minDegreeClass == "22" %}
+                  2:2 or above, or equivalent
+                {% elif minDegreeClass == "3" %}
+                  3rd class degree or above, or equivalent
+                {% endif %}
+
+              {% else %}
+                Empty
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree">
+                Change<span class="govuk-visually-hidden"> degree requirements</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key ">
+              GCSEs
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data[course.programmeCode + '-gcse-additional-requirements'] === "No" %}
+                Grade 4 (C) or above in English and Maths, or equivalent
+              {% elif data[course.programmeCode + '-gcse-additional-requirements'] === "Yes" %}
+                Grade 4 (C) or above in English and Maths, or equivalent
+
+                <br><br>{{ data[course.programmeCode + '-gcse-requirements'] }}
+
+              {% else %}
+                Empty
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/gcses">
+                Change<span class="govuk-visually-hidden"> GCSE requirements</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key ">
+              Personal qualities (optional)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data[course.programmeCode + '-personal-qualities'] %}
+                {{ data[course.programmeCode + '-personal-qualities'] }}
+              {% else %}
+                Empty
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/requirements">
+                Change<span class="govuk-visually-hidden"> personal qualities</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key ">
+              Other requirements (optional)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data[course.programmeCode + '-other-requirements'] %}
+                {{ data[course.programmeCode + '-other-requirements'] }}
+              {% else %}
+                Empty
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/requirements#other-requirements"">
+                Change<span class="govuk-visually-hidden"> other requirements</span>
+              </a>
+            </dd>
+          </div>
         </dl>
       </div>
       <div class="govuk-grid-column-one-third">

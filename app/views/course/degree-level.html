@@ -9,9 +9,11 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree-subject" method="post">
 
+        {% set radioName = course.programmeCode + '-degree-minimum-classification' %}
+
         {{ govukRadios({
           idPrefix: "degree-minimum",
-          name: "degree-minimum",
+          name: radioName,
           fieldset: {
             legend: {
               text: title,
@@ -25,15 +27,18 @@
           items: [
             {
               value: "21",
-              text: "2:1 or above (or equivalent)"
+              text: "2:1 or above (or equivalent)",
+              checked: (data[radioName] === "21")
             },
             {
               value: "22",
-              text: "2:2 or above (or equivalent)"
+              text: "2:2 or above (or equivalent)",
+              checked: (data[radioName] === "22")
             },
             {
               value: "3",
-              text: "3rd or above (or equivalent)"
+              text: "3rd or above (or equivalent)",
+              checked: (data[radioName] === "3")
             }
           ]
         }) }}

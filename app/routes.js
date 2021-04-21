@@ -469,7 +469,7 @@ router.post('/course/:providerCode/:code', function (req, res) {
 
   data[c.programmeCode + '-publish-state'] = state
 
-  res.render('course', {
+  res.render('course/index', {
     course: c,
     errors: validate(data, c),
     publishState: state,

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Degree requirements" %}
-{% set backLink = course.path + "/requirements" %}
+{% set backLink = course.path %}
 
 {% block content %}
   <!-- <h1 class="govuk-heading-xl">
@@ -11,41 +11,46 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/requirements" method="post">
+      <form action="{{ course.path }}/requirements" method="post">
 
         <h1 class="govuk-heading-l">GCSEs (or equivalent)</h1>
 
         <p>Candidates will be advised that they need to have an English and Maths GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
 
+        {% set textareaName = course.programmeCode + '-gcse-requirements' %}
         {% set gcseRequirementsHtml %}
           {{ govukTextarea({
             id: "gcse-requirements",
-            name: "gcse-requirements",
+            name: textareaName,
+            value: data[textareaName],
             spellcheck: true,
             label: {
-              text: "GCSE (or equivalent) requirements"
+              text: "Additional GCSE (or equivalent) requirements"
             }
           }) }}
         {% endset -%}
 
+        {% set radioName = course.programmeCode + '-gcse-additional-requirements' %}
         {{ govukRadios({
           idPrefix: "degree-subject",
-          name: "degree-subject",
+          name: radioName,
           fieldset: {
             legend: {
-              text: "Do you have more specific requirements?",
+              text: "Do you have any additional requirements?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--m"
             }
           },
           items: [
             {
-              value: "no",
-              text: "No"
+              value: "No",
+              text: "No",
+              checked: (data[radioName] === "No")
             },
             {
-              value: "yes",
+              value: "Yes",
               text: "Yes",
+              checked: (data[radioName] === "Yes"),
               conditional: {
                 html: gcseRequirementsHtml
               }

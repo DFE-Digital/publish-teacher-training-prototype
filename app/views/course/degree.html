@@ -10,9 +10,11 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree-level" method="post">
 
+      {% set radioName = course.programmeCode + '-degree-minimum-required' %}
+
         {{ govukRadios({
           idPrefix: "degree-minimum",
-          name: "degree-minimum",
+          name: course.programmeCode + '-degree-minimum-required',
           fieldset: {
             legend: {
               text: title,
@@ -25,12 +27,14 @@
           },
           items: [
             {
-              value: "yes",
-              text: "Yes"
+              value: "Yes",
+              text: "Yes",
+              checked: (data[radioName] === "Yes")
             },
             {
-              value: "no",
-              text: "No"
+              value: "No",
+              text: "No",
+              checked: (data[radioName] === "No")
             }
           ]
         }) }}
