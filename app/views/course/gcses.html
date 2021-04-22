@@ -11,11 +11,13 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ course.path }}/requirements" method="post">
+      <form action="{{ course.path }}/gcses-pending-or-equivalency-tests" method="post">
+
+        <span class="govuk-caption-l">{{ course.name | safe }} ({{ course.programmeCode }})</span>
 
         <h1 class="govuk-heading-l">GCSEs (or equivalent)</h1>
 
-        <p>Candidates will be advised that they need to have an English and Maths GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
+        <p>Candidates will be advised that they need to have a English{{", maths and science" if course.name == "Primary" else " and maths" }} GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
 
         {% set textareaName = course.programmeCode + '-gcse-requirements' %}
         {% set gcseRequirementsHtml %}

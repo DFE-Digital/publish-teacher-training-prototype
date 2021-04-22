@@ -7,7 +7,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/gcses" method="post">
+      <form action="{{ course.path }}" method="post">
 
         <h1 class="govuk-heading-l">Degree subject</h1>
 
@@ -24,9 +24,10 @@
           }) }}
         {% endset -%}
 
+        {% set radioName = course.programmeCode + '-degree-subject-required' %}
         {{ govukRadios({
           idPrefix: "degree-subject",
-          name: course.programmeCode + '-degree-subject-required',
+          name: radioName,
           fieldset: {
             legend: {
               text: "Do you have more specific degree subject requirements?",
@@ -37,11 +38,13 @@
           items: [
             {
               value: "No",
-              text: "No"
+              text: "No",
+              checked: (data[radioName] === "No")
             },
             {
               value: "Yes",
               text: "Yes",
+              checked: (data[radioName] === "Yes"),
               conditional: {
                 html: degreeSubjectRequirementsHtml
               }

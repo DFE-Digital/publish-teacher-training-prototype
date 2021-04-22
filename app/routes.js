@@ -488,12 +488,9 @@ router.post('/course/:providerCode/:code/degree', function (req, res) {
   } else if (c.subject != "Primary") {
     // Redirect to degree subject requirements page (unless it’s a Primary course)
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-subject`)
-  } else if (req.session.data[c.programmeCode + '-gcse-additional-requirements']) {
+  } else {
     // Redirect back to course page
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}`)
-  } else {
-    // Redirect GCSE requirements page (as that hasn’t been answered yet)
-    res.redirect(`/course/${req.params.providerCode}/${req.params.code}/gcses`)
   }
 })
 

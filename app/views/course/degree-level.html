@@ -7,7 +7,12 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}/degree-subject" method="post">
+      {% if course.name === "Primary" %}
+        {% set formPath = course.path %}
+      {% else %}
+        {% set formPath = course.path + "/degree-subject" %}
+      {% endif %}
+      <form action="{{ formPath }}" method="post">
 
         {% set radioName = course.programmeCode + '-degree-minimum-classification' %}
 
