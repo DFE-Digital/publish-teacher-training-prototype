@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Degree requirements" %}
-{% set backLink = course.path + "/gcses" %}
+{% set backLink = course.path %}
 
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
@@ -13,7 +13,7 @@
       <form action="{{ course.path }}" method="post">
 
         <span class="govuk-caption-l">{{ course.name | safe }} ({{ course.programmeCode }})</span>
-        <h1 class="govuk-heading-l">Pending GCSEs and equivalency tests</h1>
+        <h1 class="govuk-heading-l">GCSEs and equivalency tests</h1>
 
         <p>Select whether you will consider candidates who are:</p>
 
