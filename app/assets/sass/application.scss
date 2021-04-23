@@ -11,6 +11,7 @@ $govuk-assets-path: '/govuk/assets/';
 @import 'patterns/simplemde-theme';
 @import 'patterns/success-summary';
 @import "patterns/destructive-button";
+@import "components/list";
 @import "components/map";
 @import "components/notification-banner";
 @import "components/application-card";
@@ -130,10 +131,6 @@ table thead th {
 dt,
 dd {
   display: inline;
-}
-
-dt {
-  margin-right: 0.25em;
 }
 
 dl.aligned {
