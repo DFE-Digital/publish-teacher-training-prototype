@@ -9,14 +9,14 @@
   </div>
 
   <h1 class="govuk-heading-xl">
-    <span class="govuk-!-font-size-36">{{ data['training-provider-name'] }}</span><br />
+    <span class="govuk-heading-l govuk-!-margin-bottom-1">{{ data['training-provider-name'] }}</span>
     {{ course.name }} ({{ course.programmeCode }})
   </h1>
 
   <p class="govuk-body-l">{{ course.options[0] }}</p>
 
-  <dl class="aligned">
-    <dt>Qualification:</dt>
+  <dl class="app-list--description govuk-!-margin-bottom-8">
+    <dt>Qualification</dt>
     <dd>
       <details class="govuk-details">
         {% if 'PGCE' in course.options[0] %}
@@ -38,7 +38,7 @@
         {% endif %}
       </details>
     </dd>
-    <dt>Course length:</dt>
+    <dt>Course length</dt>
     <dd>
       {% if data[prefix + '-duration'] == 'Other' %}
         {{ data[prefix + '-duration-other'] }}
@@ -46,9 +46,9 @@
         {{ data[prefix + '-duration'] or '1 year' }}
       {% endif %}
     </dd>
-    <dt>Date you can apply from:</dt>
+    <dt>Date you can apply from</dt>
     <dd>26 October 2018</dd>
-    <dt>Website:</dt>
+    <dt>Website</dt>
     <dd>
       {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
         <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}</a>
@@ -68,20 +68,21 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="course-contents">
         <h2 class="govuk-heading-m">Contents</h2>
-        <ul class="govuk-list">
+        <ul class="govuk-list app-list--dash">
           <li><a href="#section-about">About the course</a></li>
+          <li><a href="#section-schools">School placements</a></li>
+          <li><a href="#section-entry">Entry requirements</a></li>
+          <li><a href="#section-about-provider">About the training provider</a></li>
+          {% if course.salaried %}
+            <li><a href="#section-salary">Salary</a></li>
+          {% endif %}
           {% if data[prefix + '-interview-process'] %}
             <li><a href="#section-interview">Interview process</a></li>
           {% endif %}
-          <li><a href="#section-schools">How school placements work</a></li>
           {% if course.salaried %}
             <li><a href="#section-salary">Salary</a></li>
-          {% else %}
-            <li><a href="#section-fees">Fees</a></li>
           {% endif %}
-          <li><a href="#section-financial-support">Financial support</a></li>
-          <li><a href="#section-entry">Requirements</a></li>
-          <li><a href="#section-about-provider">About the training provider</a></li>
+          <li><a href="#section-fees">Fees and financial support</a></li>
           <li><a href="#section-access-needs">Training with disabilities and other needs</a></li>
           <li><a href="#section-contact">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
