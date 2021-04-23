@@ -253,7 +253,7 @@
           {% endif %}
 
           {% if subjectsCanBePending | length > 0 %}
-            <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsCanBePending | length) === 1 }} {{ subjectsCanBePending | formatOrList }} GCSE{{"s" if (subjectsCanBePending | length) > 1 }} or who need to take equivalency tests.</p>
+            <p class="govuk-body">You will not consider candidates who need to take an equivalency test for {{"a" if (subjectsCanBePending | length) === 1 }} {{ subjectsCanBePending | formatOrList }} but you will consider those already taking the GCSE{{"s" if (subjectsCanBePending | length) > 1 }}.</p>
           {% endif %}
 
           {% if subjectsPendingOrEquivalencyTests | length > 0 %}
