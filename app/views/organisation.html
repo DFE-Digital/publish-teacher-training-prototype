@@ -26,9 +26,9 @@
   <h1 class="govuk-heading-xl">
     {% if data["rolled-over"] %}
       {% if data["next-cycle"] %}
-        Next cycle (2020&thinsp;–&thinsp;2021)
+        Next cycle (2022 to 2023)
       {% else %}
-        Current cycle (2019&thinsp;–&thinsp;2020)
+        Current cycle (2021 to 2022)
       {% endif %}
     {% else %}
       {{ data["training-provider-name"] }}
@@ -116,18 +116,6 @@
     <div class="govuk-grid-column-one-third">
       {% if not data["rolled-over"] %}
         <div class="status-box">
-        {#
-          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
-            <a href="/notifications">Email notifications</a>
-          </h2>
-          <p>Get email notifications about your courses</p>
-
-          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
-            <a href="/users">Users</a>
-          </h2>
-          <p>View users who manage your courses.</p>
-        #}
-
           <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
             <a href="/users/">Users</a>
           </h2>
@@ -138,7 +126,7 @@
           </h2>
           <p>Update or request UCAS contact details.</p>
 
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
 
           <h2 class="govuk-heading-s">Support and guidance</h2>
           <p class="govuk-body">If you have a question, or you’ve had a problem using Publish, you can email:</p>

@@ -271,14 +271,6 @@
   </div>
 {% endmacro %}
 
-{% macro orgHeading(activeTab, message = '') %}
-{{ message | safe }}
-
-<h1 class="govuk-heading-xl">
-  {{ activeTab }}
-</h1>
-{% endmacro %}
-
 {% macro select(name, label, options, helpText = false, emptyOption = true, errors = false, autocomplete = false) %}
   <div class="govuk-form-group">
     <label class="govuk-label" for="{{ name }}">{{ label | safe }}</label>
