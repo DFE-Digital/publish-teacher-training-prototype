@@ -9,6 +9,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
 
       <form action="{{ course.path + "#information" }}" method="post">
 
