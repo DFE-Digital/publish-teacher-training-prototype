@@ -1,15 +1,16 @@
-{% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% extends "layout.html" %}
-{% set title = 'Courses as an accredited body' %}
+{% set title = 'Check your answers' %}
+{% set backLink = "/allocations/request-places" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
-{% block beforeContent %}
-{{ govukBackLink({
-  text: "Back",
-  href: "/pe-allocation/request-places"
-}) }}
-{% endblock %}
+{% set requestingProviderName %}
+	{% if data['requestingProvider'] != "Find an organisation not listed above" %}
+		{{ data['requestingProvider'] }}
+	{% else %}
+		{{ data['schoolList'] }}
+	{% endif %}
+{% endset %}
 
 {% block content %}
 
@@ -17,8 +18,8 @@
 	<div class="govuk-grid-column-two-thirds">
 
 	<h1 class="govuk-heading-xl">
-		<span class="govuk-caption-xl">Hope Valley College</span>
-		Check your information before sending your request
+		<span class="govuk-caption-xl">{{ requestingProviderName }}</span>
+		Check your information before sending your requests
 	</h1>
 
 		<div class="body-text">
@@ -32,7 +33,7 @@
 						{{ data['requested-amount'] }}
 					</dd>
 					<dd class="govuk-summary-list__actions">
-						<a class="govuk-link" href="/pe-allocation/request-places">
+						<a class="govuk-link" href="/allocations/request-places">
 							Change <span class="govuk-visually-hidden">places requested</span>
 						</a>
 					</dd>
@@ -41,8 +42,7 @@
 
 		</div>	
 
-		{# <button class="govuk-button" data-module="govuk-button">Continue</button> #}
-		<a class="govuk-button" href="/pe-allocation/confirmation-phase-4">Send request</a>
+		<a class="govuk-button" href="/allocations/confirmation">Send request</a>
 
 	</div>
 </div>

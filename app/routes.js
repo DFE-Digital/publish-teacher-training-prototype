@@ -665,7 +665,78 @@ router.post('/users/check', function (req, res) {
   res.render('users', { showMessage: true })
 })
 
-
 // check answers
+
+// Allocations
+
+// router.post('/pe-allocation/offer-pe-ab', function (req, res) { 
+//   let firstTime = req.session.data['first-time']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-sent-ab')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-ab')
+//   }
+// })
+
+// router.post('/pe-allocation/offer-pe-a', function (req, res) {
+//   let firstTime = req.session.data['first-time']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-sent-a')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-a')
+//   }
+// })
+
+// router.post('/pe-allocation/offer-pe-e', function (req, res) { 
+//   let firstTime = req.session.data['first-time-e']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-sent-e')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-e')
+//   }
+// })
+
+// router.post('/pe-allocation/offer-pe-2', function (req, res) { 
+//   let firstTime = req.session.data['first-time']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-sent-2')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-2')
+//   }
+// })
+
+// router.post('/pe-allocation/offer-pe-3', function (req, res) {
+//   let firstTime = req.session.data['first-time']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-sent-3')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-3')
+//   }
+// })
+
+// router.post('/pe-allocation/offer-pe-h', function (req, res) {  
+//   let firstTime = req.session.data['first-time-h']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/pe-allocation/request-places')
+//   } else {
+//       res.redirect('/pe-allocation/no-request-confirmed-h')
+//   }
+// })
+
+// router.post('/allocations/new-provider', function (req, res) {
+//   let firstTime = req.session.data['first-time']
+  
+//   if (firstTime === 'Yes') {
+//       res.redirect('/allocations/thanks')
+//   } else {
+//       res.redirect('/allocations/request-places')
+//   }
+// })
 
 module.exports = router

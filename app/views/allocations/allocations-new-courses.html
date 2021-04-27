@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% set title = 'Request PE courses for 2021/22' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+
+{% block beforeContent %}
+
+{{ govukPhaseBanner({
+  tag: {
+    text: "prototype"
+  },
+  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+}) }}
+
+{{ govukBackLink({
+  text: "Middlesex University",
+  href: "/"
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Request PE courses for 2021/22</h1>
+    <p>You need to request any fee-funded PE courses for 2021/22 by 10 July 2020. You do not need to request salaried PE courses.</p>
+    <p>Once you’ve made a request, you can change it before 10 July.</p>
+    <h2 class="govuk-heading-l govuk-!-margin-top-4">Do you want to request PE again for these organisations?</h2>
+    <p>These are the organisations currently offering fee-funded PE that you’re the accredited body for. Your own organisation will be included if it offers its own courses.</p>
+    <p>Tell us if you’d like to request PE again for these organisations. There’s no need to request a specific number of places for courses running again - these will be allocated based on current figures.</p>
+    <p>We’ll contact you in September to tell you if the request has been approved and how many places have been allocated.</p>
+  </div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <div class="body-text">
+      <table class="govuk-table ucas-info-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header subject-col" style="width: 35%">Organisation</th>
+            <th class="govuk-table__header status-col" style="width: 25%">Status</th>
+            <th class="govuk-table__header status-col" style=""></th>
+            <th class="govuk-table__header status-col" style=""></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+                Enfield County School for Girls
+            </th>
+            <td class="govuk-table__cell">
+              <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
+            </td>
+            <td class="govuk-table__cell">
+               <a href="/pe-allocation/offer-pe-e" class="govuk-link--no-visited-state">Confirm choice</a>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+                London Academy
+            </th>
+            <td class="govuk-table__cell">
+              <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
+            </td>
+            <td class="govuk-table__cell">
+               <a href="#" class="govuk-link--no-visited-state">Confirm choice</a>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                Middlesex University
+              </th>
+            </td>
+            <td class="govuk-table__cell">
+              <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
+            </td>
+            <td class="govuk-table__cell">
+               <a href="#" class="govuk-link--no-visited-state">Confirm choice</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="body-text">
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">New PE courses in 2021/22</h2>
+      <table class="govuk-table ucas-info-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header subject-col" style="width: 35%">Organisation</th>
+            <th class="govuk-table__header status-col" style="width: 25%">Status</th>
+            <th class="govuk-table__header status-col"><span class="govuk-visually-hidden">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+          <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                Hope Valley College
+              </th>
+            </td>
+            <td class="govuk-table__cell">
+              <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--green">{{ data['requested-amount'] }} places requested</span>
+            </td>
+            <td class="govuk-table__cell">
+               <a href="/pe-allocation/offer-pe-h" class="govuk-link--no-visited-state">Change</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+</div> 
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-l govuk-!-margin-top-4">Do you want to request PE for any other organisations?</h2>
+    <p>Request PE for 2021/22 for any organisations not currently offering this course. You’ll be asked to request a specific number of places.</p>
+    <a class="govuk-button govuk-!-margin-bottom-9" href="/pe-allocation/new-provider">Choose an organisation</a>
+  </div>
+</div>
+
+{% endblock %}

@@ -9,12 +9,20 @@
   }) }}
 {% endblock %}
 
+{% set requestingProviderName %}
+	{% if data['requestingProvider'] != "Find an organisation not listed above" %}
+		{{ data['requestingProvider'] }}
+	{% else %}
+		{{ data['schoolList'] }}
+	{% endif %}
+{% endset %}
+
 {% block content %}
   <div class="govuk-grid-row">
 
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Request PE courses for 2021/22</h1>
-      <p>You must request any fee-funded PE courses for 2021/22 by 10 July 2020. You do not need to request any other courses, including salaried PE.</p>
+      <h1 class="govuk-heading-xl">Request PE courses for 2022/23</h1>
+      <p>You must request any fee-funded PE courses for 2022/23 by 10 July 2021. You do not need to request any other courses, including salaried PE.</p>
       <p>Once you’ve made a request, you can change it before 10 July.</p>
       <h2 class="govuk-heading-l govuk-!-margin-top-4">Do you want to request PE again for these organisations?</h2>
       <p>These are the organisations currently offering fee-funded PE that you’re the accredited body for. You’ll be included if you offer your own courses.</p>
@@ -72,15 +80,46 @@
           </tbody>
         </table>
       </div>
-      
+
+      {# only show this if they have gone through the new provider flow #}
+      {% if data['requestingProvider'] or data['schoolList'] %}
+
+        <div class="body-text">
+          <h2 class="govuk-heading-m govuk-!-margin-top-7">New PE courses in 2022/23</h2>
+          <table class="govuk-table ucas-info-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header subject-col" style="width: 35%">Organisation</th>
+                <th class="govuk-table__header status-col" style="width: 25%">Status</th>
+                <th class="govuk-table__header status-col"><span class="govuk-visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+
+              <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header">
+                    {{ requestingProviderName }}
+                  </th>
+                </td>
+                <td class="govuk-table__cell">
+                  <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--green">{{ data['requested-amount'] }} places requested</span>
+                </td>
+                <td class="govuk-table__cell">
+                  <a href="/allocations/new-provider" class="govuk-link--no-visited-state">Change</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
     </div>
   </div>
-
+  
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l govuk-!-margin-top-4">Do you want to request PE for any other organisations?</h2>
-      <p>Request fee-funded PE for 2021/22 for any organisations not currently offering this course. We’ll need to know how many places each one would like to offer. </p>
-      <a class="govuk-button govuk-!-margin-bottom-9" href="new-provider">Choose an organisation</a>
+      <p>Request fee-funded PE for 2022/23 for any organisations not currently offering this course. We’ll need to know how many places each one would like to offer. </p>
+      <a class="govuk-button govuk-!-margin-bottom-9" href="/allocations/new-provider">Choose an organisation</a>
     </div>
   </div>
 

@@ -1,81 +1,56 @@
 {% extends "layout.html" %}
-{% set title = 'Request PE courses for 2021/22' %}
+{% set title = 'Who are you requesting for?' %}
+{% set backLink = "/allocations" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
-
-{% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: [{
-      href: "/allocations",
-      text: data['training-provider-name']
-    }]
-  })
-{% endblock %}
-
-{{ govukBackLink({
-  text: "Request PE courses",
-  href: "/pe-allocations-phase-3"
-}) }}
-
-{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       
-      <form action="/pe-allocation/request-places" method="post" class="form">
-		<div class="govuk-form-group govuk-!-margin-bottom-2">
-			<fieldset class="govuk-fieldset">
-			<legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-				<h1 class="govuk-fieldset__heading govuk-!-margin-bottom-6">
-				  Who are you requesting a course for?
-				</h1>
-				<p>This should be the name of the organisation offering the course - eg a lead school, or your own organisation if you’re offering it yourselves.</p>
-			</legend>
-			<div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-				<div class="govuk-radios__item">
-					<input class="govuk-radios__input" id="where-do-you-live" name="where-do-you-live" type="radio" value="england">
-					<label class="govuk-label govuk-radios__label" for="where-do-you-live">
-						Featherstone High School
-					</label>
-				</div>
-				<div class="govuk-radios__item">
-					<input class="govuk-radios__input" id="where-do-you-live-2" name="where-do-you-live" type="radio" value="scotland">
-					<label class="govuk-label govuk-radios__label" for="where-do-you-live-2">
-						Greenwood Academies Trust
-					</label>
-				</div>
-				<div class="govuk-radios__item">
-					<input class="govuk-radios__input" id="where-do-you-live-3" name="where-do-you-live" type="radio" value="wales">
-					<label class="govuk-label govuk-radios__label" for="where-do-you-live-3">
-						Medlock Valley Community School
-					</label>
-				</div>
-				<div class="govuk-radios__divider">or</div>
-				<div class="govuk-radios__item">
-					<input class="govuk-radios__input" id="where-do-you-live-conditional-3" name="where-do-you-live" type="radio" value="text" data-aria-controls="conditional-where-do-you-live-conditional-3">
-					<label class="govuk-label govuk-radios__label" for="where-do-you-live-conditional-3">
-					Find an organisation not listed above
-					</label>
-				</div>
-				<div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-where-do-you-live-conditional-3">
-					<div class="govuk-form-group">
-						<div class="govuk-!-margin-bottom-6">
-							<label class="govuk-label" for="provider-name">
-								<span class="">Organisation name</span>
-							</label>
-							<div class="body-text">
-								{# <input class="govuk-input" id="autocomplete-default" name="provider-name" type="text"> #}
-								<div id="tt-default" class="autocomplete-wrapper"></div>
-							</div>
-						</div> 
-					</div>
-
-				</div>
-			</div>
-			<button class="govuk-button govuk-!-margin-top-4" data-module="govuk-button">Continue</button>
-			</fieldset>
-		</div>
+      <form action="/allocations/request-places" method="post" class="form">
+        <div class="govuk-form-group govuk-!-margin-bottom-2">
+          <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-6">
+              Who are you requesting a course for?
+            </h1>
+            <p>This should be the name of the organisation offering the course - eg a lead school, or your own organisation if you’re offering it yourselves.</p>
+          </legend>
+          <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="item1" name="requestingProvider" type="radio" value="Featherstone High School">
+              <label class="govuk-label govuk-radios__label" for="item1">
+                Featherstone High School
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="item2" name="requestingProvider" type="radio" value="Greenwood Academies Trust">
+              <label class="govuk-label govuk-radios__label" for="item2">
+                Greenwood Academies Trust
+              </label>
+            </div>
+            <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="item3" name="requestingProvider" type="radio" value="Find an organisation not listed above" data-aria-controls="conditional-item3">
+              <label class="govuk-label govuk-radios__label" for="item3">
+                Find an organisation not listed above
+              </label>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-item3">
+              <div class="govuk-form-group">
+                <div class="govuk-!-margin-bottom-6">
+                  <label class="govuk-label" for="provider-name">Organisation name</label>
+                  <div class="body-text">
+                    <div id="tt-default" class="autocomplete-wrapper"></div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <button class="govuk-button govuk-!-margin-top-4" data-module="govuk-button">Continue</button>
+          </fieldset>
+        </div>
       </form>
 
       <p>To add a new provider to Publish, you should contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a></p>
@@ -2031,7 +2006,8 @@
   accessibleAutocomplete({
     element: element,
     id: id,
-    source: providers
+    source: providers,
+    name: "schoolList"
   })
 </script>
 
