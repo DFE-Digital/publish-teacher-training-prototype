@@ -1,0 +1,32 @@
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% extends "layout.html" %}
+{% set title = 'Courses as an accredited body' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+
+{% block beforeContent %}
+
+{{ govukPhaseBanner({
+  tag: {
+    text: "prototype"
+  },
+  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+ 	 <div class="govuk-grid-column-two-thirds">
+		<h1 class="govuk-panel__title">
+			<span class="govuk-caption-xl">Enfield County School for Girls</span>
+			Thank you
+		</h1>
+		<p>You’ve confirmed that Enfield School will not be offering fee-funded PE in 2021/22.</p>
+		<h2 class="govuk-heading-m">What happens now? </h2>
+		<p>You don’t need to do anything else. If you want to change this choice, you have until 10 July to do so. If you have any questions, contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+		<a class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6 govuk-link--no-visited-state" style="display: block" href="/pe-allocations-no">Return to Request PE courses for 2021/22</a>
+  	</div>
+</div>
+
+{% endblock %}

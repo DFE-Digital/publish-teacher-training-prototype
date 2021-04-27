@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% set title = 'Courses as an accredited body' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+
+{% block beforeContent %}
+
+{{ govukPhaseBanner({
+  tag: {
+    text: "prototype"
+  },
+  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+}) }}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "/pe-allocation/new-provider"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+      <form action="/pe-allocation/check-answers" method="post" class="form">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-margin-bottom-0">
+            <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-6">
+              <span class="govuk-caption-xl">Hope Valley College</span>
+              How many places would you like to request?
+            </h1>
+            <p class="govuk-body">Say how many trainees the organisation would like to recruit - make sure this number is as accurate as possible.</p>
+          </legend>
+          <div class="govuk-!-margin-bottom-6">
+            <label class="govuk-label" for="event-name">
+              <span class="govuk-visually-hidden">Number of places</span>
+            </label>
+            <input class="govuk-input govuk-input govuk-input--width-10" id="requested-amount" name="requested-amount" value="{{ data['requested-amount'] }}" type="text">
+          </div>
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
