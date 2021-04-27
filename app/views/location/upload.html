@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% set title = "Upload training location data" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      href: "/locations",
+      text: "Locations"
+    }, {
+      text: title
+    }])
+  )) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/location/upload-review" method="get" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <p class="govuk-body">Something about the type of file that can be accepted. Probably a CSV of Unique reference numbers (URNs), which we can describe here.</p>
+
+      {{ govukFileUpload({
+        id: "file-upload",
+        name: "file-upload",
+        label: {
+          text: "Upload CSV file",
+          classes: "govuk-label--m"
+        }
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Upload file and continue"
+        }) }}
+
+        <a class="govuk-link" href="/locations">Cancel</a>
+      </div>
+    </div>
+  </form>
+{% endblock %}
