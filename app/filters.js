@@ -15,6 +15,21 @@ module.exports = function (env) {
     return fields
   }
 
+  filters.push = (array, item) => {
+    array.push(item)
+    return array
+  }
+
+  /**
+   * Convert array to readable list format
+   * @param {Array} array Array to convert
+   * @example [A, B, C] => A, B and C
+   */
+  filters.formatOrList = (array = []) => {
+    const lf = new Intl.ListFormat('en', { style: 'short', type: 'disjunction' })
+    return lf.format(array)
+  }
+
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

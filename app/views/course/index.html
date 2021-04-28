@@ -184,15 +184,169 @@
         </dl>
 
         <h3 class="govuk-heading-m">
-          <a href="{{ coursePath }}/requirements">
-            Requirements and eligibility
-          </a>
+          Requirements and eligibility
         </h3>
-        <dl class="govuk-summary-list govuk-summary-list--short">
-          {{ macros.coursePart(course.programmeCode + '-qualifications-required', 'Qualifications needed', errors, coursePath) }}
-          {{ macros.coursePart(course.programmeCode + '-personal-qualities', 'Personal qualities (optional)') }}
-          {{ macros.coursePart(course.programmeCode + '-other-requirements', 'Other requirements (optional)') }}
-        </dl>
+
+        {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+        {% set degreeValueHtml %}
+          {% if data[course.programmeCode + '-degree-minimum-required'] === "No" %}
+            An undergraduate degree, or equivalent
+          {% elif data[course.programmeCode + '-degree-minimum-required'] === "Yes" %}
+
+            {% set minDegreeClass = data[course.programmeCode + '-degree-minimum-classification'] %}
+
+            {% if minDegreeClass == "21" %}
+              2:1 or above, or equivalent
+            {% elif minDegreeClass == "22" %}
+              2:2 or above, or equivalent
+            {% elif minDegreeClass == "3" %}
+              3rd class degree or above, or equivalent
+            {% endif %}
+          {% else %}
+            Not set
+          {% endif %}
+          {% if data[course.programmeCode + '-degree-subject-required'] === "Yes" %}
+            <br><br>
+            {{ data[course.programmeCode + '-degree-subject-requirements'] }}
+          {% endif %}
+        {% endset %}
+
+        {% set degreeValueClasses = "" if data[course.programmeCode + '-degree-minimum-required'] else "empty" %}
+
+        {% set gcseValueHtml %}
+
+          {% if englishGcseFlexibility %}
+              <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
+            {% if data[course.programmeCode + '-gcse-additional-requirements'] === "Yes" %}
+              <p class="govuk-body">{{ data[course.programmeCode + '-gcse-requirements'] }}</p>
+            {% endif %}
+
+            {% set englishGcseFlexibility = data[course.programmeCode + '-gcse-english-flexibility'] %}
+            {% set mathsGcseFlexibility = data[course.programmeCode + '-gcse-maths-flexibility'] %}
+            {% set scienceGcseFlexibility = data[course.programmeCode + '-gcse-science-flexibility'] %}
+
+            {% set subjectsMustHave = [] %}
+            {% set subjectsCanBePending = [] %}
+            {% set subjectsPendingOrEquivalencyTests = [] %}
+
+            {% if englishGcseFlexibility === "pending" %}
+              {% set subjectsCanBePending = subjectsCanBePending | push("English") %}
+            {% elif englishGcseFlexibility === "must" %}
+              {% set subjectsMustHave = subjectsMustHave | push("English") %}
+            {% elif englishGcseFlexibility === "equivalency-test-offered" %}
+              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("English") %}
+            {% endif %}
+
+            {% if mathsGcseFlexibility === "pending" %}
+              {% set subjectsCanBePending = subjectsCanBePending | push("maths") %}
+            {% elif mathsGcseFlexibility === "must" %}
+              {% set subjectsMustHave = subjectsMustHave | push("maths") %}
+            {% elif mathsGcseFlexibility === "equivalency-test-offered" %}
+              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("maths") %}
+            {% endif %}
+
+            {% if scienceGcseFlexibility === "pending" %}
+              {% set subjectsCanBePending = subjectsCanBePending | push("science") %}
+            {% elif scienceGcseFlexibility === "must" %}
+              {% set subjectsMustHave = subjectsMustHave | push("science") %}
+            {% elif scienceGcseFlexibility === "equivalency-test-offered" %}
+              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("science") %}
+            {% endif %}
+
+            {% if subjectsMustHave | length > 0 %}
+              <p class="govuk-body">You will not consider candidates who are currently taking {{"a" if (subjectsMustHave | length) === 1 }} {{ subjectsMustHave | formatOrList }} GCSE{{"s" if (subjectsMustHave | length) > 1 }} or who need to take equivalency tests.</p>
+            {% endif %}
+
+            {% if subjectsCanBePending | length > 0 %}
+              <p class="govuk-body">You will not consider candidates who need to take an equivalency test for {{"a" if (subjectsCanBePending | length) === 1 }} {{ subjectsCanBePending | formatOrList }} but you will consider those already taking the GCSE{{"s" if (subjectsCanBePending | length) > 1 }}.</p>
+            {% endif %}
+
+            {% if subjectsPendingOrEquivalencyTests | length > 0 %}
+              <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsPendingOrEquivalencyTests | length) === 1 }} {{ subjectsPendingOrEquivalencyTests | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }} or who need to take equivalency tests.</p>
+            {% endif %}
+          {% else %}
+            Not set
+          {% endif %}
+        {% endset %}
+
+        {% set gcseValueClasses = "" if englishGcseFlexibility else "empty" %}
+
+        {{ govukSummaryList({
+          classes: '',
+          rows: [
+            {
+              key: {
+                text: "Degree"
+              },
+              value: {
+                html: degreeValueHtml,
+                classes: degreeValueClasses
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/degree",
+                    text: "Change",
+                    visuallyHiddenText: "degree requirements"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "GCSEs"
+              },
+              value: {
+                html: gcseValueHtml,
+                classes: gcseValueClasses
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests",
+                    text: "Change",
+                    visuallyHiddenText: "GCSE requirements"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Personal qualities (optional)"
+              },
+              value: {
+                html: data[course.programmeCode + '-personal-qualities']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/requirements",
+                    text: "Change",
+                    visuallyHiddenText: "personal qualities requirements"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Other requirements (optional)"
+              },
+              value: {
+                html: data[course.programmeCode + '-other-requirements']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/requirements#other-requirements",
+                    text: "Change",
+                    visuallyHiddenText: "other requirements"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
       </div>
       <div class="govuk-grid-column-one-third">
         {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
