@@ -15,12 +15,7 @@
         <span class="govuk-caption-l">{{ course.name | safe }} ({{ course.programmeCode }})</span>
         <h1 class="govuk-heading-l">GCSEs and equivalency tests</h1>
 
-        <p>Select whether you will consider candidates who are:</p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <li>currently taking a GCSE</li>
-          <li>need to take an equivalency test (this proves they have the skills to start training)</li>
-        </ul>
+        <p class="govuk-body">Select how flexible you are towards candidates in meeting GCSE standards.</p>
 
         {% set mathsRadioName = course.programmeCode + '-gcse-maths-flexibility' %}
         {{ govukRadios({
