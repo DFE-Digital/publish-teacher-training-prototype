@@ -51,7 +51,7 @@
                 <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
               </td>
               <td class="govuk-table__cell">
-                <a href="/pe-allocation/offer-pe-e" class="govuk-link--no-visited-state">Confirm choice</a>
+                <a href="/allocations/offer-pe" class="govuk-link--no-visited-state">Confirm choice</a>
               </td>
             </tr>
             <tr class="govuk-table__row">
@@ -59,17 +59,22 @@
                   London Academy
               </th>
               <td class="govuk-table__cell">
-                <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
+                {% if data['offer-pe'] == "Yes" %}
+                   <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--green">Requested</span>
+                {% else if data['offer-pe'] == "No" %}
+                  <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--red">Not requested</span>
+                {% else %}
+                  <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
+                {% endif %}
               </td>
               <td class="govuk-table__cell">
                 <a href="#" class="govuk-link--no-visited-state">Confirm choice</a>
               </td>
             </tr>
             <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">
-                  Middlesex University
-                </th>
-              </td>
+              <th scope="row" class="govuk-table__header">
+                Middlesex University
+              </th>
               <td class="govuk-table__cell">
                 <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--grey">Yet to request</span>
               </td>
@@ -81,7 +86,7 @@
         </table>
       </div>
 
-      {# only show this if they have gone through the new provider flow #}
+      {# Only show this section if they have gone through the new provider flow #}
       {% if data['requestingProvider'] or data['schoolList'] %}
 
         <div class="body-text">

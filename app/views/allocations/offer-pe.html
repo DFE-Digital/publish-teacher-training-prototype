@@ -1,23 +1,8 @@
-{% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% extends "layout.html" %}
-{% set title = 'Offer PE' %}
+{% set title = 'Do you want to request PE for this organisation?' %}
+{% set backLink = "/allocations" %}
 {% block pageTitle %}{{ title }}{% endblock %}
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
-
-{% block beforeContent %}
-
-{{ govukPhaseBanner({
-  tag: {
-    text: "prototype"
-  },
-  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
-}) }}
-
-{{ govukBackLink({
-  text: "Request PE courses",
-  href: "/pe-allocations"
-}) }}
-{% endblock %}
 
 {% block content %}
 
@@ -36,14 +21,14 @@
         </legend>
         <div class="govuk-radios govuk-!-margin-top-6">
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="first-time-e-yes" name="first-time-e" type="radio" value="Yes" {{ checked("first-time-e", "Yes") }}>
-            <label class="govuk-label govuk-radios__label" for="first-time-yes">
+            <input class="govuk-radios__input" id="offer-pe-yes" name="offer-pe" type="radio" value="Yes" {{ checked("offer-pe", "Yes") }}>
+            <label class="govuk-label govuk-radios__label" for="offer-pe-yes">
               Yes 
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="first-time-e-no" name="first-time-e" type="radio" value="No" {{ checked("first-time-e", "No") }}>
-            <label class="govuk-label govuk-radios__label" for="first-time-no">
+            <input class="govuk-radios__input" id="offer-pe-no" name="offer-pe" type="radio" value="No" {{ checked("offer-pe", "No") }}>
+            <label class="govuk-label govuk-radios__label" for="offer-pe-no">
               No
             </label>
           </div>
