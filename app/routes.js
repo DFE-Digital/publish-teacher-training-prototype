@@ -469,7 +469,7 @@ router.post('/course/:providerCode/:code', function (req, res) {
 
   data[c.programmeCode + '-publish-state'] = state
 
-  res.render('course', {
+  res.render('course/index', {
     course: c,
     errors: validate(data, c),
     publishState: state,
@@ -530,11 +530,12 @@ router.get('/preview/:providerCode/:code', function (req, res) {
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
-  const view = req.params.view
+  const {code, view } = req.params
   const c = course(req)
 
   res.render(`course/${view}`, {
     course: c,
+    code: code,
     errors: validate(req.session.data, c, view)
   })
 })

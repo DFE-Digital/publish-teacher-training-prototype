@@ -175,6 +175,34 @@
   </dd>
   {% endif %}
 </div>
+
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Visa sponsorship
+  </dt>
+  <dd class="govuk-summary-list__value">
+    {% set courseType = data[code + "-type"] %}
+    {% set visaSponsorship = data[code + '-visa-sponsorship'] %}
+
+    {% if visaSponsorship === "Yes" %}
+      {% if courseType === "Salaried" %}
+        You can sponsor a Skilled worker visa
+      {% else %}
+        You can sponsor a Student visa
+      {% endif %}
+    {% elseif visaSponsorship === "No" %}
+      You cannot sponsor a visa
+    {% endif %}
+  </dd>
+  {% if showChangeLinks %}
+  <dd class="govuk-summary-list__actions">
+    <a href="{{ course.path + "/visa-sponsorship" }}">
+      Change<span class="govuk-visually-hidden"> visa sponsorship</span>
+    </a>
+  </dd>
+  {% endif %}
+</div>
+
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     Locations
