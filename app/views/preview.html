@@ -141,10 +141,6 @@
                     <td class="govuk-table__cell">UK students</td>
                     <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
                   </tr>
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">EU students</td>
-                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
-                  </tr>
                   {% if data[prefix + '-fee-international'] %}
                   <tr class="govuk-table__row">
                     <td class="govuk-table__cell">International students</td>
@@ -155,6 +151,8 @@
               </table>
             </div>
           {% endif %}
+
+          <p class="govuk-body">Some candidates, such as those with settled or pre-settled status under the EU Settlement scheme, may be <a href="https://www.gov.uk/government/publications/student-finance-eligibility-2021-to-2022-academic-year" class="govuk-body">eligible for home fee status and student finance</a>.</p>
 
           {% if data[prefix + '-fee-details'] %}
             {{ macros.previewPart(prefix + '-fee-details') }}
