@@ -6,7 +6,7 @@ require 'json'
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
 provider = 'Beech Hill Primary School'
-next_cycle = false
+next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
 isAccreditedBody = !courses.first['route'].include?('School Direct')
@@ -19,6 +19,8 @@ postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha
 prototype_data = {
   'rolled-over': true,
   'next-cycle': next_cycle,
+  #'allocations-window' options: open, closed, confirmed 
+  'allocations-window': 'closed',
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',
@@ -31,7 +33,6 @@ prototype_data = {
   'ucas-admin-name': 'Joe Admin',
   'ucas-admin-email': 'admin@myorg.ac.uk',
   'ucas-admin-telephone': '01234 321456',
-  'allocations-window-open': false
 }
 
 def course_qualification(c)

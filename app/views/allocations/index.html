@@ -26,7 +26,7 @@
 {% endset %}
 
 {% set pageTitle %}
-  {% if data['allocations-window-open'] %}
+  {% if data['allocations-window'] == 'open' %}
     Request PE courses for 2022 to 2023
   {% else %}
     Fee-funded PE courses for 2022 to 2023
@@ -35,7 +35,7 @@
 
 {% block content %}
   {# allocations is open #}
-  {% if data['allocations-window-open'] %}
+  {% if data['allocations-window'] == 'open' %}
     <div class="govuk-grid-row">
 
       <div class="govuk-grid-column-two-thirds">
@@ -105,7 +105,7 @@
         </div>
 
         {# Only show this section if they have gone through the new provider flow #}
-        {% if data['requestingProvider'] or data['schoolList'] %}
+        {% if data["requestingProvider"] or data["schoolList"] %}
 
           <div class="body-text">
             <h2 class="govuk-heading-m govuk-!-margin-top-7">New PE courses in 2022 to 2023</h2>
@@ -125,7 +125,7 @@
                     </th>
                   </td>
                   <td class="govuk-table__cell">
-                    <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--green">{{ data['requested-amount'] }} places requested</span>
+                    <span class="govuk-tag govuk-tag-small govuk-tag-table govuk-tag--green">{{ data["requested-amount"] }} places requested</span>
                   </td>
                   <td class="govuk-table__cell">
                     <a href="#" class="govuk-link--no-visited-state">Change</a>
@@ -145,8 +145,81 @@
         <a class="govuk-button govuk-!-margin-bottom-9" href="/allocations/new-provider">Choose an organisation</a>
       </div>
     </div>
+
+  {% elseif data["allocations-window"] == "closed" %}
+
+    <div class="govuk-grid-row">
+
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+        <p>You can no longer request fee-funded PE for 2021 to 2022. The request window closed on 10 July.</p>
+        <p>Your requests are set out below. In September, we’ll tell you if they’ve been approved and, if so, how many places have been allocated for each organisation.</p>
+        <p>Also included are current courses that were not requested for 2021 to 2022.</p>
+        <p class="govuk-body">For now, if you have any questions contact <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+      </div>
+    </div>
     
-  {% else %}  {# Allocations is closed #}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">Courses for 2022 to 2023</h2>
+        
+        <div class="body-text">
+          <table class="govuk-table ucas-info-table govuk-!-margin-bottom-9">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header subject-col" style="width: 70%">Organisation</th>
+                <th class="govuk-table__header status-col">Status</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">
+                    Enfield County School for Girls
+                </th>
+                <td class="govuk-table__cell">
+                  <span class="govuk-tag govuk-tag--green">Requested</span>
+                </td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">
+                    London Academy
+                </th>
+                <td class="govuk-table__cell">
+                  <span class="govuk-tag govuk-tag--green">Requested</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+      <h2 class="govuk-heading-m">Courses not running in 2022 to 2023</h2>
+        
+      <div class="body-text">
+        <table class="govuk-table ucas-info-table govuk-!-margin-bottom-9">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header subject-col" style="width: 70%">Organisation</th>
+              <th class="govuk-table__header status-col">Status</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                Middlesex University
+              </th>
+              <td class="govuk-table__cell">
+                <span class="govuk-tag govuk-tag--red">Not requested</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+    
+  {% else %}  {# Allocations is confirmed #}
 
     <div class="govuk-grid-row">
 
@@ -183,14 +256,6 @@
                 </th>
                 <td class="govuk-table__cell">
                   6
-                </td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">
-                  Middlesex University
-                </th>
-                <td class="govuk-table__cell">
-                  1
                 </td>
               </tr>
             </tbody>
