@@ -97,7 +97,7 @@
         <li>add locations</li>
       </ul>
 
-      {% if data["allocations-open"] %}
+      {% if data["allocations-window-open"] == true %}
         <h2 class="govuk-heading-m">
           <a href="/allocations">Request PE courses for 2022 to 2023</a>
         </h2>
@@ -110,7 +110,7 @@
         </ul>
       {% endif %}
       
-      {% if not data["allocations-open"] %}
+      {% if not data["allocations-window-open"] %}
         <h2 class="govuk-heading-m">
           <a href="/allocations">View PE courses for 2022 to 2023</a>
         </h2>
