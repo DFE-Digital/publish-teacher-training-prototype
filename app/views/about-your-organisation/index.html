@@ -3,7 +3,9 @@
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
-    items: breadcrumbItems()
+    items: breadcrumbItems([{
+      text: title
+    }])
   }) }}
 {% endblock %}
 
@@ -26,18 +28,27 @@
   {% endif %}
 
   {% if justPublished %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-      Your changes have been published
-    </h3>
-  </div>
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
+        Your changes have been published
+      </h3>
+    </div>
   {% endif %}
 
-  {{ macros.orgHeading('About your organisation', message) }}
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">
+      {% if data["next-cycle"] %}
+        Next cycle (2022 to 2023)
+      {% else %}
+        Current cycle (2021 to 2022)
+      {% endif %}
+    </span>
+    {{ title }}
+  </h1>
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-27 remove-top-margin">
+      <h3 class="govuk-heading-27">
         <a href="/about-your-organisation/contact">Contact details</a>
       </h3>
 
@@ -98,6 +109,4 @@
       {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
     </div>
   </div>
-
-
 {% endblock %}

@@ -548,11 +548,12 @@ router.get('/preview/:providerCode/:code', function (req, res) {
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
-  const view = req.params.view
+  const {code, view } = req.params
   const c = course(req)
 
   res.render(`course/${view}`, {
     course: c,
+    code: code,
     errors: validate(req.session.data, c, view)
   })
 })

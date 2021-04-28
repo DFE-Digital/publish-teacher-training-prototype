@@ -76,13 +76,14 @@
           {% if course.salaried %}
             <li><a href="#section-salary">Salary</a></li>
           {% endif %}
-          {% if data[prefix + '-interview-process'] %}
-            <li><a href="#section-interview">Interview process</a></li>
-          {% endif %}
           {% if course.salaried %}
             <li><a href="#section-salary">Salary</a></li>
           {% endif %}
           <li><a href="#section-fees">Fees and financial support</a></li>
+          {% if data[prefix + '-interview-process'] %}
+            <li><a href="#section-interview">Interview process</a></li>
+          {% endif %}
+          <li><a href="#section-international">International students</a></li>
           <li><a href="#section-access-needs">Training with disabilities and other needs</a></li>
           <li><a href="#section-contact">Contact details</a></li>
           <li><a href="#section-apply">Apply</a></li>
@@ -91,19 +92,39 @@
         <h2 class="govuk-heading-l" id="section-about">About the course</h2>
         {{ macros.previewPart(prefix + '-about-this-course') }}
 
-        {% if data[prefix + '-interview-process'] %}
-          <h2 class="govuk-heading-l" id="section-interview">Interview process</h2>
-          {{ macros.previewPart(prefix + '-interview-process') }}
+        <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
+        {{ macros.previewPart(prefix + '-placement-school-policy') }}
+
+        <h2 class="govuk-heading-l" id="section-entry">Entry requirements</h2>
+
+        <h3 class="govuk-heading-m">Qualifications needed</h3>
+        {{ macros.previewPart(prefix + '-qualifications-required') }}
+
+        {% if data[prefix + '-personal-qualities'] %}
+          <h3 class="govuk-heading-m">Personal qualities</h3>
+          {{ macros.previewPart(prefix + '-personal-qualities') }}
         {% endif %}
 
-        <h2 class="govuk-heading-l" id="section-schools">How school placements work</h2>
-        {{ macros.previewPart(prefix + '-placement-school-policy') }}
+        {% if data[prefix + '-other-requirements'] %}
+          <h3 class="govuk-heading-m">Other requirements</h3>
+          {{ macros.previewPart(prefix + '-other-requirements') }}
+        {% endif %}
+
+        <h2 class="govuk-heading-l" id="section-about-provider">About the training provider</h2>
+        {{ macros.previewPart('about-organisation', true) }}
+
+        {% if not accrediting.selfAccrediting %}
+          {% if data[accrediting.slug + '-about-accrediting-provider'] %}
+            <h3 class="govuk-heading-m">About {{ accrediting.name }}</h3>
+            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
+          {% endif %}
+        {% endif %}
 
         {% if course.salaried %}
           <h2 class="govuk-heading-l" id="section-salary">Salary</h2>
           {{ macros.previewPart(prefix + '-salary-details') }}
         {% else %}
-          <h2 class="govuk-heading-l" id="section-fees">Fees</h2>
+          <h2 class="govuk-heading-l" id="section-fees">Fees and financial support</h2>
 
           {% if not data[prefix + '-fee'] %}
             {{ macros.previewPart(prefix + '-fee') }}
@@ -140,7 +161,6 @@
           {% endif %}
         {% endif %}
 
-        <h2 class="govuk-heading-l" id="section-financial-support">Financial support</h3>
         <p>You may be eligible for <a href="https://www.gov.uk/teacher-training-funding">financial support while you study, including bursaries, scholarships and loans</a>.</p>
         <p><a href="https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates">Financial support if you’re from outside of the UK</a>.</p>
 
@@ -233,20 +253,36 @@
           {{ macros.previewPart(prefix + '-personal-qualities') }}
         {% endif %}
 
-        {% if data[prefix + '-other-requirements'] %}
-          <h3 class="govuk-heading-m">Other requirements</h3>
-          {{ macros.previewPart(prefix + '-other-requirements') }}
+        {% if data[prefix + '-interview-process'] %}
+          <h2 class="govuk-heading-l" id="section-interview">Interview process</h2>
+          {{ macros.previewPart(prefix + '-interview-process') }}
         {% endif %}
 
-        <h2 class="govuk-heading-l" id="section-about-provider">About the training provider</h2>
-        {{ macros.previewPart('about-organisation', true) }}
+        <h2 class="govuk-heading-l" id="section-international">International students</h2>
 
-        {% if not accrediting.selfAccrediting %}
-          {% if data[accrediting.slug + '-about-accrediting-provider'] %}
-            <h3 class="govuk-heading-m">About {{ accrediting.name }}</h3>
-            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
+        {% set courseType = data[prefix + "-type"] %}
+        {% set visaSponsorship = data[prefix + '-visa-sponsorship'] %}
+
+        <p class="govuk-body">
+          {% if visaSponsorship === "Yes" %}
+            {% if courseType === "Salaried" %}
+              We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Skilled worker visas</a>, but this is not guaranteed.
+            {% else %}
+              We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Student visas</a>, but this is not guaranteed.
+            {% endif %}
+          {% elseif visaSponsorship === "No" %}
+
+            We are unable to sponsor a visa.
+            You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% endif %}
-        {% endif %}
+        </p>
+
+        <p class="govuk-body">
+          You do not need a visa if you already have settled or pre-settled status under the EU Settlement Scheme, or if you are an Irish citizen.
+        </p>
+
+        <p class="govuk-body">Candidates with qualifications from non-UK institutions may need to provide evidence of comparability by applying for a <a href="https://www.enic.org.uk" class="govuk-link">UK ENIC statement</a>.</p>
+
 
         <h2 class="govuk-heading-l" id="section-access-needs">Training with disabilities and other needs</h2>
         {{ macros.previewPart('training-with-a-disability', true) }}

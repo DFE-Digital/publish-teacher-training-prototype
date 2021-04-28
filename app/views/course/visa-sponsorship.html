@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% set title = "Visa sponsorship" %}
+{% set backLink = course.path %}
+
+{% block beforeContent %}
+  {{ govukBackLink({href: course.path + "#information"})}}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+
+      <form action="{{ course.path + "#information" }}" method="post">
+
+        {% set radioName = code + "-visa-sponsorship" %}
+
+        {% set courseType = data[code + "-type"] %}
+
+        {% if courseType === "Salaried" %}
+          {% set questionText = "Can you sponsor a Skilled worker visa?" %}
+        {% else %}
+          {% set questionText = "Can you sponsor a Student visa?" %}
+        {% endif %}
+
+        {{ govukRadios({
+          name: radioName,
+          fieldset: {
+            legend: {
+              text: questionText,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              checked: (data[radioName] === "Yes")
+            },
+            {
+              value: "No",
+              text: "No",
+              checked: (data[radioName] === "No")
+            }
+          ]
+        }) }}
+
+        {{ govukButton({text: "Continue"}) }}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}
