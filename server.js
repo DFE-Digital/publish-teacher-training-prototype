@@ -245,7 +245,7 @@ app.use(function (req, res, next) {
       defaultItems.push({ text: data['training-provider-name'], href: '/cycles' })
 
       if (data['next-cycle']) {
-        defaultItems.push({ text: 'Next cycle (2021 – 2022)', href: '/' })
+        defaultItems.push({ text: 'Next cycle (2022 – 2023)', href: '/' })
       } else {
         defaultItems.push({ text: 'Current cycle (2020 – 2021)', href: '/' })
       }
