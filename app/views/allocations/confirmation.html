@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% set title = 'Check your answers' %}
+{% set backLink = "/allocations" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+
+{% set requestingProviderName %}
+	{% if data['requestingProvider'] != "Find an organisation not listed above" %}
+		{{ data['requestingProvider'] }}
+	{% else %}
+		{{ data['schoolList'] }}
+	{% endif %}
+{% endset %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-7">
+      <h1 class="govuk-panel__title">
+        Request sent
+      </h1>
+      <div class="govuk-panel__body">You’ve confirmed that {{ requestingProviderName }} would like to offer PE in 2022 to 23</div>
+	  </div>
+    <h2 class="govuk-heading-m">What happens now?</h2>
+    <p class="govuk-body">You have until 10 July to change this request. After this date, we’ll send an email to (insert email address) confirming your choice and setting out next steps.</p>
+    <h2 class="govuk-heading-m">How many places will be allocated?</h2>
+    <p class="govuk-body">In September we'll let you know how many places we've allocated for this course.</p>
+    <p class="govuk-body">If you have any questions, contact <a href="mailto:becomingateacher@digital.education.gov.uk" class="govuk-link">becomingateacher@digital.education.gov.uk</a>.</p>
+    <a class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6 govuk-link--no-visited-state" style="display: block" href="/allocations/">Return to Request PE courses for 2022 to 2023</a>
+  </div>
+</div>
+
+{% endblock %}

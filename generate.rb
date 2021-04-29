@@ -19,6 +19,8 @@ postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha
 prototype_data = {
   'rolled-over': false,
   'next-cycle': next_cycle,
+  # 'allocations-window' options: open, closed, confirmed
+  'allocations-window': 'open',
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',

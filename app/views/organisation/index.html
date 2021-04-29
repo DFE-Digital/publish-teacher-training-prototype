@@ -35,21 +35,6 @@
     {% endif %}
   </h1>
 
-  {# <div class="app-banner app-banner--information app-banner--temporary-message">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="app-banner__heading">
-          New features
-        </h2>
-        <p class="govuk-body">We’ve added two features to further support accredited bodies.</p>
-        <ul class="govuk-list govuk-list--bullet app-banner__message">
-          <li><a href="/accredited-body">See which courses</a> you're the accredited body for</li>
-          <li><a href="/notifications">Get notifications</a> about changes to these courses</li>
-        </ul>
-      </div>
-    </div>
-  </div> #}
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if data["rolled-over"] %}
@@ -110,6 +95,46 @@
         <li>edit location names and addresses</li>
         <li>add locations</li>
       </ul>
+
+      {% if data["allocations-window"] == 'open' %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">Request PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Use it to view the outcome of requests for fee-funded PE courses (ones without a salary) for the next recruitment cycle.</p>
+        <p>This includes:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>your own courses</li>
+          <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
+        </ul>
+      {% endif %}
+      
+      {% if data["allocations-window"] == 'closed' %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">Request PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Only accredited bodies are able to see this section. Use it to request fee-funded PE courses (ones without a salary) for the next recruitment cycle.</p>
+        <p>This includes:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>your own courses</li>
+          <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
+        </ul>
+      {% endif %}
+      
+      {% if data["allocations-window"] == 'confirmed' %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">View PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Use this section to view the outcome of requests for fee-funded PE courses (ones without a salary) for the next recruitment cycle.</p>
+        <p>This includes:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>your own courses</li>
+          <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
+        </ul>
+      {% endif %}
+
     </div>
 
     <div class="govuk-grid-column-one-third">

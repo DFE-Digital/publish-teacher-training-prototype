@@ -687,7 +687,19 @@ router.post('/users/check', function (req, res) {
   res.render('users', { showMessage: true })
 })
 
+// Check answers
+// TODO: The routes for the manage courses
 
-// check answers
+// Allocations
+
+router.post('/allocations/offer-pe', function (req, res) { 
+  let offeringPE = req.session.data['offer-pe']
+  
+  if (offeringPE === 'Yes') {
+      res.redirect('/allocations/request-sent')
+  } else {
+      res.redirect('/allocations/no-request-confirmed')
+  }
+})
 
 module.exports = router
