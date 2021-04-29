@@ -2,10 +2,16 @@
 {% set title = "Request a change to this course" %}
 
 {% block content %}
-  {% set messageHtml %}
-    <p class="govuk-!-margin-bottom-0">We aim to respond to all requests within 48 hours.</p>
+  {% set notificationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">Your message has been sent</h3>
+    <p class="govuk-body">We aim to respond to all requests within 48 hours.</p>
   {% endset %}
-  {{ macros.summary('Your message has been sent', messageHtml) }}
+
+  {{ govukNotificationBanner({
+    html: notificationBannerHtml,
+    type: "success"
+  }) }}
+
   <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
@@ -14,8 +20,8 @@
     <div class="govuk-grid-column-two-thirds">
 
       {{ govukWarningText({
-          text: 'We’re still working on this feature',
-          iconFallbackText: 'Warning'
+        text: 'We’re still working on this feature',
+        iconFallbackText: 'Warning'
       }) }}
 
       <p>When the feature is ready, you’ll be able to make this change yourself.</p>
