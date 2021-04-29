@@ -20,7 +20,7 @@ prototype_data = {
   'rolled-over': false,
   'next-cycle': next_cycle,
   # 'allocations-window' options: open, closed, confirmed
-  'allocations-window': 'confirmed',
+  'allocations-window': 'open',
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
   'ucas-alerts': 'Get an email for each application you receive',

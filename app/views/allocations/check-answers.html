@@ -24,21 +24,27 @@
 
 		<div class="body-text">
 
-			<dl class="govuk-summary-list">
-				<div class="govuk-summary-list__row">
-					<dt class="govuk-summary-list__key">
-						Places requested 
-					</dt>
-					<dd class="govuk-summary-list__value">
-						{{ data['requested-amount'] }}
-					</dd>
-					<dd class="govuk-summary-list__actions">
-						<a class="govuk-link" href="/allocations/request-places">
-							Change <span class="govuk-visually-hidden">places requested</span>
-						</a>
-					</dd>
-				</div>
-			</dl>
+			{{ govukSummaryList({
+				rows: [
+					{
+						key: {
+							text: "Places requested"
+						},
+						value: {
+							text: data.requestedAmount
+						},
+						actions: {
+							items: [
+								{
+									href: "/allocations/request-places",
+									text: "Change",
+									visuallyHiddenText: "places requested"
+								}
+							]
+						}
+					}
+				]
+			}) }}
 
 		</div>	
 
