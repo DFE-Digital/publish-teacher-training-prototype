@@ -95,12 +95,6 @@
 </form>
 {% endmacro %}
 
-{% macro formattingBox() %}
-<div class="add-double-bottom-margin status-box">
-  {{ formatting() }}
-</div>
-{% endmacro %}
-
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
 <div class="add-double-bottom-margin status-box">
   {% if state == 'draft' %}
