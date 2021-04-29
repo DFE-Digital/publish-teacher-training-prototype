@@ -422,16 +422,6 @@
   </div>
 {% endmacro %}
 
-{% macro textboxWithoutValue(id, label, helpText = false, size = '') %}
-<div class="form-group">
-  <label class="form-label" for="{{id}}">{{label | safe}}</label>
-  {% if helpText %}
-    <span class="form-hint">{{helpText | safe}}</span>
-  {% endif %}
-  <input class="form-control {{ size }}" name="{{id}}" type="text" id="{{id}}">
-</div>
-{% endmacro %}
-
 {% macro textareaBasic(id, label, rows, helpText = false, labelClass = '') %}
   <div class="govuk-form-group">
     <label class="govuk-label {{ labelClass }}" for="{{id}}">{{label}}</label>
