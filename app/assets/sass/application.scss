@@ -301,15 +301,16 @@ dl.aligned.course-part-tasks dd {
     font-weight: bold;
     color: $govuk-link-colour;
     text-align: left;
+    text-decoration: none;
   }
 
-  .govuk-tabs__tab--selected {
+  .govuk-tabs__tab--selected,
+  .govuk-tabs__list-item--selected {
     color: $govuk-text-colour;
     background-color: govuk-colour('white');
     border-top: 5px solid govuk-colour('blue');
     padding-top: govuk-spacing(3) - 5;
 
-    text-decoration: none;
     a {
       outline-offset: -3px;
     }
