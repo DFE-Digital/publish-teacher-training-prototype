@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
-{% block pageTitle %}-{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "-" %}
+{% set navActive = "users" %}
+
 {% block backLink %}{{ macros.backLink('/users/show') }}{% endblock %}
 
 {% block content %}
