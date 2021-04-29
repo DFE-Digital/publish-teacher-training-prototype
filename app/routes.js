@@ -26,22 +26,22 @@ const {
 // Route index page
 router.all('/', function (req, res) {
   if (req.session.data['multi-organisation']) {
-    res.render('your-organisations')
+    res.render('organisations/index')
   } else {
-    res.render('organisation', { nextCycle: true, currentCycle: false })
+    res.render('organisation/index', { nextCycle: true, currentCycle: false })
   }
 })
 
 router.all('/next-cycle', function (req, res) {
-  res.render('organisation', { nextCycle: true, currentCycle: false })
+  res.render('organisation/index', { nextCycle: true, currentCycle: false })
 })
 
 router.all('/current-cycle', function (req, res) {
-  res.render('organisation', { nextCycle: false, currentCycle: true })
+  res.render('organisation/index', { nextCycle: false, currentCycle: true })
 })
 
 router.all('/courses', function (req, res) {
-  res.render('courses', {
+  res.render('courses/index', {
     justEditedVacancies: req.query.editedVacancies,
     justDeleted: req.query.deleted
   })
@@ -410,7 +410,7 @@ router.get('/about-your-organisation/contact', function (req, res) {
 
 router.post('/about-your-organisation', function (req, res) {
   req.session.data['about-your-organisation-publish-state'] = 'draft'
-  res.render('about-your-organisation', { showMessage: true, publishState: 'draft' })
+  res.render('about-your-organisation/index', { showMessage: true, publishState: 'draft' })
 })
 
 router.get('/preview/about-your-organisation', function (req, res) {
@@ -427,7 +427,7 @@ router.get('/publish/about-your-organisation', function (req, res) {
     req.session.data['about-your-organisation-published-before'] = true
   }
 
-  res.redirect('/about-your-organisation?publish=true')
+  res.redirect('/about-your-organisation/index?publish=true')
 })
 
 // Publish course action
@@ -558,6 +558,19 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
   })
 })
 
+router.get('/location/upload', function (req, res) {
+  res.render('locations/upload')
+})
+
+router.get('/location/upload-review', function (req, res) {
+  const data = req.session.data
+  const locations = JSON.parse(JSON.stringify(data.schools))
+
+  res.render('locations/upload-review', {
+    locations: locations
+  })
+})
+
 router.get('/location/start', function (req, res) {
   const existingCodes = req.session.data.schools.map(s => s.code)
   const code = generateLocationCode(existingCodes)
@@ -568,14 +581,12 @@ router.get('/location/:code', function (req, res) {
   const code = req.params.code
   const data = req.session.data
   const school = data.schools.find(school => school.code === code)
-  const courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === code))
 
   const isNew = !school
-  res.render('location', {
+  res.render('location/index', {
     school: school,
     code: code,
-    isNew: isNew,
-    courses: courses
+    isNew: isNew
   })
 })
 
@@ -588,7 +599,7 @@ router.post('/location/:code', function (req, res) {
   let isNew = false
 
   if (!loc && req.body[code + '-location-confirm'] === '_unchecked') {
-    res.render('location', {
+    res.render('location/index', {
       school: loc,
       code: code,
       showErrors: true,
@@ -611,21 +622,13 @@ router.post('/location/:code', function (req, res) {
   res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${loc.code}`)
 })
 
-router.get('/location/:id/edit', function (req, res) {
-  const school = req.session.data.schools.find(function (school) {
-    return school.id === req.params.id
-  })
-
-  res.render('edit-location', { school: school })
-})
-
 router.all('/locations', function (req, res) {
   const data = req.session.data
   const locations = JSON.parse(JSON.stringify(data.schools))
 
   locations.forEach(location => location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length)
 
-  res.render('locations', {
+  res.render('locations/index', {
     locations: locations,
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
@@ -640,7 +643,7 @@ router.get('/accredited-body/:code', function (req, res) {
 
 // Notifications
 router.post('/notifications', function (req, res) {
-  res.render('organisation', { showMessage: true })
+  res.render('organisation/index', { showMessage: true })
 })
 
 // Invite user flow

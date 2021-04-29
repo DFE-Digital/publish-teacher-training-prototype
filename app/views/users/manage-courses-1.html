@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% set title = 'Permissions for Achieve with TELA: Can this user manage courses?' %}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title = "Permissions for Achieve with TELA: Can this user manage courses?" %}
 {% set navActive = 'users' %}
 
 {% block breadcrumbs %}
@@ -20,7 +19,7 @@
       {% endset %}
 
       <form action="/users/manage-courses-1" method="post">
-        
+
         {{ govukRadios({
           idPrefix: "manage-courses-1",
           name: "manage-courses-1",
@@ -48,7 +47,7 @@
             }
           ]
         }) }}
-        
+
         {{govukButton({
           text: "Continue"
         })}}

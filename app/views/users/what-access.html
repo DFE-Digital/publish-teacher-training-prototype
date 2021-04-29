@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'What access should this user have?' %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "What access should this user have?" %}
+{% set navActive = "users" %}
 
 {% block breadcrumbs %}
   {{ govukBackLink({
@@ -43,7 +42,7 @@
               }
             ]
           }) }}
-        
+
         {{govukButton({
           text: "Continue"
         })}}

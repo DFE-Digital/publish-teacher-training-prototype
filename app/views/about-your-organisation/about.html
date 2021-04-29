@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% set title = "About your organisation" %}
+{% set backLink = "/about-your-organisation" %}
+
+{% block content %}
+  <form action="/about-your-organisation" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {% include "about-your-organisation/_errors.html" %}
+
+        <h1 class="govuk-heading-xl">
+          <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
+          {{ title }}
+        </h1>
+
+        <p class="govuk-body">Tell applicants why they should choose to train with you. Say:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>who you are</li>
+          <li>who you work with</li>
+        </ul>
+        <p class="govuk-body">You could mention:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>your key values</li>
+          <li>your specialisms</li>
+          <li>your past achievements (eg student successes, Ofsted ratings)</li>
+        </ul>
+        <p class="govuk-body">Be specific with any claims you make, and support them with evidence. For example:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>don’t say “our students are some of the happiest in the country”</li>
+          <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
+        </ul>
+
+        {{ govukCharacterCount({
+          label: {
+            text: "Training with you",
+            classes: "govuk-label--s"
+          },
+          name: "about-organisation",
+          id: "about-organisation",
+          value: data["about-organisation"],
+          maxlength: 250,
+          rows: 14
+        }) }}
+
+        {% if not data["self_accrediting"] %}
+          <h2 class="govuk-heading-l">About your accredited bodies</h2>
+          <p>Tell applicants about {{ "each" if data["accreditors"].length > 1 else "your" }} accredited body – you could mention their academic specialities and achievements. Be specific with the claims you make, and support with them evidence.</p>
+
+          {% for a in data["accreditors"] %}
+            {{ govukCharacterCount({
+              label: {
+                text: "About " + a.name + " (optional)",
+                classes: "govuk-label--s"
+              },
+              name: a.slug + "-about-accrediting-provider",
+              id: a.slug + "-about-accrediting-provider",
+              value: data[a.slug + "-about-accrediting-provider"],
+              maxlength: 100,
+              rows: 8
+            }) }}
+          {% endfor %}
+        {% endif %}
+
+        <h3 class="govuk-heading-l">Training with disabilities and other needs</h3>
+        <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>dyslexia</li>
+          <li>physical, hearing and visual impairments</li>
+          <li>mental health conditions</li>
+        </ul>
+        <p>If accessibility varies between locations, give details. It’s also useful to candidates to know how you’ve accommodated others with specific access needs in the past.</p>
+
+        {{ govukCharacterCount({
+          label: {
+            text: "Training with disabilities and other needs",
+            classes: "govuk-label--s"
+          },
+          name: "training-with-a-disability",
+          id: "training-with-a-disability",
+          value: data["training-with-a-disability"],
+          maxlength: 250,
+          rows: 14
+        }) }}
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+        <div class="add-double-bottom-margin status-box">
+          {{ macros.formatting() }}
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Save"
+      }) }}
+      <a class="govuk-link" href="/about-your-organisation">Cancel changes</a>
+    </div>
+  </form>
+{% endblock %}

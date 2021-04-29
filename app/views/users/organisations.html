@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Select the organisations this user requires access to' %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "Select the organisations this user requires access to" %}
+{% set navActive = "users" %}
 
 {% block breadcrumbs %}
   {{ govukBackLink({
@@ -20,7 +19,7 @@
       {% endset %}
 
       <form action="/users/organisations" method="post">
-        
+
         {{ govukCheckboxes({
           idPrefix: "organisations",
           name: "organisations",
@@ -49,7 +48,7 @@
             }
           ]
         }) }}
-        
+
         {{govukButton({
           text: "Continue"
         })}}

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block pageTitle %}{{ data['training-provider-name'] }}{% endblock %}
+{% set title = data["training-provider-name"] %}
+
 {% block breadcrumbs %}
   {% if data['rolled-over'] %}
     {{
@@ -106,7 +107,6 @@
 
         <p>Use this section to:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>manage the locations that candidates select when applying</li>
           <li>edit location names and addresses</li>
           <li>add locations</li>
         </ul>

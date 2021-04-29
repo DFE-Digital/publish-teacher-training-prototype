@@ -1,7 +1,7 @@
-{% extends "layout-new.html" %}
-{% block pageTitle %}Users{% endblock %}
-{% set navActive = 'users' %}
-{% block backLink %}{{ macros.backLink('/cycles' if data['rolled-over'] else '/') }}{% endblock %}
+{% extends "layout.html" %}
+{% set title = "Users" %}
+{% set navActive = "users" %}
+{% set backLink = "/cycles" if data["rolled-over"] else "/" %}
 
 {% block content %}
   <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
@@ -12,7 +12,6 @@
       If the request is approved, the new user will receive sign up instructions by email. This should happen within 2 working days. If the request is not approved, we’ll contact you by email with further information.
     </p>
   </div>
-
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
