@@ -26,13 +26,14 @@ prototype_data = {
   'ucas-alerts': 'Get an email for each application you receive',
   'training-provider-name': provider,
   'provider-code': courses.first['providerCode'],
-  'ucas-postal-address-building-and-street': '1 Fake street name',
-  'ucas-postal-address-organisation-town-or-city': 'Town name',
-  'ucas-postal-address-county': 'London',
-  'ucas-postal-address-postcode': 'LB1 1AA',
+  'building-and-street': '1 Fake street name',
+  'town-or-city': 'Town name',
+  'county': 'London',
+  'postcode': 'LB1 1AA',
   'ucas-admin-name': 'Joe Admin',
-  'ucas-admin-email': 'admin@myorg.ac.uk',
-  'ucas-admin-telephone': '01234 321456'
+  'email': 'admin@myorg.ac.uk',
+  'website': 'https://myorg.ac.uk',
+  'telephone': '01234 321456'
 }
 
 def course_qualification(c)

@@ -3,7 +3,9 @@
 {% set backLink = "/ucas/apply-preferences" %}
 
 {% block content %}
-  {{ macros.summary('You made a request to change this in the last 7 days', false, 'neutral') }}
+  {{ govukNotificationBanner({
+    text: "You made a request to change this in the last 7 days"
+  }) }}
 
   <h1 class="govuk-heading-xl">
     {{ title }}

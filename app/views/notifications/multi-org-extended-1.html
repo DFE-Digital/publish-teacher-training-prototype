@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Manage notifications' %}
-{% set navActive = 'notifications' %}
-{% block pageTitle %}{{ title }}{% endblock %}
+{% set title = "Manage notifications" %}
+{% set navActive = "notifications" %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -18,7 +17,7 @@
         <div class="govuk-!-margin-bottom-6">
           <p>Receive instant email notifications about changes to courses for which you are the accredited body.</p>
         </div>
-        
+
         {% set options3 %}
           {{ govukCheckboxes({
             name: "options3",

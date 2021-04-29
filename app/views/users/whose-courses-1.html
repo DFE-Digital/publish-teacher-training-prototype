@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit' %}
-
-{% block pageTitle %}{{ title }}{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit" %}
+{% set navActive = "users" %}
 
 {% block breadcrumbs %}
   {{ govukBackLink({
@@ -21,7 +19,7 @@
       {% endset %}
 
       <form action="/users/whose-courses-1" method="post">
-        
+
         {{ govukCheckboxes({
           idPrefix: "whose-courses",
           name: "whose-courses",
@@ -50,7 +48,7 @@
             }
           ]
         }) }}
-        
+
         {{govukButton({
           text: "Continue"
         })}}

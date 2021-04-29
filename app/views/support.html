@@ -2,10 +2,15 @@
 {% set title = "Get support and guidance" %}
 
 {% block content %}
-  {% set messageHtml %}
-    <p class="govuk-!-margin-bottom-0">We aim to respond to all requests within 48 hours.</p>
+  {% set notificationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">Your message has been sent</h3>
+    <p class="govuk-body">We aim to respond to all requests within 48 hours.</p>
   {% endset %}
-  {{ macros.summary('Your message has been sent', messageHtml) }}
+
+  {{ govukNotificationBanner({
+    html: notificationBannerHtml,
+    type: "success"
+  }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% set title = school.name or "Add a location" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      href: "/locations",
+      text: "Locations"
+    }, {
+      text: title
+    }])
+  )) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/location/{{ code }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if showErrors %}
+        {% set errors = [{
+          id: code + '-location-confirm',
+          href: '#checkbox-part-1',
+          text: 'Please confirm that candidates can pick this location when they apply'
+        }] %}
+
+        {{ govukErrorSummary({
+          titleText: "We couldn’t save this location",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      {{ govukInput({
+        label: {
+          classes: "govuk-label--m",
+          text: "Name"
+        },
+        id: code + "-name",
+        name: code + "-name",
+        value: school.name
+      }) }}
+
+      {{ govukInput({
+        label: {
+          classes: "govuk-label--m",
+          text: "Unique Reference Number (URN)"
+        },
+        hint: {
+          html: "You can find URNs on the <a href=\"https://www.get-information-schools.service.gov.uk/\" target=\"_blank\">Get information about schools service (opens in new tab)</a>."
+        },
+        classes: "govuk-input--width-10",
+        id: code + "-urn",
+        name: code + "-urn",
+        value: school.urn
+      }) }}
+
+      {{ govukRadios({
+        idPrefix: code + "-location-type",
+        name: code + "-location-type",
+        fieldset: {
+          legend: {
+            text: "Type of location",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "school",
+          text: "School",
+          hint: {
+            text: "Used for classroom based training with children"
+          }
+        }, {
+          value: "college",
+          text: "University or college",
+          hint: {
+            text: "Used for academic learning"
+          }
+        }]
+      }) }}
+
+      <h2 class="govuk-heading-m">Address</h2>
+      {{ govukInput({
+        label: {
+          html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
+        },
+        autocomplete: "address-line1",
+        id: code + "-address",
+        name: code + "-address",
+        value: school.address
+      }) }}
+
+      {{ govukInput({
+        label: {
+          html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
+        },
+        autocomplete: "address-line2"
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Town or city"
+        },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "address-level2",
+        id: code + "-town",
+        name: code + "-town",
+        value: school.town
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "County"
+        },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "address-level1",
+        id: code + "-county",
+        name: code + "-county",
+        value: school.county
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Postal code"
+        },
+        classes: "govuk-input--width-10",
+        autocomplete: "postal-code",
+        id: code + "-postcode",
+        name: code + "-postcode",
+        value: school.postcode
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and publish changes"
+        }) }}
+
+        <a class="govuk-link" href="/locations">Cancel</a>
+      </div>
+    </div>
+  </form>
+{% endblock %}

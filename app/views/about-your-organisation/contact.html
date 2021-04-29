@@ -3,54 +3,120 @@
 {% set backLink = "/about-your-organisation" %}
 
 {% block content %}
-{% include "about-your-organisation/_errors.html" %}
-
-<h1 class="govuk-heading-xl">
-  <span class="govuk-caption-xl">{{ data['training-provider-name'] }}</span>
-  {{ title }}
-</h1>
-
   <form action="/about-your-organisation" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {{ macros.textbox('email-address', 'Email address', 'Give an email address that applicants can use to contact you', false, null, errors) }}
-        {{ macros.textbox('telephone-number', 'Telephone number', 'Give a telephone number that applicants can use to call you', 'govuk-input--width-10', null, errors) }}
-        {{ macros.textbox('website', 'Website', 'Add a link to the initial teacher training or course pages of your website', 'govuk-!-width-full', null, errors) }}
+        {% include "about-your-organisation/_errors.html" %}
+
+        <h1 class="govuk-heading-xl">
+          <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
+          {{ title }}
+        </h1>
+
+        {{ govukInput({
+          label: {
+            text: "Email address"
+          },
+          hint: {
+            text: "Give an email address that applicants can use to contact you"
+          },
+          classes: "govuk-!-width-two-thirds",
+          type: "email",
+          id: "email",
+          name: "email",
+          value: data["email"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Telephone number"
+          },
+          hint: {
+            text: "Give a telephone number that applicants can use to call you"
+          },
+          classes: "govuk-input--width-10",
+          type: "tel",
+          id: "telephone",
+          name: "telephone",
+          value: data["telephone"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Website"
+          },
+          hint: {
+            text: "Add a link to the initial teacher training or course pages of your website"
+          },
+          type: "url",
+          id: "website",
+          name: "website",
+          value: data["website"]
+        }) }}
 
         <h2 class="govuk-heading-m" id="contact-address">Contact address</h2>
-        {{ macros.textbox('building-and-street', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
-        {{ macros.textbox('building-and-street-2', null, null, 'govuk-!-width-full', null, errors) }}
+        {{ govukInput({
+          label: {
+            html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
+          },
+          autocomplete: "address-line1",
+          id: "building-and-street",
+          name: "building-and-street",
+          value: data["building-and-street"]
+        }) }}
 
-        {{ macros.textbox('organisation-town-or-city', 'Town or city', null, 'form-control', null, errors) }}
-        {{ macros.textbox('county', 'County', null, 'form-control', null, errors) }}
-        {{ macros.textbox('postcode', 'Postcode', null, 'form-control-small', null, errors) }}
+        {{ govukInput({
+          label: {
+            html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
+          },
+          autocomplete: "address-line2",
+          id: "building-and-street-2",
+          name: "building-and-street-2",
+          value: data["building-and-street-2"]
+        }) }}
 
-        {{ macros.select('provider-ucas-region', 'Region of UK', [
-          { name: 'London' },
-          { name: 'South East' },
-          { name: 'South West' },
-          { name: 'Wales' },
-          { name: 'West Midlands' },
-          { name: 'East Midlands' },
-          { name: 'Eastern' },
-          { name: 'North West' },
-          { name: 'Yorkshire and the Humber' },
-          { name: 'North East' },
-          { name: 'Scotland' },
-          { name: 'Northern Ireland' },
-          { name: 'No region' }
-        ])}}
+        {{ govukInput({
+          label: {
+            text: "Town or city"
+          },
+          classes: "govuk-!-width-two-thirds",
+          autocomplete: "address-level2",
+          id: "town-or-city",
+          name: "town-or-city",
+          value: data["town-or-city"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "County"
+          },
+          classes: "govuk-!-width-two-thirds",
+          autocomplete: "address-level1",
+          id: "county",
+          name: "county",
+          value: data["county"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Postcode"
+          },
+          classes: "govuk-input--width-10",
+          autocomplete: "postal-code",
+          id: "postcode",
+          name: "postcode",
+          value: data["postcode"]
+        }) }}
+
+        <p class="govuk-body">Changes will appear on Find postgraduate teacher training within 2 hours.</p>
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Save"
+          }) }}
+          <a class="govuk-link" href="/about-your-organisation">Cancel changes</a>
+        </div>
       </div>
     </div>
-
-    <div class="add-double-bottom-margin">
-      <input type="submit" class="govuk-button" value="Save" />
-    </div>
-
-    <p>
-      <a href="/about-your-organisation">Cancel changes</a>
-    </p>
   </form>
-
-
 {% endblock %}

@@ -20,7 +20,7 @@
     {% endif %}
   {% endset %}
 
-  {% if data['about-your-organisation-show-publish-errors'] and errors.length > 0 %}
+  {% if data["about-your-organisation-show-publish-errors"] and errors.length > 0 %}
     {{ govukErrorSummary({
       titleText: "We couldn’t publish this because some information was missing",
       errorList: errors
@@ -48,36 +48,36 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-27">
+      <h3 class="govuk-heading-27 govuk-!-margin-top-0">
         <a href="/about-your-organisation/contact">Contact details</a>
       </h3>
 
       <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart('email-address', 'Email address', errors) }}
-        {{ macros.coursePart('telephone-number', 'Telephone number', errors) }}
-        {{ macros.coursePart('website', 'Website', errors) }}
+        {{ macros.coursePart("email", "Email address", errors) }}
+        {{ macros.coursePart("telephone", "Telephone number", errors) }}
+        {{ macros.coursePart("website", "Website", errors) }}
 
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
             Contact address
             {% if e %}<a href="{{ coursePath }}{{ e.link }}">{{ e.title }}</a>{% endif %}
           </dt>
-          {% if data['building-and-street'] or data['building-and-street-2'] or data['organisation-town-or-city'] or data['county'] or data['postcode'] %}
+          {% if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] %}
             <dd class="govuk-summary-list__value">
-              {% if data['building-and-street'] %}
-                {{ data['building-and-street'] }}<br />
+              {% if data["building-and-street"] %}
+                {{ data["building-and-street"] }}<br />
               {% endif %}
-              {% if data['building-and-street-2'] %}
-                {{ data['building-and-street-2'] }}<br />
+              {% if data["building-and-street-2"] %}
+                {{ data["building-and-street-2"] }}<br />
               {% endif %}
-              {% if data['organisation-town-or-city'] %}
-                {{ data['organisation-town-or-city'] }}<br />
+              {% if data["town-or-city"] %}
+                {{ data["town-or-city"] }}<br />
               {% endif %}
-              {% if data['county'] %}
-                {{ data['county'] }}<br />
+              {% if data["county"] %}
+                {{ data["county"] }}<br />
               {% endif %}
-              {% if data['postcode'] %}
-                {{ data['postcode'] }}<br />
+              {% if data["postcode"] %}
+                {{ data["postcode"] }}<br />
               {% endif %}
             </dd>
           {% else %}
@@ -89,15 +89,15 @@
       </dl>
 
       <h3 class="govuk-heading-27">
-        <a href="/about-your-organisation/edit">
+        <a href="/about-your-organisation/about">
           About your organisation
         </a>
       </h3>
 
       <dl class="govuk-summary-list govuk-summary-list--short">
         {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
-        {% if not data['self_accrediting'] %}
-          {% for a in data['accreditors'] %}
+        {% if not data["self_accrediting"] %}
+          {% for a in data["accreditors"] %}
             {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
           {% endfor %}
         {% endif %}
@@ -105,8 +105,8 @@
       </dl>
     </div>
     <div class="govuk-grid-column-one-third">
-      {% set publishState = publishState or data['about-your-organisation-publish-state'] or 'new' %}
-      {{ macros.aboutYourOrgPublish(publishState, data['about-your-organisation-published-before'], '/publish/about-your-organisation') }}
+      {% set publishState = publishState or data["about-your-organisation-publish-state"] or 'new' %}
+      {{ macros.aboutYourOrgPublish(publishState, data["about-your-organisation-published-before"], '/publish/about-your-organisation') }}
     </div>
   </div>
 {% endblock %}

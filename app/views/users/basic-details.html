@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Basic details' %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "Basic details" %}
+{% set navActive = "users" %}
 
 {% block breadcrumbs %}
   {{ govukBackLink({
@@ -70,7 +69,7 @@
           }) }}
 
         {% endcall %}
-        
+
         {{govukButton({
           text: "Continue"
         })}}

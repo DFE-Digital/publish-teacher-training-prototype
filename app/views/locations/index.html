@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% set title = "Training locations" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems({
+      text: "Locations"
+    })
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% if justCreated %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+      Your location has been added
+    </h3>
+    <p>
+      Before candidates can pick this location, you must assign it to one or more courses.<br />
+      You can do this when adding or editing courses.
+    </p>
+    <p class="govuk-!-margin-bottom-0">
+      <a href="/courses">Your courses</a>
+    </p>
+  </div>
+  {% endif %}
+
+  {% if justEdited %}
+    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+      <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
+        Your changes have been published
+      </h3>
+      <p class="govuk-!-margin-bottom-0">
+        Changes will appear on courses in Find straight away.<br />UCAS Apply will be updated overnight.
+      </p>
+    </div>
+  {% endif %}
+
+  <h1 class="govuk-heading-xl">
+    {% if data['next-cycle'] %}<span class="govuk-caption-xl">Next cycle (2020 – 2021)</span>{% endif %}
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>edit location names and addresses</li>
+        <li>add locations</li>
+      </ul>
+      <p class="govuk-body">You can assign locations to a course from the ‘Basic details’ tab on the course page.</p>
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Add a new location",
+          href: "/location/start"
+        }) }}
+
+        <a class="govuk-link" href="/locations/upload">Upload location data</a>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      <h2 class="govuk-heading-m">Locations</h2>
+      <ul class="govuk-list govuk-list--spaced">
+        {% for school in locations %}
+          <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0"><a href="/location/{{ school.code }}" class="govuk-!-font-weight-bold">{{ school.name }}</a></h3>
+            <p class="govuk-body">{{ school.address }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

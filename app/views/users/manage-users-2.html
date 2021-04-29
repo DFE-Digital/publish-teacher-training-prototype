@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% set title = 'Permissions for Beech Hill: Can this user manage other users?' %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% set navActive = 'users' %}
+{% set title = "Permissions for Beech Hill: Can this user manage other users?" %}
+{% set navActive = "users" %}
 
 {% block breadcrumbs %}
   {{ govukBackLink({
@@ -20,7 +19,7 @@
       {% endset %}
 
       <form action="/users/manage-users-2" method="post">
-        
+
         {{ govukRadios({
           idPrefix: "manage-users-2",
           name: "manage-users-2",
@@ -48,7 +47,7 @@
             }
           ]
         }) }}
-        
+
         {{govukButton({
           text: "Continue"
         })}}
