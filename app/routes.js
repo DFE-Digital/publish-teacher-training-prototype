@@ -410,7 +410,7 @@ router.get('/about-your-organisation/contact', function (req, res) {
 
 router.post('/about-your-organisation', function (req, res) {
   req.session.data['about-your-organisation-publish-state'] = 'draft'
-  res.render('about-your-organisation', { showMessage: true, publishState: 'draft' })
+  res.render('about-your-organisation/index', { showMessage: true, publishState: 'draft' })
 })
 
 router.get('/preview/about-your-organisation', function (req, res) {
@@ -427,7 +427,7 @@ router.get('/publish/about-your-organisation', function (req, res) {
     req.session.data['about-your-organisation-published-before'] = true
   }
 
-  res.redirect('/about-your-organisation?publish=true')
+  res.redirect('/about-your-organisation/index?publish=true')
 })
 
 // Publish course action
