@@ -16,6 +16,8 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/notification-banner";
 @import "components/application-card";
 @import "components/success-summary";
+@import "components/notice-summary";
+
 
 // Utilities
 @import "utilities/overrides";
