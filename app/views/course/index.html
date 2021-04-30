@@ -118,6 +118,37 @@
     }) }}
   {% endif %}
 
+
+  {% set actionsList = [] %}
+  {% if not data[course.programmeCode + "-age-range"] %}
+    {% set result = actionsList.push({
+      text: "Specify an age range",
+      href: "/new/" + course.programmeCode + "/age-range"
+    }) %}
+  {% endif %}
+
+  {% if not data[course.programmeCode + "-degree-minimum-required"] %}
+    {% set result = actionsList.push({
+      text: "Degree requirements",
+      href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/degree"
+    }) %}
+  {% endif %}
+
+  {% if not data[course.programmeCode + '-gcse-english-flexibility'] %}
+    {% set result = actionsList.push({
+      text: "GCSE requirements",
+      href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests"
+    }) %}
+  {% endif %}
+
+  {% if actionsList | length > 0 %}
+    {{ appNoticeSummary({
+      titleText: "You need to provide some information before publishing this course",
+      actionsList: actionsList
+    }) }}
+  {% endif %}
+
+
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">{{ course.options }}</span>
     {{ title }}
@@ -216,15 +247,17 @@
 
         {% set gcseValueHtml %}
 
+          {% set englishGcseFlexibility = data[course.programmeCode + '-gcse-english-flexibility'] %}
+          {% set mathsGcseFlexibility = data[course.programmeCode + '-gcse-maths-flexibility'] %}
+          {% set scienceGcseFlexibility = data[course.programmeCode + '-gcse-science-flexibility'] %}
+
+
           {% if englishGcseFlexibility %}
               <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
             {% if data[course.programmeCode + '-gcse-additional-requirements'] === "Yes" %}
               <p class="govuk-body">{{ data[course.programmeCode + '-gcse-requirements'] }}</p>
             {% endif %}
 
-            {% set englishGcseFlexibility = data[course.programmeCode + '-gcse-english-flexibility'] %}
-            {% set mathsGcseFlexibility = data[course.programmeCode + '-gcse-maths-flexibility'] %}
-            {% set scienceGcseFlexibility = data[course.programmeCode + '-gcse-science-flexibility'] %}
 
             {% set subjectsMustHave = [] %}
             {% set subjectsCanBePending = [] %}
@@ -546,7 +579,7 @@
       ]
     }) }}
   </div> #}
-  
+
   {# We've hidden the History tab as it wasn't built in production #}
   <div class="course-tabs">
     {{ govukTabs({
