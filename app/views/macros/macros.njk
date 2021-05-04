@@ -484,7 +484,7 @@
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>
-    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
+    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}govuk-summary-list__value--empty{% endif %}">
       {% if (value(id)) %}
         {{ value(id) }}
       {% else %}
