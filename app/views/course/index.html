@@ -390,7 +390,7 @@
 
   {% set locationsHtml %}
     <h3 class="govuk-heading-m">
-      <a href="/new/{{ course.programmeCode }}/training-locations">
+      <a href="/new/{{ course.programmeCode }}/training-location">
         Locations
       </a>
     </h3>
@@ -532,19 +532,13 @@
           html: descriptionHtml
         }
       }, {
-        label: "Training locations<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Placement and training locations</span>" | safe,
-        id: "locations",
-        panel: {
-          html: locationsHtml
-        }
-      }, {
         label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Outcome and subject</span>" | safe,
         id: "information",
         panel: {
           html: informationHtml
         }
       }, {
-        label: 'History<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Who changed what, and when</span>' | safe,
+        label: "History<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Who changed what, and when</span>" | safe,
         id: "history",
         panel: {
           html: historyHtml

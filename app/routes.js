@@ -133,10 +133,10 @@ router.all(['/new/:code/placement-locations', '/new/:code/further/placement-loca
   })
 })
 
-router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {
+router.all(['/new/:code/training-location', '/new/:code/further/training-location'], function (req, res) {
   const code = req.params.code
 
-  res.render('new/training-locations', {
+  res.render('new/training-location', {
     code: code,
     paths: newCourseWizardPaths(req)
   })

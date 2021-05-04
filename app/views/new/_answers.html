@@ -1,390 +1,369 @@
-<style>
-  .govuk-summary-list__actions {
-    width: 22%
-  }
-</style>
+{% set visaSponsorshipText %}
+  {% set courseType = data[code + "-type"] %}
+  {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
 
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Level
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-phase'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-      <a href="/new/{{ code }}/phase?change=phase">
-        Change<span class="govuk-visually-hidden"> phase</span>
-      </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    SEND
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-sen'] %}
-      Yes
+  {% if visaSponsorship === "Yes" %}
+    {% if courseType === "Salaried" %}
+      You can sponsor a Skilled worker visa
     {% else %}
-      No
+      You can sponsor a Student visa
     {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/phase?change=phase">
-      Change<span class="govuk-visually-hidden"> SEND</span>
-    </a>
-    {% endif %}
-  </dd>
+  {% elseif visaSponsorship === "No" %}
+    You cannot sponsor a visa
   {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Subject
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-subject'] }}
-    {% if data[code + '-second-subject'] %}
-      <br />{{ data[code + '-second-subject'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/subject?change=subject">
-      Change<span class="govuk-visually-hidden"> subject</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-{% if data[code + '-subject'] == 'Modern languages' %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Languages
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if isArray(data[code + '-languages']) %}
-      {{ data[code + '-languages'].join('<br />') | safe }}
-    {% else %}
-      {{ data[code + '-languages'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/languages?change=languages">
-      Change<span class="govuk-visually-hidden"> languages</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-{% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Age range
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-age-range'] == 'Another age range' %}
-      {{ data[code + '-age-youngest'] }} to {{ data[code + '-age-oldest'] }}
-    {% else %}
-      {{ data[code + '-age-range'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/age-range?change=age-range">
-      Change<span class="govuk-visually-hidden"> subject</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Outcome
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-outcome'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/outcome?change=outcome">
-      Change<span class="govuk-visually-hidden"> outcome</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-{% if data['new-course']['include-fee-or-salary'] %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Fee or salary
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ data[code + '-type'] }}
-    </dd>
-    {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions">
-      {% if isNotPublished %}
-      <a href="/new/{{ code }}/funding?change=funding">
-        Change<span class="govuk-visually-hidden"> fee or salary</span>
-      </a>
-      {% endif %}
-    </dd>
-    {% endif %}
-  </div>
-{% else %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Apprenticeship
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ data[code + '-apprenticeship'] }}
-    </dd>
-    {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions">
-      {% if isNotPublished %}
-      <a href="/new/{{ code }}/apprenticeship?change=apprenticeship">
-        Change<span class="govuk-visually-hidden"> apprenticeship</span>
-      </a>
-      {% endif %}
-    </dd>
-    {% endif %}
-  </div>
-{% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Full or part time
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-full-part'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/full-time-part-time?change=full-time-part-time">
-      Change<span class="govuk-visually-hidden"> full time or part time</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
+{% endset %}
 
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Visa sponsorship
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% set courseType = data[code + "-type"] %}
-    {% set visaSponsorship = data[code + '-visa-sponsorship'] %}
+{% set schoolPlacementsText %}
+  {% if data[code + "-placements"] == "hosted" %}
+    {{ data[code + "-placements-hosted"] }}
+  {% elif data[code + "-placements"] == "placed" %}
+    {{ data[code + "-placements-placed"] }}
+  {% elif data[code + "-placements"] == "other" %}
+    {{ data[code + "-placements-other"] }}
+  {% endif %}
+{% endset %}
 
-    {% if visaSponsorship === "Yes" %}
-      {% if courseType === "Salaried" %}
-        You can sponsor a Skilled worker visa
-      {% else %}
-        You can sponsor a Student visa
-      {% endif %}
-    {% elseif visaSponsorship === "No" %}
-      You cannot sponsor a visa
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="{{ course.path + "/visa-sponsorship" }}">
-      Change<span class="govuk-visually-hidden"> visa sponsorship</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Locations
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if isArray(data[code + '-locations']) %}
-      {{ data[code + '-locations'] | join('<br>') | safe }}
-    {% elseif data[code + '-locations'] %}
-      {{ data[code + '-locations'] }}
-    {% else %}
-      {{ data['schools'][0].name }}
-    {% endif %}
-    {% if data['schools'].length == 1 and showChangeLinks %}
-      <p class="empty">You can’t change this because you only have 1 location</p>
-      <p><a href="/locations">Manage all your locations</a></p>
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions">
-      {% if data['schools'].length > 1 and data[code + '-locations'] %}
-      <a href="/new/{{ code }}/training-locations?change=training-locations">
-        Change<span class="govuk-visually-hidden"> locations</span>
-      </a>
-      {% endif %}
-    </dd>
-  {% endif %}
-</div>
-{% if data['new-course']['include-accredited'] %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Accredited body
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ data[code + '-new-accredited-body'] or data[code + '-accredited-body'] }}
-    </dd>
-    {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions">
-      {% if isNotPublished %}
-      <a href="/new/{{ code }}/accredited-body?change=accredited-body">
-        Change<span class="govuk-visually-hidden"> accredited body</span>
-      </a>
-      {% endif %}
-    </dd>
-    {% endif %}
-  </div>
-{% endif %}
-
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Applications open
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-applications-open'] == 'On a specific date' %}
-      On {{ data[code + '-applications-open-date-day'] }}-{{ data[code + '-applications-open-date-month'] }}-{{ data[code + '-applications-open-date-year'] }}
-    {% elseif data[code + '-applications-open'] == 'When I publish the course' %}
-        When the course is published
-    {% else %}
-      {{ data[code + '-applications-open'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/applications-open?change=applications-open">
-      Change<span class="govuk-visually-hidden"> start date</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-<!--
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    UCAS applications: GCSEs pending
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-no-qualifications-yet'] == 'Yes (recommended)' %}
-      Receive applications from candidates who haven’t gained the minimum qualifications yet
-    {% else %}
-      UCAS will block applications from candidates who haven’t gained the minimum qualifications yet
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/minimum-gcses?change=minimum-gcses">
-      Change<span class="govuk-visually-hidden"> minimum requirements</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
--->
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Course starts
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-start-date'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    {% if isNotPublished %}
-    <a href="/new/{{ code }}/start-date?change=start-date">
-      Change<span class="govuk-visually-hidden"> start date</span>
-    </a>
-    {% endif %}
-  </dd>
-  {% endif %}
-</div>
-{% if showTitleAndDescription %}
-  {% if data[code + '-change-title'] != 'Yes, that’s correct' %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Title requested
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ data[code + '-title'] }}
-      </dd>
-      {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions">
-        {% if isNotPublished %}
-        <a href="/new/{{ code }}/title?change=title">
-          Change<span class="govuk-visually-hidden"> title</span>
-        </a>
-        {% endif %}
-      </dd>
-      {% endif %}
-    </div>
+{% set placementLocationsHtml %}
+  {% if isArray(data[code + '-locations']) %}
+    {{ data[code + '-locations'] | join('<br>') | safe }}
+  {% elseif data[code + '-locations'] %}
+    {{ data[code + '-locations'] }}
   {% else %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Title
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ data[code + '-generated-title'] }}
-      </dd>
-      {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions">
-        {% if isNotPublished %}
-        <a href="/new/{{ code }}/title?change=title">
-          Change<span class="govuk-visually-hidden"> title</span>
-        </a>
-        {% endif %}
-      </dd>
-      {% endif %}
-    </div>
+    {{ data['schools'][0].name }}
   {% endif %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Description
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ courseOffered or course.options }}
-    </dd>
-    {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions"></dd>
-    {% endif %}
-  </div>
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Course code
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ code }}
-    </dd>
-    {% if showChangeLinks %}
-    <dd class="govuk-summary-list__actions"></dd>
-    {% endif %}
-  </div>
-{% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Allocations
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-subject'] == 'Physical education' and data[code + '-type'] == 'Fee paying (no salary)' %}
-      <p>Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
-      <p>If you haven’t already, you must <a href="#">request allocations</a>.</p>
-    {% else %}
-      Recruitment is not restricted
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions"></dd>
+{% endset %}
+
+{% set applicationsOpenText %}
+  {% if data[code + "-applications-open"] == "On a specific date" %}
+    On {{ data[code + "-applications-open-date-day"] }}-{{ data[code + "-applications-open-date-month"] }}-{{ data[code + "-applications-open-date-year"] }}
+  {% elseif data[code + "-applications-open"] == "When I publish the course" %}
+    When the course is published
+  {% else %}
+    {{ data[code + "-applications-open"] }}
   {% endif %}
-</div>
+{% endset %}
+
+{% set allocationsText %}
+  {% if data[code + "-subject"] == "Physical education" and data[code + "-type"] == "Fee paying (no salary)" %}
+    <p>Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
+    <p>If you haven’t already, you must <a href="#">request allocations</a>.</p>
+  {% else %}
+    Recruitment is not restricted
+  {% endif %}
+{% endset %}
+
+{% set minimumGcsesText %}
+  {% if data[code + "-no-qualifications-yet"] == "Yes (recommended)" %}
+    Receive applications from candidates who haven’t gained the minimum qualifications yet
+  {% else %}
+    UCAS will block applications from candidates who haven’t gained the minimum qualifications yet
+  {% endif %}
+{% endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Level"
+    },
+    value: {
+      text: data[code + "-phase"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/phase?change=phase",
+        text: "Change",
+        visuallyHiddenText: "phase"
+      } if isNotPublished]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      html: "<abbr title=\"Special educational needs and disability\">SEND</abbr>"
+    },
+    value: {
+      text: "Yes" if data[code + "-sen"] else "No"
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/phase?change=phase",
+        text: "Change",
+        visuallyHiddenText: "SEND"
+      } if isNotPublished]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Subject"
+    },
+    value: {
+      html: data[code + "-subject"] + ("<br>" + data[code + "-second-subject"] if data[code + "-second-subject"])
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/subject?change=subject",
+        text: "Change",
+        visuallyHiddenText: "subject"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Languages"
+    },
+    value: {
+      html: data[code + "-languages"].join("<br>") if isArray(data[code + "-languages"]) else data[code + "-languages"] | safe
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/languages?change=languages",
+        text: "Change",
+        visuallyHiddenText: "languages"
+      }]
+    } if showChangeLinks
+  } if data[code + "-subject"] == "Modern languages",
+
+  {
+    key: {
+      text: "Age range"
+    },
+    value: {
+      text: data[code + "-age-youngest"] + " to " + data[code + "-age-oldest"] if data[code + "-age-range"] == "Another age range" else data[code + "-age-range"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/age-range?change=age-range",
+        text: "Change",
+        visuallyHiddenText: "age range"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Outcome"
+    },
+    value: {
+      text: data[code + "-outcome"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/outcome?change=outcome",
+        text: "Change",
+        visuallyHiddenText: "outcome"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Fee or salary"
+    },
+    value: {
+      text: data[code + "-type"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/funding?change=funding",
+        text: "Change",
+        visuallyHiddenText: "fee or salary"
+      } if isNotPublished]
+    } if showChangeLinks
+  } if data["new-course"]["include-fee-or-salary"] else {
+    key: {
+      text: "Apprenticeship"
+    },
+    value: {
+      text: data[code + "-apprenticeship"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/apprenticeship?change=apprenticeship",
+        text: "Change",
+        visuallyHiddenText: "apprenticeship"
+      } if isNotPublished]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Full or part time"
+    },
+    value: {
+      text: data[code + "-full-part"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/full-time-part-time?change=full-time-part-time",
+        text: "Change",
+        visuallyHiddenText: "full time or part time"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Visa sponsorship"
+    },
+    value: {
+      text: visaSponsorshipText
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/xxx?change=xxx",
+        text: "Change",
+        visuallyHiddenText: "visa sponsorship"
+      }]
+    } if showChangeLinks
+  } if data[code + "-visa-sponsorship"],
+
+  {
+    key: {
+      text: "School placements"
+    },
+    value: {
+      text: schoolPlacementsText
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/placements?change=placements",
+        text: "Change",
+        visuallyHiddenText: "how placements work"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Available placements"
+    },
+    value: {
+      html: placementLocationsHtml
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/placement-locations?change=placement-locations",
+        text: "Change",
+        visuallyHiddenText: "school locations"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Training location"
+    },
+    value: {
+      text: data[code + "-training-location"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/training-location?change=training-location",
+        text: "Change",
+        visuallyHiddenText: "training location"
+      }]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Accredited body"
+    },
+    value: {
+      text: data[code + "-new-accredited-body"] or data[code + "-accredited-body"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/accredited-body?change=accredited-body",
+        text: "Change",
+        visuallyHiddenText: "accredited body"
+      } if isNotPublished]
+    } if showChangeLinks
+  } if data["new-course"]["include-accredited"],
+
+  {
+    key: {
+      text: "Applications open"
+    },
+    value: {
+      text: applicationsOpenText
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/applications-open?change=applications-open",
+        text: "Change",
+        visuallyHiddenText: "applications open date"
+      } if isNotPublished]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Course starts"
+    },
+    value: {
+      text: data[code + "-start-date"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/start-date?change=start-date",
+        text: "Change",
+        visuallyHiddenText: "start date"
+      } if isNotPublished]
+    } if showChangeLinks
+  },
+
+  {
+    key: {
+      text: "Title"
+    },
+    value: {
+      text: data[code + "-generated-title"] or data[code + "-subject"]
+    }
+  } if showTitleAndDescription,
+
+  {
+    key: {
+      text: "Description"
+    },
+    value: {
+      text: courseOffered or course.options
+    }
+  } if showTitleAndDescription,
+
+  {
+    key: {
+      text: "Course code"
+    },
+    value: {
+      text: code
+    }
+  } if not isNotPublished,
+
+  {
+    key: {
+      text: "Allocations"
+    },
+    value: {
+      text: allocationsText
+    }
+  },
+
+  {
+    key: {
+      text: "UCAS Apply: GCSE requirements for applicants"
+    },
+    value: {
+      text: minimumGcsesText
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/minimum-gcses?change=minimum-gcses",
+        text: "Change",
+        visuallyHiddenText: "minimum requirements"
+      }]
+    } if showChangeLinks
+  }]
+}) }}
