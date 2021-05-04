@@ -228,7 +228,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/placements?change=placements",
+        href: "/new/" + code + "/placement-policy?change=placements",
         text: "Change",
         visuallyHiddenText: "how placements work"
       }]
@@ -249,7 +249,7 @@
         visuallyHiddenText: "school locations"
       }]
     } if showChangeLinks
-  },
+  } if data[code + "-placement-policy"] == "hosted",
 
   {
     key: {

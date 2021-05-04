@@ -5,44 +5,6 @@
 {% block content %}
   <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {% set hostedHtml %}
-        {{ govukCharacterCount({
-          value: "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but your provider may not be able to guarantee this.",
-          id: code + "-placements-hosted",
-          name: code + "-placements-hosted",
-          label: {
-            text: "Give details"
-          },
-          maxlength: 350,
-          rows: 8
-        }) }}
-      {% endset %}
-
-      {% set placedHtml %}
-        {{ govukCharacterCount({
-          value: "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but your provider will try to take your journey time into consideration.",
-          id: code + "-placements-placed",
-          name: code + "-placements-placed",
-          label: {
-            text: "Give details"
-          },
-          maxlength: 350,
-          rows: 8
-        }) }}
-      {% endset %}
-
-      {% set otherHtml %}
-        {{ govukCharacterCount({
-          id: code + "-placements-other",
-          name: code + "-placements-other",
-          label: {
-            text: "Give details"
-          },
-          maxlength: 350,
-          rows: 8
-        }) }}
-      {% endset %}
-
       {{ govukRadios({
         idPrefix: code + "-placement-policy",
         name: code + "-placement-policy",
@@ -57,19 +19,49 @@
           value: "hosted",
           text: "Candidates choose a lead or host school when they apply",
           conditional: {
-            html: hostedHtml
+            html: govukCharacterCount({
+              id: code + "-placement-policy-hosted",
+              name: code + "-placement-policy-hosted",
+              value: value(code + "-placement-policy-hosted") or "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but your provider may not be able to guarantee this.",
+              label: {
+                text: "Give details",
+                classes: "govuk-label--s"
+              },
+              maxlength: 350,
+              rows: 8
+            })
           }
         }, {
           value: "placed",
           text: "Placements are arranged before training starts",
           conditional: {
-            html: placedHtml
+            html: govukCharacterCount({
+              id: code + "-placement-policy-placed",
+              name: code + "-placement-policy-placed",
+              value: value(code + "-placement-policy-placed") or "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but your provider will try to take your journey time into consideration.",
+              label: {
+                text: "Give details",
+                classes: "govuk-label--s"
+              },
+              maxlength: 350,
+              rows: 8
+            })
           }
         }, {
           value: "other",
           text: "Other",
           conditional: {
-            html: otherHtml
+            html: govukCharacterCount({
+              id: code + "-placement-policy-other",
+              name: code + "-placement-policy-other",
+              value: value(code + "-placement-policy-other"),
+              label: {
+                text: "Give details",
+                classes: "govuk-label--s"
+              },
+              maxlength: 350,
+              rows: 8
+            })
           }
         }]
       }) }}
