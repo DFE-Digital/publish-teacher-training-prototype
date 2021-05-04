@@ -38,11 +38,13 @@
           name: "about-organisation",
           id: "about-organisation",
           value: data["about-organisation"],
-          maxlength: 250,
+          maxwords: 250,
           rows: 14
         }) }}
 
         {% if not data["self_accrediting"] %}
+          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
+
           <h2 class="govuk-heading-l">About your accredited bodies</h2>
           <p>Tell applicants about {{ "each" if data["accreditors"].length > 1 else "your" }} accredited body – you could mention their academic specialities and achievements. Be specific with the claims you make, and support with them evidence.</p>
 
@@ -55,13 +57,15 @@
               name: a.slug + "-about-accrediting-provider",
               id: a.slug + "-about-accrediting-provider",
               value: data[a.slug + "-about-accrediting-provider"],
-              maxlength: 100,
+              maxwords: 100,
               rows: 8
             }) }}
           {% endfor %}
         {% endif %}
 
-        <h3 class="govuk-heading-l">Training with disabilities and other needs</h3>
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
+
+        <h2 class="govuk-heading-l">Training with disabilities and other needs</h2>
         <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>dyslexia</li>
@@ -78,7 +82,7 @@
           name: "training-with-a-disability",
           id: "training-with-a-disability",
           value: data["training-with-a-disability"],
-          maxlength: 250,
+          maxwords: 250,
           rows: 14
         }) }}
       </div>
