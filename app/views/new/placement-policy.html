@@ -13,7 +13,8 @@
           label: {
             text: "Give details"
           },
-          maxlength: 300
+          maxlength: 350,
+          rows: 8
         }) }}
       {% endset %}
 
@@ -25,7 +26,8 @@
           label: {
             text: "Give details"
           },
-          maxlength: 300
+          maxlength: 350,
+          rows: 8
         }) }}
       {% endset %}
 
@@ -36,13 +38,14 @@
           label: {
             text: "Give details"
           },
-          maxlength: 300
+          maxlength: 350,
+          rows: 8
         }) }}
       {% endset %}
 
       {{ govukRadios({
-        idPrefix: code + "-placements",
-        name: code + "-placements",
+        idPrefix: code + "-placement-policy",
+        name: code + "-placement-policy",
         fieldset: {
           legend: {
             text: title,

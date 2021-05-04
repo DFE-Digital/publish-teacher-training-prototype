@@ -172,7 +172,7 @@ function newCourseWizardPaths (req) {
     `/new/${code}/outcome`,
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : [`/new/${code}/apprenticeship`]),
     `/new/${code}/full-time-part-time`,
-    `/new/${code}/placements`,
+    `/new/${code}/placement-policy`,
     ...(includeLocationsInWizard(data) ? [`/new/${code}/placement-locations`] : []),
     `/new/${code}/training-location`,
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
@@ -432,15 +432,6 @@ function validate (data, course, view) {
         title: 'Give details about this course',
         id: `${prefix}-about-this-course`,
         link: `/about-this-course#${prefix}-about-this-course`,
-        page: 'about-this-course'
-      })
-    }
-
-    if (!data[prefix + '-placement-school-policy']) {
-      errors.push({
-        title: 'Give details about how school placements work',
-        id: `${prefix}-placement-school-policy`,
-        link: `/about-this-course#${prefix}-placement-school-policy`,
         page: 'about-this-course'
       })
     }

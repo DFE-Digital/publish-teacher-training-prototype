@@ -59,7 +59,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   if idx < 7
     prototype_data[courseCode + '-about-this-course'] = lorem
     prototype_data[courseCode + '-interview-process'] = lorem
-    prototype_data[courseCode + '-placement-school-policy'] = lorem
+    prototype_data[courseCode + '-placement-policy'] = lorem
     prototype_data[courseCode + '-duration'] = '1 year'
     prototype_data[courseCode + '-salary-details'] = lorem
     prototype_data[courseCode + '-fee'] = '9,000'

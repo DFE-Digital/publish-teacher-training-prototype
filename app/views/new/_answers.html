@@ -14,12 +14,12 @@
 {% endset %}
 
 {% set schoolPlacementsText %}
-  {% if data[code + "-placements"] == "hosted" %}
-    {{ data[code + "-placements-hosted"] }}
-  {% elif data[code + "-placements"] == "placed" %}
-    {{ data[code + "-placements-placed"] }}
-  {% elif data[code + "-placements"] == "other" %}
-    {{ data[code + "-placements-other"] }}
+  {% if data[code + "-placement-policy"] == "hosted" %}
+    {{ data[code + "-placement-policy-hosted"] }}
+  {% elif data[code + "-placement-policy"] == "placed" %}
+    {{ data[code + "-placement-policy-placed"] }}
+  {% elif data[code + "-placement-policy"] == "other" %}
+    {{ data[code + "-placement-policy-other"] }}
   {% endif %}
 {% endset %}
 
