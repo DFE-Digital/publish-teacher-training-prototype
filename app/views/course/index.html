@@ -175,6 +175,7 @@
       <div class="govuk-grid-column-two-thirds">
         <h3 class="govuk-heading-m govuk-!-margin-top-0">About this course</h3>
         {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-8",
           rows: [{
             key: {
               text: "About this course"
@@ -210,6 +211,7 @@
 
         <h3 class="govuk-heading-m">Course length and {{ "salary" if course.salaried else "fees" }}</h3>
         {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-8",
           rows: [{
             key: {
               text: "Course length"
@@ -382,6 +384,7 @@
         {% endset %}
 
         {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-8",
           rows: [{
             key: {
               text: "Degree"
@@ -478,22 +481,6 @@
         </div>
       </div>
     </div>
-  {% endset %}
-
-  {% set locationsHtml %}
-    <h3 class="govuk-heading-m">
-      <a href="/new/{{ course.programmeCode }}/training-location">
-        Locations
-      </a>
-    </h3>
-    <ul class="govuk-list location-list">
-      {% for school in course.schools %}
-        <li>
-          <strong>{{ school.name }} (Code: {{ school.code }})</strong><br />
-          {{ school.address }}
-        </li>
-      {% endfor %}
-    </ul>
   {% endset %}
 
   {% set historyHtml %}
@@ -624,7 +611,7 @@
           html: descriptionHtml
         }
       }, {
-        label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Locations, outcome, subject</span>" | safe,
+        label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Locations, subject and outcome</span>" | safe,
         id: "information",
         panel: {
           html: informationHtml

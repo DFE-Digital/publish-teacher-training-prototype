@@ -60,7 +60,9 @@
   {% endif %}
 {% endset %}
 
+<h3 class="govuk-heading-m">Subject</h3>
 {{ govukSummaryList({
+  classes: "govuk-!-margin-bottom-8",
   rows: [{
     key: {
       text: "Level"
@@ -139,9 +141,13 @@
         visuallyHiddenText: "age range"
       }]
     } if showChangeLinks
-  },
+  }]
+}) }}
 
-  {
+<h3 class="govuk-heading-m">Outcome</h3>
+{{ govukSummaryList({
+  classes: "govuk-!-margin-bottom-8",
+  rows: [{
     key: {
       text: "Outcome"
     },
@@ -221,7 +227,27 @@
 
   {
     key: {
-      text: "School placements"
+      text: "Accredited body"
+    },
+    value: {
+      text: data[code + "-new-accredited-body"] or data[code + "-accredited-body"]
+    },
+    actions: {
+      items: [{
+        href: "/new/" + code + "/accredited-body?change=accredited-body",
+        text: "Change",
+        visuallyHiddenText: "accredited body"
+      } if isNotPublished]
+    } if showChangeLinks
+  } if data["new-course"]["include-accredited"]]
+}) }}
+
+<h3 class="govuk-heading-m">Locations</h3>
+{{ govukSummaryList({
+  classes: "govuk-!-margin-bottom-8",
+  rows: [{
+    key: {
+      text: "How school placements work"
     },
     value: {
       text: schoolPlacementsText
@@ -237,7 +263,7 @@
 
   {
     key: {
-      text: "Available placements"
+      text: "Placement locations"
     },
     value: {
       html: placementLocationsHtml
@@ -265,25 +291,13 @@
         visuallyHiddenText: "training location"
       }]
     } if showChangeLinks
-  },
+  }]
+}) }}
 
-  {
-    key: {
-      text: "Accredited body"
-    },
-    value: {
-      text: data[code + "-new-accredited-body"] or data[code + "-accredited-body"]
-    },
-    actions: {
-      items: [{
-        href: "/new/" + code + "/accredited-body?change=accredited-body",
-        text: "Change",
-        visuallyHiddenText: "accredited body"
-      } if isNotPublished]
-    } if showChangeLinks
-  } if data["new-course"]["include-accredited"],
-
-  {
+<h3 class="govuk-heading-m">Key dates</h3>
+{{ govukSummaryList({
+  classes: "govuk-!-margin-bottom-8",
+  rows: [{
     key: {
       text: "Applications open"
     },
@@ -317,53 +331,10 @@
 
   {
     key: {
-      text: "Title"
-    },
-    value: {
-      text: data[code + "-generated-title"] or data[code + "-subject"]
-    }
-  } if showTitleAndDescription,
-
-  {
-    key: {
-      text: "Description"
-    },
-    value: {
-      text: courseOffered or course.options
-    }
-  } if showTitleAndDescription,
-
-  {
-    key: {
-      text: "Course code"
-    },
-    value: {
-      text: code
-    }
-  } if not isNotPublished,
-
-  {
-    key: {
       text: "Allocations"
     },
     value: {
       text: allocationsText
     }
-  },
-
-  {
-    key: {
-      text: "UCAS Apply: GCSE requirements for applicants"
-    },
-    value: {
-      text: minimumGcsesText
-    },
-    actions: {
-      items: [{
-        href: "/new/" + code + "/minimum-gcses?change=minimum-gcses",
-        text: "Change",
-        visuallyHiddenText: "minimum requirements"
-      }]
-    } if showChangeLinks
   }]
 }) }}

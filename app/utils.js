@@ -172,12 +172,11 @@ function newCourseWizardPaths (req) {
     `/new/${code}/outcome`,
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : [`/new/${code}/apprenticeship`]),
     `/new/${code}/full-time-part-time`,
+    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/placement-policy`,
     ...(includeLocationsInWizard(data) ? [`/new/${code}/placement-locations`] : []),
     `/new/${code}/training-location`,
-    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/applications-open`,
-    `/new/${code}/minimum-gcses`,
     `/new/${code}/start-date`,
     `/new/${code}/${summaryView}`,
     `/new/${code}/create`
