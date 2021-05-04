@@ -3,30 +3,59 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <form action="{{ paths.next }}" method="post">
-    {% set dateFields = [
-       { name: 'September 2020'},
-       { name: 'October 2020'},
-       { name: 'November 2020'},
-       { name: 'December 2020'},
-       { name: 'January 2021'},
-       { name: 'February 2021'},
-       { name: 'March 2021'},
-       { name: 'April 2021'},
-       { name: 'May 2021'},
-       { name: 'June 2021'},
-       { name: 'July 2021'},
-       { name: 'August 2021'}
-      ]
-    %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-    {{ macros.select(code + '-start-date', '', dateFields) }}
+      {{ govukSelect({
+        id: code + "-start-date",
+        name: code + "-start-date",
+        label: {
+          text: "Course start date"
+        },
+        items: [{
+          value: "September 2021",
+          text: "September 2021",
+          selected: true
+        }, {
+          value: "October 2021",
+          text: "October 2021"
+        }, {
+          value: "November 2021",
+          text: "November 2021"
+        }, {
+          value: "December 2021",
+          text: "December 2021"
+        }, {
+          value: "January 2022",
+          text: "January 2022"
+        }, {
+          value: "February 2022",
+          text: "February 2022"
+        }, {
+          value: "March 2022",
+          text: "March 2022"
+        }, {
+          value: "April 2022",
+          text: "April 2022"
+        }, {
+          value: "May 2022",
+          text: "May 2022"
+        }, {
+          value: "June 2022",
+          text: "June 2022"
+        }, {
+          value: "July 2022",
+          text: "July 2022"
+        }, {
+          value: "August 2022",
+          text: "August 2022"
+        }]
+      }) }}
 
-    <div class="form-group">
-      <input type="submit" class="govuk-button" value="Continue" />
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
   </form>
 {% endblock %}

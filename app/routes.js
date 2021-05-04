@@ -108,22 +108,37 @@ router.all('/cycles', function (req, res) {
   res.render('cycles', { justRolledOver: req.query.rolled })
 })
 
-router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {
+router.all(['/new/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
   const data = req.session.data
   const code = req.params.code
   const locations = []
 
   data.schools.forEach(school => {
     locations.push({
-      name: school.name,
-      text: school.address
+      value: school.name,
+      text: school.name,
+      label: {
+        classes: 'govuk-label--s'
+      },
+      hint: {
+        text: school.address
+      }
     })
   })
 
-  res.render('new/training-locations', {
+  res.render('new/placement-locations', {
     code: code,
     paths: newCourseWizardPaths(req),
     locations: locations
+  })
+})
+
+router.all(['/new/:code/training-locations', '/new/:code/further/training-locations'], function (req, res) {
+  const code = req.params.code
+
+  res.render('new/training-locations', {
+    code: code,
+    paths: newCourseWizardPaths(req)
   })
 })
 
@@ -281,9 +296,40 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   res.redirect(`/course/${data['provider-code']}/${code}?${query}`)
 })
 
+router.get('/new/:code/accredited-body', function (req, res) {
+  const code = req.params.code
+  const data = req.session.data
+
+  const accreditedBodies = data['accredited-bodies-choices'].map(body => ({
+    value: body.name,
+    text: body.name
+  }))
+
+  accreditedBodies.unshift({
+    value: '',
+    text: ''
+  })
+
+  const accreditors = data.accreditors.slice().map(body => ({
+    value: body.name,
+    text: body.name
+  }))
+
+  res.render('new/accredited-body', {
+    code: code,
+    paths: newCourseWizardPaths(req),
+    accreditedBodies,
+    accreditors
+  })
+})
+
 router.all('/new/:code/:view', function (req, res) {
   const code = req.params.code
-  res.render(`new/${req.params.view}`, { code: code, paths: newCourseWizardPaths(req) })
+
+  res.render(`new/${req.params.view}`, {
+    code: code,
+    paths: newCourseWizardPaths(req)
+  })
 })
 
 router.all('/new/:code/further/:view', function (req, res) {
@@ -692,9 +738,9 @@ router.post('/users/check', function (req, res) {
 
 // Allocations
 
-router.post('/allocations/offer-pe', function (req, res) { 
+router.post('/allocations/offer-pe', function (req, res) {
   let offeringPE = req.session.data['offer-pe']
-  
+
   if (offeringPE === 'Yes') {
       res.redirect('/allocations/request-sent')
   } else {

@@ -1,7 +1,7 @@
 <style>
-.govuk-summary-list__actions {
-  width: 22%
-}
+  .govuk-summary-list__actions {
+    width: 22%
+  }
 </style>
 
 <div class="govuk-summary-list__row">
@@ -249,51 +249,7 @@
     {% endif %}
   </div>
 {% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Application path
-  </dt>
-  <dd class="govuk-summary-list__value">
-    Apply/UCAS
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/applications-path?change=applications-path">
-      Change<span class="govuk-visually-hidden"> application path</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Application path
-  </dt>
-  <dd class="govuk-summary-list__value">
-    Apply only
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/applications-path?change=applications-path">
-      Change<span class="govuk-visually-hidden"> application path</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Application route
-  </dt>
-  <dd class="govuk-summary-list__value">
-    Applications should be made directly to the college of your choice
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/applications-path?change=applications-path">
-      Change<span class="govuk-visually-hidden"> application path</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
+
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     Applications open
@@ -332,31 +288,6 @@
   {% if showChangeLinks %}
   <dd class="govuk-summary-list__actions">
     <a href="/new/{{ code }}/minimum-gcses?change=minimum-gcses">
-      Change<span class="govuk-visually-hidden"> minimum requirements</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    UCAS applications: Equivalency tests
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-equivalency-test'] == 'Yes (recommended)' %}
-      <p>Accept equivalency tests in
-      {% if isArray(data[code + '-equivalency-subjects']) %}
-        {{ data[code + '-equivalency-subjects'].join(' and ') }}
-      {% else %}
-        {{ data[code + '-equivalency-subjects'] }}
-      {% endif %}
-       </p>
-    {% else %}
-      <p>UCAS will block applications from candidates who need to take an equivalency test</p>
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/equivalency-tests?change=equivalency-tests">
       Change<span class="govuk-visually-hidden"> minimum requirements</span>
     </a>
   </dd>

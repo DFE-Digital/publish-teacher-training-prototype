@@ -3,32 +3,33 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
+      {{ govukRadios({
+        idPrefix: code + "-full-part",
+        name: code + "-full-part",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "Full time",
+          text: "Full time"
+        }, {
+          value: "Part time",
+          text: "Part time"
+        }, {
+          value: "Full time or part time",
+          text: "Full time or part time"
+        }]
+      }) }}
 
-        {% set fields = [
-            {
-              name: 'Full time'
-            },
-            {
-              name: 'Part time'
-            },
-            {
-              name: 'Full time or part time'
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup(code + '-full-part', fields, errors) }}
-
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
-
-
+  </form>
 {% endblock %}

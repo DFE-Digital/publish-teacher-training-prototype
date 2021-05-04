@@ -3,59 +3,46 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <!-- <p>Only published courses will appear on Find and be open to applications.</p> -->
+  <form action="{{ paths.next }}" method="post">
+    {% set specificDateHtml %}
+      {{ govukDateInput({
+        id: code + "-applications-open-date",
+        namePrefix: code + "-applications-open-date",
+        fieldset: {
+          legend: {
+            text: "What date will applications open?"
+          }
+        },
+        hint: {
+          text: "For example, 30 9 2021"
+        }
+      }) }}
+    {% endset %}
 
-      <form action="{{ paths.next }}" method="post">
-        {% set specificDate %}
-          {{ govukDateInput({
-            id: code + "-applications-open-date",
-            namePrefix: code + "-applications-open-date",
-            fieldset: {
-              legend: {
-                text: "What date will applications open?"
-              }
-            },
-            hint: {
-              text: "For example, 31 10 2019"
-            }
-          }) }}
-        {% endset %}
+    {{ govukRadios({
+      idPrefix: code + "-applications-open",
+      name: code + "-applications-open",
+      fieldset: {
+        legend: {
+          text: title,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+      items: [{
+        value: "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)",
+        text: "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)"
+      }, {
+        value: "On a specific date",
+        text: "On a specific date",
+        conditional: {
+          html: specificDateHtml
+        }
+      }]
+    }) }}
 
-        {% if data['next-cycle'] %}
-          {% set fields = [
-              {
-                name: 'On 21 October when applications for the 2020 – 2021 cycle open'
-              },
-              {
-                name: 'On a specific date',
-                more: specificDate
-              }
-            ]
-          %}
-        {% else %}
-          {% set fields = [
-              {
-                name: 'As soon as the course is on Find (recommended)'
-              },
-              {
-                name: 'On a specific date',
-                more: specificDate
-              }
-            ]
-          %}
-        {% endif %}
-
-        {{ macros.radioGroup(code + '-applications-open', fields, errors) }}
-
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
-    </div>
-  </div>
-
-
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

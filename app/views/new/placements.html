@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% set title = "How do school placements work?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% set hostedHtml %}
+        {{ govukCharacterCount({
+          value: "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but your provider may not be able to guarantee this.",
+          id: code + "-placements-hosted",
+          name: code + "-placements-hosted",
+          label: {
+            text: "Give details"
+          },
+          maxlength: 300
+        }) }}
+      {% endset %}
+
+      {% set placedHtml %}
+        {{ govukCharacterCount({
+          value: "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but your provider will try to take your journey time into consideration.",
+          id: code + "-placements-placed",
+          name: code + "-placements-placed",
+          label: {
+            text: "Give details"
+          },
+          maxlength: 300
+        }) }}
+      {% endset %}
+
+      {% set otherHtml %}
+        {{ govukCharacterCount({
+          id: code + "-placements-other",
+          name: code + "-placements-other",
+          label: {
+            text: "Give details"
+          },
+          maxlength: 300
+        }) }}
+      {% endset %}
+
+      {{ govukRadios({
+        idPrefix: code + "-placements",
+        name: code + "-placements",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "hosted",
+          text: "Candidates choose a lead or host school when they apply",
+          conditional: {
+            html: hostedHtml
+          }
+        }, {
+          value: "placed",
+          text: "Placements are arranged before training starts",
+          conditional: {
+            html: placedHtml
+          }
+        }, {
+          value: "other",
+          text: "Other",
+          conditional: {
+            html: otherHtml
+          }
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </div>
+  </form>
+{% endblock %}

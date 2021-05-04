@@ -2,77 +2,160 @@
 {% set title %}Pick a {{ data[code + "-phase"] | lower }} subject{% endset %}
 {% set backLink = paths.back %}
 
+{% set primaryItems = [{
+  value: "",
+  text: ""
+}, {
+  value: "Primary",
+  text: "Primary"
+}, {
+  value: "Primary with English",
+  text: "Primary with English"
+}, {
+  value: "Primary with Geography and History",
+  text: "Primary with Geography and History"
+}, {
+  value: "Primary with Mathematics",
+  text: "Primary with Mathematics"
+}, {
+  value: "Primary with Modern Languages",
+  text: "Primary with Modern Languages"
+}, {
+  value: "Primary with Physical Education",
+  text: "Primary with Physical Education"
+}, {
+  value: "Primary with Science",
+  text: "Primary with Science"
+}] %}
+
+{% set secondaryItems = [{
+  value: "",
+  text: ""
+}, {
+  value: "Art and design",
+  text: "Art and design"
+}, {
+  value: "Biology",
+  text: "Biology"
+}, {
+  value: "Business studies",
+  text: "Business studies"
+}, {
+  value: "Chemistry",
+  text: "Chemistry"
+}, {
+  value: "Citizenship",
+  text: "Citizenship"
+}, {
+  value: "Classics",
+  text: "Classics"
+}, {
+  value: "Communication and media studies",
+  text: "Communication and media studies"
+}, {
+  value: "Computing",
+  text: "Computing"
+}, {
+  value: "Dance",
+  text: "Dance"
+}, {
+  value: "Design and technology",
+  text: "Design and technology"
+}, {
+  value: "Drama",
+  text: "Drama"
+}, {
+  value: "Economics",
+  text: "Economics"
+}, {
+  value: "English",
+  text: "English"
+}, {
+  value: "English literature",
+  text: "English literature"
+}, {
+  value: "Geography",
+  text: "Geography"
+}, {
+  value: "Health and social care",
+  text: "Health and social care"
+}, {
+  value: "History",
+  text: "History"
+}, {
+  value: "Mathematics",
+  text: "Mathematics"
+}, {
+  value: "Modern languages",
+  text: "Modern languages"
+}, {
+  value: "Music",
+  text: "Music"
+}, {
+  value: "Physical education",
+  text: "Physical education"
+}, {
+  value: "Physics",
+  text: "Physics"
+}, {
+  value: "Psychology",
+  text: "Psychology"
+}, {
+  value: "Religious education",
+  text: "Religious education"
+}, {
+  value: "Science",
+  text: "Science"
+}, {
+  value: "Social sciences",
+  text: "Social sciences"
+}] %}
+
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
-        {% set primaryFields = [
-           { name: 'Primary'},
-           { name: 'Primary with English'},
-           { name: 'Primary with Geography and History'},
-           { name: 'Primary with Mathematics'},
-           { name: 'Primary with Modern Languages'},
-           { name: 'Primary with Physical Education'},
-           { name: 'Primary with Science'}
-          ]
-        %}
+      {% call govukFieldset({
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--xl",
+          isPageHeading: true
+        }
+      }) %}
 
-        {% set secondaryFields = [
-           { name: 'Art and design'},
-           { name: 'Biology'},
-           { name: 'Business studies'},
-           { name: 'Chemistry'},
-           { name: 'Citizenship'},
-           { name: 'Classics'},
-           { name: 'Communication and media studies'},
-           { name: 'Computing'},
-           { name: 'Dance'},
-           { name: 'Design and technology'},
-           { name: 'Drama'},
-           { name: 'Economics'},
-           { name: 'English'},
-           { name: 'English literature'},
-           { name: 'Geography'},
-           { name: 'Health and social care'},
-           { name: 'History'},
-           { name: 'Mathematics'},
-           { name: 'Modern languages'},
-           { name: 'Music'},
-           { name: 'Physical education'},
-           { name: 'Physics'},
-           { name: 'Psychology'},
-           { name: 'Religious education'},
-           { name: 'Science'},
-           { name: 'Social sciences'}
-          ]
-        %}
+        {{ govukSelect({
+          id: code + "-subject",
+          name: code + "-subject",
+          label: {
+            text: data[code + "-phase"] + " subject"
+          },
+          items: primaryItems if data[code + "-phase"] == "Primary" else secondaryItems
+        }) }}
 
-        {% if data[code + '-phase'] == 'Primary' %}
-          {{ macros.select(code + '-subject', 'Primary subject', primaryFields) }}
-        {% elseif data[code + '-phase'] == 'Secondary' %}
-          {{ macros.select(code + '-subject', 'Subject', secondaryFields) }}
+        {% set detailsHtml %}
+          <p>Your first subject is the main one. It’ll appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
 
-          {% set detailsHtml %}
-            <p>Your first subject is the main one. It’ll appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
+          {{ govukSelect({
+            id: code + "-second-subject",
+            name: code + "-second-subject",
+            label: {
+              text: "Second subject (optional)"
+            },
+            hint: {
+              text: "For example ‘Physics’"
+            },
+            items: secondaryItems
+          }) }}
+        {% endset %}
 
-            {{ macros.select(code + '-second-subject', 'Second subject (optional)', secondaryFields, 'For example ‘Physics with Mathematics’') }}
-          {% endset %}
+        {{ govukDetails({
+          summaryText: "Add a second subject (optional)",
+          html: detailsHtml
+        }) if data[code + "-phase"] == "Secondary" }}
+      {% endcall %}
 
-          <div style="margin-bottom: -20px">
-            {{ govukDetails({
-              summaryText: "Add a second subject (optional)",
-              html: detailsHtml
-            }) }}
-          </div>
-        {% endif %}
-
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
-
-
+  </form>
 {% endblock %}
