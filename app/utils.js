@@ -174,7 +174,7 @@ function newCourseWizardPaths (req) {
     `/new/${code}/full-time-part-time`,
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/placement-policy`,
-    ...(includeLocationsInWizard(data) ? [`/new/${code}/placement-locations`] : []),
+    `/new/${code}/placement-policy-answer`,
     `/new/${code}/training-location`,
     `/new/${code}/applications-open`,
     `/new/${code}/start-date`,
@@ -390,6 +390,10 @@ function isFurtherEducation (code, data) {
   return data[code + '-phase'] === 'Further education'
 }
 
+function isUsingPlacementLocations (code, data) {
+  return data[code + '-placement-policy'] === 'hosted'
+}
+
 function subject (req) {
   const accrediting = accreditor(req)
   const subject = accrediting.subjects.find(function (s) {
@@ -591,6 +595,7 @@ module.exports = {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  isUsingPlacementLocations,
   rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,

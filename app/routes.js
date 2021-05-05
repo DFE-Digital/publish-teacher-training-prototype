@@ -12,6 +12,7 @@ const {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  isUsingPlacementLocations,
   rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,
@@ -106,6 +107,18 @@ router.all('/rollover/:view', function (req, res) {
 
 router.all('/cycles', function (req, res) {
   res.render('cycles', { justRolledOver: req.query.rolled })
+})
+
+router.post('/new/:code/placement-policy-answer', function (req, res) {
+  const code = req.params.code
+  const data = req.session.data
+  const paths = newCourseWizardPaths(req)
+
+  if (isUsingPlacementLocations(code, data)) {
+    res.redirect('/new/' + code + '/placement-locations')
+  } else {
+    res.redirect(paths.next)
+  }
 })
 
 router.all(['/new/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
@@ -528,10 +541,10 @@ router.post('/course/:providerCode/:code/degree', function (req, res) {
   const c = course(req)
   const choice = req.body[req.params.code + '-degree-minimum-required']
 
-  if (choice == "Yes") {
+  if (choice === 'Yes') {
     // Redirect to minimum course requirements page
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-level`)
-  } else if (c.subject != "Primary") {
+  } else if (c.subject !== 'Primary') {
     // Redirect to degree subject requirements page (unless it’s a Primary course)
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-subject`)
   } else {
@@ -539,7 +552,6 @@ router.post('/course/:providerCode/:code/degree', function (req, res) {
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}`)
   }
 })
-
 
 // Post to vacancies page
 router.post('/course/:providerCode/:code/vacancies', function (req, res) {
@@ -594,7 +606,7 @@ router.get('/preview/:providerCode/:code', function (req, res) {
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
-  const {code, view } = req.params
+  const { code, view } = req.params
   const c = course(req)
 
   res.render(`course/${view}`, {
@@ -699,8 +711,7 @@ router.post('/users/basic-details', (req, res) => {
 })
 
 router.post('/users/what-access', function (req, res) {
-
-  let whatAccess = req.session.data['what-access']
+  const whatAccess = req.session.data['what-access']
 
   if (whatAccess === 'same') {
     res.redirect('/users/permissions-1')
@@ -739,12 +750,12 @@ router.post('/users/check', function (req, res) {
 // Allocations
 
 router.post('/allocations/offer-pe', function (req, res) {
-  let offeringPE = req.session.data['offer-pe']
+  const offeringPE = req.session.data['offer-pe']
 
   if (offeringPE === 'Yes') {
-      res.redirect('/allocations/request-sent')
+    res.redirect('/allocations/request-sent')
   } else {
-      res.redirect('/allocations/no-request-confirmed')
+    res.redirect('/allocations/no-request-confirmed')
   }
 })
 
