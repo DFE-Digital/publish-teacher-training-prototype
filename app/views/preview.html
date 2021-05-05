@@ -9,23 +9,24 @@
   </div>
 
   <h1 class="govuk-heading-xl">
-    <span class="govuk-heading-l govuk-!-margin-bottom-1">{{ data['training-provider-name'] }}</span>
+    <span class="govuk-heading-l govuk-!-margin-bottom-1">{{ data["training-provider-name"] }}</span>
     {{ course.name }} ({{ course.programmeCode }})
   </h1>
 
   <p class="govuk-body-l">{{ course.options[0] }}</p>
 
-  <dl class="app-list--description govuk-!-margin-bottom-8">
+  <dl class="app-description-list govuk-!-margin-bottom-8">
     <dt>Qualification</dt>
     <dd>
       <details class="govuk-details">
-        {% if 'PGCE' in course.options[0] %}
+        {% if "PGCE" in course.options[0] %}
           <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">PGCE with QTS</span>
           </summary>
           <div class="govuk-details__text">
-              <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally.</p>
-              <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
+            <p>A postgraduate certificate in education (PGCE) with qualified teacher status (QTS) will allow you to teach in state schools in England and may allow you to teach in other parts of the UK.</p>
+            <p>It may also allow you to teach overseas, though you should always check what qualifications are needed in the country you’d like to teach in.</p>
+            <p>Many PGCE courses include credits that count toward a Master’s degree.</p>
           </div>
         {% else %}
           <summary class="govuk-details__summary">
@@ -40,20 +41,22 @@
     </dd>
     <dt>Course length</dt>
     <dd>
-      {% if data[prefix + '-duration'] == 'Other' %}
-        {{ data[prefix + '-duration-other'] }}
+      {% if data[code + "-duration"] == "Other" %}
+        {{ data[code + "-duration-other"] }}
       {% else %}
-        {{ data[prefix + '-duration'] or '1 year' }}
+        {{ data[code + "-duration"] or "1 year" }}
       {% endif %}
     </dd>
     <dt>Date you can apply from</dt>
-    <dd>26 October 2018</dd>
+    <dd>{{ data[code + "-applications-open"] }}</dd>
+    <dt>Date course starts</dt>
+    <dd>{{ data[code + "-start-date"] }}</dd>
     <dt>Website</dt>
     <dd>
-      {% if (data[subject.slug + '-' + accrediting.slug + '-course-website']) %}
-        <a href="{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}">{{ data[subject.slug + '-' + accrediting.slug + '-course-website'] }}</a>
+      {% if (data[subject.slug + "-" + accrediting.slug + "-course-website"]) %}
+        <a href="{{ data[subject.slug + "-" + accrediting.slug + "-course-website"] }}">{{ data[subject.slug + "-" + accrediting.slug + "-course-website"] }}</a>
       {% else %}
-        <a href="{{ data['website'] }}">{{ data['website'] }}</a>
+        <a href="{{ data["website"] }}">{{ data["website"] }}</a>
       {% endif %}
     </dd>
     {% if not accrediting.selfAccrediting %}
@@ -66,7 +69,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div class="course-contents">
+      <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-m">Contents</h2>
         <ul class="govuk-list app-list--dash">
           <li><a href="#section-about">About the course</a></li>
@@ -80,7 +83,7 @@
             <li><a href="#section-salary">Salary</a></li>
           {% endif %}
           <li><a href="#section-fees">Fees and financial support</a></li>
-          {% if data[prefix + '-interview-process'] %}
+          {% if data[code + "-interview-process"] %}
             <li><a href="#section-interview">Interview process</a></li>
           {% endif %}
           <li><a href="#section-international">International students</a></li>
@@ -89,95 +92,57 @@
           <li><a href="#section-advice">Support and advice</a></li>
           <li><a href="#section-apply">Apply</a></li>
         </ul>
+      </section>
 
+      <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-about">About the course</h2>
-        {{ macros.previewPart(prefix + '-about-this-course') }}
+        {{ macros.previewPart(code + "-about-this-course") }}
+      </section>
 
+      <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
-        {{ macros.previewPart(prefix + '-placement-school-policy') }}
 
+        {% if data[code + "-placement-policy"] == "hosted" %}
+          {{ macros.previewPart(code + "-placement-policy-hosted") }}
+
+          <h3 class="govuk-heading-m">Locations</h3>
+          <p class="govuk-body">You can select one of the following locations when you apply.</p>
+          <table class="govuk-table">
+            <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col">Location</th>
+                <th class="govuk-table__header" scope="col">Vacancies</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              {% for school in course.schools %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                  <span class="govuk-!-font-weight-bold">{{ school.name }}</span><br>
+                  {{ school.address }}
+                </td>
+                <td class="govuk-table__cell">Yes</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% elif data[code + "-placement-policy"] == "placed" %}
+          {{ macros.previewPart(code + "-placement-policy-placed") }}
+        {% elif data[code + "-placement-policy"] == "other" %}
+          {{ macros.previewPart(code + "-placement-policy-other") }}
+        {% endif %}
+      </section>
+
+      <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-entry">Entry requirements</h2>
 
         <h3 class="govuk-heading-m">Qualifications needed</h3>
-        {{ macros.previewPart(prefix + '-qualifications-required') }}
-
-        {% if data[prefix + '-personal-qualities'] %}
-          <h3 class="govuk-heading-m">Personal qualities</h3>
-          {{ macros.previewPart(prefix + '-personal-qualities') }}
-        {% endif %}
-
-        {% if data[prefix + '-other-requirements'] %}
-          <h3 class="govuk-heading-m">Other requirements</h3>
-          {{ macros.previewPart(prefix + '-other-requirements') }}
-        {% endif %}
-
-        <h2 class="govuk-heading-l" id="section-about-provider">About the training provider</h2>
-        {{ macros.previewPart('about-organisation', true) }}
-
-        {% if not accrediting.selfAccrediting %}
-          {% if data[accrediting.slug + '-about-accrediting-provider'] %}
-            <h3 class="govuk-heading-m">About {{ accrediting.name }}</h3>
-            {{ macros.previewPart(accrediting.slug + '-about-accrediting-provider', true) }}
-          {% endif %}
-        {% endif %}
-
-        {% if course.salaried %}
-          <h2 class="govuk-heading-l" id="section-salary">Salary</h2>
-          {{ macros.previewPart(prefix + '-salary-details') }}
-        {% else %}
-          <h2 class="govuk-heading-l" id="section-fees">Fees and financial support</h2>
-
-          {% if not data[prefix + '-fee'] %}
-            {{ macros.previewPart(prefix + '-fee') }}
-          {% else %}
-            <p>The course fees for 2018/2019 are as follows:</p>
-            <div class="body-text">
-              <table class="govuk-table">
-                <tbody class="govuk-table__body">
-                  <tr class="visually-hidden">
-                    <th class="govuk-table__header" scope="col">Student type</th>
-                    <th class="govuk-table__header" scope="col">Fees to pay</th>
-                  </tr>
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">UK students</td>
-                    <td class="govuk-table__cell">£{{ data[prefix + '-fee'] }}</td>
-                  </tr>
-                  {% if data[prefix + '-fee-international'] %}
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">International students</td>
-                    <td class="govuk-table__cell">£{{ data[prefix + '-fee-international'] }}</td>
-                  </tr>
-                  {% endif %}
-                </tbody>
-              </table>
-            </div>
-          {% endif %}
-
-          <p class="govuk-body">Some candidates, such as those with settled or pre-settled status under the EU Settlement scheme, may be <a href="https://www.gov.uk/government/publications/student-finance-eligibility-2021-to-2022-academic-year" class="govuk-body">eligible for home fee status and student finance</a>.</p>
-
-          {% if data[prefix + '-fee-details'] %}
-            {{ macros.previewPart(prefix + '-fee-details') }}
-          {% endif %}
-        {% endif %}
-
-        <p>You may be eligible for <a href="https://www.gov.uk/teacher-training-funding">financial support while you study, including bursaries, scholarships and loans</a>.</p>
-        <p><a href="https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates">Financial support if you’re from outside of the UK</a>.</p>
-
-        {% if data[prefix + '-financial-support'] %}
-          <h3 class="govuk-heading-m">Financial support from the training provider</h3>
-          {{ macros.previewPart(prefix + '-financial-support') }}
-        {% endif %}
-
-        <h2 class="govuk-heading-l" id="section-entry">Entry requirements</h2>
-
-        <h3 class="govuk-heading-m">Qualifications needed</h3>
-
         <p class="govuk-body">
-          {% if data[prefix + '-degree-minimum-required'] === "No" %}
+          {% if data[code + "-degree-minimum-required"] === "No" %}
             An undergraduate degree, or equivalent.
-          {% elif data[prefix + '-degree-minimum-required'] === "Yes" %}
-
-            {% set minDegreeClass = data[prefix + '-degree-minimum-classification'] %}
+          {% elif data[code + "-degree-minimum-required"] === "Yes" %}
+            {% set minDegreeClass = data[code + "-degree-minimum-classification"] %}
 
             {% if minDegreeClass == "21" %}
               An undergraduate degree at class 2:1 or above, or equivalent.
@@ -190,22 +155,20 @@
         </p>
 
         {% if course.name !== "Primary" %}
-          {% if data[prefix + '-degree-subject-required'] === "Yes" %}
-            <p class="govuk-body">
-              {{ data[prefix + '-degree-subject-requirements'] }}
-            </p>
+          {% if data[code + "-degree-subject-required"] === "Yes" %}
+            <p class="govuk-body">{{ data[code + "-degree-subject-requirements"] }}</p>
           {% endif %}
         {% endif %}
 
         <p class="govuk-body">GCSE grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent.</p>
 
-        {% if data[prefix + '-gcse-additional-requirements'] === "Yes" %}
-          <p class="govuk-body">{{ data[prefix + '-gcse-requirements'] }}</p>
+        {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
+          <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
         {% endif %}
 
-        {% set englishGcseFlexibility = data[prefix + '-gcse-english-flexibility'] %}
-        {% set mathsGcseFlexibility = data[prefix + '-gcse-maths-flexibility'] %}
-        {% set scienceGcseFlexibility = data[prefix + '-gcse-science-flexibility'] %}
+        {% set englishGcseFlexibility = data[code + "-gcse-english-flexibility"] %}
+        {% set mathsGcseFlexibility = data[code + "-gcse-maths-flexibility"] %}
+        {% set scienceGcseFlexibility = data[code + "-gcse-science-flexibility"] %}
 
         {% set subjectsMustHave = [] %}
         {% set subjectsCanBePending = [] %}
@@ -247,20 +210,93 @@
           <p class="govuk-body">You can ask to take an equivalency test for {{ subjectsPendingOrEquivalencyTests | formatOrList }}. You will also be considered if you are currently taking {{"a" if (subjectsCanBePending | length) === 1 }} {{ subjectsCanBePending | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }}.</p>
         {% endif %}
 
-        {% if data[prefix + '-personal-qualities'] %}
+        {% if data[code + "-personal-qualities"] %}
           <h3 class="govuk-heading-m">Personal qualities</h3>
-          {{ macros.previewPart(prefix + '-personal-qualities') }}
+          {{ macros.previewPart(code + "-personal-qualities") }}
         {% endif %}
 
-        {% if data[prefix + '-interview-process'] %}
+        {% if data[code + "-other-requirements"] %}
+          <h3 class="govuk-heading-m">Other requirements</h3>
+          {{ macros.previewPart(code + "-other-requirements") }}
+        {% endif %}
+      </section>
+
+      <section class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l" id="section-about-provider">About the training provider</h2>
+        {{ macros.previewPart("about-organisation", true) }}
+
+        {% if not accrediting.selfAccrediting %}
+          {% if data[accrediting.slug + "-about-accrediting-provider"] %}
+            <h3 class="govuk-heading-m">About {{ accrediting.name }}</h3>
+            {{ macros.previewPart(accrediting.slug + "-about-accrediting-provider", true) }}
+          {% endif %}
+        {% endif %}
+      </section>
+
+      {% if data[code + "-interview-process"] %}
+        <section class="govuk-!-margin-bottom-8">
           <h2 class="govuk-heading-l" id="section-interview">Interview process</h2>
-          {{ macros.previewPart(prefix + '-interview-process') }}
+          {{ macros.previewPart(code + "-interview-process") }}
+        </section>
+      {% endif %}
+
+      <section class="govuk-!-margin-bottom-8">
+        {% if course.salaried %}
+          <h2 class="govuk-heading-l" id="section-salary">Salary</h2>
+          {{ macros.previewPart(code + "-salary-details") }}
+        {% else %}
+          <h2 class="govuk-heading-l" id="section-fees">Fees and financial support</h2>
+          {% set financialSupportHtml %}
+            <p>You may be eligible for a <a href="https://beta-getintoteaching.education.gov.uk/funding-your-training#tuition-fee-and-maintenance-loans">loan while you study</a> – note that you’ll have to apply for <a href="https://www.gov.uk/student-finance">undergraduate student finance</a>.</p>
+            <p>Find out about financial support if you’re from <a href="https://beta-getintoteaching.education.gov.uk/guidance/financial-support-for-international-applicants">outside the UK</a>.</p>
+          {% endset %}
+
+          {{ appAdvice({
+            title: "Financial support from the government",
+            html: financialSupportHtml
+          }) }}
+
+          {% if not data[code + "-fee"] %}
+            {{ macros.previewPart(code + "-fee") }}
+          {% else %}
+            <p>The course fees for 2021 to 2022 are as follows:</p>
+            <table class="govuk-table">
+              <tbody class="govuk-table__body">
+                <tr class="visually-hidden">
+                  <th class="govuk-table__header" scope="col">Student type</th>
+                  <th class="govuk-table__header" scope="col">Fees to pay</th>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">UK students</td>
+                  <td class="govuk-table__cell">£{{ data[code + "-fee"] }}</td>
+                </tr>
+                {% if data[code + "-fee-international"] %}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">International students</td>
+                  <td class="govuk-table__cell">£{{ data[code + "-fee-international"] }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          {% endif %}
+
+          <p class="govuk-body">Some candidates, such as those with settled or pre-settled status under the EU Settlement scheme, may be <a href="https://www.gov.uk/government/publications/student-finance-eligibility-2021-to-2022-academic-year" class="govuk-body">eligible for home fee status and student finance</a>.</p>
+
+          {% if data[code + "-fee-details"] %}
+            {{ macros.previewPart(code + "-fee-details") }}
+          {% endif %}
         {% endif %}
 
-        <h2 class="govuk-heading-l" id="section-international">International students</h2>
+        {% if data[code + "-financial-support"] %}
+          <h3 class="govuk-heading-m">Financial support from the training provider</h3>
+          {{ macros.previewPart(code + "-financial-support") }}
+        {% endif %}
+      </section>
 
-        {% set courseType = data[prefix + "-type"] %}
-        {% set visaSponsorship = data[prefix + '-visa-sponsorship'] %}
+      <section class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l" id="section-international">International students</h2>
+        {% set courseType = data[code + "-type"] %}
+        {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
 
         <p class="govuk-body">
           {% if visaSponsorship === "Yes" %}
@@ -276,61 +312,57 @@
           {% endif %}
         </p>
 
-        <p class="govuk-body">
-          You do not need a visa if you already have settled or pre-settled status under the EU Settlement Scheme, or if you are an Irish citizen.
-        </p>
-
+        <p class="govuk-body">You do not need a visa if you already have settled or pre-settled status under the EU Settlement Scheme, or if you are an Irish citizen.</p>
         <p class="govuk-body">Candidates with qualifications from non-UK institutions may need to provide evidence of comparability by applying for a <a href="https://www.enic.org.uk" class="govuk-link">UK ENIC statement</a>.</p>
+      </section>
 
+      <section id="section-train-with-disabilities" class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l">Training with disabilities and other needs</h2>
+        {{ macros.previewPart("training-with-a-disability", true) }}
+      </section>
 
-        <h2 class="govuk-heading-l" id="section-access-needs">Training with disabilities and other needs</h2>
-        {{ macros.previewPart('training-with-a-disability', true) }}
+      <section id="section-contact" class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l">Contact this training provider</h2>
 
-        <h2 class="govuk-heading-l" id="section-contact">Contact this training provider</h2>
-
-        {% if not (data['email-address'] and data['telephone-number'] and data['website'] and data['postcode'] and data['building-and-street']) %}
-          <p class="missing-section">
-            Please <a href="/about-your-organisation">add your missing contact details</a></a>.
-          </p>
+        {% if not (data["email-address"] and data["telephone-number"] and data["website"] and data["postcode"] and data["building-and-street"]) %}
+          <p class="missing-section">Please <a href="/about-your-organisation">add your missing contact details</a></a>.</p>
         {% endif %}
 
-        <dl class="aligned">
-          <dt>Email:</dt>
-          <dd><a href="#">{{ data['email-address'] }}</a></dd>
-          <dt>Telephone:</dt>
-          <dd>{{ data['telephone-number'] }}</dd>
-          <dt>Website:</dt>
-          <dd><a href="{{ data['website'] }}">{{ data['website'] }}</a></dd>
-          <dt>Address:</dt>
+        <dl class="app-description-list">
+          <dt>Email</dt>
+          <dd><a href="#">{{ data["email-address"] }}</a></dd>
+          <dt>Telephone</dt>
+          <dd>{{ data["telephone-number"] }}</dd>
+          <dt>Website</dt>
+          <dd><a href="{{ data["website"] }}">{{ data["website"] }}</a></dd>
+          <dt>Address</dt>
           <dd>
-            {{ data['building-and-street'] }}<br />
-            {% if data['building-and-street-2'] %}
-              {{ data['building-and-street-2'] }}<br />
+            {{ data["building-and-street"] }}<br />
+            {% if data["building-and-street-2"] %}
+              {{ data["building-and-street-2"] }}<br />
             {% endif %}
-            {{ data['organisation-town-or-city'] }}<br />
-            {{ data['county'] }}<br />
-            {{ data['postcode'] }}
+            {{ data["organisation-town-or-city"] }}<br />
+            {{ data["county"] }}<br />
+            {{ data["postcode"] }}
           </dd>
         </dl>
+      </section>
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-l" id="section-advice">Support and advice</h2>
-        <p class="govuk-body">For support and advice, you can speak to a <a class="govuk-link" href="https://beta-adviser-getintoteaching.education.gov.uk/">Get Into Teaching</a> adviser for free. They’re all experienced teachers who can help you to prepare your application, book school experience, and access exclusive teaching events.</p>
-        <p class="govuk-body">You can also call Get Into Teaching free of charge on 0800 389 2501, or speak to an adviser using their <a class="govuk-link" href="https://beta-getintoteaching.education.gov.uk/#talk-to-us">online chat service</a> Monday to Friday, 8.30am to 5pm (except public holidays).</p>
-
+      <section id="section-advice" class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l">Support and advice</h2>
+        <p class="govuk-body">For support and advice, you can speak to a <a class="govuk-link" href="https://adviser-getintoteaching.education.gov.uk">Get Into Teaching</a> adviser for free. They’re all experienced teachers who can help you to prepare your application, book school experience, and access exclusive teaching events.</p>
+        <p class="govuk-body">You can also call Get Into Teaching free of charge on 0800 389 2500, or speak to an adviser using their  <a class="govuk-link" href="https://getintoteaching.education.gov.uk/#talk-to-us">online chat service</a> Monday to Friday, 8.30am to 5pm (except public holidays).</p>
         <h3 class="govuk-heading-m">Is there something wrong with this page?</h3>
-        <p class="govuk-body">If there is something wrong with this course listing, <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">contact us by email</a>.</p>
+        <p class="govuk-body">If there is something wrong with this course listing, <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Edit%20Primary%20%28T92%2FX130%29">contact us by email</a>.</p>
       </section>
 
-      <section id="section-apply">
+      <section id="section-apply" class="govuk-!-margin-bottom-8">
         {{ govukButton({
-          href: "#",
           text: "Apply for this course",
-          isStartButton: true
+          isStartButton: true,
+          href: "#"
         }) }}
-      </section>
+      </div>
     </div>
   </div>
-
-
 {% endblock %}

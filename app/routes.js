@@ -600,9 +600,9 @@ router.get('/course-not-running/:providerCode/:code', function (req, res) {
 
 router.get('/preview/:providerCode/:code', function (req, res) {
   const c = course(req)
-  const prefix = c.programmeCode
+  const code = c.programmeCode
 
-  res.render('preview', { course: c, prefix: prefix })
+  res.render('preview', { course: c, code })
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {

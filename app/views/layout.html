@@ -1,5 +1,5 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{%- set assetPath = '/govuk/assets' -%}
+{%- set assetPath = "/govuk/assets" -%}
 
 {% extends "govuk/template.njk" %}
 
@@ -31,8 +31,9 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
+{% from "_components/advice/macro.njk"                   import appAdvice %}
 {% from "_components/icon/macro.njk"                     import appIcon %}
-{% from "_components/notice-summary/macro.njk"                     import appNoticeSummary %}
+{% from "_components/notice-summary/macro.njk"           import appNoticeSummary %}
 
 {% import "macros/macros.njk" as macros %}
 

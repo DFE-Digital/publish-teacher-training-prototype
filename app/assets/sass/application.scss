@@ -4,20 +4,24 @@ $govuk-global-styles: true;
 // We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework.
 $govuk-assets-path: '/govuk/assets/';
 
+// Get into teaching
+$git-brand-colour: #159964;
+
 // Import GOV.UK Frontend and any extension styles if extensions have been configured
 @import "lib/extensions/extensions";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
-@import 'patterns/simplemde-theme';
-@import 'patterns/success-summary';
+@import "patterns/simplemde-theme";
+@import "patterns/success-summary";
 @import "patterns/destructive-button";
+@import "components/advice";
+@import "components/description-list";
 @import "components/list";
 @import "components/map";
 @import "components/notification-banner";
 @import "components/application-card";
 @import "components/success-summary";
 @import "components/notice-summary";
-
 
 // Utilities
 @import "utilities/overrides";
