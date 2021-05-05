@@ -3,40 +3,51 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <p>What will a trainee get when they complete this course?</p> -->
-      <form action="{{ paths.next }}" method="post">
+      {{ govukRadios({
+        idPrefix: code + "-outcome",
+        name: code + "-outcome",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "PGCE with QTS",
+          text: "PGCE with QTS",
+          label: {
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Postgraduate certificate in education with qualified teacher status"
+          }
+        }, {
+          value: "QTS",
+          text: "QTS",
+          label: {
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Qualified teacher status"
+          }
+        }, {
+          value: "PGDE with QTS",
+          text: "PGDE with QTS",
+          label: {
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Postgraduate diploma in education with qualified teacher status"
+          }
+        }]
+      }) }}
 
-        {% set fields = [
-            {
-              name: 'PGCE with QTS',
-              text: 'Applicants must complete a PGCE'
-            },
-            {
-              name: 'QTS',
-              text: 'Applicants will study for QTS without PGCE'
-            },
-            {
-              name: 'QTS with optional PGCE',
-              text: 'Applicants can choose to take the PGCE or not'
-            },
-            {
-              name: 'PGDE with QTS',
-              text: 'Postgraduate diploma in education with qualified teacher status.<br />Applicants must complete a PGDE.'
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup(code + '-outcome', fields, errors) }}
-
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
-
-
+  </form>
 {% endblock %}

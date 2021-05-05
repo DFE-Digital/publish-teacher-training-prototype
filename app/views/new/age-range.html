@@ -3,67 +3,69 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
-        {% set more %}
-          <p>Enter an age range in years, for example: 5 to 11. The course must cover 4 or more school years.</p>
-          {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
-          {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
-        {% endset %}
+      {% set anotherHtml %}
+        <p>Enter an age range in years, for example: 5 to 11. The course must cover 4 or more school years.</p>
+        {{ macros.textbox(code + '-age-youngest', 'From', false, 'govuk-input--width-2') }}
+        {{ macros.textbox(code + '-age-oldest', 'To', false, 'govuk-input--width-2') }}
+      {% endset %}
 
-        {% if data[code + '-phase'] == 'Primary' %}
-          {% set fields = [
-            {
-              name: '3 to 7'
-            },
-            {
-              name: '5 to 11'
-            },
-            {
-              name: '7 to 11'
-            },
-            {
-              name: '7 to 14 (middle years)'
-            },
-            {
-              or: true
-            },
-            {
-              name: 'Another age range',
-              more: more
-            }
-          ]%}
-        {% else %}
-        {% set fields = [
-          {
-            name: '11 to 16'
-          },
-          {
-            name: '11 to 18'
-          },
-          {
-            name: '14 to 19'
-          },
-          {
-            name: '7 to 14 (middle years)'
-          },
-          {
-            or: true
-          },
-          {
-            name: 'Another age range',
-            more: more
+      {% set items = [{
+        value: "3 to 7",
+        text: "3 to 7"
+      }, {
+        value: "5 to 11",
+        text: "5 to 11"
+      }, {
+        value: "7 to 11",
+        text: "7 to 11"
+      }, {
+        value: "7 to 14 (middle years)",
+        text: "7 to 14 (middle years)"
+      }, {
+        divider: "or"
+      }, {
+        value: "Another age range",
+        text: "Another age range",
+        conditional: {
+          html: anotherHtml
+        }
+      }] if data[code + "-phase"] == "Primary" else [{
+        value: "11 to 16",
+        text: "11 to 16"
+      }, {
+        value: "11 to 18",
+        text: "11 to 18"
+      }, {
+        value: "14 to 19",
+        text: "14 to 19"
+      }, {
+        divider: "or"
+      }, {
+        value: "Another age range",
+        text: "Another age range",
+        conditional: {
+          html: anotherHtml
+        }
+      }] %}
+
+      {{ govukRadios({
+        idPrefix: code + "-age-range",
+        name: code + "-age-range",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
           }
-        ]%}
-        {% endif %}
+        },
+        items: items
+      }) }}
 
-        {{ macros.radioGroup(code + '-age-range', fields) }}
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
+  </form>
 {% endblock %}

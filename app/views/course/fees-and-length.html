@@ -12,33 +12,47 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
-        <h2 class="govuk-heading-l remove-top-margin">Course length</h2>
-        {% set otherField %}
-          {{ macros.textbox(course.programmeCode + '-duration-other', 'Course length')}}
-        {% endset %}
-
-        {% set fields = [
-            {
-              name: '1 year'
-            },
-            {
-              name: 'Up to 2 years'
-            },
-            {
-              name: 'Other',
-              more: otherField
+      <form action="/course/{{ data["provider-code"] }}/{{ course.programmeCode }}" method="post">
+        {{ govukRadios({
+          idPrefix: code + "-duration",
+          name: code + "-duration",
+          fieldset: {
+            legend: {
+              text: "Course length",
+              classes: "govuk-fieldset__legend--l"
             }
-          ]
-        %}
+          },
+          items: [{
+            value: "1 year",
+            text: "1 year",
+            checked: value(course.programmeCode + "-duration") == "1 year"
+          }, {
+            value: "Up to 2 years",
+            text: "Up to 2 years",
+            checked: value(course.programmeCode + "-duration") == "Up to 2 years"
+          }, {
+            value: "Other",
+            text: "Other",
+            checked: value(course.programmeCode + "-duration") == "Other",
+            conditional: {
+              html: govukInput({
+                name: course.programmeCode + "-duration-other",
+                id: course.programmeCode + "-duration-other",
+                value: value(course.programmeCode + "-duration-other"),
+                label: {
+                  text: "Course length",
+                  classes: "govuk-label--s"
+                },
+                classes: "govuk-input--width-20"
+              })
+            }
+          }]
+        }) }}
 
-        {{ macros.radioGroup(course.programmeCode + '-duration', fields, errors) }}
-
-        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
         {% if course.salaried %}
-          <h2 class="govuk-heading-l">Salary</h2>
-
+          <h2 id="salary-details" class="govuk-heading-l">Salary</h2>
           <p>Give details about the salary for this course.</p>
           <p>You should:</p>
           <ul class="govuk-list govuk-list--bullet">
@@ -46,45 +60,96 @@
             <li>say whether there are any fees or others costs – if there are no fees for this course, you should also say so</li>
           </ul>
 
-          {{ macros.textarea(course.programmeCode + '-salary-details', 'Salary', 10, null, 250, errors) }}
+          {{ govukCharacterCount({
+            name: course.programmeCode + "-salary-details",
+            id: course.programmeCode + "-salary-details",
+            value: value(course.programmeCode + "-salary-details"),
+            label: {
+              text: "Salary",
+              classes: "govuk-label--s"
+            },
+            maxwords: 250,
+            rows: 10
+          }) }}
         {% else %}
-          <h2 class="govuk-heading-l">Course fees</h2>
+          <h2 id="fees" class="govuk-heading-l">Course fees</h2>
 
-          {{ macros.textbox(course.programmeCode + '-fee', 'Fee for UK and EU students', null, 'form-control-xsmall', '£', errors) }}
-          {{ macros.textbox(course.programmeCode + '-fee-international', 'Fee for international students (optional)', null, 'form-control-xsmall', '£') }}
+          {{ govukInput({
+            name: course.programmeCode + "-fee",
+            id: course.programmeCode + "-fee",
+            value: value(course.programmeCode + "-fee"),
+            label: {
+              text: "Fee for UK students",
+              classes: "govuk-label--s"
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5"
+          }) }}
 
-          <h4 class="govuk-heading-m">Fee details</h4>
+          {{ govukInput({
+            name: course.programmeCode + "-fee-international",
+            id: course.programmeCode + "-fee-international",
+            value: value(course.programmeCode + "-fee-international"),
+            label: {
+              text: "Fee for international students (optional)",
+              classes: "govuk-label--s"
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5"
+          }) }}
 
+          <h3 id="fee-details" class="govuk-heading-m">Fee details</h3>
           <p>If applicable, give further details about the fees for this course.</p>
-
           <p>This could include:</p>
           <ul class="govuk-list govuk-list--bullet">
             <li>any top up fees</li>
             <li>any other costs</li>
           </ul>
 
-          {{ macros.textarea(course.programmeCode + '-fee-details', 'Fee details (optional)', 10, null, 250) }}
+          {{ govukCharacterCount({
+            name: course.programmeCode + "-fee-details",
+            id: course.programmeCode + "-fee-details",
+            value: value(course.programmeCode + "-fee-details"),
+            label: {
+              text: "Fee details (optional)",
+              classes: "govuk-label--s"
+            },
+            maxwords: 250,
+            rows: 10
+          }) }}
 
-          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
+          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
-          <h2 class="govuk-heading-l">Financial support you offer</h2>
-          <p>If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
-          <p>You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
+          <h2 id="financial-support" class="govuk-heading-l">Financial support you offer</h2>
+          <p class="govuk-body">If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
+          <p class="govuk-body">You don’t need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page.</p>
 
-          {{ macros.textarea(course.programmeCode + '-financial-support', 'Financial support you offer (optional)', 10, null, 250) }}
+          {{ govukCharacterCount({
+            name: course.programmeCode + "-financial-support",
+            id: course.programmeCode + "-financial-support",
+            value: value(course.programmeCode + "-financial-support"),
+            label: {
+              text: "Financial support you offer (optional)",
+              classes: "govuk-label--s"
+            },
+            maxwords: 250,
+            rows: 10
+          }) }}
         {% endif %}
 
-        <div class="add-top-margin add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save" />
-        </div>
+        {{ govukButton({
+          text: "Save"
+        }) }}
 
-        <p><a href="{{ course.path }}">Cancel changes</a></p>
+        <p class="govuk-body"><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
     <div class="govuk-grid-column-one-third">
       {{ macros.copyContent() }}
     </div>
   </div>
-
-
 {% endblock %}

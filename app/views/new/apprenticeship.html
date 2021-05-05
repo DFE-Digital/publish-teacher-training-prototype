@@ -3,28 +3,28 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
-        {% set fields = [
-            {
-              name: 'Yes'
-            },
-            {
-              name: 'No'
-            }
-          ]
-        %}
+  <form action="{{ paths.next }}" method="post">
+    {{ govukRadios({
+      idPrefix: code + "-apprenticeship",
+      name: code + "-apprenticeship",
+      fieldset: {
+        legend: {
+          text: title,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+      items: [{
+        value: "Yes",
+        text: "Yes"
+      }, {
+        value: "No",
+        text: "No"
+      }]
+    }) }}
 
-        {{ macros.radioGroup(code + '-apprenticeship', fields, 0, false) }}
-
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
-    </div>
-  </div>
-
-
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

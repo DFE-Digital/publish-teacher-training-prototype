@@ -5,7 +5,7 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'Beech Hill Primary School'
+provider = 'Gorse SCITT'
 next_cycle = false
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
@@ -59,7 +59,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   if idx < 7
     prototype_data[courseCode + '-about-this-course'] = lorem
     prototype_data[courseCode + '-interview-process'] = lorem
-    prototype_data[courseCode + '-placement-school-policy'] = lorem
+    prototype_data[courseCode + '-placement-policy'] = lorem
     prototype_data[courseCode + '-duration'] = '1 year'
     prototype_data[courseCode + '-salary-details'] = lorem
     prototype_data[courseCode + '-fee'] = '9,000'
@@ -189,12 +189,13 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   prototype_data[courseCode + '-generated-title'] = c['name']
   prototype_data[courseCode + '-change-title'] = 'Yes, that’s correct'
   #prototype_data[courseCode + '-title'] = c['name']
-  prototype_data[courseCode + '-applications-open'] = '10 October 2018'
+  prototype_data[courseCode + '-applications-open'] = '10 October 2020'
   prototype_data[courseCode + '-who-apply-type'] = "Option A"
   prototype_data[courseCode + '-type'] = type
   prototype_data[courseCode + '-apprenticeship'] = "No"
   prototype_data[courseCode + '-languages'] = languages
   prototype_data[courseCode + '-phase'] = level
+  prototype_data[courseCode + '-age-range'] = level == 'Primary' ? '7 to 11' : '11 to 16'
   prototype_data[courseCode + '-min-requirements'] = minRequirements
   prototype_data[courseCode + '-subject'] = subject
   prototype_data[courseCode + '-full-part'] = fullPart
@@ -206,7 +207,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   prototype_data[courseCode + '-vacancies-choice'] = idx == 4 ? 'There are no vacancies' : 'There are some vacancies'
   prototype_data[courseCode + '-full-time-and-part-time'] = partTime && fullTime
   prototype_data[courseCode + '-multi-location'] = c['campuses'].length > 1
-  prototype_data[courseCode + '-start-date'] = 'September 2019'
+  prototype_data[courseCode + '-start-date'] = 'September 2021'
 
   c['campuses'].each_with_index do |campus, i|
     prototype_data["#{courseCode}-vacancies-#{i + 1}"] = 'Vacancies'

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% set title = "Where does academic training take place?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukRadios({
+        hint: {
+          text: "Academic training is teaching that takes place outside of the classroom"
+        },
+        idPrefix: code + "-training-location",
+        name: code + "-training-location",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "Leeds West Academy",
+          text: "Leeds West Academy",
+          label: {
+            classes: 'govuk-label--s'
+          },
+          hint: {
+            text: "Intake Lane, Leeds, LS13 1DQ"
+          }
+        }, {
+          divider: "or"
+        }, {
+          value: "At the school where the candidate is based",
+          text: "At the school where the candidate is based"
+        }, {
+          value: "Remotely",
+          text: "Remotely"
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </div>
+  </form>
+{% endblock %}

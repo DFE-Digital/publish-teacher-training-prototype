@@ -3,29 +3,51 @@
 {% set backLink = paths.back %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">
-    {{ title }}
-  </h1>
-  <div class="govuk-grid-row">
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ paths.next }}" method="post">
-        {% set languageFields = [
-          { name: 'English as a foreign language'},
-          { name: 'French'},
-          { name: 'German'},
-          { name: 'Italian'},
-          { name: 'Japanese'},
-          { name: 'Mandarin'},
-          { name: 'Russian'},
-          { name: 'Spanish'},
-          { name: 'Urdu'}
-          ]
-        %}
-        {{ macros.checkboxGroup(code + '-languages', languageFields, 0, false) }}
-        <input type="submit" class="govuk-button" value="Continue" />
-      </form>
+      {{ govukCheckboxes({
+        idPrefix: code + "-languages",
+        name: code + "-languages",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "English as a foreign language",
+          text: "English as a foreign language"
+        }, {
+          value: "French",
+          text: "French"
+        }, {
+          value: "German",
+          text: "German"
+        }, {
+          value: "Italian",
+          text: "Italian"
+        }, {
+          value: "Japanese",
+          text: "Japanese"
+        }, {
+          value: "Mandarin",
+          text: "Mandarin"
+        }, {
+          value: "Russian",
+          text: "Russian"
+        }, {
+          value: "Spanish",
+          text: "Spanish"
+        }, {
+          value: "Urdu",
+          text: "Urdu"
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
-
-
+  </form>
 {% endblock %}

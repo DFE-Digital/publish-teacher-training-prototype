@@ -27,13 +27,11 @@
           {{ title }}
         </h1>
 
-        <dl class="govuk-summary-list govuk-!-margin-top-9 govuk-!-margin-bottom-9">
-          {% if isFe %}
-            {% include "new/further/_answers.html" %}
-          {% else %}
-            {% include "new/_answers.html" %}
-          {% endif %}
-        </dl>
+        {% if isFe %}
+          {% include "new/further/_answers.html" %}
+        {% else %}
+          {% include "new/_answers.html" %}
+        {% endif %}
 
         <!-- <h2 class="govuk-heading-l">Preview</h2>
 

@@ -3,153 +3,88 @@
 {% set backLink = course.path %}
 
 {% block content %}
+  {% include "course/_errors.html" %}
+
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
     {{ title }}
   </h1>
 
-  {% include "course/_errors.html" %}
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
-        <p>Give applicants a short description of the course.</p>
-
-        <p>You could include:</p>
+      <form action="/course/{{ data["provider-code"] }}/{{ course.programmeCode }}" method="post">
+        <p class="govuk-body">You should give a short, factual summary of the course.</p>
+        <p class="govuk-body">Tell applicants:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>an overview of what candidates are taught</li>
-          <li>how much time they’ll spend training in school</li>
-          <li>how they’ll be assessed</li>
-          <li>the workload (eg how many essays per term?)</li>
-          <li>any other locations they’ll need to go to (eg will they also have to attend classes at an accredited body?)</li>
-          <li>information about the prestige of the course (eg league-table rankings)</li>
+          <li>what they’ll learn (eg what units are taught)</li>
+          <li>how the course is structured</li>
+          <li>whether it has any distinctive features</li>
         </ul>
-
-        <p>If you offer different courses in the same subject, be clear about how this course differs from the others (eg amount of time spent in school, course structure). This will help the applicant decide which course best suits them.</p>
-
-        {{ macros.textarea(course.programmeCode + '-about-this-course', 'About this course', 20, '', 400, errors) }}
-
-        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-        <!-- <h3 class="govuk-heading-l remove-top-margin">Outcome</h3>
-        <p>Pick the outcome which describes what a trainee will get when they complete this course.</p>
-
-        {% set fields = [
-            {
-              name: 'PGCE with QTS',
-              text: 'Postgraduate certificate in education with qualified teacher status'
-            },
-            {
-              name: 'QTS',
-              text: 'Qualified teacher status'
-            },
-            {
-              name: 'QTS with optional PGCE',
-              text: 'Qualified teacher status with optional postgraduate certificate in education'
-            }
-          ]
-        %}
-
-        {{ macros.radioGroup(course.programmeCode + '-outcome', fields, errors) }}
-
-        <details {% if data[course.programmeCode + '-outcome'] == 'PGDE with QTS' %}open{% endif %}>
-          <summary><span class="summary">More options</span></summary>
-          <div class="govuk-inset-text">
-            {% set fields = [
-                {
-                  name: 'PGDE with QTS',
-                  text: 'Postgraduate diploma in education with qualified teacher status'
-                },
-                {
-                  name: 'PGCE only (further education, without QTS)',
-                  text: 'Only applies to courses in further education'
-                },
-                {
-                  name: 'PGDE only (further education, without QTS)',
-                  text: 'Only applies to courses in further education'
-                }
-              ]
-            %}
-
-            {{ macros.radioGroup(course.programmeCode + '-outcome', fields, errors, 4) }}
-          </div>
-        </details>
-        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" /> -->
-
-        <h3 class="govuk-heading-l remove-top-margin">Interview process</h3>
-
-        <p>Give applicants a summary of the interview process.</p>
-
-        <p>This could include:</p>
+        <p class="govuk-body">You could include details such as:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>who’ll be interviewing them</li>
-          <li>how many interviews they’ll need to attend</li>
-          <li>details of any tests they’ll need to sit</li>
+          <li>how candidates are assessed</li>
+          <li>the size of the workload (eg how many essays per term)</li>
+          <li>league-table rankings and student employability ratings</li>
+          <li>quotes from past students</li>
         </ul>
-
-        {{ macros.textarea(course.programmeCode + '-interview-process', 'Interview process (optional)', 10, '', 250) }}
-
-        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
-
-        <h3 class="govuk-heading-l remove-top-margin">How school placements work</h3>
-
-        <p>Give applicants more information about the schools they’ll be teaching in. Tell them:</p>
-
+        <p class="govuk-body">Remember to:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>how many placements a candidate will have</li>
-          <li>how much time they’ll spend in each school</li>
-          <li>if mentors are available within the schools</li>
-          <li>the average distance candidates have to travel from home to school</li>
+          <li>make your content specific to this course - don’t repeat the descriptions you’ve used for other courses</li>
+          <li>use short paragraphs (no more than five sentences each)</li>
+          <li>use bullet points where possible (to check formatting, use the ‘preview’ function after saving your content)</li>
+          <li>spell out all acronyms the first time you use them, eg ITT, NQT, EAL, ICT (applicants may not be familiar with these terms)</li>
         </ul>
-
-        <p>You could also mention:</p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <li>the age ranges taught (eg 11 to 16 or 11 to 18)</li>
-          <li>how many schools you partner with in total</li>
-          <li>whether candidates are able to change schools</li>
-          <li>how placement schools are selected</li>
-        </ul>
-
-        <p>We show guidance in this section. It tells candidates:</p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <li>where your school placements are</li>
-          <li>that they will be placed in different schools</li>
-          <li>that you will take their commute into account</li>
-        </ul>
-
-        {# Guidance for non-HEI route shown #}
-        {% set schoolPlacementsHtml %}
-          <h3 class="govuk-!-margin-top-0">Where you will train</h3>
-
-          <p>You’ll be placed in schools for most of your course. This university is based in <mark>[show provider location(s)]</mark>, and your school placements will be within commuting distance.</p>
-
-          <p>You can’t pick which schools you want to be in, but your university will try to take your journey time into consideration.<p>
-
-          <p>Universities can work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
-        {% endset %}
 
         {{ govukDetails({
-          summaryText: "See the guidance",
-          html: schoolPlacementsHtml
+          summaryText: "Several courses in the same subject?",
+          text: "If you offer more than one course in the same subject - eg two Primary courses - it’s important to say how they differ (eg differences in teaching placements or in the focus of the training). Otherwise, applicants may be unable to decide between them."
+        })}}
+
+        {{ govukCharacterCount({
+          name: course.programmeCode + "-about-this-course",
+          id: course.programmeCode + "-about-this-course",
+          value: value(course.programmeCode + "-about-this-course"),
+          label: {
+            text: "About this course",
+            classes: "govuk-label--s"
+          },
+          maxwords: 400,
+          rows: 20
         }) }}
 
-        {{ macros.textarea(course.programmeCode + '-placement-school-policy', 'How school placements work', 10, '', 350, errors) }}
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save" />
-        </div>
+        <h2 id="interview-process" class="govuk-heading-l">Interview process</h2>
+        <p>Tell applicants:</p>
+        <p>This could include:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how many interviews they’ll have</li>
+          <li>how long each interview will be</li>
+          <li>who’ll be interviewing them - will it be one-on-one or a group interview?</li>
+          <li>whether they’ll have to sit any tests - if so, how can they prepare?</li>
+        </ul>
 
-        <p>
-          <a href="{{ course.path }}">Cancel changes</a>
-        </p>
+        {{ govukCharacterCount({
+          name: course.programmeCode + "-interview-process",
+          id: course.programmeCode + "-interview-process",
+          value: value(course.programmeCode + "-interview-process"),
+          label: {
+            text: "Interview process (optional)",
+            classes: "govuk-label--s"
+          },
+          maxwords: 250,
+          rows: 10
+        }) }}
+
+        {{ govukButton({
+          text: "Save"
+        }) }}
+
+        <p class="govuk-body"><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
     <div class="govuk-grid-column-one-third">
       {{ macros.copyContent() }}
     </div>
   </div>
-
-
 {% endblock %}

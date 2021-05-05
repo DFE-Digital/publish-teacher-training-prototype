@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 {% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
-{% set coursePath = '/course/' + data['provider-code'] + '/' + course.programmeCode %}
-{% set previewLink = '/preview/' +  data['provider-code'] + '/' + course.programmeCode %}
-{% set publishState = publishState or data[course.programmeCode + '-publish-state'] or 'new' %}
+{% set coursePath = "/course/" + data["provider-code"] + "/" + course.programmeCode %}
+{% set previewLink = "/preview/" +  data["provider-code"] + "/" + course.programmeCode %}
+{% set publishState = publishState or data[course.programmeCode + "-publish-state"] or "new" %}
 {% set code = course.programmeCode %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
-{% set isNotPublished = not data[code + '-published-before'] %}
+{% set isNotPublished = not data[code + "-published-before"] %}
+
+{# We’ve hidden the History tab as it wasn’t built in production #}
+{% set showHistory = false %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -20,7 +23,7 @@
 {% set titleRequestedHtml %}
   <p class="govuk-body">Requested title:</p>
   <p class="govuk-heading-s">{{ course.titleRequested }} ({{ course.programmeCode }})</p>
-  <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+  <p class="govuk-body">You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
   <p class="govuk-body"><a class="govuk-notification-banner__link" href="#">Cancel this request</a></p>
 {% endset %}
 
@@ -154,26 +157,12 @@
     {{ title }}
   </h1>
 
-  <!-- <div class="error" style="margin-top: -45px; margin-bottom: 45px">
-    {{ govukWarningText({
-      html: '<a href="' + coursePath + '/problems" class="destructive-link">We’ve found problems with this course</a>',
-      iconFallbackText: 'Warning'
-    }) }}
-  </div> -->
-
-  <!-- <div style="margin-top: -40px; margin-bottom: 40px">
-    {{ govukWarningText({
-      html: '<a href="#">This course can be improved</a>',
-      iconFallbackText: 'Warning'
-    }) }}
-  </div> -->
-
-  {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
+  {% if data[course.programmeCode + "-publish-state"] == "withdrawn" %}
     <div class="govuk-grid-row govuk-!-margin-bottom-5">
       <div class="govuk-grid-column-two-thirds">
         {{ govukWarningText({
-            html: 'This course has been withdrawn.<br />It can’t be published again in this cycle.',
-            iconFallbackText: 'Warning'
+          html: "This course has been withdrawn.<br />It can’t be published again in this cycle.",
+          iconFallbackText: "Warning"
         }) }}
       </div>
     </div>
@@ -184,48 +173,144 @@
   {% set descriptionHtml %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h3 class="govuk-heading-m govuk-!-margin-top-0">
-          <a href="{{ coursePath }}/about-this-course">About this course</a>
-        </h3>
-        <dl class="govuk-summary-list govuk-summary-list--short">
-          {{ macros.coursePart(course.programmeCode + '-about-this-course', 'About this course', errors, coursePath) }}
-          {{ macros.coursePart(course.programmeCode + '-interview-process', 'Interview process (optional)') }}
-          {{ macros.coursePart(course.programmeCode + '-placement-school-policy', 'How school placements work', errors, coursePath) }}
-        </dl>
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">About this course</h3>
+        {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-8",
+          rows: [{
+            key: {
+              text: "About this course"
+            },
+            value: {
+              text: value(course.programmeCode + "-about-this-course") or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-about-this-course") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/about-this-course",
+                text: "Change",
+                visuallyHiddenText: "details about this course"
+              }]
+            }
+          }, {
+            key: {
+              text: "Interview process (optional)"
+            },
+            value: {
+              html: value(course.programmeCode + "-interview-process") or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-interview-process") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/about-this-course#interview-process",
+                text: "Change",
+                visuallyHiddenText: "details of your interview process"
+              }]
+            }
+          }]
+        }) }}
 
-        <h3 class="govuk-heading-m">
-          <a href="{{ coursePath }}/fees-and-length">
-            Course length and {% if course.salaried %}salary{% else %}fees{% endif %}
-          </a>
-        </h3>
-        <dl class="govuk-summary-list govuk-summary-list--short">
-          {% if data[course.programmeCode + '-duration'] == 'Other' %}
-            {{ macros.coursePart(course.programmeCode + '-duration-other', 'Course length', errors, coursePath) }}
-          {% else %}
-            {{ macros.coursePart(course.programmeCode + '-duration', 'Course length', errors, coursePath) }}
-          {% endif %}
-          {% if course.salaried %}
-            {{ macros.coursePart(course.programmeCode + '-salary-details', 'Salary', errors, coursePath) }}
-          {% else %}
-            {{ macros.feesCoursePart(course.programmeCode + '-fee', 'Fee for UK and EU students', errors, coursePath) }}
-            {{ macros.feesCoursePart(course.programmeCode + '-fee-international', 'Fee for international students (optional)') }}
-            {{ macros.coursePart(course.programmeCode + '-fee-details', 'Fee details (optional)') }}
-            {{ macros.coursePart(course.programmeCode + '-financial-support', 'Financial support you offer (optional)') }}
-          {% endif %}
-        </dl>
+        <h3 class="govuk-heading-m">Course length and {{ "salary" if course.salaried else "fees" }}</h3>
+        {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-8",
+          rows: [{
+            key: {
+              text: "Course length"
+            },
+            value: {
+              text: value(course.programmeCode + "-duration") or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-duration") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length",
+                text: "Change",
+                visuallyHiddenText: "course length"
+              }]
+            }
+          }, {
+            key: {
+              text: "Salary"
+            },
+            value: {
+              text: value(course.programmeCode + "-salary-details"),
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-salary-details") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length#salary-details",
+                text: "Change",
+                visuallyHiddenText: "salary"
+              }]
+            }
+          } if course.salaried, {
+            key: {
+              text: "Fee for UK students"
+            },
+            value: {
+              text: "£" + value(course.programmeCode + "-fee") if value(course.programmeCode + "-fee") else "Empty",
+              classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-fee")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length#fees",
+                text: "Change",
+                visuallyHiddenText: "fee for UK students"
+              }]
+            }
+          } if not course.salaried, {
+            key: {
+              text: "Fee for international students (optional)"
+            },
+            value: {
+              text: "£" + value(course.programmeCode + "-fee-international") if value(course.programmeCode + "-fee-international") else "Empty",
+              classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-fee-international")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length#fees",
+                text: "Change",
+                visuallyHiddenText: "fee for international students"
+              }]
+            }
+          } if not course.salaried, {
+            key: {
+              text: "Fee details (optional)"
+            },
+            value: {
+              text: value(course.programmeCode + "-fee-details") or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-fee-details") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length#fee-details",
+                text: "Change",
+                visuallyHiddenText: "fee details"
+              }]
+            }
+          } if not course.salaried, {
+            key: {
+              text: "Financial support you offer (optional)"
+            },
+            value: {
+              html: value(course.programmeCode + "-financial-support") or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-financial-support") else "empty")
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/fees-and-length#financial-support",
+                text: "Change",
+                visuallyHiddenText: "details of financial support you offer"
+              }]
+            }
+          } if not course.salaried]
+        }) }}
 
-        <h3 class="govuk-heading-m">
-          Requirements and eligibility
-        </h3>
-
-        {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
-
+        <h3 class="govuk-heading-m">Requirements and eligibility</h3>
         {% set degreeValueHtml %}
-          {% if data[course.programmeCode + '-degree-minimum-required'] === "No" %}
+          {% if data[course.programmeCode + "-degree-minimum-required"] === "No" %}
             An undergraduate degree, or equivalent
-          {% elif data[course.programmeCode + '-degree-minimum-required'] === "Yes" %}
-
-            {% set minDegreeClass = data[course.programmeCode + '-degree-minimum-classification'] %}
+          {% elif data[course.programmeCode + "-degree-minimum-required"] === "Yes" %}
+            {% set minDegreeClass = data[course.programmeCode + "-degree-minimum-classification"] %}
 
             {% if minDegreeClass == "21" %}
               2:1 or above, or equivalent
@@ -237,27 +322,22 @@
           {% else %}
             Not set
           {% endif %}
-          {% if data[course.programmeCode + '-degree-subject-required'] === "Yes" %}
+          {% if data[course.programmeCode + "-degree-subject-required"] === "Yes" %}
             <br><br>
-            {{ data[course.programmeCode + '-degree-subject-requirements'] }}
+            {{ data[course.programmeCode + "-degree-subject-requirements"] }}
           {% endif %}
         {% endset %}
 
-        {% set degreeValueClasses = "" if data[course.programmeCode + '-degree-minimum-required'] else "empty" %}
-
         {% set gcseValueHtml %}
-
           {% set englishGcseFlexibility = data[course.programmeCode + '-gcse-english-flexibility'] %}
           {% set mathsGcseFlexibility = data[course.programmeCode + '-gcse-maths-flexibility'] %}
           {% set scienceGcseFlexibility = data[course.programmeCode + '-gcse-science-flexibility'] %}
 
-
           {% if englishGcseFlexibility %}
-              <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
-            {% if data[course.programmeCode + '-gcse-additional-requirements'] === "Yes" %}
-              <p class="govuk-body">{{ data[course.programmeCode + '-gcse-requirements'] }}</p>
+            <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
+            {% if data[course.programmeCode + "-gcse-additional-requirements"] === "Yes" %}
+              <p class="govuk-body">{{ data[course.programmeCode + "-gcse-requirements"] }}</p>
             {% endif %}
-
 
             {% set subjectsMustHave = [] %}
             {% set subjectsCanBePending = [] %}
@@ -303,138 +383,107 @@
           {% endif %}
         {% endset %}
 
-        {% set gcseValueClasses = "" if englishGcseFlexibility else "empty" %}
-
         {{ govukSummaryList({
-          classes: '',
-          rows: [
-            {
-              key: {
-                text: "Degree"
-              },
-              value: {
-                html: degreeValueHtml,
-                classes: degreeValueClasses
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/degree",
-                    text: "Change",
-                    visuallyHiddenText: "degree requirements"
-                  }
-                ]
-              }
+          classes: "govuk-!-margin-bottom-8",
+          rows: [{
+            key: {
+              text: "Degree"
             },
-            {
-              key: {
-                text: "GCSEs"
-              },
-              value: {
-                html: gcseValueHtml,
-                classes: gcseValueClasses
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests",
-                    text: "Change",
-                    visuallyHiddenText: "GCSE requirements"
-                  }
-                ]
-              }
+            value: {
+              html: degreeValueHtml,
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-degree-minimum-required") else "empty")
             },
-            {
-              key: {
-                text: "Personal qualities (optional)"
-              },
-              value: {
-                html: data[course.programmeCode + '-personal-qualities']
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/requirements",
-                    text: "Change",
-                    visuallyHiddenText: "personal qualities requirements"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Other requirements (optional)"
-              },
-              value: {
-                html: data[course.programmeCode + '-other-requirements']
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/requirements#other-requirements",
-                    text: "Change",
-                    visuallyHiddenText: "other requirements"
-                  }
-                ]
-              }
+            actions: {
+              items: [{
+                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/degree",
+                text: "Change",
+                visuallyHiddenText: "degree requirements"
+              }]
             }
-          ]
+          }, {
+            key: {
+              text: "GCSEs"
+            },
+            value: {
+              html: gcseValueHtml,
+              classes: "govuk-summary-list__value--" + ("truncate" if englishGcseFlexibility else "empty")
+            },
+            actions: {
+              items: [{
+                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests",
+                text: "Change",
+                visuallyHiddenText: "GCSE requirements"
+              }]
+            }
+          }, {
+            key: {
+              text: "Personal qualities (optional)"
+            },
+            value: {
+              html: data[course.programmeCode + "-personal-qualities"] or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-personal-qualities") else "empty")
+            },
+            actions: {
+              items: [{
+                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/requirements",
+                text: "Change",
+                visuallyHiddenText: "personal qualities requirements"
+              }]
+            }
+          }, {
+            key: {
+              text: "Other requirements (optional)"
+            },
+            value: {
+              html: data[course.programmeCode + "-other-requirements"] or "Empty",
+              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-other-requirements") else "empty")
+            },
+            actions: {
+              items: [{
+                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/requirements#other-requirements",
+                text: "Change",
+                visuallyHiddenText: "other requirements"
+              }]
+            }
+          }]
         }) }}
       </div>
       <div class="govuk-grid-column-one-third">
-        {{ macros.coursePublish(publishState, data[course.programmeCode + '-published-before'], data['provider-code'], course.programmeCode) }}
+        {{ macros.coursePublish(publishState, data[course.programmeCode + "-published-before"], data["provider-code"], course.programmeCode) }}
       </div>
     </div>
   {% endset %}
 
   {% set informationHtml %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if course.level == 'Further education' %}
-        <dl class="govuk-summary-list govuk-summary-list--short">
-          {% include "new/further/_answers.html" %}
-        </dl>
-      {% else %}
-        <dl class="govuk-summary-list">
-          {% include "new/_answers.html" %}
-        </dl>
-      {% endif %}
-    </div>
-    <div class="govuk-grid-column-one-third">
-      <div class="status-box">
-        <h2 class="govuk-heading-m">Changing the details of this course</h2>
-        {% if isNotPublished %}
-          <p>You can change every detail of this course before it’s published.</p>
-          <p>After it’s published, you can only change some details – as candidates may have started applying for it</p>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {% if course.level == "Further education" %}
+          <dl class="govuk-summary-list govuk-summary-list--short">
+            {% include "new/further/_answers.html" %}
+          </dl>
         {% else %}
-          <p>You can only change some details of this course – this is because it’s been published, and candidates may have started applying for it.</p>
-
-          <p>If you need to make significant changes to this course, you should consider <a href="#">withdrawing it</a> and creating a new course instead.</p>
-
-          <p>To make any other changes, <a href="#">contact the Becoming a teacher team</a>.</p>
+          <dl class="govuk-summary-list">
+            {% include "new/_answers.html" %}
+          </dl>
         {% endif %}
       </div>
+      <div class="govuk-grid-column-one-third">
+        <div class="status-box">
+          <h2 class="govuk-heading-m">Changing the details of this course</h2>
+          {% if isNotPublished %}
+            <p>You can change every detail of this course before it’s published.</p>
+            <p>After it’s published, you can only change some details – as candidates may have started applying for it</p>
+          {% else %}
+            <p>You can only change some details of this course – this is because it’s been published, and candidates may have started applying for it.</p>
+            <p>If you need to make significant changes to this course, you should consider <a href="#">withdrawing it</a> and creating a new course instead.</p>
+            <p>To make any other changes, <a href="#">contact the Becoming a teacher team</a>.</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
-  </div>
   {% endset %}
 
-  {% set locationsHtml %}
-    <h3 class="govuk-heading-m">
-      <a href="/new/{{ course.programmeCode }}/training-locations">
-        Locations
-      </a>
-    </h3>
-    <ul class="govuk-list location-list">
-      {% for school in course.schools %}
-        <li>
-          <strong>{{ school.name }} (Code: {{ school.code }})</strong><br />
-          {{ school.address }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endset %}
-
-  {# {% set historyHtml %}
+  {% set historyHtml %}
     <h2 class="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-8">2020 to 2021 cycle</h2>
     <ul class="timeline">
       <li class="edition">
@@ -445,7 +494,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">Published</h4>
-                  <span class="metadata">7:03pm by Jane Doe</span>
+                  <span class="govuk-hint">7:03pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -454,7 +503,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">Rolled over from previous cycle</h4>
-                  <span class="metadata">10:25pm by Department for Education</span>
+                  <span class="govuk-hint">10:25pm by Department for Education</span>
                 </li>
               </ul>
             </li>
@@ -472,7 +521,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-l">Published</h4>
-                  <span class="metadata">7:03pm by Jane Doe</span>
+                  <span class="govuk-hint">7:03pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -481,15 +530,15 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">About this course updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
                 <li class="event">
                   <h4 class="govuk-heading-s">Course length and fees updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
                 <li class="event">
                   <h4 class="govuk-heading-s">Requirements and eligibility updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -498,7 +547,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">Vacancies edited, applications reopened</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -507,7 +556,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">No vacancies, applications closed</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -516,7 +565,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">Vacancies edited</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -525,7 +574,7 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-l">First published</h4>
-                  <span class="metadata">7:03pm by Jane Doe</span>
+                  <span class="govuk-hint">7:03pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -534,15 +583,15 @@
               <ul class="events">
                 <li class="event">
                   <h4 class="govuk-heading-s">About this course updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
                 <li class="event">
                   <h4 class="govuk-heading-s">Course length and fees updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
                 <li class="event">
                   <h4 class="govuk-heading-s">Requirements and eligibility updated</h4>
-                  <span class="metadata">10:25pm by Jane Doe</span>
+                  <span class="govuk-hint">10:25pm by Jane Doe</span>
                 </li>
               </ul>
             </li>
@@ -550,57 +599,30 @@
         </ul>
       </li>
     </ul>
-  {% endset %} #}
-
-  {# <div class="course-tabs">
-    {{ govukTabs({
-      items: [
-        {
-          label: 'Description<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Content, fees and eligibility</span>' | safe,
-          id: "description",
-          panel: {
-            html: descriptionHtml
-          }
-        },
-        {
-          label: 'Basic details<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Locations, outcome, subject</span>' | safe,
-          id: "information",
-          panel: {
-            html: informationHtml
-          }
-        },
-        {
-          label: 'History<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Who changed what, and when</span>' | safe,
-          id: "history",
-          panel: {
-            html: historyHtml
-          }
-        }
-      ]
-    }) }}
-  </div> #}
+  {% endset %}
 
   {# We've hidden the History tab as it wasn't built in production #}
   <div class="course-tabs">
     {{ govukTabs({
-      items: [
-        {
-          label: 'Description<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Content, fees and eligibility</span>' | safe,
-          id: "description",
-          panel: {
-            html: descriptionHtml
-          }
-        },
-        {
-          label: 'Basic details<br /><span style="pointer-events: none" class="govuk-body-s govuk-!-font-weight-regular">Locations, outcome, subject</span>' | safe,
-          id: "information",
-          panel: {
-            html: informationHtml
-          }
+      items: [{
+        label: "Description<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Content, fees and eligibility</span>" | safe,
+        id: "description",
+        panel: {
+          html: descriptionHtml
         }
-      ]
+      }, {
+        label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Locations, subject and outcome</span>" | safe,
+        id: "information",
+        panel: {
+          html: informationHtml
+        }
+      }, {
+        label: "History<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Who changed what, and when</span>" | safe,
+        id: "history",
+        panel: {
+          html: historyHtml
+        }
+      } if showHistory]
     }) }}
   </div>
-
-
 {% endblock %}

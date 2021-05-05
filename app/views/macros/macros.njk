@@ -1,3 +1,5 @@
+
+
 {% macro ucasPart(id, label, help, changeLink = '#', contact = false) %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
@@ -482,26 +484,9 @@
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>
-    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}empty{% endif %}">
+    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}govuk-summary-list__value--empty{% endif %}">
       {% if (value(id)) %}
         {{ value(id) }}
-      {% else %}
-        Empty
-      {% endif %}
-    </dd>
-  </div>
-{% endmacro %}
-
-{% macro feesCoursePart(id, label, errors) %}
-  {% set e = error(id, errors) %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
-      {{ label }}
-      {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
-    </dt>
-    <dd class="govuk-summary-list__value {% if not value(id) %}empty{% endif %}">
-      {% if (value(id)) %}
-        £{{ value(id) }}
       {% else %}
         Empty
       {% endif %}

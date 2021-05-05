@@ -52,46 +52,67 @@
         <a href="/about-your-organisation/contact">Contact details</a>
       </h3>
 
-      <dl class="govuk-summary-list govuk-summary-list--short">
-        {{ macros.coursePart("email", "Email address", errors) }}
-        {{ macros.coursePart("telephone", "Telephone number", errors) }}
-        {{ macros.coursePart("website", "Website", errors) }}
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
-            Contact address
-            {% if e %}<a href="{{ coursePath }}{{ e.link }}">{{ e.title }}</a>{% endif %}
-          </dt>
-          {% if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] %}
-            <dd class="govuk-summary-list__value">
-              {% if data["building-and-street"] %}
-                {{ data["building-and-street"] }}<br />
-              {% endif %}
-              {% if data["building-and-street-2"] %}
-                {{ data["building-and-street-2"] }}<br />
-              {% endif %}
-              {% if data["town-or-city"] %}
-                {{ data["town-or-city"] }}<br />
-              {% endif %}
-              {% if data["county"] %}
-                {{ data["county"] }}<br />
-              {% endif %}
-              {% if data["postcode"] %}
-                {{ data["postcode"] }}<br />
-              {% endif %}
-            </dd>
-          {% else %}
-            <dd class="govuk-summary-list__value empty">
-              Empty
-            </dd>
+      {% set contactAddressHtml %}
+        {% if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] %}
+          {% if data["building-and-street"] %}
+            {{ data["building-and-street"] }}<br />
           {% endif %}
-        </div>
-      </dl>
+          {% if data["building-and-street-2"] %}
+            {{ data["building-and-street-2"] }}<br />
+          {% endif %}
+          {% if data["town-or-city"] %}
+            {{ data["town-or-city"] }}<br />
+          {% endif %}
+          {% if data["county"] %}
+            {{ data["county"] }}<br />
+          {% endif %}
+          {% if data["postcode"] %}
+            {{ data["postcode"] }}<br />
+          {% endif %}
+        {% else %}
+          Empty
+        {% endif %}
+      {% endset %}
+
+      {{ govukSummaryList({
+        classes: "govuk-summary-list--short",
+        rows: [{
+          key: {
+            text: "Email address"
+          },
+          value: {
+            text: value("email") or "Empty",
+            classes: "govuk-summary-list__value--empty" if not value("email")
+          }
+        }, {
+          key: {
+            text: "Telephone number"
+          },
+          value: {
+            text: value("telephone") or "Empty",
+            classes: "govuk-summary-list__value--empty" if not value("telephone")
+          }
+        }, {
+          key: {
+            text: "Website"
+          },
+          value: {
+            text: value("website") or "Empty",
+            classes: "govuk-summary-list__value--empty" if not value("website")
+          }
+        }, {
+          key: {
+            text: "Contact address"
+          },
+          value: {
+            html: contactAddressHtml,
+            classes: "govuk-summary-list__value--empty" if not value("building-and-street")
+          }
+        }]
+      }) }}
 
       <h3 class="govuk-heading-27">
-        <a href="/about-your-organisation/about">
-          About your organisation
-        </a>
+        <a href="/about-your-organisation/about">About your organisation</a>
       </h3>
 
       <dl class="govuk-summary-list govuk-summary-list--short">
