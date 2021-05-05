@@ -605,14 +605,14 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
 })
 
 router.get('/location/upload', function (req, res) {
-  res.render('locations/upload')
+  res.render('location/upload')
 })
 
 router.get('/location/upload-review', function (req, res) {
   const data = req.session.data
   const locations = JSON.parse(JSON.stringify(data.schools))
 
-  res.render('locations/upload-review', {
+  res.render('location/upload-review', {
     locations: locations
   })
 })
