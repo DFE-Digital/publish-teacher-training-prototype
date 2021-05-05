@@ -13,18 +13,18 @@
   </td>
   <td class="govuk-table__cell">
     {% if data[course.programmeCode + '-publish-state'] == 'draft' %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-draft">Draft</span>
+      <span class="govuk-tag govuk-tag--orange">Draft</span>
     {% elseif data[course.programmeCode + '-publish-state'] == 'published' %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published">Published</span>
+      <span class="govuk-tag govuk-tag--green">Published</span>
     {% elseif data[course.programmeCode + '-publish-state'] == 'published-with-changes' %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-published govuk-!-margin-bottom-1">Published&nbsp;*</span><br />
+      <span class="govuk-tag govuk-tag--green govuk-!-margin-bottom-1">Published&nbsp;*</span><br />
       <span class="govuk-body-s">* Unpublished changes</span>
     {% elseif data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-not-running">Withdrawn</span>
+      <span class="govuk-tag govuk-tag--grey">Withdrawn</span>
     {% elseif data[course.programmeCode + '-publish-state'] == 'rolled-over' %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">Rolled over</span>
+      <span class="govuk-tag govuk-tag--grey">Rolled over</span>
     {% else %}
-      <span class="govuk-tag phase-tag-small phase-tag-table phase-tag-no-content">New</span>
+      <span class="govuk-tag phase-tag-no-content">New</span>
     {% endif %}
   </td>
   <td class="govuk-table__cell no-wrap">
