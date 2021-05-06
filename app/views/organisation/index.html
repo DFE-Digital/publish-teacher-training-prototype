@@ -11,17 +11,10 @@
 {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full-width">
-      {% set message %}
-        {% if showMessage %}
-          <div class="govuk-success-summary" role="alert" aria-labelledby="success-summary-heading" tabindex="-1" data-module="govuk-error-summary" data-ga-event-form="success">
-            <h3 class="govuk-success-summary__title" id="success-summary-heading">Email notification preferences for name@email.co.uk have been saved.</h3>
-          </div>
-        {% endif %}
-      {% endset %}
-    </div>
-  </div>
+  {{ govukNotificationBanner({
+    text: "Email notification preferences for name@email.co.uk have been saved.",
+    type: "success"
+  }) if showMessage }}
 
   <h1 class="govuk-heading-xl">
     {% if data["rolled-over"] %}
@@ -108,7 +101,7 @@
           <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
         </ul>
       {% endif %}
-      
+
       {% if data["allocations-window"] == 'closed' %}
         <h2 class="govuk-heading-m">
           <a href="/allocations">Request PE courses for 2022 to 2023</a>
@@ -121,7 +114,7 @@
           <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
         </ul>
       {% endif %}
-      
+
       {% if data["allocations-window"] == 'confirmed' %}
         <h2 class="govuk-heading-m">
           <a href="/allocations">View PE courses for 2022 to 2023</a>
