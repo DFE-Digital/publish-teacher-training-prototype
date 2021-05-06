@@ -102,6 +102,11 @@
       <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
 
+        {% if not data[code + "-placement-policy"] %}
+          {# Show missing message #}
+          {{ macros.previewPart(code + "-placement-policy") }}
+        {% endif %}
+
         {% if data[code + "-placement-policy"] == "hosted" %}
           {{ macros.previewPart(code + "-placement-policy-hosted") }}
 
@@ -309,6 +314,9 @@
 
             We are unable to sponsor a visa.
             You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
+          {% else %}
+            {# Show missing message #}
+            {{ macros.previewPart(visaSponsorship) }}
           {% endif %}
         </p>
 
