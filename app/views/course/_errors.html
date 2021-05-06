@@ -1,6 +1,4 @@
-{% if data[course.programmeCode + '-show-publish-errors'] and errors.length > 0 %}
-  {{ govukErrorSummary({
-    titleText: "We couldn’t publish this course because some information was missing",
-    errorList: errors
-  }) }}
-{% endif %}
+{{ govukErrorSummary({
+  titleText: "We couldn’t publish this course because some information was missing",
+  errorList: errors
+}) if data[course.programmeCode + "-show-publish-errors"] and errors.length > 0 }}

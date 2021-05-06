@@ -12,7 +12,6 @@
         {{ title }}
       </h1>
 
-
       <form action="/course/{{ data['provider-code'] }}/{{ course.programmeCode }}" method="post">
 
         <p>Tell applicants about the skills and motivation you’re looking for (eg experience with children, a genuine passion for teaching, or a talent for public speaking).</p>
@@ -21,11 +20,11 @@
         <p id="other-requirements">If applicants need any non-academic qualifications or documents, list them here (eg criminal record checks, or relevant work experience).</p>
         {{ macros.textarea(course.programmeCode + '-other-requirements', 'Other requirements (optional)', 8, null, 100) }}
 
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save" />
-        </div>
+        {{ govukButton({
+          text: "Save"
+        }) }}
 
-        <p><a href="{{ course.path }}">Cancel changes</a></p>
+        <p class="govuk-body"><a href="{{ course.path }}">Cancel changes</a></p>
       </form>
     </div>
     <div class="govuk-grid-column-one-third">

@@ -18,7 +18,6 @@ $git-brand-colour: #159964;
 @import "components/description-list";
 @import "components/list";
 @import "components/map";
-@import "components/notification-banner";
 @import "components/application-card";
 
 // Utilities
@@ -209,35 +208,37 @@ dl.aligned.course-part-tasks dd {
   @extend .govuk-list--bullet;
 }
 
-.govuk-summary-list--short {
-  margin-top: govuk-spacing(6);
-  margin-bottom: govuk-spacing(8);
+// Optional value is empty
+.govuk-summary-list__row--empty {
+  .govuk-summary-list__value {
+    color: govuk-colour("dark-grey");
+  }
+}
+
+// Required value is missing
+.govuk-summary-list__row--missing {
+  .govuk-summary-list__value {
+    color: govuk-colour("dark-grey");
+  }
 
   .govuk-summary-list__key {
-    width: 50%;
-  }
-
-  // .govuk-summary-list__row:last-child {
-  //   .govuk-summary-list__key,
-  //   .govuk-summary-list__actions,
-  //   .govuk-summary-list__value {
-  //     border: none;
-  //   }
-  // }
-}
-
-.govuk-summary-list__key--error {
-  color: $govuk-error-colour;
-  border-left: 5px solid $govuk-error-colour !important;
-  padding-left: 10px;
-
-  a {
-    font-weight: normal;
+    border-left: $govuk-border-width solid govuk-colour("blue");
+    padding-left: govuk-spacing(2);
   }
 }
 
-.govuk-summary-list__value--empty {
-  color: govuk-colour("dark-grey");
+// Required value is missing and validated
+.govuk-summary-list__row--error {
+  .govuk-summary-list__key {
+    border-left: $govuk-border-width solid govuk-colour("red");
+    padding-left: govuk-spacing(2);
+  }
+
+  .govuk-summary-list__value a {
+    @include govuk-typography-weight-bold;
+    @include govuk-link-common;
+    @include govuk-link-style-error;
+  }
 }
 
 .govuk-summary-list__value--truncate {
@@ -254,10 +255,6 @@ dl.aligned.course-part-tasks dd {
   max-width: 100%;
   display: inline-block;
   margin-bottom: -8px;
-}
-
-.govuk-heading-27 {
-  @include govuk-font(27, $weight: bold);
 }
 
 .interruption-card {

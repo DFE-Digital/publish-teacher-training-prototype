@@ -477,10 +477,22 @@
 </div>
 {% endmacro %}
 
+{% macro requiredSummaryRowClasses(id, showErrors) %}
+  {% if not value(id) and showErrors %}
+    govuk-summary-list__row--error
+  {% elif not value(id) %}
+    govuk-summary-list__row--missing
+  {% endif %}
+{% endmacro %}
+
+{% macro optionalSummaryRowClasses(id) %}
+  {{ "govuk-summary-list__row--empty" if not value(id) }}
+{% endmacro %}
+
 {% macro coursePart(id, label, errors, truncate = true) %}
   {% set e = error(id, errors) %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key {% if e %}govuk-summary-list__key--error{% endif %}">
+  <div class="govuk-summary-list__row {% if e %}govuk-summary-list__row--error{% endif %}">
+    <dt class="govuk-summary-list__key">
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>

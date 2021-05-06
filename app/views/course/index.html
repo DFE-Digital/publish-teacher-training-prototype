@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
-{% set title %}{{ course.name | safe }} ({{ course.programmeCode }}){% endset %}
-{% set coursePath = "/course/" + data["provider-code"] + "/" + course.programmeCode %}
-{% set previewLink = "/preview/" +  data["provider-code"] + "/" + course.programmeCode %}
-{% set publishState = publishState or data[course.programmeCode + "-publish-state"] or "new" %}
 {% set code = course.programmeCode %}
+{% set title %}{{ course.name | safe }} ({{ code }}){% endset %}
+{% set coursePath = "/course/" + data["provider-code"] + "/" + code %}
+{% set previewLink = "/preview/" +  data["provider-code"] + "/" + code %}
+{% set publishState = publishState or data[code + "-publish-state"] or "new" %}
 {% set showChangeLinks = true %}
 {% set showTitleAndDescription = true %}
+{% set showErrors = data[code + "-show-publish-errors"] %}
 {% set isNotPublished = not data[code + "-published-before"] %}
 
 {# We’ve hidden the History tab as it wasn’t built in production #}
@@ -22,7 +23,7 @@
 
 {% set titleRequestedHtml %}
   <p class="govuk-body">Requested title:</p>
-  <p class="govuk-heading-s">{{ course.titleRequested }} ({{ course.programmeCode }})</p>
+  <p class="govuk-heading-s">{{ course.titleRequested }} ({{ code }})</p>
   <p class="govuk-body">You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
   <p class="govuk-body"><a class="govuk-notification-banner__link" href="#">Cancel this request</a></p>
 {% endset %}
@@ -63,7 +64,6 @@
   {% if justEditedAndPublished %}
     {% set createdHtml %}
       <h3 class="govuk-notification-banner__heading">Your changes have been published</h3>
-      <p class="govuk-body">Your changes are now <a class="govuk-notification-banner__link" href="#">live on Find</a>.</p>
       {% if course.titleRequested %}
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <h3 class="govuk-heading-m">Your request for a new title is being reviewed</h3>
@@ -124,54 +124,54 @@
   {% set actionsList = [] %}
 
   {# Age range was an additional field required for rollover 2020 #}
-  {% if not data[course.programmeCode + "-age-range"] %}
+  {% if not data[code + "-age-range"] %}
     {% set result = actionsList.push({
       text: "Specify an age range",
-      href: "/new/" + course.programmeCode + "/age-range"
+      href: "/new/" + code + "/age-range"
     }) %}
   {% endif %}
 
   {# Structured degree requirements were required for rollover in 2021 #}
-  {% if not data[course.programmeCode + "-degree-minimum-required"] %}
+  {% if not data[code + "-degree-minimum-required"] %}
     {% set result = actionsList.push({
       text: "Degree requirements",
-      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/degree"
+      href: "/course/" + data["provider-code"] + "/" + code + "/degree"
     }) %}
   {% endif %}
 
   {# Structured GCSE requirements were required for rollover in 2021 #}
-  {% if not data[course.programmeCode + "-gcse-english-flexibility"] %}
+  {% if not data[code + "-gcse-english-flexibility"] %}
     {% set result = actionsList.push({
       text: "GCSE requirements",
-      href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests"
+      href: "/course/" + data['provider-code'] + "/" + code + "/gcses-pending-or-equivalency-tests"
     }) %}
   {% endif %}
 
   {# Visa sponsorship policy was required for rollover in 2021 #}
-  {% if not data[course.programmeCode + "-visa-sponsorship"] %}
+  {% if not data[code + "-visa-sponsorship"] %}
     {% set result = actionsList.push({
       text: "Visa sponsorship",
-      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/visa-sponsorship"
+      href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
     }) %}
   {% endif %}
 
   {# Structured school placements policy was required for rollover in 2021 #}
-  {% if not data[course.programmeCode + "-placement-policy"] %}
+  {% if not data[code + "-placement-policy"] %}
     {% set result = actionsList.push({
       text: "School placements",
-      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/placement-policy"
+      href: "/new/" + data["provider-code"] + "/" + "/placement-policy?change=true"
     }) %}
   {% endif %}
 
   {# An academic training location was required for rollover in 2021 #}
-  {% if not data[course.programmeCode + "-training-location"] %}
+  {% if not data[code + "-training-location"] %}
     {% set result = actionsList.push({
-      text: "Training location",
-      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/training-location"
+      text: "Academic training location",
+      href: "/new/" + data["provider-code"] + "/" + "/training-location?change=true"
     }) %}
   {% endif %}
 
-  {% if actionsList | length > 0 %}
+  {% if actionsList.length > 0 and not showErrors %}
     {% set actionsHtml %}
       <h3 class="govuk-notification-banner__heading">You need to provide some information before publishing this course.</h3>
       <ul class="govuk-list">
@@ -192,12 +192,14 @@
     }) }}
   {% endif %}
 
+  {% include "course/_errors.html" %}
+
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">{{ course.options }}</span>
     {{ title }}
   </h1>
 
-  {% if data[course.programmeCode + "-publish-state"] == "withdrawn" %}
+  {% if data[code + "-publish-state"] == "withdrawn" %}
     <div class="govuk-grid-row govuk-!-margin-bottom-5">
       <div class="govuk-grid-column-two-thirds">
         {{ govukWarningText({
@@ -208,21 +210,42 @@
     </div>
   {% endif %}
 
-  {% include "course/_errors.html" %}
-
   {% set descriptionHtml %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h3 class="govuk-heading-m govuk-!-margin-top-0">About this course</h3>
+        {% set visaSponsorshipText %}
+          {% set courseType = data[code + "-type"] %}
+          {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
+
+          {% if visaSponsorship === "Yes" %}
+            {% if courseType === "Salaried" %}
+              You can sponsor a Skilled worker visa
+            {% else %}
+              You can sponsor a Student visa
+            {% endif %}
+          {% elseif visaSponsorship === "No" %}
+            You cannot sponsor a visa
+          {% else %}
+            {% set visaSponsorshipError = error(code + "-visa-sponsorship", errors) %}
+            {% if showErrors %}
+              <a href={{ visaSponsorshipError.href }}>{{ visaSponsorshipError.text }}</a>
+            {% else %}
+              Unknown
+            {% endif %}
+          {% endif %}
+        {% endset %}
+
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
+            classes: macros.requiredSummaryRowClasses(code + "-about-this-course"),
             key: {
               text: "About this course"
             },
             value: {
-              text: value(course.programmeCode + "-about-this-course") or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-about-this-course") else "empty")
+              text: value(code + "-about-this-course") or "Unknown",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -232,12 +255,13 @@
               }]
             }
           }, {
+            classes: macros.optionalSummaryRowClasses(code + "-interview-process"),
             key: {
               text: "Interview process (optional)"
             },
             value: {
-              html: value(course.programmeCode + "-interview-process") or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-interview-process") else "empty")
+              html: value(code + "-interview-process") or "Empty",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -246,6 +270,21 @@
                 visuallyHiddenText: "details of your interview process"
               }]
             }
+          }, {
+            classes: macros.requiredSummaryRowClasses(code + "-visa-sponsorship", showErrors),
+            key: {
+              text: "Visa sponsorship"
+            },
+            value: {
+              html: visaSponsorshipText
+            },
+            actions: {
+              items: [{
+                href: "/new/" + code + "/visa-sponsorship?change=true",
+                text: "Change",
+                visuallyHiddenText: "visa sponsorship"
+              }]
+            } if showChangeLinks and not visaSponsorshipError
           }]
         }) }}
 
@@ -253,12 +292,13 @@
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
+            classes: macros.requiredSummaryRowClasses(code + "-duration"),
             key: {
               text: "Course length"
             },
             value: {
-              text: value(course.programmeCode + "-duration") or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-duration") else "empty")
+              text: value(code + "-duration") or "Unknown",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -268,12 +308,13 @@
               }]
             }
           }, {
+            classes: macros.requiredSummaryRowClasses(code + "-salary-details"),
             key: {
               text: "Salary"
             },
             value: {
-              text: value(course.programmeCode + "-salary-details"),
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-salary-details") else "empty")
+              text: value(code + "-salary-details"),
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -283,12 +324,12 @@
               }]
             }
           } if course.salaried, {
+            classes: macros.requiredSummaryRowClasses(code + "-fee"),
             key: {
               text: "Fee for UK students"
             },
             value: {
-              text: "£" + value(course.programmeCode + "-fee") if value(course.programmeCode + "-fee") else "Empty",
-              classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-fee")
+              text: "£" + value(code + "-fee") if value(code + "-fee") else "Unknown"
             },
             actions: {
               items: [{
@@ -298,12 +339,12 @@
               }]
             }
           } if not course.salaried, {
+            classes: macros.optionalSummaryRowClasses(code + "-fee-international"),
             key: {
               text: "Fee for international students (optional)"
             },
             value: {
-              text: "£" + value(course.programmeCode + "-fee-international") if value(course.programmeCode + "-fee-international") else "Empty",
-              classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-fee-international")
+              text: "£" + value(code + "-fee-international") if value(code + "-fee-international") else "Empty"
             },
             actions: {
               items: [{
@@ -313,12 +354,13 @@
               }]
             }
           } if not course.salaried, {
+            classes: macros.optionalSummaryRowClasses(code + "-fee-details"),
             key: {
               text: "Fee details (optional)"
             },
             value: {
-              text: value(course.programmeCode + "-fee-details") or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-fee-details") else "empty")
+              text: value(code + "-fee-details") or "Empty",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -328,12 +370,13 @@
               }]
             }
           } if not course.salaried, {
+            classes: macros.optionalSummaryRowClasses(code + "-financial-support"),
             key: {
               text: "Financial support you offer (optional)"
             },
             value: {
-              html: value(course.programmeCode + "-financial-support") or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-financial-support") else "empty")
+              html: value(code + "-financial-support") or "Empty",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -347,10 +390,10 @@
 
         <h3 class="govuk-heading-m">Requirements and eligibility</h3>
         {% set degreeValueHtml %}
-          {% if data[course.programmeCode + "-degree-minimum-required"] === "No" %}
+          {% if data[code + "-degree-minimum-required"] === "No" %}
             An undergraduate degree, or equivalent
-          {% elif data[course.programmeCode + "-degree-minimum-required"] === "Yes" %}
-            {% set minDegreeClass = data[course.programmeCode + "-degree-minimum-classification"] %}
+          {% elif data[code + "-degree-minimum-required"] === "Yes" %}
+            {% set minDegreeClass = data[code + "-degree-minimum-classification"] %}
 
             {% if minDegreeClass == "21" %}
               2:1 or above, or equivalent
@@ -360,23 +403,28 @@
               3rd class degree or above, or equivalent
             {% endif %}
           {% else %}
-            Not set
+            {% if showErrors %}
+              {% set degreeError = error(code + "-degree-minimum-required", errors) %}
+              <a href={{ degreeError.href }}>{{ degreeError.text }}</a>
+            {% else %}
+              Unknown
+            {% endif %}
           {% endif %}
-          {% if data[course.programmeCode + "-degree-subject-required"] === "Yes" %}
+          {% if data[code + "-degree-subject-required"] === "Yes" %}
             <br><br>
-            {{ data[course.programmeCode + "-degree-subject-requirements"] }}
+            {{ data[code + "-degree-subject-requirements"] }}
           {% endif %}
         {% endset %}
 
         {% set gcseValueHtml %}
-          {% set englishGcseFlexibility = data[course.programmeCode + '-gcse-english-flexibility'] %}
-          {% set mathsGcseFlexibility = data[course.programmeCode + '-gcse-maths-flexibility'] %}
-          {% set scienceGcseFlexibility = data[course.programmeCode + '-gcse-science-flexibility'] %}
+          {% set englishGcseFlexibility = data[code + '-gcse-english-flexibility'] %}
+          {% set mathsGcseFlexibility = data[code + '-gcse-maths-flexibility'] %}
+          {% set scienceGcseFlexibility = data[code + '-gcse-science-flexibility'] %}
 
           {% if englishGcseFlexibility %}
             <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
-            {% if data[course.programmeCode + "-gcse-additional-requirements"] === "Yes" %}
-              <p class="govuk-body">{{ data[course.programmeCode + "-gcse-requirements"] }}</p>
+            {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
+              <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
             {% endif %}
 
             {% set subjectsMustHave = [] %}
@@ -419,77 +467,92 @@
               <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsPendingOrEquivalencyTests | length) === 1 }} {{ subjectsPendingOrEquivalencyTests | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }} or who need to take equivalency tests.</p>
             {% endif %}
           {% else %}
-            Not set
+            {% if showErrors %}
+              {% set gcseError = error(code + "-gcse-english-flexibility", errors) %}
+              <a href={{ gcseError.href }}>{{ gcseError.text }}</a>
+            {% else %}
+              Unknown
+            {% endif %}
           {% endif %}
         {% endset %}
 
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
+            classes: macros.requiredSummaryRowClasses(code + "-degree-minimum-required", showErrors),
             key: {
               text: "Degree"
             },
             value: {
-              html: degreeValueHtml,
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-degree-minimum-required") else "empty")
+              html: degreeValueHtml
             },
             actions: {
               items: [{
-                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/degree",
+                href: "/course/" + data["provider-code"] + "/" + code + "/degree",
                 text: "Change",
                 visuallyHiddenText: "degree requirements"
               }]
-            }
+            } if not degreeError
           }, {
+            classes: macros.requiredSummaryRowClasses(code + "-gcse-english-flexibility", showErrors),
             key: {
               text: "GCSEs"
             },
             value: {
-              html: gcseValueHtml,
-              classes: "govuk-summary-list__value--" + ("truncate" if englishGcseFlexibility else "empty")
+              html: gcseValueHtml
             },
             actions: {
               items: [{
-                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests",
+                href: "/course/" + data["provider-code"] + "/" + code + "/gcses-pending-or-equivalency-tests",
                 text: "Change",
                 visuallyHiddenText: "GCSE requirements"
               }]
-            }
+            } if not gcseError
           }, {
+            classes: macros.optionalSummaryRowClasses(code + "-personal-qualities"),
             key: {
               text: "Personal qualities (optional)"
             },
             value: {
-              html: data[course.programmeCode + "-personal-qualities"] or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-personal-qualities") else "empty")
+              html: data[code + "-personal-qualities"] or "Empty",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
-                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/requirements",
+                href: "/course/" + data["provider-code"] + "/" + code + "/requirements",
                 text: "Change",
                 visuallyHiddenText: "personal qualities requirements"
               }]
             }
           }, {
+            classes: macros.optionalSummaryRowClasses(code + "-other-requirements"),
             key: {
               text: "Other requirements (optional)"
             },
             value: {
-              html: data[course.programmeCode + "-other-requirements"] or "Empty",
-              classes: "govuk-summary-list__value--" + ("truncate" if value(course.programmeCode + "-other-requirements") else "empty")
+              html: data[code + "-other-requirements"] or "Empty",
+              classes: "govuk-summary-list__value--truncate"
             },
             actions: {
               items: [{
-                href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/requirements#other-requirements",
+                href: "/course/" + data["provider-code"] + "/" + code + "/requirements#other-requirements",
                 text: "Change",
                 visuallyHiddenText: "other requirements"
               }]
             }
           }]
         }) }}
+
+        <h3 class="govuk-heading-m">Allocations</h3>
+        {% if data[code + "-subject"] == "Physical education" and data[code + "-type"] == "Fee paying (no salary)" %}
+          <p class="govuk-body">Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
+          <p class="govuk-body">If you haven’t already, you must <a href="#">request allocations</a>.</p>
+        {% else %}
+          <p class="govuk-body">Recruitment is not restricted</p>
+        {% endif %}
       </div>
       <div class="govuk-grid-column-one-third">
-        {{ macros.coursePublish(publishState, data[course.programmeCode + "-published-before"], data["provider-code"], course.programmeCode) }}
+        {{ macros.coursePublish(publishState, data[code + "-published-before"], data["provider-code"], code) }}
       </div>
     </div>
   {% endset %}
@@ -498,18 +561,11 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% if course.level == "Further education" %}
-          <dl class="govuk-summary-list govuk-summary-list--short">
+          <dl class="govuk-summary-list">
             {% include "new/further/_answers.html" %}
           </dl>
         {% else %}
           {% include "new/_answers.html" %}
-          <h3 class="govuk-heading-m">Allocations</h3>
-          {% if data[code + "-subject"] == "Physical education" and data[code + "-type"] == "Fee paying (no salary)" %}
-            <p class="govuk-body">Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
-            <p class="govuk-body">If you haven’t already, you must <a href="#">request allocations</a>.</p>
-          {% else %}
-            <p class="govuk-body">Recruitment is not restricted</p>
-          {% endif %}
         {% endif %}
       </div>
       <div class="govuk-grid-column-one-third">

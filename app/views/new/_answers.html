@@ -1,21 +1,4 @@
-{% set visaSponsorshipText %}
-  {% set courseType = data[code + "-type"] %}
-  {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
-
-  {% if visaSponsorship === "Yes" %}
-    {% if courseType === "Salaried" %}
-      You can sponsor a Skilled worker visa
-    {% else %}
-      You can sponsor a Student visa
-    {% endif %}
-  {% elseif visaSponsorship === "No" %}
-    You cannot sponsor a visa
-  {% else %}
-    Not set
-  {% endif %}
-{% endset %}
-
-{% set schoolPlacementsText %}
+{% set placementPolicyHtml %}
   {% if data[code + "-placement-policy"] == "hosted" %}
     {{ data[code + "-placement-policy-hosted"] }}
   {% elif data[code + "-placement-policy"] == "placed" %}
@@ -23,7 +6,12 @@
   {% elif data[code + "-placement-policy"] == "other" %}
     {{ data[code + "-placement-policy-other"] }}
   {% else %}
-    Not set
+    {% if showErrors %}
+      {% set placementPolicyError = error(code + "-placement-policy", errors) %}
+      <a href={{ placementPolicyError.href }}>{{ placementPolicyError.text }}</a>
+    {% else %}
+      Unknown
+    {% endif %}
   {% endif %}
 {% endset %}
 
@@ -37,6 +25,19 @@
   {% endif %}
 {% endset %}
 
+{% set trainingLocationHtml %}
+  {% if data[code + "-training-location"] %}
+    {{ data[code + "-training-location"] }}
+  {% else %}
+    {% if showErrors %}
+      {% set trainingLocationError = error(code + "-training-location", errors) %}
+      <a href={{ trainingLocationError.href }}>{{ trainingLocationError.text }}</a>
+    {% else %}
+      Unknown
+    {% endif %}
+  {% endif %}
+{% endset %}
+
 {% set applicationsOpenText %}
   {% if data[code + "-applications-open"] == "On a specific date" %}
     On {{ data[code + "-applications-open-date-day"] }}-{{ data[code + "-applications-open-date-month"] }}-{{ data[code + "-applications-open-date-year"] }}
@@ -47,15 +48,6 @@
   {% endif %}
 {% endset %}
 
-{% set minimumGcsesText %}
-  {% if data[code + "-no-qualifications-yet"] == "Yes (recommended)" %}
-    Receive applications from candidates who haven’t gained the minimum qualifications yet
-  {% else %}
-    UCAS will block applications from candidates who haven’t gained the minimum qualifications yet
-  {% endif %}
-{% endset %}
-
-<h3 class="govuk-heading-m">Subject</h3>
 {{ govukSummaryList({
   classes: "govuk-!-margin-bottom-8",
   rows: [{
@@ -63,11 +55,11 @@
       text: "Level"
     },
     value: {
-      text: data[code + "-phase"]
+      text: data[code + "-phase"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=phase",
+        href: "/new/" + code + "/phase?change=true",
         text: "Change",
         visuallyHiddenText: "phase"
       } if isNotPublished]
@@ -83,7 +75,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=phase",
+        href: "/new/" + code + "/phase?change=true",
         text: "Change",
         visuallyHiddenText: "SEND"
       } if isNotPublished]
@@ -99,7 +91,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/subject?change=subject",
+        href: "/new/" + code + "/subject?change=true",
         text: "Change",
         visuallyHiddenText: "subject"
       }]
@@ -111,11 +103,11 @@
       text: "Languages"
     },
     value: {
-      html: data[code + "-languages"].join("<br>") if isArray(data[code + "-languages"]) else data[code + "-languages"] | safe
+      html: data[code + "-languages"].join("<br>") if isArray(data[code + "-languages"]) else data[code + "-languages"]
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/languages?change=languages",
+        href: "/new/" + code + "/languages?change=true",
         text: "Change",
         visuallyHiddenText: "languages"
       }]
@@ -123,6 +115,7 @@
   } if data[code + "-subject"] == "Modern languages",
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-age-range", showErrors),
     key: {
       text: "Age range"
     },
@@ -131,27 +124,23 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/age-range?change=age-range",
+        href: "/new/" + code + "/age-range?change=true",
         text: "Change",
         visuallyHiddenText: "age range"
       }]
     } if showChangeLinks
-  }]
-}) }}
+  },
 
-<h3 class="govuk-heading-m">Outcome</h3>
-{{ govukSummaryList({
-  classes: "govuk-!-margin-bottom-8",
-  rows: [{
+  {
     key: {
       text: "Outcome"
     },
     value: {
-      text: data[code + "-outcome"]
+      text: data[code + "-outcome"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/outcome?change=outcome",
+        href: "/new/" + code + "/outcome?change=true",
         text: "Change",
         visuallyHiddenText: "outcome"
       }]
@@ -163,11 +152,11 @@
       text: "Fee or salary"
     },
     value: {
-      text: data[code + "-type"]
+      text: data[code + "-type"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/funding?change=funding",
+        href: "/new/" + code + "/funding?change=true",
         text: "Change",
         visuallyHiddenText: "fee or salary"
       } if isNotPublished]
@@ -177,11 +166,11 @@
       text: "Apprenticeship"
     },
     value: {
-      text: data[code + "-apprenticeship"]
+      text: data[code + "-apprenticeship"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/apprenticeship?change=apprenticeship",
+        href: "/new/" + code + "/apprenticeship?change=true",
         text: "Change",
         visuallyHiddenText: "apprenticeship"
       } if isNotPublished]
@@ -193,30 +182,13 @@
       text: "Full or part time"
     },
     value: {
-      text: data[code + "-full-part"]
+      text: data[code + "-full-part"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/full-time-part-time?change=full-time-part-time",
+        href: "/new/" + code + "/full-time-part-time?change=true",
         text: "Change",
         visuallyHiddenText: "full time or part time"
-      }]
-    } if showChangeLinks
-  },
-
-  {
-    key: {
-      text: "Visa sponsorship"
-    },
-    value: {
-      text: visaSponsorshipText,
-      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-visa-sponsorship")
-    },
-    actions: {
-      items: [{
-        href: "/new/" + code + "/visa-sponsorship?change=visa-sponsorship",
-        text: "Change",
-        visuallyHiddenText: "visa sponsorship"
       }]
     } if showChangeLinks
   },
@@ -226,36 +198,32 @@
       text: "Accredited body"
     },
     value: {
-      text: data[code + "-new-accredited-body"] or data[code + "-accredited-body"]
+      text: data[code + "-new-accredited-body"] or data[code + "-accredited-body"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/accredited-body?change=accredited-body",
+        href: "/new/" + code + "/accredited-body?change=true",
         text: "Change",
         visuallyHiddenText: "accredited body"
       } if isNotPublished]
     } if showChangeLinks
-  } if data["new-course"]["include-accredited"]]
-}) }}
+  } if data["new-course"]["include-accredited"],
 
-<h3 class="govuk-heading-m">Locations</h3>
-{{ govukSummaryList({
-  classes: "govuk-!-margin-bottom-8",
-  rows: [{
+  {
+    classes: macros.requiredSummaryRowClasses(code + "-placement-policy", showErrors),
     key: {
       text: "School placements"
     },
     value: {
-      text: schoolPlacementsText,
-      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-placement-policy")
+      html: placementPolicyHtml
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/placement-policy?change=placements",
+        href: "/new/" + code + "/placement-policy?change=true",
         text: "Change",
         visuallyHiddenText: "how placements work"
       }]
-    } if showChangeLinks
+    } if showChangeLinks and not placementPolicyError
   },
 
   {
@@ -267,7 +235,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/placement-locations?change=placement-locations",
+        href: "/new/" + code + "/placement-locations?change=true",
         text: "Change",
         visuallyHiddenText: "school locations"
       }]
@@ -275,27 +243,23 @@
   } if data[code + "-placement-policy"] == "hosted",
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-training-location", showErrors),
     key: {
-      text: "Training location"
+      text: "Academic training location"
     },
     value: {
-      text: data[code + "-training-location"] or "Not set",
-      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-training-location")
+      html: trainingLocationHtml
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/training-location?change=training-location",
+        href: "/new/" + code + "/training-location?change=true",
         text: "Change",
         visuallyHiddenText: "training location"
       }]
-    } if showChangeLinks
-  }]
-}) }}
+    } if showChangeLinks and not trainingLocationError
+  },
 
-<h3 class="govuk-heading-m">Key dates</h3>
-{{ govukSummaryList({
-  classes: "govuk-!-margin-bottom-8",
-  rows: [{
+  {
     key: {
       text: "Applications open"
     },
@@ -304,7 +268,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/applications-open?change=applications-open",
+        href: "/new/" + code + "/applications-open?change=true",
         text: "Change",
         visuallyHiddenText: "applications open date"
       } if isNotPublished]
@@ -316,11 +280,11 @@
       text: "Course starts"
     },
     value: {
-      text: data[code + "-start-date"]
+      text: data[code + "-start-date"] or "Unknown"
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/start-date?change=start-date",
+        href: "/new/" + code + "/start-date?change=true",
         text: "Change",
         visuallyHiddenText: "start date"
       } if isNotPublished]
