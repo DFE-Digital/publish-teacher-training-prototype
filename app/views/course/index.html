@@ -121,8 +121,9 @@
     }) }}
   {% endif %}
 
-
   {% set actionsList = [] %}
+
+  {# Age range was an additional field required for rollover 2020 #}
   {% if not data[course.programmeCode + "-age-range"] %}
     {% set result = actionsList.push({
       text: "Specify an age range",
@@ -130,24 +131,64 @@
     }) %}
   {% endif %}
 
+  {# Structured degree requirements were required for rollover in 2021 #}
   {% if not data[course.programmeCode + "-degree-minimum-required"] %}
     {% set result = actionsList.push({
       text: "Degree requirements",
-      href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/degree"
+      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/degree"
     }) %}
   {% endif %}
 
-  {% if not data[course.programmeCode + '-gcse-english-flexibility'] %}
+  {# Structured GCSE requirements were required for rollover in 2021 #}
+  {% if not data[course.programmeCode + "-gcse-english-flexibility"] %}
     {% set result = actionsList.push({
       text: "GCSE requirements",
       href: "/course/" + data['provider-code'] + "/" + course.programmeCode + "/gcses-pending-or-equivalency-tests"
     }) %}
   {% endif %}
 
+  {# Visa sponsorship policy was required for rollover in 2021 #}
+  {% if not data[course.programmeCode + "-visa-sponsorship"] %}
+    {% set result = actionsList.push({
+      text: "Visa sponsorship",
+      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/visa-sponsorship"
+    }) %}
+  {% endif %}
+
+  {# Structured school placements policy was required for rollover in 2021 #}
+  {% if not data[course.programmeCode + "-placement-policy"] %}
+    {% set result = actionsList.push({
+      text: "School placements",
+      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/placement-policy"
+    }) %}
+  {% endif %}
+
+  {# An academic training location was required for rollover in 2021 #}
+  {% if not data[course.programmeCode + "-training-location"] %}
+    {% set result = actionsList.push({
+      text: "Training location",
+      href: "/course/" + data["provider-code"] + "/" + course.programmeCode + "/training-location"
+    }) %}
+  {% endif %}
+
   {% if actionsList | length > 0 %}
-    {{ appNoticeSummary({
-      titleText: "You need to provide some information before publishing this course",
-      actionsList: actionsList
+    {% set actionsHtml %}
+      <h3 class="govuk-notification-banner__heading">You need to provide some information before publishing this course.</h3>
+      <ul class="govuk-list">
+      {% for item in actionsList %}
+        <li>
+          {% if item.href %}
+            <a class="govuk-notification-banner__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>{{ item.html | safe if item.html else item.text }}</a>
+          {% else %}
+            {{ item.html | safe if item.html else item.text }}
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endset %}
+    {{ govukNotificationBanner({
+      titleText: "Prepare for the next cycle",
+      html: actionsHtml
     }) }}
   {% endif %}
 
@@ -461,9 +502,14 @@
             {% include "new/further/_answers.html" %}
           </dl>
         {% else %}
-          <dl class="govuk-summary-list">
-            {% include "new/_answers.html" %}
-          </dl>
+          {% include "new/_answers.html" %}
+          <h3 class="govuk-heading-m">Allocations</h3>
+          {% if data[code + "-subject"] == "Physical education" and data[code + "-type"] == "Fee paying (no salary)" %}
+            <p class="govuk-body">Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
+            <p class="govuk-body">If you haven’t already, you must <a href="#">request allocations</a>.</p>
+          {% else %}
+            <p class="govuk-body">Recruitment is not restricted</p>
+          {% endif %}
         {% endif %}
       </div>
       <div class="govuk-grid-column-one-third">
@@ -610,7 +656,7 @@
           html: descriptionHtml
         }
       }, {
-        label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Locations, subject and outcome</span>" | safe,
+        label: "Basic details<br /><span style=\"pointer-events: none\" class=\"govuk-body-s govuk-!-font-weight-regular\">Subject, outcome, locations and key dates</span>" | safe,
         id: "information",
         panel: {
           html: informationHtml

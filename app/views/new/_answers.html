@@ -10,6 +10,8 @@
     {% endif %}
   {% elseif visaSponsorship === "No" %}
     You cannot sponsor a visa
+  {% else %}
+    Not set
   {% endif %}
 {% endset %}
 
@@ -20,6 +22,8 @@
     {{ data[code + "-placement-policy-placed"] }}
   {% elif data[code + "-placement-policy"] == "other" %}
     {{ data[code + "-placement-policy-other"] }}
+  {% else %}
+    Not set
   {% endif %}
 {% endset %}
 
@@ -40,15 +44,6 @@
     When the course is published
   {% else %}
     {{ data[code + "-applications-open"] }}
-  {% endif %}
-{% endset %}
-
-{% set allocationsText %}
-  {% if data[code + "-subject"] == "Physical education" and data[code + "-type"] == "Fee paying (no salary)" %}
-    <p>Recruitment to fee-funded PE courses is limited by the number of places allocated to you by DfE.</p>
-    <p>If you haven’t already, you must <a href="#">request allocations</a>.</p>
-  {% else %}
-    Recruitment is not restricted
   {% endif %}
 {% endset %}
 
@@ -214,16 +209,17 @@
       text: "Visa sponsorship"
     },
     value: {
-      text: visaSponsorshipText
+      text: visaSponsorshipText,
+      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-visa-sponsorship")
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/xxx?change=xxx",
+        href: "/new/" + code + "/visa-sponsorship?change=visa-sponsorship",
         text: "Change",
         visuallyHiddenText: "visa sponsorship"
       }]
     } if showChangeLinks
-  } if data[code + "-visa-sponsorship"],
+  },
 
   {
     key: {
@@ -247,10 +243,11 @@
   classes: "govuk-!-margin-bottom-8",
   rows: [{
     key: {
-      text: "How school placements work"
+      text: "School placements"
     },
     value: {
-      text: schoolPlacementsText
+      text: schoolPlacementsText,
+      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-placement-policy")
     },
     actions: {
       items: [{
@@ -282,7 +279,8 @@
       text: "Training location"
     },
     value: {
-      text: data[code + "-training-location"]
+      text: data[code + "-training-location"] or "Not set",
+      classes: "govuk-summary-list__value--empty" if not value(course.programmeCode + "-training-location")
     },
     actions: {
       items: [{
@@ -327,14 +325,5 @@
         visuallyHiddenText: "start date"
       } if isNotPublished]
     } if showChangeLinks
-  },
-
-  {
-    key: {
-      text: "Allocations"
-    },
-    value: {
-      text: allocationsText
-    }
   }]
 }) }}
