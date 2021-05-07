@@ -16,6 +16,16 @@
   <p class="govuk-body-l">{{ course.options[0] }}</p>
 
   <dl class="app-description-list govuk-!-margin-bottom-8">
+    <dt>Accredited body</dt>
+    <dd>{{ course.accrediting }}</dd>
+    <dt>Financial support</dt>
+    <dd>
+      {% if data[code + "-type"] == "Fee paying (no salary)" %}
+        Student finance if you’re eligible
+      {% else %}
+        Salary
+      {% endif %}
+    </dd>
     <dt>Qualification</dt>
     <dd>
       <details class="govuk-details">
