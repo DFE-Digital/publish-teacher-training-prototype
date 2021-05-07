@@ -81,12 +81,11 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-sen", showErrors),
     key: {
       html: "<abbr title=\"Special educational needs and disability\">SEND</abbr>"
     },
     value: {
-      text: data[code + "-sen"] or "Unknown"
+      text: "Yes" if data[code + "-sen"] else "No"
     },
     actions: {
       items: [{
