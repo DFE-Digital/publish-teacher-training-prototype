@@ -274,25 +274,29 @@
           {% if not data[code + "-fee"] %}
             {{ macros.previewPart(code + "-fee") }}
           {% else %}
-            <p>The course fees for 2021 to 2022 are as follows:</p>
-            <table class="govuk-table">
-              <tbody class="govuk-table__body">
-                <tr class="visually-hidden">
-                  <th class="govuk-table__header" scope="col">Student type</th>
-                  <th class="govuk-table__header" scope="col">Fees to pay</th>
-                </tr>
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell">UK students</td>
-                  <td class="govuk-table__cell">£{{ data[code + "-fee"] }}</td>
-                </tr>
-                {% if data[code + "-fee-international"] %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell">International students</td>
-                  <td class="govuk-table__cell">£{{ data[code + "-fee-international"] }}</td>
-                </tr>
-                {% endif %}
-              </tbody>
-            </table>
+            {% if data[code + "-fee-international"] %}
+              <p>The course fees for 2022 to 2023 are as follows:</p>
+              <table class="govuk-table">
+                <tbody class="govuk-table__body">
+                  <tr class="visually-hidden">
+                    <th class="govuk-table__header" scope="col">Student type</th>
+                    <th class="govuk-table__header" scope="col">Fees to pay</th>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">UK students</td>
+                    <td class="govuk-table__cell">£{{ data[code + "-fee"] }}</td>
+                  </tr>
+                  {% if data[code + "-fee-international"] %}
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">International students</td>
+                    <td class="govuk-table__cell">£{{ data[code + "-fee-international"] }}</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+            {% else %}
+              <p class="govuk-body">The course fees for UK students in 2022 to 2023 are £{{ data[code + "-fee"] }}.</p>
+            {% endif %}
           {% endif %}
 
           <p class="govuk-body">Some candidates, such as those with settled or pre-settled status under the EU Settlement scheme, may be <a href="https://www.gov.uk/government/publications/student-finance-eligibility-2021-to-2022-academic-year" class="govuk-body">eligible for home fee status and student finance</a>.</p>
