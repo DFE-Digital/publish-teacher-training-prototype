@@ -174,7 +174,6 @@ function newCourseWizardPaths (req) {
     `/new/${code}/full-time-part-time`,
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/placement-policy`,
-    `/new/${code}/placement-policy-answer`,
     `/new/${code}/training-location`,
     `/new/${code}/applications-open`,
     `/new/${code}/start-date`,

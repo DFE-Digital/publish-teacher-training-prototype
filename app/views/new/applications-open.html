@@ -31,10 +31,12 @@
       },
       items: [{
         value: "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)",
-        text: "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)"
+        text: "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)",
+        checked: checked((code + "-applications-open"), "On 21 October when applications for the 2021 - 2022 cycle open" if data["next-cycle"] else "As soon as the course is on Find (recommended)")
       }, {
         value: "On a specific date",
         text: "On a specific date",
+        checked: checked((code + "-applications-open"), "On a specific date"),
         conditional: {
           html: specificDateHtml
         }

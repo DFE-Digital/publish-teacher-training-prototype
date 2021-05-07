@@ -1,176 +1,178 @@
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Level
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-phase'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/phase?change=phase">
-      Change<span class="govuk-visually-hidden"> phase</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    SEND
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-sen'] %}
-      Yes
-    {% else %}
-      No
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/phase?change=phase">
-      Change<span class="govuk-visually-hidden"> SEND</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-{% if showTitleAndDescription %}
-  {% if data[code + '-change-title'] != 'Yes, that’s correct' %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Title requested
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ data[code + '-title'] }}
-      </dd>
-      {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions">
-        <a href="/new/{{ code }}/title?change=title">
-          Change<span class="govuk-visually-hidden"> title</span>
-        </a>
-      </dd>
-      {% endif %}
-    </div>
-  {% else %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Title
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ data[code + '-generated-title'] }}
-      </dd>
-      {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions">
-        <a href="/new/{{ code }}/title?change=title">
-          Change<span class="govuk-visually-hidden"> title</span>
-        </a>
-      </dd>
-      {% endif %}
-    </div>
-  {% endif %}
-{% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Outcome
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-outcome'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/further/outcome?change=outcome">
-      Change<span class="govuk-visually-hidden"> outcome</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Full or part time
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-full-part'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/further/full-time-part-time?change=full-time-part-time">
-      Change<span class="govuk-visually-hidden"> full time or part time</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-{% if data['schools'].length > 1 and data[code + '-locations'] %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Locations
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-locations'] | join('<br>') | safe }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/further/training-location?change=training-location">
-      Change<span class="govuk-visually-hidden"> locations</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-{% endif %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Applications open
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {% if data[code + '-applications-open'] == 'On a specific date' %}
-      On {{ data[code + '-applications-open-date-day'] }}-{{ data[code + '-applications-open-date-month'] }}-{{ data[code + '-applications-open-date-year'] }}
-    {% elseif data[code + '-applications-open'] == 'When I publish the course' %}
-        When the course is published
-    {% else %}
-      {{ data[code + '-applications-open'] }}
-    {% endif %}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/applications-open?change=applications-open">
-      Change<span class="govuk-visually-hidden"> start date</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    Course starts
-  </dt>
-  <dd class="govuk-summary-list__value">
-    {{ data[code + '-start-date'] }}
-  </dd>
-  {% if showChangeLinks %}
-  <dd class="govuk-summary-list__actions">
-    <a href="/new/{{ code }}/further/start-date?change=start-date">
-      Change<span class="govuk-visually-hidden"> start date</span>
-    </a>
-  </dd>
-  {% endif %}
-</div>
-{% if showTitleAndDescription %}
+<dl class="govuk-summary-list">
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Description
+      Level
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ courseOffered }}
+      {{ data[code + '-phase'] }}
     </dd>
     {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions"></dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/phase?change=phase">
+        Change<span class="govuk-visually-hidden"> phase</span>
+      </a>
+    </dd>
     {% endif %}
   </div>
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Course code
+      SEND
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ code }}
+      {% if data[code + '-sen'] %}
+        Yes
+      {% else %}
+        No
+      {% endif %}
     </dd>
     {% if showChangeLinks %}
-      <dd class="govuk-summary-list__actions"></dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/phase?change=phase">
+        Change<span class="govuk-visually-hidden"> SEND</span>
+      </a>
+    </dd>
     {% endif %}
   </div>
-{% endif %}
+  {% if showTitleAndDescription %}
+    {% if data[code + '-change-title'] != 'Yes, that’s correct' %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Title requested
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data[code + '-title'] }}
+        </dd>
+        {% if showChangeLinks %}
+        <dd class="govuk-summary-list__actions">
+          <a href="/new/{{ code }}/title?change=title">
+            Change<span class="govuk-visually-hidden"> title</span>
+          </a>
+        </dd>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Title
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data[code + '-generated-title'] }}
+        </dd>
+        {% if showChangeLinks %}
+        <dd class="govuk-summary-list__actions">
+          <a href="/new/{{ code }}/title?change=title">
+            Change<span class="govuk-visually-hidden"> title</span>
+          </a>
+        </dd>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Outcome
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-outcome'] }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/further/outcome?change=outcome">
+        Change<span class="govuk-visually-hidden"> outcome</span>
+      </a>
+    </dd>
+    {% endif %}
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Full or part time
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-full-part'] }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/further/full-time-part-time?change=full-time-part-time">
+        Change<span class="govuk-visually-hidden"> full time or part time</span>
+      </a>
+    </dd>
+    {% endif %}
+  </div>
+  {% if data['schools'].length > 1 and data[code + '-locations'] %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Locations
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-locations'] | join('<br>') | safe }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/further/training-location?change=training-location">
+        Change<span class="govuk-visually-hidden"> locations</span>
+      </a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Applications open
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if data[code + '-applications-open'] == 'On a specific date' %}
+        On {{ data[code + '-applications-open-date-day'] }}-{{ data[code + '-applications-open-date-month'] }}-{{ data[code + '-applications-open-date-year'] }}
+      {% elseif data[code + '-applications-open'] == 'When I publish the course' %}
+          When the course is published
+      {% else %}
+        {{ data[code + '-applications-open'] }}
+      {% endif %}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/applications-open?change=applications-open">
+        Change<span class="govuk-visually-hidden"> start date</span>
+      </a>
+    </dd>
+    {% endif %}
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Course starts
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data[code + '-start-date'] }}
+    </dd>
+    {% if showChangeLinks %}
+    <dd class="govuk-summary-list__actions">
+      <a href="/new/{{ code }}/further/start-date?change=start-date">
+        Change<span class="govuk-visually-hidden"> start date</span>
+      </a>
+    </dd>
+    {% endif %}
+  </div>
+  {% if showTitleAndDescription %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Description
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ courseOffered }}
+      </dd>
+      {% if showChangeLinks %}
+        <dd class="govuk-summary-list__actions"></dd>
+      {% endif %}
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Course code
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ code }}
+      </dd>
+      {% if showChangeLinks %}
+        <dd class="govuk-summary-list__actions"></dd>
+      {% endif %}
+    </div>
+  {% endif %}
+</dl>

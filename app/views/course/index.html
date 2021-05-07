@@ -561,9 +561,7 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% if course.level == "Further education" %}
-          <dl class="govuk-summary-list">
-            {% include "new/further/_answers.html" %}
-          </dl>
+          {% include "new/further/_answers.html" %}
         {% else %}
           {% include "new/_answers.html" %}
         {% endif %}

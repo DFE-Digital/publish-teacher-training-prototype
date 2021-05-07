@@ -1,3 +1,14 @@
+{% set subjectHtml %}
+  {% if data[code + "-subject"] %}
+    {{ data[code + "-subject"] }}
+    {% if data[code + "-second-subject"] %}
+      <br>{{ data[code + "-second-subject"] }}
+    {% endif %}
+  {% else %}
+    Unknown
+  {% endif %}
+{% endset %}
+
 {% set placementPolicyHtml %}
   {% if data[code + "-placement-policy"] == "hosted" %}
     {{ data[code + "-placement-policy-hosted"] }}
@@ -43,14 +54,17 @@
     On {{ data[code + "-applications-open-date-day"] }}-{{ data[code + "-applications-open-date-month"] }}-{{ data[code + "-applications-open-date-year"] }}
   {% elseif data[code + "-applications-open"] == "When I publish the course" %}
     When the course is published
-  {% else %}
+  {% elseif data[code + "-applications-open"] %}
     {{ data[code + "-applications-open"] }}
+  {% else %}
+    Unknown
   {% endif %}
 {% endset %}
 
 {{ govukSummaryList({
   classes: "govuk-!-margin-bottom-8",
   rows: [{
+    classes: macros.requiredSummaryRowClasses(code + "-phase", showErrors),
     key: {
       text: "Level"
     },
@@ -59,7 +73,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=true",
+        href: "/new/" + code + "/phase?change=phase",
         text: "Change",
         visuallyHiddenText: "phase"
       } if isNotPublished]
@@ -67,11 +81,12 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-sen", showErrors),
     key: {
       html: "<abbr title=\"Special educational needs and disability\">SEND</abbr>"
     },
     value: {
-      text: "Yes" if data[code + "-sen"] else "No"
+      text: data[code + "-sen"] or "Unknown"
     },
     actions: {
       items: [{
@@ -83,11 +98,12 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-subject", showErrors),
     key: {
       text: "Subject"
     },
     value: {
-      html: data[code + "-subject"] + ("<br>" + data[code + "-second-subject"] if data[code + "-second-subject"])
+      html: subjectHtml
     },
     actions: {
       items: [{
@@ -99,6 +115,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-languages", showErrors),
     key: {
       text: "Languages"
     },
@@ -120,7 +137,7 @@
       text: "Age range"
     },
     value: {
-      text: data[code + "-age-youngest"] + " to " + data[code + "-age-oldest"] if data[code + "-age-range"] == "Another age range" else data[code + "-age-range"]
+      text: data[code + "-age-youngest"] + " to " + data[code + "-age-oldest"] if data[code + "-age-range"] == "Another age range" else data[code + "-age-range"] or "Unknown"
     },
     actions: {
       items: [{
@@ -132,6 +149,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-outcome", showErrors),
     key: {
       text: "Outcome"
     },
@@ -148,6 +166,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-type", showErrors),
     key: {
       text: "Fee or salary"
     },
@@ -162,6 +181,7 @@
       } if isNotPublished]
     } if showChangeLinks
   } if data["new-course"]["include-fee-or-salary"] else {
+    classes: macros.requiredSummaryRowClasses(code + "-apprenticeship", showErrors),
     key: {
       text: "Apprenticeship"
     },
@@ -178,6 +198,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-full-part", showErrors),
     key: {
       text: "Full or part time"
     },
@@ -194,6 +215,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-new-accredited-body", showErrors),
     key: {
       text: "Accredited body"
     },
@@ -260,6 +282,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-applications-open", showErrors),
     key: {
       text: "Applications open"
     },
@@ -276,6 +299,7 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-start-date", showErrors),
     key: {
       text: "Course starts"
     },
