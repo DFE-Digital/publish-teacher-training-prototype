@@ -17,13 +17,16 @@
         },
         items: [{
           value: "Full time",
-          text: "Full time"
+          text: "Full time",
+          checked: checked((code + "-full-part"), "Full time")
         }, {
           value: "Part time",
-          text: "Part time"
+          text: "Part time",
+          checked: checked((code + "-full-part"), "Part time")
         }, {
           value: "Full time or part time",
-          text: "Full time or part time"
+          text: "Full time or part time",
+          checked: checked((code + "-full-part"), "Full time or part time")
         }]
       }) }}
 

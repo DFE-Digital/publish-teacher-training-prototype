@@ -13,38 +13,47 @@
 
       {% set items = [{
         value: "3 to 7",
-        text: "3 to 7"
+        text: "3 to 7",
+        checked: checked((code + "-age-range"), "3 to 7")
       }, {
         value: "5 to 11",
-        text: "5 to 11"
+        text: "5 to 11",
+        checked: checked((code + "-age-range"), "5 to 11")
       }, {
         value: "7 to 11",
-        text: "7 to 11"
+        text: "7 to 11",
+        checked: checked((code + "-age-range"), "7 to 11")
       }, {
         value: "7 to 14 (middle years)",
-        text: "7 to 14 (middle years)"
+        text: "7 to 14 (middle years)",
+        checked: checked((code + "-age-range"), "7 to 14 (middle years)")
       }, {
         divider: "or"
       }, {
         value: "Another age range",
         text: "Another age range",
+        checked: checked((code + "-age-range"), "Another age range"),
         conditional: {
           html: anotherHtml
         }
       }] if data[code + "-phase"] == "Primary" else [{
         value: "11 to 16",
-        text: "11 to 16"
+        text: "11 to 16",
+        checked: checked((code + "-age-range"), "11 to 16")
       }, {
         value: "11 to 18",
-        text: "11 to 18"
+        text: "11 to 18",
+        checked: checked((code + "-age-range"), "11 to 18")
       }, {
         value: "14 to 19",
-        text: "14 to 19"
+        text: "14 to 19",
+        checked: checked((code + "-age-range"), "14 to 19")
       }, {
         divider: "or"
       }, {
         value: "Another age range",
         text: "Another age range",
+        checked: checked((code + "-age-range"), "Another age range"),
         conditional: {
           html: anotherHtml
         }

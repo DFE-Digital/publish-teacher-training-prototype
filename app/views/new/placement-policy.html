@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = "How do school placements work?" %}
+{% set title = "School placements" %}
 {% set backLink = paths.back %}
 
 {% block content %}
@@ -17,7 +17,8 @@
         },
         items: [{
           value: "hosted",
-          text: "Candidates choose a lead or host school when they apply",
+          text: "Candidates can choose a lead or host school",
+          checked: checked((code + "-placement-policy"), "hosted"),
           conditional: {
             html: govukCharacterCount({
               id: code + "-placement-policy-hosted",
@@ -33,7 +34,8 @@
           }
         }, {
           value: "placed",
-          text: "Placements are arranged before training starts",
+          text: "Placements are arranged with candidates before their training starts",
+          checked: checked((code + "-placement-policy"), "placed"),
           conditional: {
             html: govukCharacterCount({
               id: code + "-placement-policy-placed",
@@ -50,6 +52,7 @@
         }, {
           value: "other",
           text: "Other",
+          checked: checked((code + "-placement-policy"), "other"),
           conditional: {
             html: govukCharacterCount({
               id: code + "-placement-policy-other",

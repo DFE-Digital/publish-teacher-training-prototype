@@ -18,13 +18,16 @@
         },
         items: [{
           value: "Primary",
-          text: "Primary"
+          text: "Primary",
+          checked: checked((code + "-phase"), "Primary")
         }, {
           value: "Secondary",
-          text: "Secondary"
+          text: "Secondary",
+          checked: checked((code + "-phase"), "Secondary")
         }, {
           value: "Further education",
-          text: "Further education"
+          text: "Further education",
+          checked: checked((code + "-phase"), "Further education")
         }]
       }) }}
 
@@ -39,7 +42,8 @@
         },
         items: [{
           value: "This course has an additional SEND specialism",
-          text: "This course has an additional SEND specialism"
+          text: "This course has an additional SEND specialism",
+          checked: checked((code + "-sen"), "This course has an additional SEND specialism")
         }]
       }) }}
 

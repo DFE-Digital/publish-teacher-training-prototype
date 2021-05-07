@@ -174,7 +174,6 @@ function newCourseWizardPaths (req) {
     `/new/${code}/full-time-part-time`,
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
     `/new/${code}/placement-policy`,
-    ...(includeLocationsInWizard(data) ? [`/new/${code}/placement-locations`] : []),
     `/new/${code}/training-location`,
     `/new/${code}/applications-open`,
     `/new/${code}/start-date`,
@@ -390,6 +389,10 @@ function isFurtherEducation (code, data) {
   return data[code + '-phase'] === 'Further education'
 }
 
+function isUsingPlacementLocations (code, data) {
+  return data[code + '-placement-policy'] === 'hosted'
+}
+
 function subject (req) {
   const accrediting = accreditor(req)
   const subject = accrediting.subjects.find(function (s) {
@@ -436,13 +439,52 @@ function validate (data, course, view) {
     }
   }
 
-  if (view === 'all' || view === 'requirements') {
-    if (!data[prefix + '-qualifications-required']) {
+  if (view === 'all') {
+    if (!data[prefix + '-degree-minimum-required']) {
       errors.push({
-        title: 'Give details about the qualifications needed',
-        id: `${prefix}-qualifications-required`,
-        link: `/requirements#${prefix}-qualifications-required`,
-        page: 'requirements'
+        title: 'Give details about the degree needed',
+        id: `${prefix}-degree-minimum-required`,
+        link: '/degree'
+      })
+    }
+  }
+
+  if (view === 'all') {
+    if (!data[prefix + '-gcse-english-flexibility']) {
+      errors.push({
+        title: 'Give details about the GCSE needed',
+        id: `${prefix}-gcse-english-flexibility`,
+        link: '/gcses-pending-or-equivalency-tests'
+      })
+    }
+  }
+
+  if (view === 'all') {
+    if (!data[prefix + '-visa-sponsorship']) {
+      errors.push({
+        title: 'Give details about sponsoring visas',
+        id: `${prefix}-visa-sponsorship`,
+        link: '/visa-sponsorship'
+      })
+    }
+  }
+
+  if (view === 'all') {
+    if (!data[prefix + '-placement-policy']) {
+      errors.push({
+        title: 'Give details about your school placement policy',
+        id: `${prefix}-placement-policy`,
+        href: `/new/${prefix}/placement-policy?change=true`
+      })
+    }
+  }
+
+  if (view === 'all') {
+    if (!data[prefix + '-training-location']) {
+      errors.push({
+        title: 'Give details about your academic training location',
+        id: `${prefix}-training-location`,
+        href: `/new/${prefix}/training-location?change=true`
       })
     }
   }
@@ -478,7 +520,7 @@ function validate (data, course, view) {
 
   return errors.map(e => {
     e.text = e.title
-    e.href = course.path + e.link
+    e.href = e.href || course.path + e.link
 
     return e
   })
@@ -591,6 +633,7 @@ module.exports = {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  isUsingPlacementLocations,
   rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,

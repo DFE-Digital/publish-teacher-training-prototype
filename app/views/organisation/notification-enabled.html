@@ -1,52 +1,37 @@
 {% extends "layout.html" %}
 {% set title = data["training-provider-name"] %}
 
-{% block breadcrumbs %}
-  {% if data['rolled-over'] %}
-    {{
-      govukBreadcrumbs({
-        items: [
-          {
-            href: "/cycles",
-            text: data['training-provider-name']
-          }
-        ]
-      })
-    }}
-  {% endif %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      href: "/cycles",
+      text: data["training-provider-name"]
+    }]
+  }) if data["rolled-over"] }}
 {% endblock %}
 
 {% block content %}
+  {{ govukNotificationBanner({
+    text: "Email notification preferences for name@address.org have been updated.",
+    type: "success"
+  }) }}
+
+  <h1 class="govuk-heading-xl">
+    {% if data["rolled-over"] %}
+      {% if data["next-cycle"] %}
+        Next cycle (2022 to 2023)
+      {% else %}
+        Current cycle (2021 to 2022)
+      {% endif %}
+    {% else %}
+      {{ data["training-provider-name"] }}
+    {% endif %}
+  </h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">
-        {% if data['rolled-over'] %}
-          {% if data['next-cycle'] %}
-            Next cycle (2022 to 2023)
-          {% else %}
-            Current cycle (2021 to 2022)
-          {% endif %}
-        {% else %}
-          {{ data['training-provider-name'] }}
-        {% endif %}
-      </h1>
-    </div>
-  </div>
-
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <div class="govuk-success-summary" role="alert" aria-labelledby="success-summary-heading" tabindex="-1" data-module="govuk-error-summary" data-ga-event-form="success">
-        <h3 class="govuk-success-summary__title" id="success-summary-heading">Email notification preferences for name@address.org have been updated.</h3>
-      </div>
-    </div>
-  </div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-
-      {% if data['rolled-over'] %}
-        {% if data['next-cycle'] %}
+      {% if data["rolled-over"] %}
+        {% if data["next-cycle"] %}
           <p class="govuk-body-l">Prepare your courses and locations for the next cycle. All your courses, locations and details have been copied from the current cycle.</p>
           <hr class="govuk-section-break govuk-section-break--m">
         {% else %}
@@ -55,7 +40,7 @@
         {% endif %}
       {% endif %}
 
-      {% if not (data['rolled-over'] and data['next-cycle']) %}
+      {% if not (data["rolled-over"] and data["next-cycle"]) %}
         <div class="govuk-!-margin-bottom-8">
           <h2 class="govuk-heading-m">
             <a href="/about-your-organisation">About your organisation</a>
@@ -79,14 +64,14 @@
           <li>preview and publish courses</li>
           <li>write about each course</li>
           <li>copy content between courses</li>
-          {% if not data['next-cycle'] %}
+          {% if not data["next-cycle"] %}
           <li>manage vacancies for each course</li>
           {% endif %}
           <li>add new courses</li>
         </ul>
       </div>
 
-      {% if data['is-accredited-body'] and not (data['rolled-over'] and data['next-cycle']) %}
+      {% if data["is-accredited-body"] and not (data["rolled-over"] and data["next-cycle"]) %}
         <div class="govuk-!-margin-bottom-8">
           <h2 class="govuk-heading-m">
             <a href="/accredited-body">Courses as an accredited body</a>
@@ -113,7 +98,7 @@
       </div>
     </div>
     <div class="govuk-grid-column-one-third">
-      {% if not data['rolled-over'] %}
+      {% if not data["rolled-over"] %}
       <div class="status-box">
         {# <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
           <a href="/notifications">Email notifications</a>

@@ -12,6 +12,7 @@ const {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
+  isUsingPlacementLocations,
   rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,
@@ -111,12 +112,14 @@ router.all('/cycles', function (req, res) {
 router.all(['/new/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
   const data = req.session.data
   const code = req.params.code
-  const locations = []
+  const locations = data[`${code}-locations`] || []
+  const items = []
 
   data.schools.forEach(school => {
-    locations.push({
+    items.push({
       value: school.name,
       text: school.name,
+      checked: locations.includes(school.name),
       label: {
         classes: 'govuk-label--s'
       },
@@ -126,20 +129,28 @@ router.all(['/new/:code/placement-locations', '/new/:code/further/placement-loca
     })
   })
 
+  const paths = newCourseWizardPaths(req)
+  paths.back = `/new/${code}/placement-policy`
+
   res.render('new/placement-locations', {
-    code: code,
-    paths: newCourseWizardPaths(req),
-    locations: locations
+    code,
+    paths,
+    items
   })
 })
 
 router.all(['/new/:code/training-location', '/new/:code/further/training-location'], function (req, res) {
+  const data = req.session.data
   const code = req.params.code
 
-  res.render('new/training-location', {
-    code: code,
-    paths: newCourseWizardPaths(req)
-  })
+  if (!isUsingPlacementLocations(code, data)) {
+    res.render('new/training-location', {
+      code,
+      paths: newCourseWizardPaths(req)
+    })
+  } else {
+    res.redirect('/new/' + code + '/placement-locations')
+  }
 })
 
 router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res) {
@@ -147,7 +158,7 @@ router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res)
   const code = req.params.code
 
   res.render('new/title', {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req),
     generatedTitle: getGeneratedTitle(code, data),
     courseOffered: getCourseOffered(code, data)
@@ -159,7 +170,7 @@ router.all(['/new/:code/editing-title', '/new/:code/further/editing-title'], fun
   const code = req.params.code
 
   res.render('new/editing-title', {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req),
     generatedTitle: getGeneratedTitle(code, data),
     courseOffered: getCourseOffered(code, data)
@@ -171,7 +182,7 @@ router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, 
   const code = req.params.code
 
   res.render('new/confirm', {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   })
@@ -182,7 +193,7 @@ router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
   const code = req.params.code
 
   res.render('new/edit', {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req),
     courseOffered: getCourseOffered(code, data)
   })
@@ -196,7 +207,7 @@ router.post('/new/:code/subject', function (req, res) {
     res.redirect('/new/' + code + '/further/outcome')
   } else {
     res.render('new/subject', {
-      code: code,
+      code,
       paths: newCourseWizardPaths(req)
     })
   }
@@ -209,7 +220,7 @@ router.post('/new/:code/languages', function (req, res) {
 
   if (isModernLanguages(code, data)) {
     res.render('new/languages', {
-      code: code,
+      code,
       paths: paths
     })
   } else {
@@ -316,7 +327,7 @@ router.get('/new/:code/accredited-body', function (req, res) {
   }))
 
   res.render('new/accredited-body', {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req),
     accreditedBodies,
     accreditors
@@ -327,7 +338,7 @@ router.all('/new/:code/:view', function (req, res) {
   const code = req.params.code
 
   res.render(`new/${req.params.view}`, {
-    code: code,
+    code,
     paths: newCourseWizardPaths(req)
   })
 })
@@ -335,7 +346,7 @@ router.all('/new/:code/:view', function (req, res) {
 router.all('/new/:code/further/:view', function (req, res) {
   const code = req.params.code
   const locals = {
-    code: code,
+    code,
     paths: newFurtherEducationCourseWizardPaths(req)
   }
 
@@ -371,7 +382,7 @@ router.all('/new-location/:code/address', function (req, res) {
     data[code + '-urn'] = urn
 
     res.render('new-location/address', {
-      code: code,
+      code,
       paths: newLocationWizardPaths(req),
       location: location
     })
@@ -384,7 +395,7 @@ router.all('/new-location/:code/confirm', function (req, res) {
 
   getLocations(code, data, function (locations) {
     res.render('new-location/confirm', {
-      code: code,
+      code,
       paths: newLocationWizardPaths(req),
       locations: locations
     })
@@ -395,7 +406,7 @@ router.all('/new-location/:code/edit', function (req, res) {
   const code = req.params.code
 
   res.render('new-location/edit', {
-    code: code,
+    code,
     paths: newLocationWizardPaths(req)
   })
 })
@@ -432,7 +443,7 @@ router.all('/new-location/:code/create', function (req, res) {
 
 router.all('/new-location/:code/:view', function (req, res) {
   const code = req.params.code
-  res.render(`new-location/${req.params.view}`, { code: code, paths: newLocationWizardPaths(req) })
+  res.render(`new-location/${req.params.view}`, { code, paths: newLocationWizardPaths(req) })
 })
 
 router.all('/onboarding/:view', function (req, res) {
@@ -528,10 +539,10 @@ router.post('/course/:providerCode/:code/degree', function (req, res) {
   const c = course(req)
   const choice = req.body[req.params.code + '-degree-minimum-required']
 
-  if (choice == "Yes") {
+  if (choice === 'Yes') {
     // Redirect to minimum course requirements page
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-level`)
-  } else if (c.subject != "Primary") {
+  } else if (c.subject !== 'Primary') {
     // Redirect to degree subject requirements page (unless it’s a Primary course)
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}/degree-subject`)
   } else {
@@ -539,7 +550,6 @@ router.post('/course/:providerCode/:code/degree', function (req, res) {
     res.redirect(`/course/${req.params.providerCode}/${req.params.code}`)
   }
 })
-
 
 // Post to vacancies page
 router.post('/course/:providerCode/:code/vacancies', function (req, res) {
@@ -588,18 +598,18 @@ router.get('/course-not-running/:providerCode/:code', function (req, res) {
 
 router.get('/preview/:providerCode/:code', function (req, res) {
   const c = course(req)
-  const prefix = c.programmeCode
+  const code = c.programmeCode
 
-  res.render('preview', { course: c, prefix: prefix })
+  res.render('preview', { course: c, code })
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
-  const {code, view } = req.params
+  const { code, view } = req.params
   const c = course(req)
 
   res.render(`course/${view}`, {
     course: c,
-    code: code,
+    code,
     errors: validate(req.session.data, c, view)
   })
 })
@@ -631,7 +641,7 @@ router.get('/location/:code', function (req, res) {
   const isNew = !school
   res.render('location/index', {
     school: school,
-    code: code,
+    code,
     isNew: isNew
   })
 })
@@ -647,7 +657,7 @@ router.post('/location/:code', function (req, res) {
   if (!loc && req.body[code + '-location-confirm'] === '_unchecked') {
     res.render('location/index', {
       school: loc,
-      code: code,
+      code,
       showErrors: true,
       isNew: true
     })
@@ -699,8 +709,7 @@ router.post('/users/basic-details', (req, res) => {
 })
 
 router.post('/users/what-access', function (req, res) {
-
-  let whatAccess = req.session.data['what-access']
+  const whatAccess = req.session.data['what-access']
 
   if (whatAccess === 'same') {
     res.redirect('/users/permissions-1')
@@ -739,12 +748,12 @@ router.post('/users/check', function (req, res) {
 // Allocations
 
 router.post('/allocations/offer-pe', function (req, res) {
-  let offeringPE = req.session.data['offer-pe']
+  const offeringPE = req.session.data['offer-pe']
 
   if (offeringPE === 'Yes') {
-      res.redirect('/allocations/request-sent')
+    res.redirect('/allocations/request-sent')
   } else {
-      res.redirect('/allocations/no-request-confirmed')
+    res.redirect('/allocations/no-request-confirmed')
   }
 })
 

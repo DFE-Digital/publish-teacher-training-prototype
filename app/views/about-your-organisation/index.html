@@ -48,7 +48,7 @@
 
   <div class="govuk-grid-row add-top-margin">
     <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-27 govuk-!-margin-top-0">
+      <h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-0">
         <a href="/about-your-organisation/contact">Contact details</a>
       </h3>
 
@@ -75,7 +75,6 @@
       {% endset %}
 
       {{ govukSummaryList({
-        classes: "govuk-summary-list--short",
         rows: [{
           key: {
             text: "Email address"
@@ -111,11 +110,11 @@
         }]
       }) }}
 
-      <h3 class="govuk-heading-27">
+      <h3 class="govuk-heading-m govuk-!-font-size-27">
         <a href="/about-your-organisation/about">About your organisation</a>
       </h3>
 
-      <dl class="govuk-summary-list govuk-summary-list--short">
+      <dl class="govuk-summary-list">
         {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
         {% if not data["self_accrediting"] %}
           {% for a in data["accreditors"] %}
