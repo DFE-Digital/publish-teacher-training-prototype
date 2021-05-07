@@ -85,7 +85,8 @@
           {% endif %}
           <li><a href="#section-international">International students</a></li>
           <li><a href="#section-access-needs">Training with disabilities and other needs</a></li>
-          <li><a href="#section-contact">Contact details</a></li>
+          <li><a href="#section-contact">Contact this training provider</a></li>
+          <li><a href="#section-advice">Support and advice</a></li>
           <li><a href="#section-apply">Apply</a></li>
         </ul>
 
@@ -285,7 +286,7 @@
         <h2 class="govuk-heading-l" id="section-access-needs">Training with disabilities and other needs</h2>
         {{ macros.previewPart('training-with-a-disability', true) }}
 
-        <h2 class="govuk-heading-l" id="section-contact">Contact details</h2>
+        <h2 class="govuk-heading-l" id="section-contact">Contact this training provider</h2>
 
         {% if not (data['email-address'] and data['telephone-number'] and data['website'] and data['postcode'] and data['building-and-street']) %}
           <p class="missing-section">
@@ -312,42 +313,22 @@
           </dd>
         </dl>
 
-        <h2 class="govuk-heading-l" id="section-apply">
-          Apply
-        </h2>
-        <p>
-          <a href="https://2018.teachertraining.apply.ucas.com/apply/student/login.do">Apply on the UCAS website</a>. You’ll need to register with UCAS before you can apply.
-        </p>
-        <p>
-          You’ll need these codes for the Choices section of the application form:
-        </p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>training provider code: {{ course.providerCode }}</li>
-          <li>training programme code: {{ course.programmeCode }}</li>
-        </ul>
+      <section class="govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-l" id="section-advice">Support and advice</h2>
+        <p class="govuk-body">For support and advice, you can speak to a <a class="govuk-link" href="https://beta-adviser-getintoteaching.education.gov.uk/">Get Into Teaching</a> adviser for free. They’re all experienced teachers who can help you to prepare your application, book school experience, and access exclusive teaching events.</p>
+        <p class="govuk-body">You can also call Get Into Teaching free of charge on 0800 389 2501, or speak to an adviser using their <a class="govuk-link" href="https://beta-getintoteaching.education.gov.uk/#talk-to-us">online chat service</a> Monday to Friday, 8.30am to 5pm (except public holidays).</p>
 
-        <p>You’ll also need to choose a training location and give the relevant training location code.</p>
+        <h3 class="govuk-heading-m">Is there something wrong with this page?</h3>
+        <p class="govuk-body">If there is something wrong with this course listing, <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">contact us by email</a>.</p>
+      </section>
 
-        <p>Available training locations:</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th class="govuk-table__header" scope="col" style="width: 30%">Name</th>
-              <th class="govuk-table__header" scope="col" style="width: 60%">Address</th>
-              <th class="govuk-table__header" scope="col">Code</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            {% for school in course.schools %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">{{ school.name }}</td>
-              <td class="govuk-table__cell">{{ school.address }}</td>
-              <td class="govuk-table__cell">{{ school.code }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+      <section id="section-apply">
+        {{ govukButton({
+          href: "#",
+          text: "Apply for this course",
+          isStartButton: true
+        }) }}
+      </section>
     </div>
   </div>
 
