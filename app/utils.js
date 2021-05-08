@@ -431,7 +431,7 @@ function validate (data, course, view) {
   if (view === 'all' || view === 'about-this-course') {
     if (!data[prefix + '-about-this-course']) {
       errors.push({
-        title: 'Give details about this course',
+        title: 'Enter details about this course',
         id: `${prefix}-about-this-course`,
         link: `/about-this-course#${prefix}-about-this-course`,
         page: 'about-this-course'
@@ -442,7 +442,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-degree-minimum-required']) {
       errors.push({
-        title: 'Give details about the degree needed',
+        title: 'Do you require a minimum degree classification?',
         id: `${prefix}-degree-minimum-required`,
         link: '/degree'
       })
@@ -452,7 +452,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-gcse-english-flexibility']) {
       errors.push({
-        title: 'Give details about the GCSE needed',
+        title: 'GCSEs and equivalency tests',
         id: `${prefix}-gcse-english-flexibility`,
         link: '/gcses-pending-or-equivalency-tests'
       })
@@ -462,7 +462,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-visa-sponsorship']) {
       errors.push({
-        title: 'Give details about sponsoring visas',
+        title: 'Can you sponsor a student visa?',
         id: `${prefix}-visa-sponsorship`,
         link: '/visa-sponsorship'
       })
@@ -472,7 +472,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-placement-policy']) {
       errors.push({
-        title: 'Give details about your school placement policy',
+        title: 'What is your school placement policy?',
         id: `${prefix}-placement-policy`,
         href: `/new/${prefix}/placement-policy?change=true`
       })
@@ -482,7 +482,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-training-location']) {
       errors.push({
-        title: 'Give details about your academic training location',
+        title: 'Where will candidates do their academic training?',
         id: `${prefix}-training-location`,
         href: `/new/${prefix}/training-location?change=true`
       })
