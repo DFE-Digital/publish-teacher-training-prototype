@@ -2,8 +2,10 @@
 {% set title = "Visa sponsorship" %}
 {% set backLink = course.path %}
 
-{% block beforeContent %}
-  {{ govukBackLink({href: course.path + "#information"})}}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: course.path
+  }) }}
 {% endblock %}
 
 {% block content %}
@@ -11,43 +13,40 @@
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
 
-      <form action="{{ course.path + "#information" }}" method="post">
-
+      <form action="{{ course.path }}" method="post">
         {% set radioName = code + "-visa-sponsorship" %}
-
         {% set courseType = data[code + "-type"] %}
 
         {% if courseType === "Salaried" %}
-          {% set questionText = "Can you sponsor a Skilled worker visa?" %}
+          {% set questionHtml = "Can you sponsor a Skilled worker&nbsp;visa?" %}
         {% else %}
-          {% set questionText = "Can you sponsor a Student visa?" %}
+          {% set questionHtml = "Can you sponsor a Student&nbsp;visa?" %}
         {% endif %}
 
         {{ govukRadios({
           name: radioName,
           fieldset: {
             legend: {
-              text: questionText,
+              html: questionHtml,
               isPageHeading: true,
-              classes: "govuk-fieldset__legend--l"
+              classes: "govuk-fieldset__legend--xl"
             }
           },
-          items: [
-            {
-              value: "Yes",
-              text: "Yes",
-              checked: (data[radioName] === "Yes")
-            },
-            {
-              value: "No",
-              text: "No",
-              checked: (data[radioName] === "No")
-            }
-          ]
+          items: [{
+            value: "Yes",
+            text: "Yes",
+            checked: (data[radioName] === "Yes")
+          },
+          {
+            value: "No",
+            text: "No",
+            checked: (data[radioName] === "No")
+          }]
         }) }}
 
-        {{ govukButton({text: "Continue"}) }}
-
+        {{ govukButton({
+          text: "Continue"
+        }) }}
       </form>
     </div>
   </div>

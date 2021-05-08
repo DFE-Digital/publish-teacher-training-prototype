@@ -143,7 +143,7 @@
   {% if not data[code + "-gcse-english-flexibility"] %}
     {% set result = actionsList.push({
       text: "GCSEs and equivalency tests",
-      href: "/course/" + data['provider-code'] + "/" + code + "/gcses-pending-or-equivalency-tests"
+      href: "/course/" + data["provider-code"] + "/" + code + "/gcses-pending-or-equivalency-tests"
     }) %}
   {% endif %}
 
@@ -275,7 +275,7 @@
             },
             actions: {
               items: [{
-                href: "/course/" + code + "/visa-sponsorship?change=true",
+                href: coursePath + "/visa-sponsorship",
                 text: "Change",
                 visuallyHiddenText: "visa sponsorship"
               }]
