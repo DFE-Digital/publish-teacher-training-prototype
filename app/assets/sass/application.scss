@@ -123,37 +123,6 @@ table thead th {
   width: 200px;
 }
 
-dt,
-dd {
-  display: inline;
-}
-
-dl.aligned {
-  overflow: hidden;
-  @include govuk-font(19);
-}
-
-dl.aligned dt {
-  width: 30%;
-  float: left;
-  margin: 0;
-  clear: both;
-}
-
-dl.aligned dd {
-  width: 70%;
-  float: right;
-  margin: 0;
-
-  .govuk-details {
-    margin-bottom: 0;
-  }
-}
-
-dl.aligned.course-part-tasks dd {
-  width: 60%;
-}
-
 .fake-email {
   margin-left: 15px;
   margin-top: 20px;
