@@ -5,25 +5,18 @@
 {% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% block content %}
-  {% set message %}
-    {% if showMessage %}
-      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-          Sally Salt has been sent instructions to finish setting up their account.
-        </h3>
-      </div>
-    {% endif %}
-  {% endset %}
-
-  {{ message | safe }}
+  {{ govukNotificationBanner({
+    text: "Sally Salt has been sent instructions to finish setting up their account.",
+    type: "success"
+  }) if showMessage }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{title}}</h1>
-      {{govukButton({
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
+      {{ govukButton({
         text: 'Invite user',
         href: '/users/basic-details'
-      })}}
+      }) }}
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
           <a class="govuk-link govuk-link--no-visited-state" href="/users/show">Ross Anderson</a>
@@ -32,11 +25,11 @@
         <p class="govuk-!-font-size-16 govuk-caption-m govuk-!-margin-bottom-0">Achieve with TELA, Beech Hill, TeachSlough</p>
       </div>
       <div class="app-application-card">
-          <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
-            <a class="govuk-link govuk-link--no-visited-state" href="#">Hermione Granger</a>
-          </h2>
-          <p class="govuk-!-margin-bottom-0">hermione.granger@address.uk</p>
-          <p class="govuk-!-font-size-16 govuk-caption-m govuk-!-margin-bottom-0">Achieve with TELA</p>
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+          <a class="govuk-link govuk-link--no-visited-state" href="#">Hermione Granger</a>
+        </h2>
+        <p class="govuk-!-margin-bottom-0">hermione.granger@address.uk</p>
+        <p class="govuk-!-font-size-16 govuk-caption-m govuk-!-margin-bottom-0">Achieve with TELA</p>
       </div>
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
@@ -47,5 +40,4 @@
       </div>
     </div>
   </div>
-
 {% endblock %}

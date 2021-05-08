@@ -12,7 +12,7 @@
       <form action="{{ paths.next }}" method="post">
         {% set whatCopy %}
           <label class="govuk-label govuk-label--s" for="copy-from">Which course should be copied?</label>
-          <select id="copy-from" name="copy-from" class="govuk-select add-double-bottom-margin" style="background: #fff">
+          <select id="copy-from" name="copy-from" class="govuk-select govuk-!-margin-bottom-6" style="background: #fff">
             {{ courseOptions() | safe }}
           </select>
         {% endset %}

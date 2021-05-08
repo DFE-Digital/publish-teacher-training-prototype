@@ -1,0 +1,39 @@
+// Optional value is empty
+.app-summary-list__row--empty {
+  .govuk-summary-list__value {
+    color: govuk-colour("dark-grey");
+  }
+}
+
+// Required value is missing
+.app-summary-list__row--missing {
+  .govuk-summary-list__value {
+    color: govuk-colour("dark-grey");
+  }
+
+  .govuk-summary-list__key {
+    border-left: $govuk-border-width solid govuk-colour("blue");
+    padding-left: govuk-spacing(2);
+  }
+}
+
+// Required value is missing and validated
+.app-summary-list__row--error {
+  .govuk-summary-list__key {
+    border-left: $govuk-border-width solid govuk-colour("red");
+    padding-left: govuk-spacing(2);
+  }
+
+  .govuk-summary-list__value a {
+    @include govuk-typography-weight-bold;
+    @include govuk-link-common;
+    @include govuk-link-style-error;
+  }
+}
+
+.app-summary-list__value--truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 295px;
+}

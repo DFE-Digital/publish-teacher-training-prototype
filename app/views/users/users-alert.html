@@ -4,14 +4,14 @@
 {% set backLink = "/cycles" if data["rolled-over"] else "/" %}
 
 {% block content %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-      We have received your request.
-    </h3>
-    <p class="govuk-!-margin-bottom-0">
-      If the request is approved, the new user will receive sign up instructions by email. This should happen within 2 working days. If the request is not approved, we’ll contact you by email with further information.
-    </p>
-  </div>
+  {% set notifcationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">We have received your request.</h3>
+    <p class="govuk-body">If the request is approved, the new user will receive sign up instructions by email. This should happen within 2 working days. If the request is not approved, we’ll contact you by email with further information.</p>
+  {% endset %}
+  {{ govukNotificationBanner({
+    html: notifcationBannerHtml,
+    type: "success"
+  }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

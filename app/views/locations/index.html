@@ -10,31 +10,19 @@
 {% endblock %}
 
 {% block content %}
-  {% if justCreated %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-      Your location has been added
-    </h3>
-    <p>
-      Before candidates can pick this location, you must assign it to one or more courses.<br />
-      You can do this when adding or editing courses.
-    </p>
-    <p class="govuk-!-margin-bottom-0">
-      <a href="/courses">Your courses</a>
-    </p>
-  </div>
-  {% endif %}
+  {% set justCreatedHtml %}
+    <h3 class="govuk-notification-banner__heading">Your location has been added.</h3>
+    <p class="govuk-body">Before candidates can pick this location, you must assign it to one or more courses. You can do this when adding or editing courses.</p>
+  {% endset %}
+  {{ govukNotificationBanner({
+    html: justCreatedHtml,
+    type: "success"
+  }) if justCreated }}
 
-  {% if justEdited %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-        Your changes have been published
-      </h3>
-      <p class="govuk-!-margin-bottom-0">
-        Changes will appear on courses in Find straight away.
-      </p>
-    </div>
-  {% endif %}
+  {{ govukNotificationBanner({
+    text: "Your changes have been published.",
+    type: "success"
+  }) if justEdited }}
 
   <h1 class="govuk-heading-xl">
     {% if data['next-cycle'] %}<span class="govuk-caption-xl">Next cycle (2022 to  2023)</span>{% endif %}

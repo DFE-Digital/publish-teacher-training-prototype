@@ -56,11 +56,12 @@
 
         <hr class="govuk-section-break govuk-section-break--m">
 
-        <input type="submit" class="govuk-button destructive-button" value="Yes I’m sure – withdraw this course" />
+        {{ govukButton({
+          text: "Yes I’m sure – withdraw this course",
+          classes: "govuk-button--warning"
+        }) }}
 
-        <p class="govuk-!-margin-top-5">
-          <a href="{{ course.path }}">Cancel</a>
-        </p>
+        <p><a href="{{ course.path }}">Cancel</a></p>
       </form>
     </div>
   </div>

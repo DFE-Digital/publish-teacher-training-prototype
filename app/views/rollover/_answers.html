@@ -4,7 +4,7 @@
   </dt>
   <dd class="govuk-summary-list__value">
     {% if data['rollover-locations'] %}
-      <ul class="govuk-list remove-bottom-margin">
+      <ul class="govuk-list govuk-!-margin-bottom-0">
         {% if isArray(data['rollover-locations']) %}
           {% for c in data['rollover-locations'] %}
             <li>{{ c }}</li>
@@ -29,7 +29,7 @@
   </dt>
   <dd class="govuk-summary-list__value">
     {% if data['rollover-courses'] %}
-      <ul class="govuk-list remove-bottom-margin">
+      <ul class="govuk-list govuk-!-margin-bottom-0">
         {% if isArray(data['rollover-courses']) %}
           {% for c in data['rollover-courses'] %}
             <li>{{ c }}</li>

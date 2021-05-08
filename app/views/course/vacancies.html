@@ -109,11 +109,18 @@
           <p>Changes will appear on Find straight away.</p>
 
           {% if data[course.programmeCode + '-multi-location'] %}
-            <input type="submit" class="govuk-button" value="Publish changes" />
+            {{ govukButton({
+              text: "Publish changes"
+            }) }}
           {% elseif data[course.programmeCode + '-vacancies-flag'] == 'Yes' %}
-            <input type="submit" class="govuk-button destructive-button" value="Close applications" />
+            {{ govukButton({
+              text: "Close applications",
+              classes: "govuk-button--warning"
+            }) }}
           {% else %}
-            <input type="submit" class="govuk-button" value="Re-open applications" />
+            {{ govukButton({
+              text: "Re-open applications"
+            }) }}
           {% endif %}
         </div>
 

@@ -35,7 +35,7 @@
       %}
 
       {% set table %}
-        <div class="add-double-bottom-margin">
+        <div class="govuk-!-margin-bottom-6">
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -86,10 +86,9 @@
       {{ macros.radioGroup('terms-and-conditions', radioFields, [ { id: 'terms-and-conditions', title: 'Please agree to the terms and conditions before continuing' }]) }}
 
       <form action="/" method="post">
-
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Publish changes" />
-        </div>
+        {{ govukButton({
+          text: "Publish changes"
+        }) }}
 
         <p><p><a href="{{ course.path }}">Cancel changes</a></p></p>
       </form>

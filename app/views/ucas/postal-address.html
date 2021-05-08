@@ -7,7 +7,7 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-grid-row add-top-margin">
+  <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
       <form action="/ucas/apply-preferences" method="post">
         {{ macros.textbox('building-and-street', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
@@ -15,14 +15,13 @@
 
         {{ macros.textbox('town-or-city', 'Town or city', null, 'form-control', null, errors) }}
         {{ macros.textbox('county', 'County', null, 'form-control', null, errors) }}
-        {{ macros.textbox('postcode', 'Postcode', null, 'form-control-small', null, errors) }}
+        {{ macros.textbox('postcode', 'Postcode', null, 'govuk-input--width-10', null, errors) }}
 
-        <div class="form-group add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save">
-        </div>
-        <p>
-          <a href="/ucas/apply-preferences">Cancel changes</a>
-        </p>
+        {{ govukButton({
+          text: "Save"
+        }) }}
+
+        <p><a href="/ucas/apply-preferences">Cancel changes</a></p>
       </form>
     </div>
   </div>

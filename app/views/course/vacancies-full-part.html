@@ -30,9 +30,9 @@
 
         <p>Changes are immediate.</p>
 
-        <div class="add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Update vacancies" />
-        </div>
+        {{ govukButton({
+          text: "Update vacancies"
+        }) }}
 
         <p><a href="{{ course.path }}">Cancel changes</a></p>
       </form>

@@ -10,30 +10,20 @@
 {% endblock %}
 
 {% block content %}
-  {% set message %}
-    {% if showMessage %}
-      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-          Your changes have been saved
-        </h3>
-      </div>
-    {% endif %}
-  {% endset %}
+  {{ govukNotificationBanner({
+    text: "Your changes have been published.",
+    type: "success"
+  }) if justPublished }}
 
-  {% if data["about-your-organisation-show-publish-errors"] and errors.length > 0 %}
-    {{ govukErrorSummary({
-      titleText: "We couldn’t publish this because some information was missing",
-      errorList: errors
-    }) }}
-  {% endif %}
+  {{ govukNotificationBanner({
+    text: "Course deleted.",
+    type: "success"
+  }) if justDeleted }}
 
-  {% if justPublished %}
-    <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-      <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-        Your changes have been published
-      </h3>
-    </div>
-  {% endif %}
+  {{ govukErrorSummary({
+    titleText: "We couldn’t publish this because some information was missing",
+    errorList: errors
+  }) if data["about-your-organisation-show-publish-errors"] and errors.length > 0 }}
 
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">
@@ -46,7 +36,7 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-grid-row add-top-margin">
+  <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
       <h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-0">
         <a href="/about-your-organisation/contact">Contact details</a>
@@ -81,7 +71,7 @@
           },
           value: {
             text: value("email") or "Empty",
-            classes: "govuk-summary-list__value--empty" if not value("email")
+            classes: "app-summary-list__value--empty" if not value("email")
           }
         }, {
           key: {
@@ -89,7 +79,7 @@
           },
           value: {
             text: value("telephone") or "Empty",
-            classes: "govuk-summary-list__value--empty" if not value("telephone")
+            classes: "app-summary-list__value--empty" if not value("telephone")
           }
         }, {
           key: {
@@ -97,7 +87,7 @@
           },
           value: {
             text: value("website") or "Empty",
-            classes: "govuk-summary-list__value--empty" if not value("website")
+            classes: "app-summary-list__value--empty" if not value("website")
           }
         }, {
           key: {
@@ -105,7 +95,7 @@
           },
           value: {
             html: contactAddressHtml,
-            classes: "govuk-summary-list__value--empty" if not value("building-and-street")
+            classes: "app-summary-list__value--empty" if not value("building-and-street")
           }
         }]
       }) }}

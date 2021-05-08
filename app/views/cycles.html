@@ -2,22 +2,16 @@
 {% set title = data["training-provider-name"] %}
 
 {% block content %}
-  {% if justRolledOver %}
-  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
-    <h3 class="govuk-heading-m success-summary-heading" id="success-summary-heading-example-1">
-      We’ve copied your courses and locations to the next cycle.
-    </h3>
+  {% set justRolledOverHtml %}
+    <h3 class="govuk-notification-banner__heading">We’ve copied your courses and locations to the next cycle.</h3>
+    <p class="govuk-body">You can now prepare for the next cycle, or edit the current cycle.</p>
+  {% endset %}
+  {{ govukNotificationBanner({
+    html: justRolledOverHtml,
+    type: "success"
+  }) if justRolledOver }}
 
-    <p class="govuk-!-margin-bottom-0">
-      You can now prepare for the next cycle, or edit the current cycle.
-    </p>
-  </div>
-  {% endif %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{ data['training-provider-name'] }}</h1>
-    </div>
-  </div>
+  <h1 class="govuk-heading-xl">{{ data["training-provider-name"] }}</h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -54,8 +48,6 @@
           <li>publish this information on all course pages</li>
         </ul>
       </div>
-
-      {# {% include "includes/_access-and-preferences.html" %} #}
     </div>
     <div class="govuk-grid-column-one-third">
       <div class="status-box">

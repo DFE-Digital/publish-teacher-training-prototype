@@ -175,12 +175,24 @@ app.use(function (req, res, next) {
       return ''
     }
 
-    const text = req.session.data[name]
-    if (text === undefined) {
+    const string = req.session.data[name]
+
+    if (!string) {
       return ''
     }
 
-    return marked(text)
+    const text = string.replace(/\\r/g, '\n').replace(/\\t/g, ' ')
+    const html = marked(text)
+
+    // Add govuk-* classes
+    let govukHtml = html.replace(/<p>/g, '<p class="govuk-body">')
+    govukHtml = govukHtml.replace(/<ol>/g, '<ol class="govuk-list govuk-list--number">')
+    govukHtml = govukHtml.replace(/<ul>/g, '<ul class="govuk-list govuk-list--bullet">')
+    govukHtml = govukHtml.replace(/<h2/g, '<h2 class="govuk-heading-l"')
+    govukHtml = govukHtml.replace(/<h3/g, '<h3 class="govuk-heading-m"')
+    govukHtml = govukHtml.replace(/<h4/g, '<h4 class="govuk-heading-s"')
+
+    return govukHtml
   })
 
   nunjucksAppEnv.addGlobal('courseOptions', function () {

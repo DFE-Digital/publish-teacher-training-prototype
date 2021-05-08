@@ -7,7 +7,7 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-grid-row add-top-margin">
+  <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
       <form action="/ucas/apply-preferences" method="post">
         <p>This person will receive invoices from UCAS for payment of fees.</p>
@@ -17,12 +17,11 @@
         {{ macros.textbox('finance-contact-telephone', 'Telephone number', false, 'govuk-input--width-10') }}
         {{ macros.checkboxGroup('agree-to-share', [{ name: 'I give permission to share this information with UCAS' }], false) }}
 
-        <div class="form-group add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save">
-        </div>
-        <p>
-          <a href="/ucas/apply-preferences">Cancel changes</a>
-        </p>
+        {{ govukButton({
+          text: "Save"
+        }) }}
+
+        <p><a href="/ucas/apply-preferences">Cancel changes</a></p>
       </form>
     </div>
   </div>
