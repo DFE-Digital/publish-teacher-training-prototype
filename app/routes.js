@@ -129,27 +129,14 @@ router.all(['/new/:code/placement-locations', '/new/:code/further/placement-loca
     })
   })
 
-  const paths = newCourseWizardPaths(req)
-  paths.back = `/new/${code}/placement-policy`
-
-  res.render('new/placement-locations', {
-    code,
-    paths,
-    items
-  })
-})
-
-router.all(['/new/:code/training-location', '/new/:code/further/training-location'], function (req, res) {
-  const data = req.session.data
-  const code = req.params.code
-
-  if (!isUsingPlacementLocations(code, data)) {
-    res.render('new/training-location', {
+  if (isUsingPlacementLocations(code, data)) {
+    res.render('new/placement-locations', {
       code,
-      paths: newCourseWizardPaths(req)
+      paths: newCourseWizardPaths(req),
+      items
     })
   } else {
-    res.redirect('/new/' + code + '/placement-locations')
+    res.redirect('/new/' + code + '/training-location')
   }
 })
 
