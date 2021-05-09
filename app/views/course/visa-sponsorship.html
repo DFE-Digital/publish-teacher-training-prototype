@@ -1,53 +1,48 @@
 {% extends "layout.html" %}
-{% set title = "Visa sponsorship" %}
+{% set courseType = data[code + "-type"] %}
+{% if courseType === "Salaried" %}
+  {% set title = "Can you sponsor a Skilled worker&nbsp;visa?" %}
+{% else %}
+  {% set title = "Can you sponsor a Student&nbsp;visa?" %}
+{% endif %}
 {% set backLink = course.path %}
 
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: course.path
-  }) }}
-{% endblock %}
-
 {% block content %}
-  <div class="govuk-grid-row">
+  <form action="{{ course.path }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+      {% include "course/_errors.html" %}
 
-      <form action="{{ course.path }}" method="post">
-        {% set radioName = code + "-visa-sponsorship" %}
-        {% set courseType = data[code + "-type"] %}
+      {% set titleHtml %}
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+          {{ title | safe }}
+        </h1>
+      {% endset %}
 
-        {% if courseType === "Salaried" %}
-          {% set questionHtml = "Can you sponsor a Skilled worker&nbsp;visa?" %}
-        {% else %}
-          {% set questionHtml = "Can you sponsor a Student&nbsp;visa?" %}
-        {% endif %}
+      {% set radioName = code + "-visa-sponsorship" %}
+      {{ govukRadios({
+        idPrefix: "visa-sponsorship",
+        name: radioName,
+        fieldset: {
+          legend: {
+            html: titleHtml,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "Yes",
+          text: "Yes",
+          checked: (data[radioName] === "Yes")
+        }, {
+          value: "No",
+          text: "No",
+          checked: (data[radioName] === "No")
+        }]
+      }) }}
 
-        {{ govukRadios({
-          name: radioName,
-          fieldset: {
-            legend: {
-              html: questionHtml,
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--xl"
-            }
-          },
-          items: [{
-            value: "Yes",
-            text: "Yes",
-            checked: (data[radioName] === "Yes")
-          },
-          {
-            value: "No",
-            text: "No",
-            checked: (data[radioName] === "No")
-          }]
-        }) }}
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      </form>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
-  </div>
+  </form>
 {% endblock %}

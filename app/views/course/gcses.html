@@ -1,71 +1,59 @@
 {% extends "layout.html" %}
-{% set title = "Degree requirements" %}
+{% set title = "GCSEs (or equivalent)" %}
 {% set backLink = course.path %}
 
 {% block content %}
-  <!-- <h1 class="govuk-heading-xl">
-    <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
-  </h1> -->
-
-  {% include "course/_errors.html" %}
-
-  <div class="govuk-grid-row">
+  <form action="{{ course.path }}/gcses-pending-or-equivalency-tests" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ course.path }}/gcses-pending-or-equivalency-tests" method="post">
+      {% include "course/_errors.html" %}
 
-        <span class="govuk-caption-l">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+      <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+        {{ title }}
+      </h1>
 
-        <h1 class="govuk-heading-l">GCSEs (or equivalent)</h1>
+      <p class="govuk-body">Candidates will be advised that they need to have a English{{", maths and science" if course.name == "Primary" else " and maths" }} GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
 
-        <p>Candidates will be advised that they need to have a English{{", maths and science" if course.name == "Primary" else " and maths" }} GCSE at grade 4 (C) or above, or equivalent, before they start their training.</p>
-
-        {% set textareaName = course.programmeCode + '-gcse-requirements' %}
-        {% set gcseRequirementsHtml %}
-          {{ govukTextarea({
-            id: "gcse-requirements",
-            name: textareaName,
-            value: data[textareaName],
-            spellcheck: true,
-            label: {
-              text: "Additional GCSE (or equivalent) requirements"
-            }
-          }) }}
-        {% endset -%}
-
-        {% set radioName = course.programmeCode + '-gcse-additional-requirements' %}
-        {{ govukRadios({
-          idPrefix: "degree-subject",
-          name: radioName,
-          fieldset: {
-            legend: {
-              text: "Do you have any additional requirements?",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "No",
-              text: "No",
-              checked: (data[radioName] === "No")
-            },
-            {
-              value: "Yes",
-              text: "Yes",
-              checked: (data[radioName] === "Yes"),
-              conditional: {
-                html: gcseRequirementsHtml
-              }
-            }
-          ]
+      {% set textareaName = course.programmeCode + "-gcse-requirements" %}
+      {% set gcseRequirementsHtml %}
+        {{ govukTextarea({
+          id: "gcse-requirements",
+          name: textareaName,
+          value: data[textareaName],
+          spellcheck: true,
+          label: {
+            text: "Additional GCSE (or equivalent) requirements"
+          }
         }) }}
+      {% endset -%}
 
-        {{ govukButton({
-          text: "Save"
-        }) }}
-      </form>
+      {% set radioName = course.programmeCode + "-gcse-additional-requirements" %}
+      {{ govukRadios({
+        idPrefix: "degree-subject",
+        name: radioName,
+        fieldset: {
+          legend: {
+            text: "Do you have any additional requirements?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "No",
+          text: "No",
+          checked: (data[radioName] === "No")
+        }, {
+          value: "Yes",
+          text: "Yes",
+          checked: (data[radioName] === "Yes"),
+          conditional: {
+            html: gcseRequirementsHtml
+          }
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Save"
+      }) }}
     </div>
-  </div>
-
-
+  </form>
 {% endblock %}
