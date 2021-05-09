@@ -2,7 +2,13 @@
 {% set title = "Users" %}
 {% set navActive = "users" %}
 
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      text: title
+    }])
+  }) }}
+{% endblock %}
 
 {% block content %}
   {{ govukNotificationBanner({
@@ -14,8 +20,8 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{ title }}</h1>
       {{ govukButton({
-        text: 'Invite user',
-        href: '/users/basic-details'
+        text: "Invite user",
+        href: "/users/basic-details"
       }) }}
       <div class="app-application-card">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-1">

@@ -60,11 +60,11 @@
       <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
         <li>write about each course</li>
         <li>preview and publish courses</li>
-        <li>copy content between courses</li>
+        <li>assign locations to a course</li>
         {% if not data["next-cycle"] %}
-        <li>manage vacancies for each course</li>
+          <li>manage vacancies for each course</li>
         {% endif %}
-        <li>add new courses</li>
+        <li>copy content between courses</li>
       </ul>
 
       {% if data["is-accredited-body"] and not (data["rolled-over"] and data["next-cycle"]) %}

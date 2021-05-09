@@ -116,17 +116,19 @@ router.all(['/new/:code/placement-locations', '/new/:code/further/placement-loca
   const items = []
 
   data.schools.forEach(school => {
-    items.push({
-      value: school.name,
-      text: school.name,
-      checked: locations.includes(school.name),
-      label: {
-        classes: 'govuk-label--s'
-      },
-      hint: {
-        text: school.address
-      }
-    })
+    if (school.code !== '-') {
+      items.push({
+        value: school.name,
+        text: school.name,
+        checked: locations.includes(school.name),
+        label: {
+          classes: 'govuk-label--s'
+        },
+        hint: {
+          text: school.address
+        }
+      })
+    }
   })
 
   if (isUsingPlacementLocations(code, data)) {
@@ -138,6 +140,35 @@ router.all(['/new/:code/placement-locations', '/new/:code/further/placement-loca
   } else {
     res.redirect('/new/' + code + '/training-location')
   }
+})
+
+router.all(['/new/:code/training-location'], function (req, res) {
+  const data = req.session.data
+  const code = req.params.code
+  const locations = data[`${code}-training-location`] || []
+  const items = []
+
+  data.schools.forEach(school => {
+    if (school.code === '-') {
+      items.push({
+        value: school.name,
+        text: school.name,
+        checked: locations.includes(school.name),
+        label: {
+          classes: 'govuk-label--s'
+        },
+        hint: {
+          text: school.address
+        }
+      })
+    }
+  })
+
+  res.render('new/training-location', {
+    code,
+    paths: newCourseWizardPaths(req),
+    items
+  })
 })
 
 router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res) {
@@ -636,14 +667,14 @@ router.get('/location/:code', function (req, res) {
 router.post('/location/:code', function (req, res) {
   const code = req.params.code
   const data = req.session.data
-  let loc = data.schools.find(function (school) {
+  let school = data.schools.find(function (school) {
     return school.code === req.params.code
   })
   let isNew = false
 
-  if (!loc && req.body[code + '-location-confirm'] === '_unchecked') {
+  if (!school && req.body[code + '-location-confirm'] === '_unchecked') {
     res.render('location/index', {
-      school: loc,
+      school,
       code,
       showErrors: true,
       isNew: true
@@ -652,29 +683,36 @@ router.post('/location/:code', function (req, res) {
     return
   }
 
-  if (!loc) {
-    loc = {}
-    data.schools.push(loc)
+  if (!school) {
+    school = {}
+    data.schools.push(school)
     isNew = true
   }
 
-  loc.name = data[code + '-name']
-  loc.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`
-  loc.code = code
+  school.name = data[code + '-name']
+  school.urn = data[code + '-urn']
+  school.placement = data[code + '-location-type'] === 'Placement school'
+  school.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`
+  school.postcode = data[code + '-postcode']
+  school.code = code
 
-  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${loc.code}`)
+  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${school.code}`)
 })
 
 router.all('/locations', function (req, res) {
   const data = req.session.data
   const locations = JSON.parse(JSON.stringify(data.schools))
 
-  locations.forEach(location => location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length)
+  locations.forEach(location => {
+    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length
+    location.placement = location.code !== '-'
+  })
 
   res.render('locations/index', {
     locations: locations,
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
+    justUploaded: req.query.success === 'uploaded',
     justChangedCode: req.query.code
   })
 })

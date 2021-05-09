@@ -12,37 +12,38 @@
   )) }}
 {% endblock %}
 
+{% set errors = [{
+  id: code + '-location-confirm',
+  href: '#checkbox-part-1',
+  text: 'Please confirm that candidates can pick this location when they apply'
+}] %}
+
 {% block content %}
   <form action="/location/{{ code }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {% if showErrors %}
-        {% set errors = [{
-          id: code + '-location-confirm',
-          href: '#checkbox-part-1',
-          text: 'Please confirm that candidates can pick this location when they apply'
-        }] %}
-
-        {{ govukErrorSummary({
-          titleText: "We couldn’t save this location",
-          errorList: errors
-        }) }}
-      {% endif %}
+      {{ govukErrorSummary({
+        titleText: "We couldn’t save this location",
+        errorList: errors
+      }) if showErrors }}
 
       <h1 class="govuk-heading-xl">
         {{ title }}
       </h1>
 
       {{ govukInput({
+        id: code + "-name",
+        name: code + "-name",
+        value: school.name,
         label: {
           classes: "govuk-label--m",
           text: "Name"
-        },
-        id: code + "-name",
-        name: code + "-name",
-        value: school.name
+        }
       }) }}
 
       {{ govukInput({
+        id: code + "-urn",
+        name: code + "-urn",
+        value: school.urn,
         label: {
           classes: "govuk-label--m",
           text: "Unique Reference Number (URN)"
@@ -50,10 +51,7 @@
         hint: {
           html: "You can find URNs on the <a href=\"https://www.get-information-schools.service.gov.uk/\" target=\"_blank\">Get information about schools service (opens in new tab)</a>."
         },
-        classes: "govuk-input--width-10",
-        id: code + "-urn",
-        name: code + "-urn",
-        value: school.urn
+        classes: "govuk-input--width-5"
       }) }}
 
       {{ govukRadios({
@@ -66,17 +64,19 @@
           }
         },
         items: [{
-          value: "school",
-          text: "School",
+          value: "Placement school",
+          text: "Placement school",
           hint: {
             text: "Used for classroom based training with children"
-          }
+          },
+          checked: checked(code + "-location-type", "Placement school")
         }, {
-          value: "college",
-          text: "University or college",
+          value: "Academic training location",
+          text: "Academic training location",
           hint: {
-            text: "Used for academic learning"
-          }
+            text: "University or college campus or other location used for academic learning"
+          },
+          checked: checked(code + "-location-type", "Academic training location")
         }]
       }) }}
 

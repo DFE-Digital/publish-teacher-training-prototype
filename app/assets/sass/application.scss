@@ -21,6 +21,7 @@ $git-brand-colour: #159964;
 @import "components/map";
 @import "components/phase-tag";
 @import "components/summary-list";
+@import "components/table";
 @import "components/timeline";
 
 .status-box {
@@ -31,4 +32,9 @@ $git-brand-colour: #159964;
 .missing-section {
   border: $govuk-border-width solid $govuk-border-colour;
   padding: govuk-spacing(4);
+}
+
+abbr[title] {
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }

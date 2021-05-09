@@ -150,7 +150,7 @@
   {# Visa sponsorship policy was required for rollover in 2021 #}
   {% if not data[code + "-visa-sponsorship"] %}
     {% set result = actionsList.push({
-      text: "Can you sponsor a student visa?",
+      text: "Can you sponsor visas?",
       href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
     }) %}
   {% endif %}
@@ -227,7 +227,7 @@
           {% elseif visaSponsorship === "No" %}
             You cannot sponsor a visa
           {% else %}
-            <a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Can you sponsor a student visa?</a>
+            <a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Can you sponsor visas?</a>
           {% endif %}
         {% endset %}
 

@@ -463,7 +463,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-visa-sponsorship']) {
       errors.push({
-        title: 'Can you sponsor a student visa?',
+        title: 'Can you sponsor visas?',
         id: `${prefix}-visa-sponsorship`,
         link: '/visa-sponsorship'
       })

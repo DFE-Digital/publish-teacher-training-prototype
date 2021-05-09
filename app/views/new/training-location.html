@@ -2,6 +2,18 @@
 {% set title = "Where will candidates do their academic training?" %}
 {% set backLink = paths.back %}
 
+{% set result = items.push({
+  divider: "or"
+}, {
+  value: "Takes place at the school where the candidate is placed",
+  text: "At the school where the candidate is placed",
+  checked: checked((code + "-training-location"), "At the school where the candidate is placed")
+}, {
+  value: "Takes place remotely",
+  text: "Remotely",
+  checked: checked((code + "-training-location"), "Takes place remotely")
+}) %}
+
 {% block content %}
   <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -15,27 +27,7 @@
             classes: "govuk-fieldset__legend--xl"
           }
         },
-        items: [{
-          value: "Leeds West Academy",
-          text: "Leeds West Academy",
-          checked: checked((code + "-training-location"), "Leeds West Academy"),
-          label: {
-            classes: 'govuk-label--s'
-          },
-          hint: {
-            text: "Intake Lane, Leeds, LS13 1DQ"
-          }
-        }, {
-          divider: "or"
-        }, {
-          value: "At the school where the candidate is based",
-          text: "At the school where the candidate is based",
-          checked: checked((code + "-training-location"), "At the school where the candidate is based")
-        }, {
-          value: "Remotely",
-          text: "Remotely",
-          checked: checked((code + "-training-location"), "Remotely")
-        }]
+        items: items
       }) }}
 
       {{ govukButton({
