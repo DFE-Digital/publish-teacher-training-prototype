@@ -159,7 +159,7 @@
   {% if not data[code + "-placement-policy"] %}
     {% set result = actionsList.push({
       text: "What is your school placement policy?",
-      href: "/new/" + data["provider-code"] + "/" + "/placement-policy?change=true"
+      href: "/new/" + data["provider-code"] + "/placement-policy?change=true"
     }) %}
   {% endif %}
 
@@ -167,7 +167,7 @@
   {% if not data[code + "-training-location"] %}
     {% set result = actionsList.push({
       text: "Where will candidates do their academic training?",
-      href: "/new/" + data["provider-code"] + "/" + "/training-location?change=true"
+      href: "/new/" + data["provider-code"] + "/training-location?change=true"
     }) %}
   {% endif %}
 
