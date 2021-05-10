@@ -23,7 +23,7 @@
             html: govukCharacterCount({
               id: code + "-placement-policy-hosted",
               name: code + "-placement-policy-hosted",
-              value: value(code + "-placement-policy-hosted") or "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but your provider may not be able to guarantee this.",
+              value: value(code + "-placement-policy-hosted") or "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but we cannot guarantee you will be placed in this school.",
               label: {
                 text: "Give details",
                 classes: "govuk-label--s"
@@ -40,7 +40,7 @@
             html: govukCharacterCount({
               id: code + "-placement-policy-placed",
               name: code + "-placement-policy-placed",
-              value: value(code + "-placement-policy-placed") or "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but your provider will try to take your journey time into consideration.",
+              value: value(code + "-placement-policy-placed") or "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but we will try to take your journey time into consideration when organising placements.",
               label: {
                 text: "Give details",
                 classes: "govuk-label--s"
