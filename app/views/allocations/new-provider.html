@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
-{% set title = 'Who are you requesting for?' %}
+{% set title = "Who are you requesting for?" %}
 {% set backLink = "/allocations" %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      
+
       <form action="/allocations/request-places" method="post" class="form">
         <div class="govuk-form-group govuk-!-margin-bottom-2">
           <fieldset class="govuk-fieldset">
@@ -41,10 +39,8 @@
               <div class="govuk-form-group">
                 <div class="govuk-!-margin-bottom-6">
                   <label class="govuk-label" for="provider-name">Organisation name</label>
-                  <div class="body-text">
-                    <div id="tt-default" class="autocomplete-wrapper"></div>
-                  </div>
-                </div> 
+                  <div id="tt-default" class="autocomplete-wrapper"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -54,7 +50,6 @@
       </form>
 
       <p>To add a new provider to Publish, you should contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a></p>
-
     </div>
   </div>
 

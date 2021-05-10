@@ -1,21 +1,18 @@
 {% extends "layout.html" %}
-{% set title = 'Request places' %}
+{% set title = "Request places" %}
 {% set backLink = "/allocations/new-provider" %}
-{% block pageTitle %}{{ title }}{% endblock %}
-{% block breadcrumbs %}{{ macros.breadcrumbs(breadcrumbItems())}}{% endblock %}
 
 {% set requestingProviderName %}
-	{% if data['requestingProvider'] != "Find an organisation not listed above" %}
-		{{ data['requestingProvider'] }}
-	{% else %}
-		{{ data['schoolList'] }}
-	{% endif %}
+  {% if data.requestingProvider != "Find an organisation not listed above" %}
+    {{ data.requestingProvider }}
+  {% else %}
+    {{ data.schoolList }}
+  {% endif %}
 {% endset %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-  
       <form action="/allocations/check-answers" method="post" class="form">
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
@@ -31,11 +28,9 @@
             </label>
             <input class="govuk-input govuk-input govuk-input--width-10" id="requestedAmount" name="requestedAmount" value="{{ data['requestedAmount'] }}" type="text">
           </div>
-
-        <button class="govuk-button" data-module="govuk-button">Continue</button>
+          <button class="govuk-button" data-module="govuk-button">Continue</button>
+        </div>
       </form>
-
     </div>
   </div>
-
 {% endblock %}

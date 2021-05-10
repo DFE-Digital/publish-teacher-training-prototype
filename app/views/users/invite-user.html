@@ -4,20 +4,14 @@
 {% set navActive = "users" %}
 
 {% block content %}
-  {% set message %}
-    {% if showMessage %}
-      <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="margin-bottom: 60px">
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
-          DfE has received your request to invite {{ data['request-first-name']}} {{ data['request-last-name'] }}.
-        </h3>
-        <p class="govuk-!-margin-bottom-0">
-          They will receive sign-up instructions if their account is approved.
-        </p>
-      </div>
-    {% endif %}
+  {% set notifcationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">DfE has received your request to invite {{ data["request-first-name"]}} {{ data["request-last-name"] }}.</h3>
+    <p class="govuk-body">They will receive sign-up instructions if their account is approved.</p>
   {% endset %}
-
-  {{ message | safe }}
+  {{ govukNotificationBanner({
+    html: notifcationBannerHtml,
+    type: "success"
+  }) if showMessage }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

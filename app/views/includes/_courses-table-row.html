@@ -27,7 +27,7 @@
       <span class="govuk-tag phase-tag-no-content">New</span>
     {% endif %}
   </td>
-  <td class="govuk-table__cell no-wrap">
+  <td class="govuk-table__cell">
     {% if data[course.programmeCode + '-publish-state'] == 'withdrawn' %}
       No – withdrawn
     {% elseif (data[course.programmeCode + '-publish-state'] == 'published' or data[course.programmeCode + '-publish-state'] == 'published-with-changes') %}

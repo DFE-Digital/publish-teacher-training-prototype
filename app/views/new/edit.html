@@ -16,7 +16,7 @@
   <form action="{{ paths.next }}" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl add-double-bottom-margin">
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
           <span class="govuk-caption-xl">
             {% if data[code + '-change-title'] == 'Yes, that’s correct' or not data[code + '-change-title']  %}
               {{ data[code + '-generated-title'] }} ({{ code }})

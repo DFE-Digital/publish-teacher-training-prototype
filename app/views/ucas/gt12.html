@@ -12,13 +12,11 @@
       <form action="/ucas/apply-preferences" method="post">
         {% include "ucas/_gt12.html" %}
 
-        <div class="form-group add-double-bottom-margin">
-          <input type="submit" class="govuk-button" value="Save">
-        </div>
+        {{ govukButton({
+          text: "Save"
+        }) }}
 
-        <p>
-          <a href="/ucas/apply-preferences">Cancel changes</a>
-        </p>
+        <p><a href="/ucas/apply-preferences">Cancel changes</a></p>
       </form>
     </div>
   </div>

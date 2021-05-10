@@ -19,7 +19,7 @@
   {% else %}
     {% if showErrors %}
       {% set placementPolicyError = error(code + "-placement-policy", errors) %}
-      <a href={{ placementPolicyError.href }}>{{ placementPolicyError.text }}</a>
+      <a class="govuk-link" href={{ placementPolicyError.href }}>{{ placementPolicyError.text }}</a>
     {% else %}
       Unknown
     {% endif %}
@@ -42,7 +42,7 @@
   {% else %}
     {% if showErrors %}
       {% set trainingLocationError = error(code + "-training-location", errors) %}
-      <a href={{ trainingLocationError.href }}>{{ trainingLocationError.text }}</a>
+      <a class="govuk-link" href={{ trainingLocationError.href }}>{{ trainingLocationError.text }}</a>
     {% else %}
       Unknown
     {% endif %}
@@ -81,12 +81,11 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-sen", showErrors),
     key: {
       html: "<abbr title=\"Special educational needs and disability\">SEND</abbr>"
     },
     value: {
-      text: data[code + "-sen"] or "Unknown"
+      text: "Yes" if data[code + "-sen"] else "No"
     },
     actions: {
       items: [{
@@ -245,7 +244,7 @@
         text: "Change",
         visuallyHiddenText: "how placements work"
       }]
-    } if showChangeLinks and not placementPolicyError
+    } if showChangeLinks and not value(code + "-placement-policy")
   },
 
   {
@@ -267,7 +266,7 @@
   {
     classes: macros.requiredSummaryRowClasses(code + "-training-location", showErrors),
     key: {
-      text: "Academic training location"
+      text: "Academic training"
     },
     value: {
       html: trainingLocationHtml

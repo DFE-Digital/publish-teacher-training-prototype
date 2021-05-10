@@ -134,7 +134,7 @@
   {# Structured degree requirements were required for rollover in 2021 #}
   {% if not data[code + "-degree-minimum-required"] %}
     {% set result = actionsList.push({
-      text: "Degree requirements",
+      text: "Do you require a minimum degree classification?",
       href: "/course/" + data["provider-code"] + "/" + code + "/degree"
     }) %}
   {% endif %}
@@ -142,15 +142,15 @@
   {# Structured GCSE requirements were required for rollover in 2021 #}
   {% if not data[code + "-gcse-english-flexibility"] %}
     {% set result = actionsList.push({
-      text: "GCSE requirements",
-      href: "/course/" + data['provider-code'] + "/" + code + "/gcses-pending-or-equivalency-tests"
+      text: "GCSEs and equivalency tests",
+      href: "/course/" + data["provider-code"] + "/" + code + "/gcses-pending-or-equivalency-tests"
     }) %}
   {% endif %}
 
   {# Visa sponsorship policy was required for rollover in 2021 #}
   {% if not data[code + "-visa-sponsorship"] %}
     {% set result = actionsList.push({
-      text: "Visa sponsorship",
+      text: "Can you sponsor visas?",
       href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
     }) %}
   {% endif %}
@@ -158,7 +158,7 @@
   {# Structured school placements policy was required for rollover in 2021 #}
   {% if not data[code + "-placement-policy"] %}
     {% set result = actionsList.push({
-      text: "School placements",
+      text: "What is your school placement policy?",
       href: "/new/" + data["provider-code"] + "/" + "/placement-policy?change=true"
     }) %}
   {% endif %}
@@ -166,7 +166,7 @@
   {# An academic training location was required for rollover in 2021 #}
   {% if not data[code + "-training-location"] %}
     {% set result = actionsList.push({
-      text: "Academic training location",
+      text: "Where will candidates do their academic training?",
       href: "/new/" + data["provider-code"] + "/" + "/training-location?change=true"
     }) %}
   {% endif %}
@@ -227,12 +227,7 @@
           {% elseif visaSponsorship === "No" %}
             You cannot sponsor a visa
           {% else %}
-            {% set visaSponsorshipError = error(code + "-visa-sponsorship", errors) %}
-            {% if showErrors %}
-              <a href={{ visaSponsorshipError.href }}>{{ visaSponsorshipError.text }}</a>
-            {% else %}
-              Unknown
-            {% endif %}
+            <a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Can you sponsor visas?</a>
           {% endif %}
         {% endset %}
 
@@ -245,7 +240,7 @@
             },
             value: {
               text: value(code + "-about-this-course") or "Unknown",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -261,7 +256,7 @@
             },
             value: {
               html: value(code + "-interview-process") or "Empty",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -280,11 +275,11 @@
             },
             actions: {
               items: [{
-                href: "/new/" + code + "/visa-sponsorship?change=true",
+                href: coursePath + "/visa-sponsorship",
                 text: "Change",
                 visuallyHiddenText: "visa sponsorship"
               }]
-            } if showChangeLinks and not visaSponsorshipError
+            } if showChangeLinks and value(code + "-visa-sponsorship")
           }]
         }) }}
 
@@ -298,7 +293,7 @@
             },
             value: {
               text: value(code + "-duration") or "Unknown",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -314,7 +309,7 @@
             },
             value: {
               text: value(code + "-salary-details"),
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -360,7 +355,7 @@
             },
             value: {
               text: value(code + "-fee-details") or "Empty",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -376,7 +371,7 @@
             },
             value: {
               html: value(code + "-financial-support") or "Empty",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -403,12 +398,7 @@
               3rd class degree or above, or equivalent
             {% endif %}
           {% else %}
-            {% if showErrors %}
-              {% set degreeError = error(code + "-degree-minimum-required", errors) %}
-              <a href={{ degreeError.href }}>{{ degreeError.text }}</a>
-            {% else %}
-              Unknown
-            {% endif %}
+            <a class="govuk-link" href="{{ coursePath }}/degree">Do you require a minimum degree classification?</a>
           {% endif %}
           {% if data[code + "-degree-subject-required"] === "Yes" %}
             <br><br>
@@ -467,12 +457,7 @@
               <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsPendingOrEquivalencyTests | length) === 1 }} {{ subjectsPendingOrEquivalencyTests | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }} or who need to take equivalency tests.</p>
             {% endif %}
           {% else %}
-            {% if showErrors %}
-              {% set gcseError = error(code + "-gcse-english-flexibility", errors) %}
-              <a href={{ gcseError.href }}>{{ gcseError.text }}</a>
-            {% else %}
-              Unknown
-            {% endif %}
+            <a class="govuk-link" href="{{ coursePath }}/gcses-pending-or-equivalency-tests">GCSEs and equivalency tests</a>
           {% endif %}
         {% endset %}
 
@@ -492,7 +477,7 @@
                 text: "Change",
                 visuallyHiddenText: "degree requirements"
               }]
-            } if not degreeError
+            } if value(code + "-degree-minimum-required")
           }, {
             classes: macros.requiredSummaryRowClasses(code + "-gcse-english-flexibility", showErrors),
             key: {
@@ -507,7 +492,7 @@
                 text: "Change",
                 visuallyHiddenText: "GCSE requirements"
               }]
-            } if not gcseError
+            } if value(code + "-gcse-english-flexibility")
           }, {
             classes: macros.optionalSummaryRowClasses(code + "-personal-qualities"),
             key: {
@@ -515,7 +500,7 @@
             },
             value: {
               html: data[code + "-personal-qualities"] or "Empty",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{
@@ -531,7 +516,7 @@
             },
             value: {
               html: data[code + "-other-requirements"] or "Empty",
-              classes: "govuk-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate"
             },
             actions: {
               items: [{

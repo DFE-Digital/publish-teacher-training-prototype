@@ -1,5 +1,3 @@
-
-
 {% macro ucasPart(id, label, help, changeLink = '#', contact = false) %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
@@ -8,7 +6,7 @@
     <dd class="govuk-summary-list__value">
       {% if (contact and (value(id + '-email'))) %}
         {{ value(id + '-name') }}<br />
-        <span class="truncate">{{ value(id + '-email') }}</span><br />
+        {{ value(id + '-email') }}<br />
         {{ value(id + '-telephone') }}
       {% elseif (value(id)) %}
         {{ value(id) }}
@@ -29,7 +27,7 @@
 {% endmacro %}
 
 {% macro formatting() %}
-<h3 class="govuk-heading-m remove-top-margin">Formatting</h3>
+<h3 class="govuk-heading-m govuk-!-margin-top-0">Formatting</h3>
 <h4 class="govuk-heading-s">Links</h4>
 <p>Use square brackets [] around the link text and round brackets () around the link URL. Make sure there are no spaces between the brackets.</p>
 
@@ -50,28 +48,25 @@
 {% macro copyContent() %}
 <form data-module="copy-content">
   <div class="status-box">
-    <h3 class="govuk-heading-m remove-top-margin">
+    <h3 class="govuk-heading-m govuk-!-margin-top-0">
       <span class="js-cant-copy" style="display: none">Use this content again</span>
       <span class="js-can-copy" style="display: none">Copy content from another course</span>
     </h3>
 
-    <div class="success-summary success-summary-small js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none;">
-      <h3 class="govuk-heading-s success-summary-heading govuk-!-margin-bottom-4 remove-top-margin" id="success-summary-heading-example-1">
-        Fields copied:
-      </h3>
+    <div class="app-copy-content app-copy-content--success js-success-copy" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1" style="display: none">
+      <h3 class="app-copy-content__title" id="success-summary-heading-example-1">Fields copied:</h3>
       <div class="js-what-copied"></div>
     </div>
-    <div class="error-summary error-summary-small js-error-copy" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="display: none">
-      <h3 class="govuk-heading-s error-summary-heading" id="error-summary-heading-example-1">
-        There was no content to copy.
-      </h3>
+
+    <div class="app-copy-content app-copy-content--error js-error-copy" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1" style="display: none">
+      <h3 class="app-copy-content__title" id="error-summary-heading-example-1">There was no content to copy.</h3>
     </div>
 
     <div class="js-can-copy" style="display: none">
       <p>Fill in this page with content from another course.</p>
 
       <label class="govuk-label govuk-label--s" for="copy-from">Copy from</label>
-      <select id="copy-from" name="copy-from" class="govuk-select add-double-bottom-margin" style="background: #fff">
+      <select id="copy-from" name="copy-from" class="govuk-select govuk-!-margin-bottom-6" style="background: #fff">
         {{ courseOptions() | safe }}
       </select>
       <input type="submit" class="govuk-button" value="Copy content" />
@@ -87,12 +82,12 @@
 {% endmacro %}
 
 {% macro aboutYourOrgPublish(state = 'new', publishedBefore = false, publishLink = '#') %}
-<div class="add-double-bottom-margin status-box">
+<div class="govuk-!-margin-bottom-6 status-box">
   {% if state == 'draft' %}
     <div class="unpublished-changes">
       <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
       <p>You have unpublished changes.</p>
-      <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+      <p class="govuk-!-margin-top-3">Last saved:<br />{{ today() }} by Jane Doe</p>
     </div>
     <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
   {% endif %}
@@ -130,7 +125,7 @@
   {% set linkPath = providerCode + '/' + courseCode %}
   {% set nextCycle = value('next-cycle') %}
 
-  <div class="add-double-bottom-margin status-box">
+  <div class="status-box govuk-!-margin-bottom-6">
     <h3 class="govuk-heading-m">Status</h3>
     {% if state == 'draft' %}
       <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
@@ -224,7 +219,7 @@
     {% endif %}
 
     {% if state == 'draft' or state == 'published-with-changes' %}
-      <p class="add-top-margin">Last saved:<br />{{ today() }} by Jane Doe</p>
+      <p class="govuk-!-margin-top-3">Last saved:<br />{{ today() }} by Jane Doe</p>
     {% endif %}
 
     {% if publishedBefore or state == 'published' or state == 'published-with-changes' %}
@@ -242,14 +237,14 @@
 
         <p>Remove this course from Find and close applications.</p>
 
-        <p class="remove-bottom-margin">
+        <p class="govuk-!-margin-bottom-0">
           <a href="/course/{{ linkPath }}/withdraw" class="destructive-link">Withdraw this course</a>
         </p>
       {% endif %}
     {% else %}
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
-      <p class="remove-bottom-margin">
+      <p class="govuk-!-margin-bottom-0">
         <a href="/course/{{ linkPath }}/delete" class="destructive-link">Delete this course</a>
       </p>
     {% endif %}
@@ -436,13 +431,11 @@
           {{ e.text }}
         </span>
       {% endif %}
-      <div class="textarea-wrapper">
-        <textarea
-          class="govuk-textarea js-character-count"
-          rows="{{ rows }}"
-          name="{{ id }}"
-          id="{{ id }}">{{ value(id) }}</textarea>
-      </div>
+      <textarea
+        class="govuk-textarea js-character-count"
+        rows="{{ rows }}"
+        name="{{ id }}"
+        id="{{ id }}">{{ value(id) }}</textarea>
       <span id="{{ id }}-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
         You can enter up to {{ maxWords }} words
       </span>
@@ -479,14 +472,14 @@
 
 {% macro requiredSummaryRowClasses(id, showErrors) %}
   {% if not value(id) and showErrors %}
-    govuk-summary-list__row--error
+    app-summary-list__row--error
   {% elif not value(id) %}
-    govuk-summary-list__row--missing
+    app-summary-list__row--missing
   {% endif %}
 {% endmacro %}
 
 {% macro optionalSummaryRowClasses(id) %}
-  {{ "govuk-summary-list__row--empty" if not value(id) }}
+  {{ "app-summary-list__row--empty" if not value(id) }}
 {% endmacro %}
 
 {% macro coursePart(id, label, errors, truncate = true) %}
@@ -496,7 +489,7 @@
       {{ label }}
       {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
     </dt>
-    <dd class="govuk-summary-list__value {% if truncate %}govuk-summary-list__value--truncate{% endif %} {% if not value(id) %}govuk-summary-list__value--empty{% endif %}">
+    <dd class="govuk-summary-list__value {% if truncate %}app-summary-list__value--truncate{% endif %} {% if not value(id) %}app-summary-list__value--empty{% endif %}">
       {% if (value(id)) %}
         {{ value(id) }}
       {% else %}

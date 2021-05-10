@@ -1,0 +1,26 @@
+.app-copy-content {
+  margin-bottom: govuk-spacing(2);
+  padding-left: govuk-spacing(2);
+  border-style: solid;
+  border-width: 0 0 0 govuk-spacing(1);
+}
+
+.app-copy-content--error {
+  border-left-color: $govuk-error-colour;
+}
+
+.app-copy-content--success {
+  border-left-color: $govuk-success-colour;
+
+  .govuk-list {
+    @extend .govuk-error-summary__list;
+
+    a {
+      color: $govuk-success-colour;
+    }
+  }
+}
+
+.app-copy-content__title {
+  @extend .govuk-heading-s
+}

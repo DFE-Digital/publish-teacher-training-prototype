@@ -18,7 +18,7 @@
         <ul class="govuk-list" id="selected-schools-list">
           {% for s in data['partner-school'] %}
             <li>
-              <h3 class="govuk-heading-s remove-bottom-margin">
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
                 {{ s }}
               </h3>
               <input type="hidden" name="partner-school" value="{{ s }}">
@@ -65,7 +65,7 @@
 
         $('#selected-schools-list').append(`
           <li>
-            <h3 class="govuk-heading-s remove-bottom-margin">
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
               ${school}
             </h3>
             <input type="hidden" name="partner-school" value="${school}">
