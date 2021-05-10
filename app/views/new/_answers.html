@@ -17,22 +17,17 @@
   {% elif data[code + "-placement-policy"] == "other" %}
     {{ data[code + "-placement-policy-other"] }}
   {% else %}
-    {% if showErrors %}
-      {% set placementPolicyError = error(code + "-placement-policy", errors) %}
-      <a class="govuk-link" href={{ placementPolicyError.href }}>{{ placementPolicyError.text }}</a>
-    {% else %}
-      Unknown
-    {% endif %}
+    <a class="govuk-link" href="/new/{{ code }}/placement-policy?change=true">What is your school placement policy?</a>
   {% endif %}
 {% endset %}
 
 {% set placementLocationsHtml %}
-  {% if isArray(data[code + '-locations']) %}
-    {{ data[code + '-locations'] | join('<br>') | safe }}
-  {% elseif data[code + '-locations'] %}
-    {{ data[code + '-locations'] }}
+  {% if isArray(data[code + "-locations"]) %}
+    {{ data[code + "-locations"] | join("<br>") | safe }}
+  {% elseif data[code + "-locations"] %}
+    {{ data[code + "-locations"] }}
   {% else %}
-    {{ data['schools'][0].name }}
+    {{ data["schools"][0].name }}
   {% endif %}
 {% endset %}
 
@@ -40,12 +35,7 @@
   {% if data[code + "-training-location"] %}
     {{ data[code + "-training-location"] }}
   {% else %}
-    {% if showErrors %}
-      {% set trainingLocationError = error(code + "-training-location", errors) %}
-      <a class="govuk-link" href={{ trainingLocationError.href }}>{{ trainingLocationError.text }}</a>
-    {% else %}
-      Unknown
-    {% endif %}
+    <a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Where will candidates do their academic training?</a>
   {% endif %}
 {% endset %}
 
@@ -244,7 +234,7 @@
         text: "Change",
         visuallyHiddenText: "how placements work"
       }]
-    } if showChangeLinks and not value(code + "-placement-policy")
+    } if showChangeLinks and value(code + "-placement-policy")
   },
 
   {
@@ -277,7 +267,7 @@
         text: "Change",
         visuallyHiddenText: "training location"
       }]
-    } if showChangeLinks and not trainingLocationError
+    } if showChangeLinks and value(code + "-training-location")
   },
 
   {
