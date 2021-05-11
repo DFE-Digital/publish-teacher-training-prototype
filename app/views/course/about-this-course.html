@@ -55,8 +55,7 @@
         <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
         <h2 id="interview-process" class="govuk-heading-l">Interview process</h2>
-        <p>Tell applicants:</p>
-        <p>This could include:</p>
+        <p class="govuk-body">Tell applicants:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>how many interviews they’ll have</li>
           <li>how long each interview will be</li>
@@ -74,6 +73,36 @@
           },
           maxwords: 250,
           rows: 10
+        }) }}
+
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
+
+        <h2 id="school-placements" class="govuk-heading-l">How school placements work</h2>
+        <p class="govuk-body">Give applicants more information about the schools they’ll be teaching in. Tell them:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how many placements a candidate will have</li>
+          <li>how much time they’ll spend in each school</li>
+          <li>if mentors are available within the schools</li>
+          <li>the average distance candidates have to travel from home to school</li>
+        </ul>
+
+        <p class="govuk-body">You could also mention:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how many schools you partner with in total</li>
+          <li>whether candidates are able to change schools</li>
+          <li>how placement schools are selected</li>
+        </ul>
+
+        {{ govukCharacterCount({
+          name: course.programmeCode + "-placements-policy",
+          id: course.programmeCode + "-placements-policy",
+          value: value(course.programmeCode + "-placements-policy"),
+          label: {
+            text: "How school placements work",
+            classes: "govuk-label--s"
+          },
+          maxwords: 350,
+          rows: 15
         }) }}
 
         {{ govukButton({

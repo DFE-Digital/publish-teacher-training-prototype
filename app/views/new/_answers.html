@@ -11,11 +11,11 @@
 
 {% set placementPolicyHtml %}
   {% if data[code + "-placement-policy"] == "hosted" %}
-    {{ data[code + "-placement-policy-hosted"] }}
+    Candidates choose a lead or host school
   {% elif data[code + "-placement-policy"] == "placed" %}
-    {{ data[code + "-placement-policy-placed"] }}
+    Placements are arranged with candidates before their training starts
   {% elif data[code + "-placement-policy"] == "other" %}
-    {{ data[code + "-placement-policy-other"] }}
+    Other
   {% else %}
     <a class="govuk-link" href="/new/{{ code }}/placement-policy?change=true">What is your school placement policy?</a>
   {% endif %}
@@ -27,7 +27,7 @@
   {% elseif data[code + "-locations"] %}
     {{ data[code + "-locations"] }}
   {% else %}
-    {{ data["schools"][0].name }}
+    <a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Select placement schools for this course</a>
   {% endif %}
 {% endset %}
 
@@ -223,7 +223,7 @@
   {
     classes: macros.requiredSummaryRowClasses(code + "-placement-policy", showErrors),
     key: {
-      text: "School placements"
+      text: "Placement policy"
     },
     value: {
       html: placementPolicyHtml
@@ -238,8 +238,9 @@
   },
 
   {
+    classes: macros.requiredSummaryRowClasses(code + "-locations", showErrors),
     key: {
-      text: "Placement locations"
+      text: "Placement schools"
     },
     value: {
       html: placementLocationsHtml
@@ -248,9 +249,9 @@
       items: [{
         href: "/new/" + code + "/placement-locations?change=true",
         text: "Change",
-        visuallyHiddenText: "school locations"
+        visuallyHiddenText: "placement schools"
       }]
-    } if showChangeLinks
+    } if showChangeLinks and value(code + "-locations")
   } if data[code + "-placement-policy"] == "hosted",
 
   {

@@ -155,7 +155,7 @@
     }) %}
   {% endif %}
 
-  {# Structured school placements policy was required for rollover in 2021 #}
+  {# Structured school placement policy was required for rollover in 2021 #}
   {% if not data[code + "-placement-policy"] %}
     {% set result = actionsList.push({
       text: "What is your school placement policy?",
@@ -247,6 +247,22 @@
                 href: coursePath + "/about-this-course",
                 text: "Change",
                 visuallyHiddenText: "details about this course"
+              }]
+            }
+          }, {
+            classes: macros.requiredSummaryRowClasses(code + "-school-placements"),
+            key: {
+              text: "How school placements work"
+            },
+            value: {
+              html: value(code + "-school-placements") or "Empty",
+              classes: "app-summary-list__value--truncate"
+            },
+            actions: {
+              items: [{
+                href: coursePath + "/about-this-course#school-placements",
+                text: "Change",
+                visuallyHiddenText: "details of how school placements work"
               }]
             }
           }, {

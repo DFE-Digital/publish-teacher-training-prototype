@@ -17,55 +17,16 @@
         },
         items: [{
           value: "hosted",
-          text: "Candidates can choose a lead or host school",
-          checked: checked((code + "-placement-policy"), "hosted"),
-          conditional: {
-            html: govukCharacterCount({
-              id: code + "-placement-policy-hosted",
-              name: code + "-placement-policy-hosted",
-              value: value(code + "-placement-policy-hosted") or "You’ll be placed in schools for most of your course. You can pick which host school you want to be in, but we cannot guarantee you will be placed in this school.",
-              label: {
-                text: "Give details",
-                classes: "govuk-label--s"
-              },
-              maxlength: 350,
-              rows: 8
-            })
-          }
+          text: "Candidates choose a lead or host school",
+          checked: checked((code + "-placement-policy"), "hosted")
         }, {
           value: "placed",
           text: "Placements are arranged with candidates before their training starts",
-          checked: checked((code + "-placement-policy"), "placed"),
-          conditional: {
-            html: govukCharacterCount({
-              id: code + "-placement-policy-placed",
-              name: code + "-placement-policy-placed",
-              value: value(code + "-placement-policy-placed") or "You’ll be placed in schools for most of your course. You can’t pick which schools you want to be in, but we will try to take your journey time into consideration when organising placements.",
-              label: {
-                text: "Give details",
-                classes: "govuk-label--s"
-              },
-              maxlength: 350,
-              rows: 8
-            })
-          }
+          checked: checked((code + "-placement-policy"), "placed")
         }, {
           value: "other",
           text: "Other",
-          checked: checked((code + "-placement-policy"), "other"),
-          conditional: {
-            html: govukCharacterCount({
-              id: code + "-placement-policy-other",
-              name: code + "-placement-policy-other",
-              value: value(code + "-placement-policy-other"),
-              label: {
-                text: "Give details",
-                classes: "govuk-label--s"
-              },
-              maxlength: 350,
-              rows: 8
-            })
-          }
+          checked: checked((code + "-placement-policy"), "other")
         }]
       }) }}
 
