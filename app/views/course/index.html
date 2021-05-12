@@ -123,11 +123,11 @@
 
   {% set actionsList = [] %}
 
-  {# Age range was an additional field required for rollover 2020 #}
-  {% if not data[code + "-age-range"] %}
+  {# Visa sponsorship policy was required for rollover in 2021 #}
+  {% if not data[code + "-visa-sponsorship"] %}
     {% set result = actionsList.push({
-      text: "Specify an age range",
-      href: "/new/" + code + "/age-range"
+      text: "Can you sponsor visas?",
+      href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
     }) %}
   {% endif %}
 
@@ -147,11 +147,11 @@
     }) %}
   {% endif %}
 
-  {# Visa sponsorship policy was required for rollover in 2021 #}
-  {% if not data[code + "-visa-sponsorship"] %}
+  {# Age range was an additional field required for rollover 2020 #}
+  {% if not data[code + "-age-range"] %}
     {% set result = actionsList.push({
-      text: "Can you sponsor visas?",
-      href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
+      text: "Specify an age range",
+      href: "/new/" + code + "/age-range"
     }) %}
   {% endif %}
 
