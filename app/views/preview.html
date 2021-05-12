@@ -178,6 +178,11 @@
             {% elif minDegreeClass == "3" %}
               An undergraduate degree, or equivalent. This should be an honours degree (3rd), or equivalent.
             {% endif %}
+          {% else %}
+            {# Show missing message #}
+            <p class="missing-section">
+              Please add details <a href="{{ course.path }}/degree">about degree requirements</a>.
+            </p>
           {% endif %}
         </p>
 
@@ -187,7 +192,6 @@
           {% endif %}
         {% endif %}
 
-        <p class="govuk-body">GCSE grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent.</p>
 
         {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
           <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
@@ -200,6 +204,15 @@
         {% set subjectsMustHave = [] %}
         {% set subjectsCanBePending = [] %}
         {% set subjectsPendingOrEquivalencyTests = [] %}
+
+        {% if englishGcseFlexibility %}
+          <p class="govuk-body">GCSE grade 4 (C) or above in English{{", maths and science" if   course.name == "Primary" else " and maths" }}, or equivalent.</p>
+        {% else %}
+          {# Show missing message #}
+            <p class="missing-section">
+              Please add details <a href="{{ course.path }}/gcses-pending-or-equivalency-tests">about GCSE requirements</a>.
+            </p>
+        {% endif %}
 
         {% if englishGcseFlexibility === "pending" %}
           {% set subjectsCanBePending = subjectsCanBePending | push("English") %}
@@ -342,7 +355,9 @@
             You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% else %}
             {# Show missing message #}
-            {{ macros.previewPart(visaSponsorship) }}
+            <p class="missing-section">
+              Please add details <a href="{{ course.path }}/visa-sponsorship">about visa sponsorship</a>.
+            </p>
           {% endif %}
         </p>
 
@@ -358,15 +373,15 @@
       <section id="section-contact" class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l">Contact this training provider</h2>
 
-        {% if not (data["email-address"] and data["telephone-number"] and data["website"] and data["postcode"] and data["building-and-street"]) %}
+        {% if not (data["email"] and data["telephone"] and data["website"] and data["postcode"] and data["building-and-street"]) %}
           <p class="missing-section">Please <a href="/about-your-organisation">add your missing contact details</a></a>.</p>
         {% endif %}
 
         <dl class="app-description-list">
           <dt>Email</dt>
-          <dd><a href="#">{{ data["email-address"] }}</a></dd>
+          <dd><a href="#">{{ data["email"] }}</a></dd>
           <dt>Telephone</dt>
-          <dd>{{ data["telephone-number"] }}</dd>
+          <dd>{{ data["telephone"] }}</dd>
           <dt>Website</dt>
           <dd><a href="{{ data["website"] }}">{{ data["website"] }}</a></dd>
           <dt>Address</dt>
@@ -375,7 +390,7 @@
             {% if data["building-and-street-2"] %}
               {{ data["building-and-street-2"] }}<br />
             {% endif %}
-            {{ data["organisation-town-or-city"] }}<br />
+            {{ data["town-or-city"] }}<br />
             {{ data["county"] }}<br />
             {{ data["postcode"] }}
           </dd>
