@@ -13,7 +13,6 @@ const {
   isFurtherEducation,
   isRegionLocation,
   isUsingPlacementLocations,
-  rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
@@ -57,52 +56,6 @@ router.get('/new/start', function (req, res) {
   }
 
   res.redirect('/new/' + code + '/phase')
-})
-
-router.all('/rollover/courses', function (req, res) {
-  const data = req.session.data
-  const courses = []
-
-  data.ucasCourses.forEach(course => {
-    courses.push({
-      name: `${course.name} (${course.programmeCode})`,
-      text: course.options[0],
-      selected: true
-    })
-  })
-
-  res.render('rollover/courses', {
-    courses: courses,
-    paths: rolloverWizardPaths(req)
-  })
-})
-
-router.all('/rollover/locations', function (req, res) {
-  const data = req.session.data
-  const locations = []
-
-  data.schools.forEach(location => {
-    locations.push({
-      name: `${location.name} (${location.code})`,
-      selected: true
-    })
-  })
-
-  res.render('rollover/locations', {
-    locations: locations,
-    paths: rolloverWizardPaths(req)
-  })
-})
-
-router.post('/rollover/create', function (req, res) {
-  const data = req.session.data
-  data['rolled-over'] = true
-
-  res.redirect('/cycles?rolled=true')
-})
-
-router.all('/rollover/:view', function (req, res) {
-  res.render(`rollover/${req.params.view}`, { paths: rolloverWizardPaths(req) })
 })
 
 router.all('/cycles', function (req, res) {
