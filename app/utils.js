@@ -72,19 +72,6 @@ function nextAndBackPaths (paths, currentPath, query, isModernLanguages = false)
   }
 }
 
-function rolloverWizardPaths (req) {
-  const paths = [
-    '/',
-    '/rollover/start',
-    '/rollover/courses',
-    '/rollover/locations',
-    '/rollover/confirm',
-    '/rollover/create'
-  ]
-
-  return nextAndBackPaths(paths, req.path, originalQuery(req))
-}
-
 function onboardingWizardPaths (req) {
   const paths = [
     '/onboarding/accept-terms',
@@ -635,7 +622,6 @@ module.exports = {
   isFurtherEducation,
   isRegionLocation,
   isUsingPlacementLocations,
-  rolloverWizardPaths,
   onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
