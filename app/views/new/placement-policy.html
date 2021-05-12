@@ -18,11 +18,17 @@
         items: [{
           value: "hosted",
           text: "Candidates choose a lead or host school",
-          checked: checked((code + "-placement-policy"), "hosted")
+          checked: checked((code + "-placement-policy"), "hosted"),
+          hint: {
+            text: "Placement schools are shown on Find with their vacancy status. Candidates will be asked to select a school when they apply."
+          }
         }, {
           value: "placed",
           text: "Placements are arranged with candidates before their training starts",
-          checked: checked((code + "-placement-policy"), "placed")
+          checked: checked((code + "-placement-policy"), "placed"),
+          hint: {
+            text: "Candidates apply directly to the course when they apply."
+          }
         }, {
           value: "other",
           text: "Other",
