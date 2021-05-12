@@ -59,8 +59,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   if idx < 7
     prototype_data[courseCode + '-about-this-course'] = lorem
     prototype_data[courseCode + '-interview-process'] = lorem
-    # prototype_data[courseCode + '-placement-policy'] = 'hosted'
-    # prototype_data[courseCode + '-placement-policy-hosted'] = lorem
+    prototype_data[courseCode + '-school-placements'] = lorem
     prototype_data[courseCode + '-duration'] = '1 year'
     prototype_data[courseCode + '-salary-details'] = lorem
     prototype_data[courseCode + '-fee'] = '9,000'
@@ -381,8 +380,7 @@ end
 
 prototype_data['new-course'] = {
   'include-accredited': !isAccreditedBody,
-  'include-fee-or-salary': courses.first['route'].include?('School Direct'),
-  'include-locations': prototype_data['schools'].length > 1
+  'include-fee-or-salary': courses.first['route'].include?('School Direct')
 }
 
 prototype_data['is-accredited-body'] = isAccreditedBody

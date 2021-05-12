@@ -112,14 +112,30 @@
       <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
 
-        {% if not data[code + "-placement-policy"] %}
-          {# Show missing message #}
-          {{ macros.previewPart(code + "-placement-policy") }}
-        {% endif %}
+        {% set trainingLocationsHtml %}
+          {% if data[code + "-placement-policy"] == "hosted" %}
+            <p>You will be placed in different schools during your training. You can select your host school when you apply.</p>
+          {% elif data[code + "-placement-policy"] == "placed" %}
+            <p>You will be placed in different schools during your training. You can’t pick which schools you want to be in, but your course will try to place you in schools you can commute to.</p>
+          {% endif %}
+
+          {% if data[code + "-training-location"] == "Takes place remotely" %}
+            <p>You will also spend some of your time in academic lessons. These take place remotely.</p>
+          {% elif data[code + "-training-location"] == "Takes place at the school where the candidate is placed" %}
+            <p>You will also spend some of your time in academic lessons, which takes place at the school where you are placed.</p>
+          {% elif data[code + "-training-location"] %}
+            <p>You will also spend some of your time in academic lessons. These take place at {{ data[code + "-training-location"] }}.</p>
+          {% endif %}
+        {% endset %}
+
+        {{ appAdvice({
+          title: "Where you will train",
+          html: trainingLocationsHtml
+        }) if data[code + "-placement-policy"]  }}
+
+        {{ macros.previewPart(code + "-school-placements") }}
 
         {% if data[code + "-placement-policy"] == "hosted" %}
-          {{ macros.previewPart(code + "-placement-policy-hosted") }}
-
           <h3 class="govuk-heading-m">Locations</h3>
           <p class="govuk-body">You can select one of the following locations when you apply.</p>
           <table class="govuk-table">
@@ -142,10 +158,6 @@
               {% endfor %}
             </tbody>
           </table>
-        {% elif data[code + "-placement-policy"] == "placed" %}
-          {{ macros.previewPart(code + "-placement-policy-placed") }}
-        {% elif data[code + "-placement-policy"] == "other" %}
-          {{ macros.previewPart(code + "-placement-policy-other") }}
         {% endif %}
       </section>
 

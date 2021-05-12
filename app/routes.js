@@ -151,7 +151,7 @@ router.all(['/new/:code/training-location'], function (req, res) {
   data.schools.forEach(school => {
     if (school.code === '-') {
       items.push({
-        value: school.name,
+        value: school.name + ', ' + 'Leeds',
         text: school.name,
         checked: locations.includes(school.name),
         label: {
