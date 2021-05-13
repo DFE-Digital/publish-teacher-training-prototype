@@ -50,9 +50,17 @@
         {{ otherAccreditedProviderFieldsHtml | safe }}
       {% endif %}
 
-      {{ govukButton({
-        text: "Continue"
-      }) }}
+      {{ change }}
+      {% if change == "true" %}
+        {{ govukButton({
+          text: "Save and publish changes"
+        }) }}
+        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+      {% else %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      {% endif %}
     </div>
   </form>
 {% endblock %}

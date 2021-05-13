@@ -295,11 +295,13 @@ router.get('/new/:code/accredited-body', function (req, res) {
 })
 
 router.all('/new/:code/:view', function (req, res) {
-  const code = req.params.code
+  const { code, view } = req.params
+  const change = req.query && req.query.change
 
-  res.render(`new/${req.params.view}`, {
+  res.render(`new/${view}`, {
     code,
-    paths: newCourseWizardPaths(req)
+    paths: newCourseWizardPaths(req),
+    change
   })
 })
 
