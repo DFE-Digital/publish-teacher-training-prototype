@@ -10,27 +10,34 @@
 {% endblock %}
 
 {% macro locationsTable(locations, caption) %}
-  <table class="govuk-table">
-    {% if caption %}
-      <caption class="govuk-table__caption govuk-table__caption--m">{{ caption }}</caption>
-    {% endif %}
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col" width="5%">URN</th>
-        <th class="govuk-table__header" scope="col" width="40%">Name</th>
-        <th class="govuk-table__header" scope="col" width="60%">Address</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      {% for location in locations %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ location.urn }}</td>
-        <td class="govuk-table__header"><a href="/location/{{ location.code }}">{{ location.name }}</a></td>
-        <td class="govuk-table__cell">{{ location.address }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="govuk-!-margin-top-8">
+  {% if locations.length > 0 %}
+    <table class="govuk-table">
+      {% if caption %}
+        <caption class="govuk-table__caption govuk-table__caption--m">{{ caption }}</caption>
+      {% endif %}
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col" width="5%">URN</th>
+          <th class="govuk-table__header" scope="col" width="40%">Name</th>
+          <th class="govuk-table__header" scope="col" width="60%">Address</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for location in locations %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{ location.urn }}</td>
+          <td class="govuk-table__header"><a href="/location/{{ location.code }}">{{ location.name }}</a></td>
+          <td class="govuk-table__cell">{{ location.address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <h2 class="govuk-heading-m">{{ caption }}</h2>
+    <p class="govuk-body">No {{ caption | lower }} added.</p>
+  {% endif %}
+  </div>
 {% endmacro %}
 
 {% block content %}
@@ -58,7 +65,7 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-inset-text govuk-!-width-two-thirds">
+  <div class="govuk-!-width-two-thirds">
     <p class="govuk-body">Locations are used to help rank search results on Find.</p>
     <p class="govuk-body">For courses where candidates can choose a lead or host school, you can also assign locations from the ‘Basic details’ tab on the course page.</p>
   </div>
@@ -74,12 +81,10 @@
     </div>
   {% endset %}
 
-  {{ buttonHtml | safe if locations.length > 10 }}
-
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  {{ buttonHtml | safe }}
 
   {{ locationsTable(locations | rejectattr("placement"), "Academic training locations") }}
   {{ locationsTable(locations | selectattr("placement"), "Placement schools") }}
 
-  {{ buttonHtml | safe }}
+  {{ buttonHtml | safe if locations.length > 10 }}
 {% endblock %}
