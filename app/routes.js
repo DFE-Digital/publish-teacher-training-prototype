@@ -159,17 +159,6 @@ router.all(['/new/:code/confirm', '/new/:code/further/confirm'], function (req, 
   })
 })
 
-router.all(['/new/:code/edit', '/new/:code/further/edit'], function (req, res) {
-  const data = req.session.data
-  const code = req.params.code
-
-  res.render('new/edit', {
-    code,
-    paths: newCourseWizardPaths(req),
-    courseOffered: getCourseOffered(code, data)
-  })
-})
-
 router.post('/new/:code/subject', function (req, res) {
   const code = req.params.code
   const data = req.session.data

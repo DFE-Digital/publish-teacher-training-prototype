@@ -129,24 +129,24 @@ function newCourseWizardPaths (req) {
   const data = req.session.data
   const code = req.params.code
   const editing = data.ucasCourses.some(a => a.programmeCode === code)
-  const summaryView = editing ? 'edit' : 'confirm'
+  const returnPath = editing ? `/course/${data['provider-code']}/${code}?edited=true#information` : `/new/${code}/confirm`
 
   if (isFurtherEducation(code, data)) {
     return newFurtherEducationCourseWizardPaths(req)
   }
 
   if (req.query.change === 'subject') {
-    return editSubjectPaths(req, summaryView)
+    return editSubjectPaths(req, returnPath)
   }
 
   if (req.query.change === 'languages') {
-    return editLanguagePaths(req, summaryView)
+    return editLanguagePaths(req, returnPath)
   }
 
-  if (req.query.change && req.query.change !== 'phase') {
+  if (req.query.change) {
     return {
-      next: `/new/${code}/${summaryView}`,
-      back: `/new/${code}/${summaryView}`
+      next: returnPath,
+      back: returnPath
     }
   }
 
@@ -165,15 +165,11 @@ function newCourseWizardPaths (req) {
     `/new/${code}/training-location`,
     `/new/${code}/applications-open`,
     `/new/${code}/start-date`,
-    `/new/${code}/${summaryView}`,
+    `/new/${code}/confirm`,
     `/new/${code}/create`
   ]
 
   const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data))
-
-  if (nextAndBack.back === '/courses?change=phase') {
-    nextAndBack.back = `/new/${code}/${summaryView}`
-  }
 
   return nextAndBack
 }
