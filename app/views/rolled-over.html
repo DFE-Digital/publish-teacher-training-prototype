@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% set title = "Prepare for the next cycle" %}
-{% set backLink = "/cycles" %}
+{% if data["from"] == "cycles" %}
+  {% set backLink = "/cycles" %}
+{% endif %}
 
 {% block content %}
   <div class="govuk-grid-row">
