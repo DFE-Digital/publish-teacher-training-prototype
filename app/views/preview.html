@@ -113,9 +113,9 @@
         <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
 
         {% set trainingLocationsHtml %}
-          {% if data[code + "-placement-policy"] == "hosted" %}
+          {% if data["placement-policy"] == "hosted" %}
             <p>You will be placed in different schools during your training. You can select your host school when you apply.</p>
-          {% elif data[code + "-placement-policy"] == "placed" %}
+          {% elif data["placement-policy"] == "placed" %}
             <p>You will be placed in different schools during your training. You can’t pick which schools you want to be in, but your course will try to place you in schools you can commute to.</p>
           {% endif %}
 
@@ -131,11 +131,11 @@
         {{ appAdvice({
           title: "Where you will train",
           html: trainingLocationsHtml
-        }) if data[code + "-placement-policy"]  }}
+        }) if data["placement-policy"]  }}
 
         {{ macros.previewPart(code + "-school-placements") }}
 
-        {% if data[code + "-placement-policy"] == "hosted" %}
+        {% if data["placement-policy"] == "hosted" %}
           <h3 class="govuk-heading-m">Locations</h3>
           <p class="govuk-body">You can select one of the following locations when you apply.</p>
           <table class="govuk-table">

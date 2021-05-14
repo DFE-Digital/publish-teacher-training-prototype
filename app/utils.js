@@ -160,7 +160,6 @@ function newCourseWizardPaths (req) {
     ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : [`/new/${code}/apprenticeship`]),
     `/new/${code}/full-time-part-time`,
     ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
-    `/new/${code}/placement-policy`,
     `/new/${code}/placement-locations`,
     `/new/${code}/training-location`,
     `/new/${code}/applications-open`,
@@ -374,7 +373,7 @@ function isFurtherEducation (code, data) {
 }
 
 function isUsingPlacementLocations (code, data) {
-  return data[code + '-placement-policy'] === 'hosted'
+  return data['placement-policy'] === 'hosted'
 }
 
 function subject (req) {
@@ -449,16 +448,6 @@ function validate (data, course, view) {
         title: 'Can you sponsor visas?',
         id: `${prefix}-visa-sponsorship`,
         link: '/visa-sponsorship'
-      })
-    }
-  }
-
-  if (view === 'all') {
-    if (!data[prefix + '-placement-policy']) {
-      errors.push({
-        title: 'What is your school placement policy?',
-        id: `${prefix}-placement-policy`,
-        href: `/new/${prefix}/placement-policy?change=true`
       })
     }
   }

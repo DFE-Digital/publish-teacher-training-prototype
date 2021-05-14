@@ -20,6 +20,8 @@ prototype_data = {
   'rolled-over': true,
   'next-cycle': next_cycle,
   # 'allocations-window' options: open, closed, confirmed
+  'about-organisation': 'Over the last five years we have trained over 800 trainees across all subjects and in Primary and Secondary phases. The majority of these colleagues are pursuing successful careers in our Trust or Alliance schools; a number of these colleagues have made rapid progress through their careers and hold positions of responsibility.',
+  'training-with-a-disability': 'We want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children.  If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.',
   'allocations-window': 'open',
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',

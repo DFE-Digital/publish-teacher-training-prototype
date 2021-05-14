@@ -154,14 +154,6 @@
     }) %}
   {% endif %}
 
-  {# Structured school placement policy was required for rollover in 2021 #}
-  {% if not data[code + "-placement-policy"] %}
-    {% set result = actionsList.push({
-      text: "What is your school placement policy?",
-      href: "/new/" + data["provider-code"] + "/placement-policy?change=true"
-    }) %}
-  {% endif %}
-
   {# An academic training location was required for rollover in 2021 #}
   {% if not data[code + "-training-location"] %}
     {% set result = actionsList.push({

@@ -45,7 +45,7 @@
         {% if not data["self_accrediting"] %}
           <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
-          <h2 class="govuk-heading-l">About your accredited bodies</h2>
+          <h2 id="about-{{ a.slug }}" class="govuk-heading-l">About your accredited bodies</h2>
           <p>Tell applicants about {{ "each" if data["accreditors"].length > 1 else "your" }} accredited body – you could mention their academic specialities and achievements. Be specific with the claims you make, and support with them evidence.</p>
 
           {% for a in data["accreditors"] %}
@@ -65,7 +65,7 @@
 
         <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
 
-        <h2 class="govuk-heading-l">Training with disabilities and other needs</h2>
+        <h2 id="training-with-a-disability" class="govuk-heading-l">Training with disabilities and other needs</h2>
         <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>dyslexia</li>

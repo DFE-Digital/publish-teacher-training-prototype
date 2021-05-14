@@ -482,23 +482,6 @@
   {{ "app-summary-list__row--empty" if not value(id) }}
 {% endmacro %}
 
-{% macro coursePart(id, label, errors, truncate = true) %}
-  {% set e = error(id, errors) %}
-  <div class="govuk-summary-list__row {% if e %}govuk-summary-list__row--error{% endif %}">
-    <dt class="govuk-summary-list__key">
-      {{ label }}
-      {% if e %}<br /><a href="{{ e.href }}">{{ e.text }}</a>{% endif %}
-    </dt>
-    <dd class="govuk-summary-list__value {% if truncate %}app-summary-list__value--truncate{% endif %} {% if not value(id) %}app-summary-list__value--empty{% endif %}">
-      {% if (value(id)) %}
-        {{ value(id) }}
-      {% else %}
-        Empty
-      {% endif %}
-    </dd>
-  </div>
-{% endmacro %}
-
 {% macro previewPart(id, org = false) %}
   {% if (value(id)) %}
     <div class="markdown">
