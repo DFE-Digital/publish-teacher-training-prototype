@@ -94,7 +94,7 @@
 
   <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-m">Contact details</h3>
+      <h2 class="govuk-heading-m">Contact details</h2>
       {{ govukSummaryList({
         rows: [{
           classes: macros.requiredSummaryRowClasses("email"),
@@ -159,7 +159,7 @@
         }]
       }) }}
 
-      <h3 class="govuk-heading-m">About your organisation</h3>
+      <h2 class="govuk-heading-m">About your organisation</h2>
       {% set aboutYourOrganisationRows = [{
         classes: macros.requiredSummaryRowClasses("about-organisation"),
         key: {
