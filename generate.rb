@@ -6,6 +6,7 @@ require 'json'
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
 provider = 'University of Bristol'
+# provider = 'Gorse SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
@@ -117,6 +118,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   end
 
   schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } }
+  schools.reject! { |s| s[:code] == '-' }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
 

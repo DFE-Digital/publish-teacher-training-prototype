@@ -5,32 +5,45 @@
 {% block content %}
   <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ govukCheckboxes({
-        idPrefix: code + "-locations",
-        name: code + "-locations",
-        fieldset: {
-          legend: {
-            text: title,
-            isPageHeading: true,
-            classes: "govuk-fieldset__legend--xl"
-          }
-        },
-        hint: {
-          classes: "govuk-!-margin-bottom-6",
-          html: "<a href=\"/locations\">Manage all your locations</a> to add to or edit this list."
-        },
-        items: items
-      }) }}
+      {% if items.length > 0 %}
+        {{ govukCheckboxes({
+          idPrefix: code + "-locations",
+          name: code + "-locations",
+          fieldset: {
+            legend: {
+              text: title,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          hint: {
+            classes: "govuk-!-margin-bottom-6",
+            html: "<a href=\"/locations\">Manage all your locations</a> to add to or edit this list."
+          },
+          items: items
+        }) }}
 
-      {% if change %}
-        {{ govukButton({
-          text: "Save and publish changes"
-        }) }}
-        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+        {% if change %}
+          {{ govukButton({
+            text: "Save and publish changes"
+          }) }}
+          <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
       {% else %}
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        <h1 class="govuk-heading-xl">{{ title }}</h1>
+        <div class="govuk-inset-text">
+          <h2 class="govuk-heading-m">No placement schools</h2>
+          <p class="govuk-body">Add or upload placement schools before selecting placement school locations for this course.</p>
+
+          {{ govukButton({
+            href: "/locations",
+            text: "Add or upload locations"
+          }) }}
+        </div>
       {% endif %}
     </div>
   </form>

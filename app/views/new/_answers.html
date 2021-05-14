@@ -9,11 +9,10 @@
   {% endif %}
 {% endset %}
 
+{% set placementLocations = data[code + "-locations"] %}
 {% set placementLocationsHtml %}
-  {% if isArray(data[code + "-locations"]) %}
-    {{ data[code + "-locations"] | join("<br>") | safe }}
-  {% elseif data[code + "-locations"] %}
-    {{ data[code + "-locations"] }}
+  {% if isArray(placementLocations) and placementLocations.length > 0 %}
+    {{ placementLocations | join("<br>") | safe }}
   {% else %}
     <a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Select placement schools for this course</a>
   {% endif %}
@@ -222,7 +221,7 @@
         text: "Change",
         visuallyHiddenText: "placement schools"
       }]
-    } if showChangeLinks and value(code + "-locations")
+    } if showChangeLinks and placementLocations.length > 0
   } if data["placement-policy"] == "hosted",
 
   {
