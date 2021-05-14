@@ -36,16 +36,10 @@
         }]
       }) }}
 
-      {% if change %}
-        {{ govukButton({
-          text: "Save and publish changes"
-        }) }}
-        <p class="govuk-body"><a href="{{ backLink }}">Cancel changes</a></p>
-      {% else %}
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      {% endif %}
+      {{ govukButton({
+        text: "Save"
+      }) }}
+      <p class="govuk-body"><a href="{{ backLink }}">Cancel changes</a></p>
     </div>
   </form>
 {% endblock %}
