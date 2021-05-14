@@ -56,7 +56,7 @@
   }) if justEdited }}
 
   {{ govukNotificationBanner({
-    text: "16 new locations added.",
+    text: data.uploadedLocations.length + " new locations added.",
     type: "success"
   }) if justUploaded }}
 

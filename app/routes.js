@@ -645,7 +645,13 @@ router.post('/location/:code', function (req, res) {
 
 router.all('/locations', function (req, res) {
   const data = req.session.data
-  const locations = JSON.parse(JSON.stringify(data.schools))
+  let { schools } = data
+
+  if (req.query.success === 'uploaded') {
+    schools = schools.concat(data.uploadedLocations)
+  }
+
+  const locations = JSON.parse(JSON.stringify(schools))
 
   locations.forEach(location => {
     location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length

@@ -18,7 +18,8 @@
       {{ title }}
     </h1>
 
-    <h2 class="govuk-heading-m">{{ locations | length }} recognised locations found</h2>
+
+    <h2 class="govuk-heading-m">{{ data.uploadedLocations | length }} recognised locations found</h2>
     <table class="govuk-table app-table--vertical-align-middle">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
@@ -28,7 +29,7 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-        {% for location in locations %}
+        {% for location in data.uploadedLocations %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
             {{ govukCheckboxes({
