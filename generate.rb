@@ -5,7 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'University of Bristol'
+# provider = 'University of Bristol'
+provider = 'Essex and Thames SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
@@ -20,6 +21,8 @@ prototype_data = {
   'rolled-over': true,
   'next-cycle': next_cycle,
   # 'allocations-window' options: open, closed, confirmed
+  'about-organisation': 'Over the last five years we have trained over 800 trainees across all subjects and in Primary and Secondary phases. The majority of these colleagues are pursuing successful careers in our Trust or Alliance schools; a number of these colleagues have made rapid progress through their careers and hold positions of responsibility.',
+  'training-with-a-disability': 'We want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children.  If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.',
   'allocations-window': 'open',
   'multi-organisation': false,
   'ucas-gt12': 'Applicants must confirm their place',
@@ -115,6 +118,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   end
 
   schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } }
+  schools.reject! { |s| s[:code] == '-' }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
 

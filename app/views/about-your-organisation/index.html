@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "About your organisation" %}
+{% set showErrors = data["about-your-organisation-show-publish-errors"] %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -8,6 +9,30 @@
     }])
   }) }}
 {% endblock %}
+
+{%- set contactAddressHtml -%}
+  {%- if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] -%}
+    {{- data["building-and-street"] + "\n" if data["building-and-street"] -}}
+    {{- data["building-and-street-2"] + "\n" if data["building-and-street-2"] -}}
+    {{- data["town-or-city"] + "\n" if data["town-or-city"] -}}
+    {{- data["county"] + "\n" if data["county"] -}}
+    {{- data["postcode"] if data["postcode"] -}}
+  {%- else -%}
+    Empty
+  {%- endif -%}
+{%- endset -%}
+
+{% set placementPolicyHtml %}
+  {% if data["placement-policy"] == "hosted" %}
+    Candidates choose a lead or host school
+  {% elif data["placement-policy"] == "placed" %}
+    Placements are arranged with candidates before their training starts
+  {% elif data["placement-policy"] == "other" %}
+    Other
+  {% else %}
+    <a class="govuk-link" href="/about-your-organisation/placement-policy">What is your school placement policy?</a>
+  {% endif %}
+{% endset %}
 
 {% block content %}
   {{ govukNotificationBanner({
@@ -23,7 +48,38 @@
   {{ govukErrorSummary({
     titleText: "We couldn’t publish this because some information was missing",
     errorList: errors
-  }) if data["about-your-organisation-show-publish-errors"] and errors.length > 0 }}
+  }) if showErrors and errors.length > 0 }}
+
+  {% set actionsList = [] %}
+
+  {# Structured school placement policy was required for rollover in 2021 #}
+  {% if not data["placement-policy"] %}
+    {% set result = actionsList.push({
+      text: "What is your school placement policy?",
+      href: "/about-your-organisation/placement-policy"
+    }) %}
+  {% endif %}
+
+  {% if actionsList.length > 0 and not showErrors %}
+    {% set actionsHtml %}
+      <h3 class="govuk-notification-banner__heading">You need to provide some information before publishing your courses.</h3>
+      <ul class="govuk-list">
+      {% for item in actionsList %}
+        <li>
+          {% if item.href %}
+            <a class="govuk-notification-banner__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>{{ item.html | safe if item.html else item.text }}</a>
+          {% else %}
+            {{ item.html | safe if item.html else item.text }}
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endset %}
+    {{ govukNotificationBanner({
+      titleText: "Prepare for the next cycle",
+      html: actionsHtml
+    }) }}
+  {% endif %}
 
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">
@@ -38,81 +94,149 @@
 
   <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-0">
-        <a href="/about-your-organisation/contact">Contact details</a>
-      </h3>
-
-      {% set contactAddressHtml %}
-        {% if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] %}
-          {% if data["building-and-street"] %}
-            {{ data["building-and-street"] }}<br />
-          {% endif %}
-          {% if data["building-and-street-2"] %}
-            {{ data["building-and-street-2"] }}<br />
-          {% endif %}
-          {% if data["town-or-city"] %}
-            {{ data["town-or-city"] }}<br />
-          {% endif %}
-          {% if data["county"] %}
-            {{ data["county"] }}<br />
-          {% endif %}
-          {% if data["postcode"] %}
-            {{ data["postcode"] }}<br />
-          {% endif %}
-        {% else %}
-          Empty
-        {% endif %}
-      {% endset %}
-
+      <h2 class="govuk-heading-m">Contact details</h2>
       {{ govukSummaryList({
         rows: [{
+          classes: macros.requiredSummaryRowClasses("email"),
           key: {
             text: "Email address"
           },
           value: {
-            text: value("email") or "Empty",
-            classes: "app-summary-list__value--empty" if not value("email")
+            text: value("email") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "email address"
+            }]
           }
         }, {
+          classes: macros.requiredSummaryRowClasses("telephone"),
           key: {
             text: "Telephone number"
           },
           value: {
-            text: value("telephone") or "Empty",
-            classes: "app-summary-list__value--empty" if not value("telephone")
+            text: value("telephone") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "telephone number"
+            }]
           }
         }, {
+          classes: macros.requiredSummaryRowClasses("website"),
           key: {
             text: "Website"
           },
           value: {
-            text: value("website") or "Empty",
-            classes: "app-summary-list__value--empty" if not value("website")
+            text: value("website") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "website"
+            }]
           }
         }, {
+          classes: macros.requiredSummaryRowClasses("building-and-street"),
           key: {
             text: "Contact address"
           },
           value: {
-            html: contactAddressHtml,
-            classes: "app-summary-list__value--empty" if not value("building-and-street")
+            html: contactAddressHtml | nl2br
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact#contact-address",
+              text: "Change",
+              visuallyHiddenText: "contact address"
+            }]
           }
         }]
       }) }}
 
-      <h3 class="govuk-heading-m govuk-!-font-size-27">
-        <a href="/about-your-organisation/about">About your organisation</a>
-      </h3>
+      <h2 class="govuk-heading-m">About your organisation</h2>
+      {% set aboutYourOrganisationRows = [{
+        classes: macros.requiredSummaryRowClasses("about-organisation"),
+        key: {
+          text: "About your organisation"
+        },
+        value: {
+          html: value("about-organisation") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about\">Enter details about your organisation</a>",
+          classes: "app-summary-list__value--truncate"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/about",
+            text: "Change",
+            visuallyHiddenText: "details about your organisation"
+          } if value("about-organisation")]
+        }
+      }] %}
 
-      <dl class="govuk-summary-list">
-        {{ macros.coursePart('about-organisation', 'About your organisation', errors) }}
-        {% if not data["self_accrediting"] %}
-          {% for a in data["accreditors"] %}
-            {{ macros.coursePart(a.slug + '-about-accrediting-provider', 'About ' + a.name + ' (optional)') }}
-          {% endfor %}
-        {% endif %}
-        {{ macros.coursePart('training-with-a-disability', 'Training with disabilities and other needs', errors) }}
-      </dl>
+      {% if not data["self_accrediting"] %}
+        {% for a in data["accreditors"] %}
+          {% set changeLink = "/about-your-organisation/about#about-" + a.slug %}
+          {% set result = aboutYourOrganisationRows.push({
+            classes: macros.optionalSummaryRowClasses(a.slug + "-about-accrediting-provider"),
+            key: {
+              text: "About " + a.name + " (optional)"
+            },
+            value: {
+              html: value(a.slug + "-about-accrediting-provider") or "<a class=\"govuk-link\" href=\"" + changeLink + "\">Enter details about " + a.name + "</a>",
+              classes: "app-summary-list__value--truncate"
+            },
+            actions: {
+              items: [{
+                href: "/about-your-organisation/about",
+                text: "Change",
+                visuallyHiddenText: "details about " + a.name
+              } if value(a.slug + "-about-accrediting-provider")]
+            }
+          }) %}
+        {% endfor %}
+      {% endif %}
+
+      {% set result = aboutYourOrganisationRows.push({
+        classes: macros.requiredSummaryRowClasses("placement-policy"),
+        key: {
+          text: "School placement policy"
+        },
+        value: {
+          html: placementPolicyHtml
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/placement-policy",
+            text: "Change",
+            visuallyHiddenText: "school placement policy"
+          } if value("placement-policy")]
+        }
+      }, {
+        classes: macros.requiredSummaryRowClasses("training-with-a-disability"),
+        key: {
+          text: "Training with disabilities and other needs"
+        },
+        value: {
+          html: value("training-with-a-disability") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about#training-with-a-disability\">Enter details about training with disabilities and other needs</a>",
+          classes: "app-summary-list__value--truncate" if value("training-with-a-disability")
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/about#training-with-a-disability",
+            text: "Change",
+            visuallyHiddenText: "details about training with disabilities and other needs"
+          } if value("training-with-a-disability")]
+        }
+      }) %}
+
+      {{ govukSummaryList({
+        rows: aboutYourOrganisationRows
+      }) }}
     </div>
     <div class="govuk-grid-column-one-third">
       {% set publishState = publishState or data["about-your-organisation-publish-state"] or 'new' %}

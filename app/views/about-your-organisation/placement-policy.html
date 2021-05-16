@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% set title = "What is your school placement policy?" %}
-{% set backLink = paths.back %}
+{% set backLink = "/about-your-organisation" %}
 
 {% block content %}
-  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+  <form action="{{ backLink }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {{ govukRadios({
-        idPrefix: code + "-placement-policy",
-        name: code + "-placement-policy",
+        idPrefix: "placement-policy",
+        name: "placement-policy",
         fieldset: {
           legend: {
             text: title,
@@ -18,34 +18,28 @@
         items: [{
           value: "hosted",
           text: "Candidates choose a lead or host school",
-          checked: checked((code + "-placement-policy"), "hosted"),
+          checked: checked(("placement-policy"), "hosted"),
           hint: {
             text: "Placement schools are shown on Find with their vacancy status. Candidates will be asked to select a school when they apply."
           }
         }, {
           value: "placed",
           text: "Placements are arranged with candidates before their training starts",
-          checked: checked((code + "-placement-policy"), "placed"),
+          checked: checked(("placement-policy"), "placed"),
           hint: {
             text: "Candidates apply directly to the course when they apply."
           }
         }, {
           value: "other",
           text: "Other",
-          checked: checked((code + "-placement-policy"), "other")
+          checked: checked(("placement-policy"), "other")
         }]
       }) }}
 
-      {% if change %}
-        {{ govukButton({
-          text: "Save and publish changes"
-        }) }}
-        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
-      {% else %}
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      {% endif %}
+      {{ govukButton({
+        text: "Save"
+      }) }}
+      <p class="govuk-body"><a href="{{ backLink }}">Cancel changes</a></p>
     </div>
   </form>
 {% endblock %}
