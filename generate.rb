@@ -5,8 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'University of Bristol'
-# provider = 'Gorse SCITT'
+# provider = 'University of Bristol'
+provider = 'Essex and Thames SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 accredited_courses = data.select {|c| c['accrediting'] == provider }
