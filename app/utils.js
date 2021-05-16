@@ -524,20 +524,20 @@ function validateOrg (data, view) {
   }
 
   if (view === 'all' || view === 'contact-details') {
-    if (!data['email-address']) {
+    if (!data.email) {
       errors.push({
         title: 'Email address is missing',
-        id: 'email-address',
-        link: '/about-your-organisation/contact#email-address',
+        id: 'email',
+        link: '/about-your-organisation/contact#email',
         page: 'contact'
       })
     }
 
-    if (!data['telephone-number']) {
+    if (!data.telephone) {
       errors.push({
         title: 'Telephone number is missing',
-        id: 'telephone-number',
-        link: '/about-your-organisation/contact#telephone-number',
+        id: 'telephone',
+        link: '/about-your-organisation/contact#telephone',
         page: 'contact'
       })
     }
@@ -560,11 +560,11 @@ function validateOrg (data, view) {
       })
     }
 
-    if (!data['organisation-town-or-city']) {
+    if (!data['town-or-city']) {
       errors.push({
         title: 'Give a town or city in your contact address',
-        id: 'organisation-town-or-city',
-        link: '/about-your-organisation/contact#organisation-town-or-city',
+        id: 'town-or-city',
+        link: '/about-your-organisation/contact#town-or-city',
         page: 'contact'
       })
     }
