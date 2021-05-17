@@ -311,7 +311,7 @@ prototype_data['schools'].each do |school|
 
   school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
   prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
-  prototype_data["#{school[:code]}-location-type"] = school[:code] == '-' ? 'Academic training location' : 'Placement school'
+  prototype_data["#{school[:code]}-location-type"] = school[:code] == '-' ? 'Centre based training location' : 'Placement school'
   prototype_data["#{school[:code]}-name"] = school[:name]
   prototype_data["#{school[:code]}-urn"] = school[:urn]
   prototype_data["#{school[:code]}-postcode"] = school[:postcode]

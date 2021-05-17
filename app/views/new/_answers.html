@@ -30,7 +30,7 @@
   {% if data[code + "-training-location"] %}
     {{ data[code + "-training-location"] }}
   {% else %}
-    <a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Where will candidates do their academic training?</a>
+    <a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Where will candidates do their centre based training?</a>
   {% endif %}
 {% endset %}
 
@@ -235,7 +235,7 @@
   {
     classes: macros.requiredSummaryRowClasses(code + "-training-location", showErrors),
     key: {
-      text: "Academic training"
+      text: "Centre based training"
     },
     value: {
       html: trainingLocationHtml

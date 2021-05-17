@@ -455,7 +455,7 @@ function validate (data, course, view) {
   if (view === 'all') {
     if (!data[prefix + '-training-location']) {
       errors.push({
-        title: 'Where will candidates do their academic training?',
+        title: 'Where will candidates do their centre based training?',
         id: `${prefix}-training-location`,
         href: `/new/${prefix}/training-location?change=true`
       })

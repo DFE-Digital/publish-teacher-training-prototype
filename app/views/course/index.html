@@ -162,10 +162,10 @@
     }) %}
   {% endif %}
 
-  {# An academic training location was required for rollover in 2021 #}
+  {# A centre based training location was required for rollover in 2021 #}
   {% if not data[code + "-training-location"] %}
     {% set result = actionsList.push({
-      text: "Where will candidates do their academic training?",
+      text: "Where will candidates do their centre based training?",
       href: "/new/" + data["provider-code"] + "/training-location?change=true"
     }) %}
   {% endif %}

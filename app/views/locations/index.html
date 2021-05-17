@@ -83,7 +83,7 @@
 
   {{ buttonHtml | safe }}
 
-  {{ locationsTable(locations | rejectattr("placement"), "Academic training locations") }}
+  {{ locationsTable(locations | rejectattr("placement"), "Centre based training locations") }}
   {{ locationsTable(locations | selectattr("placement"), "Placement schools") }}
 
   {{ buttonHtml | safe if locations.length > 10 }}
