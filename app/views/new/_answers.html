@@ -14,7 +14,15 @@
   {% if isArray(placementLocations) and placementLocations.length > 0 %}
     {{ placementLocations | join("<br>") | safe }}
   {% else %}
-    <a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Select placement schools for this course</a>
+    <a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Where will candidates be placed?</a>
+  {% endif %}
+{% endset %}
+
+{% set placementLocationSummaryRowClasses %}
+  {% if placementLocations.length == 0 and showErrors %}
+    app-summary-list__row--error
+  {% elif not placementLocations.length > 0 %}
+    app-summary-list__row--missing
   {% endif %}
 {% endset %}
 
@@ -191,7 +199,7 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-new-accredited-body", showErrors),
+    classes: macros.requiredSummaryRowClasses(code + "-accredited-body", showErrors),
     key: {
       text: "Accredited body"
     },
@@ -208,7 +216,7 @@
   } if data["new-course"]["include-accredited"],
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-locations", showErrors),
+    classes: placementLocationSummaryRowClasses,
     key: {
       text: "Placement schools"
     },
