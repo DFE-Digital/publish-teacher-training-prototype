@@ -1,3 +1,17 @@
+// Inset message
+.app-summary-list__message {
+  border-left: $govuk-border-width-narrow solid;
+  padding-left: govuk-spacing(3);
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.app-summary-list__heading {
+  @include govuk-typography-weight-bold;
+}
+
 // Optional value is empty
 .app-summary-list__row--empty {
   .govuk-summary-list__value {
@@ -11,23 +25,23 @@
     color: govuk-colour("dark-grey");
   }
 
-  .govuk-summary-list__key {
-    border-left: $govuk-border-width solid govuk-colour("blue");
-    padding-left: govuk-spacing(2);
+  .app-summary-list__message {
+    border-left-color: govuk-colour("blue");
+  }
+
+  .app-summary-list__heading {
+    color: govuk-colour("blue");
   }
 }
 
 // Required value is missing and validated
 .app-summary-list__row--error {
-  .govuk-summary-list__key {
-    border-left: $govuk-border-width solid govuk-colour("red");
-    padding-left: govuk-spacing(2);
+  .app-summary-list__message {
+    border-left-color: $govuk-error-colour;
   }
 
-  .govuk-summary-list__value a {
-    @include govuk-typography-weight-bold;
-    @include govuk-link-common;
-    @include govuk-link-style-error;
+  .app-summary-list__heading {
+    color: $govuk-error-colour;
   }
 }
 

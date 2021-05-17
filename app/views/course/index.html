@@ -226,7 +226,10 @@
           {% elseif visaSponsorship === "No" %}
             You cannot sponsor a visa
           {% else %}
-            <a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Can you sponsor visas?</a>
+            <div class="app-summary-list__message">
+              <p class="app-summary-list__heading">Can you sponsor visas?</p>
+              <p><a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Select if you can sponsor visas</a></p>
+            </div>
           {% endif %}
         {% endset %}
 
@@ -413,7 +416,10 @@
               Third class degree or above, or equivalent
             {% endif %}
           {% else %}
-            <a class="govuk-link" href="{{ coursePath }}/degree">Do you require a minimum degree classification?</a>
+            <div class="app-summary-list__message">
+              <p class="app-summary-list__heading">Do you require a minimum degree classification?</p>
+              <p><a class="govuk-link" href="{{ coursePath }}/degree">Enter degree requirements</a></p>
+            </div>
           {% endif %}
           {% if data[code + "-degree-subject-required"] === "Yes" %}
             <br><br>
@@ -472,7 +478,10 @@
               <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsPendingOrEquivalencyTests | length) === 1 }} {{ subjectsPendingOrEquivalencyTests | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }} or who need to take equivalency tests.</p>
             {% endif %}
           {% else %}
-            <a class="govuk-link" href="{{ coursePath }}/gcses-pending-or-equivalency-tests">GCSEs and equivalency tests</a>
+            <div class="app-summary-list__message">
+              <p class="app-summary-list__heading">GCSEs and equivalency tests</p>
+              <p><a class="govuk-link" href="{{ coursePath }}/gcses-pending-or-equivalency-tests">Enter GCSEs and equivalency test requirements</a></p>
+            </div>
           {% endif %}
         {% endset %}
 

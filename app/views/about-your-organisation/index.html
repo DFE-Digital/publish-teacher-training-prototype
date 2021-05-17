@@ -30,7 +30,10 @@
   {% elif data["placement-policy"] == "other" %}
     Other
   {% else %}
-    <a class="govuk-link" href="/about-your-organisation/placement-policy">What is your school placement policy?</a>
+    <div class="app-summary-list__message">
+      <p class="app-summary-list__heading">What is your school placement policy?</p>
+      <p><a class="govuk-link" href="/about-your-organisation/placement-policy">Select a school placement policy</a></p>
+    </div>
   {% endif %}
 {% endset %}
 
@@ -204,7 +207,7 @@
       {% set result = aboutYourOrganisationRows.push({
         classes: macros.requiredSummaryRowClasses("placement-policy"),
         key: {
-          text: "School placement policy"
+          text: "School placements"
         },
         value: {
           html: placementPolicyHtml

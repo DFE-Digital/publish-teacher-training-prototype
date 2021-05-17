@@ -14,7 +14,10 @@
   {% if isArray(placementLocations) and placementLocations.length > 0 %}
     {{ placementLocations | join("<br>") | safe }}
   {% else %}
-    <a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Where will candidates be placed?</a>
+    <div class="app-summary-list__message">
+      <p class="app-summary-list__heading">Where will candidates be placed?</p>
+      <p><a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Choose the locations candidates can apply to</a></p>
+    </div>
   {% endif %}
 {% endset %}
 
@@ -30,7 +33,10 @@
   {% if data[code + "-training-location"] %}
     {{ data[code + "-training-location"] }}
   {% else %}
-    <a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Where will candidates do their centre based training?</a>
+    <div class="app-summary-list__message">
+      <p class="app-summary-list__heading">Where will candidates do their centre based training?</p>
+      <p><a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Select a centre based training location</a></p>
+    </div>
   {% endif %}
 {% endset %}
 
