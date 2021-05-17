@@ -51,6 +51,16 @@
       </ul>
 
       <h2 class="govuk-heading-m">
+        <a href="/locations">Locations</a>
+      </h2>
+
+      <p>Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>edit location names and addresses</li>
+        <li>add locations</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
         <a href="/courses">Courses</a>
       </h2>
 
@@ -77,17 +87,7 @@
         </ul>
       {% endif %}
 
-      <h2 class="govuk-heading-m">
-        <a href="/locations">Locations</a>
-      </h2>
-
-      <p>Use this section to:</p>
-      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
-        <li>edit location names and addresses</li>
-        <li>add locations</li>
-      </ul>
-
-      {% if data["allocations-window"] == 'open' %}
+      {% if data["allocations-window"] == "open" %}
         <h2 class="govuk-heading-m">
           <a href="/allocations">Request PE courses for 2022 to 2023</a>
         </h2>
