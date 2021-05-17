@@ -54,7 +54,7 @@
         classes: "govuk-input--width-5"
       }) }}
 
-      {{ govukRadios({
+      {{ govukCheckboxes({
         idPrefix: code + "-location-type",
         name: code + "-location-type",
         fieldset: {
@@ -64,19 +64,19 @@
           }
         },
         items: [{
-          value: "Placement school",
+          value: "school",
           text: "Placement school",
           hint: {
             text: "Used for classroom based training with children"
           },
-          checked: checked(code + "-location-type", "Placement school")
+          checked: checked(code + "-location-type", "school")
         }, {
-          value: "Centre based training location",
+          value: "centre",
           text: "Centre based training location",
           hint: {
             text: "University or college campus or other location used for centre based training"
           },
-          checked: checked(code + "-location-type", "Centre based training location")
+          checked: checked(code + "-location-type", "centre")
         }]
       }) }}
 

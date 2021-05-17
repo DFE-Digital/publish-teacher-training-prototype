@@ -307,16 +307,16 @@ prototype_data['schools'].sort_by! { |k| k[:name] }
 
 prototype_data['schools'].each do |school|
   school[:urn] = rand(100000..199999)
+  school[:type] = school[:code] == '-' ? ['centre'] : ['school']
   postcodeMatched = postcodeRegex.match(school[:address])
 
   school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
   prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
-  prototype_data["#{school[:code]}-location-type"] = school[:code] == '-' ? 'Centre based training location' : 'Placement school'
+  prototype_data["#{school[:code]}-location-type"] = school[:code] == '-' ? ['centre'] : ['school']
   prototype_data["#{school[:code]}-name"] = school[:name]
   prototype_data["#{school[:code]}-urn"] = school[:urn]
   prototype_data["#{school[:code]}-postcode"] = school[:postcode]
   prototype_data["#{school[:code]}-address"] = school[:address]
-  prototype_data["#{school[:code]}-placement"] = school[:code] != '-' ? true : false
 end
 
 # Create a list of accreditors

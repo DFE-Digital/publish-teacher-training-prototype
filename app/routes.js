@@ -65,23 +65,23 @@ router.all('/cycles', function (req, res) {
 router.all(['/new/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
   const data = req.session.data
   const code = req.params.code
-  const locations = data[`${code}-locations`] || []
+  const selectedLocations = data[`${code}-locations`] || []
   const items = []
 
-  data.schools.forEach(school => {
-    if (school.code !== '-') {
-      items.push({
-        value: school.name,
-        text: school.name,
-        checked: locations.includes(school.name),
-        label: {
-          classes: 'govuk-label--s'
-        },
-        hint: {
-          text: school.address
-        }
-      })
-    }
+  const schools = data.schools.filter(school => school.type.includes('school'))
+
+  schools.forEach(school => {
+    items.push({
+      value: school.name,
+      text: school.name,
+      checked: selectedLocations.includes(school.name),
+      label: {
+        classes: 'govuk-label--s'
+      },
+      hint: {
+        text: school.address
+      }
+    })
   })
 
   if (isUsingPlacementLocations(code, data)) {
@@ -384,7 +384,7 @@ router.all('/new-location/:code/create', function (req, res) {
     data.schools.push(loc)
   }
 
-  loc.type = data[code + '-location-type']
+  loc.type = data[code + '-location-types']
   loc.urn = data[code + '-urn']
   loc.code = code
 
@@ -635,12 +635,12 @@ router.post('/location/:code', function (req, res) {
 
   school.name = data[code + '-name']
   school.urn = data[code + '-urn']
-  school.placement = data[code + '-location-type'] === 'Placement school'
-  school.address = `${data[code + '-address']}, ${data[code + '-town']}, ${data[code + '-postcode']}`
+  school.type = data[code + '-location-type']
+  school.address = data[code + '-address']
   school.postcode = data[code + '-postcode']
   school.code = code
 
-  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}&code=${school.code}`)
+  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}`)
 })
 
 router.all('/locations', function (req, res) {
@@ -651,15 +651,17 @@ router.all('/locations', function (req, res) {
     schools = schools.concat(data.uploadedLocations)
   }
 
-  const locations = JSON.parse(JSON.stringify(schools))
-
-  locations.forEach(location => {
+  schools.forEach(location => {
     location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length
-    location.placement = location.code !== '-'
   })
 
+  const centerLocations = schools.filter(school => school.type.includes('centre'))
+  const schoolLocations = schools.filter(school => school.type.includes('school'))
+
   res.render('locations/index', {
-    locations: locations,
+    locations: schools,
+    centerLocations,
+    schoolLocations,
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
     justUploaded: req.query.success === 'uploaded',

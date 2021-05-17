@@ -1924,31 +1924,39 @@
       "name": "London and Essex Site",
       "address": "Runwell Primary School, Canewdon Gardens, Runwell, Essex, SS11 7BJ",
       "code": "-",
-      "urn": 173341,
+      "urn": 167680,
+      "type": [
+        "centre"
+      ],
       "postcode": "SS11 7BJ"
     },
     {
       "name": "Southend Site",
       "address": "Edwards Hall Primary School, Macmurdo Road, Leigh-on-Sea, Essex, SS9 5AQ",
       "code": "7",
-      "urn": 114796,
+      "urn": 122541,
+      "type": [
+        "school"
+      ],
       "postcode": "SS9 5AQ"
     }
   ],
-  "--location-picked": "London and Essex Site (173341, City, SS11 7BJ)",
-  "--location-type": "Centre based training location",
+  "--location-picked": "London and Essex Site (167680, City, SS11 7BJ)",
+  "--location-type": [
+    "centre"
+  ],
   "--name": "London and Essex Site",
-  "--urn": 173341,
+  "--urn": 167680,
   "--postcode": "SS11 7BJ",
   "--address": "Runwell Primary School, Canewdon Gardens, Runwell, Essex, SS11 7BJ",
-  "--placement": false,
-  "7-location-picked": "Southend Site (114796, City, SS9 5AQ)",
-  "7-location-type": "Placement school",
+  "7-location-picked": "Southend Site (122541, City, SS9 5AQ)",
+  "7-location-type": [
+    "school"
+  ],
   "7-name": "Southend Site",
-  "7-urn": 114796,
+  "7-urn": 122541,
   "7-postcode": "SS9 5AQ",
   "7-address": "Edwards Hall Primary School, Macmurdo Road, Leigh-on-Sea, Essex, SS9 5AQ",
-  "7-placement": true,
   "accreditors": [
     {
       "name": "Essex and Thames SCITT",

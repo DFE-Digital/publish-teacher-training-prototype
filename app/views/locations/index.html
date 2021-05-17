@@ -83,8 +83,8 @@
 
   {{ buttonHtml | safe }}
 
-  {{ locationsTable(locations | rejectattr("placement"), "Centre based training locations") }}
-  {{ locationsTable(locations | selectattr("placement"), "Placement schools") }}
+  {{ locationsTable(centerLocations, "Centre based training locations") }}
+  {{ locationsTable(schoolLocations, "Placement schools") }}
 
   {{ buttonHtml | safe if locations.length > 10 }}
 {% endblock %}
