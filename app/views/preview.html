@@ -340,23 +340,19 @@
       <section class="govuk-!-margin-bottom-8">
         <h2 class="govuk-heading-l" id="section-international">International students</h2>
         {% set courseType = data[code + "-type"] %}
-        {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
 
         <p class="govuk-body">
-          {% if visaSponsorship === "Yes" %}
-            {% if courseType === "Salaried" %}
-              We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Skilled worker visas</a>, but this is not guaranteed.
-            {% else %}
-              We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Student visas</a>, but this is not guaranteed.
-            {% endif %}
-          {% elseif visaSponsorship === "No" %}
-
+          {% if courseType === "Salaried" and data["canSponsorSkilledWorkerVisa"] == "true" %}
+            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Skilled worker visas</a>, but this is not guaranteed.
+          {% elif courseType !== "Salaried" and data["canSponsorStudentVisa"] == "true" %}
+            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Student visas</a>, but this is not guaranteed.
+          {% elseif data["canSponsorSkilledWorkerVisa"] == "false" or data["canSponsorStudentVisa"] == "false" %}
             We are unable to sponsor a visa.
             You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% else %}
             {# Show missing message #}
             <p class="missing-section">
-              Please add details <a href="{{ course.path }}/visa-sponsorship">about visa sponsorship</a>.
+              Please add details <a href="/about-your-organisation/visa-sponsorship">about visa sponsorship</a>.
             </p>
           {% endif %}
         </p>

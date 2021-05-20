@@ -37,6 +37,23 @@
   {% endif %}
 {% endset %}
 
+{% set visaSponsorshipHtml %}
+  {% if data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "true" %}
+    You can sponsor Student and Skilled worker visas
+  {% elif data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
+   You can sponsor Student visas
+  {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "true"  %}
+    You can sponsor Skilled worker visas
+  {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
+    You cannot sponsor visas
+  {% else %}
+    <div class="app-summary-list__message">
+      <p class="app-summary-list__heading">Can you sponsor visas?</p>
+      <p><a class="govuk-link" href="/about-your-organisation/visa-sponsorship">Select whether you can sponsor visas</a></p>
+    </div>
+  {% endif %}
+{% endset %}
+
 {% block content %}
   {{ govukNotificationBanner({
     text: "Your changes have been published.",
@@ -62,6 +79,15 @@
       href: "/about-your-organisation/placement-policy"
     }) %}
   {% endif %}
+
+  {# Visa sponsorship information was required rollover in 2021 #}
+  {% if not (data["canSponsorStudentVisa"] and data["canSponsorSkilledWorkerVisa"]) %}
+    {% set result = actionsList.push({
+      text: "Can you sponsor visas?",
+      href: "/about-your-organisation/visa-sponsorship"
+    }) %}
+  {% endif %}
+
 
   {% if actionsList.length > 0 and not showErrors %}
     {% set actionsHtml %}
@@ -219,7 +245,23 @@
             visuallyHiddenText: "school placement policy"
           } if value("placement-policy")]
         }
-      }, {
+      },
+      {
+        key: {
+          text: "Visas"
+        },
+        value: {
+          html: visaSponsorshipHtml
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/visa-sponsorship",
+            text: "Change",
+            visuallyHiddenText: "whether you can sponsor visas"
+          } if value("canSponsorStudentVisa")]
+        }
+      }
+      , {
         classes: macros.requiredSummaryRowClasses("training-with-a-disability"),
         key: {
           text: "Training with disabilities and other needs"
