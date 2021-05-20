@@ -14,106 +14,84 @@
 
       <p class="govuk-body">Select how flexible you are towards candidates in meeting GCSE standards.</p>
 
-      {% set mathsRadioName = course.programmeCode + "-gcse-maths-flexibility" %}
+      {% set pendingGcsesRadioName = course.programmeCode + "-pending-gcses" %}
       {{ govukRadios({
-        name: mathsRadioName,
+        name: pendingGcsesRadioName,
         fieldset: {
           legend: {
-            text: "Maths GCSE",
+            text: "Will you accept applications from candidates with pending GCSEs?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        hint: {
+          text: "These are candidates who expected to have the qualification before the beginning of the course. If successful they would receive a conditional offer."
+        },
+        items: [{
+          value: "true",
+          text: "Yes",
+          checked: (data[pendingGcsesRadioName] === "true")
+          },
+          {
+          value: "false",
+          text: "No",
+          checked: (data[pendingGcsesRadioName] === "false")
+          }
+        ]
+      }) }}
+
+
+    {% set equivalencySubjects %}
+      {{ govukCheckboxes({
+        name: "equivalencySubjects",
+        fieldset: {
+          legend: {
+            text: "Which subjects will you offer equivalency tests in?",
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        items: [
+          {
+            value: "english",
+            text: "English"
+          },
+          {
+            value: "maths",
+            text: "Maths"
+          },
+          {
+            value: "science",
+            text: "Science"
+          }
+        ]
+      }) }}
+    {% endset %}
+
+
+    {% set equivalencyTestsRadioName = course.programmeCode + "-equivalency-tests-offered" %}
+      {{ govukRadios({
+        name: equivalencyTestsRadioName,
+        fieldset: {
+          legend: {
+            text: "Will you accept applications from candidates who need to take an equivalency test in English, maths or science?",
             classes: "govuk-fieldset__legend--m"
           }
         },
         items: [{
-          value: "must",
-          text: "Must have the GCSE, or equivalent (least flexible)",
-          hint: {
-            text: "Candidates who do not already have a GCSE grade C (4) or above will be discouraged from applying, but not blocked."
-          },
-          checked: (data[mathsRadioName] === "must")
-        }, {
-          value: "pending",
-          text: "Taking the GCSE",
-          hint: {
-            text: "You will consider applicants with a pending GCSE."
-          },
-          checked: (data[mathsRadioName] === "pending")
-        }, {
-          value: "equivalency-test-offered",
-          text: "Equivalency test (most flexible)",
-          hint: {
-            text: "You will consider applicants who need to take an equivalency test, as well as those with a pending GCSE."
-          },
-          checked: (data[mathsRadioName] === "equivalency-test-offered")
-        }]
-      }) }}
-
-      {% set englishRadioName = course.programmeCode + '-gcse-english-flexibility' %}
-      {{ govukRadios({
-        name: englishRadioName,
-        fieldset: {
-          legend: {
-            text: "English GCSE",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        items: [{
-          value: "must",
-          text: "Must have the GCSE, or equivalent (least flexible)",
-          hint: {
-            text: "Candidates who do not already have a GCSE grade C (4) or above will be discouraged from applying, but not blocked."
-          },
-          checked: (data[englishRadioName] === "must")
-        }, {
-          value: "pending",
-          text: "Taking the GCSE",
-          hint: {
-            text: "You will consider applicants with a pending GCSE."
-          },
-          checked: (data[englishRadioName] === "pending")
-        }, {
-          value: "equivalency-test-offered",
-          text: "Equivalency test (most flexible)",
-          hint: {
-            text: "You will consider applicants who need to take an equivalency test, as well as those with a pending GCSE."
-          },
-          checked: (data[englishRadioName] === "equivalency-test-offered")
-        }]
-      }) }}
-
-      {% if course.name === "Primary" %}
-        {% set scienceRadioName = course.programmeCode + "-gcse-science-flexibility" %}
-        {{ govukRadios({
-          name: scienceRadioName,
-          fieldset: {
-            legend: {
-              text: "Science GCSE",
-              classes: "govuk-fieldset__legend--m"
+          value: "true",
+          text: "Yes",
+          checked: (data[equivalencyTestsRadioName] === "true"),
+          conditional:
+            {
+              html: equivalencySubjects
             }
           },
-          items: [{
-            value: "must",
-            text: "Must have the GCSE, or equivalent (least flexible)",
-            hint: {
-              text: "Candidates who do not already have a GCSE grade C (4) or above will be discouraged from applying, but not blocked."
-            },
-            checked: (data[scienceRadioName] === "must")
-          }, {
-            value: "pending",
-            text: "Taking the GCSE",
-            hint: {
-              text: "You will consider applicants with a pending GCSE."
-            },
-            checked: (data[scienceRadioName] === "pending")
-          }, {
-            value: "equivalency-test-offered",
-            text: "Equivalency test (most flexible)",
-            hint: {
-              text: "You will consider applicants who need to take an equivalency test, as well as those with a pending GCSE."
-            },
-            checked: (data[scienceRadioName] === "equivalency-test-offered")
-          }]
-        }) }}
-      {% endif %}
+          {
+          value: "false",
+          text: "No",
+          checked: (data[equivalencyTestsRadioName] === "false")
+          }
+        ]
+      }) }}
 
       {{ govukButton({
         text: "Save"
