@@ -122,14 +122,6 @@
 
   {% set actionsList = [] %}
 
-  {# Visa sponsorship policy was required for rollover in 2021 #}
-  {% if not data[code + "-visa-sponsorship"] %}
-    {% set result = actionsList.push({
-      text: "Can you sponsor visas?",
-      href: "/course/" + data["provider-code"] + "/" + code + "/visa-sponsorship"
-    }) %}
-  {% endif %}
-
   {# Structured degree requirements were required for rollover in 2021 #}
   {% if not data[code + "-degree-minimum-required"] %}
     {% set result = actionsList.push({
@@ -213,26 +205,6 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h3 class="govuk-heading-m govuk-!-margin-top-0">About this course</h3>
-        {% set visaSponsorshipText %}
-          {% set courseType = data[code + "-type"] %}
-          {% set visaSponsorship = data[code + "-visa-sponsorship"] %}
-
-          {% if visaSponsorship === "Yes" %}
-            {% if courseType === "Salaried" %}
-              You can sponsor a Skilled worker visa
-            {% else %}
-              You can sponsor a Student visa
-            {% endif %}
-          {% elseif visaSponsorship === "No" %}
-            You cannot sponsor a visa
-          {% else %}
-            <div class="app-summary-list__message">
-              <p class="app-summary-list__heading">Can you sponsor visas?</p>
-              <p><a class="govuk-link" href="{{ coursePath }}/visa-sponsorship">Select if you can sponsor visas</a></p>
-            </div>
-          {% endif %}
-        {% endset %}
-
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
@@ -283,21 +255,6 @@
                 visuallyHiddenText: "details of your interview process"
               }]
             }
-          }, {
-            classes: macros.requiredSummaryRowClasses(code + "-visa-sponsorship", showErrors),
-            key: {
-              text: "Visa sponsorship"
-            },
-            value: {
-              html: visaSponsorshipText
-            },
-            actions: {
-              items: [{
-                href: coursePath + "/visa-sponsorship",
-                text: "Change",
-                visuallyHiddenText: "visa sponsorship"
-              }]
-            } if showChangeLinks and value(code + "-visa-sponsorship")
           }]
         }) }}
 

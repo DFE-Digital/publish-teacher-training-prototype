@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% set title = "Visa sponsorship" %}
+{% set backLink = "/about-your-organisation" %}
+
+{% block content %}
+  <form action="{{ backLink }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% set studentVisaRadioName = "canSponsorStudentVisa" %}
+      {% set skilledWorkerVisaRadioName = "canSponsorSkilledWorkerVisa" %}
+
+      {{ govukRadios({
+        name: studentVisaRadioName,
+        fieldset: {
+          legend: {
+            text: "Can you sponsor Student visas?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "true",
+          text: "Yes",
+          checked: (data[studentVisaRadioName] === "true")
+        }, {
+          value: "false",
+          text: "No",
+          checked: (data[studentVisaRadioName] === "false")
+        }]
+      }) }}
+
+      {{ govukRadios({
+        name: skilledWorkerVisaRadioName,
+        fieldset: {
+          legend: {
+            text: "Can you sponsor Skilled worker visas?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "true",
+          text: "Yes",
+          checked: (data[skilledWorkerVisaRadioName] === "true")
+        }, {
+          value: "false",
+          text: "No",
+          checked: (data[skilledWorkerVisaRadioName] === "false")
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Save"
+      }) }}
+      <p class="govuk-body"><a href="{{ backLink }}">Cancel changes</a></p>
+    </div>
+  </form>
+{% endblock %}
