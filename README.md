@@ -43,6 +43,6 @@ When merging the upgrade, do a squash and merge to avoid adding 1500 new commits
 ## Change the provider in the prototype
 
 * Copy `courses-clean.json` from [courses-clean.zip](https://github.com/DFE-Digital/search-and-compare-data/blob/master/courses-clean.zip) in the search-and-compare-data repo to this repo (it’s in .gitignore already)
-* Set the `provider` in [generate.rb](https://github.com/fofr/manage-courses-prototype/blob/master/generate.rb#L9) to the name of the provider in UCAS
+* Set the `provider` in [generate.rb](./generate.rb#L8) to the name of the provider in the JSON file
 * Run the ruby script: `./generate.rb`, which generates a new `prototype_data.json` file
 * Commit the changes to master, which auto-deploys to Heroku
