@@ -396,17 +396,17 @@
 
             <p class="govuk-body">
               {% if pendingGcses == "true" %}
-                Candidates with pending GCSEs will be considered.
+                Candidates with pending GCSEs will be considered
               {% else %}
-                Candidates with pending GCSEs will not be considered.
+                Candidates with pending GCSEs will not be considered
               {% endif %}
             </p>
 
             <p class="govuk-body">
               {% if equivalencyTestsOffered == "true" %}
-                Equivalency tests will be offered in {{ data[code + "-equivalency-subjects"] | formatList }}.
+                Equivalency tests will be offered in {{ data[code + "-equivalency-subjects"] | formatList }}
               {% else %}
-                Equivalenct tests will not be offered.
+                Equivalency tests will not be offered
               {% endif %}
             </p>
 
