@@ -8,6 +8,8 @@ data = JSON.parse(file)
 provider = 'Oxford Brookes University'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
+abort("No courses found - check the provider name exactly matches one in JSON file") if courses.length.zero?
+
 accredited_courses = data.select {|c| c['accrediting'] == provider }
 isAccreditedBody = !courses.first['route'].include?('School Direct')
 
