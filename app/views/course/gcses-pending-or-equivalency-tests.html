@@ -39,8 +39,9 @@
 
 
     {% set equivalencySubjects %}
+      {% set equivalencySubjectsName = course.programmeCode + "-equivalency-subjects" %}
       {{ govukCheckboxes({
-        name: "equivalencySubjects",
+        name: equivalencySubjectsName,
         fieldset: {
           legend: {
             text: "Which subjects can you offer equivalency tests in?",
@@ -49,19 +50,19 @@
         },
         items: [
           {
-            value: "english",
+            value: "English",
             text: "English",
-            checked: checked("equivalencySubjects", "english")
+            checked: checked(equivalencySubjectsName, "English")
           },
           {
             value: "maths",
             text: "Maths",
-            checked: checked("equivalencySubjects", "maths")
+            checked: checked(equivalencySubjectsName, "maths")
           },
           {
             value: "science",
             text: "Science",
-            checked: checked("equivalencySubjects", "science")
+            checked: checked(equivalencySubjectsName, "science")
           }
         ]
       }) }}

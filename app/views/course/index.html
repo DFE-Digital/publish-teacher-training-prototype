@@ -131,7 +131,7 @@
   {% endif %}
 
   {# Structured GCSE requirements were required for rollover in 2021 #}
-  {% if not data[code + "-gcse-english-flexibility"] %}
+  {% if not data[code + "-pending-gcses"] %}
     {% set result = actionsList.push({
       text: "GCSEs and equivalency tests",
       href: "/course/" + data["provider-code"] + "/" + code + "/gcses-pending-or-equivalency-tests"
@@ -385,55 +385,32 @@
         {% endset %}
 
         {% set gcseValueHtml %}
-          {% set englishGcseFlexibility = data[code + '-gcse-english-flexibility'] %}
-          {% set mathsGcseFlexibility = data[code + '-gcse-maths-flexibility'] %}
-          {% set scienceGcseFlexibility = data[code + '-gcse-science-flexibility'] %}
+          {% set pendingGcses = data[code + '-pending-gcses'] %}
+          {% set equivalencyTestsOffered = data[code + "-equivalency-tests-offered"] %}
 
-          {% if englishGcseFlexibility %}
-            <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent</p>
+          {% if pendingGcses %}
+            <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent qualification</p>
             {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
               <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
             {% endif %}
 
-            {% set subjectsMustHave = [] %}
-            {% set subjectsCanBePending = [] %}
-            {% set subjectsPendingOrEquivalencyTests = [] %}
+            <p class="govuk-body">
+              {% if pendingGcses == "true" %}
+                Candidates with pending GCSEs will be considered.
+              {% else %}
+                Candidates with pending GCSEs will not be considered.
+              {% endif %}
+            </p>
 
-            {% if englishGcseFlexibility === "pending" %}
-              {% set subjectsCanBePending = subjectsCanBePending | push("English") %}
-            {% elif englishGcseFlexibility === "must" %}
-              {% set subjectsMustHave = subjectsMustHave | push("English") %}
-            {% elif englishGcseFlexibility === "equivalency-test-offered" %}
-              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("English") %}
-            {% endif %}
+            <p class="govuk-body">
+              {% if equivalencyTestsOffered == "true" %}
+                Equivalency tests will be offered in {{ data[code + "-equivalency-subjects"] | formatList }}.
+              {% else %}
+                Equivalenct tests will not be offered.
+              {% endif %}
+            </p>
 
-            {% if mathsGcseFlexibility === "pending" %}
-              {% set subjectsCanBePending = subjectsCanBePending | push("maths") %}
-            {% elif mathsGcseFlexibility === "must" %}
-              {% set subjectsMustHave = subjectsMustHave | push("maths") %}
-            {% elif mathsGcseFlexibility === "equivalency-test-offered" %}
-              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("maths") %}
-            {% endif %}
 
-            {% if scienceGcseFlexibility === "pending" %}
-              {% set subjectsCanBePending = subjectsCanBePending | push("science") %}
-            {% elif scienceGcseFlexibility === "must" %}
-              {% set subjectsMustHave = subjectsMustHave | push("science") %}
-            {% elif scienceGcseFlexibility === "equivalency-test-offered" %}
-              {% set subjectsPendingOrEquivalencyTests = subjectsPendingOrEquivalencyTests | push("science") %}
-            {% endif %}
-
-            {% if subjectsMustHave | length > 0 %}
-              <p class="govuk-body">You will not consider candidates who are currently taking {{"a" if (subjectsMustHave | length) === 1 }} {{ subjectsMustHave | formatOrList }} GCSE{{"s" if (subjectsMustHave | length) > 1 }} or who need to take equivalency tests.</p>
-            {% endif %}
-
-            {% if subjectsCanBePending | length > 0 %}
-              <p class="govuk-body">You will not consider candidates who need to take an equivalency test for {{"a" if (subjectsCanBePending | length) === 1 }} {{ subjectsCanBePending | formatOrList }} but you will consider those already taking the GCSE{{"s" if (subjectsCanBePending | length) > 1 }}.</p>
-            {% endif %}
-
-            {% if subjectsPendingOrEquivalencyTests | length > 0 %}
-              <p class="govuk-body">You will consider candidates who are currently taking {{"a" if (subjectsPendingOrEquivalencyTests | length) === 1 }} {{ subjectsPendingOrEquivalencyTests | formatOrList }} GCSE{{"s" if (subjectsPendingOrEquivalencyTests | length) > 1 }} or who need to take equivalency tests.</p>
-            {% endif %}
           {% else %}
             <div class="app-summary-list__message">
               <p class="app-summary-list__heading">GCSEs and equivalency tests</p>
@@ -460,7 +437,7 @@
               }]
             } if value(code + "-degree-minimum-required")
           }, {
-            classes: macros.requiredSummaryRowClasses(code + "-gcse-english-flexibility", showErrors),
+            classes: macros.requiredSummaryRowClasses(code + "-pending-gcses", showErrors),
             key: {
               text: "GCSEs"
             },
@@ -473,7 +450,7 @@
                 text: "Change",
                 visuallyHiddenText: "GCSE requirements"
               }]
-            } if value(code + "-gcse-english-flexibility")
+            } if value(code + "-pending-gcses")
           }, {
             classes: macros.optionalSummaryRowClasses(code + "-personal-qualities"),
             key: {
