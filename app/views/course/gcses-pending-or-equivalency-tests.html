@@ -12,19 +12,17 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-body">Select how flexible you are towards candidates in meeting GCSE standards.</p>
-
       {% set pendingGcsesRadioName = course.programmeCode + "-pending-gcses" %}
       {{ govukRadios({
         name: pendingGcsesRadioName,
         fieldset: {
           legend: {
-            text: "Will you accept applications from candidates with pending GCSEs?",
+            text: "Will you accept candidates with pending GCSEs?",
             classes: "govuk-fieldset__legend--m"
           }
         },
         hint: {
-          text: "These are candidates who expected to have the qualification before the beginning of the course. If successful they would receive a conditional offer."
+          text: "These are candidates who expect to have the qualification before the beginning of the course. If successful they would receive a conditional offer."
         },
         items: [{
           value: "true",
@@ -45,22 +43,25 @@
         name: "equivalencySubjects",
         fieldset: {
           legend: {
-            text: "Which subjects will you offer equivalency tests in?",
+            text: "Which subjects can you offer equivalency tests in?",
             classes: "govuk-fieldset__legend--s"
           }
         },
         items: [
           {
             value: "english",
-            text: "English"
+            text: "English",
+            checked: checked("equivalencySubjects", "english")
           },
           {
             value: "maths",
-            text: "Maths"
+            text: "Maths",
+            checked: checked("equivalencySubjects", "maths")
           },
           {
             value: "science",
-            text: "Science"
+            text: "Science",
+            checked: checked("equivalencySubjects", "science")
           }
         ]
       }) }}
@@ -72,7 +73,7 @@
         name: equivalencyTestsRadioName,
         fieldset: {
           legend: {
-            text: "Will you accept applications from candidates who need to take an equivalency test in English, maths or science?",
+            text: "Will you accept candidates who need to take an equivalency test in English, maths or science?",
             classes: "govuk-fieldset__legend--m"
           }
         },
