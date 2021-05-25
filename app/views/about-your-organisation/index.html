@@ -72,11 +72,11 @@
 
   {% set actionsList = [] %}
 
-  {# Structured school placement policy was required for rollover in 2021 #}
-  {% if not data["placement-policy"] %}
+  {# School placements policy moved to organisation level for rollover in 2021 #}
+  {% if not data["school-placements"] %}
     {% set result = actionsList.push({
-      text: "What is your school placement policy?",
-      href: "/about-your-organisation/placement-policy"
+      text: "How do school placements work?",
+      href: "/about-your-organisation/school-placements"
     }) %}
   {% endif %}
 
@@ -123,6 +123,100 @@
 
   <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
+      {% set aboutYourOrganisationRows = [{
+        classes: macros.requiredSummaryRowClasses("about-organisation"),
+        key: {
+          text: "Training with your organisation"
+        },
+        value: {
+          html: value("about-organisation") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about\">Enter details about your organisation</a>",
+          classes: "app-summary-list__value--truncate"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/about",
+            text: "Change",
+            visuallyHiddenText: "details about your organisation"
+          } if value("about-organisation")]
+        }
+      }] %}
+
+      {% if not data["self_accrediting"] %}
+        {% for a in data["accreditors"] %}
+          {% set changeLink = "/about-your-organisation/about#about-" + a.slug %}
+          {% set result = aboutYourOrganisationRows.push({
+            classes: macros.optionalSummaryRowClasses(a.slug + "-about-accrediting-provider"),
+            key: {
+              text: "About " + a.name + " (optional)"
+            },
+            value: {
+              html: value(a.slug + "-about-accrediting-provider") or "<a class=\"govuk-link\" href=\"" + changeLink + "\">Enter details about " + a.name + "</a>",
+              classes: "app-summary-list__value--truncate"
+            },
+            actions: {
+              items: [{
+                href: "/about-your-organisation/about",
+                text: "Change",
+                visuallyHiddenText: "details about " + a.name
+              } if value(a.slug + "-about-accrediting-provider")]
+            }
+          }) %}
+        {% endfor %}
+      {% endif %}
+
+      {% set result = aboutYourOrganisationRows.push({
+        classes: macros.requiredSummaryRowClasses("training-with-a-disability"),
+        key: {
+          text: "Training with disabilities and other needs"
+        },
+        value: {
+          html: value("training-with-a-disability") or "<a class=\"govuk-link\" href=\"/about-your-organisation/training-with-a-disability\">Enter details about training with disabilities and other needs</a>",
+          classes: "app-summary-list__value--truncate" if value("training-with-a-disability")
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/training-with-a-disability",
+            text: "Change",
+            visuallyHiddenText: "details about training with disabilities and other needs"
+          } if value("training-with-a-disability")]
+        }
+      }, {
+        classes: macros.requiredSummaryRowClasses("school-placements"),
+        key: {
+          text: "School placements"
+        },
+        value: {
+          html: value("school-placements") or "<a class=\"govuk-link\" href=\"/about-your-organisation/school-placements\">Enter details about school placements</a>",
+          classes: "app-summary-list__value--truncate"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/school-placements",
+            text: "Change",
+            visuallyHiddenText: "details about school placements"
+          } if value("school-placements")]
+        }
+      }, {
+        classes: macros.requiredSummaryRowClasses("canSponsorStudentVisa"),
+        key: {
+          text: "Visa sponsorship"
+        },
+        value: {
+          html: visaSponsorshipHtml
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/visa-sponsorship",
+            text: "Change",
+            visuallyHiddenText: "whether you can sponsor visas"
+          } if value("canSponsorStudentVisa")]
+        }
+      }) %}
+
+      {{ govukSummaryList({
+        rows: aboutYourOrganisationRows
+      }) }}
+
       <h2 class="govuk-heading-m">Contact details</h2>
       {{ govukSummaryList({
         rows: [{
@@ -186,102 +280,6 @@
             }]
           }
         }]
-      }) }}
-
-      <h2 class="govuk-heading-m">About your organisation</h2>
-      {% set aboutYourOrganisationRows = [{
-        classes: macros.requiredSummaryRowClasses("about-organisation"),
-        key: {
-          text: "About your organisation"
-        },
-        value: {
-          html: value("about-organisation") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about\">Enter details about your organisation</a>",
-          classes: "app-summary-list__value--truncate"
-        },
-        actions: {
-          items: [{
-            href: "/about-your-organisation/about",
-            text: "Change",
-            visuallyHiddenText: "details about your organisation"
-          } if value("about-organisation")]
-        }
-      }] %}
-
-      {% if not data["self_accrediting"] %}
-        {% for a in data["accreditors"] %}
-          {% set changeLink = "/about-your-organisation/about#about-" + a.slug %}
-          {% set result = aboutYourOrganisationRows.push({
-            classes: macros.optionalSummaryRowClasses(a.slug + "-about-accrediting-provider"),
-            key: {
-              text: "About " + a.name + " (optional)"
-            },
-            value: {
-              html: value(a.slug + "-about-accrediting-provider") or "<a class=\"govuk-link\" href=\"" + changeLink + "\">Enter details about " + a.name + "</a>",
-              classes: "app-summary-list__value--truncate"
-            },
-            actions: {
-              items: [{
-                href: "/about-your-organisation/about",
-                text: "Change",
-                visuallyHiddenText: "details about " + a.name
-              } if value(a.slug + "-about-accrediting-provider")]
-            }
-          }) %}
-        {% endfor %}
-      {% endif %}
-
-      {% set result = aboutYourOrganisationRows.push({
-        classes: macros.requiredSummaryRowClasses("placement-policy"),
-        key: {
-          text: "School placements"
-        },
-        value: {
-          html: placementPolicyHtml
-        },
-        actions: {
-          items: [{
-            href: "/about-your-organisation/placement-policy",
-            text: "Change",
-            visuallyHiddenText: "school placement policy"
-          } if value("placement-policy")]
-        }
-      },
-      {
-        classes: macros.requiredSummaryRowClasses("canSponsorStudentVisa"),
-        key: {
-          text: "Visas"
-        },
-        value: {
-          html: visaSponsorshipHtml
-        },
-        actions: {
-          items: [{
-            href: "/about-your-organisation/visa-sponsorship",
-            text: "Change",
-            visuallyHiddenText: "whether you can sponsor visas"
-          } if value("canSponsorStudentVisa")]
-        }
-      }
-      , {
-        classes: macros.requiredSummaryRowClasses("training-with-a-disability"),
-        key: {
-          text: "Training with disabilities and other needs"
-        },
-        value: {
-          html: value("training-with-a-disability") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about#training-with-a-disability\">Enter details about training with disabilities and other needs</a>",
-          classes: "app-summary-list__value--truncate" if value("training-with-a-disability")
-        },
-        actions: {
-          items: [{
-            href: "/about-your-organisation/about#training-with-a-disability",
-            text: "Change",
-            visuallyHiddenText: "details about training with disabilities and other needs"
-          } if value("training-with-a-disability")]
-        }
-      }) %}
-
-      {{ govukSummaryList({
-        rows: aboutYourOrganisationRows
       }) }}
     </div>
     <div class="govuk-grid-column-one-third">

@@ -5,8 +5,11 @@
 {% block content %}
   <form action="{{ backLink }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
+        {{ title }}
+      </h1>
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
       {% set studentVisaRadioName = "canSponsorStudentVisa" %}
       {% set skilledWorkerVisaRadioName = "canSponsorSkilledWorkerVisa" %}
 

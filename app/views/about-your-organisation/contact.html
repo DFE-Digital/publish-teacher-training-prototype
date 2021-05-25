@@ -3,16 +3,14 @@
 {% set backLink = "/about-your-organisation" %}
 
 {% block content %}
-  <form action="/about-your-organisation" method="post">
+  <form action="{{ backLink }}" method="post">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
+      {{ title }}
+    </h1>
+
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {% include "about-your-organisation/_errors.html" %}
-
-        <h1 class="govuk-heading-xl">
-          <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
-          {{ title }}
-        </h1>
-
         {{ govukInput({
           label: {
             classes: "govuk-label--m",
