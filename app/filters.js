@@ -23,10 +23,20 @@ module.exports = function (env) {
   /**
    * Convert array to readable list format
    * @param {Array} array Array to convert
-   * @example [A, B, C] => A, B and C
+   * @example [A, B, C] => A, B or C
    */
   filters.formatOrList = (array = []) => {
     const lf = new Intl.ListFormat('en', { style: 'short', type: 'disjunction' })
+    return lf.format(array)
+  }
+
+  /**
+   * Convert array to readable list format
+   * @param {Array} array Array to convert
+   * @example [A, B, C] => A, B and C
+   */
+  filters.formatList = (array = []) => {
+    const lf = new Intl.ListFormat('en')
     return lf.format(array)
   }
 
