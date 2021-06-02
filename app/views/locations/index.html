@@ -10,12 +10,8 @@
 {% endblock %}
 
 {% block content %}
-  {% set justCreatedHtml %}
-    <h3 class="govuk-notification-banner__heading">Your location has been added.</h3>
-    <p class="govuk-body">Before candidates can pick this location, you must assign it to one or more courses. You can do this when adding or editing courses.</p>
-  {% endset %}
   {{ govukNotificationBanner({
-    html: justCreatedHtml,
+    text: "Your location has been added.",
     type: "success"
   }) if justCreated }}
 
@@ -35,22 +31,8 @@
   </h1>
 
   <div class="govuk-!-width-two-thirds">
-    <p class="govuk-body">Most candidates search for courses by location. Adding the locations where candidates may train improves the visibility of your courses on Find.</p>
-    {{ govukInsetText({
-      text: "There is no longer a limit on the number of locations you can add."
-    }) }}
+    <p class="govuk-body">Most candidates search for courses by location. Adding locations improves the visibility of your courses on Find.</p>
   </div>
-
-  {% set buttonHtml %}
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Add a new location",
-        href: "/location/start"
-      }) }}
-
-      <a class="govuk-link govuk-link--no-visited-state" href="/location/upload">Upload location data</a>
-    </div>
-  {% endset %}
 
   {% macro locationsTable(locations, caption) %}
     {% set type = "school" if locations == schoolLocations else "centre" %}
@@ -90,21 +72,33 @@
           </tbody>
         </table>
       </section>
-      {{ govukButton({
-        text: "Add a " + item,
-        href: "/location/start?type=" + type
-      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Add a new " + item,
+          href: "/location/start?type=" + type
+        }) }}
+
+        {% if type == "school" %}
+          <a class="govuk-link govuk-link--no-visited-state" href="/location/upload">Upload schools CSV</a>
+        {% endif %}
+      </div>
     {% else %}
       <div class="govuk-!-width-two-thirds">
         <h2 class="govuk-heading-m">{{ heading }}</h2>
         {% if type == "school" %}
-          <p class="govuk-body">Depending on how you organise your placements, you can choose to show individual schools, or the areas in which these schools sit within.</p>
+          <p class="govuk-body">A placement school is a location where a candidate may be placed during their training.</p>
+          <p class="govuk-body">Before adding any schools, you can decide:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>whether to show individual addresses or only the areas schools are located</li>
+            <li>if candidates can select a school when making an application</li>
+          </ul>
           {{ govukButton({
             text: "Set up placement schools",
             href: "#"
           }) }}
         {% else %}
-          <p class="govuk-body">Training centres are locations where academic training takes place.</p>
+          <p class="govuk-body">A training centre is a location where academic training takes place.</p>
           {{ govukButton({
             text: "Add a " + item,
             href: "/location/start?type=" + type
