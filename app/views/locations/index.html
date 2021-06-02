@@ -56,33 +56,40 @@
     {% set type = "school" if locations == schoolLocations else "centre" %}
     {% set heading = "Placement schools" if type == "school" else "Training centres" %}
     {% set item = "placement school" if type == "school" else "training centre" %}
-    <div class="govuk-!-margin-top-8">
+    <hr class="govuk-section-break govuk-section-break--l">
     {% if locations.length > 0 %}
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m">{{ heading }}</caption>
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col" width="5%">URN</th>
-            <th class="govuk-table__header" scope="col" width="40%">Name</th>
-            <th class="govuk-table__header" scope="col" width="60%">Address</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% for location in locations %}
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">{{ location.urn }}</td>
-            <td class="govuk-table__header"><a href="/location/{{ location.code or location.urn }}">{{ location.name }}</a></td>
-            <td class="govuk-table__cell">
-              {{- location["address-line1"] + ", " if location["address-line1"] -}}
-              {{- location["address-line2"] + ", " if location["address-line2"] -}}
-              {{- location["address-level2"] + ", " if location["address-level2"] -}}
-              {{- location["address-level1"] + ", " if location["address-level1"] -}}
-              {{- location["postal-code"] if location["postal-code"] -}}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <section class="app-table-container" tabindex="0" aria-labelledby="{{ type }}-caption">
+        <table class="govuk-table">
+          <caption class="govuk-table__caption govuk-table__caption--m" id="{{ type }}-caption">{{ heading }}</caption>
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" width="40%" scope="col">Name</th>
+              <th class="govuk-table__header" width="10%" scope="col">URN</th>
+              <th class="govuk-table__header" width="60%" scope="col">Address</th>
+              <th class="govuk-table__header" scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            {% for location in locations %}
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row">{{ location.name }}</th>
+              <td class="govuk-table__cell">{{ location.urn }}</td>
+              <td class="govuk-table__cell">
+                {{- location["address-line1"] + ", " if location["address-line1"] -}}
+                {{- location["address-line2"] + ", " if location["address-line2"] -}}
+                {{- location["address-level2"] + ", " if location["address-level2"] -}}
+                {{- location["address-level1"] + ", " if location["address-level1"] -}}
+                {{- location["postal-code"] if location["postal-code"] -}}
+              </td>
+              <td class="govuk-table__cell app-govuk-table__cell--actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}">Edit</a>
+                <a class="govuk-link app-link--destructive" href="#">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
       {{ govukButton({
         text: "Add a " + item,
         href: "/location/start?type=" + type
@@ -105,7 +112,6 @@
         {% endif %}
       </div>
     {% endif %}
-    </div>
   {% endmacro %}
 
   {{ locationsTable(schoolLocations) }}
