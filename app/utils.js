@@ -433,7 +433,7 @@ function validate (data, course, view) {
   }
 
   if (view === 'all') {
-    if (!data[prefix + '-gcse-english-flexibility']) {
+    if (!data[prefix + '-pending-gcses']) {
       errors.push({
         title: 'GCSEs and equivalency tests',
         id: `${prefix}-gcse-english-flexibility`,
