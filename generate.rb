@@ -5,7 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'UCL, University College London (University of London)'
+# provider = 'UCL, University College London (University of London)'
+provider = 'Gorse SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 abort("No courses found - check the provider name exactly matches one in JSON file") if courses.length.zero?
@@ -343,7 +344,7 @@ prototype_data['schools'] = courses.map { |c| school_data(c) }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
 
 prototype_data['schools'].each do |school|
-  school[:urn] = rand(100000..199999)
+  school[:urn] = rand(100000..199999).to_s
 
   prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, #{school[:'address-level1']}, #{school[:'postal-code']})"
 end

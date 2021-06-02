@@ -31,13 +31,13 @@ module.exports = function (env) {
   }
 
   /**
-   * Convert array to readable list format
-   * @param {Array} array Array to convert
-   * @example [A, B, C] => A, B and C
+   * Find item in array of objects
+   * @param {Array} array Array to search
+   * @param {string} key Key
+   * @param {value} value Value
    */
-  filters.formatList = (array = []) => {
-    const lf = new Intl.ListFormat('en')
-    return lf.format(array)
+  filters.find = (array, key, value) => {
+    return array.find(item => item[key] === value)
   }
 
   /* ------------------------------------------------------------------

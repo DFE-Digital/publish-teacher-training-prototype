@@ -12,11 +12,15 @@
 {% set placementLocations = data[code + "-locations"] %}
 {% set placementLocationsHtml %}
   {% if isArray(placementLocations) and placementLocations.length > 0 %}
-    {{ placementLocations | join("<br>") | safe }}
+    <ul class="govuk-list">
+      {% for location in placementLocations %}
+        <li>{{ location }}</li>
+      {% endfor %}
+    </ul>
   {% else %}
     <div class="app-summary-list__message">
       <p class="app-summary-list__heading">Where will candidates be placed?</p>
-      <p><a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Choose the locations candidates can apply to</a></p>
+      <p><a class="govuk-link" href="/edit/{{ code }}/placement-locations">Choose the locations candidates can apply to</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -30,12 +34,23 @@
 {% endset %}
 
 {% set trainingLocationHtml %}
-  {% if data[code + "-training-location"] %}
-    {{ data[code + "-training-location"] }}
+  {% if data[code + "-training-locations"] %}
+    <ul class="govuk-list">
+    {% for item in data[code + "-training-locations"] %}
+      {% if item == "remote" %}
+         <li>Remotely</li>
+      {% elif item == "placed" %}
+         <li>Candidate’s placement school</li>
+      {% else %}
+        {% set location = data.schools | find("urn", item) %}
+        <li>{{ location.name }}, {{ location['address-level1'] }}</li>
+      {% endif %}
+    {% endfor %}
+    </ul>
   {% else %}
     <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Where will candidates do their centre based training?</p>
-      <p><a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Select a centre based training location</a></p>
+      <p class="app-summary-list__heading">Where will candidates do their centre-based training?</p>
+      <p><a class="govuk-link" href="/edit/{{ code }}/training-locations">Select a training location</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -64,7 +79,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=phase",
+        href: "/edit/" + code + "/phase",
         text: "Change",
         visuallyHiddenText: "phase"
       } if isNotPublished]
@@ -80,7 +95,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=true",
+        href: "/edit/" + code + "/phase",
         text: "Change",
         visuallyHiddenText: "SEND"
       } if isNotPublished]
@@ -97,7 +112,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/subject?change=true",
+        href: "/edit/" + code + "/subject",
         text: "Change",
         visuallyHiddenText: "subject"
       }]
@@ -114,7 +129,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/languages?change=true",
+        href: "/edit/" + code + "/languages",
         text: "Change",
         visuallyHiddenText: "languages"
       }]
@@ -131,7 +146,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/age-range?change=true",
+        href: "/edit/" + code + "/age-range",
         text: "Change",
         visuallyHiddenText: "age range"
       }]
@@ -148,7 +163,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/outcome?change=true",
+        href: "/edit/" + code + "/outcome",
         text: "Change",
         visuallyHiddenText: "outcome"
       }]
@@ -165,7 +180,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/funding?change=true",
+        href: "/edit/" + code + "/funding",
         text: "Change",
         visuallyHiddenText: "fee or salary"
       } if isNotPublished]
@@ -180,7 +195,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/apprenticeship?change=true",
+        href: "/edit/" + code + "/apprenticeship",
         text: "Change",
         visuallyHiddenText: "apprenticeship"
       } if isNotPublished]
@@ -197,7 +212,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/full-time-part-time?change=true",
+        href: "/edit/" + code + "/full-time-part-time",
         text: "Change",
         visuallyHiddenText: "full time or part time"
       }]
@@ -214,7 +229,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/accredited-body?change=true",
+        href: "/edit/" + code + "/accredited-body",
         text: "Change",
         visuallyHiddenText: "accredited body"
       } if isNotPublished]
@@ -231,7 +246,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/placement-locations?change=true",
+        href: "/edit/" + code + "/placement-locations",
         text: "Change",
         visuallyHiddenText: "placement schools"
       }]
@@ -239,20 +254,20 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-training-location", showErrors),
+    classes: macros.requiredSummaryRowClasses(code + "-training-locations", showErrors),
     key: {
-      text: "Centre based training"
+      text: "Centre-based training locations"
     },
     value: {
       html: trainingLocationHtml
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/training-location?change=true",
+        href: "/edit/" + code + "/training-locations",
         text: "Change",
         visuallyHiddenText: "training location"
       }]
-    } if showChangeLinks and value(code + "-training-location")
+    } if showChangeLinks and value(code + "-training-locations")
   },
 
   {
@@ -265,7 +280,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/applications-open?change=true",
+        href: "/edit/" + code + "/applications-open",
         text: "Change",
         visuallyHiddenText: "applications open date"
       } if isNotPublished]
@@ -282,7 +297,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/start-date?change=true",
+        href: "/edit/" + code + "/start-date",
         text: "Change",
         visuallyHiddenText: "start date"
       } if isNotPublished]

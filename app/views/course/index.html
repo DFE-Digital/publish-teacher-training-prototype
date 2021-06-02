@@ -142,7 +142,7 @@
   {% if not data[code + "-age-range"] %}
     {% set result = actionsList.push({
       text: "Specify an age range",
-      href: "/new/" + code + "/age-range"
+      href: "/edit/" + code + "/age-range"
     }) %}
   {% endif %}
 
@@ -150,15 +150,15 @@
   {% if data[code + "-locations"].length == 0 %}
     {% set result = actionsList.push({
       text: "Where will candidates be placed?",
-      href: "/new/" + data["provider-code"] + "/placement-locations?change=true"
+      href: "/edit/" + data["provider-code"] + "/placement-locations"
     }) %}
   {% endif %}
 
-  {# A centre based training location was required for rollover in 2021 #}
-  {% if not data[code + "-training-location"] %}
+  {# A centre-based training location was required for rollover in 2021 #}
+  {% if not data[code + "-training-locations"] %}
     {% set result = actionsList.push({
-      text: "Where will candidates do their centre based training?",
-      href: "/new/" + data["provider-code"] + "/training-location?change=true"
+      text: "Where will candidates do their centre-based training?",
+      href: "/edit/" + data["provider-code"] + "/training-locations"
     }) %}
   {% endif %}
 

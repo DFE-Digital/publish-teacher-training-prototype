@@ -35,8 +35,10 @@
   </h1>
 
   <div class="govuk-!-width-two-thirds">
-    <p class="govuk-body">Most candidates search for courses by location. Adding all the locations where candidates may train will improve the visibility of your courses on Find.</p>
-    <p class="govuk-body">There is no longer a limit on how many locations you can add.</p>
+    <p class="govuk-body">Most candidates search for courses by location. Adding the locations where candidates may train improves the visibility of your courses on Find.</p>
+    {{ govukInsetText({
+      text: "There is no longer a limit on the number of locations you can add."
+    }) }}
   </div>
 
   {% set buttonHtml %}
@@ -89,6 +91,9 @@
       <div class="govuk-!-width-two-thirds">
         <h2 class="govuk-heading-m">{{ heading }}</h2>
         {% if type == "school" %}
+          {{ govukInsetText({
+            text: "There is no longer a limit on the number of locations you can add."
+          }) }}
           <p class="govuk-body">Depending on how you organise your placements, you can choose to show individual schools, or the areas in which these schools sit within.</p>
           {{ govukButton({
             text: "Set up placement schools",

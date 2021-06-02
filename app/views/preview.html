@@ -119,12 +119,12 @@
             <p>You will be placed in different schools during your training. You can’t pick which schools you want to be in, but your course will try to place you in schools you can commute to.</p>
           {% endif %}
 
-          {% if data[code + "-training-location"] == "Takes place remotely" %}
+          {% if data[code + "-training-locations"] == "remote" %}
             <p>You will also spend some of your time in academic lessons. These take place remotely.</p>
-          {% elif data[code + "-training-location"] == "Takes place at the school where the candidate is placed" %}
+          {% elif data[code + "-training-locations"] == "placed" %}
             <p>You will also spend some of your time in academic lessons, which takes place at the school where you are placed.</p>
-          {% elif data[code + "-training-location"] %}
-            <p>You will also spend some of your time in academic lessons. These take place at {{ data[code + "-training-location"] }}.</p>
+          {% elif data[code + "-training-locations"] %}
+            <p>You will also spend some of your time in academic lessons. These take place at {{ data[code + "-training-locations"] }}.</p>
           {% endif %}
         {% endset %}
 
