@@ -39,11 +39,11 @@
 
 {% set visaSponsorshipHtml %}
   {% if data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "true" %}
-    You can sponsor Student and Skilled worker visas
+    You can sponsor Student and Skilled Worker visas
   {% elif data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
    You can sponsor Student visas
   {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "true"  %}
-    You can sponsor Skilled worker visas
+    You can sponsor Skilled Worker visas
   {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
     You cannot sponsor visas
   {% else %}
