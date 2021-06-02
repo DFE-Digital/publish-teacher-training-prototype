@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "How do you want to manage placement schools?" %}
-{% set backLink = referrer or "/locations#school" %}
+{% set backLink = referrer %}
 
 {% block content %}
   <form action="{{ referrer or "/locations/placements-policy" }}" method="post" class="govuk-grid-row">

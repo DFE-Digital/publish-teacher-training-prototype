@@ -85,6 +85,7 @@ router.all(['/:flow(new|edit)/:code/placement-locations', '/new/:code/further/pl
   res.render('new/placement-locations', {
     paths: newCourseWizardPaths(req),
     code,
+    schoolLocations,
     items,
     editing: flow === 'edit'
   })
@@ -665,6 +666,12 @@ router.all('/locations', function (req, res) {
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
     justUploaded: req.query.success === 'uploaded'
+  })
+})
+
+router.get('/locations/:view', function (req, res) {
+  res.render(`locations/${req.params.view}`, {
+    referrer: req.query.referrer
   })
 })
 

@@ -30,7 +30,7 @@
       <p class="govuk-heading-s app-inset-text__title">Where will candidates be placed?</p>
       {% if not data["placements-policy"] %}
         {# Placement policy must be set before this question can be answered #}
-        <p><a class="govuk-link govuk-link--no-visited-state" href="#">Set up placement schools</a></p>
+        <p><a class="govuk-link govuk-link--no-visited-state" href="/locations/placements-display"/>Set up placement schools</a></p>
       {% else %}
         <p><a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ code }}/placement-locations">Select the locations candidates can apply to</a></p>
       {% endif %}
