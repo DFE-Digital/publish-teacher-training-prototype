@@ -1,23 +1,12 @@
 {% extends "layout.html" %}
 {% set title = school.name or "Add a " + ("placement school" if type == "school" else "training centre") %}
-
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: referrer
-  }) if referrer else govukBreadcrumbs({
-    items: breadcrumbItems([{
-      href: "/locations",
-      text: "Locations"
-    }, {
-      text: title
-    }])
-  )) }}
-{% endblock %}
+{% set backLink = referrer or "/locations#" + type %}
 
 {% block content %}
-  <form action="/location/{{ id }}?referrer={{ referrer }}" method="post" class="govuk-grid-row">
+  <form action="/location/{{ id }}?referrer={{ referrer }}#{{ type }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">Locations</span>
         {{ title }}
       </h1>
 

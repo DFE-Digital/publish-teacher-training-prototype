@@ -23,16 +23,16 @@
 {%- endset -%}
 
 {% set placementPolicyHtml %}
-  {% if data["placement-policy"] == "hosted" %}
+  {% if data["placements-policy"] == "hosted" %}
     Candidates choose a lead or host school
-  {% elif data["placement-policy"] == "placed" %}
+  {% elif data["placements-policy"] == "placed" %}
     Placements are arranged with candidates before their training starts
-  {% elif data["placement-policy"] == "other" %}
+  {% elif data["placements-policy"] == "other" %}
     Other
   {% else %}
     <div class="app-summary-list__message">
       <p class="app-summary-list__heading">What is your school placement policy?</p>
-      <p><a class="govuk-link" href="/about-your-organisation/placement-policy">Select a school placement policy</a></p>
+      <p><a class="govuk-link" href="/about-your-organisation/placements-policy">Select a school placement policy</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -164,21 +164,6 @@
 
       {% set result = aboutYourOrganisationRows.push({
         key: {
-          text: "Training with disabilities and other needs"
-        },
-        value: {
-          html: value("training-with-a-disability") or "Empty",
-          classes: "app-summary-list__value--truncate" if value("training-with-a-disability") else "app-!-colour-muted"
-        },
-        actions: {
-          items: [{
-            href: "/about-your-organisation/training-with-a-disability",
-            text: "Change",
-            visuallyHiddenText: "details about training with disabilities and other needs"
-          }]
-        }
-      }, {
-        key: {
           text: "School placements"
         },
         value: {
@@ -190,6 +175,21 @@
             href: "/about-your-organisation/school-placements",
             text: "Change",
             visuallyHiddenText: "details about school placements"
+          }]
+        }
+      }, {
+        key: {
+          text: "Training with disabilities and other needs"
+        },
+        value: {
+          html: value("training-with-a-disability") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("training-with-a-disability") else "app-!-colour-muted"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/training-with-a-disability",
+            text: "Change",
+            visuallyHiddenText: "details about training with disabilities and other needs"
           }]
         }
       }, {

@@ -10,15 +10,15 @@
 {% endset %}
 
 {% set placementLocations = data[code + "-locations"] %}
-{% set canEditPlacementLocations = data["placement-policy"] and placementLocations.length > 0 %}
+{% set canEditPlacementLocations = data["placements-policy"] and placementLocations.length > 0 %}
 {% set placementLocationsHtml %}
   {# Play back the placement policy above the list of school placement locations #}
-  {% if data["placement-policy"] == "hosted" %}
+  {% if data["placements-policy"] == "hosted" %}
     <p class="govuk-body">Candidates can choose apply to one of the following locations when they apply:</p>
   {% endif %}
 
   {# List of school placement locations #}
-  {% if data["placement-policy"] and isArray(placementLocations) and placementLocations.length > 0 %}
+  {% if data["placements-policy"] and isArray(placementLocations) and placementLocations.length > 0 %}
     <ul class="govuk-list">
       {% for location in placementLocations %}
         {% set location = data.schools | find("urn", location) %}
@@ -28,7 +28,7 @@
   {% else %}
     <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
       <p class="govuk-heading-s app-inset-text__title">Where will candidates be placed?</p>
-      {% if not data["placement-policy"] %}
+      {% if not data["placements-policy"] %}
         {# Placement policy must be set before this question can be answered #}
         <p><a class="govuk-link govuk-link--no-visited-state" href="#">Set up placement schools</a></p>
       {% else %}
