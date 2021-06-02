@@ -15,15 +15,15 @@
 {% endblock %}
 
 {% block content %}
-  <form action="/location/{{ code }}?referrer={{ referrer }}" method="post" class="govuk-grid-row">
+  <form action="/location/{{ id }}?referrer={{ referrer }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
         {{ title }}
       </h1>
 
       {{ govukInput({
-        id: code + "-name",
-        name: code + "-name",
+        id: id + "-name",
+        name: id + "-name",
         value: school.name,
         label: {
           classes: "govuk-label--m",
@@ -32,8 +32,8 @@
       }) }}
 
       {{ govukInput({
-        id: code + "-urn",
-        name: code + "-urn",
+        id: id + "-urn",
+        name: id + "-urn",
         value: school.urn,
         label: {
           classes: "govuk-label--m",
@@ -46,15 +46,15 @@
       }) }}
 
       {{ govukInput({
-        id: code + "-location-type",
-        name: code + "-location-type",
-        value: value(code + "-location-type") or type,
+        id: id + "-location-type",
+        name: id + "-location-type",
+        value: value(id + "-location-type") or type,
         type: "hidden"
       }) }}
 
       {# govukCheckboxes({
-        idPrefix: code + "-location-type",
-        name: code + "-location-type",
+        idPrefix: id + "-location-type",
+        name: id + "-location-type",
         fieldset: {
           legend: {
             text: "Type of location",
@@ -67,14 +67,14 @@
           hint: {
             text: "Used for classroom based training with children"
           },
-          checked: checked(code + "-location-type", "school")
+          checked: checked(id + "-location-type", "school")
         }, {
           value: "centre",
           text: "centre-based training location",
           hint: {
             text: "University or college campus or other location used for centre-based training"
           },
-          checked: checked(code + "-location-type", "centre")
+          checked: checked(id + "-location-type", "centre")
         }]
       }) #}
 
@@ -84,8 +84,8 @@
           html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
         },
         autocomplete: "address-line1",
-        id: code + "-address-line1",
-        name: code + "-address-line1",
+        id: id + "-address-line1",
+        name: id + "-address-line1",
         value: school["address-line1"]
       }) }}
 
@@ -94,8 +94,8 @@
           html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
         },
         autocomplete: "address-line2",
-        id: code + "-address-line2",
-        name: code + "-address-line2",
+        id: id + "-address-line2",
+        name: id + "-address-line2",
         value: school["address-line2"]
       }) }}
 
@@ -105,8 +105,8 @@
         },
         classes: "govuk-!-width-two-thirds",
         autocomplete: "address-level2",
-        id: code + "-address-level2",
-        name: code + "-address-level2",
+        id: id + "-address-level2",
+        name: id + "-address-level2",
         value: school["address-level2"]
       }) }}
 
@@ -116,8 +116,8 @@
         },
         classes: "govuk-!-width-two-thirds",
         autocomplete: "address-level1",
-        id: code + "-address-level1",
-        name: code + "-address-level1",
+        id: id + "-address-level1",
+        name: id + "-address-level1",
         value: school["address-level1"]
       }) }}
 
@@ -127,8 +127,8 @@
         },
         classes: "govuk-input--width-10",
         autocomplete: "postal-code",
-        id: code + "-postal-code",
-        name: code + "-postal-code",
+        id: id + "-postal-code",
+        name: id + "-postal-code",
         value: school["postal-code"]
       }) }}
 

@@ -71,7 +71,7 @@
           {% for location in locations %}
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">{{ location.urn }}</td>
-            <td class="govuk-table__header"><a href="/location/{{ location.code }}">{{ location.name }}</a></td>
+            <td class="govuk-table__header"><a href="/location/{{ location.code or location.urn }}">{{ location.name }}</a></td>
             <td class="govuk-table__cell">
               {{- location["address-line1"] + ", " if location["address-line1"] -}}
               {{- location["address-line2"] + ", " if location["address-line2"] -}}
@@ -91,9 +91,6 @@
       <div class="govuk-!-width-two-thirds">
         <h2 class="govuk-heading-m">{{ heading }}</h2>
         {% if type == "school" %}
-          {{ govukInsetText({
-            text: "There is no longer a limit on the number of locations you can add."
-          }) }}
           <p class="govuk-body">Depending on how you organise your placements, you can choose to show individual schools, or the areas in which these schools sit within.</p>
           {{ govukButton({
             text: "Set up placement schools",

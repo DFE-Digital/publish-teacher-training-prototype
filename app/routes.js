@@ -603,44 +603,30 @@ router.get('/location/start', function (req, res) {
   }
 })
 
-router.get('/location/:code', function (req, res) {
+router.get('/location/:id', function (req, res) {
   const { type, referrer } = req.query
-  const { code } = req.params
+  const { id } = req.params
   const { data } = req.session
 
-  const school = data.schools.find(school => school.code === code)
-
+  const school = data.schools.find(school => school.urn === id || school.code === id)
   const isNew = !school
+
   res.render('location/index', {
     school: school,
-    code,
+    id: id,
     type: type || 'school',
     referrer,
     isNew: isNew
   })
 })
 
-router.post('/location/:code', function (req, res) {
-  const { code } = req.params
+router.post('/location/:id', function (req, res) {
+  const { id } = req.params
   const { data } = req.session
   const { referrer } = req.query
 
-  let school = data.schools.find(function (school) {
-    return school.code === req.params.code
-  })
-
+  let school = data.schools.find(school => school.urn === id || school.code === id)
   let isNew = false
-
-  if (!school && req.body[code + '-location-confirm'] === '_unchecked') {
-    res.render('location/index', {
-      school,
-      code,
-      showErrors: true,
-      isNew: true
-    })
-
-    return
-  }
 
   if (!school) {
     school = {}
@@ -648,15 +634,16 @@ router.post('/location/:code', function (req, res) {
     isNew = true
   }
 
-  school.urn = data[code + '-urn']
-  school.name = data[code + '-name']
-  school.code = code
-  school.type = data[code + '-location-type']
-  school['address-line1'] = data[code + '-address-line1']
-  school['address-line2'] = data[code + '-address-line2']
-  school['address-level2'] = data[code + '-address-level2']
-  school['address-level1'] = data[code + '-address-level1']
-  school['postal-code'] = data[code + '-postal-code']
+  school.urn = data[id + '-urn']
+  school.name = data[id + '-name']
+  school.type = data[id + '-location-type']
+  school['address-line1'] = data[id + '-address-line1']
+  school['address-line2'] = data[id + '-address-line2']
+  school['address-level2'] = data[id + '-address-level2']
+  school['address-level1'] = data[id + '-address-level1']
+  school['postal-code'] = data[id + '-postal-code']
+
+  delete school.code
 
   res.redirect(referrer || `/locations?success=${isNew ? 'new' : 'edited'}`)
 })
@@ -670,7 +657,7 @@ router.all('/locations', function (req, res) {
   }
 
   schools.forEach(location => {
-    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length
+    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.urn === location.urn)).length
   })
 
   const centerLocations = schools.filter(school => school.type.includes('centre'))
@@ -682,8 +669,7 @@ router.all('/locations', function (req, res) {
     schoolLocations,
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
-    justUploaded: req.query.success === 'uploaded',
-    justChangedCode: req.query.code
+    justUploaded: req.query.success === 'uploaded'
   })
 })
 
