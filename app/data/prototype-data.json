@@ -10,10 +10,10 @@
   "ucas-alerts": "Get an email for each application you receive",
   "training-provider-name": "UCL, University College London (University of London)",
   "provider-code": "U80",
-  "building-and-street": "1 Fake street name",
-  "town-or-city": "Town name",
-  "county": "London",
-  "postcode": "LB1 1AA",
+  "address-line1": "1 Fake street name",
+  "address-level2": "Town name",
+  "address-level1": "London",
+  "postal-code": "LB1 1AA",
   "ucas-admin-name": "Joe Admin",
   "email": "admin@myorg.ac.uk",
   "website": "https://myorg.ac.uk",
@@ -1635,23 +1635,17 @@
   "schools": [
     {
       "name": "Main Site",
-      "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
       "code": "-",
-      "urn": 177101,
-      "type": [
-        "centre"
-      ],
-      "postcode": "WC1E 6BT"
+      "type": "unknown",
+      "address-line1": "Registrar's Division",
+      "address-line2": null,
+      "address-level2": "Gower Street",
+      "address-level1": "London",
+      "postal-code": "WC1E 6BT",
+      "urn": 123803
     }
   ],
-  "--location-picked": "Main Site (177101, City, WC1E 6BT)",
-  "--location-type": [
-    "centre"
-  ],
-  "--name": "Main Site",
-  "--urn": 177101,
-  "--postcode": "WC1E 6BT",
-  "--address": "Registrar's Division, Gower Street, London, WC1E 6BT",
+  "--location-picked": "Main Site (123803, London, WC1E 6BT)",
   "accreditors": [
     {
       "name": "UCL, University College London (University of London)",

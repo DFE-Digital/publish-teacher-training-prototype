@@ -16,30 +16,42 @@ isAccreditedBody = !courses.first['route'].include?('School Direct')
 all_accredited_bodies = data.map {|c| c['accrediting'] }.uniq.compact.sort
 
 # https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
-postcodeRegex =  /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
+$postcodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
-prototype_data = {
-  'rolled-over': true,
-  'next-cycle': next_cycle,
-  # 'allocations-window' options: open, closed, confirmed
-  'about-organisation': 'Over the last five years we have trained over 800 trainees across all subjects and in Primary and Secondary phases. The majority of these colleagues are pursuing successful careers in our Trust or Alliance schools; a number of these colleagues have made rapid progress through their careers and hold positions of responsibility.',
-  'school-placements': "Our placement schools are chosen for their quality, excellence in supporting teacher education and to provide comprehensive geographical coverage across a wide range of phases, subjects and specialisms.\n\nYou will take a minimum of two placements in different schools (up to 120 days in total), each with a dedicated placement co-ordinating mentor, with both schools carefully matched to your needs in terms of location, stage and subject, taking any mobility needs into account.",
-  'training-with-a-disability': 'We want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children. If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.',
-  'allocations-window': 'open',
-  'multi-organisation': false,
-  'ucas-gt12': 'Applicants must confirm their place',
-  'ucas-alerts': 'Get an email for each application you receive',
-  'training-provider-name': provider,
-  'provider-code': courses.first['providerCode'],
-  'building-and-street': '1 Fake street name',
-  'town-or-city': 'Town name',
-  'county': 'London',
-  'postcode': 'LB1 1AA',
-  'ucas-admin-name': 'Joe Admin',
-  'email': 'admin@myorg.ac.uk',
-  'website': 'https://myorg.ac.uk',
-  'telephone': '01234 321456'
-}
+def school_data(c)
+  c['campuses'].map { |a|
+    postalCode = $postcodeRegex.match(a['address'])
+    address = a['address'].gsub($postcodeRegex, '')
+    addressParts = address.split(', ')
+    addressLine1 = addressParts[0]
+
+    if addressParts.length == 2
+      addressLevel1 = addressParts[1]
+    end
+
+    if addressParts.length == 3
+      addressLevel2 = addressParts[1]
+      addressLevel1 = addressParts[2]
+    end
+
+    if addressParts.length == 4
+      addressLine2 = addressParts[1]
+      addressLevel2 = addressParts[2]
+      addressLevel1 = addressParts[3]
+    end
+
+    {
+      name: a['name'],
+      code: a['code'] == '' ? '-' : a['code'],
+      type: a['name'] == 'Main Site' ? 'unknown' : 'school',
+      'address-line1': addressLine1,
+      'address-line2': addressLine2,
+      'address-level2': addressLevel2,
+      'address-level1': addressLevel1,
+      'postal-code': postalCode.to_s
+    }
+  }
+end
 
 def course_qualification(c)
   if c['subjects'].map {|s| s.downcase.capitalize }.include?('Further education')
@@ -54,6 +66,29 @@ def course_qualification(c)
 
   qual
 end
+
+prototype_data = {
+  'rolled-over': true,
+  'next-cycle': next_cycle,
+  # 'allocations-window' options: open, closed, confirmed
+  'about-organisation': 'Over the last five years we have trained over 800 trainees across all subjects and in Primary and Secondary phases. The majority of these colleagues are pursuing successful careers in our Trust or Alliance schools; a number of these colleagues have made rapid progress through their careers and hold positions of responsibility.',
+  'school-placements': "Our placement schools are chosen for their quality, excellence in supporting teacher education and to provide comprehensive geographical coverage across a wide range of phases, subjects and specialisms.\n\nYou will take a minimum of two placements in different schools (up to 120 days in total), each with a dedicated placement co-ordinating mentor, with both schools carefully matched to your needs in terms of location, stage and subject, taking any mobility needs into account.",
+  'training-with-a-disability': 'We want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children. If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.',
+  'allocations-window': 'open',
+  'multi-organisation': false,
+  'ucas-gt12': 'Applicants must confirm their place',
+  'ucas-alerts': 'Get an email for each application you receive',
+  'training-provider-name': provider,
+  'provider-code': courses.first['providerCode'],
+  'address-line1': '1 Fake street name',
+  'address-level2': 'Town name',
+  'address-level1': 'London',
+  'postal-code': 'LB1 1AA',
+  'ucas-admin-name': 'Joe Admin',
+  'email': 'admin@myorg.ac.uk',
+  'website': 'https://myorg.ac.uk',
+  'telephone': '01234 321456'
+}
 
 # Map course data for the `imported from UCAS` view
 prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
@@ -119,7 +154,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
     fullPart = 'Full time'
   end
 
-  schools = c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } }
+  schools = school_data(c)
   schools.reject! { |s| s[:code] == '-' }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
@@ -304,21 +339,13 @@ end
 # prototype_data['ucasCourses'] = []
 
 # Find all schools across all courses and flatten into array of schools
-prototype_data['schools'] = courses.map { |c| c['campuses'].map { |a| { name: a['name'], address: a['address'], code: a['code'] == '' ? '-' : a['code'] } } }.flatten.uniq
+prototype_data['schools'] = courses.map { |c| school_data(c) }.flatten.uniq
 prototype_data['schools'].sort_by! { |k| k[:name] }
 
 prototype_data['schools'].each do |school|
   school[:urn] = rand(100000..199999)
-  school[:type] = school[:code] == '-' ? ['centre'] : ['school']
-  postcodeMatched = postcodeRegex.match(school[:address])
 
-  school[:postcode] = postcodeMatched ? postcodeMatched[0] : ''
-  prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, City, #{school[:postcode]})"
-  prototype_data["#{school[:code]}-location-type"] = school[:code] == '-' ? ['centre'] : ['school']
-  prototype_data["#{school[:code]}-name"] = school[:name]
-  prototype_data["#{school[:code]}-urn"] = school[:urn]
-  prototype_data["#{school[:code]}-postcode"] = school[:postcode]
-  prototype_data["#{school[:code]}-address"] = school[:address]
+  prototype_data["#{school[:code]}-location-picked"] = "#{school[:name]} (#{school[:urn]}, #{school[:'address-level1']}, #{school[:'postal-code']})"
 end
 
 # Create a list of accreditors

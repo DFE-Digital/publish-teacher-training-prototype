@@ -592,18 +592,20 @@ router.get('/location/upload-review', function (req, res) {
 router.get('/location/start', function (req, res) {
   const existingCodes = req.session.data.schools.map(s => s.code)
   const code = generateLocationCode(existingCodes)
-  res.redirect(`/location/${code}`)
+  res.redirect(`/location/${code}?type=${req.query.type}`)
 })
 
 router.get('/location/:code', function (req, res) {
   const code = req.params.code
   const data = req.session.data
+  const type = req.query.type || 'school'
   const school = data.schools.find(school => school.code === code)
 
   const isNew = !school
   res.render('location/index', {
     school: school,
     code,
+    type,
     isNew: isNew
   })
 })
@@ -633,12 +635,15 @@ router.post('/location/:code', function (req, res) {
     isNew = true
   }
 
-  school.name = data[code + '-name']
   school.urn = data[code + '-urn']
-  school.type = data[code + '-location-type']
-  school.address = data[code + '-address']
-  school.postcode = data[code + '-postcode']
+  school.name = data[code + '-name']
   school.code = code
+  school.type = data[code + '-location-type']
+  school['address-line1'] = data[code + '-address-line1']
+  school['address-line2'] = data[code + '-address-line2']
+  school['address-level2'] = data[code + '-address-level2']
+  school['address-level1'] = data[code + '-address-level1']
+  school['postal-code'] = data[code + '-postal-code']
 
   res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}`)
 })

@@ -11,12 +11,12 @@
 {% endblock %}
 
 {%- set contactAddressHtml -%}
-  {%- if data["building-and-street"] or data["building-and-street-2"] or data["town-or-city"] or data["county"] or data["postcode"] -%}
-    {{- data["building-and-street"] + "\n" if data["building-and-street"] -}}
-    {{- data["building-and-street-2"] + "\n" if data["building-and-street-2"] -}}
-    {{- data["town-or-city"] + "\n" if data["town-or-city"] -}}
-    {{- data["county"] + "\n" if data["county"] -}}
-    {{- data["postcode"] if data["postcode"] -}}
+  {%- if data["address-line1"] or data["address-line2"] or data["address-level2"] or data["address-level1"] or data["postal-code"] -%}
+    {{- data["address-line1"] + "\n" if data["address-line1"] -}}
+    {{- data["address-line2"] + "\n" if data["address-line2"] -}}
+    {{- data["address-level2"] + "\n" if data["address-level2"] -}}
+    {{- data["address-level1"] + "\n" if data["address-level1"] -}}
+    {{- data["postal-code"] if data["postal-code"] -}}
   {%- else -%}
     Empty
   {%- endif -%}

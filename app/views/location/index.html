@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = school.name or "Add a location" %}
+{% set title = school.name or "Add a " + ("placement school" if type == "school" else "training centre") %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -12,20 +12,9 @@
   )) }}
 {% endblock %}
 
-{% set errors = [{
-  id: code + '-location-confirm',
-  href: '#checkbox-part-1',
-  text: 'Please confirm that candidates can pick this location when they apply'
-}] %}
-
 {% block content %}
   <form action="/location/{{ code }}" method="post" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ govukErrorSummary({
-        titleText: "We couldn’t save this location",
-        errorList: errors
-      }) if showErrors }}
-
       <h1 class="govuk-heading-xl">
         {{ title }}
       </h1>
@@ -49,12 +38,19 @@
           text: "Unique Reference Number (URN)"
         },
         hint: {
-          html: "You can find URNs on the <a href=\"https://www.get-information-schools.service.gov.uk/\" target=\"_blank\">Get information about schools service (opens in new tab)</a>."
+          html: "You can find URNs on <a href=\"https://www.get-information-schools.service.gov.uk/\" target=\"_blank\">Get information about schools (opens in new tab)</a>."
         },
         classes: "govuk-input--width-5"
       }) }}
 
-      {{ govukCheckboxes({
+      {{ govukInput({
+        id: code + "-location-type",
+        name: code + "-location-type",
+        value: value(code + "-location-type") or type,
+        type: "hidden"
+      }) }}
+
+      {# govukCheckboxes({
         idPrefix: code + "-location-type",
         name: code + "-location-type",
         fieldset: {
@@ -78,7 +74,7 @@
           },
           checked: checked(code + "-location-type", "centre")
         }]
-      }) }}
+      }) #}
 
       <h2 class="govuk-heading-m">Address</h2>
       {{ govukInput({
@@ -86,16 +82,19 @@
           html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
         },
         autocomplete: "address-line1",
-        id: code + "-address",
-        name: code + "-address",
-        value: school.address
+        id: code + "-address-line1",
+        name: code + "-address-line1",
+        value: school["address-line1"]
       }) }}
 
       {{ govukInput({
         label: {
           html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
         },
-        autocomplete: "address-line2"
+        autocomplete: "address-line2",
+        id: code + "-address-line2",
+        name: code + "-address-line2",
+        value: school["address-line2"]
       }) }}
 
       {{ govukInput({
@@ -104,9 +103,9 @@
         },
         classes: "govuk-!-width-two-thirds",
         autocomplete: "address-level2",
-        id: code + "-town",
-        name: code + "-town",
-        value: school.town
+        id: code + "-address-level2",
+        name: code + "-address-level2",
+        value: school["address-level2"]
       }) }}
 
       {{ govukInput({
@@ -115,9 +114,9 @@
         },
         classes: "govuk-!-width-two-thirds",
         autocomplete: "address-level1",
-        id: code + "-county",
-        name: code + "-county",
-        value: school.county
+        id: code + "-address-level1",
+        name: code + "-address-level1",
+        value: school["address-level1"]
       }) }}
 
       {{ govukInput({
@@ -126,14 +125,14 @@
         },
         classes: "govuk-input--width-10",
         autocomplete: "postal-code",
-        id: code + "-postcode",
-        name: code + "-postcode",
-        value: school.postcode
+        id: code + "-postal-code",
+        name: code + "-postal-code",
+        value: school["postal-code"]
       }) }}
 
       <div class="govuk-button-group">
         {{ govukButton({
-          text: "Save and publish changes"
+          text: "Save location"
         }) }}
 
         <a class="govuk-link" href="/locations">Cancel</a>
