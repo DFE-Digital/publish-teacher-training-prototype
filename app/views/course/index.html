@@ -208,13 +208,12 @@
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
-            classes: macros.requiredSummaryRowClasses(code + "-about-this-course"),
             key: {
               text: "About this course"
             },
             value: {
-              text: value(code + "-about-this-course") or "Unknown",
-              classes: "app-summary-list__value--truncate"
+              text: value(code + "-about-this-course") or "Empty",
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-about-this-course"))
             },
             actions: {
               items: [{
@@ -224,13 +223,12 @@
               }]
             }
           }, {
-            classes: macros.optionalSummaryRowClasses(code + "-interview-process"),
             key: {
               text: "Interview process (optional)"
             },
             value: {
               html: value(code + "-interview-process") or "Empty",
-              classes: "app-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-interview-process"))
             },
             actions: {
               items: [{
@@ -246,13 +244,12 @@
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
-            classes: macros.requiredSummaryRowClasses(code + "-duration"),
             key: {
               text: "Course length"
             },
             value: {
               text: value(code + "-duration") or "Unknown",
-              classes: "app-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-duration"))
             },
             actions: {
               items: [{
@@ -262,13 +259,12 @@
               }]
             }
           }, {
-            classes: macros.requiredSummaryRowClasses(code + "-salary-details"),
             key: {
               text: "Salary"
             },
             value: {
-              text: value(code + "-salary-details"),
-              classes: "app-summary-list__value--truncate"
+              text: value(code + "-salary-details") or "Empty",
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-salary-details"))
             },
             actions: {
               items: [{
@@ -278,12 +274,12 @@
               }]
             }
           } if course.salaried, {
-            classes: macros.requiredSummaryRowClasses(code + "-fee"),
             key: {
               text: "Fee for UK students"
             },
             value: {
-              text: "£" + value(code + "-fee") if value(code + "-fee") else "Unknown"
+              text: "£" + value(code + "-fee") if value(code + "-fee") else "Unknown",
+              classes: "app-!-colour-muted" if not value(code + "-fee")
             },
             actions: {
               items: [{
@@ -293,12 +289,12 @@
               }]
             }
           } if not course.salaried, {
-            classes: macros.optionalSummaryRowClasses(code + "-fee-international"),
             key: {
               text: "Fee for international students (optional)"
             },
             value: {
-              text: "£" + value(code + "-fee-international") if value(code + "-fee-international") else "Empty"
+              text: "£" + value(code + "-fee-international") if value(code + "-fee-international") else "Unknown",
+              classes: "app-!-colour-muted" if not value(code + "-fee-international")
             },
             actions: {
               items: [{
@@ -308,13 +304,12 @@
               }]
             }
           } if not course.salaried, {
-            classes: macros.optionalSummaryRowClasses(code + "-fee-details"),
             key: {
               text: "Fee details (optional)"
             },
             value: {
-              text: value(code + "-fee-details") or "Empty",
-              classes: "app-summary-list__value--truncate"
+              text: value(code + "-fee-details") or "Unknown",
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-fee-details"))
             },
             actions: {
               items: [{
@@ -324,13 +319,12 @@
               }]
             }
           } if not course.salaried, {
-            classes: macros.optionalSummaryRowClasses(code + "-financial-support"),
             key: {
               text: "Financial support you offer (optional)"
             },
             value: {
               html: value(code + "-financial-support") or "Empty",
-              classes: "app-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-financial-support"))
             },
             actions: {
               items: [{
@@ -357,9 +351,9 @@
               Third class degree or above, or equivalent
             {% endif %}
           {% else %}
-            <div class="app-summary-list__message">
-              <p class="app-summary-list__heading">Do you require a minimum degree classification?</p>
-              <p><a class="govuk-link" href="{{ coursePath }}/degree">Enter degree requirements</a></p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+              <p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
+              <p><a class="govuk-link govuk-link--no-visited-state" href="{{ coursePath }}/degree">Enter degree requirements</a></p>
             </div>
           {% endif %}
           {% if data[code + "-degree-subject-required"] === "Yes" %}
@@ -396,9 +390,9 @@
 
 
           {% else %}
-            <div class="app-summary-list__message">
-              <p class="app-summary-list__heading">GCSEs and equivalency tests</p>
-              <p><a class="govuk-link" href="{{ coursePath }}/gcses-pending-or-equivalency-tests">Enter GCSEs and equivalency test requirements</a></p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+              <p class="govuk-heading-s app-inset-text__title">GCSEs and equivalency tests</p>
+              <p><a class="govuk-link govuk-link--no-visited-state" href="{{ coursePath }}/gcses-pending-or-equivalency-tests">Enter GCSEs and equivalency test requirements</a></p>
             </div>
           {% endif %}
         {% endset %}
@@ -406,7 +400,6 @@
         {{ govukSummaryList({
           classes: "govuk-!-margin-bottom-8",
           rows: [{
-            classes: macros.requiredSummaryRowClasses(code + "-degree-minimum-required", showErrors),
             key: {
               text: "Degree"
             },
@@ -421,7 +414,6 @@
               }]
             } if value(code + "-degree-minimum-required")
           }, {
-            classes: macros.requiredSummaryRowClasses(code + "-pending-gcses", showErrors),
             key: {
               text: "GCSEs"
             },
@@ -436,13 +428,12 @@
               }]
             } if value(code + "-pending-gcses")
           }, {
-            classes: macros.optionalSummaryRowClasses(code + "-personal-qualities"),
             key: {
               text: "Personal qualities (optional)"
             },
             value: {
               html: data[code + "-personal-qualities"] or "Empty",
-              classes: "app-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-personal-qualities"))
             },
             actions: {
               items: [{
@@ -452,13 +443,12 @@
               }]
             }
           }, {
-            classes: macros.optionalSummaryRowClasses(code + "-other-requirements"),
             key: {
               text: "Other requirements (optional)"
             },
             value: {
               html: data[code + "-other-requirements"] or "Empty",
-              classes: "app-summary-list__value--truncate"
+              classes: "app-summary-list__value--truncate" + (" app-!-colour-muted" if not value(code + "-other-requirements"))
             },
             actions: {
               items: [{

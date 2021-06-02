@@ -470,18 +470,6 @@
 </div>
 {% endmacro %}
 
-{% macro requiredSummaryRowClasses(id, showErrors) %}
-  {% if not value(id) and showErrors %}
-    app-summary-list__row--error
-  {% elif not value(id) %}
-    app-summary-list__row--missing
-  {% endif %}
-{% endmacro %}
-
-{% macro optionalSummaryRowClasses(id) %}
-  {{ "app-summary-list__row--empty" if not value(id) }}
-{% endmacro %}
-
 {% macro previewPart(id, org = false) %}
   {% if (value(id)) %}
     <div class="markdown">

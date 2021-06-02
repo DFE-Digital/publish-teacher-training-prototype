@@ -47,9 +47,9 @@
   {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
     You cannot sponsor visas
   {% else %}
-    <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Can you sponsor visas?</p>
-      <p><a class="govuk-link" href="/about-your-organisation/visa-sponsorship">Select whether you can sponsor visas</a></p>
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Can you sponsor visas?</p>
+      <p><a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation/visa-sponsorship">Select if you can sponsor visas</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -124,20 +124,19 @@
   <div class="govuk-grid-row govuk-!-margin-top-3">
     <div class="govuk-grid-column-two-thirds">
       {% set aboutYourOrganisationRows = [{
-        classes: macros.requiredSummaryRowClasses("about-organisation"),
         key: {
           text: "Training with your organisation"
         },
         value: {
-          html: value("about-organisation") or "<a class=\"govuk-link\" href=\"/about-your-organisation/about\">Enter details about your organisation</a>",
-          classes: "app-summary-list__value--truncate"
+          html: value("about-organisation") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("about-organisation") else "app-!-colour-muted"
         },
         actions: {
           items: [{
             href: "/about-your-organisation/about",
             text: "Change",
             visuallyHiddenText: "details about your organisation"
-          } if value("about-organisation")]
+          }]
         }
       }] %}
 
@@ -145,59 +144,55 @@
         {% for a in data["accreditors"] %}
           {% set changeLink = "/about-your-organisation/about#about-" + a.slug %}
           {% set result = aboutYourOrganisationRows.push({
-            classes: macros.optionalSummaryRowClasses(a.slug + "-about-accrediting-provider"),
             key: {
               text: "About " + a.name + " (optional)"
             },
             value: {
-              html: value(a.slug + "-about-accrediting-provider") or "<a class=\"govuk-link\" href=\"" + changeLink + "\">Enter details about " + a.name + "</a>",
-              classes: "app-summary-list__value--truncate"
+              html: value(a.slug + "-about-accrediting-provider") or "Empty",
+              classes: "app-summary-list__value--truncate" if value(a.slug + "-about-accrediting-provider") else "app-!-colour-muted"
             },
             actions: {
               items: [{
                 href: "/about-your-organisation/about",
                 text: "Change",
                 visuallyHiddenText: "details about " + a.name
-              } if value(a.slug + "-about-accrediting-provider")]
+              }]
             }
           }) %}
         {% endfor %}
       {% endif %}
 
       {% set result = aboutYourOrganisationRows.push({
-        classes: macros.requiredSummaryRowClasses("training-with-a-disability"),
         key: {
           text: "Training with disabilities and other needs"
         },
         value: {
-          html: value("training-with-a-disability") or "<a class=\"govuk-link\" href=\"/about-your-organisation/training-with-a-disability\">Enter details about training with disabilities and other needs</a>",
-          classes: "app-summary-list__value--truncate" if value("training-with-a-disability")
+          html: value("training-with-a-disability") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("training-with-a-disability") else "app-!-colour-muted"
         },
         actions: {
           items: [{
             href: "/about-your-organisation/training-with-a-disability",
             text: "Change",
             visuallyHiddenText: "details about training with disabilities and other needs"
-          } if value("training-with-a-disability")]
+          }]
         }
       }, {
-        classes: macros.requiredSummaryRowClasses("school-placements"),
         key: {
           text: "School placements"
         },
         value: {
-          html: value("school-placements") or "<a class=\"govuk-link\" href=\"/about-your-organisation/school-placements\">Enter details about school placements</a>",
-          classes: "app-summary-list__value--truncate"
+          html: value("school-placements") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("school-placements") else "app-!-colour-muted"
         },
         actions: {
           items: [{
             href: "/about-your-organisation/school-placements",
             text: "Change",
             visuallyHiddenText: "details about school placements"
-          } if value("school-placements")]
+          }]
         }
       }, {
-        classes: macros.requiredSummaryRowClasses("canSponsorStudentVisa"),
         key: {
           text: "Visa sponsorship"
         },
@@ -220,7 +215,6 @@
       <h2 class="govuk-heading-m">Contact details</h2>
       {{ govukSummaryList({
         rows: [{
-          classes: macros.requiredSummaryRowClasses("email"),
           key: {
             text: "Email address"
           },
@@ -235,7 +229,6 @@
             }]
           }
         }, {
-          classes: macros.requiredSummaryRowClasses("telephone"),
           key: {
             text: "Telephone number"
           },
@@ -250,7 +243,6 @@
             }]
           }
         }, {
-          classes: macros.requiredSummaryRowClasses("website"),
           key: {
             text: "Website"
           },
@@ -265,7 +257,6 @@
             }]
           }
         }, {
-          classes: macros.requiredSummaryRowClasses("building-and-street"),
           key: {
             text: "Contact address"
           },

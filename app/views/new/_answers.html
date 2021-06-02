@@ -10,47 +10,52 @@
 {% endset %}
 
 {% set placementLocations = data[code + "-locations"] %}
+{% set canEditPlacementLocations = data["placement-policy"] and placementLocations.length > 0 %}
 {% set placementLocationsHtml %}
-  {% if isArray(placementLocations) and placementLocations.length > 0 %}
+  {# Play back the placement policy above the list of school placement locations #}
+  {% if data["placement-policy"] == "hosted" %}
+    <p class="govuk-body">Candidates can choose apply to one of the following locations when they apply:</p>
+  {% endif %}
+
+  {# List of school placement locations #}
+  {% if data["placement-policy"] and isArray(placementLocations) and placementLocations.length > 0 %}
     <ul class="govuk-list">
       {% for location in placementLocations %}
-        <li>{{ location }}</li>
+        {% set location = data.schools | find("urn", location) %}
+        <li>{{ location.name }}, {{ location['address-level1'] }}</li>
       {% endfor %}
     </ul>
   {% else %}
-    <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Where will candidates be placed?</p>
-      <p><a class="govuk-link" href="/edit/{{ code }}/placement-locations">Choose the locations candidates can apply to</a></p>
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Where will candidates be placed?</p>
+      {% if not data["placement-policy"] %}
+        {# Placement policy must be set before this question can be answered #}
+        <p><a class="govuk-link govuk-link--no-visited-state" href="#">Set up placement schools</a></p>
+      {% else %}
+        <p><a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ code }}/placement-locations">Select the locations candidates can apply to</a></p>
+      {% endif %}
     </div>
-  {% endif %}
-{% endset %}
-
-{% set placementLocationSummaryRowClasses %}
-  {% if placementLocations.length == 0 and showErrors %}
-    app-summary-list__row--error
-  {% elif not placementLocations.length > 0 %}
-    app-summary-list__row--missing
   {% endif %}
 {% endset %}
 
 {% set trainingLocationHtml %}
   {% if data[code + "-training-locations"] %}
     <ul class="govuk-list">
-    {% for item in data[code + "-training-locations"] %}
-      {% if item == "remote" %}
+    {% for location in data[code + "-training-locations"] %}
+      {% if location == "remote" %}
          <li>Remotely</li>
-      {% elif item == "placed" %}
+      {% elif location == "placed" %}
          <li>Candidate’s placement school</li>
       {% else %}
-        {% set location = data.schools | find("urn", item) %}
+        {% set location = data.schools | find("urn", location) %}
         <li>{{ location.name }}, {{ location['address-level1'] }}</li>
       {% endif %}
     {% endfor %}
     </ul>
   {% else %}
-    <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Where will candidates do their centre-based training?</p>
-      <p><a class="govuk-link" href="/edit/{{ code }}/training-locations">Select a training location</a></p>
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Where will candidates do their centre-based training?</p>
+      <p><a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ code }}/training-locations">Select a training location</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -70,7 +75,6 @@
 {{ govukSummaryList({
   classes: "govuk-!-margin-bottom-8",
   rows: [{
-    classes: macros.requiredSummaryRowClasses(code + "-phase", showErrors),
     key: {
       text: "Level"
     },
@@ -103,7 +107,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-subject", showErrors),
     key: {
       text: "Subject"
     },
@@ -120,7 +123,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-languages", showErrors),
     key: {
       text: "Languages"
     },
@@ -137,7 +139,6 @@
   } if data[code + "-subject"] == "Modern languages",
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-age-range", showErrors),
     key: {
       text: "Age range"
     },
@@ -154,7 +155,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-outcome", showErrors),
     key: {
       text: "Outcome"
     },
@@ -171,7 +171,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-type", showErrors),
     key: {
       text: "Fee or salary"
     },
@@ -186,7 +185,6 @@
       } if isNotPublished]
     } if showChangeLinks
   } if data["new-course"]["include-fee-or-salary"] else {
-    classes: macros.requiredSummaryRowClasses(code + "-apprenticeship", showErrors),
     key: {
       text: "Apprenticeship"
     },
@@ -203,7 +201,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-full-part", showErrors),
     key: {
       text: "Full or part time"
     },
@@ -220,7 +217,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-accredited-body", showErrors),
     key: {
       text: "Accredited body"
     },
@@ -250,11 +246,10 @@
         text: "Change",
         visuallyHiddenText: "placement schools"
       }]
-    } if showChangeLinks and placementLocations.length > 0
+    } if showChangeLinks and canEditPlacementLocations
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-training-locations", showErrors),
     key: {
       text: "Centre-based training locations"
     },
@@ -271,7 +266,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-applications-open", showErrors),
     key: {
       text: "Applications open"
     },
@@ -288,7 +282,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-start-date", showErrors),
     key: {
       text: "Course starts"
     },

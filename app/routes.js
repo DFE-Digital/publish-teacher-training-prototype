@@ -12,7 +12,6 @@ const {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
-  isUsingPlacementLocations,
   onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
@@ -65,34 +64,30 @@ router.all('/cycles', function (req, res) {
 router.all(['/:flow(new|edit)/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
   const data = req.session.data
   const { code, flow } = req.params
-  const selectedLocations = data[`${code}-locations`] || []
+  const checkedLocations = data[`${code}-locations`] || []
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
   const items = []
 
-  const schools = data.schools.filter(school => school.type.includes('school'))
-
-  schools.forEach(school => {
+  schoolLocations.forEach(location => {
     items.push({
-      value: school.name,
-      text: school.name,
-      checked: selectedLocations.includes(school.name),
+      value: location.urn,
+      text: location.name,
+      checked: checkedLocations.includes(location.urn),
       label: {
         classes: 'govuk-label--s'
       },
       hint: {
-        text: school.address
+        text: `${location['address-line1']}, ${location['address-level1']}, ${location['postal-code']}`
       }
     })
   })
 
-  if (isUsingPlacementLocations(code, data)) {
-    res.render('new/placement-locations', {
-      code,
-      paths: newCourseWizardPaths(req),
-      items
-    })
-  } else {
-    res.redirect(`/${flow}/${code}/training-locations`)
-  }
+  res.render('new/placement-locations', {
+    paths: newCourseWizardPaths(req),
+    code,
+    items,
+    editing: flow === 'edit'
+  })
 })
 
 router.all(['/:flow(new|edit)/:code/training-locations'], function (req, res) {

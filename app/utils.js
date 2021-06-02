@@ -372,10 +372,6 @@ function isFurtherEducation (code, data) {
   return data[code + '-phase'] === 'Further education'
 }
 
-function isUsingPlacementLocations (code, data) {
-  return data['placement-policy'] === 'hosted'
-}
-
 function subject (req) {
   const accrediting = accreditor(req)
   const subject = accrediting.subjects.find(function (s) {
@@ -596,7 +592,6 @@ module.exports = {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
-  isUsingPlacementLocations,
   onboardingWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
