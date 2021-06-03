@@ -163,30 +163,22 @@
       {% endif %}
     </p>
 
-    {% if state == 'withdrawn' %}
+    {% if state == "withdrawn" %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
-      <p>
-        Closed
-      </p>
+      <p>Closed</p>
 
-      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
-      <p>
-        No
-      </p>
-    {% elseif publishedBefore or state == 'published' or state == 'published-with-changes' %}
+      {% if value("placements-policy") == "hosted" %}
+        <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+        <p>No</p>
+      {% endif %}
+    {% elseif publishedBefore or state == "published" or state == "published-with-changes" %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
-      <p>
-        {% if nextCycle %}
-          Opening on 10 October
-        {% else %}
-          Open
-        {% endif %}
-      </p>
+      <p>{{ "Opening on 10 October" if nextCycle else "Open" }}</p>
 
-      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
-      <p>
-        Yes (<a href="/course/{{ linkPath }}/vacancies">Edit</a>)
-      </p>
+      {% if value("placements-policy") == "hosted" %}
+        <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+        <p>Yes (<a href="/course/{{ linkPath }}/vacancies">Edit</a>)</p>
+      {% endif %}
     {% endif %}
 
     {% if state != 'published' and state != 'withdrawn' %}
@@ -194,9 +186,7 @@
       <h3 class="govuk-heading-m">Preview</h3>
       <p>See how your unpublished changes look.</p>
       <p>Preview your course to check for mistakes before publishing.</p>
-      <p>
-        <a href="/preview/{{ linkPath }}">Preview course</a>
-      </p>
+      <p><a href="/preview/{{ linkPath }}">Preview course</a></p>
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h3 class="govuk-heading-m">Publish</h3>
