@@ -39,16 +39,8 @@
 
 
     {% set equivalencySubjects %}
-      {% set equivalencySubjectsName = course.programmeCode + "-equivalency-subjects" %}
-      {{ govukCheckboxes({
-        name: equivalencySubjectsName,
-        fieldset: {
-          legend: {
-            text: "Which subjects can you offer equivalency tests in?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
+
+      {% set equivalencyItems = [
           {
             value: "English",
             text: "English",
@@ -58,13 +50,27 @@
             value: "maths",
             text: "Maths",
             checked: checked(equivalencySubjectsName, "maths")
-          },
-          {
+          }
+      ] %}
+
+      {% if course.subject == "Primary" %}
+        {% set equivalencyItems = equivalencyItems | push({
             value: "science",
             text: "Science",
             checked: checked(equivalencySubjectsName, "science")
+          }) %}
+      {% endif %}
+
+      {% set equivalencySubjectsName = course.programmeCode + "-equivalency-subjects" %}
+      {{ govukCheckboxes({
+        name: equivalencySubjectsName,
+        fieldset: {
+          legend: {
+            text: "Which subjects can you offer equivalency tests in?",
+            classes: "govuk-fieldset__legend--s"
           }
-        ]
+        },
+        items: equivalencyItems
       }) }}
 
       {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
