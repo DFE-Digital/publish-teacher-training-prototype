@@ -44,8 +44,8 @@
             <span class="govuk-details__summary-text">QTS</span>
           </summary>
           <div class="govuk-details__text">
-              <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
-              <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
+            <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
+            <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
           </div>
         {% endif %}
       </details>
@@ -84,7 +84,7 @@
         <h2 class="govuk-heading-m">Contents</h2>
         <ul class="govuk-list app-list--dash">
           <li><a href="#section-about">About the course</a></li>
-          <li><a href="#section-schools">School placements</a></li>
+          <li><a href="#section-locations">Where you will train</a></li>
           <li><a href="#section-entry">Entry requirements</a></li>
           <li><a href="#section-about-provider">About the training provider</a></li>
           {% if course.salaried %}
@@ -111,55 +111,64 @@
       </section>
 
       <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
+        <h2 class="govuk-heading-l" id="section-locations">Where you will train</h2>
 
-        {% set trainingLocationsHtml %}
-          {% if data["placements-policy"] == "hosted" %}
-            <p>You will be placed in different schools during your training. You can select your host school when you apply.</p>
-          {% elif data["placements-policy"] == "placed" %}
-            <p>You will be placed in different schools during your training. You can’t pick which schools you want to be in, but your course will try to place you in schools you can commute to.</p>
-          {% endif %}
-
-          {% if data[code + "-training-locations"] == "remote" %}
-            <p>You will also spend some of your time in academic lessons. These take place remotely.</p>
-          {% elif data[code + "-training-locations"] == "placed" %}
-            <p>You will also spend some of your time in academic lessons, which takes place at the school where you are placed.</p>
-          {% elif data[code + "-training-locations"] %}
-            <p>You will also spend some of your time in academic lessons. These take place at {{ data[code + "-training-locations"] }}.</p>
-          {% endif %}
-        {% endset %}
-
-        {{ appAdvice({
-          title: "Where you will train",
-          html: trainingLocationsHtml
-        }) if data["placements-policy"]  }}
-
+        <h3 class="govuk-heading-m">School placements</h3>
         {{ macros.previewPart(code + "-school-placements") }}
 
-        {% if data["placements-policy"] == "hosted" %}
-          <h3 class="govuk-heading-m">Locations</h3>
-          <p class="govuk-body">You can select one of the following locations when you apply.</p>
+        {% if data["placements-display"] == "list" and course.schools.length > 0 %}
+          {# Display a list of placement schools #}
           <table class="govuk-table">
-            <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
+            <caption class="govuk-table__caption govuk-body govuk-!-font-weight-regular">
+              {% if data["placements-policy"] == "hosted" %}
+                Select one of the following locations when you apply:
+              {% else %}
+                You may be placed in one of the following locations:
+              {% endif %}
+            </caption>
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Location</th>
-                <th class="govuk-table__header" scope="col">Vacancies</th>
+                <th class="govuk-table__header" scope="col">School name and address</th>
+                {% if data["placements-policy"] == "hosted" %}
+                  <th class="govuk-table__header" scope="col">Vacancies</th>
+                {% endif %}
               </tr>
             </thead>
             <tbody class="govuk-table__body">
-              {% for school in course.schools %}
+              {% for location in course.schools %}
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
-                  <span class="govuk-!-font-weight-bold">{{ school.name }}</span><br>
-                  {{ school.address }}
+                  <span class="govuk-!-font-weight-bold">{{ location.name }}</span>
+                  <span class="govuk-!-display-block">
+                    {{- location["address-line1"] + ", " if location["address-line1"] -}}
+                    {{- location["address-line2"] + ", " if location["address-line2"] -}}
+                    {{- location["address-level2"] + ", " if location["address-level2"] -}}
+                    {{- location["address-level1"] + ", " if location["address-level1"] -}}
+                    {{- location["postal-code"] if location["postal-code"] -}}
+                  </span>
                 </td>
-                <td class="govuk-table__cell">Yes</td>
+                {% if data["placements-policy"] == "hosted" %}
+                  <td class="govuk-table__cell">Yes</td>
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>
           </table>
+        {% elif data["placements-display"] == "area" and course.schools.length > 0 %}
+          {# List areas placement schools lie within #}
+          <p class="govuk-body">You may be placed in schools located near Leeds, Bradford and Halifax.</p>
+        {% else %}
+          {# Show missing message #}
+          <div class="govuk-inset-text app-inset-text app-inset-text--important">
+            <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/placement-locations">about your school placement locations</a></p>
+          </div>
         {% endif %}
+
+        {# Show missing message #}
+        <h3 class="govuk-heading-m">Centre-based training</h3>
+        <div class="govuk-inset-text app-inset-text app-inset-text--important">
+          <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/training-locations">about your centre-based training locations</a></p>
+        </div>
       </section>
 
       <section class="govuk-!-margin-bottom-8">
