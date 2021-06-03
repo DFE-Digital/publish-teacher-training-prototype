@@ -12,16 +12,11 @@
 {% set placementLocations = data[code + "-locations"] %}
 {% set canEditPlacementLocations = data["placements-policy"] and placementLocations.length > 0 %}
 {% set placementLocationsHtml %}
-  {# Play back the placement policy above the list of school placement locations #}
-  {% if data["placements-policy"] == "hosted" %}
-    <p class="govuk-body">Candidates can choose apply to one of the following locations when they apply:</p>
-  {% endif %}
-
   {# List of school placement locations #}
   {% if data["placements-policy"] and isArray(placementLocations) and placementLocations.length > 0 %}
     <ul class="govuk-list">
       {% for location in placementLocations %}
-        {% set location = data.schools | find("urn", location) %}
+        {% set location = data.schools | find("name", location) %}
         <li>{{ location.name }}, {{ location['address-level1'] }}</li>
       {% endfor %}
     </ul>

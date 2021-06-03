@@ -70,9 +70,9 @@ router.all(['/:flow(new|edit)/:code/placement-locations', '/new/:code/further/pl
 
   schoolLocations.forEach(location => {
     items.push({
-      value: location.urn,
+      value: location.name,
       text: location.name,
-      checked: checkedLocations.includes(location.urn),
+      checked: checkedLocations.includes(location.name),
       label: {
         classes: 'govuk-label--s'
       },
