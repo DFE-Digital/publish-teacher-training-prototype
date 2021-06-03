@@ -394,6 +394,9 @@
               {% endif %}
             </p>
 
+            {% if equivalencyTestsOffered == "true" and data[code + "-equivalency-test-details"] %}
+              <p class="govuk-body">{{ data[code + "-equivalency-test-details"] }}</p>
+            {% endif %}
 
           {% else %}
             <div class="app-summary-list__message">
