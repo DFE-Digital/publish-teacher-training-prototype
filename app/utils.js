@@ -173,6 +173,26 @@ function newCourseWizardPaths (req) {
   return nextAndBack
 }
 
+function placementsWizardPaths (req) {
+  const { data } = req.session
+  const { referrer } = req.query
+
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
+
+  const paths = [
+    ...(referrer || ['/locations']),
+    '/locations',
+    '/locations/placements-display',
+    '/locations/placements-policy',
+    ...(schoolLocations.length > 0 ? ['/locations/add'] : ['/locations']),
+    '/locations/add-answer'
+  ]
+
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
+
+  return nextAndBack
+}
+
 function editSubjectPaths (req, summaryView = 'confirm') {
   const data = req.session.data
   const code = req.params.code
@@ -593,6 +613,7 @@ module.exports = {
   isFurtherEducation,
   isRegionLocation,
   onboardingWizardPaths,
+  placementsWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,

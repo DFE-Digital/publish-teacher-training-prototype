@@ -13,6 +13,7 @@ const {
   isFurtherEducation,
   isRegionLocation,
   onboardingWizardPaths,
+  placementsWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,
@@ -574,19 +575,6 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
   })
 })
 
-router.get('/location/upload', function (req, res) {
-  res.render('location/upload')
-})
-
-router.get('/location/upload-review', function (req, res) {
-  const data = req.session.data
-  const locations = JSON.parse(JSON.stringify(data.schools))
-
-  res.render('location/upload-review', {
-    locations: locations
-  })
-})
-
 router.get('/location/start', function (req, res) {
   const { type, referrer } = req.query
   const existingCodes = req.session.data.schools.map(s => s.code)
@@ -669,8 +657,50 @@ router.all('/locations', function (req, res) {
   })
 })
 
+router.get('/locations/add', function (req, res) {
+  const paths = placementsWizardPaths(req)
+  paths.next = 'locations/add-answer'
+
+  res.render('locations/add', {
+    paths
+  })
+})
+
+router.get('/locations/upload-review', function (req, res) {
+  const { data } = req.session
+  const locations = JSON.parse(JSON.stringify(data.schools))
+
+  res.render('locations/upload-review', {
+    locations: locations
+  })
+})
+
+router.post('/locations/add-answer', function (req, res) {
+  const { data } = req.session
+
+  if (data['add-placements-answer'] === 'upload') {
+    res.redirect('/locations/upload')
+  } else {
+    res.redirect('/location/start')
+  }
+})
+
+router.post('/locations/placements-policy', function (req, res) {
+  const { data } = req.session
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
+
+  if (data['placements-display'] === 'area') {
+    res.redirect(schoolLocations.length > 0 ? '/locations/' : '/locations/add')
+  } else {
+    res.render('locations/placements-policy', {
+      paths: placementsWizardPaths(req)
+    })
+  }
+})
+
 router.get('/locations/:view', function (req, res) {
   res.render(`locations/${req.params.view}`, {
+    paths: placementsWizardPaths(req),
     referrer: req.query.referrer
   })
 })
