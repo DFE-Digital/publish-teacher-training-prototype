@@ -4,9 +4,10 @@
 {% set backLinkText = "Back to course" %}
 
 {% block content %}
-  <div class="status-box govuk-!-margin-bottom-4" style="margin-top: -15px">
-    <p class="govuk-!-margin-bottom-0">This is a preview of a course: {{ course.name }} ({{ course.programmeCode }})</p>
-  </div>
+  {{ govukNotificationBanner({
+    titleText: "Information",
+    text: "This is a preview of the ‘" + course.name + " (" + course.programmeCode + ")’ course."
+  }) }}
 
   <h1 class="govuk-heading-xl">
     <span class="govuk-heading-l govuk-!-margin-bottom-1">{{ data["training-provider-name"] }}</span>
@@ -180,9 +181,9 @@
             {% endif %}
           {% else %}
             {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="{{ course.path }}/degree">about degree requirements</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="{{ course.path }}/degree">about degree requirements</a></p>
+            </div>
           {% endif %}
         </p>
 
@@ -220,9 +221,9 @@
 
         {% else %}
           {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="{{ course.path }}/gcses-pending-or-equivalency-tests">about GCSE requirements</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="{{ course.path }}/gcses-pending-or-equivalency-tests">about GCSE requirements</a></p>
+            </div>
         {% endif %}
 
         {% if data[code + "-personal-qualities"] %}
@@ -326,9 +327,9 @@
             You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% else %}
             {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="/about-your-organisation/visa-sponsorship">about visa sponsorship</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation/visa-sponsorship">about visa sponsorship</a></p>
+            </div>
           {% endif %}
         </p>
 
@@ -345,7 +346,9 @@
         <h2 class="govuk-heading-l">Contact this training provider</h2>
 
         {% if not (data["email"] and data["telephone"] and data["website"] and data["postcode"] and data["building-and-street"]) %}
-          <p class="missing-section">Please <a href="/about-your-organisation">add your missing contact details</a></a>.</p>
+          <div class="govuk-inset-text app-inset-text app-inset-text--important">
+            <p class="govuk-heading-s">Please <a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation">add your missing contact details</a></a></p>
+          </div>
         {% endif %}
 
         <dl class="app-description-list">

@@ -476,12 +476,12 @@
       {{ markdown(id) | safe }}
     </div>
   {% else %}
-    <p class="missing-section">
+    <div class="govuk-inset-text app-inset-text app-inset-text--important">
       {% if org %}
-        Please add details <a href="/about-your-organisation">about your organisation</a>.
+        <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation">about your organisation</a></p>
       {% else %}
-        Please add details for this section.
+        <p class="govuk-heading-s">Please add details for this section</p>
       {% endif %}
-    </p>
+    </div>
   {% endif %}
 {% endmacro %}
