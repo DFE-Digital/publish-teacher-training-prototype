@@ -66,6 +66,22 @@
           }
         ]
       }) }}
+
+      {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+      {{ govukTextarea({
+        name: course.programmeCode + "-equivalency-test-details",
+        id: "more-detail",
+        label: {
+          text: "Details about equivalency tests you offer (optional)",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        value: data[course.programmeCode + "-equivalency-test-details"],
+        hint: {
+          text: "For example, when and how you offer equivalency tests, or if there are any costs that candidates need to pay."
+        }
+      }) }}
     {% endset %}
 
 
