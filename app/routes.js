@@ -679,9 +679,9 @@ router.post('/locations/add-answer', function (req, res) {
   const { data } = req.session
 
   if (data['add-placements-answer'] === 'upload') {
-    res.redirect('/locations/upload')
+    res.redirect('/locations/upload?referrer=/locations/add')
   } else {
-    res.redirect('/location/start')
+    res.redirect('/location/start?referrer=/locations/add')
   }
 })
 

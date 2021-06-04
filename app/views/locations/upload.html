@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Upload location data" %}
-{% set backLink = referrer or paths.back %}
+{% set backLink = referrer or "/locations" %}
 
 {% block content %}
   <form action="/locations/upload-review" method="get" class="govuk-grid-row">
@@ -23,7 +23,7 @@
           text: "Upload file and continue"
         }) }}
 
-        <a class="govuk-link" href="{{ referrer or paths.back }}">Cancel</a>
+        <a class="govuk-link" href="{{ backLink }}">Cancel</a>
       </div>
     </div>
   </form>

@@ -184,7 +184,7 @@ function placementsWizardPaths (req) {
     '/locations',
     '/locations/placements-display',
     '/locations/placements-policy',
-    ...(schoolLocations.length > 0 ? ['/locations/add'] : ['/locations']),
+    ...(schoolLocations.length === 0 ? ['/locations/add'] : ['/locations']),
     '/locations/add-answer'
   ]
 
