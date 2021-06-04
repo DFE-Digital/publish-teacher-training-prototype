@@ -2,7 +2,7 @@
 {% set title = "Edit vacancies" %}
 {% set backLink = "/courses" %}
 
-{% set showLocations = data[course.programmeCode + "-multi-location"] and data[course.programmeCode + "-placement-policy"] == "hosted" %}
+{% set showLocations = data[course.programmeCode + "-multi-location"] and data[course.programmeCode + "-placements-policy"] == "hosted" %}
 {% set locationItems = [] %}
 {% for school in course.schools %}
   {% set result = locationItems.push({

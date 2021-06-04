@@ -2,3 +2,12 @@
 .app-table--vertical-align-middle .govuk-table__header {
   vertical-align: middle;
 }
+
+.app-govuk-table__cell--actions {
+  white-space: nowrap;
+
+  .govuk-link + .govuk-link {
+    display: inline-block;
+    margin-left: govuk-spacing(3);
+  }
+}

@@ -1,0 +1,17 @@
+.app-table-container {
+  overflow: auto;
+  margin: #{govuk-spacing(2) * -1};
+  padding: govuk-spacing(2);
+
+  &:focus {
+    outline: $govuk-focus-width solid $govuk-focus-colour;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: $govuk-focus-width solid $govuk-focus-colour;
+  }
+}

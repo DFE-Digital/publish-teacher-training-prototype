@@ -12,8 +12,8 @@ const {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
-  isUsingPlacementLocations,
   onboardingWizardPaths,
+  placementsWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,
@@ -62,65 +62,63 @@ router.all('/cycles', function (req, res) {
   res.render('cycles', { justRolledOver: req.query.rolled })
 })
 
-router.all(['/new/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
+router.all(['/:flow(new|edit)/:code/placement-locations', '/new/:code/further/placement-locations'], function (req, res) {
   const data = req.session.data
-  const code = req.params.code
-  const selectedLocations = data[`${code}-locations`] || []
+  const { code, flow } = req.params
+  const checkedLocations = data[`${code}-locations`] || []
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
   const items = []
 
-  const schools = data.schools.filter(school => school.type.includes('school'))
-
-  schools.forEach(school => {
+  schoolLocations.forEach(location => {
     items.push({
-      value: school.name,
-      text: school.name,
-      checked: selectedLocations.includes(school.name),
+      value: location.name,
+      text: location.name,
+      checked: checkedLocations.includes(location.name),
       label: {
         classes: 'govuk-label--s'
       },
       hint: {
-        text: school.address
+        text: `${location['address-line1']}, ${location['address-level1']}, ${location['postal-code']}`
       }
     })
   })
 
-  if (isUsingPlacementLocations(code, data)) {
-    res.render('new/placement-locations', {
-      code,
-      paths: newCourseWizardPaths(req),
-      items
-    })
-  } else {
-    res.redirect('/new/' + code + '/training-location')
-  }
+  res.render('new/placement-locations', {
+    paths: newCourseWizardPaths(req),
+    code,
+    schoolLocations,
+    items,
+    editing: flow === 'edit'
+  })
 })
 
-router.all(['/new/:code/training-location'], function (req, res) {
+router.all(['/:flow(new|edit)/:code/training-locations'], function (req, res) {
   const data = req.session.data
-  const code = req.params.code
-  const locations = data[`${code}-training-location`] || []
+  const { code, flow } = req.params
+  const checkedLocations = data[`${code}-training-locations`] || []
+  const trainingLocations = data.schools.filter(school => school.type === 'centre');
   const items = []
 
-  data.schools.forEach(school => {
-    if (school.code === '-') {
-      items.push({
-        value: school.name + ', ' + 'Leeds',
-        text: school.name,
-        checked: locations.includes(school.name),
-        label: {
-          classes: 'govuk-label--s'
-        },
-        hint: {
-          text: school.address
-        }
-      })
-    }
+  trainingLocations.forEach(location => {
+    items.push({
+      value: location.urn,
+      text: location.name + ', ' + location['address-level2'],
+      checked: checkedLocations.includes(location.urn),
+      label: {
+        classes: 'govuk-label--s'
+      },
+      hint: {
+        text: `${location['address-line1']}, ${location['address-level1']}, ${location['postal-code']}`
+      }
+    })
   })
 
-  res.render('new/training-location', {
-    code,
+  res.render('new/training-locations', {
     paths: newCourseWizardPaths(req),
-    items
+    code,
+    trainingLocations,
+    items,
+    editing: flow === 'edit'
   })
 })
 
@@ -136,7 +134,7 @@ router.all(['/new/:code/title', '/new/:code/further/title'], function (req, res)
   })
 })
 
-router.all(['/new/:code/editing-title', '/new/:code/further/editing-title'], function (req, res) {
+router.all(['/edit/:code/editing-title', '/edit/:code/further/editing-title'], function (req, res) {
   const data = req.session.data
   const code = req.params.code
 
@@ -173,7 +171,7 @@ router.post('/new/:code/subject', function (req, res) {
   }
 })
 
-router.post('/new/:code/languages', function (req, res) {
+router.post('/:flow(new|edit)/:code/languages', function (req, res) {
   const code = req.params.code
   const data = req.session.data
   const paths = newCourseWizardPaths(req)
@@ -267,8 +265,8 @@ router.all(['/new/:code/create', '/new/:code/further/create'], function (req, re
   res.redirect(`/course/${data['provider-code']}/${code}?${query}`)
 })
 
-router.get('/new/:code/accredited-body', function (req, res) {
-  const code = req.params.code
+router.get('/:flow(new|edit)/:code/accredited-body', function (req, res) {
+  const { code, flow } = req.params
   const data = req.session.data
 
   const accreditedBodies = data['accredited-bodies-choices'].map(body => ({
@@ -290,33 +288,34 @@ router.get('/new/:code/accredited-body', function (req, res) {
     code,
     paths: newCourseWizardPaths(req),
     accreditedBodies,
-    accreditors
+    accreditors,
+    editing: flow === 'edit'
   })
 })
 
-router.all('/new/:code/:view', function (req, res) {
-  const { code, view } = req.params
-  const change = req.query && req.query.change
+router.all('/:flow(new|edit)/:code/:view', function (req, res) {
+  const { code, view, flow } = req.params
 
   res.render(`new/${view}`, {
     code,
     paths: newCourseWizardPaths(req),
-    change
+    editing: flow === 'edit'
   })
 })
 
-router.all('/new/:code/further/:view', function (req, res) {
-  const code = req.params.code
+router.all('/:flow(new|edit)/:code/further/:view', function (req, res) {
+  const { code, view, flow } = req.params
   const locals = {
     code,
-    paths: newFurtherEducationCourseWizardPaths(req)
+    paths: newFurtherEducationCourseWizardPaths(req),
+    editing: flow === 'edit'
   }
 
   // Render the non-specific FE view
-  res.render(`new/further/${req.params.view}`, locals, function (err, html) {
+  res.render(`new/further/${view}`, locals, function (err, html) {
     if (err) {
       if (err.message.indexOf('template not found') !== -1) {
-        return res.render(`new/${req.params.view}`, locals)
+        return res.render(`new/${view}`, locals)
       }
       throw err
     }
@@ -561,8 +560,9 @@ router.get('/course-not-running/:providerCode/:code', function (req, res) {
 router.get('/preview/:providerCode/:code', function (req, res) {
   const c = course(req)
   const code = c.programmeCode
+  const schoolLocations = req.session.data.schools.filter(school => school.type.includes('school'))
 
-  res.render('preview', { course: c, code })
+  res.render('preview', { course: c, code, schoolLocations })
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
@@ -576,56 +576,42 @@ router.get('/course/:providerCode/:code/:view', function (req, res) {
   })
 })
 
-router.get('/location/upload', function (req, res) {
-  res.render('location/upload')
-})
-
-router.get('/location/upload-review', function (req, res) {
-  const data = req.session.data
-  const locations = JSON.parse(JSON.stringify(data.schools))
-
-  res.render('location/upload-review', {
-    locations: locations
-  })
-})
-
 router.get('/location/start', function (req, res) {
+  const { type, referrer } = req.query
   const existingCodes = req.session.data.schools.map(s => s.code)
   const code = generateLocationCode(existingCodes)
-  res.redirect(`/location/${code}`)
+
+  if (referrer) {
+    res.redirect(`/location/${code}?type=${type}&referrer=${referrer}`)
+  } else {
+    res.redirect(`/location/${code}?type=${type}`)
+  }
 })
 
-router.get('/location/:code', function (req, res) {
-  const code = req.params.code
-  const data = req.session.data
-  const school = data.schools.find(school => school.code === code)
+router.get('/location/:id', function (req, res) {
+  const { type, referrer } = req.query
+  const { id } = req.params
+  const { data } = req.session
 
+  const school = data.schools.find(school => school.urn === id || school.code === id)
   const isNew = !school
+
   res.render('location/index', {
     school: school,
-    code,
+    id: id,
+    type: type || 'school',
+    referrer,
     isNew: isNew
   })
 })
 
-router.post('/location/:code', function (req, res) {
-  const code = req.params.code
-  const data = req.session.data
-  let school = data.schools.find(function (school) {
-    return school.code === req.params.code
-  })
+router.post('/location/:id', function (req, res) {
+  const { id } = req.params
+  const { data } = req.session
+  const { referrer } = req.query
+
+  let school = data.schools.find(school => school.urn === id || school.code === id)
   let isNew = false
-
-  if (!school && req.body[code + '-location-confirm'] === '_unchecked') {
-    res.render('location/index', {
-      school,
-      code,
-      showErrors: true,
-      isNew: true
-    })
-
-    return
-  }
 
   if (!school) {
     school = {}
@@ -633,14 +619,18 @@ router.post('/location/:code', function (req, res) {
     isNew = true
   }
 
-  school.name = data[code + '-name']
-  school.urn = data[code + '-urn']
-  school.type = data[code + '-location-type']
-  school.address = data[code + '-address']
-  school.postcode = data[code + '-postcode']
-  school.code = code
+  school.urn = data[id + '-urn']
+  school.name = data[id + '-name']
+  school.type = data[id + '-location-type']
+  school['address-line1'] = data[id + '-address-line1']
+  school['address-line2'] = data[id + '-address-line2']
+  school['address-level2'] = data[id + '-address-level2']
+  school['address-level1'] = data[id + '-address-level1']
+  school['postal-code'] = data[id + '-postal-code']
 
-  res.redirect(`/locations?success=${isNew ? 'new' : 'edited'}`)
+  delete school.code
+
+  res.redirect(referrer || `/locations?success=${isNew ? 'new' : 'edited'}`)
 })
 
 router.all('/locations', function (req, res) {
@@ -652,7 +642,7 @@ router.all('/locations', function (req, res) {
   }
 
   schools.forEach(location => {
-    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.code === location.code)).length
+    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.urn === location.urn)).length
   })
 
   const centerLocations = schools.filter(school => school.type.includes('centre'))
@@ -664,8 +654,58 @@ router.all('/locations', function (req, res) {
     schoolLocations,
     justCreated: req.query.success === 'new',
     justEdited: req.query.success === 'edited',
-    justUploaded: req.query.success === 'uploaded',
-    justChangedCode: req.query.code
+    justUploaded: req.query.success === 'uploaded'
+  })
+})
+
+router.get('/locations/add', function (req, res) {
+  const paths = placementsWizardPaths(req)
+  paths.next = '/locations/add-answer'
+
+  res.render('locations/add', {
+    paths
+  })
+})
+
+router.get('/locations/upload-review', function (req, res) {
+  const { data } = req.session
+  const locations = JSON.parse(JSON.stringify(data.schools))
+
+  res.render('locations/upload-review', {
+    locations: locations
+  })
+})
+
+router.post('/locations/add-answer', function (req, res) {
+  const { data } = req.session
+
+  if (data['add-placements-answer'] === 'upload') {
+    res.redirect('/locations/upload?referrer=/locations/add')
+  } else {
+    res.redirect('/location/start?referrer=/locations/add')
+  }
+})
+
+router.post('/locations/placements-policy', function (req, res) {
+  const { data } = req.session
+  const { referrer } = req.query
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
+
+  if (data['placements-display'] === 'area') {
+    delete data['placements-policy']
+    res.redirect(schoolLocations.length === 0 ? '/locations/add' : '/locations')
+  } else {
+    res.render('locations/placements-policy', {
+      paths: placementsWizardPaths(req),
+      referrer
+    })
+  }
+})
+
+router.get('/locations/:view', function (req, res) {
+  res.render(`locations/${req.params.view}`, {
+    paths: placementsWizardPaths(req),
+    referrer: req.query.referrer
   })
 })
 

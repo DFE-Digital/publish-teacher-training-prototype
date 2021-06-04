@@ -186,7 +186,7 @@
         }) if data[code + "-phase"] == "Secondary" }}
       {% endcall %}
 
-      {% if change %}
+      {% if editing %}
         {{ govukButton({
           text: "Save and publish changes"
         }) }}

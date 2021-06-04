@@ -91,29 +91,29 @@ function onboardingWizardPaths (req) {
 }
 
 function newFurtherEducationCourseWizardPaths (req) {
-  const code = req.params.code
+  const { code, flow } = req.params
   const data = req.session.data
-  const editing = data.ucasCourses.some(a => a.programmeCode === code)
+  const editing = flow === 'edit'
   const summaryView = editing ? 'edit' : 'confirm'
 
   if (req.query.change && req.query.change !== 'phase') {
     return {
-      next: `/new/${code}/further/${summaryView}`,
-      back: `/new/${code}/further/${summaryView}`
+      next: `/${flow}/${code}/further/${summaryView}`,
+      back: `/${flow}/${code}/further/${summaryView}`
     }
   }
 
   const paths = [
     '/courses',
-    `/new/${code}/phase`,
-    `/new/${code}/further/outcome`,
-    `/new/${code}/further/full-time-part-time`,
-    `/new/${code}/further/title`,
-    ...(includeLocationsInWizard(data) ? [`/new/${code}/further/training-location`] : []),
-    `/new/${code}/further/applications-open`,
-    `/new/${code}/further/start-date`,
-    `/new/${code}/further/${summaryView}`,
-    `/new/${code}/further/create`
+    `/${flow}/${code}/phase`,
+    `/${flow}/${code}/further/outcome`,
+    `/${flow}/${code}/further/full-time-part-time`,
+    `/${flow}/${code}/further/title`,
+    ...(includeLocationsInWizard(data) ? [`/${flow}/${code}/further/training-locations`] : []),
+    `/${flow}/${code}/further/applications-open`,
+    `/${flow}/${code}/further/start-date`,
+    `/${flow}/${code}/further/${summaryView}`,
+    `/${flow}/${code}/further/create`
   ]
 
   const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
@@ -127,8 +127,8 @@ function newFurtherEducationCourseWizardPaths (req) {
 
 function newCourseWizardPaths (req) {
   const data = req.session.data
-  const code = req.params.code
-  const editing = data.ucasCourses.some(a => a.programmeCode === code)
+  const { code, flow } = req.params
+  const editing = flow === 'edit'
   const returnPath = editing ? `/course/${data['provider-code']}/${code}?edited=true#information` : `/new/${code}/confirm`
 
   if (isFurtherEducation(code, data)) {
@@ -143,7 +143,7 @@ function newCourseWizardPaths (req) {
     return editLanguagePaths(req, returnPath)
   }
 
-  if (req.query.change) {
+  if (editing) {
     return {
       next: returnPath,
       back: returnPath
@@ -152,23 +152,43 @@ function newCourseWizardPaths (req) {
 
   const paths = [
     '/courses',
-    `/new/${code}/phase`,
-    `/new/${code}/subject`,
-    `/new/${code}/languages`,
-    `/new/${code}/age-range`,
-    `/new/${code}/outcome`,
-    ...(data['new-course']['include-fee-or-salary'] ? [`/new/${code}/funding`] : [`/new/${code}/apprenticeship`]),
-    `/new/${code}/full-time-part-time`,
-    ...(data['new-course']['include-accredited'] ? [`/new/${code}/accredited-body`] : []),
-    `/new/${code}/placement-locations`,
-    `/new/${code}/training-location`,
-    `/new/${code}/applications-open`,
-    `/new/${code}/start-date`,
-    `/new/${code}/confirm`,
-    `/new/${code}/create`
+    `/${flow}/${code}/phase`,
+    `/${flow}/${code}/subject`,
+    `/${flow}/${code}/languages`,
+    `/${flow}/${code}/age-range`,
+    `/${flow}/${code}/outcome`,
+    ...(data['new-course']['include-fee-or-salary'] ? [`/${flow}/${code}/funding`] : [`/${flow}/${code}/apprenticeship`]),
+    `/${flow}/${code}/full-time-part-time`,
+    ...(data['new-course']['include-accredited'] ? [`/${flow}/${code}/accredited-body`] : []),
+    `/${flow}/${code}/placement-locations`,
+    `/${flow}/${code}/training-locations`,
+    `/${flow}/${code}/applications-open`,
+    `/${flow}/${code}/start-date`,
+    `/${flow}/${code}/confirm`,
+    `/${flow}/${code}/create`
   ]
 
   const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req), isModernLanguages(code, data))
+
+  return nextAndBack
+}
+
+function placementsWizardPaths (req) {
+  const { data } = req.session
+  const { referrer } = req.query
+
+  const schoolLocations = data.schools.filter(school => school.type.includes('school'))
+
+  const paths = [
+    ...(referrer || ['/locations']),
+    '/locations',
+    '/locations/placements-display',
+    '/locations/placements-policy',
+    ...(schoolLocations.length === 0 ? ['/locations/add'] : ['/locations']),
+    '/locations/add-answer'
+  ]
+
+  const nextAndBack = nextAndBackPaths(paths, req.path, originalQuery(req))
 
   return nextAndBack
 }
@@ -372,10 +392,6 @@ function isFurtherEducation (code, data) {
   return data[code + '-phase'] === 'Further education'
 }
 
-function isUsingPlacementLocations (code, data) {
-  return data['placement-policy'] === 'hosted'
-}
-
 function subject (req) {
   const accrediting = accreditor(req)
   const subject = accrediting.subjects.find(function (s) {
@@ -443,11 +459,11 @@ function validate (data, course, view) {
   }
 
   if (view === 'all') {
-    if (!data[prefix + '-training-location']) {
+    if (!data[prefix + '-training-locations']) {
       errors.push({
-        title: 'Where will candidates do their centre based training?',
-        id: `${prefix}-training-location`,
-        href: `/new/${prefix}/training-location?change=true`
+        title: 'Where will candidates do their centre-based training?',
+        id: `${prefix}-training-locations`,
+        href: `/edit/${prefix}/training-locations`
       })
     }
   }
@@ -596,8 +612,8 @@ module.exports = {
   isModernLanguages,
   isFurtherEducation,
   isRegionLocation,
-  isUsingPlacementLocations,
   onboardingWizardPaths,
+  placementsWizardPaths,
   newCourseWizardPaths,
   newFurtherEducationCourseWizardPaths,
   newLocationWizardPaths,

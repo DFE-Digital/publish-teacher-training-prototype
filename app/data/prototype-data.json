@@ -10,10 +10,10 @@
   "ucas-alerts": "Get an email for each application you receive",
   "training-provider-name": "UCL, University College London (University of London)",
   "provider-code": "U80",
-  "building-and-street": "1 Fake street name",
-  "town-or-city": "Town name",
-  "county": "London",
-  "postcode": "LB1 1AA",
+  "address-line1": "1 Fake street name",
+  "address-level2": "Town name",
+  "address-level1": "London",
+  "postal-code": "LB1 1AA",
   "ucas-admin-name": "Joe Admin",
   "email": "admin@myorg.ac.uk",
   "website": "https://myorg.ac.uk",
@@ -55,7 +55,7 @@
   "2P3V-subject": "Early years",
   "2P3V-full-part": "Full time",
   "2P3V-locations": [
-
+    "Main Site"
   ],
   "2P3V-has-accredited-body": "We are the accredited body",
   "2P3V-accredited-body": "UCL, University College London (University of London)",
@@ -102,7 +102,7 @@
   "2P3T-subject": "Mathematics",
   "2P3T-full-part": "Full time",
   "2P3T-locations": [
-
+    "Main Site"
   ],
   "2P3T-has-accredited-body": "We are the accredited body",
   "2P3T-accredited-body": "UCL, University College London (University of London)",
@@ -149,7 +149,7 @@
   "2P3S-subject": "Primary",
   "2P3S-full-part": "Full time",
   "2P3S-locations": [
-
+    "Main Site"
   ],
   "2P3S-has-accredited-body": "We are the accredited body",
   "2P3S-accredited-body": "UCL, University College London (University of London)",
@@ -195,7 +195,7 @@
   "2P35-subject": "Art / art & design",
   "2P35-full-part": "Full time",
   "2P35-locations": [
-
+    "Main Site"
   ],
   "2P35-has-accredited-body": "We are the accredited body",
   "2P35-accredited-body": "UCL, University College London (University of London)",
@@ -241,7 +241,7 @@
   "2P36-subject": "Biology",
   "2P36-full-part": "Full time",
   "2P36-locations": [
-
+    "Main Site"
   ],
   "2P36-has-accredited-body": "We are the accredited body",
   "2P36-accredited-body": "UCL, University College London (University of London)",
@@ -287,7 +287,7 @@
   "2P37-subject": "Business education",
   "2P37-full-part": "Full time",
   "2P37-locations": [
-
+    "Main Site"
   ],
   "2P37-has-accredited-body": "We are the accredited body",
   "2P37-accredited-body": "UCL, University College London (University of London)",
@@ -333,7 +333,7 @@
   "2P38-subject": "Chemistry",
   "2P38-full-part": "Full time",
   "2P38-locations": [
-
+    "Main Site"
   ],
   "2P38-has-accredited-body": "We are the accredited body",
   "2P38-accredited-body": "UCL, University College London (University of London)",
@@ -371,7 +371,7 @@
   "2P3J-subject": "Modern languages",
   "2P3J-full-part": "Full time",
   "2P3J-locations": [
-
+    "Main Site"
   ],
   "2P3J-has-accredited-body": "We are the accredited body",
   "2P3J-accredited-body": "UCL, University College London (University of London)",
@@ -405,7 +405,7 @@
   "2P39-subject": "Citizenship",
   "2P39-full-part": "Full time",
   "2P39-locations": [
-
+    "Main Site"
   ],
   "2P39-has-accredited-body": "We are the accredited body",
   "2P39-accredited-body": "UCL, University College London (University of London)",
@@ -439,7 +439,7 @@
   "2P3B-subject": "Computer studies",
   "2P3B-full-part": "Full time",
   "2P3B-locations": [
-
+    "Main Site"
   ],
   "2P3B-has-accredited-body": "We are the accredited body",
   "2P3B-accredited-body": "UCL, University College London (University of London)",
@@ -473,7 +473,7 @@
   "2P3F-subject": "Drama and theatre studies",
   "2P3F-full-part": "Full time",
   "2P3F-locations": [
-
+    "Main Site"
   ],
   "2P3F-has-accredited-body": "We are the accredited body",
   "2P3F-accredited-body": "UCL, University College London (University of London)",
@@ -507,7 +507,7 @@
   "2P3D-subject": "English",
   "2P3D-full-part": "Full time",
   "2P3D-locations": [
-
+    "Main Site"
   ],
   "2P3D-has-accredited-body": "We are the accredited body",
   "2P3D-accredited-body": "UCL, University College London (University of London)",
@@ -543,7 +543,7 @@
   "2P3L-subject": "Modern languages",
   "2P3L-full-part": "Full time",
   "2P3L-locations": [
-
+    "Main Site"
   ],
   "2P3L-has-accredited-body": "We are the accredited body",
   "2P3L-accredited-body": "UCL, University College London (University of London)",
@@ -577,7 +577,7 @@
   "2P3G-subject": "Geography",
   "2P3G-full-part": "Full time",
   "2P3G-locations": [
-
+    "Main Site"
   ],
   "2P3G-has-accredited-body": "We are the accredited body",
   "2P3G-accredited-body": "UCL, University College London (University of London)",
@@ -613,7 +613,7 @@
   "2P3M-subject": "Modern languages",
   "2P3M-full-part": "Full time",
   "2P3M-locations": [
-
+    "Main Site"
   ],
   "2P3M-has-accredited-body": "We are the accredited body",
   "2P3M-accredited-body": "UCL, University College London (University of London)",
@@ -647,7 +647,7 @@
   "2P3H-subject": "History",
   "2P3H-full-part": "Full time",
   "2P3H-locations": [
-
+    "Main Site"
   ],
   "2P3H-has-accredited-body": "We are the accredited body",
   "2P3H-accredited-body": "UCL, University College London (University of London)",
@@ -683,7 +683,7 @@
   "2P3N-subject": "Modern languages",
   "2P3N-full-part": "Full time",
   "2P3N-locations": [
-
+    "Main Site"
   ],
   "2P3N-has-accredited-body": "We are the accredited body",
   "2P3N-accredited-body": "UCL, University College London (University of London)",
@@ -717,7 +717,7 @@
   "2P3K-subject": "Mathematics",
   "2P3K-full-part": "Full time",
   "2P3K-locations": [
-
+    "Main Site"
   ],
   "2P3K-has-accredited-body": "We are the accredited body",
   "2P3K-accredited-body": "UCL, University College London (University of London)",
@@ -751,7 +751,7 @@
   "2P3R-subject": "Mathematics",
   "2P3R-full-part": "Full time",
   "2P3R-locations": [
-
+    "Main Site"
   ],
   "2P3R-has-accredited-body": "We are the accredited body",
   "2P3R-accredited-body": "UCL, University College London (University of London)",
@@ -785,7 +785,7 @@
   "2P3P-subject": "Music",
   "2P3P-full-part": "Full time",
   "2P3P-locations": [
-
+    "Main Site"
   ],
   "2P3P-has-accredited-body": "We are the accredited body",
   "2P3P-accredited-body": "UCL, University College London (University of London)",
@@ -819,7 +819,7 @@
   "2P3Q-subject": "Physics",
   "2P3Q-full-part": "Full time",
   "2P3Q-locations": [
-
+    "Main Site"
   ],
   "2P3Q-has-accredited-body": "We are the accredited body",
   "2P3Q-accredited-body": "UCL, University College London (University of London)",
@@ -853,7 +853,7 @@
   "2P3W-subject": "Psychology",
   "2P3W-full-part": "Full time",
   "2P3W-locations": [
-
+    "Main Site"
   ],
   "2P3W-has-accredited-body": "We are the accredited body",
   "2P3W-accredited-body": "UCL, University College London (University of London)",
@@ -887,7 +887,7 @@
   "2P3X-subject": "Religious education",
   "2P3X-full-part": "Full time",
   "2P3X-locations": [
-
+    "Main Site"
   ],
   "2P3X-has-accredited-body": "We are the accredited body",
   "2P3X-accredited-body": "UCL, University College London (University of London)",
@@ -921,7 +921,7 @@
   "2P3Y-subject": "Secondary",
   "2P3Y-full-part": "Full time",
   "2P3Y-locations": [
-
+    "Main Site"
   ],
   "2P3Y-has-accredited-body": "We are the accredited body",
   "2P3Y-accredited-body": "UCL, University College London (University of London)",
@@ -949,7 +949,16 @@
       "providerCode": "U80",
       "programmeCode": "2P35",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -977,7 +986,16 @@
       "providerCode": "U80",
       "programmeCode": "2P36",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1005,7 +1023,16 @@
       "providerCode": "U80",
       "programmeCode": "2P37",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1033,7 +1060,16 @@
       "providerCode": "U80",
       "programmeCode": "2P38",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1061,7 +1097,16 @@
       "providerCode": "U80",
       "programmeCode": "2P39",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1090,7 +1135,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3B",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1118,7 +1172,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3D",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1147,7 +1210,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3F",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1175,7 +1247,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3G",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1203,7 +1284,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3H",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1240,7 +1330,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3J",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1268,7 +1367,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3K",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1300,7 +1408,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3L",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1332,7 +1449,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3M",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1364,7 +1490,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3N",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1392,7 +1527,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3P",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1420,7 +1564,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3Q",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1449,7 +1602,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3R",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1477,7 +1639,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3S",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1505,7 +1676,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3T",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1533,7 +1713,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3V",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1561,7 +1750,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3W",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1589,7 +1787,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3X",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1617,7 +1824,16 @@
       "providerCode": "U80",
       "programmeCode": "2P3Y",
       "schools": [
-
+        {
+          "name": "Main Site",
+          "code": "-",
+          "type": "centre",
+          "address-line1": "Registrar's Division",
+          "address-line2": null,
+          "address-level2": "Gower Street",
+          "address-level1": "London",
+          "postal-code": "WC1E 6BT"
+        }
       ],
       "options": [
         "PGCE with QTS full time"
@@ -1635,23 +1851,17 @@
   "schools": [
     {
       "name": "Main Site",
-      "address": "Registrar's Division, Gower Street, London, WC1E 6BT",
       "code": "-",
-      "urn": 177101,
-      "type": [
-        "centre"
-      ],
-      "postcode": "WC1E 6BT"
+      "type": "centre",
+      "address-line1": "Registrar's Division",
+      "address-line2": null,
+      "address-level2": "Gower Street",
+      "address-level1": "London",
+      "postal-code": "WC1E 6BT",
+      "urn": "123520"
     }
   ],
-  "--location-picked": "Main Site (177101, City, WC1E 6BT)",
-  "--location-type": [
-    "centre"
-  ],
-  "--name": "Main Site",
-  "--urn": 177101,
-  "--postcode": "WC1E 6BT",
-  "--address": "Registrar's Division, Gower Street, London, WC1E 6BT",
+  "--location-picked": "Main Site (123520, London, WC1E 6BT)",
   "accreditors": [
     {
       "name": "UCL, University College London (University of London)",

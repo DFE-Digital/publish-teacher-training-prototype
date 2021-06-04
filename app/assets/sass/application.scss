@@ -14,24 +14,28 @@ $git-brand-colour: #159964;
 @import "components/advice";
 @import "components/application-card";
 @import "components/copy-content";
-@import "components/course-tabs";
 @import "components/description-list";
 @import "components/header";
+@import "components/inset-text";
+@import "components/link";
 @import "components/list";
 @import "components/map";
+@import "components/overrides";
 @import "components/phase-tag";
 @import "components/summary-list";
 @import "components/table";
+@import "components/table-container";
+@import "components/tabs";
 @import "components/timeline";
 
-.status-box {
+.app-status-box {
   background-color: govuk-colour("light-grey");
+  margin-bottom: govuk-spacing(4);
   padding: govuk-spacing(4);
-}
 
-.missing-section {
-  border: $govuk-border-width solid $govuk-border-colour;
-  padding: govuk-spacing(4);
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 abbr[title] {

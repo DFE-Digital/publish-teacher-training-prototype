@@ -10,32 +10,47 @@
 {% endset %}
 
 {% set placementLocations = data[code + "-locations"] %}
+{% set canEditPlacementLocations = data["placements-policy"] and placementLocations.length > 0 %}
 {% set placementLocationsHtml %}
-  {% if isArray(placementLocations) and placementLocations.length > 0 %}
-    {{ placementLocations | join("<br>") | safe }}
+  {# List of school placement locations #}
+  {% if data["placements-policy"] and isArray(placementLocations) and placementLocations.length > 0 %}
+    <ul class="govuk-list">
+      {% for location in placementLocations %}
+        {% set location = data.schools | find("name", location) %}
+        <li>{{ location.name }}, {{ location['address-level1'] }}</li>
+      {% endfor %}
+    </ul>
   {% else %}
-    <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Where will candidates be placed?</p>
-      <p><a class="govuk-link" href="/new/{{ code }}/placement-locations?change=true">Choose the locations candidates can apply to</a></p>
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Where will candidates be placed?</p>
+      {% if not data["placements-policy"] %}
+        {# Placement policy must be set before this question can be answered #}
+        <p><a class="govuk-link govuk-link--no-visited-state" href="/locations/placements-display?referrer=/course/{{ value("provider-code") }}/{{ code }}/"/>Set up placement schools</a></p>
+      {% else %}
+        <p><a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ code }}/placement-locations">Select the locations candidates can apply to</a></p>
+      {% endif %}
     </div>
   {% endif %}
 {% endset %}
 
-{% set placementLocationSummaryRowClasses %}
-  {% if placementLocations.length == 0 and showErrors %}
-    app-summary-list__row--error
-  {% elif not placementLocations.length > 0 %}
-    app-summary-list__row--missing
-  {% endif %}
-{% endset %}
-
 {% set trainingLocationHtml %}
-  {% if data[code + "-training-location"] %}
-    {{ data[code + "-training-location"] }}
+  {% if data[code + "-training-locations"] %}
+    <ul class="govuk-list">
+    {% for location in data[code + "-training-locations"] %}
+      {% if location == "remote" %}
+         <li>Remotely</li>
+      {% elif location == "placed" %}
+         <li>Candidate’s placement school</li>
+      {% else %}
+        {% set location = data.schools | find("urn", location) %}
+        <li>{{ location.name }}, {{ location['address-level1'] }}</li>
+      {% endif %}
+    {% endfor %}
+    </ul>
   {% else %}
-    <div class="app-summary-list__message">
-      <p class="app-summary-list__heading">Where will candidates do their centre based training?</p>
-      <p><a class="govuk-link" href="/new/{{ code }}/training-location?change=true">Select a centre based training location</a></p>
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Where will candidates do their centre-based training?</p>
+      <p><a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ code }}/training-locations">Select a training location</a></p>
     </div>
   {% endif %}
 {% endset %}
@@ -55,7 +70,6 @@
 {{ govukSummaryList({
   classes: "govuk-!-margin-bottom-8",
   rows: [{
-    classes: macros.requiredSummaryRowClasses(code + "-phase", showErrors),
     key: {
       text: "Level"
     },
@@ -64,7 +78,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=phase",
+        href: "/edit/" + code + "/phase",
         text: "Change",
         visuallyHiddenText: "phase"
       } if isNotPublished]
@@ -80,7 +94,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/phase?change=true",
+        href: "/edit/" + code + "/phase",
         text: "Change",
         visuallyHiddenText: "SEND"
       } if isNotPublished]
@@ -88,7 +102,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-subject", showErrors),
     key: {
       text: "Subject"
     },
@@ -97,7 +110,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/subject?change=true",
+        href: "/edit/" + code + "/subject",
         text: "Change",
         visuallyHiddenText: "subject"
       }]
@@ -105,7 +118,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-languages", showErrors),
     key: {
       text: "Languages"
     },
@@ -114,7 +126,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/languages?change=true",
+        href: "/edit/" + code + "/languages",
         text: "Change",
         visuallyHiddenText: "languages"
       }]
@@ -122,7 +134,6 @@
   } if data[code + "-subject"] == "Modern languages",
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-age-range", showErrors),
     key: {
       text: "Age range"
     },
@@ -131,7 +142,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/age-range?change=true",
+        href: "/edit/" + code + "/age-range",
         text: "Change",
         visuallyHiddenText: "age range"
       }]
@@ -139,7 +150,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-outcome", showErrors),
     key: {
       text: "Outcome"
     },
@@ -148,7 +158,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/outcome?change=true",
+        href: "/edit/" + code + "/outcome",
         text: "Change",
         visuallyHiddenText: "outcome"
       }]
@@ -156,7 +166,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-type", showErrors),
     key: {
       text: "Fee or salary"
     },
@@ -165,13 +174,12 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/funding?change=true",
+        href: "/edit/" + code + "/funding",
         text: "Change",
         visuallyHiddenText: "fee or salary"
       } if isNotPublished]
     } if showChangeLinks
   } if data["new-course"]["include-fee-or-salary"] else {
-    classes: macros.requiredSummaryRowClasses(code + "-apprenticeship", showErrors),
     key: {
       text: "Apprenticeship"
     },
@@ -180,7 +188,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/apprenticeship?change=true",
+        href: "/edit/" + code + "/apprenticeship",
         text: "Change",
         visuallyHiddenText: "apprenticeship"
       } if isNotPublished]
@@ -188,7 +196,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-full-part", showErrors),
     key: {
       text: "Full or part time"
     },
@@ -197,7 +204,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/full-time-part-time?change=true",
+        href: "/edit/" + code + "/full-time-part-time",
         text: "Change",
         visuallyHiddenText: "full time or part time"
       }]
@@ -205,7 +212,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-accredited-body", showErrors),
     key: {
       text: "Accredited body"
     },
@@ -214,7 +220,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/accredited-body?change=true",
+        href: "/edit/" + code + "/accredited-body",
         text: "Change",
         visuallyHiddenText: "accredited body"
       } if isNotPublished]
@@ -231,32 +237,30 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/placement-locations?change=true",
+        href: "/edit/" + code + "/placement-locations",
         text: "Change",
         visuallyHiddenText: "placement schools"
       }]
-    } if showChangeLinks and placementLocations.length > 0
-  } if data["placement-policy"] == "hosted",
+    } if showChangeLinks and canEditPlacementLocations
+  },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-training-location", showErrors),
     key: {
-      text: "Centre based training"
+      text: "Centre-based training locations"
     },
     value: {
       html: trainingLocationHtml
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/training-location?change=true",
+        href: "/edit/" + code + "/training-locations",
         text: "Change",
         visuallyHiddenText: "training location"
       }]
-    } if showChangeLinks and value(code + "-training-location")
+    } if showChangeLinks and value(code + "-training-locations")
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-applications-open", showErrors),
     key: {
       text: "Applications open"
     },
@@ -265,7 +269,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/applications-open?change=true",
+        href: "/edit/" + code + "/applications-open",
         text: "Change",
         visuallyHiddenText: "applications open date"
       } if isNotPublished]
@@ -273,7 +277,6 @@
   },
 
   {
-    classes: macros.requiredSummaryRowClasses(code + "-start-date", showErrors),
     key: {
       text: "Course starts"
     },
@@ -282,7 +285,7 @@
     },
     actions: {
       items: [{
-        href: "/new/" + code + "/start-date?change=true",
+        href: "/edit/" + code + "/start-date",
         text: "Change",
         visuallyHiddenText: "start date"
       } if isNotPublished]

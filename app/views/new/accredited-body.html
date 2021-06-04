@@ -50,8 +50,7 @@
         {{ otherAccreditedProviderFieldsHtml | safe }}
       {% endif %}
 
-      {{ change }}
-      {% if change == "true" %}
+      {% if editing %}
         {{ govukButton({
           text: "Save and publish changes"
         }) }}

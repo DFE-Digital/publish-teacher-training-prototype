@@ -47,7 +47,7 @@
 
 {% macro copyContent() %}
 <form data-module="copy-content">
-  <div class="status-box">
+  <div class="app-status-box">
     <h3 class="govuk-heading-m govuk-!-margin-top-0">
       <span class="js-cant-copy" style="display: none">Use this content again</span>
       <span class="js-can-copy" style="display: none">Copy content from another course</span>
@@ -125,7 +125,7 @@
   {% set linkPath = providerCode + '/' + courseCode %}
   {% set nextCycle = value('next-cycle') %}
 
-  <div class="status-box govuk-!-margin-bottom-6">
+  <div class="app-status-box govuk-!-margin-bottom-6">
     <h3 class="govuk-heading-m">Status</h3>
     {% if state == 'draft' %}
       <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
@@ -163,30 +163,22 @@
       {% endif %}
     </p>
 
-    {% if state == 'withdrawn' %}
+    {% if state == "withdrawn" %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
-      <p>
-        Closed
-      </p>
+      <p>Closed</p>
 
-      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
-      <p>
-        No
-      </p>
-    {% elseif publishedBefore or state == 'published' or state == 'published-with-changes' %}
+      {% if value("placements-policy") == "hosted" %}
+        <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+        <p>No</p>
+      {% endif %}
+    {% elseif publishedBefore or state == "published" or state == "published-with-changes" %}
       <h3 class="govuk-heading-s govuk-!-margin-0">Applications</h3>
-      <p>
-        {% if nextCycle %}
-          Opening on 10 October
-        {% else %}
-          Open
-        {% endif %}
-      </p>
+      <p>{{ "Opening on 10 October" if nextCycle else "Open" }}</p>
 
-      <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
-      <p>
-        Yes (<a href="/course/{{ linkPath }}/vacancies">Edit</a>)
-      </p>
+      {% if value("placements-policy") == "hosted" %}
+        <h3 class="govuk-heading-s govuk-!-margin-0">Vacancies</h3>
+        <p>Yes (<a href="/course/{{ linkPath }}/vacancies">Edit</a>)</p>
+      {% endif %}
     {% endif %}
 
     {% if state != 'published' and state != 'withdrawn' %}
@@ -194,9 +186,7 @@
       <h3 class="govuk-heading-m">Preview</h3>
       <p>See how your unpublished changes look.</p>
       <p>Preview your course to check for mistakes before publishing.</p>
-      <p>
-        <a href="/preview/{{ linkPath }}">Preview course</a>
-      </p>
+      <p><a href="/preview/{{ linkPath }}">Preview course</a></p>
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m" />
 
       <h3 class="govuk-heading-m">Publish</h3>
@@ -470,30 +460,18 @@
 </div>
 {% endmacro %}
 
-{% macro requiredSummaryRowClasses(id, showErrors) %}
-  {% if not value(id) and showErrors %}
-    app-summary-list__row--error
-  {% elif not value(id) %}
-    app-summary-list__row--missing
-  {% endif %}
-{% endmacro %}
-
-{% macro optionalSummaryRowClasses(id) %}
-  {{ "app-summary-list__row--empty" if not value(id) }}
-{% endmacro %}
-
 {% macro previewPart(id, org = false) %}
   {% if (value(id)) %}
     <div class="markdown">
       {{ markdown(id) | safe }}
     </div>
   {% else %}
-    <p class="missing-section">
+    <div class="govuk-inset-text app-inset-text app-inset-text--important">
       {% if org %}
-        Please add details <a href="/about-your-organisation">about your organisation</a>.
+        <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation">about your organisation</a></p>
       {% else %}
-        Please add details for this section.
+        <p class="govuk-heading-s">Please add details for this section</p>
       {% endif %}
-    </p>
+    </div>
   {% endif %}
 {% endmacro %}

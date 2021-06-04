@@ -20,7 +20,7 @@
   }) if justDeleted }}
 
   <h1 class="govuk-heading-xl">
-    {% if data["next-cycle"] %}<span class="govuk-caption-xl">Next cycle (2022 to  2023)</span>{% endif %}
+    {% if data["next-cycle"] %}<span class="govuk-caption-xl">Next cycle (2022 to 2023)</span>{% endif %}
     {{ title }}
   </h1>
 
@@ -45,8 +45,10 @@
             <th class="govuk-table__header">
               {% if data["next-cycle"] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training">Find</abbr>?
             </th>
-            <th class="govuk-table__header">Applications</th>
-            <th class="govuk-table__header">Vacancies</th>
+            {% if data["placements-policy"] == "hosted" %}
+              <th class="govuk-table__header">Applications</th>
+              <th class="govuk-table__header">Vacancies</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody class="govuk-table__body">

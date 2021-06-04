@@ -4,9 +4,10 @@
 {% set backLinkText = "Back to course" %}
 
 {% block content %}
-  <div class="status-box govuk-!-margin-bottom-4" style="margin-top: -15px">
-    <p class="govuk-!-margin-bottom-0">This is a preview of a course: {{ course.name }} ({{ course.programmeCode }})</p>
-  </div>
+  {{ govukNotificationBanner({
+    titleText: "Information",
+    text: "This is a preview of the ‘" + course.name + " (" + course.programmeCode + ")’ course."
+  }) }}
 
   <h1 class="govuk-heading-xl">
     <span class="govuk-heading-l govuk-!-margin-bottom-1">{{ data["training-provider-name"] }}</span>
@@ -43,8 +44,8 @@
             <span class="govuk-details__summary-text">QTS</span>
           </summary>
           <div class="govuk-details__text">
-              <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
-              <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
+            <p>Qualified teacher status (QTS) allows you to teach in state schools in England.</p>
+            <p>If you want to teach in the rest of the UK or internationally, consider the qualification PGCE (postgraduate certificate in education) with QTS instead.</p>
           </div>
         {% endif %}
       </details>
@@ -83,7 +84,7 @@
         <h2 class="govuk-heading-m">Contents</h2>
         <ul class="govuk-list app-list--dash">
           <li><a href="#section-about">About the course</a></li>
-          <li><a href="#section-schools">School placements</a></li>
+          <li><a href="#section-locations">Where you will train</a></li>
           <li><a href="#section-entry">Entry requirements</a></li>
           <li><a href="#section-about-provider">About the training provider</a></li>
           {% if course.salaried %}
@@ -110,55 +111,64 @@
       </section>
 
       <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-l" id="section-schools">School placements</h2>
+        <h2 class="govuk-heading-l" id="section-locations">Where you will train</h2>
 
-        {% set trainingLocationsHtml %}
-          {% if data["placement-policy"] == "hosted" %}
-            <p>You will be placed in different schools during your training. You can select your host school when you apply.</p>
-          {% elif data["placement-policy"] == "placed" %}
-            <p>You will be placed in different schools during your training. You can’t pick which schools you want to be in, but your course will try to place you in schools you can commute to.</p>
-          {% endif %}
+        <h3 class="govuk-heading-m">School placements</h3>
+        {{ macros.previewPart("school-placements") }}
 
-          {% if data[code + "-training-location"] == "Takes place remotely" %}
-            <p>You will also spend some of your time in academic lessons. These take place remotely.</p>
-          {% elif data[code + "-training-location"] == "Takes place at the school where the candidate is placed" %}
-            <p>You will also spend some of your time in academic lessons, which takes place at the school where you are placed.</p>
-          {% elif data[code + "-training-location"] %}
-            <p>You will also spend some of your time in academic lessons. These take place at {{ data[code + "-training-location"] }}.</p>
-          {% endif %}
-        {% endset %}
-
-        {{ appAdvice({
-          title: "Where you will train",
-          html: trainingLocationsHtml
-        }) if data["placement-policy"]  }}
-
-        {{ macros.previewPart(code + "-school-placements") }}
-
-        {% if data["placement-policy"] == "hosted" %}
-          <h3 class="govuk-heading-m">Locations</h3>
-          <p class="govuk-body">You can select one of the following locations when you apply.</p>
+        {% if data["placements-display"] == "list" and course.schools.length > 0 %}
+          {# Display a list of placement schools #}
           <table class="govuk-table">
-            <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
+            <caption class="govuk-table__caption govuk-body govuk-!-font-weight-regular">
+              {% if data["placements-policy"] == "hosted" %}
+                You can select one of the following locations when you apply:
+              {% else %}
+                You may be placed in one of the following locations:
+              {% endif %}
+            </caption>
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Location</th>
-                <th class="govuk-table__header" scope="col">Vacancies</th>
+                <th class="govuk-table__header" scope="col">School name and address</th>
+                {% if data["placements-policy"] == "hosted" %}
+                  <th class="govuk-table__header" scope="col">Vacancies</th>
+                {% endif %}
               </tr>
             </thead>
             <tbody class="govuk-table__body">
-              {% for school in course.schools %}
+              {% for location in schoolLocations %}
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
-                  <span class="govuk-!-font-weight-bold">{{ school.name }}</span><br>
-                  {{ school.address }}
+                  <span class="govuk-!-font-weight-bold">{{ location.name }}</span>
+                  <span class="govuk-!-display-block">
+                    {{- location["address-line1"] + ", " if location["address-line1"] -}}
+                    {{- location["address-line2"] + ", " if location["address-line2"] -}}
+                    {{- location["address-level2"] + ", " if location["address-level2"] -}}
+                    {{- location["address-level1"] + ", " if location["address-level1"] -}}
+                    {{- location["postal-code"] if location["postal-code"] -}}
+                  </span>
                 </td>
-                <td class="govuk-table__cell">Yes</td>
+                {% if data["placements-policy"] == "hosted" %}
+                  <td class="govuk-table__cell">Yes</td>
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>
           </table>
+        {% elif data["placements-display"] == "area" and course.schools.length > 0 %}
+          {# List areas placement schools lie within #}
+          <p class="govuk-body">You may be placed in schools located near Bradford, Leeds and Wakefield.</p>
+        {% else %}
+          {# Show missing message #}
+          <div class="govuk-inset-text app-inset-text app-inset-text--important">
+            <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/placement-locations">about your school placement locations</a></p>
+          </div>
         {% endif %}
+
+        {# Show missing message #}
+        <h3 class="govuk-heading-m">Centre-based training</h3>
+        <div class="govuk-inset-text app-inset-text app-inset-text--important">
+          <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/training-locations">about your centre-based training locations</a></p>
+        </div>
       </section>
 
       <section class="govuk-!-margin-bottom-8">
@@ -180,9 +190,9 @@
             {% endif %}
           {% else %}
             {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="{{ course.path }}/degree">about degree requirements</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="{{ course.path }}/degree">about degree requirements</a></p>
+            </div>
           {% endif %}
         </p>
 
@@ -220,9 +230,9 @@
 
         {% else %}
           {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="{{ course.path }}/gcses-pending-or-equivalency-tests">about GCSE requirements</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="{{ course.path }}/gcses-pending-or-equivalency-tests">about GCSE requirements</a></p>
+            </div>
         {% endif %}
 
         {% if data[code + "-personal-qualities"] %}
@@ -326,9 +336,9 @@
             You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% else %}
             {# Show missing message #}
-            <p class="missing-section">
-              Please add details <a href="/about-your-organisation/visa-sponsorship">about visa sponsorship</a>.
-            </p>
+            <div class="govuk-inset-text app-inset-text app-inset-text--important">
+              <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation/visa-sponsorship">about visa sponsorship</a></p>
+            </div>
           {% endif %}
         </p>
 
@@ -345,7 +355,9 @@
         <h2 class="govuk-heading-l">Contact this training provider</h2>
 
         {% if not (data["email"] and data["telephone"] and data["website"] and data["postcode"] and data["building-and-street"]) %}
-          <p class="missing-section">Please <a href="/about-your-organisation">add your missing contact details</a></a>.</p>
+          <div class="govuk-inset-text app-inset-text app-inset-text--important">
+            <p class="govuk-heading-s">Please <a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation">add your missing contact details</a></a></p>
+          </div>
         {% endif %}
 
         <dl class="app-description-list">

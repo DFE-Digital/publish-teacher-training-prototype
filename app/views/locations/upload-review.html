@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% set title = "Review locations" %}
+{% set backLink = referrer or paths.back %}
+
+{% block content %}
+  <form action="/locations?success=uploaded" method="post">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">Locations</span>
+      {{ title }}
+    </h1>
+
+    <h2 class="govuk-heading-m">{{ data.uploadedLocations | length }} recognised locations found</h2>
+    <table class="govuk-table app-table--vertical-align-middle">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">URN</th>
+          <th class="govuk-table__header" scope="col">Name</th>
+          <th class="govuk-table__header" scope="col">Address</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for location in data.uploadedLocations %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            {{ govukCheckboxes({
+              formGroup: {
+                classes: "govuk-!-margin-bottom-0"
+              },
+              classes: "govuk-checkboxes--small",
+              items: [{
+                value: location.urn,
+                text: location.urn,
+                checked: true
+              }]
+            }) }}
+          </td>
+          <td class="govuk-table__header">{{ location.name }}</td>
+          <td class="govuk-table__cell">{{ location.address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Add selected locations"
+      }) }}
+
+      <a class="govuk-link" href="{{ paths.back }}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}
