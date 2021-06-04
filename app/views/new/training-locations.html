@@ -13,52 +13,45 @@
 }) %}
 
 {% block content %}
-  {% if trainingLocations.length > 0 %}
-    <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        {{ govukCheckboxes({
-          idPrefix: code + "-training-locations",
-          name: code + "-training-locations",
-          fieldset: {
-            legend: {
-              text: title,
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--xl"
-            }
-          },
-          hint: {
-            classes: "govuk-!-margin-bottom-6",
-            html: "<a href=\"/locations\">Manage your training locations</a> to update this list."
-          },
-          items: items
-        }) }}
-
-        {% if editing %}
-          {{ govukButton({
-            text: "Save and publish changes"
-          }) }}
-          <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
-      </div>
-    </form>
-  {% else %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    {% call govukFieldset({
+      classes: "govuk-grid-column-two-thirds",
+      legend: {
+        classes: "govuk-fieldset__legend--xl",
+        text: title,
+        isPageHeading: true
+      }
+    }) %}
+      {% if trainingLocations.length == 0 %}
         <div class="govuk-inset-text">
           <h2 class="govuk-heading-m">You have not added any training centres</h2>
           <p class="govuk-body">Training centres are locations where academic training takes place.</p>
-
           {{ govukButton({
+            classes: "govuk-button--secondary",
             text: "Add a training centre",
             href: "/location/start?type=centre&referrer=/edit/" + code + "/training-locations"
           }) }}
         </div>
-      </div>
-    </div>
-  {% endif %}
+      {% else %}
+        <p class="govuk-body"><a href="/locations">Manage your training locations</a> to update this list.</p>
+      {% endif %}
+
+      {{ govukCheckboxes({
+        idPrefix: code + "-training-locations",
+        name: code + "-training-locations",
+        items: items
+      }) }}
+
+      {% if editing %}
+        {{ govukButton({
+          text: "Save and publish changes"
+        }) }}
+        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+      {% else %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      {% endif %}
+    {% endcall %}
+  </form>
 {% endblock %}

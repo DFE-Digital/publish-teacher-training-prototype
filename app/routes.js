@@ -691,7 +691,7 @@ router.post('/locations/placements-policy', function (req, res) {
   const schoolLocations = data.schools.filter(school => school.type.includes('school'))
 
   if (data['placements-display'] === 'area') {
-    res.redirect(schoolLocations.length > 0 ? '/locations/' : '/locations/add')
+    res.redirect(schoolLocations.length === 0 ? '/locations/add' : '/locations')
   } else {
     res.render('locations/placements-policy', {
       paths: placementsWizardPaths(req)
