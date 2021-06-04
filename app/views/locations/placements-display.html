@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set title = "How do you want to manage placement schools?" %}
+{% set title = "How do you want to display placement schools?" %}
 {% set backLink = referrer or paths.back %}
 
 {% block content %}
@@ -17,23 +17,17 @@
         },
         items: [{
           value: "list",
-          text: "Assign placement schools for each course",
+          text: "Show a list of placement schools for each course",
           checked: checked(("placements-display"), "list"),
-          label: {
-            classes: "govuk-label--s"
-          },
           hint: {
             text: "You can assign placement schools from the ‘Basic details’ tab on the course page."
           }
         }, {
           value: "area",
-          text: "Generate a list of areas where placements schools can be offered",
+          text: "Show the areas where placements can be offered",
           checked: checked(("placements-display"), "area"),
-          label: {
-            classes: "govuk-label--s"
-          },
           hint: {
-            text: "A list of areas will be generated from placement schools locations. This list will be shown for all courses"
+            text: "These areas will be generated from the placement schools locations added."
           }
         }]
       }) }}

@@ -5,8 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-# provider = 'UCL, University College London (University of London)'
-provider = 'Gorse SCITT'
+provider = 'UCL, University College London (University of London)'
+# provider = 'Gorse SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 abort("No courses found - check the provider name exactly matches one in JSON file") if courses.length.zero?
@@ -44,7 +44,7 @@ def school_data(c)
     {
       name: a['name'],
       code: a['code'] == '' ? '-' : a['code'],
-      type: a['name'] == 'Main Site' ? 'unknown' : 'school',
+      type: a['name'] == 'Main Site' ? 'centre' : 'school',
       'address-line1': addressLine1,
       'address-line2': addressLine2,
       'address-level2': addressLevel2,
@@ -156,7 +156,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   end
 
   schools = school_data(c)
-  schools.reject! { |s| s[:code] == '-' }
+  # schools.reject! { |s| s[:code] == '-' }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
 
