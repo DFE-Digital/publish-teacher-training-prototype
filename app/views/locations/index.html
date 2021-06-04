@@ -11,9 +11,7 @@
 
 {% macro locationsTable(locations, caption) %}
   <table class="govuk-table">
-    {% if caption %}
-      <caption class="govuk-table__caption govuk-table__caption--m">{{ caption }}</caption>
-    {% endif %}
+    <caption class="govuk-visually-hidden">{{ caption }} locations</caption>
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th class="govuk-table__header" width="40%" scope="col">Name (URN)</th>
@@ -73,41 +71,28 @@
   {% set placementSchoolsHtml %}
     <h2 class="govuk-heading-l">Placement schools</h2>
     {% if data["placements-policy"] and schoolLocations.length > 0 %}
-      <h3 class="govuk-heading-m">School placement settings</h3>
-      {{ govukSummaryList({
-        classes: "govuk-!-margin-bottom-8 govuk-!-width-two-thirds",
-        rows: [{
-          key: {
-            text: "Placement schools are assigned to each course"
-          },
-          value: {
-            text: "Yes" if data["placements-display"] == "list" else "No"
-          },
-          actions: {
-            items: [{
-              href: "/locations/placements-display?referrer=/locations#school",
-              text: "Change",
-              visuallyHiddenText: "how placements are displayed"
-            }]
-          }
-        }, {
-          key: {
-            text: "Candidates select a school when they apply"
-          },
-          value: {
-            text: "Yes" if data["placements-policy"] == "hosted" else "No"
-          },
-          actions: {
-            items: [{
-              href: "/locations/placements-policy?referrer=/locations#school",
-              text: "Change",
-              visuallyHiddenText: "placements policy"
-            }]
-          }
-        }]
-      }) }}
+      <div class="govuk-!-width-two-thirds">
+        <div class="govuk-inset-text">
+          <h3 class="govuk-heading-m">
+            {% if data["placements-display"] == "list" %}
+              Courses show a list of placement schools{{ ", and candidates select one when they apply" if data["placements-policy"] == "hosted" }}
+            {% else %}
+              Courses show areas where placements can be offered
+            {% endif %}
+          </h3>
+          {% if data["placements-display"] == "list" %}
+            <p class="govuk-body">Assign placement schools from the ‘Basic details’ tab on a course page.</p>
+          {% else %}
+            <p class="govuk-body">Based on the school locations you have added, courses will show the following areas:</p>
+            <div class="app-status-box">
+              <p class="govuk-body govuk-!-margin-bottom-0">Leeds, Bradford and Halifax.</p>
+            </div>
+          {% endif %}
+          <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="/locations/placements-display">Update placement school settings</a></p>
+        </div>
+      </div>
 
-      {{ locationsTable(schoolLocations, "Schools") }}
+      {{ locationsTable(schoolLocations, "Placement school") }}
 
       <div class="govuk-button-group">
         {{ govukButton({
@@ -136,7 +121,7 @@
   {% set trainingCentresHtml %}
     <h2 class="govuk-heading-l">Training centres</h2>
     {% if centerLocations.length > 0 %}
-      {{ locationsTable(centerLocations) }}
+      {{ locationsTable(centerLocations, "Training centre") }}
     {% else %}
       <div class="govuk-!-width-two-thirds">
         <p class="govuk-body">A training centre is a location where academic or ‘centre-based’ training takes place.</p>

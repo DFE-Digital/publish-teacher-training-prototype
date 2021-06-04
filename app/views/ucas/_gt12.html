@@ -2,7 +2,7 @@
 <p class="govuk-!-margin-bottom-5">Choose which letter you’d like UCAS to send (the content of each letter is summarised below):</p>
 
 {% set confirmLetter %}
-  <div class="status-box" style="border: none">
+  <div class="app-status-box" style="border: none">
     <p>
       To confirm whether or not you intend to take up this place,
       you must contact the training provider at [email address
@@ -22,7 +22,7 @@
 {% endset %}
 
 {% set noResponseLetter %}
-  <div class="status-box" style="border: none">
+  <div class="app-status-box" style="border: none">
     <p class="govuk-!-margin-bottom-0">{{ data['training-provider-name'] }} will assume you are taking up your place, and will be sending you joining instructions before you start your training programme.</p>
   </div>
 {% endset %}

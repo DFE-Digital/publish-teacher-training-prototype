@@ -28,9 +28,14 @@ $git-brand-colour: #159964;
 @import "components/tabs";
 @import "components/timeline";
 
-.status-box {
+.app-status-box {
   background-color: govuk-colour("light-grey");
+  margin-bottom: govuk-spacing(4);
   padding: govuk-spacing(4);
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 abbr[title] {

@@ -47,7 +47,7 @@
 
 {% macro copyContent() %}
 <form data-module="copy-content">
-  <div class="status-box">
+  <div class="app-status-box">
     <h3 class="govuk-heading-m govuk-!-margin-top-0">
       <span class="js-cant-copy" style="display: none">Use this content again</span>
       <span class="js-can-copy" style="display: none">Copy content from another course</span>
@@ -125,7 +125,7 @@
   {% set linkPath = providerCode + '/' + courseCode %}
   {% set nextCycle = value('next-cycle') %}
 
-  <div class="status-box govuk-!-margin-bottom-6">
+  <div class="app-status-box govuk-!-margin-bottom-6">
     <h3 class="govuk-heading-m">Status</h3>
     {% if state == 'draft' %}
       <span class="govuk-tag phase-tag-draft govuk-!-margin-bottom-4">Draft</span>
