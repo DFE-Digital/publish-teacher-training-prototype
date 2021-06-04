@@ -41,32 +41,6 @@
         type: "hidden"
       }) }}
 
-      {# govukCheckboxes({
-        idPrefix: id + "-location-type",
-        name: id + "-location-type",
-        fieldset: {
-          legend: {
-            text: "Type of location",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        items: [{
-          value: "school",
-          text: "Placement school",
-          hint: {
-            text: "Used for classroom based training with children"
-          },
-          checked: checked(id + "-location-type", "school")
-        }, {
-          value: "centre",
-          text: "centre-based training location",
-          hint: {
-            text: "University or college campus or other location used for centre-based training"
-          },
-          checked: checked(id + "-location-type", "centre")
-        }]
-      }) #}
-
       <h2 class="govuk-heading-m">Address</h2>
       {{ govukInput({
         label: {
@@ -124,6 +98,12 @@
       <div class="govuk-button-group">
         {{ govukButton({
           text: "Save location"
+        }) }}
+
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          text: "Save location and add another",
+          href: "#"
         }) }}
 
         <a class="govuk-link" href="/locations">Cancel</a>

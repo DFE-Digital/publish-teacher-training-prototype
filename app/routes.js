@@ -682,7 +682,7 @@ router.post('/locations/add-answer', function (req, res) {
   if (data['add-placements-answer'] === 'upload') {
     res.redirect('/locations/upload?referrer=/locations/add')
   } else {
-    res.redirect('/location/start?referrer=/locations/add')
+    res.redirect('/location/start?type=school&referrer=/locations/add')
   }
 })
 
