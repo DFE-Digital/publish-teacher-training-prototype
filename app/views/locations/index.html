@@ -9,6 +9,42 @@
   }) }}
 {% endblock %}
 
+{% macro locationsTable(locations, caption) %}
+  <table class="govuk-table">
+    {% if caption %}
+      <caption class="govuk-table__caption govuk-table__caption--m">{{ caption }}</caption>
+    {% endif %}
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" width="40%" scope="col">Name (URN)</th>
+        <th class="govuk-table__header" width="60%" scope="col">Address</th>
+        <th class="govuk-table__header" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      {% for location in locations %}
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
+            {{ location.name }}
+            <span class="govuk-!-font-weight-regular app-!-colour-muted">({{ location.urn }})</span>
+          </th>
+          <td class="govuk-table__cell">
+            {{- location["address-line1"] + ", " if location["address-line1"] -}}
+            {{- location["address-line2"] + ", " if location["address-line2"] -}}
+            {{- location["address-level2"] + ", " if location["address-level2"] -}}
+            {{- location["address-level1"] + ", " if location["address-level1"] -}}
+            {{- location["postal-code"] if location["postal-code"] -}}
+          </td>
+          <td class="govuk-table__cell app-govuk-table__cell--actions">
+            <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}?referrer=/locations#{{ type }}">Edit</a>
+            <a class="govuk-link app-link--destructive" href="#">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endmacro %}
+
 {% block content %}
   {{ govukNotificationBanner({
     text: "Your location has been added.",
@@ -34,14 +70,10 @@
     <p class="govuk-body">Most candidates search for courses by location. Adding locations improves the visibility of your courses on Find.</p>
   </div>
 
-  {% macro locationsTable(locations, caption) %}
-    {% set type = "school" if locations == schoolLocations else "centre" %}
-    {% set heading = "Placement schools" if type == "school" else "Training centres" %}
-    {% set caption = "Schools" if type == "school" else "Training centres" %}
-    {% set item = "placement school" if type == "school" else "training centre" %}
-
-    {% if type == "school" and data["placements-policy"] %}
-      <h2 class="govuk-heading-l">School placement settings</h2>
+  {% set placementSchoolsHtml %}
+    <h2 class="govuk-heading-l">Placement schools</h2>
+    {% if data["placements-policy"] and schoolLocations.length > 0 %}
+      <h3 class="govuk-heading-m">School placement settings</h3>
       {{ govukSummaryList({
         classes: "govuk-!-margin-bottom-8 govuk-!-width-two-thirds",
         rows: [{
@@ -74,75 +106,48 @@
           }
         }]
       }) }}
-    {% endif %}
 
-    {% if locations.length > 0 %}
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--l" id="{{ type }}-caption">{{ caption }}</caption>
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" width="40%" scope="col">Name (URN)</th>
-            <th class="govuk-table__header" width="60%" scope="col">Address</th>
-            <th class="govuk-table__header" scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% for location in locations %}
-            <tr class="govuk-table__row">
-              <th class="govuk-table__header" scope="row">
-                {{ location.name }}
-                <span class="govuk-!-font-weight-regular app-!-colour-muted">({{ location.urn }})</span>
-              </th>
-              <td class="govuk-table__cell">
-                {{- location["address-line1"] + ", " if location["address-line1"] -}}
-                {{- location["address-line2"] + ", " if location["address-line2"] -}}
-                {{- location["address-level2"] + ", " if location["address-level2"] -}}
-                {{- location["address-level1"] + ", " if location["address-level1"] -}}
-                {{- location["postal-code"] if location["postal-code"] -}}
-              </td>
-              <td class="govuk-table__cell app-govuk-table__cell--actions">
-                <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}?referrer=/locations#{{ type }}">Edit</a>
-                <a class="govuk-link app-link--destructive" href="#">Delete</a>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      {{ locationsTable(schoolLocations, "Schools") }}
 
       <div class="govuk-button-group">
         {{ govukButton({
-          text: "Add a new " + item,
-          href: "/location/start?type=" + type
+          text: "Add a new placement school",
+          href: "/location/start?type=school"
         }) }}
-
-        {% if type == "school" %}
-          <a class="govuk-link govuk-link--no-visited-state" href="/location/upload">Upload schools CSV</a>
-        {% endif %}
+        <a class="govuk-link govuk-link--no-visited-state" href="/location/upload">Upload schools CSV</a>
       </div>
     {% else %}
       <div class="govuk-!-width-two-thirds">
-        <h2 class="govuk-heading-l">{{ heading }}</h2>
-        {% if type == "school" %}
-          <p class="govuk-body">A placement school is a location where candidates may be placed during their training.</p>
-          <p class="govuk-body">Before adding placement schools, you can decide:</p>
-          <ul class="govuk-list govuk-list--bullet">
-            <li>whether to show individual addresses or only the areas schools are located</li>
-            <li>if candidates can select a school when making an application</li>
-          </ul>
-          {{ govukButton({
-            text: "Set up placement schools",
-            href: "/locations/placements-display"
-          }) }}
-        {% else %}
-          <p class="govuk-body">A training centre is a location where academic or ‘centre-based’ training takes place.</p>
-          {{ govukButton({
-            text: "Add a " + item,
-            href: "/location/start?type=" + type
-          }) }}
-        {% endif %}
+        <p class="govuk-body">A placement school is a location where candidates may be placed during their training.</p>
+        <p class="govuk-body">Before adding placement schools, you can decide:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>whether to show individual addresses or only the areas schools are located</li>
+          <li>if candidates can select a school when making an application</li>
+        </ul>
+
+        {{ govukButton({
+          text: "Set up placement schools",
+          href: "/locations/placements-display"
+        }) }}
       </div>
     {% endif %}
-  {% endmacro %}
+  {% endset %}
+
+  {% set trainingCentresHtml %}
+    <h2 class="govuk-heading-l">Training centres</h2>
+    {% if centerLocations.length > 0 %}
+      {{ locationsTable(centerLocations) }}
+    {% else %}
+      <div class="govuk-!-width-two-thirds">
+        <p class="govuk-body">A training centre is a location where academic or ‘centre-based’ training takes place.</p>
+      </div>
+    {% endif %}
+
+    {{ govukButton({
+      text: "Add a new training centre",
+      href: "/location/start?type=centre"
+    }) }}
+  {% endset %}
 
   {{ govukTabs({
     classes: "app-tabs app-tabs--locations govuk-!-margin-top-8",
@@ -150,13 +155,13 @@
       label: "Placement schools",
       id: "school",
       panel: {
-        html: locationsTable(schoolLocations)
+        html: placementSchoolsHtml
       }
     }, {
       label: "Training centres",
       id: "centre",
       panel: {
-        html: locationsTable(centerLocations)
+        html: trainingCentresHtml
       }
     }]
   }) }}

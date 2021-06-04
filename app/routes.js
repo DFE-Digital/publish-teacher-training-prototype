@@ -659,7 +659,7 @@ router.all('/locations', function (req, res) {
 
 router.get('/locations/add', function (req, res) {
   const paths = placementsWizardPaths(req)
-  paths.next = 'locations/add-answer'
+  paths.next = '/locations/add-answer'
 
   res.render('locations/add', {
     paths
