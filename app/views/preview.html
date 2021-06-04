@@ -114,14 +114,14 @@
         <h2 class="govuk-heading-l" id="section-locations">Where you will train</h2>
 
         <h3 class="govuk-heading-m">School placements</h3>
-        {{ macros.previewPart(code + "-school-placements") }}
+        {{ macros.previewPart("school-placements") }}
 
         {% if data["placements-display"] == "list" and course.schools.length > 0 %}
           {# Display a list of placement schools #}
           <table class="govuk-table">
             <caption class="govuk-table__caption govuk-body govuk-!-font-weight-regular">
               {% if data["placements-policy"] == "hosted" %}
-                Select one of the following locations when you apply:
+                You can select one of the following locations when you apply:
               {% else %}
                 You may be placed in one of the following locations:
               {% endif %}
