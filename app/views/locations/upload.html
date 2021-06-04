@@ -1,20 +1,24 @@
 {% extends "layout.html" %}
-{% set title = "Upload location data" %}
+{% set title = "Upload school data" %}
 {% set backLink = referrer or "/locations" %}
 
 {% block content %}
   <form action="/locations/upload-review" method="get" class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">Locations</span>
+        {{ title }}
+      </h1>
+
+      <p class="govuk-body">Add multiple locations by providing a CSV of Unique reference numbers (URNs). You can review the details of each school before adding them to your account.</p>
+      <p class="govuk-body">Download this <a class="govuk-link" href="upload-template.csv" type="text/csv" download="upload-template.csv">CSV template</a> to get started.</p>
+
       {{ govukFileUpload({
         id: "file-upload",
         name: "file-upload",
         label: {
-          html: "<span class=\"govuk-caption-xl\">Locations</span>" + title,
-          isPageHeading: true,
-          classes: "govuk-label--xl"
-        },
-        hint: {
-          text: "Add multiple locations by providing a CSV of Unique reference numbers (URNs). You can review addresses before adding them to your account."
+          text: "Upload CSV file",
+          classes: "govuk-label--m"
         }
       }) }}
 
