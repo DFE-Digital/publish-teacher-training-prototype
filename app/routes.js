@@ -560,8 +560,9 @@ router.get('/course-not-running/:providerCode/:code', function (req, res) {
 router.get('/preview/:providerCode/:code', function (req, res) {
   const c = course(req)
   const code = c.programmeCode
+  const schoolLocations = req.session.data.schools.filter(school => school.type.includes('school'))
 
-  res.render('preview', { course: c, code })
+  res.render('preview', { course: c, code, schoolLocations })
 })
 
 router.get('/course/:providerCode/:code/:view', function (req, res) {
