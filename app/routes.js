@@ -688,13 +688,15 @@ router.post('/locations/add-answer', function (req, res) {
 
 router.post('/locations/placements-policy', function (req, res) {
   const { data } = req.session
+  const { referrer } = req.query
   const schoolLocations = data.schools.filter(school => school.type.includes('school'))
 
   if (data['placements-display'] === 'area') {
     res.redirect(schoolLocations.length === 0 ? '/locations/add' : '/locations')
   } else {
     res.render('locations/placements-policy', {
-      paths: placementsWizardPaths(req)
+      paths: placementsWizardPaths(req),
+      referrer
     })
   }
 })

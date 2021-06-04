@@ -154,6 +154,13 @@
     }) %}
   {% endif %}
 
+  {% if not data["placements-display"] %}
+    {% set result = actionsList.push({
+      text: "Set up placement schools",
+      href: "/locations/placements-display?referrer=/course/" + value("provider-code") + "/" + code + "/"
+    }) %}
+  {% endif %}
+
   {# A centre-based training location was required for rollover in 2021 #}
   {% if not data[code + "-training-locations"] %}
     {% set result = actionsList.push({

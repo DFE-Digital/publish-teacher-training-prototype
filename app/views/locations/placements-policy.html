@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set title = "Can candidates choose a school when they apply?" %}
-{% set backLink = referrer or paths.back %}
+{% set backLink = paths.back %}
 
 {% block content %}
   <form action="{{ referrer or paths.next }}" method="post" class="govuk-grid-row">
