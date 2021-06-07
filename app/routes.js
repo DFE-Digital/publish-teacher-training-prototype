@@ -467,6 +467,7 @@ router.get('/publish/:providerCode/:code', function (req, res) {
 router.get('/course/:providerCode/:code', function (req, res) {
   const c = course(req)
   const errors = validate(req.session.data, c)
+  const schoolLocations = req.session.data.schools.filter(school => school.type.includes('school'))
 
   res.render('course/index', {
     course: c,
@@ -475,7 +476,8 @@ router.get('/course/:providerCode/:code', function (req, res) {
     justEdited: req.query.edited,
     justEditedAndPublished: req.query.editedAndPublished,
     justWithdrawn: req.query.withdrawn,
-    justPublished: (req.query.publish && errors.length === 0)
+    justPublished: (req.query.publish && errors.length === 0),
+    schoolLocations
   })
 })
 
@@ -633,23 +635,24 @@ router.post('/location/:id', function (req, res) {
   res.redirect(referrer || `/locations?success=${isNew ? 'new' : 'edited'}`)
 })
 
-router.all('/locations', function (req, res) {
+router.post('/locations/upload-data', function (req, res) {
   const data = req.session.data
-  let { schools } = data
+  data.schools = data.schools.concat(data.uploadedLocations)
 
-  if (req.query.success === 'uploaded') {
-    schools = schools.concat(data.uploadedLocations)
-  }
+  res.redirect('/locations?success=uploaded')
+})
+
+router.all('/locations', function (req, res) {
+  const { schools, ucasCourses } = req.session.data
 
   schools.forEach(location => {
-    location.courses = data.ucasCourses.filter(a => a.schools.find(school => school.urn === location.urn)).length
+    location.courses = ucasCourses.filter(a => a.schools.find(school => school.urn === location.urn)).length
   })
 
   const centerLocations = schools.filter(school => school.type.includes('centre'))
   const schoolLocations = schools.filter(school => school.type.includes('school'))
 
   res.render('locations/index', {
-    locations: schools,
     centerLocations,
     schoolLocations,
     justCreated: req.query.success === 'new',
