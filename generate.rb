@@ -5,8 +5,8 @@ require 'json'
 
 file = File.read('courses-clean.json')
 data = JSON.parse(file)
-provider = 'UCL, University College London (University of London)'
-# provider = 'Gorse SCITT'
+# provider = 'UCL, University College London (University of London)'
+provider = 'Gorse SCITT'
 next_cycle = true
 courses = data.select {|c| c['provider'] == provider }
 abort("No courses found - check the provider name exactly matches one in JSON file") if courses.length.zero?
