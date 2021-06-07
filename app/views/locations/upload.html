@@ -10,8 +10,11 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-body">Add multiple locations by providing a CSV of Unique reference numbers (URNs). You can review the details of each school before adding them to your account.</p>
-      <p class="govuk-body">Download this <a class="govuk-link" href="upload-template.csv" type="text/csv" download="upload-template.csv">CSV template</a> to get started.</p>
+      <p class="govuk-body">Add multiple locations by uploading a file containing school unique reference numbers (URNs).</p>
+
+      <p class="govuk-body"><a class="govuk-link" href="upload-template.csv" type="text/csv" download="upload-template.csv">Download, fill in and upload this template as a CSV file</a>.</p>
+
+      <p class="govuk-body">You'll then be able to review the locations before confirming them.</p>
 
       {{ govukFileUpload({
         id: "file-upload",

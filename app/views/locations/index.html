@@ -69,25 +69,25 @@
   </h1>
 
   <div class="govuk-!-width-two-thirds">
-    <p class="govuk-body-l">Most candidates search for courses by location. Adding locations improves the visibility of your courses on Find.</p>
+    <p class="govuk-body-l">Most candidates search for courses by location. Add your locations to improve the visibility of your courses on Find.</p>
   </div>
 
   {% set placementSchoolsHtml %}
     <h2 class="govuk-heading-l">Placement schools</h2>
-    <p class="govuk-body">A placement school is a location where candidates may be placed during their training.</p>
+    <p class="govuk-body">Add the schools where candidates may be placed.</p>
 
     {% if data["placements-display"] and schoolLocations.length > 0 %}
       <div class="govuk-!-width-two-thirds">
         <div class="govuk-inset-text">
           <h3 class="govuk-heading-m">
             {% if data["placements-display"] == "list" %}
-              Courses show a list of placement schools{{ ", and candidates select one when they apply" if data["placements-policy"] == "hosted" }}
+              Courses show precise placement locations{{ ", and candidates select one when they apply" if data["placements-policy"] == "hosted" }}
             {% else %}
               Courses show areas where placements can be offered
             {% endif %}
           </h3>
           {% if data["placements-display"] == "list" %}
-            <p class="govuk-body">Assign placement schools from the ‘Basic details’ tab on a course page.</p>
+            <p class="govuk-body">You can assign your placement schools to your courses from your individual course pages.</p>
           {% else %}
             <p class="govuk-body">Based on the school locations you have added, courses will show the following areas:</p>
             <div class="app-status-box">
@@ -109,10 +109,10 @@
       </div>
     {% else %}
       <div class="govuk-!-width-two-thirds">
-        <p class="govuk-body">Before adding placement schools, you can decide:</p>
+        <p class="govuk-body">You can choose whether to:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>whether to show individual addresses or only the areas schools are located</li>
-          <li>if candidates can select a school when making an application</li>
+          <li>show precise placement locations or only the general area</li>
+          <li>allow candidates to choose a placement school</li>
         </ul>
 
         {{ govukButton({
@@ -125,7 +125,7 @@
 
   {% set trainingCentresHtml %}
     <h2 class="govuk-heading-l">Training centres</h2>
-    <p class="govuk-body">A training centre is a location where academic or ‘centre-based’ training takes place.</p>
+    <p class="govuk-body">Add the locations where academic or ‘centre-based’ training takes place.</p>
 
     {% if centerLocations.length > 0 %}
       {{ locationsTable(centerLocations, "Training centre") }}
