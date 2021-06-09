@@ -147,7 +147,7 @@
   {% endif %}
 
   {# Placement locations #}
-  {% if data[code + "-locations"].length == 0 %}
+  {% if data["placements-display"] == "list" and data[code + "-locations"].length == 0 %}
     {% set result = actionsList.push({
       text: "Where will candidates be placed?",
       href: "/edit/" + data["provider-code"] + "/placement-locations"
