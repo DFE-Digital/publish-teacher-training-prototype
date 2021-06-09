@@ -9,10 +9,10 @@
   {% endif %}
 {% endset %}
 
-{% set canEditSchoolLocations = data["placements-policy"] and schoolLocations.length > 0 %}
 {% set schoolLocationsHtml %}
-  {# List of school placement locations #}
-  {% if data["placements-display"] == "list" and isArray(schoolLocations) and schoolLocations.length > 0 %}
+  {% set schoolLocations = data[code + "-locations"] %}
+  {% if data["placements-display"] == "list" and schoolLocations.length > 0 %}
+    {% set canEditSchoolLocations = true %}
     <ul class="govuk-list">
       {% for location in schoolLocations %}
         {% set location = data.schools | find("name", location) %}
@@ -20,7 +20,7 @@
       {% endfor %}
     </ul>
   {% elif data["placements-display"] == "area" %}
-    <p class="govuk-body">Bradford, Leeds and Wakefield.</p>
+    <p class="govuk-body">Bradford, Leeds and Wakefield</p>
   {% else %}
     <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
       <p class="govuk-heading-s app-inset-text__title">Where will candidates be placed?</p>
@@ -35,9 +35,10 @@
 {% endset %}
 
 {% set trainingLocationHtml %}
-  {% if data[code + "-training-locations"] %}
+  {% set trainingLocations = data[code + "-training-locations"] %}
+  {% if trainingLocations %}
     <ul class="govuk-list">
-    {% for location in data[code + "-training-locations"] %}
+    {% for location in trainingLocations %}
       {% if location == "remote" %}
          <li>Remotely</li>
       {% elif location == "placed" %}

@@ -467,7 +467,6 @@ router.get('/publish/:providerCode/:code', function (req, res) {
 router.get('/course/:providerCode/:code', function (req, res) {
   const c = course(req)
   const errors = validate(req.session.data, c)
-  const schoolLocations = req.session.data.schools.filter(school => school.type.includes('school'))
 
   res.render('course/index', {
     course: c,
@@ -476,8 +475,7 @@ router.get('/course/:providerCode/:code', function (req, res) {
     justEdited: req.query.edited,
     justEditedAndPublished: req.query.editedAndPublished,
     justWithdrawn: req.query.withdrawn,
-    justPublished: (req.query.publish && errors.length === 0),
-    schoolLocations
+    justPublished: (req.query.publish && errors.length === 0)
   })
 })
 

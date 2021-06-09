@@ -156,7 +156,7 @@ prototype_data['ucasCourses'] = courses.each_with_index.map do |c, idx|
   end
 
   schools = school_data(c)
-  # schools.reject! { |s| s[:code] == '-' }
+  schools.reject! { |s| s[:name] == 'Main Site' }
 
   subjects = c['subjects'].map {|s| s.downcase.capitalize }
 
