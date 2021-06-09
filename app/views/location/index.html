@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% set type = school.type or type %}
 {% set title = school.name or "Add a " + ("placement school" if type == "school" else "training centre") %}
 {% set backLink = referrer or "/locations#" + type %}
 
@@ -37,7 +38,7 @@
       {{ govukInput({
         id: id + "-location-type",
         name: id + "-location-type",
-        value: value(id + "-location-type") or type,
+        value: type,
         type: "hidden"
       }) }}
 

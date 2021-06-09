@@ -35,7 +35,7 @@
               {{- location["postal-code"] if location["postal-code"] -}}
             </td>
             <td class="govuk-table__cell app-govuk-table__cell--actions">
-              <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}?referrer=/locations#{{ type }}">Edit</a>
+              <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}">Edit</a>
               <a class="govuk-link app-link--destructive" href="#">Delete</a>
             </td>
           </tr>
