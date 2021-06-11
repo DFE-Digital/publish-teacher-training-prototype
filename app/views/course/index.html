@@ -150,7 +150,7 @@
   {% if data["placements-display"] == "list" and data[code + "-locations"].length == 0 %}
     {% set result = actionsList.push({
       text: "Where will candidates be placed?",
-      href: "/edit/" + data["provider-code"] + "/placement-locations"
+      href: "/edit/" + code + "/placement-locations?referrer=/course/" + value("provider-code") + "/" + code + "/"
     }) %}
   {% endif %}
 
@@ -165,7 +165,7 @@
   {% if not data[code + "-training-locations"] %}
     {% set result = actionsList.push({
       text: "Where will candidates do their centre-based training?",
-      href: "/edit/" + data["provider-code"] + "/training-locations"
+      href: "/edit/" + code + "/training-locations?referrer=/course/" + value("provider-code") + "/" + code + "/"
     }) %}
   {% endif %}
 
