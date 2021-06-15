@@ -164,11 +164,28 @@
           </div>
         {% endif %}
 
-        {# Show missing message #}
+        {# TODO: Generate sentence based on training centres selected #}
         <h3 class="govuk-heading-m">Centre-based training</h3>
-        <div class="govuk-inset-text app-inset-text app-inset-text--important">
-          <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/training-locations">about your centre-based training locations</a></p>
-        </div>
+        {% set trainingLocations = data[code + "-training-locations"] %}
+        {% if trainingLocations %}
+          <p class="govuk-body">
+          {% for location in trainingLocations %}
+            {% if location == "remote" %}
+              Remotely
+            {% elif location == "placed" %}
+              Candidate’s placement school
+            {% else %}
+              {% set location = data.schools | find("urn", location) %}
+              {{ location.name }}, {{ location['address-level1'] }}
+            {% endif %}
+          {% endfor %}
+          </p>
+        {% else %}
+        {# Show missing message #}
+          <div class="govuk-inset-text app-inset-text app-inset-text--important">
+            <p class="govuk-heading-s">Please add details <a class="govuk-link govuk-link--no-visited-state" href="/edit/{{ course.programmeCode }}/training-locations">about your centre-based training locations</a></p>
+          </div>
+        {% endif %}
       </section>
 
       <section class="govuk-!-margin-bottom-8">

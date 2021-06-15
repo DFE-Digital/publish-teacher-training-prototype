@@ -35,7 +35,13 @@
             }) }}
           </td>
           <td class="govuk-table__header">{{ location.name }}</td>
-          <td class="govuk-table__cell">{{ location.address }}</td>
+          <td class="govuk-table__cell">
+            {{- location["address-line1"] + ", " if location["address-line1"] -}}
+            {{- location["address-line2"] + ", " if location["address-line2"] -}}
+            {{- location["address-level2"] + ", " if location["address-level2"] -}}
+            {{- location["address-level1"] + ", " if location["address-level1"] -}}
+            {{- location["postal-code"] if location["postal-code"] -}}
+          </td>
         </tr>
         {% endfor %}
       </tbody>

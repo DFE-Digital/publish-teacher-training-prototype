@@ -35,7 +35,7 @@
               {{- location["postal-code"] if location["postal-code"] -}}
             </td>
             <td class="govuk-table__cell app-govuk-table__cell--actions">
-              <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}?referrer=/locations#{{ type }}">Edit</a>
+              <a class="govuk-link govuk-link--no-visited-state" href="/location/{{ location.code or location.urn }}">Edit</a>
               <a class="govuk-link app-link--destructive" href="#">Delete</a>
             </td>
           </tr>
@@ -81,9 +81,9 @@
         <div class="govuk-inset-text">
           <h3 class="govuk-heading-m">
             {% if data["placements-display"] == "list" %}
-              You've chosen to show precise placement locations{{ " and allow candidates to choose one when they apply" if data["placements-policy"] == "hosted" }}
+              You’ve chosen to show precise placement locations{{ " and allow candidates to choose one when they apply" if data["placements-policy"] == "hosted" }}
             {% else %}
-              You've chosen to show only the general areas where placements can be offered
+              You’ve chosen to show only the general areas where placements can be offered
             {% endif %}
           </h3>
           {% if data["placements-display"] == "list" %}

@@ -66,7 +66,7 @@
         name: equivalencySubjectsName,
         fieldset: {
           legend: {
-            text: "Which subjects can you offer equivalency tests in?",
+            text: "Which subjects will you accept equivalency tests in?",
             classes: "govuk-fieldset__legend--s"
           }
         },
@@ -79,13 +79,13 @@
         name: course.programmeCode + "-equivalency-test-details",
         id: "more-detail",
         label: {
-          text: "Details about equivalency tests you offer (optional)",
+          text: "Details about equivalency tests you offer or accept",
           classes: "govuk-label--s",
           isPageHeading: false
         },
         value: data[course.programmeCode + "-equivalency-test-details"],
         hint: {
-          text: "For example, when and how you offer equivalency tests, or if there are any costs that candidates need to pay."
+          text: "For example, whether you run the tests directly or use a third party, and if there are any costs that candidates need to pay."
         }
       }) }}
     {% endset %}
