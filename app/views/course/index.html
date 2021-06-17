@@ -373,7 +373,7 @@
           {% set pendingGcses = data[code + '-pending-gcses'] %}
           {% set equivalencyTestsOffered = data[code + "-equivalency-tests-offered"] %}
 
-          {% if pendingGcses %}
+          {% if pendingGcses and equivalencyTestsOffered  %}
             <p class="govuk-body">Grade 4 (C) or above in English{{", maths and science" if course.name == "Primary" else " and maths" }}, or equivalent qualification</p>
             {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
               <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
@@ -390,7 +390,7 @@
             <p class="govuk-body">
               {% if equivalencyTestsOffered == "true" %}
                 Equivalency tests will be accepted in {{ data[code + "-equivalency-subjects"] | formatList }}
-              {% else %}
+              {% elif equivalencyTestsOffered == "false" %}
                 Equivalency tests will not be accepted
               {% endif %}
             </p>
