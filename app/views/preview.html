@@ -214,6 +214,8 @@
         </p>
 
         {% if course.name !== "Primary" %}
+          <p class="govuk-body">Your degree subject should be in {{ course.name }} or a similar subject. Otherwise you’ll need to prove your subject knowledge in some other way.</p>
+
           {% if data[code + "-degree-subject-required"] === "Yes" %}
             <p class="govuk-body">{{ data[code + "-degree-subject-requirements"] }}</p>
           {% endif %}
@@ -223,25 +225,19 @@
         {% set equivalencyTestsOffered = data[code + "-equivalency-tests-offered"] %}
 
         {% if pendingGcses %}
-          <p class="govuk-body">GCSE grade 4 (C) or above in English{{", maths and science" if   course.name == "Primary" else " and maths" }}, or equivalent.</p>
-
-          {% if data[code + "-gcse-additional-requirements"] === "Yes" %}
-            <p class="govuk-body">{{ data[code + "-gcse-requirements"] }}</p>
-          {% endif %}
+          <p class="govuk-body">GCSE grade 4 (C) or above in English{{", maths and science" if   course.name == "Primary" else " and maths" }}, or equivalent qualification.</p>
 
             <p class="govuk-body">
               {% if pendingGcses == "true" %}
-                Candidates with pending GCSEs will be considered.
+                We’ll consider candidates who are currently taking GCSEs.
               {% else %}
-                Candidates with pending GCSEs will not be considered.
+                We will not consider candidates with pending GCSEs.
               {% endif %}
-            </p>
 
-            <p class="govuk-body">
               {% if equivalencyTestsOffered == "true" %}
-                Equivalency tests will be accepted in {{ data[code + "-equivalency-subjects"] | formatList }}.
+                We’ll consider candidates who need to take a GCSE equivalency test in {{ data[code + "-equivalency-subjects"] | formatOrList }}.
               {% else %}
-                Equivalency tests will not be accepted.
+                We will not consider candidates who need to take GCSE equivalency tests.
               {% endif %}
             </p>
 
@@ -349,12 +345,12 @@
 
         <p class="govuk-body">
           {% if courseType === "Salaried" and data["canSponsorSkilledWorkerVisa"] == "true" %}
-            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Skilled Worker visas</a>, but this is not guaranteed.
+            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Skilled Worker visas</a>.
           {% elif courseType !== "Salaried" and data["canSponsorStudentVisa"] == "true" %}
-            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Student visas</a>, but this is not guaranteed.
+            We can <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">sponsor Student visas</a>.
           {% elseif data["canSponsorSkilledWorkerVisa"] == "false" or data["canSponsorStudentVisa"] == "false" %}
-            We are unable to sponsor a visa.
-            You will need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
+            We’re unable to sponsor visas.
+            You’ll need to <a class="govuk-link" href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration">get the right visa or status to {{"work" if  courseType == "Salaried" else "study" }} in the UK</a>.
           {% else %}
             {# Show missing message #}
             <div class="govuk-inset-text app-inset-text app-inset-text--important">
@@ -363,7 +359,7 @@
           {% endif %}
         </p>
 
-        <p class="govuk-body">You do not need a visa if you already have settled or pre-settled status under the EU Settlement Scheme, or if you are an Irish citizen.</p>
+        <p class="govuk-body">You do not need a visa if you already have settled or pre-settled status under the EU Settlement Scheme, or if you’re an Irish citizen.</p>
         <p class="govuk-body">Candidates with qualifications from non-UK institutions may need to provide evidence of comparability by applying for a <a href="https://www.enic.org.uk" class="govuk-link">UK ENIC statement</a>.</p>
       </section>
 
