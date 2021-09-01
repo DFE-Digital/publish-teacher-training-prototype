@@ -10,6 +10,10 @@
         {{ title }}
       </h1>
 
+      <p class="govuk-bodu">If you’re unsure if your courses can sponsor visas, check the <a href="https://www.gov.uk/government/publications/register-of-licensed-sponsors-students" class="govuk-link">Register of Student sponsors</a> and <a href="https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers" class="govuk-link">Register of Worker and Temporary Worker licensed sponsors</a>.</p>
+
+      <p class="govuk-body">Find out how to <a href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor" class="govuk-link">become a visa sponsor</a>.</p>
+
       {% set studentVisaRadioName = "canSponsorStudentVisa" %}
       {% set skilledWorkerVisaRadioName = "canSponsorSkilledWorkerVisa" %}
 
@@ -17,12 +21,9 @@
         name: studentVisaRadioName,
         fieldset: {
           legend: {
-            text: "Can you sponsor Student visas?",
+            text: "Can candidates get a sponsored Student visa for your fee-paying courses?",
             classes: "govuk-fieldset__legend--m"
           }
-        },
-        hint: {
-          text: "Applies to fee-paying courses"
         },
         items: [{
           value: "true",
@@ -39,17 +40,18 @@
         name: skilledWorkerVisaRadioName,
         fieldset: {
           legend: {
-            text: "Can you sponsor Skilled Worker visas?",
+            text: "Can candidates get a sponsored Skilled Worker visa for your salaried courses?",
             classes: "govuk-fieldset__legend--m"
           }
-        },
-        hint: {
-          text: "Applies to salaried courses"
         },
         items: [{
           value: "true",
           text: "Yes",
           checked: (data[skilledWorkerVisaRadioName] === "true")
+        }, {
+          value: "some",
+          text: "Only for some salaried courses",
+          checked: (data[skilledWorkerVisaRadioName] === "some")
         }, {
           value: "false",
           text: "No, or not applicable",
