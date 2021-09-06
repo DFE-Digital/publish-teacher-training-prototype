@@ -1,0 +1,74 @@
+{% extends "layout.njk" %}
+{% set title = "Courses as an accredited body" %}
+{% set newCourseFormUrl = "https://goo.gl/forms/HJ17Hob3728X3mTc2" if data["new-course"]["include-accredited"] else "https://goo.gl/forms/kdNksCuwcz7TVtNF2" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems()
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {% if data["next-cycle"] %}<span class="govuk-caption-xl">Next cycle (2022 to 2023)</span>{% endif %}
+    {{ title }}
+  </h1>
+
+  <p>Use this section to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>see who lists you as their accredited body</li>
+    <li>see which courses you’re the accredited body for</li>
+  </ul>
+
+  <h2 class="govuk-heading-l govuk-!-margin-top-6">Training providers</h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <ul class="govuk-list">
+        {% for provider in data['providers'] %}
+          <li>
+            <h3 class="govuk-heading-m">
+              <a href="/accredited-body/{{ provider.code }}">{{ provider.name }} ({{ provider.code }})</a>
+              <span class="govuk-body govuk-!-font-weight-regular govuk-!-display-block">
+                {# Lead school: Example School Name<br /> #}
+                {{ provider.count }}&nbsp;course{% if not (provider.count == 1) %}s{% endif %}
+              </span>
+            </h3>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- <table class="govuk-table govuk-!-margin-top-8">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Training provider</th>
+            <th class="govuk-table__header">Courses</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for provider in data['providers'] %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+
+            </td>
+            <td class="govuk-table__cell"><a href="#">{{ provider.count }}&nbsp;courses</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table> -->
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="app-status-box">
+        {# <h2 class="govuk-heading-m govuk-!-margin-top-2">
+          <a href="/notifications">Notifications</a>
+        </h2>
+        <p>Recieve notifications about courses that you’re the accredited body for.</p> #}
+        <h2 class="govuk-heading-m">Download</h2>
+        <p>Export all the courses you’re the accredited body for.</p>
+        <p class="">
+          <a href="#">Download as a CSV file</a>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

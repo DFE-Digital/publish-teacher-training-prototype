@@ -1,0 +1,65 @@
+{% extends "layout.njk" %}
+{% set title = "Who is the accredited body?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+      {% set otherAccreditedProviderFieldsHtml %}
+        {{ govukSelect({
+          id: code + "-new-accredited-body",
+          name: code + "-new-accredited-body",
+          label: {
+            text: "Name of accredited body"
+          },
+          items: accreditedBodies
+        }) }}
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function(){
+            accessibleAutocomplete.enhanceSelectElement({
+              showAllValues: true,
+              selectElement: document.querySelector('#{{ code + "-new-accredited-body" }}')
+            })
+          });
+        </script>
+      {% endset %}
+
+      {% set options = (accreditors.push({
+        divider: "or"
+      }, {
+        value: "A new accredited body you’re working with",
+        text: "A new accredited body you’re working with",
+        conditional: {
+          html: otherAccreditedProviderFieldsHtml
+        }
+      }), accreditors) %}
+
+      {% if data["accreditors"].length > 0 %}
+        {{ govukRadios({
+          id: code + "-accredited-body",
+          name: code + "-accredited-body",
+          label: {
+            text: "Name of accredited body"
+          },
+          items: options
+        }) }}
+      {% else %}
+        {{ otherAccreditedProviderFieldsHtml | safe }}
+      {% endif %}
+
+      {% if editing %}
+        {{ govukButton({
+          text: "Save and publish changes"
+        }) }}
+        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+      {% else %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      {% endif %}
+    </div>
+  </form>
+{% endblock %}

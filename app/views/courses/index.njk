@@ -1,0 +1,69 @@
+{% extends "layout.njk" %}
+{% set title = "Courses" %}
+{% set newCourseFormUrl = "/new/start" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems()
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    text: "Course vacancies published.",
+    type: "success"
+  }) if justEditedVacancies }}
+
+  {{ govukNotificationBanner({
+    text: "Course deleted.",
+    type: "success"
+  }) if justDeleted }}
+
+  <h1 class="govuk-heading-xl">
+    {% if data["next-cycle"] %}<span class="govuk-caption-xl">Next cycle (2022 to 2023)</span>{% endif %}
+    {{ title }}
+  </h1>
+
+  {{ govukButton({
+    text: "Add a new course",
+    href: newCourseFormUrl
+  }) if data["ucasCourses"].length > 10 }}
+
+  {% if data["ucasCourses"].length > 0 %}
+    {% for accrediting in data["accreditors"] %}
+      {% if accrediting.name != data["training-provider-name"] %}
+        <h3 class="govuk-heading-m">
+          <span class="govuk-caption-m">Accredited body</span>
+          {{ accrediting.name }}
+        </h3>
+      {% endif %}
+      <table class="govuk-table ucas-info-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header govuk-!-width-one-third">Course</th>
+            <th class="govuk-table__header">Status</th>
+            <th class="govuk-table__header">
+              {% if data["next-cycle"] %}Will it be{% else %}Is it{% endif %} on <abbr title="Find postgraduate teacher training">Find</abbr>?
+            </th>
+            {% if data["placements-policy"] == "hosted" %}
+              <th class="govuk-table__header">Applications</th>
+              <th class="govuk-table__header">Vacancies</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for course in data["ucasCourses"] %}
+            {% if course.accrediting == accrediting.name %}
+              {% include "includes/_courses-table-row.njk" %}
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Add a new course",
+    href: newCourseFormUrl
+  }) }}
+{% endblock %}

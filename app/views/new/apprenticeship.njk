@@ -1,0 +1,39 @@
+{% extends "layout.njk" %}
+{% set title = "Is this a teaching apprenticeship?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post">
+    {{ govukRadios({
+      idPrefix: code + "-apprenticeship",
+      name: code + "-apprenticeship",
+      fieldset: {
+        legend: {
+          text: title,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+      items: [{
+        value: "Yes",
+        text: "Yes",
+        checked: checked((code + "-apprenticeship"), "Yes")
+      }, {
+        value: "No",
+        text: "No",
+        checked: checked((code + "-apprenticeship"), "No")
+      }]
+    }) }}
+
+    {% if editing %}
+      {{ govukButton({
+        text: "Save and publish changes"
+      }) }}
+      <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+    {% else %}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    {% endif %}
+  </form>
+{% endblock %}

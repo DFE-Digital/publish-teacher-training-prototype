@@ -1,0 +1,49 @@
+{% extends "layout.njk" %}
+{% set title = "Invite a user" %}
+{% set backLink = "/cycles" if data["rolled-over"] else "/users" %}
+{% set navActive = "users" %}
+
+{% block content %}
+  {% set notifcationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">DfE has received your request to invite {{ data["request-first-name"]}} {{ data["request-last-name"] }}.</h3>
+    <p class="govuk-body">They will receive sign-up instructions if their account is approved.</p>
+  {% endset %}
+  {{ govukNotificationBanner({
+    html: notifcationBannerHtml,
+    type: "success"
+  }) if showMessage }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Invite a new user to have access to this account. This could include training partners or people within your own organisation.</p>
+
+      <form action="/users/invite-user" method="post">
+        <legend>
+          <h2 class="govuk-visually-hidden">Invite this person:</h2>
+        </legend>
+        {{ macros.textbox('request-first-name', 'First name') }}
+        {{ macros.textbox('request-last-name', 'Last name') }}
+        {{ macros.textbox('request-email', 'Email address') }}
+
+        <!-- <p>What access should this user have?</p> -->
+        {% set fields = [
+            {
+              name: 'Access to the same organisations as me'
+            },
+            {
+              name: 'Access to ' + data['training-provider-name']
+            }
+          ]
+        %}
+
+        {# macros.radioGroup('request-scope', fields) #}
+
+        {{ macros.textbox('request-organisation', 'Their organisation') }}
+        {{ macros.textareaBasic('request-reason', 'Reason they need access', 4) }}
+        <input type="submit" class="govuk-button" value="Invite user">
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

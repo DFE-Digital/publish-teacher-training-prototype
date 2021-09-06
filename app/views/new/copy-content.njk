@@ -1,0 +1,38 @@
+{% extends "layout.njk" %}
+{% set title = "Do you want to copy content from another course?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <form action="{{ paths.next }}" method="post">
+        {% set whatCopy %}
+          <label class="govuk-label govuk-label--s" for="copy-from">Which course should be copied?</label>
+          <select id="copy-from" name="copy-from" class="govuk-select govuk-!-margin-bottom-6" style="background: #fff">
+            {{ courseOptions() | safe }}
+          </select>
+        {% endset %}
+
+        {% set fields = [
+          {
+            name: 'Yes',
+            more: whatCopy
+          },
+          {
+            name: 'No'
+          }
+        ] %}
+
+        {{ macros.radioGroup(code + '-copy-from', fields) }}
+
+        <div class="govuk-form-group">
+          <input type="submit" class="govuk-button" value="Continue" />
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

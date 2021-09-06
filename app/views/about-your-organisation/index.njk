@@ -1,0 +1,241 @@
+{% extends "layout.njk" %}
+{% set title = "About your organisation" %}
+{% set showErrors = data["about-your-organisation-show-publish-errors"] %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems([{
+      text: title
+    }])
+  }) }}
+{% endblock %}
+
+{%- set contactAddressHtml -%}
+  {%- if data["address-line1"] or data["address-line2"] or data["address-level2"] or data["address-level1"] or data["postal-code"] -%}
+    {{- data["address-line1"] + "\n" if data["address-line1"] -}}
+    {{- data["address-line2"] + "\n" if data["address-line2"] -}}
+    {{- data["address-level2"] + "\n" if data["address-level2"] -}}
+    {{- data["address-level1"] + "\n" if data["address-level1"] -}}
+    {{- data["postal-code"] if data["postal-code"] -}}
+  {%- else -%}
+    Empty
+  {%- endif -%}
+{%- endset -%}
+
+{% set placementPolicyHtml %}
+  {% if data["placements-policy"] == "hosted" %}
+    Candidates choose a lead or host school
+  {% elif data["placements-policy"] == "placed" %}
+    Placements are arranged with candidates before their training starts
+  {% elif data["placements-policy"] == "other" %}
+    Other
+  {% else %}
+    <div class="app-summary-list__message">
+      <p class="app-summary-list__heading">What is your school placement policy?</p>
+      <p><a class="govuk-link" href="/about-your-organisation/placements-policy">Select a school placement policy</a></p>
+    </div>
+  {% endif %}
+{% endset %}
+
+{% set visaSponsorshipHtml %}
+  {% if data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "true" %}
+    You can sponsor Student and Skilled Worker visas
+  {% elif data["canSponsorStudentVisa"] == "true" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
+   You can sponsor Student visas
+  {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "true"  %}
+    You can sponsor Skilled Worker visas
+  {% elif data["canSponsorStudentVisa"] == "false" and data["canSponsorSkilledWorkerVisa"] == "false"  %}
+    You cannot sponsor visas
+  {% else %}
+    <div class="govuk-inset-text app-inset-text app-inset-text--{{ "error" if showErrors else "important" }}">
+      <p class="govuk-heading-s app-inset-text__title">Can you sponsor visas?</p>
+      <p><a class="govuk-link govuk-link--no-visited-state" href="/about-your-organisation/visa-sponsorship">Select if you can sponsor visas</a></p>
+    </div>
+  {% endif %}
+{% endset %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    text: "Your changes have been published.",
+    type: "success"
+  }) if justPublished }}
+
+  {{ govukNotificationBanner({
+    text: "Course deleted.",
+    type: "success"
+  }) if justDeleted }}
+
+  {{ govukErrorSummary({
+    titleText: "We couldn’t publish this because some information was missing",
+    errorList: errors
+  }) if showErrors and errors.length > 0 }}
+
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">
+      {% if data["next-cycle"] %}
+        Next cycle (2022 to 2023)
+      {% else %}
+        Current cycle (2021 to 2022)
+      {% endif %}
+    </span>
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row govuk-!-margin-top-3">
+    <div class="govuk-grid-column-two-thirds">
+      {% set aboutYourOrganisationRows = [{
+        key: {
+          text: "Training with your organisation"
+        },
+        value: {
+          html: value("about-organisation") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("about-organisation") else "app-!-colour-muted"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/about",
+            text: "Change",
+            visuallyHiddenText: "details about your organisation"
+          }]
+        }
+      }] %}
+
+      {% if not data["self_accrediting"] %}
+        {% for a in data["accreditors"] %}
+          {% set changeLink = "/about-your-organisation/about#about-" + a.slug %}
+          {% set result = aboutYourOrganisationRows.push({
+            key: {
+              text: "About " + a.name + " (optional)"
+            },
+            value: {
+              html: value(a.slug + "-about-accrediting-provider") or "Empty",
+              classes: "app-summary-list__value--truncate" if value(a.slug + "-about-accrediting-provider") else "app-!-colour-muted"
+            },
+            actions: {
+              items: [{
+                href: "/about-your-organisation/about",
+                text: "Change",
+                visuallyHiddenText: "details about " + a.name
+              }]
+            }
+          }) %}
+        {% endfor %}
+      {% endif %}
+
+      {% set result = aboutYourOrganisationRows.push({
+        key: {
+          text: "School placements"
+        },
+        value: {
+          html: value("school-placements") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("school-placements") else "app-!-colour-muted"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/school-placements",
+            text: "Change",
+            visuallyHiddenText: "details about school placements"
+          }]
+        }
+      }, {
+        key: {
+          text: "Training with disabilities and other needs"
+        },
+        value: {
+          html: value("training-with-a-disability") or "Empty",
+          classes: "app-summary-list__value--truncate" if value("training-with-a-disability") else "app-!-colour-muted"
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/training-with-a-disability",
+            text: "Change",
+            visuallyHiddenText: "details about training with disabilities and other needs"
+          }]
+        }
+      }, {
+        key: {
+          text: "Visa sponsorship"
+        },
+        value: {
+          html: visaSponsorshipHtml
+        },
+        actions: {
+          items: [{
+            href: "/about-your-organisation/visa-sponsorship",
+            text: "Change",
+            visuallyHiddenText: "whether you can sponsor visas"
+          } if value("canSponsorStudentVisa")]
+        }
+      }) %}
+
+      {{ govukSummaryList({
+        rows: aboutYourOrganisationRows
+      }) }}
+
+      <h2 class="govuk-heading-m">Contact details</h2>
+      {{ govukSummaryList({
+        rows: [{
+          key: {
+            text: "Email address"
+          },
+          value: {
+            text: value("email") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "email address"
+            }]
+          }
+        }, {
+          key: {
+            text: "Telephone number"
+          },
+          value: {
+            text: value("telephone") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "telephone number"
+            }]
+          }
+        }, {
+          key: {
+            text: "Website"
+          },
+          value: {
+            text: value("website") or "Empty"
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact",
+              text: "Change",
+              visuallyHiddenText: "website"
+            }]
+          }
+        }, {
+          key: {
+            text: "Contact address"
+          },
+          value: {
+            html: contactAddressHtml | nl2br
+          },
+          actions: {
+            items: [{
+              href: "/about-your-organisation/contact#contact-address",
+              text: "Change",
+              visuallyHiddenText: "contact address"
+            }]
+          }
+        }]
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {% set publishState = publishState or data["about-your-organisation-publish-state"] or 'new' %}
+      {{ macros.aboutYourOrgPublish(publishState, data["about-your-organisation-published-before"], '/publish/about-your-organisation') }}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "layout.njk" %}
+{% set title = data["training-provider-name"] %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      href: "/cycles",
+      text: data['training-provider-name']
+    }]
+  }) if data["rolled-over"] }}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    text: "Email notification preferences for name@email.co.uk have been saved.",
+    type: "success"
+  }) if showMessage }}
+
+  <h1 class="govuk-heading-xl">
+    {% if data["rolled-over"] %}
+      {% if data["next-cycle"] %}
+        Next cycle (2022 to 2023)
+      {% else %}
+        Current cycle (2021 to 2022)
+      {% endif %}
+    {% else %}
+      {{ data["training-provider-name"] }}
+    {% endif %}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if data["rolled-over"] %}
+        {% if data["next-cycle"] %}
+          <p class="govuk-body-l">Prepare your courses and locations for the next cycle. Your records have been copied from the current cycle.</p>
+          <hr class="govuk-section-break govuk-section-break--m">
+        {% else %}
+          <p class="govuk-body-l">Manage courses, locations and vacancies in the current&nbsp;cycle.</p>
+          <hr class="govuk-section-break govuk-section-break--m">
+        {% endif %}
+      {% endif %}
+
+      <h2 class="govuk-heading-m">
+        <a href="/about-your-organisation">About your organisation</a>
+      </h2>
+      <p>Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>write about your organisation</li>
+        <li>set your contact details</li>
+        <li>publish this information on all course pages</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a href="/locations">Locations</a>
+      </h2>
+      <p>Use this section to add or edit your training locations. This will make your courses more visible on Find.</p>
+
+      <p>You can also choose whether to:</p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>show precise placement locations or only the general area</li>
+        <li>allow candidates to choose a placement school</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a href="/courses">Courses</a>
+      </h2>
+
+      <p>Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>write about each course</li>
+        <li>preview and publish courses</li>
+        <li>assign locations to a course</li>
+        {% if not data["next-cycle"] %}
+          <li>manage vacancies for each course</li>
+        {% endif %}
+        <li>copy content between courses</li>
+      </ul>
+
+      {% if data["is-accredited-body"] and not (data["rolled-over"] and data["next-cycle"]) %}
+        <h2 class="govuk-heading-m">
+          <a href="/accredited-body">Courses as an accredited body</a>
+        </h2>
+
+        <p>Use this section to:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>see who lists you as their accredited body</li>
+          <li>see which courses you’re the accredited body for</li>
+        </ul>
+      {% endif %}
+
+      {% if data["allocations-window"] == "open" %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">Request PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Use this section to:</p>
+        <ul class="govuk-list govuk-list--bullet ">
+          <li>request fee-funded PE courses (ones without a salary)</li>
+          <li>check the status of these requests</li>
+        </ul>
+        <p>If you accredit fee-funded PE courses for any training providers, you must request these courses on their behalf.</p>
+      {% endif %}
+
+      {% if data["allocations-window"] == 'closed' %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">Request PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Only accredited bodies are able to see this section. Use it to request fee-funded PE courses (ones without a salary) for the next recruitment cycle.</p>
+        <p>This includes:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>your own courses</li>
+          <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
+        </ul>
+      {% endif %}
+
+      {% if data["allocations-window"] == 'confirmed' %}
+        <h2 class="govuk-heading-m">
+          <a href="/allocations">View PE courses for 2022 to 2023</a>
+        </h2>
+
+        <p>Use this section to view the outcome of requests for fee-funded PE courses (ones without a salary) for the next recruitment cycle.</p>
+        <p>This includes:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+          <li>your own courses</li>
+          <li>courses you’re the accredited body for (you must request these on behalf of training partners)</li>
+        </ul>
+      {% endif %}
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      {% if not data["rolled-over"] %}
+        <div class="app-status-box">
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/users/">Users</a>
+          </h2>
+          <p>View users who manage your courses.</p>
+
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+            <a href="/ucas/apply-preferences">UCAS contacts</a>
+          </h2>
+          <p>Update or request UCAS contact details.</p>
+
+          <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+          <h2 class="govuk-heading-s">Support and guidance</h2>
+          <p class="govuk-body">If you have a question, or you’ve had a problem using Publish, you can email:</p>
+          <p class="govuk-body govuk-!-margin-bottom-0">
+            <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Support%20and%20guidance">becomingateacher<wbr>@digital.education.gov.uk</a>
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

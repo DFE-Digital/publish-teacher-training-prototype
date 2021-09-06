@@ -1,0 +1,79 @@
+{% extends "layout.njk" %}
+{% set title = "Is this course title right?" %}
+{% set backLink = paths.back %}
+{% set isFe = (data[code + '-phase'] == 'Further education') %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p>Your requested and approved title:</p>
+      <div class="govuk-inset-text govuk-!-margin-bottom-6">
+        <p class="govuk-heading-m govuk-!-margin-bottom-2">
+          {{ generatedTitle }}
+        </p>
+        <p>{{ courseOffered }}</p>
+      </div>
+
+      <form action="{{ paths.next }}" method="post">
+        {% set moreTitle %}
+          {{ macros.textbox(code + '-title', 'Requested title', '', 'govuk-!-width-full', false, false, data[code + '-title'] or generatedTitle or data[code + '-generated-title']) }}
+
+          {{ govukWarningText({
+            text: "Title changes are subject to approval by the Becoming a Teacher team",
+            iconFallbackText: "Warning"
+          }) }}
+
+          {% if isFe %}
+            <p>We won’t approve titles that include:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li>location names</li>
+              <li>qualifications or outcomes, eg PGCE or PGDE</li>
+            </ul>
+          {% else %}
+            <p>We will approve titles that include:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li>a subject or pair of subjects, eg Geography, or Geography with History</li>
+              <li>an age range, eg Primary (3-7), or Primary (5-11)</li>
+            </ul>
+
+            <p>We won’t approve titles that include:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li>school names</li>
+              <li>qualifications or outcomes, eg PGCE with QTS full time</li>
+              <li>references to any educational or curricular levels except Primary, eg Key Stage 1, Early Years, Secondary - you should specify an age range instead</li>
+            </ul>
+
+            <p>You’ll receive an email from the Becoming a Teacher team when the change is approved or rejected.</p>
+          {% endif %}
+        {% endset %}
+
+        {% set generatedTitleOption = 'No, request a different title' + data[code + '-generated-title'] %}
+
+        {{ macros.radioGroup(code + '-change-title', [
+          {
+            name: 'Yes, that’s correct'
+          },
+          {
+            name: 'Use the recommended title, ‘Primary’'
+          },
+          {
+            name: 'Request a different title',
+            more: moreTitle
+          }
+        ], errors) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout.njk" %}
+{% set title = "Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit" %}
+{% set navActive = "users" %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users/manage-courses-1"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set h1 %}
+        <span class="govuk-caption-xl">Invite user</span>
+        Permissions for Achieve with TELA: Select the accredited bodies whose courses the user can edit
+      {% endset %}
+
+      <form action="/users/whose-courses-1" method="post">
+
+        {{ govukCheckboxes({
+          idPrefix: "whose-courses",
+          name: "whose-courses",
+          fieldset: {
+            legend: {
+              html: h1,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-6"
+            }
+          },
+          items: [
+            {
+              value: "ab-1",
+              text: "Essex and Thames Primary SCITT",
+              checked: checked("whose-courses", "org-1")
+            },
+            {
+              value: "ab-2",
+              text: "Middlesex University",
+              checked: checked("whose-courses", "org-2")
+            },
+            {
+              value: "ab-3",
+              text: "University of East Anglia",
+              checked: checked("whose-courses", "org-3")
+            }
+          ]
+        }) }}
+
+        {{govukButton({
+          text: "Continue"
+        })}}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
