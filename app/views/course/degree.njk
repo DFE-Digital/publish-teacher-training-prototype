@@ -1,0 +1,46 @@
+{% extends "layout.njk" %}
+{% set title = "Do you require a minimum degree classification?" %}
+{% set backLink = course.path %}
+
+{% block content %}
+  <form action="/course/{{ data["provider-code"] }}/{{ course.programmeCode }}/degree" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "course/_errors.njk" %}
+
+      {% set titleHtml %}
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">{{ course.name | safe }} ({{ course.programmeCode }})</span>
+          {{ title | safe }}
+        </h1>
+      {% endset %}
+
+      {% set radioName = course.programmeCode + "-degree-minimum-required" %}
+      {{ govukRadios({
+        idPrefix: "degree-minimum",
+        name: course.programmeCode + '-degree-minimum-required',
+        fieldset: {
+          legend: {
+            html: titleHtml,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        hint: {
+          text: "If you specify a minimum (for example, 2:1), candidates will be discouraged but not blocked from applying if they do not meet this level."
+        },
+        items: [{
+          value: "Yes",
+          text: "Yes",
+          checked: (data[radioName] === "Yes")
+        }, {
+          value: "No",
+          text: "No",
+          checked: (data[radioName] === "No")
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Save"
+      }) }}
+    </div>
+  </form>
+{% endblock %}

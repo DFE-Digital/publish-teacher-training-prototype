@@ -1,0 +1,37 @@
+{% extends "layout.njk" %}
+{% set title = "Can candidates choose a placement school when they apply?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ referrer or paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukRadios({
+        idPrefix: "placements-policy",
+        name: "placements-policy",
+        fieldset: {
+          legend: {
+            html: "<span class=\"govuk-caption-xl\">Locations</span>" + title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "hosted",
+          text: "Yes",
+          checked: checked(("placements-policy"), "hosted")
+        }, {
+          value: "placed",
+          text: "No",
+          checked: checked(("placements-policy"), "placed")
+        }]
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+        <p class="govuk-body"><a href="{{ referrer or paths.back }}">Cancel</a></p>
+      </div>
+    </div>
+  </form>
+{% endblock %}

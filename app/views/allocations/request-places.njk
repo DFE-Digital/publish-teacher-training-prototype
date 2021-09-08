@@ -1,0 +1,36 @@
+{% extends "layout.njk" %}
+{% set title = "Request places" %}
+{% set backLink = "/allocations/new-provider" %}
+
+{% set requestingProviderName %}
+  {% if data.requestingProvider != "Find an organisation not listed above" %}
+    {{ data.requestingProvider }}
+  {% else %}
+    {{ data.schoolList }}
+  {% endif %}
+{% endset %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/allocations/check-answers" method="post" class="form">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-margin-bottom-0">
+            <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-6">
+              <span class="govuk-caption-xl">{{ requestingProviderName }}</span>
+              How many places would you like to request?
+            </h1>
+          </legend>
+          <div class="govuk-!-margin-bottom-6">
+            <label class="govuk-label" for="event-name">
+              <span class="govuk-visually-hidden">How many places would you like to request?</span>
+            </label>
+            <input class="govuk-input govuk-input govuk-input--width-10" id="requestedAmount" name="requestedAmount" value="{{ data['requestedAmount'] }}" type="text">
+          </div>
+          <button class="govuk-button" data-module="govuk-button">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

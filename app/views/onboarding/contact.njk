@@ -1,0 +1,48 @@
+{% extends "layout.njk" %}
+{% set title = "Contact details" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+
+  <h1 class="govuk-heading-xl">
+    Ways candidates can contact you
+  </h1>
+
+  <form action="{{ paths.next }}" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ macros.textbox('email-address', 'Email address', false, null, errors) }}
+        {{ macros.textbox('telephone-number', 'Telephone number', false, 'govuk-input--width-10', null, errors) }}
+        {{ macros.textbox('website', 'Website', 'Add a link to the most relevant page on your website', 'govuk-!-width-full', null, errors) }}
+
+        <hr class="govuk-section-break govuk-section-break--m" />
+        <h2 class="govuk-heading-l" id="contact-address">Contact address</h2>
+        {{ macros.textbox('building-and-street', 'Building and street', null, 'govuk-!-width-full', null, errors) }}
+        {{ macros.textbox('building-and-street-2', null, null, 'govuk-!-width-full', null, errors) }}
+
+        {{ macros.textbox('organisation-town-or-city', 'Town or city', null, 'form-control', null, errors) }}
+        {{ macros.textbox('county', 'County', null, 'form-control', null, errors) }}
+        {{ macros.textbox('postcode', 'Postcode', null, 'govuk-input--width-10', null, errors) }}
+
+        {{ macros.select('provider-ucas-region', 'Region of UK', [
+          { name: 'London' },
+          { name: 'South East' },
+          { name: 'South West' },
+          { name: 'Wales' },
+          { name: 'West Midlands' },
+          { name: 'East Midlands' },
+          { name: 'Eastern' },
+          { name: 'North West' },
+          { name: 'Yorkshire and the Humber' },
+          { name: 'North East' },
+          { name: 'Scotland' },
+          { name: 'Northern Ireland' },
+          { name: 'No region' }
+        ])}}
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m" />
+    <input type="submit" class="govuk-button" value="Continue" />
+  </form>
+{% endblock %}

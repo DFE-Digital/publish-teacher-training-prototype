@@ -1,0 +1,49 @@
+{% extends "layout.njk" %}
+{% set title = "Training with disabilities and other needs" %}
+{% set backLink = "/about-your-organisation" %}
+
+{% block content %}
+  <form action="{{ backLink }}" method="post">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">{{ data["training-provider-name"] }}</span>
+      {{ title }}
+    </h1>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p>Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>dyslexia</li>
+          <li>physical, hearing and visual impairments</li>
+          <li>mental health conditions</li>
+        </ul>
+        <p>If accessibility varies between locations, give details. It’s also useful to candidates to know how you’ve accommodated others with specific access needs in the past.</p>
+
+        {{ govukCharacterCount({
+          label: {
+            text: "Training with disabilities and other needs",
+            classes: "govuk-label--s"
+          },
+          name: "training-with-a-disability",
+          id: "training-with-a-disability",
+          value: data["training-with-a-disability"],
+          maxwords: 250,
+          rows: 14
+        }) }}
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Save"
+          }) }}
+          <a class="govuk-link" href="/about-your-organisation">Cancel changes</a>
+        </div>
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+        <div class="app-status-box govuk-!-margin-bottom-6">
+          {{ macros.formatting() }}
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

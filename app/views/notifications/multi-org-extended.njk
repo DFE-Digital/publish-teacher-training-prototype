@@ -1,0 +1,197 @@
+{% extends "layout.njk" %}
+{% set title = "Manage notifications" %}
+{% set navActive = "notifications" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/" method="post" class="form">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-8">
+            <span class="govuk-caption-xl">Notifications for accredited bodies</span>
+            Changes to courses
+          </h1>
+        </legend>
+
+        <div class="govuk-!-margin-bottom-6">
+          <p>Receive instant email notifications about changes to courses for which you are the accredited body.</p>
+        </div>
+
+        {% set options1 %}
+          {{ govukCheckboxes({
+            name: "options1",
+            classes: "govuk-!-margin-bottom-6",
+            fieldset: {
+              legend: {
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+              }
+            },
+            items: [
+              {
+                text: "A new course is published",
+                value: "value1a",
+                checked: {
+                  checked: checked("options1", "value1a")
+                }
+              },
+              {
+                text: "A change to an existing course is made",
+                value: "value2a",
+                checked: {
+                  checked: checked("options1", "value2a")
+                }
+              },
+              {
+                text: "A course is withdrawn",
+                value: "value3a",
+                checked: {
+                  checked: checked("options1", "value3a")
+                }
+              },
+              {
+                text: "The vacancy status of a course changes",
+                value: "value4a",
+                checked: {
+                  checked: checked("options1", "value4a")
+                }
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+        {% set options2 %}
+          {{ govukCheckboxes({
+            name: "options2",
+            classes: "govuk-!-margin-bottom-6",
+            fieldset: {
+              legend: {
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+              }
+            },
+            items: [
+              {
+                text: "A new course is published",
+                value: "value2a",
+                checked: {
+                  checked: checked("options2", "value1a")
+                }
+              },
+              {
+                text: "A change to an existing course is made",
+                value: "value2a",
+                checked: {
+                  checked: checked("options2", "value2a")
+                }
+              },
+              {
+                text: "A course is withdrawn",
+                value: "value3a",
+                checked: {
+                  checked: checked("options2", "value3a")
+                }
+              },
+              {
+                text: "The vacancy status of a course changes",
+                value: "value4a",
+                checked: {
+                  checked: checked("options2", "value4a")
+                }
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+        {% set options3 %}
+          {{ govukCheckboxes({
+            name: "options3",
+            classes: "govuk-!-margin-bottom-6",
+            fieldset: {
+              legend: {
+                text: "Which events do you want to be notified of?",
+                classes: "govuk-fieldset__legend--m govuk-!-margin-top-3 govuk-!-margin-bottom-6"
+              }
+            },
+            items: [
+              {
+                text: "A new course is published",
+                value: "value2a",
+                checked: {
+                  checked: checked("options3", "value1a")
+                }
+              },
+              {
+                text: "A change to an existing course is made",
+                value: "value2a",
+                checked: {
+                  checked: checked("options3", "value2a")
+                }
+              },
+              {
+                text: "A course is withdrawn",
+                value: "value3a",
+                checked: {
+                  checked: checked("options3", "value3a")
+                }
+              },
+              {
+                text: "The vacancy status of a course changes",
+                value: "value4a",
+                checked: {
+                  checked: checked("options3", "value4a")
+                }
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+
+        {{ govukCheckboxes({
+          name: "notifications",
+          fieldset: {
+            legend: {
+              text: "Which organisations would you like to receive email notifications about?",
+              classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-6"
+            }
+          },
+          items: [
+            {
+              value: "value1",
+              html: "<strong>Academies Enterprise Trust: Eastern</strong>",
+              checked: checked("notifications", "value1"),
+              conditional: {
+                html: options1
+              }
+            },
+            {
+              text: "Oakham Alliance",
+              value: "value2",
+              html: "<strong>Oakham Alliance</strong>",
+              checked: checked("notifications", "value2"),
+              conditional: {
+                html: options2
+              }
+            },
+            {
+              text: "Temple Newsam Learning Partnership",
+              value: "value3",
+              html: "<strong>Temple Newsam Learning Partnership</strong>",
+              checked: checked("notifications", "value3"),
+              conditional: {
+                html: options3
+              }
+            }
+          ]
+        }) }}
+
+      <input type="submit" class="govuk-button govuk-!-margin-bottom-7 govuk-!-margin-top-2" value="Save">
+      Customise your settings
+    </form>
+    <p>
+      <a href="/">Cancel changes</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

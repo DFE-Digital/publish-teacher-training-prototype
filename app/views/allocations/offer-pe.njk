@@ -1,0 +1,37 @@
+{% extends "layout.njk" %}
+{% set title = "Do you want to request PE for this organisation?" %}
+{% set backLink = "/allocations" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/allocations/offer-pe" method="post" class="form">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h1 class="govuk-fieldset__heading">
+              <span class="govuk-caption-xl">Enfield County School for Girls</span>
+              Do you want to request PE for this organisation?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-!-margin-top-6">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="offer-pe-yes" name="offer-pe" type="radio" value="Yes" {{ checked("offer-pe", "Yes") }}>
+              <label class="govuk-label govuk-radios__label" for="offer-pe-yes">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="offer-pe-no" name="offer-pe" type="radio" value="No" {{ checked("offer-pe", "No") }}>
+              <label class="govuk-label govuk-radios__label" for="offer-pe-no">
+                No
+              </label>
+            </div>
+          </div>
+          </fieldset>
+        </div>
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

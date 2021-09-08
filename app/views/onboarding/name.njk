@@ -1,0 +1,42 @@
+{% extends "layout.njk" %}
+{% set title = "Is your organisation name right?" %}
+{% set backLink = paths.back %}
+{% set originalName = data['training-provider-name'] %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Is your organisation name&nbsp;right?
+      </h1>
+
+      <!-- <p>From your request for allocations we’ve got this name:</p> -->
+      <p>You’re listed under this name:</p>
+      <div class="govuk-inset-text govuk-!-margin-bottom-6">
+        <p class="govuk-body-l">
+          {{ originalName }}
+        </p>
+      </div>
+
+      {% set moreTitle %}
+        {{ macros.textbox('onboarding-new-name', 'New name', '', 'govuk-!-width-full', false, false, data['onboarding-new-name'] or originalName) }}
+      {% endset %}
+
+      <form action="{{ paths.next }}" method="post">
+        {{ macros.radioGroup('onboarding-name-title', [
+          {
+            name: 'Yes, that’s what should be shown to candidates'
+          },
+          {
+            name: 'No, I need to change it',
+            more: moreTitle
+          }
+        ], errors) }}
+
+        <div class="form-group">
+          <input type="submit" class="govuk-button" value="Continue">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

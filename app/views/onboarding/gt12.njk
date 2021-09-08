@@ -1,0 +1,21 @@
+{% extends "layout.njk" %}
+{% set title = "Pick a letter for successful applicants" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ paths.next }}" method="post">
+        {% include "ucas/_gt12.njk" %}
+
+        <div class="form-group">
+          <input type="submit" class="govuk-button" value="Continue">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

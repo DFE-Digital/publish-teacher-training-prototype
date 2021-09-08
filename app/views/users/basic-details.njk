@@ -1,0 +1,80 @@
+{% extends "layout.njk" %}
+{% set title = "Basic details" %}
+{% set navActive = "users" %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set h1 %}
+        <span class="govuk-caption-xl">Invite user</span>
+        {{title}}
+      {% endset %}
+
+      <form novalidate action="/users/basic-details" method="post">
+
+        {% call govukFieldset({
+            legend: {
+              html: h1,
+              classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-6",
+              isPageHeading: true
+            }
+          }) %}
+
+          {{ govukInput({
+            label: {
+              text: "First name"
+            },
+            id: "first-name",
+            name: "first-name",
+            type: "text",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Last name"
+            },
+            id: "last-name",
+            name: "last-name",
+            type: "text",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Email address"
+            },
+            id: "email-address",
+            name: "email-address",
+            type: "email",
+            autocomplete: "email",
+            classes: "govuk-!-width-two-thirds",
+            attributes: {
+              spellcheck: "false"
+            }
+          }) }}
+
+        {% endcall %}
+
+        {{govukButton({
+          text: "Continue"
+        })}}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

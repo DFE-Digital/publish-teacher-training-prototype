@@ -1,0 +1,29 @@
+{% extends "layout.njk" %}
+{% set title = "You are now about to assign permissons for the next provider" %}
+{% set navActive = "users" %}
+
+{% block breadcrumbs %}
+  {{ govukBackLink({
+    href: "/users/whose-courses-1"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-fieldset__legend--xl govuk-!-margin-bottom-8">
+        <span class="govuk-caption-xl">Invite user</span>
+        {{title}}
+      </h1>
+
+      <p>You have finished setting permisisons for Achieve with TELA.</p>
+      <p class="govuk-!-margin-bottom-8">You have one more provider to set permissons for.</p>
+
+      <a href="/users/manage-courses-2" class="govuk-button">Continue to permissions for Beech Hill</a>
+
+    </div>
+  </div>
+
+{% endblock %}

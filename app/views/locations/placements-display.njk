@@ -1,0 +1,43 @@
+{% extends "layout.njk" %}
+{% set title = "How do you want to display placement schools?" %}
+{% set backLink = referrer or paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukRadios({
+        idPrefix: "placements-display",
+        name: "placements-display",
+        fieldset: {
+          legend: {
+            html: "<span class=\"govuk-caption-xl\">Locations</span>" + title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "list",
+          text: "Show precise placement locations for each course",
+          checked: checked(("placements-display"), "list"),
+          hint: {
+            text: "You can assign placement schools to courses later from your individual course pages."
+          }
+        }, {
+          value: "area",
+          text: "Show only the general placement areas",
+          checked: checked(("placements-display"), "area"),
+          hint: {
+            text: "You still need to add precise locations to do this."
+          }
+        }]
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+        <p class="govuk-body"><a href="{{ referrer or paths.back }}">Cancel</a></p>
+      </div>
+    </div>
+  </form>
+{% endblock %}

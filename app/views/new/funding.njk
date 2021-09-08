@@ -1,0 +1,45 @@
+{% extends "layout.njk" %}
+{% set title = "Is it fee paying or salaried?" %}
+{% set backLink = paths.back %}
+
+{% block content %}
+  <form action="{{ paths.next }}" method="post" class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukRadios({
+        idPrefix: code + "-type",
+        name: code + "-type",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        items: [{
+          value: "Fee paying (no salary)",
+          text: "Fee paying (no salary)",
+          selected: checked((code + "-type"), "Fee paying (no salary)")
+        }, {
+          value: "Salaried",
+          text: "Salaried",
+          selected: checked((code + "-type"), "Salaried")
+        }, {
+          value: "Teaching apprenticeship (with salary)",
+          text: "Teaching apprenticeship (with salary)",
+          selected: checked((code + "-type"), "Teaching apprenticeship (with salary)")
+        }]
+      }) }}
+
+      {% if editing %}
+        {{ govukButton({
+          text: "Save and publish changes"
+        }) }}
+        <p class="govuk-body"><a href="{{ paths.back }}">Cancel changes</a></p>
+      {% else %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      {% endif %}
+    </div>
+  </form>
+{% endblock %}

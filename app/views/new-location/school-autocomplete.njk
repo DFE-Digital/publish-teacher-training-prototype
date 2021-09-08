@@ -1,0 +1,84 @@
+{% extends "layout.njk" %}
+{% set title = "Add your partner schools" %}
+
+{% block content %}
+<style>
+  #selected-schools-list li {
+    border-bottom: 1px solid #ccc;
+  }
+</style>
+
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/locations">
+        <ul class="govuk-list" id="selected-schools-list">
+          {% for s in data['partner-school'] %}
+            <li>
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+                {{ s }}
+              </h3>
+              <input type="hidden" name="partner-school" value="{{ s }}">
+              <p>
+                <a href="https://www.get-information-schools.service.gov.uk/Establishments/Establishment/Details/" target="_blank">School details</a> – <a href="#">Remove</a>
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="govuk-form-group">
+          <label for="my-autocomplete" class="govuk-label">Choose a school by name, postcode or URN number</label>
+          <div id="my-autocomplete-container"></div>
+        </div>
+
+        <input type="submit" class="govuk-button" value="Save" />
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script src="/public/javascripts/schools.js"></script>
+<script>
+  var createSimpleEngine = function (values) {
+    return function (query, syncResults) {
+      var matches = values
+        .filter(function(r) {
+          return r.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        })
+        .slice(0, 10)
+      syncResults(matches)
+    }
+  }
+
+  accessibleAutocomplete({
+    element: document.querySelector('#my-autocomplete-container'),
+    id: 'my-autocomplete', // To match it to the existing <label>.
+    source: createSimpleEngine(autocompleteOptions),
+    minLength: 2,
+    onConfirm: function(school) {
+      if (school) {
+        var urn = school.match(/\d{6}/)[0];
+
+        $('#selected-schools-list').append(`
+          <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+              ${school}
+            </h3>
+            <input type="hidden" name="partner-school" value="${school}">
+            <p>
+              <a href="https://www.get-information-schools.service.gov.uk/Establishments/Establishment/Details/${urn}" target="_blank">School details</a> – <a href="#">Remove</a>
+            </p>
+          </li>
+        `);
+        setTimeout(function() {
+          $('#my-autocomplete-container input').val('');
+        }, 50);
+      }
+    }
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.njk" %}
+{% set title = "Get support and guidance" %}
+
+{% block content %}
+  {% set notificationBannerHtml %}
+    <h3 class="govuk-notification-banner__heading">Your message has been sent</h3>
+    <p class="govuk-body">We aim to respond to all requests within 48 hours.</p>
+  {% endset %}
+
+  {{ govukNotificationBanner({
+    html: notificationBannerHtml,
+    type: "success"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ title }}
+      </h1>
+
+      <p>Use this form to contact the Becoming a teacher team. You can use it to request changes to your courses, ask a question, report a problem or suggest an improvement.</p>
+
+      <p>Alternatively you can email us at: <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Support%20and%20guidance">becomingateacher@digital.education.gov.uk</a></p>
+
+      <h2 class="govuk-heading-l">Contact us</h2>
+      {{ macros.textbox('support-subject', 'What’s it to do with?', false, 'govuk-!-width-full') }}
+      {{ macros.textareaBasic('support-body', 'What are the details?', 10) }}
+
+      <input type="submit" class="govuk-button" value="Send message" />
+    </div>
+  </div>
+{% endblock %}
