@@ -68,7 +68,7 @@
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
-      text: "Prototype"
+      text: environment if environment != 'production' else 'beta'
     },
     html: "This is a prototype of a new service. Some parts of this prototype do not work yet."
   }) }}
