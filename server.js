@@ -9,10 +9,6 @@ const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
 
-// Custom dependencies
-const marked = require('marked')
-const dateFormat = require('dateformat')
-
 // Run before other code to make sure variables from .env are available
 dotenv.config()
 
@@ -77,7 +73,7 @@ app.set('view engine', 'njk')
 // Middleware to serve static assets
 app.use('/public', express.static(path.join(__dirname, '/public')))
 
-// Serve govuk-frontend in from node_modules (so not to break pre-extenstions prototype kits)
+// Serve govuk-frontend in from node_modules (so not to break pre-extensions prototype kits)
 app.use('/node_modules/govuk-frontend', express.static(path.join(__dirname, '/node_modules/govuk-frontend')))
 
 // Support for parsing data in POSTs
@@ -126,150 +122,6 @@ if (useAutoStoreData === 'true') {
   app.use(utils.autoStoreData)
   utils.addCheckedFunction(nunjucksAppEnv)
 }
-
-// Nunjucks globals
-app.use(function (req, res, next) {
-  nunjucksAppEnv.addGlobal('checked', function (name, value) {
-    // check session data exists
-    if (req.session.data === undefined) {
-      return ''
-    }
-
-    const storedValue = req.session.data[name]
-
-    // check the requested data exists
-    if (storedValue === undefined) {
-      return ''
-    }
-
-    let checked = ''
-
-    // if data is an array, check it exists in the array
-    if (Array.isArray(storedValue)) {
-      if (storedValue.indexOf(value) !== -1) {
-        checked = 'checked'
-      }
-    } else {
-      // the data is just a simple value, check it matches
-      if (storedValue === value) {
-        checked = 'checked'
-      }
-    }
-    return checked
-  })
-
-  nunjucksAppEnv.addGlobal('value', function (name) {
-    if (req.session.data === undefined) {
-      return ''
-    }
-
-    const value = req.session.data[name]
-    if (value === undefined) {
-      return ''
-    }
-
-    return value
-  })
-
-  nunjucksAppEnv.addGlobal('markdown', function (name) {
-    if (req.session.data === undefined) {
-      return ''
-    }
-
-    const string = req.session.data[name]
-
-    if (!string) {
-      return ''
-    }
-
-    const text = string.replace(/\\r/g, '\n').replace(/\\t/g, ' ')
-    const html = marked(text)
-
-    // Add govuk-* classes
-    let govukHtml = html.replace(/<p>/g, '<p class="govuk-body">')
-    govukHtml = govukHtml.replace(/<ol>/g, '<ol class="govuk-list govuk-list--number">')
-    govukHtml = govukHtml.replace(/<ul>/g, '<ul class="govuk-list govuk-list--bullet">')
-    govukHtml = govukHtml.replace(/<h2/g, '<h2 class="govuk-heading-l"')
-    govukHtml = govukHtml.replace(/<h3/g, '<h3 class="govuk-heading-m"')
-    govukHtml = govukHtml.replace(/<h4/g, '<h4 class="govuk-heading-s"')
-
-    return govukHtml
-  })
-
-  nunjucksAppEnv.addGlobal('courseOptions', function () {
-    const o = ['<option value=""></option>']
-    req.session.data.ucasCourses.forEach(function (course) {
-      o.push(`<option value="${course.programmeCode}">${course.name} (${course.programmeCode})</option>`)
-    })
-
-    return o
-  })
-
-  nunjucksAppEnv.addGlobal('error', function (id, errors) {
-    const { data } = req.session
-    let courseCode = id.split('-')[0]
-
-    if (courseCode.length > 4) {
-      courseCode = 'about-your-organisation'
-    }
-
-    // Temporarily disable hiding of publish errors
-    if (!errors || data === undefined) {
-      return false
-    }
-
-    if (
-      !data[courseCode + '-show-publish-errors'] &&
-      !id.includes('vacancies') &&
-      !id.includes('location-confirm')
-    ) {
-      return false
-    }
-
-    return errors.find(function (e) {
-      return e.id === id
-    })
-  })
-
-  nunjucksAppEnv.addGlobal('today', function () {
-    const now = new Date()
-    return dateFormat(now, 'd mmm yyyy')
-  })
-
-  nunjucksAppEnv.addGlobal('isArray', something => Array.isArray(something))
-
-  nunjucksAppEnv.addGlobal('locationFromString', function (string) {
-    const urn = string.match(/\d{6}/)[0]
-    const name = string.split('(')[0]
-    const location = string.split('(')[1].split(',')[1]
-
-    return {
-      urn: urn,
-      name: name,
-      location: location
-    }
-  })
-
-  nunjucksAppEnv.addGlobal('breadcrumbItems', function (items = []) {
-    const { data } = req.session
-    const defaultItems = []
-
-    if (data['rolled-over']) {
-      defaultItems.push({ text: data['training-provider-name'], href: '/cycles' })
-
-      if (data['next-cycle']) {
-        defaultItems.push({ text: 'Next cycle (2022 to 2023)', href: '/' })
-      } else {
-        defaultItems.push({ text: 'Current cycle (2020 to 2021)', href: '/' })
-      }
-    } else {
-      defaultItems.push({ text: data['training-provider-name'], href: '/' })
-    }
-    return defaultItems.concat(items)
-  })
-
-  next()
-})
 
 // Clear all data in session if you open /prototype-admin/clear-data
 app.post('/prototype-admin/clear-data', function (req, res) {
