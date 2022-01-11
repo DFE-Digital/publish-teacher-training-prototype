@@ -31,10 +31,10 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
-{% from "_components/advice/macro.njk"                   import appAdvice %}
+{#% from "_components/advice/macro.njk"                   import appAdvice %}
 {% from "_components/icon/macro.njk"                     import appIcon %}
 
-{% import "macros/macros.njk" as macros %}
+{% import "macros/macros.njk" as macros %#}
 
 {% block head %}
   {% include "includes/head.njk" %}
@@ -46,18 +46,18 @@
 
 {% block header %}
   {{ govukHeader({
-    homepageUrl: "/cycles" if value("rolled-over") else "/",
+    homepageUrl: "/",
     productName: serviceName,
     containerClasses: "govuk-width-container",
     navigationClasses: "govuk-header__navigation--end",
     navigation: [{
       href: "/notifications",
       text: "Notifications",
-      active: true if (navActive == "notifications")
+      active: true if (primaryNav == "notifications")
     }, {
       href: "/users",
       text: "Users",
-      active: true if (navActive == "users")
+      active: true if (primaryNav == "users")
     }, {
       href: "#",
       text: "Sign out (Jane Doe)"
@@ -86,15 +86,6 @@
     {{ govukFooter({
       meta: {
         items: [{
-          href: "https://www.youtube.com/watch?v=nxmtXGy1cCY",
-          text: "Video (YouTube)"
-        }, {
-          href: "/cycles",
-          text: "Cycles"
-        }, {
-          href: "/new-location/start",
-          text: "New location"
-        }, {
           href: "/prototype-admin/clear-data",
           text: "Clear data"
         }]
