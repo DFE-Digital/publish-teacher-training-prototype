@@ -31,11 +31,6 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
-{#% from "_components/advice/macro.njk"                   import appAdvice %}
-{% from "_components/icon/macro.njk"                     import appIcon %}
-
-{% import "macros/macros.njk" as macros %#}
-
 {% block head %}
   {% include "includes/head.njk" %}
 {% endblock %}
@@ -53,15 +48,15 @@
     navigation: [{
       href: "/notifications",
       text: "Notifications",
-      active: true if (primaryNav == "notifications")
+      active: true if (primaryNavId == "notifications")
     }, {
       href: "/users",
       text: "Users",
-      active: true if (primaryNav == "users")
+      active: true if (primaryNavId == "users")
     }, {
-      href: "#",
-      text: "Sign out (Jane Doe)"
-    }]
+      href: "/sign-out",
+      text: "Sign out"
+    }] if data.isAuthenticated
   }) }}
 {% endblock %}
 

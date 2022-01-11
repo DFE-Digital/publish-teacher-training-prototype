@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 module.exports = function (env) {
   /**
    * Instantiate object used to store the methods registered as a
@@ -7,48 +9,82 @@ module.exports = function (env) {
    */
   const filters = {}
 
-  filters.addMoreToFields = function (fields, more) {
-    fields.forEach(f => {
-      f.more = more
-    })
-
-    return fields
+  /* ------------------------------------------------------------------
+  utility function to return true or false
+  example: {{ 'yes' | falsify }}
+  outputs: true
+  ------------------------------------------------------------------ */
+  filters.falsify = (input) => {
+    if (_.isNumber(input)) return input
+    else if (input == false) return false
+    if (_.isString(input)){
+      const truthyValues = ['yes','true']
+      const falsyValues = ['no', 'false']
+      if (truthyValues.includes(input.toLowerCase())) return true
+      else if (falsyValues.includes(input.toLowerCase())) return false
+    }
+    return input
   }
 
-  filters.push = (array, item) => {
-    array.push(item)
-    return array
+  /* ------------------------------------------------------------------
+  utility function to get an error for a component
+  example: {{ errors | getErrorMessage('title') }}
+  outputs: "Enter a title"
+  ------------------------------------------------------------------ */
+  filters.getErrorMessage = function (array, fieldName) {
+    if (!array || !fieldName) {
+      return null
+    }
+
+    const error = array.filter((obj) =>
+      obj.fieldName === fieldName
+    )[0]
+
+    return error
   }
 
-  /**
-   * Convert array to readable list format
-   * @param {Array} array Array to convert
-   * @example [A, B, C] => A, B and C
-   */
-  filters.formatList = (array = []) => {
-    const lf = new Intl.ListFormat('en')
-    return lf.format(array)
-  }
-
-  /**
-   * Convert array to readable list format
-   * @param {Array} array Array to convert
-   * @example [A, B, C] => A, B or C
-   */
-  filters.formatOrList = (array = []) => {
-    const lf = new Intl.ListFormat('en', { style: 'short', type: 'disjunction' })
-    return lf.format(array)
-  }
-
-  /**
-   * Find item in array of objects
-   * @param {Array} array Array to search
-   * @param {string} key Key
-   * @param {value} value Value
-   */
-  filters.find = (array, key, value) => {
-    return array.find(item => item[key] === value)
-  }
+  // filters.addMoreToFields = function (fields, more) {
+  //   fields.forEach(f => {
+  //     f.more = more
+  //   })
+  //
+  //   return fields
+  // }
+  //
+  // filters.push = (array, item) => {
+  //   array.push(item)
+  //   return array
+  // }
+  //
+  // /**
+  //  * Convert array to readable list format
+  //  * @param {Array} array Array to convert
+  //  * @example [A, B, C] => A, B and C
+  //  */
+  // filters.formatList = (array = []) => {
+  //   const lf = new Intl.ListFormat('en')
+  //   return lf.format(array)
+  // }
+  //
+  // /**
+  //  * Convert array to readable list format
+  //  * @param {Array} array Array to convert
+  //  * @example [A, B, C] => A, B or C
+  //  */
+  // filters.formatOrList = (array = []) => {
+  //   const lf = new Intl.ListFormat('en', { style: 'short', type: 'disjunction' })
+  //   return lf.format(array)
+  // }
+  //
+  // /**
+  //  * Find item in array of objects
+  //  * @param {Array} array Array to search
+  //  * @param {string} key Key
+  //  * @param {value} value Value
+  //  */
+  // filters.find = (array, key, value) => {
+  //   return array.find(item => item[key] === value)
+  // }
 
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
