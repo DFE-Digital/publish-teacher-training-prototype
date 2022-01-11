@@ -209,4 +209,4 @@ prototypeData.uploadedLocations = [{
   'postal-code': 'NP16 7AA'
 }]
 
-module.exports = prototypeData
+// module.exports = prototypeData
