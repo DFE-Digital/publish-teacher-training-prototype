@@ -10,6 +10,10 @@ const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
 
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const users = require('./app/data/users.json')
+
 // Run before other code to make sure variables from .env are available
 dotenv.config()
 
@@ -117,6 +121,26 @@ if (useCookieSessionStore === 'true') {
     saveUninitialized: false
   })))
 }
+
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
+// Authentication
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+    const user = users.find(user => user.username === username && user.password === password && user.active === true)
+    if (user) { return done(null, user) }
+    return done(null, false)
+  }
+))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(flash())
 
