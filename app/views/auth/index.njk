@@ -29,7 +29,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">
+      <!-- <h1 class="govuk-heading-xl">
         {{ title }}
       </h1>
 
@@ -106,7 +106,105 @@
 
       <p class="govuk-body">
         Need help? <a class="govuk-link govuk-link--no-visited-state" href="#">See our DfE Sign-in help guides</a>.
+      </p> -->
+
+      <h2 class="govuk-heading-m">Anne</h2>
+
+      {{ govukTag({
+        text: "School direct",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      <p class="govuk-body">
+        Anne is a course administrator who belongs to one school direct.
       </p>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <input type="hidden" name="username" value="anne">
+        <input type="hidden" name="password" value="bat">
+        {{ govukButton({
+          text: "Sign in as Anne"
+        }) }}
+      </form>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+      <h2 class="govuk-heading-m">Susy</h2>
+
+      {{ govukTag({
+        text: "Accredited body",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      <p class="govuk-body">
+        Susy is a SCITT service manager who belongs to one accredited body.
+      </p>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <input type="hidden" name="username" value="susy">
+        <input type="hidden" name="password" value="bat">
+        {{ govukButton({
+          text: "Sign in as Susy"
+        }) }}
+      </form>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+      <h2 class="govuk-heading-m">Mary</h2>
+
+      {{ govukTag({
+        text: "Multi-Org",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      {{ govukTag({
+        text: "Accredited body",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      {{ govukTag({
+        text: "School direct",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      <p class="govuk-body">
+        Mary is a SCITT Business Support Coordinator who belongs to:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>multiple accredited bodies, <strong>Suffolk and Norfolk Primary SCITT</strong> and <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
+        <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses accredited by <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
+        <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses also accredited by an organisation not associated with Mary</li>
+      </ul>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <input type="hidden" name="username" value="mary">
+        <input type="hidden" name="password" value="bat">
+        {{ govukButton({
+          text: "Sign in as Mary"
+        }) }}
+      </form>
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+      <h2 class="govuk-heading-m">Colin</h2>
+
+      {{ govukTag({
+        text: "Support",
+        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+      }) }}
+
+      <p class="govuk-body">
+        Colin is a DfE support agent who has administrator access to all organisations.
+      </p>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <input type="hidden" name="username" value="colin">
+        <input type="hidden" name="password" value="bat">
+        {{ govukButton({
+          text: "Sign in as Colin"
+        }) }}
+      </form>
 
     </div>
   </div>
