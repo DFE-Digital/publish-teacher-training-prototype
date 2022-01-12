@@ -1,67 +1,29 @@
-// const flash = require('connect-flash')
-
-const Authentication = require('../models/authentication')
+const authentication = require('../models/authentication')
 
 exports.sign_in_get = (req, res) => {
-  console.log(req.session.data);
   if (req.session.passport || req.session.data.user) {
+    delete req.session.data.username
+    delete req.session.data.password
     res.redirect('/')
   } else {
+    const errors = req.flash()
     res.render('../views/auth/index', {
       actions: {
         save: '/sign-in',
         create: '/register',
         terms: '/terms-and-conditions',
         forgotten: '/forgotten-password'
-      }
-    })
-  }
-}
-
-exports.sign_in_post = (req, res) => {
-  console.log(req.session.data);
-  const errors = []
-
-  if (!req.session.data.email.length) {
-    const error = {}
-    error.fieldName = 'email'
-    error.href = '#email'
-    error.text = 'Enter an email address'
-    errors.push(error)
-  }
-
-  if (!req.session.data.password.length) {
-    const error = {}
-    error.fieldName = 'password'
-    error.href = '#password'
-    error.text = 'Enter a password'
-    errors.push(error)
-  }
-
-  if (errors.length) {
-    res.render('../views/auth/index', {
-      actions: {
-        save: '/auth',
-        create: '/register',
-        terms: '/terms-and-conditions',
-        forgotten: '/forgotten-password'
       },
       errors
     })
-  } else {
-    // req.session.data.routes = {
-    //   signout: '/sign-out',
-    //   account: '/account'
-    // }
-    req.session.data.isAuthenticated = true
-    res.redirect('/')
   }
 }
 
 exports.sign_out_get = (req, res) => {
-  delete req.session.data.email
+  delete req.session.data.username
   delete req.session.data.password
-  req.session.data.isAuthenticated = false
+  delete req.session.data.user
+  delete req.session.passport
   req.flash('success','Signed out')
   res.redirect('/sign-in')
 }
