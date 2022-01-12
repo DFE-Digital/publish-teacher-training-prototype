@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
+const passport = require('passport')
+
 // Controller modules
 const authenticationController = require('./controllers/authentication.js')
 
 const checkIsAuthenticated = (req, res, next) => {
-  // if (req.session.passport || req.session.data.user) {
-  //   req.session.data.user = req.session.passport.user
-  if (req.session.data.isAuthenticated) {
+  if (req.session.passport || req.session.data.user) {
+    req.session.data.user = req.session.passport.user
     next()
   } else {
     res.redirect('/sign-in')
@@ -19,8 +20,12 @@ const checkIsAuthenticated = (req, res, next) => {
 /// --------------------------------------------------///
 
 router.get('/sign-in', authenticationController.sign_in_get)
-router.post('/sign-in', authenticationController.sign_in_post)
-// router.post('/sign-in', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/sign-in', failureFlash: 'Missing credentials' }))
+// router.post('/sign-in', authenticationController.sign_in_post)
+router.post('/sign-in', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/sign-in',
+  failureFlash: 'Enter valid sign-in details'
+}))
 
 router.get('/sign-out', authenticationController.sign_out_get)
 

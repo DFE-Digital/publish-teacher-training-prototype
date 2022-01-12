@@ -43,20 +43,7 @@
   {{ govukHeader({
     homepageUrl: "/",
     productName: serviceName,
-    containerClasses: "govuk-width-container",
-    navigationClasses: "govuk-header__navigation--end",
-    navigation: [{
-      href: "/notifications",
-      text: "Notifications",
-      active: true if (primaryNavId == "notifications")
-    }, {
-      href: "/users",
-      text: "Users",
-      active: true if (primaryNavId == "users")
-    }, {
-      href: "/sign-out",
-      text: "Sign out"
-    }]
+    containerClasses: "govuk-width-container"
   }) }}
 {% endblock %}
 
