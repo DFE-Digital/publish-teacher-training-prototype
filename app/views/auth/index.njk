@@ -1,4 +1,4 @@
-{% extends "_layout.njk" %}
+{% extends "_layout-auth.njk" %}
 
 {% set title = "Department for Education Sign-in"  %}
 
@@ -8,7 +8,23 @@
 
 {% block content %}
 
-  {% include "./_error-summary.njk" %}
+  {% if errors.error %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{
+          text: "Enter a valid email address",
+          href: "#username"
+        },
+        {
+          text: "Enter a valid password",
+          href: "#password"
+        }]
+      }) }}
+    </div>
+  </div>
+  {% endif %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -18,7 +34,7 @@
       </h1>
 
       <p class="govuk-body">
-        DfE Sign-in allows you to access several important services in the education sector, such as COLLECT.
+        DfE Sign-in allows you to access several important services in the education sector.
       </p>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -32,15 +48,15 @@
         }) %}
 
           {{ govukInput({
-            id: "email",
-            name: "email",
-            type: "email",
+            id: "username",
+            name: "username",
+            type: "username",
             inputmode: "email",
             label: {
               text: "Email address"
             },
-            errorMessage: errors | getErrorMessage("email"),
-            value: data.email,
+            errorMessage: "Enter a valid email address" if errors.error,
+            value: data.username,
             classes: "govuk-!-width-two-thirds",
             spellcheck: false
           }) }}
@@ -52,7 +68,7 @@
             label: {
               text: "Password"
             },
-            errorMessage: errors | getErrorMessage("password"),
+            errorMessage: "Enter a valid password" if errors.error,
             value: data.password,
             classes: "govuk-!-width-two-thirds",
             formGroup: {
