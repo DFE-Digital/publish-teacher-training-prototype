@@ -50,23 +50,27 @@
       text: "Notifications",
       active: true if (primaryNavId == "notifications")
     }, {
-      href: "/users",
-      text: "Users",
+      href: "#",
+      text: data.user.display_name,
       active: true if (primaryNavId == "users")
     }, {
       href: "/sign-out",
       text: "Sign out"
     }]
   }) }}
+
+  {{ govukPhaseBanner({
+    tag: {
+      text: environment if environment != 'production' else 'beta',
+      classes: "app-tag--prototype" if environment != 'production'
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
+    classes: "govuk-width-container"
+  }) }}
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-    tag: {
-      text: environment if environment != 'production' else 'beta'
-    },
-    html: "This is a prototype of a new service. Some parts of this prototype do not work yet."
-  }) }}
+
 
   {% block pageNavigation %}
     {{ govukBackLink({

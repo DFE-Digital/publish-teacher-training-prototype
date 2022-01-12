@@ -28,6 +28,11 @@ $git-brand-colour: #159964;
 @import "components/tabs";
 @import "components/timeline";
 
+
+.app-tag--prototype {
+  background-color: govuk-colour('red');
+}
+
 .app-status-box {
   background-color: govuk-colour("light-grey");
   margin-bottom: govuk-spacing(4);
