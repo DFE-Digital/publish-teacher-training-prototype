@@ -37,7 +37,6 @@ const useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreD
 const useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
 const useLogin = process.env.USE_LOGIN || config.useLogin
 let useHttps = process.env.USE_HTTPS || config.useHttps
-
 useHttps = useHttps.toLowerCase()
 
 // Force HTTPS on production. Do this before using basicAuth to avoid
