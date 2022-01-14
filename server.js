@@ -35,6 +35,7 @@ const glitchEnv = (process.env.PROJECT_REMIX_CHAIN) ? 'production' : false // gl
 const env = (process.env.NODE_ENV || glitchEnv || 'development').toLowerCase()
 const useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 const useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
+const useLogin = process.env.USE_LOGIN || config.useLogin
 let useHttps = process.env.USE_HTTPS || config.useHttps
 
 useHttps = useHttps.toLowerCase()
@@ -94,6 +95,7 @@ app.locals.useCookieSessionStore = (useCookieSessionStore === 'true')
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
 app.locals.environment = env
+app.locals.useLogin = useLogin
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 

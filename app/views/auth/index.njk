@@ -1,6 +1,10 @@
 {% extends "_layout-auth.njk" %}
 
-{% set title = "Department for Education Sign-in"  %}
+{% if useLogin == "true" %}
+  {% set title = "Department for Education Sign-in"  %}
+{% else %}
+  {% set title = "Publish test users"  %}
+{% endif %}
 
 {% block pageTitle %}
 {{ 'Error: ' if errors.length}} {{- title }} – {{ serviceName }} – GOV.UK
@@ -29,182 +33,188 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <!-- <h1 class="govuk-heading-xl">
+      <h1 class="govuk-heading-xl">
         {{ title }}
       </h1>
 
-      <p class="govuk-body">
-        DfE Sign-in allows you to access several important services in the education sector.
-      </p>
+      {% if useLogin == "true" %}
 
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <p class="govuk-body">
+          DfE Sign-in allows you to access several important services in the education sector.
+        </p>
 
-        {% call govukFieldset({
-          legend: {
-            text: "Sign-in",
-            classes: "govuk-fieldset__legend--m",
-            isPageHeading: false
-          }
-        }) %}
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-          {{ govukInput({
-            id: "username",
-            name: "username",
-            type: "username",
-            inputmode: "email",
-            label: {
-              text: "Email address"
-            },
-            errorMessage: "Enter a valid email address" if errors.error,
-            value: data.username,
-            classes: "govuk-!-width-two-thirds",
-            spellcheck: false
-          }) }}
-
-          {{ govukInput({
-            id: "password",
-            name: "password",
-            type: "password",
-            label: {
-              text: "Password"
-            },
-            errorMessage: "Enter a valid password" if errors.error,
-            value: data.password,
-            classes: "govuk-!-width-two-thirds",
-            formGroup: {
-              classes: "govuk-!-margin-bottom-1"
+          {% call govukFieldset({
+            legend: {
+              text: "Sign-in",
+              classes: "govuk-fieldset__legend--m",
+              isPageHeading: false
             }
+          }) %}
+
+            {{ govukInput({
+              id: "username",
+              name: "username",
+              type: "username",
+              inputmode: "email",
+              label: {
+                text: "Email address"
+              },
+              errorMessage: "Enter a valid email address" if errors.error,
+              value: data.username,
+              classes: "govuk-!-width-two-thirds",
+              spellcheck: false
+            }) }}
+
+            {{ govukInput({
+              id: "password",
+              name: "password",
+              type: "password",
+              label: {
+                text: "Password"
+              },
+              errorMessage: "Enter a valid password" if errors.error,
+              value: data.password,
+              classes: "govuk-!-width-two-thirds",
+              formGroup: {
+                classes: "govuk-!-margin-bottom-1"
+              }
+            }) }}
+
+            <p class="govuk-body">
+              <a class="govuk-link govuk-link--no-visited-state" href="{{ actions.forgotten }}">
+                Forgotten your password?
+              </a>
+            </p>
+
+          {% endcall %}
+
+          {% set termsConditionsHtml %}
+            By continuing you accept the <a class="govuk-link govuk-link--no-visited-state" href="{{ actions.terms }}">terms and conditions</a>.
+          {% endset %}
+
+          {{ govukInsetText({
+            html: termsConditionsHtml
           }) }}
 
-          <p class="govuk-body">
-            <a class="govuk-link govuk-link--no-visited-state" href="{{ actions.forgotten }}">
-              Forgotten your password?
-            </a>
-          </p>
+          {{ govukButton({
+            text: "Sign in"
+          }) }}
 
-        {% endcall %}
+          {{ govukButton({
+            text: "Create account",
+            href: actions.create,
+            classes: "govuk-button--secondary"
+          }) }}
 
-        {% set termsConditionsHtml %}
-          By continuing you accept the <a class="govuk-link govuk-link--no-visited-state" href="{{ actions.terms }}">terms and conditions</a>.
-        {% endset %}
+        </form>
 
-        {{ govukInsetText({
-          html: termsConditionsHtml
+        <p class="govuk-body">
+          Need help? <a class="govuk-link govuk-link--no-visited-state" href="#">See our DfE Sign-in help guides</a>.
+        </p>
+
+      {% else %}
+
+        <h2 class="govuk-heading-m">Anne</h2>
+
+        {{ govukTag({
+          text: "School direct",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
-        {{ govukButton({
-          text: "Sign in"
+        <p class="govuk-body">
+          Anne is a course administrator who belongs to one school direct.
+        </p>
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="anne">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Anne"
+          }) }}
+        </form>
+
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+        <h2 class="govuk-heading-m">Susy</h2>
+
+        {{ govukTag({
+          text: "Accredited body",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
-        {{ govukButton({
-          text: "Create account",
-          href: actions.create,
-          classes: "govuk-button--secondary"
+        <p class="govuk-body">
+          Susy is a SCITT service manager who belongs to one accredited body.
+        </p>
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="susy">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Susy"
+          }) }}
+        </form>
+
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+        <h2 class="govuk-heading-m">Mary</h2>
+
+        {{ govukTag({
+          text: "Multi-Org",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
-      </form>
-
-      <p class="govuk-body">
-        Need help? <a class="govuk-link govuk-link--no-visited-state" href="#">See our DfE Sign-in help guides</a>.
-      </p> -->
-
-      <h2 class="govuk-heading-m">Anne</h2>
-
-      {{ govukTag({
-        text: "School direct",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
-
-      <p class="govuk-body">
-        Anne is a course administrator who belongs to one school direct.
-      </p>
-
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-        <input type="hidden" name="username" value="anne">
-        <input type="hidden" name="password" value="bat">
-        {{ govukButton({
-          text: "Sign in as Anne"
+        {{ govukTag({
+          text: "Accredited body",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
-      </form>
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
-
-      <h2 class="govuk-heading-m">Susy</h2>
-
-      {{ govukTag({
-        text: "Accredited body",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
-
-      <p class="govuk-body">
-        Susy is a SCITT service manager who belongs to one accredited body.
-      </p>
-
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-        <input type="hidden" name="username" value="susy">
-        <input type="hidden" name="password" value="bat">
-        {{ govukButton({
-          text: "Sign in as Susy"
+        {{ govukTag({
+          text: "School direct",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
-      </form>
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+        <p class="govuk-body">
+          Mary is a SCITT Business Support Coordinator who belongs to:
+        </p>
 
-      <h2 class="govuk-heading-m">Mary</h2>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>multiple accredited bodies, <strong>Suffolk and Norfolk Primary SCITT</strong> and <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
+          <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses accredited by <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
+          <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses also accredited by an organisation not associated with Mary</li>
+        </ul>
 
-      {{ govukTag({
-        text: "Multi-Org",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="mary">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Mary"
+          }) }}
+        </form>
 
-      {{ govukTag({
-        text: "Accredited body",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
 
-      {{ govukTag({
-        text: "School direct",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
+        <h2 class="govuk-heading-m">Colin</h2>
 
-      <p class="govuk-body">
-        Mary is a SCITT Business Support Coordinator who belongs to:
-      </p>
-
-      <ul class="govuk-list govuk-list--bullet">
-        <li>multiple accredited bodies, <strong>Suffolk and Norfolk Primary SCITT</strong> and <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
-        <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses accredited by <strong>Suffolk and Norfolk Secondary SCITT</strong></li>
-        <li>a school direct <strong>Thorpe St Andrew School and Sixth Form</strong> with courses also accredited by an organisation not associated with Mary</li>
-      </ul>
-
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-        <input type="hidden" name="username" value="mary">
-        <input type="hidden" name="password" value="bat">
-        {{ govukButton({
-          text: "Sign in as Mary"
+        {{ govukTag({
+          text: "Support",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
-      </form>
 
-      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+        <p class="govuk-body">
+          Colin is a DfE support agent who has administrator access to all organisations.
+        </p>
 
-      <h2 class="govuk-heading-m">Colin</h2>
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="colin">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Colin"
+          }) }}
+        </form>
 
-      {{ govukTag({
-        text: "Support",
-        classes: "govuk-tag--blue govuk-!-margin-bottom-5"
-      }) }}
-
-      <p class="govuk-body">
-        Colin is a DfE support agent who has administrator access to all organisations.
-      </p>
-
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-        <input type="hidden" name="username" value="colin">
-        <input type="hidden" name="password" value="bat">
-        {{ govukButton({
-          text: "Sign in as Colin"
-        }) }}
-      </form>
+      {% endif %}
 
     </div>
   </div>
