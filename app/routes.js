@@ -22,10 +22,12 @@ const checkIsAuthenticated = (req, res, next) => {
 router.get('/sign-in', authenticationController.sign_in_get)
 // router.post('/sign-in', authenticationController.sign_in_post)
 router.post('/sign-in', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/auth',
   failureRedirect: '/sign-in',
   failureFlash: 'Enter valid sign-in details'
 }))
+
+router.get('/auth', authenticationController.auth_get)
 
 router.get('/sign-out', authenticationController.sign_out_get)
 
@@ -59,6 +61,7 @@ router.get('/terms-and-conditions', authenticationController.terms_and_condition
 /// --------------------------------------------------///
 
 router.get('/', checkIsAuthenticated, (req, res) => {
+  console.log(req.session.data);
   res.render('index', {})
 })
 
