@@ -48,11 +48,11 @@
     navigation: [{
       href: "/notifications",
       text: "Notifications",
-      active: true if (primaryNavId == "notifications")
+      active: true if (headerNavId == "notifications")
     }, {
       href: "#",
-      text: data.user.display_name,
-      active: true if (primaryNavId == "users")
+      text: "Your account",
+      active: true if (headerNavId == "account")
     }, {
       href: "/sign-out",
       text: "Sign out"
