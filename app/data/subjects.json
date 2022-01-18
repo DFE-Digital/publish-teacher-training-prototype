@@ -1,207 +1,286 @@
 [
   {
-    "code": "W1",
+    "id": "53d7a153-1258-4a28-b363-64a4e4f27f4f",
+    "name": "Ancient Greek",
+    "code": "A1",
+    "type": "secondary"
+  },
+  {
+    "id": "5510a8ea-e627-4eea-b4a0-f12c5349c780",
+    "name": "Ancient Hebrew",
+    "code": "A2",
+    "type": "secondary"
+  },
+  {
+    "id": "d461a678-3335-4ca2-9616-1dc479d31a49",
     "name": "Art and design",
-    "level": "secondary"
+    "code": "W1",
+    "type": "secondary"
   },
   {
-    "code": "C1",
+    "id": "322cfc19-d51d-45db-91e3-bd7b4738470f",
     "name": "Biology",
-    "level": "secondary"
+    "code": "C1",
+    "type": "secondary"
   },
   {
-    "code": "08",
+    "id": "de6477b2-6027-48e6-b9f7-3206774705c2",
     "name": "Business studies",
-    "level": "secondary"
+    "code": "8",
+    "type": "secondary"
   },
   {
-    "code": "F1",
+    "id": "912d4fb4-761b-42e9-8dc6-e968b791ea4e",
     "name": "Chemistry",
-    "level": "secondary"
+    "code": "F1",
+    "type": "secondary"
   },
   {
-    "code": "09",
+    "id": "7c98ffbf-d90d-46bb-91ea-7817a81848f5",
     "name": "Citizenship",
-    "level": "secondary"
+    "code": "9",
+    "type": "secondary"
   },
   {
-    "code": "Q8",
+    "id": "0238281a-b738-45a5-88bb-b426a2a562e1",
     "name": "Classics",
-    "level": "secondary"
+    "code": "Q8",
+    "type": "secondary"
   },
   {
+    "id": "9fcb4fa9-42d8-4b18-882e-d2925e53fe55",
+    "name": "Communication and media studies",
     "code": "P3",
-    "name": "Communications and media studies",
-    "level": "secondary"
+    "type": "secondary"
   },
   {
+    "id": "e6be6a9c-8696-4b88-8fbd-1ba1bef1b6fc",
+    "name": "Computing",
     "code": "11",
-    "name": "Computer science",
-    "level": "secondary"
+    "type": "secondary"
   },
   {
-    "code": "12",
+    "id": "49dcc400-03df-4732-af93-1c56ae22897f",
     "name": "Dance",
-    "level": "secondary"
+    "code": "12",
+    "type": "secondary"
   },
   {
-    "code": "DT",
+    "id": "118fabd7-86d0-4a40-9e9a-e5c302abe59b",
     "name": "Design and technology",
-    "level": "secondary"
+    "code": "DT",
+    "type": "secondary"
   },
   {
-    "code": "Q3",
+    "id": "69052223-ca45-4781-a8d3-cb92447a6d78",
     "name": "Drama",
-    "level": "secondary"
-  },
-  {
-    "code": "L1",
-    "name": "Economics",
-    "level": "secondary"
-  },
-  {
     "code": "13",
+    "type": "secondary"
+  },
+  {
+    "id": "cd9159fc-869f-4188-8435-3374676d6e92",
+    "name": "Economics",
+    "code": "L1",
+    "type": "secondary"
+  },
+  {
+    "id": "3aed1aa8-ae46-4b68-92bb-a6cc20655c59",
     "name": "English",
-    "level": "secondary"
+    "code": "Q3",
+    "type": "secondary"
   },
   {
-    "code": "16",
+    "id": "a9a2321a-fe0e-49fd-96b0-304880d1eed2",
     "name": "English as a second or other language",
-    "level": "secondary"
+    "code": "16",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "15",
+    "id": "9727f674-61ba-4efa-b1f2-21ec7e354442",
     "name": "French",
-    "level": "secondary"
+    "code": "15",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "F8",
+    "id": "9de4b2d2-5739-4c34-92d2-9b4384760298",
+    "name": "Further education",
+    "code": "41",
+    "type": "further_education"
+  },
+  {
+    "id": "3f47e67b-7fa5-4947-a5a0-74d528cd2a87",
     "name": "Geography",
-    "level": "secondary"
+    "code": "F8",
+    "type": "secondary"
   },
   {
-    "code": "17",
+    "id": "fbb00c08-2dbc-4f26-adb3-3b23afba18c1",
     "name": "German",
-    "level": "secondary"
+    "code": "17",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "L5",
+    "id": "b1c3659e-5021-4f1e-a218-16b115f46fbc",
     "name": "Health and social care",
-    "level": "secondary"
+    "code": "L5",
+    "type": "secondary"
   },
   {
-    "code": "V1",
+    "id": "5a3609a0-5bbb-4377-b919-5d89932ab622",
     "name": "History",
-    "level": "secondary"
+    "code": "V1",
+    "type": "secondary"
   },
   {
-    "code": "18",
+    "id": "5e94c647-7b7e-4d02-a3b4-7667296fbf0a",
     "name": "Italian",
-    "level": "secondary"
+    "code": "18",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "19",
+    "id": "dbae1e2d-e1c7-4b6d-897d-d5be177a884a",
     "name": "Japanese",
-    "level": "secondary"
+    "code": "19",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "20",
+    "id": "fa7ee0d3-4cd4-475a-9280-f6b63b0dc466",
+    "name": "Latin",
+    "code": "A0",
+    "type": "secondary"
+  },
+  {
+    "id": "440c1e5c-0a7b-49ae-9534-184528468511",
     "name": "Mandarin",
-    "level": "secondary"
+    "code": "20",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "G1",
+    "id": "72345aa7-096c-488f-8649-085b8178cadb",
     "name": "Mathematics",
-    "level": "secondary"
+    "code": "G1",
+    "type": "secondary"
   },
   {
-    "code": "24",
+    "id": "ce8523ef-9236-4cd9-b260-d826c7a521b3",
+    "name": "Modern Languages",
+    "type": "secondary"
+  },
+  {
+    "id": "4608e5e3-2a1a-48a1-8236-56c7af5a139d",
     "name": "Modern languages (other)",
-    "level": "secondary"
+    "code": "24",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "W3",
+    "id": "24311bef-8673-41fb-933c-53f887fb6976",
     "name": "Music",
-    "level": "secondary"
+    "code": "W3",
+    "type": "secondary"
   },
   {
-    "code": "P1",
+    "id": "a8daf023-e0c4-4cb1-9b2f-8bba1841d401",
     "name": "Philosophy",
-    "level": "secondary"
+    "code": "P1",
+    "type": "secondary"
   },
   {
-    "code": "C6",
+    "id": "74d64a54-5e34-4590-b6c7-528dd0cf26fe",
     "name": "Physical education",
-    "level": "secondary"
+    "code": "C6",
+    "type": "secondary"
   },
   {
-    "code": "F3",
+    "id": "bf97cd0a-224c-43d3-a021-84143df13e8d",
     "name": "Physics",
-    "level": "secondary"
+    "code": "F3",
+    "type": "secondary"
   },
   {
-    "code": "00",
-    "name": "primary",
-    "level": "primary"
+    "id": "32a27d4b-8216-4498-9e7c-ddfba0a38a00",
+    "name": "Primary",
+    "code": "0",
+    "type": "primary"
   },
   {
-    "code": "01",
-    "name": "primary with English",
-    "level": "primary"
+    "id": "1e6e30f3-d686-4686-9d83-16b3a56cd9a0",
+    "name": "Primary with English",
+    "code": "1",
+    "type": "primary"
   },
   {
-    "code": "02",
-    "name": "primary with geography and history",
-    "level": "primary"
+    "id": "4f96acc0-644d-4f31-8cd8-7e9fe1351bcd",
+    "name": "Primary with geography and history",
+    "code": "2",
+    "type": "primary"
   },
   {
-    "code": "03",
-    "name": "primary with mathematics",
-    "level": "primary"
+    "id": "286cf12f-b3e3-41c5-9f33-2ff7807d2df0",
+    "name": "Primary with mathematics",
+    "code": "3",
+    "type": "primary"
   },
   {
-    "code": "04",
-    "name": "primary with modern languages",
-    "level": "primary"
+    "id": "9e1b13bd-5c38-4c2f-9ef6-b36610f986c8",
+    "name": "Primary with modern languages",
+    "code": "4",
+    "type": "primary"
   },
   {
-    "code": "06",
-    "name": "primary with physical education",
-    "level": "primary"
+    "id": "5ae4c96e-1da2-4831-91a3-64439b606fed",
+    "name": "Primary with physical education",
+    "code": "6",
+    "type": "primary"
   },
   {
-    "code": "07",
-    "name": "primary with science",
-    "level": "primary"
+    "id": "c271fc3e-81ce-4e50-8715-fe2cfa0d5dc4",
+    "name": "Primary with science",
+    "code": "7",
+    "type": "primary"
   },
   {
-    "code": "C8",
+    "id": "1878e739-30bb-4de9-841e-42dacfb1fa0c",
     "name": "Psychology",
-    "level": "secondary"
+    "code": "C8",
+    "type": "secondary"
   },
   {
-    "code": "V6",
+    "id": "724b5d16-28dd-4431-bc17-ea4be4daedc4",
     "name": "Religious education",
-    "level": "secondary"
+    "code": "V6",
+    "type": "secondary"
   },
   {
-    "code": "21",
+    "id": "f1f05cc5-08a2-4766-b138-71edb79081b9",
     "name": "Russian",
-    "level": "secondary"
+    "code": "21",
+    "type": "secondary",
+    "parentCode": "24"
   },
   {
-    "code": "F0",
+    "id": "ed329bbc-6bb1-481f-98f7-8815f8c4fd68",
     "name": "Science",
-    "level": "secondary"
+    "code": "F0",
+    "type": "secondary"
   },
   {
-    "code": "14",
+    "id": "bd9a2174-f682-4f18-9551-498c2f7a48f9",
     "name": "Social sciences",
-    "level": "secondary"
+    "code": "14",
+    "type": "secondary"
   },
   {
-    "code": "22",
+    "id": "e34fd2a3-a32e-44e9-aea1-666badf3ac03",
     "name": "Spanish",
-    "level": "secondary"
+    "code": "22",
+    "type": "secondary",
+    "parentCode": "24"
   }
 ]
