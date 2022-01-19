@@ -3,13 +3,13 @@
     "id": "2b6f2381-452c-4f9b-8852-2e71ac98e55b",
     "username": "anne@example.com",
     "password": "bat",
-    "display_name": "Anne",
+    "firstName": "Anne",
+    "lastName": "Meakin",
     "email": "anne@example.com",
     "organisations": [{
       "id": "4dfe21ee-acfa-4fc1-9513-cc764e814205",
       "name": "Thorpe St Andrew School and Sixth Form",
-      "isAccreditedBody": false,
-      "roles": []
+      "roles": ["admin"]
     }],
     "active": true
   },
@@ -17,13 +17,13 @@
     "id": "813fc2b9-3587-46d1-b248-4e28552d095f",
     "username": "susy@example.com",
     "password": "bat",
-    "display_name": "Susy",
+    "firstName": "Susy",
+    "lastName": "Wolff",
     "email": "susy@example.com",
     "organisations": [{
       "id": "ce357bdb-6396-426a-9f1f-8cbfb444cffd",
       "name": "Suffolk and Norfolk Secondary SCITT",
-      "isAccreditedBody": true,
-      "roles": []
+      "roles": ["admin"]
     }],
     "active": true
   },
@@ -31,18 +31,17 @@
     "id": "eb81d689-f47a-4cd1-8e72-23e967816b2f",
     "username": "mary@example.com",
     "password": "bat",
-    "display_name": "Mary",
+    "firstName": "Mary",
+    "lastName": "Kingsley",
     "email": "mary@example.com",
     "organisations": [{
       "id": "4dfe21ee-acfa-4fc1-9513-cc764e814205",
       "name": "Thorpe St Andrew School and Sixth Form",
-      "isAccreditedBody": false,
-      "roles": []
+      "roles": ["admin"]
     },{
       "id": "ce357bdb-6396-426a-9f1f-8cbfb444cffd",
       "name": "Suffolk and Norfolk Secondary SCITT",
-      "isAccreditedBody": true,
-      "roles": []
+      "roles": ["admin"]
     }],
     "active": true
   },
@@ -50,7 +49,8 @@
     "id": "2bc57186-3329-4c96-a7aa-9d785895fe43",
     "username": "colin@example.com",
     "password": "bat",
-    "display_name": "Colin",
+    "firstName": "Colin",
+    "lastName": "Chapman",
     "email": "colin@example.com",
     "organisations": [],
     "active": false
