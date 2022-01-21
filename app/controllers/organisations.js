@@ -5,3 +5,11 @@ exports.home_get = (req, res) => {
 
   })
 }
+
+exports.organisation_list = (req, res) => {
+  res.send('NOT IMPLEMENTED: Organisation list')
+}
+
+exports.organisation_detail = (req, res) => {
+  res.send('NOT IMPLEMENTED: Organisation detail: ' + req.params.organisationId)
+}
