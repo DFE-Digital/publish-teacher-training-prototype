@@ -299,9 +299,9 @@ exports.new_course_check_answers_get = (req, res) => {
 
 exports.new_course_check_answers_post = (req, res) => {
   req.flash('success', {
-    title: '',
-    description: ''
+    title: 'Success',
+    description: 'Course added'
   })
 
-  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`)
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
 }
