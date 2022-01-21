@@ -75,11 +75,44 @@ router.get('/terms-and-conditions', authentication.terms_and_conditions_get)
 /// COURSE ROUTES
 /// --------------------------------------------------///
 
-// router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courses.show_description_get)
-//
-// router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courses.show_details_get)
-//
-// router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courses.list_get)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subbject_level_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subbject_level_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courses.new_course_subject_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courses.new_course_subject_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courses.new_course_age_range_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courses.new_course_age_range_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/qualification', checkIsAuthenticated, courses.new_course_qualification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/qualification', checkIsAuthenticated, courses.new_course_qualification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/funding-type', checkIsAuthenticated, courses.new_course_funding_type_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/funding-type', checkIsAuthenticated, courses.new_course_funding_type_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courses.new_course_study_mode_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courses.new_course_study_mode_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/location', checkIsAuthenticated, courses.new_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/location', checkIsAuthenticated, courses.new_course_location_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courses.new_course_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courses.new_course_accredited_body_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courses.new_course_applications_open_date_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courses.new_course_applications_open_date_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start-date', checkIsAuthenticated, courses.new_course_course_start_date_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start-date', checkIsAuthenticated, courses.new_course_course_start_date_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courses.new_course_check_answers_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courses.new_course_check_answers_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courses.course_description)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courses.course_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courses.course_list)
 
 /// --------------------------------------------------///
 /// LOCATION ROUTES
