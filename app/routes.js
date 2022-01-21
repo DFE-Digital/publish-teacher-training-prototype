@@ -75,8 +75,8 @@ router.get('/terms-and-conditions', authentication.terms_and_conditions_get)
 /// COURSE ROUTES
 /// --------------------------------------------------///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subbject_level_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subbject_level_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subject_level_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courses.new_course_subject_level_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courses.new_course_subject_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courses.new_course_subject_post)
