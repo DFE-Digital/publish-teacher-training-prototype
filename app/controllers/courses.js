@@ -1,6 +1,13 @@
-const courses = require('../models/courses')
+const courseModel = require('../models/courses')
+const courseHelper = require('../helpers/courses')
+
+const locationHelper = require('../helpers/locations')
+const organisationHelper = require('../helpers/organisations')
+const subjectHelper = require('../helpers/subjects')
 
 exports.course_list = (req, res) => {
+  // clean out course data
+  delete req.session.data.course
   res.render('../views/courses/list', {
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
@@ -18,7 +25,15 @@ exports.course_description = (req, res) => {
 }
 
 exports.new_course_subject_level_get = (req, res) => {
+  let selectedSubjectLevel
+  if (req.session.data.course && req.session.data.course.subjectLevel) {
+    selectedSubjectLevel = req.session.data.course.subjectLevel
+  }
+
+  const subjectLevels = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
+
   res.render('../views/courses/subject-level', {
+    subjectLevels,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
@@ -30,8 +45,16 @@ exports.new_course_subject_level_get = (req, res) => {
 exports.new_course_subject_level_post = (req, res) => {
   const errors = []
 
+  let selectedSubjectLevel
+  if (req.session.data.course && req.session.data.course.subjectLevel) {
+    selectedSubjectLevel = req.session.data.course.subjectLevel
+  }
+
+  const subjectLevels = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
+
   if (errors.length) {
     res.render('../views/courses/subject-level', {
+      subjectLevels,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
@@ -45,7 +68,15 @@ exports.new_course_subject_level_post = (req, res) => {
 }
 
 exports.new_course_subject_get = (req, res) => {
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subject) {
+    selectedSubject = req.session.data.course.subject
+  }
+
+  const subjects = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+
   res.render('../views/courses/subject', {
+    subjects,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
@@ -57,8 +88,16 @@ exports.new_course_subject_get = (req, res) => {
 exports.new_course_subject_post = (req, res) => {
   const errors = []
 
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subject) {
+    selectedSubject = req.session.data.course.subject
+  }
+
+  const subjects = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+
   if (errors.length) {
     res.render('../views/courses/subject', {
+      subjects,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
@@ -72,7 +111,15 @@ exports.new_course_subject_post = (req, res) => {
 }
 
 exports.new_course_age_range_get = (req, res) => {
+  let selectedAgeRange
+  if (req.session.data.course && req.session.data.course.ageRange) {
+    selectedAgeRange = req.session.data.course.ageRange
+  }
+
+  const ageRanges = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+
   res.render('../views/courses/age-range', {
+    ageRanges,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
@@ -84,8 +131,16 @@ exports.new_course_age_range_get = (req, res) => {
 exports.new_course_age_range_post = (req, res) => {
   const errors = []
 
+  let selectedAgeRange
+  if (req.session.data.course && req.session.data.course.ageRange) {
+    selectedAgeRange = req.session.data.course.ageRange
+  }
+
+  const ageRanges = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+
   if (errors.length) {
     res.render('../views/courses/age-range', {
+      ageRanges,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
@@ -99,7 +154,15 @@ exports.new_course_age_range_post = (req, res) => {
 }
 
 exports.new_course_qualification_get = (req, res) => {
+  let selectedQualification
+  if (req.session.data.course && req.session.data.course.qualification) {
+    selectedQualification = req.session.data.course.qualification
+  }
+
+  const qualifications = courseHelper.getQualificationOptions(selectedQualification)
+
   res.render('../views/courses/qualification', {
+    qualifications,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
@@ -111,8 +174,16 @@ exports.new_course_qualification_get = (req, res) => {
 exports.new_course_qualification_post = (req, res) => {
   const errors = []
 
+  let selectedQualification
+  if (req.session.data.course && req.session.data.course.qualification) {
+    selectedQualification = req.session.data.course.qualification
+  }
+
+  const qualifications = courseHelper.getQualificationOptions(selectedQualification)
+
   if (errors.length) {
     res.render('../views/courses/qualification', {
+      qualifications,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
@@ -131,7 +202,15 @@ exports.new_course_qualification_post = (req, res) => {
 }
 
 exports.new_course_funding_type_get = (req, res) => {
+  let selectedFundingType
+  if (req.session.data.course && req.session.data.course.fundingType) {
+    selectedFundingType = req.session.data.course.fundingType
+  }
+
+  const fundingTypes = courseHelper.getFundingTypeOptions(selectedFundingType)
+
   res.render('../views/courses/funding-type', {
+    fundingTypes,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
@@ -143,8 +222,16 @@ exports.new_course_funding_type_get = (req, res) => {
 exports.new_course_funding_type_post = (req, res) => {
   const errors = []
 
+  let selectedFundingType
+  if (req.session.data.course && req.session.data.course.fundingType) {
+    selectedFundingType = req.session.data.course.fundingType
+  }
+
+  const fundingTypes = courseHelper.getFundingTypeOptions(selectedFundingType)
+
   if (errors.length) {
     res.render('../views/courses/funding-type', {
+      fundingTypes,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
@@ -185,6 +272,13 @@ exports.new_course_apprenticeship_post = (req, res) => {
 }
 
 exports.new_course_study_mode_get = (req, res) => {
+  let selectedStudyMode
+  if (req.session.data.course && req.session.data.course.studyMode) {
+    selectedStudyMode = req.session.data.course.studyMode
+  }
+
+  const studyModes = courseHelper.getStudyModeOptions(selectedStudyMode)
+
   let back = ''
   // TODO: if organisation is a lead school else scitt
   if (true) {
@@ -194,6 +288,7 @@ exports.new_course_study_mode_get = (req, res) => {
   }
 
   res.render('../views/courses/study-mode', {
+    studyModes,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
       back: back,
@@ -205,6 +300,13 @@ exports.new_course_study_mode_get = (req, res) => {
 exports.new_course_study_mode_post = (req, res) => {
   const errors = []
 
+  let selectedStudyMode
+  if (req.session.data.course && req.session.data.course.studyMode) {
+    selectedStudyMode = req.session.data.course.studyMode
+  }
+
+  const studyModes = courseHelper.getStudyModeOptions(selectedStudyMode)
+
   let back = ''
   // TODO: if organisation is a lead school else scitt
   if (true) {
@@ -215,6 +317,7 @@ exports.new_course_study_mode_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/study-mode', {
+      studyModes,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
         back: back,
@@ -228,7 +331,15 @@ exports.new_course_study_mode_post = (req, res) => {
 }
 
 exports.new_course_location_get = (req, res) => {
+  let selectedLocation
+  if (req.session.data.course && req.session.data.course.location) {
+    selectedLocation = req.session.data.course.location
+  }
+
+  const locations = locationHelper.getLocationOptions(selectedLocation)
+
   res.render('../views/courses/location', {
+    locations,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
@@ -240,8 +351,16 @@ exports.new_course_location_get = (req, res) => {
 exports.new_course_location_post = (req, res) => {
   const errors = []
 
+  let selectedLocation
+  if (req.session.data.course && req.session.data.course.location) {
+    selectedLocation = req.session.data.course.location
+  }
+
+  const locations = locationHelper.getLocationOptions(selectedLocation)
+
   if (errors.length) {
     res.render('../views/courses/location', {
+      locations,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
@@ -255,7 +374,15 @@ exports.new_course_location_post = (req, res) => {
 }
 
 exports.new_course_accredited_body_get = (req, res) => {
+  let selectedAccreditedBody
+  if (req.session.data.course && req.session.data.course.accreditedBody) {
+    selectedAccreditedBody = req.session.data.course.accreditedBody
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodyOptions([], selectedAccreditedBody)
+
   res.render('../views/courses/accredited-body', {
+    accreditedBodies,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
@@ -267,8 +394,16 @@ exports.new_course_accredited_body_get = (req, res) => {
 exports.new_course_accredited_body_post = (req, res) => {
   const errors = []
 
+  let selectedAccreditedBody
+  if (req.session.data.course && req.session.data.course.accreditedBody) {
+    selectedAccreditedBody = req.session.data.course.accreditedBody
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodyOptions([], selectedAccreditedBody)
+
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
+      accreditedBodies,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
