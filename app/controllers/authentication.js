@@ -21,6 +21,7 @@ exports.auth_get = (req, res) => {
   delete req.session.data.username
   delete req.session.data.password
   req.session.data.user = req.session.passport.user
+  // TODO: load user's organisations and courses into session
   res.redirect('/')
 }
 
