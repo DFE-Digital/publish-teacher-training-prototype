@@ -90,6 +90,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/qualific
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/funding-type', checkIsAuthenticated, courses.new_course_funding_type_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/funding-type', checkIsAuthenticated, courses.new_course_funding_type_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/apprenticeship', checkIsAuthenticated, courses.new_course_apprenticeship_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/apprenticeship', checkIsAuthenticated, courses.new_course_apprenticeship_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courses.new_course_study_mode_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courses.new_course_study_mode_post)
 
@@ -142,7 +145,6 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuth
 /// --------------------------------------------------///
 
 router.get('/', checkIsAuthenticated, (req, res) => {
-  console.log(req.session.data);
   res.render('index', {})
 })
 
