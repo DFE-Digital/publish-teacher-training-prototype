@@ -15,6 +15,7 @@ const checkIsAuthenticated = (req, res, next) => {
     req.session.data.user = req.session.passport.user
     next()
   } else {
+    delete req.session.data
     res.redirect('/sign-in')
   }
 }
