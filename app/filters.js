@@ -1,3 +1,4 @@
+const cycles = require('./helpers/cycles')
 const _ = require('lodash')
 
 module.exports = function (env) {
@@ -41,6 +42,17 @@ module.exports = function (env) {
     )[0]
 
     return error
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the cycle label
+  example: {{ '2022' | getErrorMessage }}
+  outputs: "2021 to 2022 - current"
+  ------------------------------------------------------------------ */
+  filters.getCycleLabel = (cycle) => {
+    let label = cycle
+    label = cycles.getCycleLabel(cycle)
+    return label
   }
 
   /* ------------------------------------------------------------------
