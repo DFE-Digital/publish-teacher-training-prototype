@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "" %}
-{% set caption = "" %}
+{% set caption = "Add course" %}
+{% set title = "When will applications open?" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -17,16 +17,53 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {{ govukRadios({
+          idPrefix: "application-open-date",
+          name: "course[applicationOpenDate]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          items: []
+        }) }}
 
+        {#{ govukDateInput({
+          id: "application-open-date",
+          name: "course[applicationOpenDate]",
+          fieldset: {
+            legend: {
+              text: "Legend text",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 1980"
+          },
+          items: [
+            {
+              name: "day"
+            },
+            {
+              name: "month"
+            },
+            {
+              name: "year"
+            }
+          ]
+        }) }#}
 
         {{ govukButton({
           text: "Continue"

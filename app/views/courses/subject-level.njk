@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "" %}
-{% set caption = "" %}
+{% set caption = "Add course" %}
+{% set title = "What type of course?" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -26,7 +26,31 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {{ govukRadios({
+          idPrefix: "subject-level",
+          name: "course[subjectLevel]",
+          fieldset: {
+            legend: {
+              text: "Level",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          errorMessage: errors | getErrorMessage("subject-level"),
+          items: subjectLevelOptions
+        }) }}
 
+        {{ govukRadios({
+          idPrefix: "send",
+          name: "course[isSend]",
+          fieldset: {
+            legend: {
+              text: "Special educational needs and disability (SEND)",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          errorMessage: errors | getErrorMessage("send"),
+          items: sendOptions
+        }) }}
 
         {{ govukButton({
           text: "Continue"

@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "" %}
-{% set caption = "" %}
+{% set caption = "Add course" %}
+{% set title = "Is this a teaching apprenticeship" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -17,16 +17,27 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-
+        {{ govukRadios({
+          idPrefix: "apprenticeship",
+          name: "course[apprenticeship]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          items: []
+        }) }}
 
         {{ govukButton({
           text: "Continue"
