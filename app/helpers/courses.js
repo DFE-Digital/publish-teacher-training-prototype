@@ -77,13 +77,30 @@ exports.getStudyModeOptions = (selectedItem) => {
   const items = []
   const studyModes = require('../data/study-modes')
 
-  studyModess.forEach((studyModes, i) => {
+  studyModes.forEach((studyModes, i) => {
     const item = {}
 
     item.text = studyModes.name
     item.value = studyModes.code
     item.id = studyModes.id
     item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  return items
+}
+
+exports.getAccreditedBodyOptions = (accreditedBodies, selectedItem) => {
+  const items = []
+
+  accreditedBodies.forEach((accreditedBody, i) => {
+    const item = {}
+
+    item.text = accreditedBody.name
+    item.value = accreditedBody.code
+    item.id = accreditedBody.id
+    item.checked = (selectedItem && selectedItem.includes(accreditedBody.code)) ? 'checked' : ''
 
     items.push(item)
   })
