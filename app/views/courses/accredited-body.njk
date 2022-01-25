@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "Who is the accredited body?" %}
+{% set title = ("Error: " if errors) + "Who is the accredited body?" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "Select the locations for this course" %}
+{% set title = ("Error: " if errors) + "Select the locations for this course" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

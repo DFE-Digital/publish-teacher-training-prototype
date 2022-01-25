@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "When will applications open?" %}
+{% set title = ("Error: " if errors) + "When will applications open?" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

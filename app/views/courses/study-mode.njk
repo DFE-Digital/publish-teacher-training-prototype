@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "Full time or part time" %}
+{% set title = ("Error: " if errors) + "Full time or part time" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

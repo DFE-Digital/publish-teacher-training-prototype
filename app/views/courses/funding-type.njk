@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "Is it fee paying or salaried?" %}
+{% set title = ("Error: " if errors) + "Is it fee paying or salaried?" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

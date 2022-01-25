@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set caption = "Add course" %}
-{% set title = "Is this a teaching apprenticeship" %}
+{% set title = ("Error: " if errors) + "Is this a teaching apprenticeship" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
