@@ -42,6 +42,19 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
   return items
 }
 
+exports.getAgeRangeLabel = (code) => {
+  let label = code
+  const ageRanges = require('../data/age-ranges')
+
+  label = ageRanges.find(ageRange => ageRange.code === code).name
+
+  if (code === 'other') {
+    label = 'Another age range'
+  }
+
+  return label
+}
+
 exports.getQualificationOptions = (subjectLevel, selectedItem) => {
   const items = []
 
@@ -63,6 +76,15 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
   })
 
   return items
+}
+
+exports.getQualificationLabel = (code) => {
+  let label = code
+  const qualifications = require('../data/qualifications')
+
+  label = qualifications.find(qualification => qualification.code === code).name
+
+  return label
 }
 
 // TODO: funding type is dependent on provider type -> programType
@@ -89,6 +111,15 @@ exports.getFundingTypeOptions = (selectedItem) => {
   return items
 }
 
+exports.getFundingTypeLabel = (code) => {
+  let label = code
+  const fundingTypes = require('../data/funding-types')
+
+  label = fundingTypes.find(fundingType => fundingType.code === code).name
+
+  return label
+}
+
 exports.getStudyModeOptions = (selectedItem) => {
   const items = []
   const studyModes = require('../data/study-modes')
@@ -105,4 +136,13 @@ exports.getStudyModeOptions = (selectedItem) => {
   })
 
   return items
+}
+
+exports.getStudyModeLabel = (code) => {
+  let label = code
+  const studyModes = require('../data/study-modes')
+
+  label = studyModes.find(studyMode => studyMode.code === code).name
+
+  return label
 }
