@@ -17,7 +17,7 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
     const item = {}
 
     item.text = location.name
-    item.value = location.code
+    item.value = location.id
     item.id = location.id
     item.checked = (selectedItem && selectedItem.includes(location.code)) ? 'checked' : ''
 
@@ -36,4 +36,13 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
   })
 
   return items
+}
+
+exports.getLocationLabel = (code) => {
+  let label = code
+  const locations = require('../data/locations')
+
+  label = locations.find(location => location.id === code).name
+
+  return label
 }

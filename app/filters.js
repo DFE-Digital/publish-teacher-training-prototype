@@ -1,5 +1,6 @@
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
+const locationHelper = require('./helpers/locations')
 
 const _ = require('lodash')
 
@@ -91,6 +92,19 @@ module.exports = function (env) {
   }
 
   // TODO: qualification description
+
+  /* ------------------------------------------------------------------
+  utility function to get the location label
+  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2' | getLocationLabel }}
+  outputs: "Main site"
+  ------------------------------------------------------------------ */
+  filters.getLocationLabel = (location) => {
+    let label = location
+    label = locationHelper.getLocationLabel(location)
+    return label
+  }
+
+  // TODO: location description
 
   /* ------------------------------------------------------------------
   utility function to get the cycle label
