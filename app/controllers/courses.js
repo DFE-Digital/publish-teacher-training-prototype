@@ -173,7 +173,7 @@ exports.new_course_qualification_get = (req, res) => {
     selectedQualification = req.session.data.course.qualification
   }
 
-  const qualificationOptions = courseHelper.getQualificationOptions(selectedQualification)
+  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
 
   res.render('../views/courses/qualification', {
     qualificationOptions,
@@ -193,7 +193,7 @@ exports.new_course_qualification_post = (req, res) => {
     selectedQualification = req.session.data.course.qualification
   }
 
-  const qualificationOptions = courseHelper.getQualificationOptions(selectedQualification)
+  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
 
   if (errors.length) {
     res.render('../views/courses/qualification', {

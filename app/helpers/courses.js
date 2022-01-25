@@ -42,9 +42,11 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
   return items
 }
 
-exports.getQualificationOptions = (selectedItem) => {
+exports.getQualificationOptions = (subjectLevel, selectedItem) => {
   const items = []
-  const qualifications = []
+
+  let qualifications = require('../data/qualifications')
+  qualifications = qualifications.filter(qualification => qualification.levels.includes(subjectLevel))
 
   qualifications.forEach((qualification, i) => {
     const item = {}
@@ -53,6 +55,9 @@ exports.getQualificationOptions = (selectedItem) => {
     item.value = qualification.code
     item.id = qualification.id
     item.checked = (selectedItem && selectedItem.includes(qualification.code)) ? 'checked' : ''
+
+    item.hint = {}
+    item.hint.text = qualification.description
 
     items.push(item)
   })
