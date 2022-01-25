@@ -350,7 +350,7 @@ exports.new_course_location_get = (req, res) => {
     selectedLocation = req.session.data.course.location
   }
 
-  const locationOptions = locationHelper.getLocationOptions(selectedLocation)
+  const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
   res.render('../views/courses/location', {
     locationOptions,
@@ -370,7 +370,7 @@ exports.new_course_location_post = (req, res) => {
     selectedLocation = req.session.data.course.location
   }
 
-  const locationOptions = locationHelper.getLocationOptions(selectedLocation)
+  const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
   if (errors.length) {
     res.render('../views/courses/location', {
