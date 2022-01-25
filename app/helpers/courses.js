@@ -28,6 +28,17 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
     return a.text.localeCompare(b.text)
   })
 
+  const divider = { divider: 'or' }
+  items.push(divider)
+
+  const other = {}
+  other.text = 'Another age range'
+  other.value = 'other'
+  other.id = 'age-range-other'
+  other.checked = (selectedItem && selectedItem.includes('other')) ? 'checked' : ''
+  other.conditional = true
+  items.push(other)
+
   return items
 }
 
@@ -84,23 +95,6 @@ exports.getStudyModeOptions = (selectedItem) => {
     item.value = studyModes.code
     item.id = studyModes.id
     item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
-
-    items.push(item)
-  })
-
-  return items
-}
-
-exports.getAccreditedBodyOptions = (accreditedBodies, selectedItem) => {
-  const items = []
-
-  accreditedBodies.forEach((accreditedBody, i) => {
-    const item = {}
-
-    item.text = accreditedBody.name
-    item.value = accreditedBody.code
-    item.id = accreditedBody.id
-    item.checked = (selectedItem && selectedItem.includes(accreditedBody.code)) ? 'checked' : ''
 
     items.push(item)
   })

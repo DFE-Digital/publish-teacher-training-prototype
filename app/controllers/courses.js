@@ -151,7 +151,7 @@ exports.new_course_age_range_post = (req, res) => {
   }
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
-
+console.log(req.session.data.course);
   if (errors.length) {
     res.render('../views/courses/age-range', {
       ageRangeOptions,
