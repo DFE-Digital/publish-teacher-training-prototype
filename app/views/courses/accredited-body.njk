@@ -28,17 +28,56 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukRadios({
-          idPrefix: "accredited-body",
-          name: "course[accreditedBody]",
-          fieldset: {
+        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors }}">
+
+          {% call govukFieldset({
             legend: {
               html: headingHtml
             }
-          },
-          errorMessage: errors | getErrorMessage("accredited-body"),
-          items: accreditedBodyOptions
-        }) }}
+          }) %}
+
+          {% if errors %}
+            <span id=" accredited-body-error" class="govuk-error-message">
+              <div><span class="govuk-visually-hidden">Error:</span> Enter an accredited body</div>
+            </span>
+          {% endif %}
+
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% for option in accreditedBodyOptions %}
+              {% if option.divider %}
+                <div class="govuk-radios__divider">{{ option.divider }}</div>
+              {% else %}
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="{{ option.id }}" name="course[accreditedBody]" type="radio" value="{{ option.value }}" {{ option.checked }} {% if option.conditional %}data-aria-controls="conditional-{{ option.id }}"{% endif %}>
+                  <label class="govuk-label govuk-radios__label" for="{{ option.id }}">
+                    {{- option.text -}}
+                  </label>
+                </div>
+                {% if option.conditional %}
+                  <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
+
+                    {{ govukInput({
+                      id: "accredited-body-other",
+                      name: "course[accreditedBodyOther]",
+                      label: {
+                        text: "Accredited body"
+                      },
+                      hint: {
+                        text: "Enter a name or provider code"
+                      }
+                    }) }}
+
+                    <!-- autocomplete -->
+
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% endcall %}
+
+        </div>
 
         {{ govukButton({
           text: "Continue"
