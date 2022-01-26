@@ -1,0 +1,9 @@
+{% macro appAutocompleteFromSelect(params) %}
+  {% set autocompleteType = 'select' %}
+  {%- include "./template.njk" -%}
+{% endmacro %}
+
+{% macro appAutocompleteFromInput(params) %}
+  {% set autocompleteType = 'input' %}
+  {%- include "./template.njk" -%}
+{% endmacro %}
