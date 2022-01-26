@@ -11,6 +11,14 @@ exports.organisations_list = (req, res) => {
   res.send('NOT IMPLEMENTED: Organisation list')
 }
 
+/// ------------------------------------------------------------------------ ///
+/// SHOW ORGANISATION
+/// ------------------------------------------------------------------------ ///
+
 exports.organisation_detail = (req, res) => {
   res.send('NOT IMPLEMENTED: Organisation detail: ' + req.params.organisationId)
 }
+
+/// ------------------------------------------------------------------------ ///
+/// EDIT ORGANISATION
+/// ------------------------------------------------------------------------ ///

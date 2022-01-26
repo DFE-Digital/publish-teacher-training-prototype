@@ -20,9 +20,9 @@ const checkIsAuthenticated = (req, res, next) => {
   }
 }
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// ALL ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 router.all('*', (req, res, next) => {
   res.locals.referrer = req.query.referrer
@@ -31,9 +31,9 @@ router.all('*', (req, res, next) => {
   next()
 })
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// AUTHENTICATION ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 router.get('/sign-in', authenticationController.sign_in_get)
 router.post('/sign-in', passport.authenticate('local', {
@@ -71,9 +71,9 @@ router.get('/registration-complete', authenticationController.registration_compl
 
 router.get('/terms-and-conditions', authenticationController.terms_and_conditions_get)
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// COURSE ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courseController.new_course_subject_level_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-level', checkIsAuthenticated, courseController.new_course_subject_level_post)
@@ -117,17 +117,17 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', c
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// LOCATION ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 // router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.show_get)
 //
 // router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.list_get)
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 // router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, cycles.show_get)
 //
@@ -140,9 +140,9 @@ router.get('/organisations', checkIsAuthenticated, organisationController.organi
 
 // router.get('/', organisations.home_get)
 
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 /// HOME ROUTES
-/// --------------------------------------------------///
+/// ------------------------------------------------------------------------ ///
 
 router.get('/', checkIsAuthenticated, (req, res) => {
   res.render('index', {})

@@ -16,6 +16,10 @@ exports.course_list = (req, res) => {
   })
 }
 
+/// ------------------------------------------------------------------------ ///
+/// SHOW COURSE
+/// ------------------------------------------------------------------------ ///
+
 exports.course_details = (req, res) => {
   res.send('NOT IMPLEMENTED: Course detail: ' + req.params.courseId)
 }
@@ -23,6 +27,14 @@ exports.course_details = (req, res) => {
 exports.course_description = (req, res) => {
   res.send('NOT IMPLEMENTED: Course description: ' + req.params.courseId)
 }
+
+/// ------------------------------------------------------------------------ ///
+/// EDIT COURSE
+/// ------------------------------------------------------------------------ ///
+
+/// ------------------------------------------------------------------------ ///
+/// NEW COURSE
+/// ------------------------------------------------------------------------ ///
 
 exports.new_course_subject_level_get = (req, res) => {
   let selectedSubjectLevel
