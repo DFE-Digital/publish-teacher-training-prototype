@@ -393,7 +393,7 @@ exports.new_course_accredited_body_get = (req, res) => {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions([], selectedAccreditedBody)
+  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   res.render('../views/courses/accredited-body', {
     accreditedBodyOptions,
@@ -413,7 +413,7 @@ exports.new_course_accredited_body_post = (req, res) => {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions([], selectedAccreditedBody)
+  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
