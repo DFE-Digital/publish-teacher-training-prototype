@@ -31,8 +31,11 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
+{% from "_components/autocomplete/macro.njk"   import appAutocompleteFromSelect %}
+{% from "_components/autocomplete/macro.njk"   import appAutocompleteFromInput %}
+
 {% block head %}
-  {% include "includes/head.njk" %}
+  {% include "_includes/head.njk" %}
 {% endblock %}
 
 {% block pageTitle %}
@@ -101,7 +104,7 @@
   </div>
   {% block scripts %}
     {{ data | log }}
-    {% include "includes/scripts.njk" %}
+    {% include "_includes/scripts.njk" %}
     {% block pageScripts %}{% endblock %}
   {% endblock %}
   <!-- GOV.UK Prototype Kit {{ releaseVersion }} -->
