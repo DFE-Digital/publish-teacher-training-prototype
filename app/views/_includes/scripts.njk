@@ -1,5 +1,4 @@
 <!-- Javascript -->
-<script src="https://unpkg.com/accessible-autocomplete@1.6.1/dist/accessible-autocomplete.min.js"></script>
 <script src="/public/javascripts/jquery-1.11.3.js"></script>
 <script src="/public/javascripts/modules.js"></script>
 <script src="/public/javascripts/modules/edge.js"></script>
@@ -9,6 +8,11 @@
 {% for scriptUrl in extensionConfig.scripts %}
   <script src="{{scriptUrl}}"></script>
 {% endfor %}
+
+<script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+<script src="/public/javascripts/autocomplete-sort.js"></script>
+
+<script src="/public/javascripts/init-autocompletes.js"></script>
 
 <script src="/public/javascripts/application.js"></script>
 

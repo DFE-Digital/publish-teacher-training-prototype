@@ -1,0 +1,98 @@
+
+{# Prepend each autocomplete option with 'data-' #}
+{% set attributes = {
+  "data-autoselect": params.autocompleteOptions.autoselect,
+  "data-classes": params.autocompleteOptions.classes,
+  "data-min-length": params.autocompleteOptions.minLength,
+  "data-placeholder": params.autocompleteOptions.placeholder,
+  "data-show-all-values": params.autocompleteOptions.showAllValues,
+  "data-show-suggestions": params.autocompleteOptions.showSuggestionsBanner,
+  "data-show-no-options-found": params.autocompleteOptions['show-no-options-found'],
+  "data-value": params.value if (params.value | falsify),
+  "data-autocomplete-values": params.autocompleteOptions.values | dump
+  
+} | deleteBlankAttributes %}
+
+{% set showSuggestions = params.autocompleteOptions.showSuggestionsBanner %}
+{% set allowEmpty = params.autocompleteOptions.allowEmpty %}
+
+{# Push data attributes back in to params #}
+{% set params = params | setAttribute("attributes", attributes) %}
+
+{% set params = params | deleteAttribute("autocompleteOptions") %}
+
+{# Check if one of the classes is a govuk-!-width class 
+If so, generate an autocomplete specific class that can be applied
+to the parent #}
+{% set widthClass = false %}
+{% if params.classes %}
+  {% set classes = params.classes | split(" ") %}
+  {% for class in classes %}
+    {% if class | includes("govuk-!-width")  %}
+      {% set widthClass = class | replace("govuk-!", "app-!-autocomplete--max")  %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<div data-module="app-autocomplete" class="govuk-form-group {{ 'app-autocomplete--with-suggestions' if showSuggestions}} {{params.autocompleteOptions.classes}} {{widthClass if widthClass}}">
+
+  {% if autocompleteType == "input" %}
+
+    {% from "govuk/components/input/macro.njk" import govukInput %}
+    {{ govukInput(params)}}
+    {# Container is where the autocomplete will get inserted
+    our javascript init code will move this within the input form-group #}
+    <div id="{{params.id}}-autocomplete-container" class=""></div>
+
+  {% elseif autocompleteType == "select" %}
+
+    {% from "govuk/components/select/macro.njk" import govukSelect %}
+
+    {# Prepare a default first item #}
+    {% set defaultItemShouldBeSelected = true %}
+
+    {# Check if value exists in items - if so, we shouldn't have a default selected item #}
+    {% if params.value %}
+      {% for item in params.items %}
+        {% if params.value == item.value %}
+          {% set defaultItemShouldBeSelected = false %}
+        {% endif %}
+      {% endfor %}
+      
+    {% endif %}
+
+    {# First item should either be an empty row or an instruction #}
+    {% if allowEmpty %}
+      {% set firstItem = {
+        value: "",
+        text: "",
+        selected: defaultItemShouldBeSelected
+      } %}
+    {% else %}
+      {% set firstItem = {
+        value: "",
+        text: "Please select",
+        disabled: true,
+        selected: defaultItemShouldBeSelected
+      } %}
+    {% endif %}
+
+    {% set selectItems = [firstItem] %}
+
+    {# Loop through items and check if any should be selected #}
+    {% for item in params.items %}
+      {% if (params.value == item.value) or (params.value == item.text) %}
+        {% set item = item | setAttribute('selected', true) %}
+      {% endif %}
+      {% set selectItems = selectItems | push(item) %}
+    {% endfor %}
+
+    {% set params = params | setAttribute("items", selectItems) %}
+
+    {{ govukSelect(params) }}
+    <div id="{{params.id}}-autocomplete-container" class=""></div>
+
+
+  {% endif %}
+
+ </div>
