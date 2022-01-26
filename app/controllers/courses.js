@@ -481,27 +481,27 @@ exports.new_course_applications_open_date_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start-date`)
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`)
   }
 }
 
-exports.new_course_course_start_date_get = (req, res) => {
-  res.render('../views/courses/course-start-date', {
+exports.new_course_course_start_get = (req, res) => {
+  res.render('../views/courses/course-start', {
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start-date`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
 }
 
-exports.new_course_course_start_date_post = (req, res) => {
+exports.new_course_course_start_post = (req, res) => {
   const errors = []
 
   if (errors.length) {
-    res.render('../views/courses/course-start-date', {
+    res.render('../views/courses/course-start', {
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start-date`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
@@ -516,7 +516,7 @@ exports.new_course_check_answers_get = (req, res) => {
   res.render('../views/courses/check-your-answers', {
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start-date`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })

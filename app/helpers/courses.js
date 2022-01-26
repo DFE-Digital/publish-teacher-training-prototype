@@ -183,3 +183,20 @@ exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
 
   return items
 }
+
+exports.getCourseStartOptions = (selectedItem) => {
+  const items = []
+
+  // studyModes.forEach((studyModes, i) => {
+  //   const item = {}
+  //
+  //   item.text = studyModes.name
+  //   item.value = studyModes.code
+  //   item.id = studyModes.id
+  //   item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
+  //
+  //   items.push(item)
+  // })
+
+  return items
+}

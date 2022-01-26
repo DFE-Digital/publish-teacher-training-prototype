@@ -105,8 +105,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredit
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start-date', checkIsAuthenticated, courseController.new_course_course_start_date_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start-date', checkIsAuthenticated, courseController.new_course_course_start_date_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_course_start_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_course_start_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_post)

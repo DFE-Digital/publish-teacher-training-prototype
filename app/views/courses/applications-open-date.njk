@@ -43,6 +43,7 @@
             hint: {
               text: "For example, 30 9 2022"
             },
+            errorMessage: errors | getErrorMessage("application-open-date-other"),
             items: [
             {
               name: "day",
@@ -72,6 +73,7 @@
               html: headingHtml
             }
           },
+          errorMessage: errors | getErrorMessage("application-open-date"),
           items: [
             {
               value: data.currentCycle.applyOpens | date,

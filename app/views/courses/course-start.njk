@@ -17,16 +17,29 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-
+        {{ govukRadios({
+          idPrefix: "course-start",
+          name: "course[courseStart]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          errorMessage: errors | getErrorMessage("course-start"),
+          items: courseStartOptions
+        }) }}
 
         {{ govukButton({
           text: "Continue"
