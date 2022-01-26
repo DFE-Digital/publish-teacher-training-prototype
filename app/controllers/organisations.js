@@ -1,4 +1,5 @@
-const organisations = require('../models/organisations')
+const organisationModel = require('../models/organisations')
+const organisationHelper = require('../helpers/organisations')
 
 exports.home_get = (req, res) => {
   res.render('../views/organisations/index', {
@@ -6,7 +7,7 @@ exports.home_get = (req, res) => {
   })
 }
 
-exports.organisation_list = (req, res) => {
+exports.organisations_list = (req, res) => {
   res.send('NOT IMPLEMENTED: Organisation list')
 }
 
