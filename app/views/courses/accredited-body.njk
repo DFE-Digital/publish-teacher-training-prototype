@@ -56,18 +56,25 @@
                 {% if option.conditional %}
                   <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
 
-                    {{ govukInput({
+                    {{ appAutocompleteFromSelect({
                       id: "accredited-body-other",
                       name: "course[accreditedBodyOther]",
                       label: {
-                        text: "Accredited body"
+                        text: "Accredited body",
+                        classes: "govuk-label--s"
                       },
                       hint: {
-                        text: "Enter a name or provider code"
+                        text: "Search for a provider name or code"
+                      },
+                      classes: "govuk-!-width-two-thirds",
+                      items: accreditedBodies,
+                      value: data.course.accreditedBodyOther[1],
+                      autocompleteOptions: {
+                        autoselect: true,
+                        showAllValues: false,
+                        allowEmpty: true
                       }
                     }) }}
-
-                    <!-- autocomplete -->
 
                   </div>
                 {% endif %}

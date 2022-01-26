@@ -395,8 +395,16 @@ exports.new_course_accredited_body_get = (req, res) => {
 
   const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
+  let selectedAccreditedBodyOther
+  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
+    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+
   res.render('../views/courses/accredited-body', {
     accreditedBodyOptions,
+    accreditedBodies,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
@@ -415,9 +423,17 @@ exports.new_course_accredited_body_post = (req, res) => {
 
   const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
+  let selectedAccreditedBodyOther
+  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
+    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
       accreditedBodyOptions,
+      accreditedBodies,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
