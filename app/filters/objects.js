@@ -4,7 +4,7 @@
 const _ = require('lodash');
 
 // Leave this filters line
-var filters = {}
+const filters = {}
 
 // Combine objects without mutating original
 filters.mergeObjects = (...items) => {
@@ -192,13 +192,13 @@ filters.removeWhere = (arr, key, compare) => {
   ---------------------------------------------------------
   returns an array with all objects that don't match removed
   arr = [
-    {"pet": "dog", name: "Catherine"}, 
-    {"pet": "cat", name: "Vasili"} 
+    {"pet": "dog", name: "Catherine"},
+    {"pet": "cat", name: "Vasili"}
     {"pet": "big cat", name: "Elizaveta"}
     ]
   arr = newArr | whereIncludes ("pet", "cat")
   newArr = [
-    {"pet": "cat", name: "Vasili"} 
+    {"pet": "cat", name: "Vasili"}
     {"pet": "big cat", name: "Elizaveta"}
     ]
 */
@@ -220,8 +220,8 @@ filters.whereIncludes = (arr, key, compare) => {
   --------------------------------------------------------
   returns an array with objects that match removed
   arr = [
-    {"pet": "dog", name: "Catherine"}, 
-    {"pet": "cat", name: "Vasili"} 
+    {"pet": "dog", name: "Catherine"},
+    {"pet": "cat", name: "Vasili"}
     {"pet": "big cat", name: "Elizaveta"}
     ]
   arr = newArr | whereDoesNotInclude("pet", "cat")
