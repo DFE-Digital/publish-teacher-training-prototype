@@ -1,16 +1,8 @@
-exports.getAccreditedBodyOptions = (accreditedBodies, selectedItem) => {
-  const items = []
+exports.getOrganisationLabel = (code) => {
+  let label = code
+  const organisations = require('../data/organisations')
 
-  accreditedBodies.forEach((accreditedBody, i) => {
-    const item = {}
+  label = organisations.find(organisation => organisation.code === code).name
 
-    item.text = accreditedBody.name
-    item.value = accreditedBody.code
-    item.id = accreditedBody.id
-    item.checked = (selectedItem && selectedItem.includes(accreditedBody.code)) ? 'checked' : ''
-
-    items.push(item)
-  })
-
-  return items
+  return label
 }
