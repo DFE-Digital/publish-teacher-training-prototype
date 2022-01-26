@@ -28,6 +28,42 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set otherHtml %}
+
+          {{ govukDateInput({
+            id: "application-open-date-other",
+            namePrefix: "course[applicationOpenDateOther]",
+            fieldset: {
+              legend: {
+                text: "When will applications open?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "For example, 30 9 2022"
+            },
+            items: [
+            {
+              name: "day",
+              value: data.course.applicationOpenDateOther[0],
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "month",
+              value: data.course.applicationOpenDateOther[1],
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "year",
+              value: data.course.applicationOpenDateOther[2],
+              classes: "govuk-input--width-4"
+            }
+            ]
+          }) }}
+
+        {% endset %}
+
         {{ govukRadios({
           idPrefix: "application-open-date",
           name: "course[applicationOpenDate]",
@@ -36,34 +72,22 @@
               html: headingHtml
             }
           },
-          items: []
-        }) }}
-
-        {#{ govukDateInput({
-          id: "application-open-date",
-          name: "course[applicationOpenDate]",
-          fieldset: {
-            legend: {
-              text: "Legend text",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--xl"
-            }
-          },
-          hint: {
-            text: "For example, 31 3 1980"
-          },
           items: [
             {
-              name: "day"
+              value: data.currentCycle.applyOpens | date,
+              text: "As soon as the course is on Find (recommended)",
+              checked: true if data.course.applicationOpenDate == (data.currentCycle.applyOpens | date)
             },
             {
-              name: "month"
-            },
-            {
-              name: "year"
+              value: "other",
+              text: "Another date",
+              checked: true if data.course.applicationOpenDate == "other",
+              conditional: {
+                html: otherHtml
+              }
             }
           ]
-        }) }#}
+        }) }}
 
         {{ govukButton({
           text: "Continue"
