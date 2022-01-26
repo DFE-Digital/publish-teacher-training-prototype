@@ -9,3 +9,7 @@ $(document).ready(function () {
   GOVUK.modules.start()
   window.GOVUKFrontend.initAll()
 })
+
+$(document).ready(function () {
+  initAutocompletes()
+})

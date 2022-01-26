@@ -1,0 +1,223 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Autocomplete test" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {{ title }}
+      </h1>
+
+      {{ appAutocompleteFromSelect({
+        id: "subjects",
+        name: "subjects",
+        label: {
+          text: "Autocomplete from select",
+          classes: "govuk-label--s"
+        },
+        hint: {
+          text: 'Search for the closest matching subject'
+        },
+        classes: "govuk-!-width-two-thirds",
+        items: [
+          {
+            text: "Ancient Greek",
+            value: "A1"
+          },
+          {
+            text: "Ancient Hebrew",
+            value: "A2"
+          },
+          {
+            text: "Art and design",
+            value: "W1"
+          },
+          {
+            text: "Biology",
+            value: "C1"
+          },
+          {
+            text: "Business studies",
+            value: "08"
+          },
+          {
+            text: "Chemistry",
+            value: "F1"
+          },
+          {
+            text: "Citizenship",
+            value: "09"
+          },
+          {
+            text: "Classics",
+            value: "Q8"
+          },
+          {
+            text: "Communication and media studies",
+            value: "P3"
+          },
+          {
+            text: "Computing",
+            value: "11"
+          },
+          {
+            text: "Dance",
+            value: "12"
+          },
+          {
+            text: "Design and technology",
+            value: "DT"
+          },
+          {
+            text: "Drama",
+            value: "13"
+          },
+          {
+            text: "Economics",
+            value: "L1"
+          },
+          {
+            text: "English",
+            value: "Q3"
+          },
+          {
+            text: "English as a second or other language",
+            value: "16"
+          },
+          {
+            text: "French",
+            value: "15"
+          },
+          {
+            text: "Further education",
+            value: "41"
+          },
+          {
+            text: "Geography",
+            value: "F8"
+          },
+          {
+            text: "German",
+            value: "17"
+          },
+          {
+            text: "Health and social care",
+            value: "L5"
+          },
+          {
+            text: "History",
+            value: "V1"
+          },
+          {
+            text: "Italian",
+            value: "18"
+          },
+          {
+            text: "Japanese",
+            value: "19"
+          },
+          {
+            text: "Latin",
+            value: "A0"
+          },
+          {
+            text: "Mandarin",
+            value: "20"
+          },
+          {
+            text: "Mathematics",
+            value: "G1"
+          },
+          {
+            text: "Modern languages (other)",
+            value: "24"
+          },
+          {
+            text: "Music",
+            value: "W3"
+          },
+          {
+            text: "Philosophy",
+            value: "P1"
+          },
+          {
+            text: "Physical education",
+            value: "C6"
+          },
+          {
+            text: "Physics",
+            value: "F3"
+          },
+          {
+            text: "Primary",
+            value: "00"
+          },
+          {
+            text: "Primary with English",
+            value: "01"
+          },
+          {
+            text: "Primary with geography and history",
+            value: "02"
+          },
+          {
+            text: "Primary with mathematics",
+            value: "03"
+          },
+          {
+            text: "Primary with modern languages",
+            value: "04"
+          },
+          {
+            text: "Primary with physical education",
+            value: "06"
+          },
+          {
+            text: "Primary with science",
+            value: "07"
+          },
+          {
+            text: "Psychology",
+            value: "C8"
+          },
+          {
+            text: "Religious education",
+            value: "V6"
+          },
+          {
+            text: "Russian",
+            value: "21"
+          },
+          {
+            text: "Science",
+            value: "F0"
+          },
+          {
+            text: "Social sciences",
+            value: "14"
+          },
+          {
+            text: "Spanish",
+            value: "22"
+          }
+        ],
+        value: record.courseDetails.subjects[ordinal],
+        autocompleteOptions: {
+          autoselect: true,
+          showAllValues: false,
+          allowEmpty: true
+        }
+      }
+      ) }}
+
+    </div>
+  </div>
+
+{% endblock %}
