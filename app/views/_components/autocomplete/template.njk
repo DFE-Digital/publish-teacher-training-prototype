@@ -10,7 +10,7 @@
   "data-show-no-options-found": params.autocompleteOptions['show-no-options-found'],
   "data-value": params.value if (params.value | falsify),
   "data-autocomplete-values": params.autocompleteOptions.values | dump
-  
+
 } | deleteBlankAttributes %}
 
 {% set showSuggestions = params.autocompleteOptions.showSuggestionsBanner %}
@@ -21,7 +21,7 @@
 
 {% set params = params | deleteAttribute("autocompleteOptions") %}
 
-{# Check if one of the classes is a govuk-!-width class 
+{# Check if one of the classes is a govuk-!-width class
 If so, generate an autocomplete specific class that can be applied
 to the parent #}
 {% set widthClass = false %}
@@ -39,7 +39,7 @@ to the parent #}
   {% if autocompleteType == "input" %}
 
     {% from "govuk/components/input/macro.njk" import govukInput %}
-    {{ govukInput(params)}}
+    {{ govukInput(params) }}
     {# Container is where the autocomplete will get inserted
     our javascript init code will move this within the input form-group #}
     <div id="{{params.id}}-autocomplete-container" class=""></div>
@@ -58,7 +58,6 @@ to the parent #}
           {% set defaultItemShouldBeSelected = false %}
         {% endif %}
       {% endfor %}
-      
     {% endif %}
 
     {# First item should either be an empty row or an instruction #}
@@ -91,7 +90,6 @@ to the parent #}
 
     {{ govukSelect(params) }}
     <div id="{{params.id}}-autocomplete-container" class=""></div>
-
 
   {% endif %}
 
