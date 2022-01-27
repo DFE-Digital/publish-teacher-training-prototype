@@ -50,12 +50,17 @@ exports.new_course_subject_level_get = (req, res) => {
   const subjectLevelOptions = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
   const sendOptions = subjectHelper.getSendOptions(selectedSend)
 
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+  if (req.query.referrer === 'check') {
+    back += '/new/check'
+  }
+
   res.render('../views/courses/subject-level', {
     subjectLevelOptions,
     sendOptions,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      back: back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -486,7 +491,15 @@ exports.new_course_applications_open_date_post = (req, res) => {
 }
 
 exports.new_course_course_start_get = (req, res) => {
+  let selectedCourseStart
+  if (req.session.data.course && req.session.data.course.courseStart) {
+    selectedCourseStart = req.session.data.course.courseStart
+  }
+
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+
   res.render('../views/courses/course-start', {
+    courseStartOptions,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
@@ -498,8 +511,16 @@ exports.new_course_course_start_get = (req, res) => {
 exports.new_course_course_start_post = (req, res) => {
   const errors = []
 
+  let selectedCourseStart
+  if (req.session.data.course && req.session.data.course.courseStart) {
+    selectedCourseStart = req.session.data.course.courseStart
+  }
+
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+
   if (errors.length) {
     res.render('../views/courses/course-start', {
+      courseStartOptions,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
@@ -514,10 +535,12 @@ exports.new_course_course_start_post = (req, res) => {
 
 exports.new_course_check_answers_get = (req, res) => {
   res.render('../views/courses/check-your-answers', {
+    course: req.session.data.course,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`
     }
   })
 }

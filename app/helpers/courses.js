@@ -1,3 +1,7 @@
+const { DateTime } = require('luxon')
+
+const cycleHelper = require('./cycles')
+
 // const DEGREE_GRADES = {
 //   0: "2:1 or above, or equivalent",
 //   1: "2:2 or above, or equivalent",
@@ -184,19 +188,37 @@ exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
   return items
 }
 
-exports.getCourseStartOptions = (selectedItem) => {
+exports.getAccreditedBodyLabel = (code) => {
+
+}
+
+exports.getCourseStartSelectOptions = (selectedItem) => {
   const items = []
 
-  // studyModes.forEach((studyModes, i) => {
-  //   const item = {}
-  //
-  //   item.text = studyModes.name
-  //   item.value = studyModes.code
-  //   item.id = studyModes.id
-  //   item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
-  //
-  //   items.push(item)
-  // })
+  const startDate = DateTime.now().toJSDate()
+  const endDate = DateTime.now().plus({months:18}).toJSDate()
+
+  for (let d = startDate; d <= endDate; d.setMonth(d.getMonth() + 1)) {
+    const item = {}
+
+    const code = DateTime.fromJSDate(d, {
+      locale: 'en-GB'
+    }).toFormat('yyyy-LL')
+
+    item.text = DateTime.fromJSDate(d, {
+      locale: 'en-GB'
+    }).toFormat('MMMM yyyy')
+
+    item.value = code
+    item.id = code
+    item.selected = (selectedItem && selectedItem.includes(code)) ? 'selected' : ''
+
+    items.push(item)
+  }
 
   return items
+}
+
+exports.getCourseStartLabel = (code) => {
+
 }

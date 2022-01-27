@@ -17,7 +17,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-
       {% set headingHtml %}
         <h1 class="govuk-heading-l">
           <span class="govuk-caption-l">
@@ -29,13 +28,11 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukRadios({
-          idPrefix: "course-start",
+        {{ govukSelect({
+          id: "course-start",
           name: "course[courseStart]",
-          fieldset: {
-            legend: {
-              html: headingHtml
-            }
+          label: {
+            html: headingHtml
           },
           errorMessage: errors | getErrorMessage("course-start"),
           items: courseStartOptions

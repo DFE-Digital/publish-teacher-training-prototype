@@ -24,10 +24,200 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Subject level"
+              },
+              value: {
+                text: course.subjectLevel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/subject-level?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "subject level"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Special educational needs and disability (SEND)"
+              },
+              value: {
+                text: course.isSend
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/subject-level?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "special educational needs and disability (SEND)"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Subject"
+              },
+              value: {
+                text: course.subject
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/subject?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "subject"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Age range"
+              },
+              value: {
+                text: course.ageRange | getAgeRangeLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/age-range?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "age range"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Qualification"
+              },
+              value: {
+                text: course.qualification | getQualificationLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/qualification?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "qualification"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Funding type"
+              },
+              value: {
+                text: course.fundingType | getFundingTypeLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/funding-type?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "funding type"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Full time or part time"
+              },
+              value: {
+                text: course.studyMode | getStudyModeLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/study-mode?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "full time or part time"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Location"
+              },
+              value: {
+                text: course.location
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/location?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "location"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Accredited body"
+              },
+              value: {
+                text: course.accreditedBody
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/accredited-body?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "accredited body"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Applications open date"
+              },
+              value: {
+                text: course.applicationOpenDate
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/applications-open-date?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "applications-open-date"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Course start"
+              },
+              value: {
+                text: course.courseStart | date("MMMM yyyy")
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/course-start?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "course start"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
 
         {{ govukButton({
-          text: "Continue"
+          text: "Save course"
         }) }}
 
       </form>
