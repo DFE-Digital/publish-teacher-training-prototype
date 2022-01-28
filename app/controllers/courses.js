@@ -147,17 +147,24 @@ exports.new_course_subject_post = (req, res) => {
 
 exports.new_course_modern_language_get = (req, res) => {
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subSubject) {
-    selectedSubject = req.session.data.course.subSubject
+  if (req.session.data.course && req.session.data.course.childSubject) {
+    selectedSubject = req.session.data.course.childSubject
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/modern-languages', {
     subjectOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -167,18 +174,25 @@ exports.new_course_modern_language_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subSubject) {
-    selectedSubject = req.session.data.course.subSubject
+  if (req.session.data.course && req.session.data.course.childSubject) {
+    selectedSubject = req.session.data.course.childSubject
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
       subjectOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -196,11 +210,22 @@ exports.new_course_age_range_get = (req, res) => {
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  } else {
+    if (req.session.data.course.childSubject && req.session.data.course.childSubject.length) {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+    }
+  }
+
   res.render('../views/courses/age-range', {
     ageRangeOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -215,19 +240,34 @@ exports.new_course_age_range_post = (req, res) => {
   }
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
-console.log(req.session.data.course);
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  } else {
+    if (req.session.data.course.childSubject && req.session.data.course.childSubject.length) {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+    }
+  }
+
   if (errors.length) {
     res.render('../views/courses/age-range', {
       ageRangeOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`)
+    }
   }
 }
 
@@ -270,11 +310,15 @@ exports.new_course_qualification_post = (req, res) => {
       errors
     })
   } else {
-    // TODO: if organisation is a lead school else scitt
-    if (true) {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
+      // TODO: if organisation is a lead school else scitt/hei
+      if (true) {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
+      }
     }
   }
 }
@@ -318,7 +362,11 @@ exports.new_course_funding_type_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
+    }
   }
 }
 
@@ -361,7 +409,11 @@ exports.new_course_apprenticeship_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
+    }
   }
 }
 
@@ -420,7 +472,11 @@ exports.new_course_study_mode_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`)
+    }
   }
 }
 
@@ -463,7 +519,11 @@ exports.new_course_location_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+    }
   }
 }
 
@@ -522,7 +582,11 @@ exports.new_course_accredited_body_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`)
+    }
   }
 }
 
@@ -549,7 +613,11 @@ exports.new_course_applications_open_date_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`)
+    }
   }
 }
 
