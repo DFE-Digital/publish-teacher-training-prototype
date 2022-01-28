@@ -81,6 +81,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject-
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courseController.new_course_subject_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject', checkIsAuthenticated, courseController.new_course_subject_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/modern-language', checkIsAuthenticated, courseController.new_course_modern_language_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/modern-language', checkIsAuthenticated, courseController.new_course_modern_language_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courseController.new_course_age_range_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courseController.new_course_age_range_post)
 

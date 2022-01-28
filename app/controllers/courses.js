@@ -137,6 +137,53 @@ exports.new_course_subject_post = (req, res) => {
       errors
     })
   } else {
+    if (selectedSubject === 'ML') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+    }
+  }
+}
+
+exports.new_course_modern_language_get = (req, res) => {
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subSubject) {
+    selectedSubject = req.session.data.course.subSubject
+  }
+
+  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+
+  res.render('../views/courses/modern-languages', {
+    subjectOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+    }
+  })
+}
+
+exports.new_course_modern_language_post = (req, res) => {
+  const errors = []
+
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subSubject) {
+    selectedSubject = req.session.data.course.subSubject
+  }
+
+  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+
+  if (errors.length) {
+    res.render('../views/courses/modern-languages', {
+      subjectOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      },
+      errors
+    })
+  } else {
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
   }
 }
