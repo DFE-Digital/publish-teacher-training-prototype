@@ -79,6 +79,23 @@
             },
             {
               key: {
+                text: "Modern language" + ("s" if course.childSubject > 1)
+              },
+              value: {
+                text: course.childSubject
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/modern-language?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "modern language"
+                  }
+                ]
+              }
+            } if course.subject == 'ML',
+            {
+              key: {
                 text: "Age range"
               },
               value: {
