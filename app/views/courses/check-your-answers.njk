@@ -113,6 +113,23 @@
             },
             {
               key: {
+                text: "Teaching apprenticeship"
+              },
+              value: {
+                text: course.apprenticeship | capitalize
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/apprenticeship?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "apprenticeship"
+                  }
+                ]
+              }
+            } if course.apprenticeship,
+            {
+              key: {
                 text: "Funding type"
               },
               value: {

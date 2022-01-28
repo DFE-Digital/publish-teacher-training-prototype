@@ -222,3 +222,27 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
 exports.getCourseStartLabel = (code) => {
 
 }
+
+exports.getApprenticeshipOptions = (selectedItem) => {
+  const items = []
+  const options = [{
+    code: 'yes',
+    name: 'Yes'
+  }, {
+    code: 'no',
+    name: 'No'
+  }]
+
+  options.forEach((options, i) => {
+    const item = {}
+
+    item.text = options.name
+    item.value = options.code
+    item.id = options.code
+    item.checked = (selectedItem && selectedItem.includes(options.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  return items
+}

@@ -276,7 +276,15 @@ exports.new_course_funding_type_post = (req, res) => {
 }
 
 exports.new_course_apprenticeship_get = (req, res) => {
+  let selectedApprenticeshipOption
+  if (req.session.data.course && req.session.data.course.apprenticeship) {
+    selectedApprenticeshipOption = req.session.data.course.apprenticeship
+  }
+
+  const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
+
   res.render('../views/courses/apprenticeship', {
+    apprenticeshipOptions,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
@@ -288,8 +296,16 @@ exports.new_course_apprenticeship_get = (req, res) => {
 exports.new_course_apprenticeship_post = (req, res) => {
   const errors = []
 
+  let selectedApprenticeshipOption
+  if (req.session.data.course && req.session.data.course.apprenticeship) {
+    selectedApprenticeshipOption = req.session.data.course.apprenticeship
+  }
+
+  const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
+
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
+      apprenticeshipOptions,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
