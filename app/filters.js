@@ -1,6 +1,8 @@
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
 const locationHelper = require('./helpers/locations')
+const organisationHelper = require('./helpers/organisations')
+const subjectHelper = require('./helpers/subjects')
 
 const _ = require('lodash')
 const fs = require('fs')
@@ -74,13 +76,45 @@ module.exports = function (env) {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the subject level label
+  example: {{ 'further_education' | getSubjectLevelLabel }}
+  outputs: "Further education"
+  ------------------------------------------------------------------ */
+  filters.getSubjectLevelLabel = (subjectLevel) => {
+    const label = subjectHelper.getSubjectLevelLabel(subjectLevel)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the subject label
+  example: {{ 'W1' | getSubjectLabel }}
+  outputs: "Art and design"
+  ------------------------------------------------------------------ */
+  filters.getSubjectLabel = (subject) => {
+    const label = subjectHelper.getSubjectLabel(subject)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the SEND label
+  example: {{ 'yes' | getSendLabel }}
+  outputs: "Yes"
+  ------------------------------------------------------------------ */
+  filters.getSendLabel = (send) => {
+    let label
+    if (send) {
+      label = courseHelper.getSendLabel(send)
+    }
+    return label
+  }
+
+  /* ------------------------------------------------------------------
   utility function to get the age range label
   example: {{ '5_to_11' | getAgeRangeLabel }}
   outputs: "5 to 11"
   ------------------------------------------------------------------ */
   filters.getAgeRangeLabel = (ageRange) => {
-    let label = ageRange
-    label = courseHelper.getAgeRangeLabel(ageRange)
+    const label = courseHelper.getAgeRangeLabel(ageRange)
     return label
   }
 
@@ -90,8 +124,7 @@ module.exports = function (env) {
   outputs: "Fee paying (no salary)"
   ------------------------------------------------------------------ */
   filters.getFundingTypeLabel = (fundingType) => {
-    let label = fundingType
-    label = courseHelper.getFundingTypeLabel(fundingType)
+    const label = courseHelper.getFundingTypeLabel(fundingType)
     return label
   }
 
@@ -101,8 +134,7 @@ module.exports = function (env) {
   outputs: "Full time or part time"
   ------------------------------------------------------------------ */
   filters.getStudyModeLabel = (studyMode) => {
-    let label = studyMode
-    label = courseHelper.getStudyModeLabel(studyMode)
+    const label = courseHelper.getStudyModeLabel(studyMode)
     return label
   }
 
@@ -112,8 +144,7 @@ module.exports = function (env) {
   outputs: "PGCE with QTS"
   ------------------------------------------------------------------ */
   filters.getQualificationLabel = (qualification) => {
-    let label = qualification
-    label = courseHelper.getQualificationLabel(qualification)
+    const label = courseHelper.getQualificationLabel(qualification)
     return label
   }
 
@@ -125,8 +156,7 @@ module.exports = function (env) {
   outputs: "Main site"
   ------------------------------------------------------------------ */
   filters.getLocationLabel = (location) => {
-    let label = location
-    label = locationHelper.getLocationLabel(location)
+    const label = locationHelper.getLocationLabel(location)
     return label
   }
 
@@ -138,8 +168,17 @@ module.exports = function (env) {
   outputs: "2021 to 2022 - current"
   ------------------------------------------------------------------ */
   filters.getCycleLabel = (cycle) => {
-    let label = cycle
-    label = cycleHelper.getCycleLabel(cycle)
+    const label = cycleHelper.getCycleLabel(cycle)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the organisation label
+  example: {{ '2022' | getOrganisationLabel }}
+  outputs: "2021 to 2022 - current"
+  ------------------------------------------------------------------ */
+  filters.getOrganisationLabel = (organisation) => {
+    const label = organisationHelper.getOrganisationLabel(organisation)
     return label
   }
 
