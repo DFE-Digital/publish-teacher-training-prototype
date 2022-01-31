@@ -16,6 +16,14 @@ exports.getSubjectLevelOptions = (selectedItem) => {
   return items
 }
 
+exports.getSubjectLevelLabel = (code) => {
+  const subjectLevels = require('../data/subject-levels')
+
+  const label = subjectLevels.find(subjectLevel => subjectLevel.code === code).name
+
+  return label
+}
+
 exports.getSubjectOptions = (subjectLevel, selectedItem) => {
   const items = []
 
@@ -41,6 +49,14 @@ exports.getSubjectOptions = (subjectLevel, selectedItem) => {
   })
 
   return items
+}
+
+exports.getSubjectLabel = (code) => {
+  const subjects = require('../data/subjects')
+
+  const label = subjects.find(subject => subject.code === code).name
+
+  return label
 }
 
 exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
@@ -79,32 +95,6 @@ exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
   if (lastItem) {
     items.push(lastItem)
   }
-
-  return items
-}
-
-exports.getSendOptions = (selectedItem) => {
-  const items = []
-  const sendOptions = [{
-    id: '5289e0bd-830b-46f6-948e-685214651beb',
-    name: 'Yes',
-    code: 'yes'
-  },{
-    id: '0c4ababf-9acb-4105-973d-ce931cf89a94',
-    name: 'No',
-    code: 'no'
-  }]
-
-  sendOptions.forEach((send, i) => {
-    const item = {}
-
-    item.text = send.name
-    item.value = send.code
-    item.id = send.id
-    item.checked = (selectedItem && selectedItem.includes(send.code)) ? 'checked' : ''
-
-    items.push(item)
-  })
 
   return items
 }

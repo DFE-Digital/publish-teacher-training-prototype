@@ -9,6 +9,38 @@ const cycleHelper = require('./cycles')
 //   9: "Not required"
 // }
 
+const sendOptions = [{
+  id: '5289e0bd-830b-46f6-948e-685214651beb',
+  name: 'Yes',
+  code: 'yes'
+},{
+  id: '0c4ababf-9acb-4105-973d-ce931cf89a94',
+  name: 'No',
+  code: 'no'
+}]
+
+exports.getSendOptions = (selectedItem) => {
+  const items = []
+
+  sendOptions.forEach((send, i) => {
+    const item = {}
+
+    item.text = send.name
+    item.value = send.code
+    item.id = send.id
+    item.checked = (selectedItem && selectedItem.includes(send.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  return items
+}
+
+exports.getSendLabel = (code) => {
+  const label = sendOptions.find(send => send.code === code).name
+  return label
+}
+
 exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
   const items = []
 
@@ -47,10 +79,9 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
 }
 
 exports.getAgeRangeLabel = (code) => {
-  let label = code
   const ageRanges = require('../data/age-ranges')
 
-  label = ageRanges.find(ageRange => ageRange.code === code).name
+  let label = ageRanges.find(ageRange => ageRange.code === code).name
 
   if (code === 'other') {
     label = 'Another age range'
@@ -71,7 +102,7 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
     item.text = qualification.name
     item.value = qualification.code
     item.id = qualification.id
-    item.checked = (selectedItem && selectedItem.includes(qualification.code)) ? 'checked' : ''
+    item.checked = (selectedItem && selectedItem === qualification.code) ? 'checked' : ''
 
     item.hint = {}
     item.hint.text = qualification.description
@@ -83,10 +114,9 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
 }
 
 exports.getQualificationLabel = (code) => {
-  let label = code
   const qualifications = require('../data/qualifications')
 
-  label = qualifications.find(qualification => qualification.code === code).name
+  const label = qualifications.find(qualification => qualification.code === code).name
 
   return label
 }
@@ -116,10 +146,9 @@ exports.getFundingTypeOptions = (selectedItem) => {
 }
 
 exports.getFundingTypeLabel = (code) => {
-  let label = code
   const fundingTypes = require('../data/funding-types')
 
-  label = fundingTypes.find(fundingType => fundingType.code === code).name
+  const label = fundingTypes.find(fundingType => fundingType.code === code).name
 
   return label
 }
@@ -143,10 +172,9 @@ exports.getStudyModeOptions = (selectedItem) => {
 }
 
 exports.getStudyModeLabel = (code) => {
-  let label = code
   const studyModes = require('../data/study-modes')
 
-  label = studyModes.find(studyMode => studyMode.code === code).name
+  const label = studyModes.find(studyMode => studyMode.code === code).name
 
   return label
 }
