@@ -115,9 +115,7 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
 
 exports.getQualificationLabel = (code) => {
   const qualifications = require('../data/qualifications')
-
   const label = qualifications.find(qualification => qualification.code === code).name
-
   return label
 }
 
@@ -173,9 +171,7 @@ exports.getStudyModeOptions = (selectedItem) => {
 
 exports.getStudyModeLabel = (code) => {
   const studyModes = require('../data/study-modes')
-
   const label = studyModes.find(studyMode => studyMode.code === code).name
-
   return label
 }
 
@@ -214,10 +210,6 @@ exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
   items.push(other)
 
   return items
-}
-
-exports.getAccreditedBodyLabel = (code) => {
-
 }
 
 exports.getCourseStartSelectOptions = (selectedItem) => {
