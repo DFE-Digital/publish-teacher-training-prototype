@@ -9,7 +9,7 @@ const fs = require('fs')
 const path = require('path')
 const individualFiltersFolder = path.join(__dirname, './filters')
 
-module.exports = function (env) {
+module.exports = (env) => {
   /**
    * Instantiate object used to store the methods registered as a
    * 'filter' (of the same name) within nunjucks. You can override
@@ -20,7 +20,7 @@ module.exports = function (env) {
 
   // Import filters from filters folder
   if (fs.existsSync(individualFiltersFolder)) {
-    var files = fs.readdirSync(individualFiltersFolder)
+    const files = fs.readdirSync(individualFiltersFolder)
     files.forEach(file => {
       let fileData = require(path.join(individualFiltersFolder, file))
       // Loop through each exported function in file (likely just one)
@@ -81,7 +81,12 @@ module.exports = function (env) {
   outputs: "Further education"
   ------------------------------------------------------------------ */
   filters.getSubjectLevelLabel = (subjectLevel) => {
-    const label = subjectHelper.getSubjectLevelLabel(subjectLevel)
+    let label = subjectLevel
+
+    if (subjectLevel) {
+      label = subjectHelper.getSubjectLevelLabel(subjectLevel)
+    }
+
     return label
   }
 
@@ -91,7 +96,12 @@ module.exports = function (env) {
   outputs: "Art and design"
   ------------------------------------------------------------------ */
   filters.getSubjectLabel = (subject) => {
-    const label = subjectHelper.getSubjectLabel(subject)
+    let label = subject
+
+    if (subject) {
+      label = subjectHelper.getSubjectLabel(subject)
+    }
+
     return label
   }
 
@@ -114,7 +124,12 @@ module.exports = function (env) {
   outputs: "5 to 11"
   ------------------------------------------------------------------ */
   filters.getAgeRangeLabel = (ageRange) => {
-    const label = courseHelper.getAgeRangeLabel(ageRange)
+    let label = ageRange
+
+    if (ageRange) {
+      label = courseHelper.getAgeRangeLabel(ageRange)
+    }
+
     return label
   }
 
@@ -124,7 +139,12 @@ module.exports = function (env) {
   outputs: "Fee paying (no salary)"
   ------------------------------------------------------------------ */
   filters.getFundingTypeLabel = (fundingType) => {
-    const label = courseHelper.getFundingTypeLabel(fundingType)
+    let label = fundingType
+
+    if (fundingType) {
+      label = courseHelper.getFundingTypeLabel(fundingType)
+    }
+
     return label
   }
 
@@ -134,7 +154,12 @@ module.exports = function (env) {
   outputs: "Full time or part time"
   ------------------------------------------------------------------ */
   filters.getStudyModeLabel = (studyMode) => {
-    const label = courseHelper.getStudyModeLabel(studyMode)
+    let label = studyMode
+
+    if (studyMode) {
+      label = courseHelper.getStudyModeLabel(studyMode)
+    }
+
     return label
   }
 
@@ -144,7 +169,12 @@ module.exports = function (env) {
   outputs: "PGCE with QTS"
   ------------------------------------------------------------------ */
   filters.getQualificationLabel = (qualification) => {
-    const label = courseHelper.getQualificationLabel(qualification)
+    let label = qualification
+
+    if (qualification) {
+      label = courseHelper.getQualificationLabel(qualification)
+    }
+
     return label
   }
 
@@ -156,7 +186,12 @@ module.exports = function (env) {
   outputs: "Main site"
   ------------------------------------------------------------------ */
   filters.getLocationLabel = (location) => {
-    const label = locationHelper.getLocationLabel(location)
+    let label = location
+
+    if (location) {
+      label = locationHelper.getLocationLabel(location)
+    }
+
     return label
   }
 
@@ -168,7 +203,12 @@ module.exports = function (env) {
   outputs: "2021 to 2022 - current"
   ------------------------------------------------------------------ */
   filters.getCycleLabel = (cycle) => {
-    const label = cycleHelper.getCycleLabel(cycle)
+    let label = cycle
+
+    if (cycle) {
+      label = cycleHelper.getCycleLabel(cycle)
+    }
+
     return label
   }
 
@@ -178,7 +218,12 @@ module.exports = function (env) {
   outputs: "2021 to 2022 - current"
   ------------------------------------------------------------------ */
   filters.getOrganisationLabel = (organisation) => {
-    const label = organisationHelper.getOrganisationLabel(organisation)
+    let label = organisation
+
+    if (organisation) {
+      label = organisationHelper.getOrganisationLabel(organisation)
+    }
+
     return label
   }
 
