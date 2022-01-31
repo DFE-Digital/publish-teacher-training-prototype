@@ -116,6 +116,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', 
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
