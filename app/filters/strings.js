@@ -1,11 +1,12 @@
 // -------------------------------------------------------------------
 // Imports and setup
 // -------------------------------------------------------------------
+const _ = require('lodash')
+const marked = require('marked')
 const string = require('string')
-const _ = require('lodash');
-const marked = require('marked');
+
 // Leave this filters line
-var filters = {}
+const filters = {}
 
 
 // Create url / slugs from text
@@ -53,9 +54,9 @@ filters.isString = str => {
 // Assessment only => an Assesment only
 // Provider-led => a provider led
 filters.prependWithAOrAn = string => {
-  var vowelRegex = '^[aieouAIEOU].*'
-  var matched = string.match(vowelRegex)
-  if(matched){
+  const vowelRegex = '^[aieouAIEOU].*'
+  const matched = string.match(vowelRegex)
+  if (matched) {
     return `an ${string}`
   }
   else{
@@ -79,7 +80,7 @@ filters.currency = input => {
 // Emulate support for string literals in Nunjucks
 // Usage:
 // {{ 'The count is ${count}' | stringLiteral }}
-filters.stringLiteral = function(str) {
+filters.stringLiteral = (str) => {
   return (new Function('with (this) { return `' + str + '` }')).call(this.ctx)
 }
 

@@ -1,0 +1,102 @@
+{% extends "_layout.njk" %}
+
+{% set caption = "Add course" %}
+{% set title = ("Error: " if errors) + "Specify an age range" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors }}">
+
+          {% call govukFieldset({
+            legend: {
+              html: headingHtml
+            }
+          }) %}
+
+          {% if errors %}
+            <span id="age-range-error" class="govuk-error-message">
+              <div><span class="govuk-visually-hidden">Error:</span> Enter an age range</div>
+            </span>
+          {% endif %}
+
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% for option in ageRangeOptions %}
+              {% if option.divider %}
+                <div class="govuk-radios__divider">{{ option.divider }}</div>
+              {% else %}
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="{{ option.id }}" name="course[ageRange]" type="radio" value="{{ option.value }}" {{ option.checked }} {% if option.conditional %}data-aria-controls="conditional-{{ option.id }}"{% endif %}>
+                  <label class="govuk-label govuk-radios__label" for="{{ option.id }}">
+                    {{- option.text -}}
+                  </label>
+                </div>
+                {% if option.conditional %}
+                  <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
+                    <p class="govuk-hint">
+                      Enter an age range in years, for example 5 to 11. The course must cover 4 or more school years.
+                    </p>
+
+                    {{ govukInput({
+                      id: option.id + "-from",
+                      name: "course[ageRangeOther][from]",
+                      label: {
+                        text: "From"
+                      },
+                      classes: "govuk-input--width-2"
+                    }) }}
+
+                    {{ govukInput({
+                      id: option.id + "-to",
+                      name: "course[ageRangeOther][to]",
+                      label: {
+                        text: "To"
+                      },
+                      classes: "govuk-input--width-2"
+                    }) }}
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% endcall %}
+
+        </div>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

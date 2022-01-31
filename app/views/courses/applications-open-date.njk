@@ -1,0 +1,107 @@
+{% extends "_layout.njk" %}
+
+{% set caption = "Add course" %}
+{% set title = ("Error: " if errors) + "When will applications open?" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set otherHtml %}
+
+          {{ govukDateInput({
+            id: "application-open-date-other",
+            namePrefix: "course[applicationOpenDateOther]",
+            fieldset: {
+              legend: {
+                text: "When will applications open?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "For example, 30 9 2022"
+            },
+            errorMessage: errors | getErrorMessage("application-open-date-other"),
+            items: [
+            {
+              name: "day",
+              value: data.course.applicationOpenDateOther[0],
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "month",
+              value: data.course.applicationOpenDateOther[1],
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "year",
+              value: data.course.applicationOpenDateOther[2],
+              classes: "govuk-input--width-4"
+            }
+            ]
+          }) }}
+
+        {% endset %}
+
+        {{ govukRadios({
+          idPrefix: "application-open-date",
+          name: "course[applicationOpenDate]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          errorMessage: errors | getErrorMessage("application-open-date"),
+          items: [
+            {
+              value: data.currentCycle.applyOpens | date,
+              text: "As soon as the course is on Find (recommended)",
+              checked: true if data.course.applicationOpenDate == (data.currentCycle.applyOpens | date)
+            },
+            {
+              value: "other",
+              text: "Another date",
+              checked: true if data.course.applicationOpenDate == "other",
+              conditional: {
+                html: otherHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

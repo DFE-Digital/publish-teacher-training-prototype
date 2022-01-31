@@ -21,13 +21,12 @@ exports.auth_get = (req, res) => {
   delete req.session.data.username
   delete req.session.data.password
   req.session.data.user = req.session.passport.user
+  // TODO: load user's organisations and courses into session
   res.redirect('/')
 }
 
 exports.sign_out_get = (req, res) => {
-  delete req.session.data.username
-  delete req.session.data.password
-  delete req.session.data.user
+  delete req.session.data
   delete req.session.passport
   req.flash('success','Signed out')
   res.redirect('/sign-in')

@@ -94,14 +94,14 @@
     "name": "English as a second or other language",
     "code": "16",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "9727f674-61ba-4efa-b1f2-21ec7e354442",
     "name": "French",
     "code": "15",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "9de4b2d2-5739-4c34-92d2-9b4384760298",
@@ -120,7 +120,7 @@
     "name": "German",
     "code": "17",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "b1c3659e-5021-4f1e-a218-16b115f46fbc",
@@ -139,14 +139,14 @@
     "name": "Italian",
     "code": "18",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "dbae1e2d-e1c7-4b6d-897d-d5be177a884a",
     "name": "Japanese",
     "code": "19",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "fa7ee0d3-4cd4-475a-9280-f6b63b0dc466",
@@ -159,7 +159,7 @@
     "name": "Mandarin",
     "code": "20",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "72345aa7-096c-488f-8649-085b8178cadb",
@@ -170,6 +170,7 @@
   {
     "id": "ce8523ef-9236-4cd9-b260-d826c7a521b3",
     "name": "Modern Languages",
+    "code": "ML",
     "level": "secondary"
   },
   {
@@ -177,7 +178,7 @@
     "name": "Modern languages (other)",
     "code": "24",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "24311bef-8673-41fb-933c-53f887fb6976",
@@ -262,7 +263,7 @@
     "name": "Russian",
     "code": "21",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   },
   {
     "id": "ed329bbc-6bb1-481f-98f7-8815f8c4fd68",
@@ -281,6 +282,6 @@
     "name": "Spanish",
     "code": "22",
     "level": "secondary",
-    "parentCode": "24"
+    "parentCode": "ML"
   }
 ]

@@ -1,10 +1,10 @@
 // -------------------------------------------------------------------
 // Imports and setup
 // -------------------------------------------------------------------
-var _ = require('lodash');
-// Leave this filters line
-var filters = {}
+const _ = require('lodash')
 
+// Leave this filters line
+const filters = {}
 
 // Merge arrays or strings together in to an array
 filters.combineArrays = (arr1=[], arr2=[]) => {
@@ -97,9 +97,9 @@ filters.cleanArray = (array) => {
   return newArray
 }
 
-const joinArray = (array, options={}) => {
+const joinArray = (array, options = {}) => {
 
-  var defaults = {
+  let defaults = {
     delimiter: ', ',
     append: '',
     prepend: ''
@@ -125,7 +125,7 @@ const joinArray = (array, options={}) => {
   if (_.isString(array)) {
     array = [array]
   }
-  if (_.isString(options)) options = {delimiter: options}
+  if (_.isString(options)) options = { delimiter: options }
 
   // Merge options and defaults
   options = Object.assign({}, defaults, options)
@@ -133,7 +133,7 @@ const joinArray = (array, options={}) => {
   options.lastDelimiter = options.lastDelimiter || options.delimiter
 
   // Strip trailing space from delimiters and add breaks
-  if (options.newlines){
+  if (options.newlines) {
     options.delimiter = options.delimiter.replace(/\s+$/g, '') + "\n"
     options.lastDelimiter = options.lastDelimiter.replace(/\s+$/g, '') + "\n"
   }
@@ -154,7 +154,7 @@ const joinArray = (array, options={}) => {
 
   // Create string
   // console.log(array)
-  var last = array.pop();
+  let last = array.pop();
   return options.prepend + array.join(options.delimiter) + options.lastDelimiter + last + options.append;
 }
 

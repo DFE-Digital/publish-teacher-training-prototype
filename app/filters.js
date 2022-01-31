@@ -1,3 +1,9 @@
+const courseHelper = require('./helpers/courses')
+const cycleHelper = require('./helpers/cycles')
+const locationHelper = require('./helpers/locations')
+const organisationHelper = require('./helpers/organisations')
+const subjectHelper = require('./helpers/subjects')
+
 const _ = require('lodash')
 const fs = require('fs')
 const path = require('path')
@@ -69,79 +75,112 @@ module.exports = function (env) {
     return error
   }
 
-  // filters.addMoreToFields = function (fields, more) {
-  //   fields.forEach(f => {
-  //     f.more = more
-  //   })
-  //
-  //   return fields
-  // }
-  //
-  // filters.push = (array, item) => {
-  //   array.push(item)
-  //   return array
-  // }
-  //
-  // /**
-  //  * Convert array to readable list format
-  //  * @param {Array} array Array to convert
-  //  * @example [A, B, C] => A, B and C
-  //  */
-  // filters.formatList = (array = []) => {
-  //   const lf = new Intl.ListFormat('en')
-  //   return lf.format(array)
-  // }
-  //
-  // /**
-  //  * Convert array to readable list format
-  //  * @param {Array} array Array to convert
-  //  * @example [A, B, C] => A, B or C
-  //  */
-  // filters.formatOrList = (array = []) => {
-  //   const lf = new Intl.ListFormat('en', { style: 'short', type: 'disjunction' })
-  //   return lf.format(array)
-  // }
-  //
-  // /**
-  //  * Find item in array of objects
-  //  * @param {Array} array Array to search
-  //  * @param {string} key Key
-  //  * @param {value} value Value
-  //  */
-  // filters.find = (array, key, value) => {
-  //   return array.find(item => item[key] === value)
-  // }
+  /* ------------------------------------------------------------------
+  utility function to get the subject level label
+  example: {{ 'further_education' | getSubjectLevelLabel }}
+  outputs: "Further education"
+  ------------------------------------------------------------------ */
+  filters.getSubjectLevelLabel = (subjectLevel) => {
+    const label = subjectHelper.getSubjectLevelLabel(subjectLevel)
+    return label
+  }
 
   /* ------------------------------------------------------------------
-    add your methods to the filters obj below this comment block:
-    @example:
-
-    filters.sayHi = function(name) {
-        return 'Hi ' + name + '!'
-    }
-
-    Which in your templates would be used as:
-
-    {{ 'Paul' | sayHi }} => 'Hi Paul'
-
-    Notice the first argument of your filters method is whatever
-    gets 'piped' via '|' to the filter.
-
-    Filters can take additional arguments, for example:
-
-    filters.sayHi = function(name,tone) {
-      return (tone == 'formal' ? 'Greetings' : 'Hi') + ' ' + name + '!'
-    }
-
-    Which would be used like this:
-
-    {{ 'Joel' | sayHi('formal') }} => 'Greetings Joel!'
-    {{ 'Gemma' | sayHi }} => 'Hi Gemma!'
-
-    For more on filters and how to write them see the Nunjucks
-    documentation.
-
+  utility function to get the subject label
+  example: {{ 'W1' | getSubjectLabel }}
+  outputs: "Art and design"
   ------------------------------------------------------------------ */
+  filters.getSubjectLabel = (subject) => {
+    const label = subjectHelper.getSubjectLabel(subject)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the SEND label
+  example: {{ 'yes' | getSendLabel }}
+  outputs: "Yes"
+  ------------------------------------------------------------------ */
+  filters.getSendLabel = (send) => {
+    let label
+    if (send) {
+      label = courseHelper.getSendLabel(send)
+    }
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the age range label
+  example: {{ '5_to_11' | getAgeRangeLabel }}
+  outputs: "5 to 11"
+  ------------------------------------------------------------------ */
+  filters.getAgeRangeLabel = (ageRange) => {
+    const label = courseHelper.getAgeRangeLabel(ageRange)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the funding type label
+  example: {{ 'fee' | getFundingTypeLabel }}
+  outputs: "Fee paying (no salary)"
+  ------------------------------------------------------------------ */
+  filters.getFundingTypeLabel = (fundingType) => {
+    const label = courseHelper.getFundingTypeLabel(fundingType)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the study mode label
+  example: {{ 'both' | getStudyModeLabel }}
+  outputs: "Full time or part time"
+  ------------------------------------------------------------------ */
+  filters.getStudyModeLabel = (studyMode) => {
+    const label = courseHelper.getStudyModeLabel(studyMode)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the qualification label
+  example: {{ 'pgce_with_qts' | getQualificationLabel }}
+  outputs: "PGCE with QTS"
+  ------------------------------------------------------------------ */
+  filters.getQualificationLabel = (qualification) => {
+    const label = courseHelper.getQualificationLabel(qualification)
+    return label
+  }
+
+  // TODO: qualification description
+
+  /* ------------------------------------------------------------------
+  utility function to get the location label
+  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2' | getLocationLabel }}
+  outputs: "Main site"
+  ------------------------------------------------------------------ */
+  filters.getLocationLabel = (location) => {
+    const label = locationHelper.getLocationLabel(location)
+    return label
+  }
+
+  // TODO: location description
+
+  /* ------------------------------------------------------------------
+  utility function to get the cycle label
+  example: {{ '2022' | getCycleLabel }}
+  outputs: "2021 to 2022 - current"
+  ------------------------------------------------------------------ */
+  filters.getCycleLabel = (cycle) => {
+    const label = cycleHelper.getCycleLabel(cycle)
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the organisation label
+  example: {{ '2022' | getOrganisationLabel }}
+  outputs: "2021 to 2022 - current"
+  ------------------------------------------------------------------ */
+  filters.getOrganisationLabel = (organisation) => {
+    const label = organisationHelper.getOrganisationLabel(organisation)
+    return label
+  }
 
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
