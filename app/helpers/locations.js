@@ -19,7 +19,7 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
     item.text = location.name
     item.value = location.id
     item.id = location.id
-    item.checked = (selectedItem && selectedItem.includes(location.code)) ? 'checked' : ''
+    item.checked = (selectedItem && selectedItem.includes(location.id)) ? 'checked' : ''
 
     item.hint = {}
     item.hint.text = utils.arrayToList(

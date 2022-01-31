@@ -50,8 +50,10 @@ exports.new_course_subject_level_get = (req, res) => {
   const subjectLevelOptions = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
   if (req.query.referrer === 'check') {
+    save += '?referrer=check'
     back += '/new/check'
   }
 
@@ -59,8 +61,8 @@ exports.new_course_subject_level_get = (req, res) => {
     subjectLevelOptions,
     sendOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
-      back: back,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -82,13 +84,20 @@ exports.new_course_subject_level_post = (req, res) => {
   const subjectLevelOptions = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back += '/new/check'
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject-level', {
       subjectLevelOptions,
       sendOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -106,11 +115,18 @@ exports.new_course_subject_get = (req, res) => {
 
   const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/subject', {
     subjectOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -126,12 +142,19 @@ exports.new_course_subject_post = (req, res) => {
 
   const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
       subjectOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -279,11 +302,18 @@ exports.new_course_qualification_get = (req, res) => {
 
   const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/qualification', {
     qualificationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -299,12 +329,19 @@ exports.new_course_qualification_post = (req, res) => {
 
   const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/qualification', {
       qualificationOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -331,11 +368,18 @@ exports.new_course_funding_type_get = (req, res) => {
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/funding-type', {
     fundingTypeOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -351,12 +395,19 @@ exports.new_course_funding_type_post = (req, res) => {
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/funding-type', {
       fundingTypeOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -378,11 +429,18 @@ exports.new_course_apprenticeship_get = (req, res) => {
 
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/qualification`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/apprenticeship', {
     apprenticeshipOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -398,12 +456,19 @@ exports.new_course_apprenticeship_post = (req, res) => {
 
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/qualification`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
       apprenticeshipOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -425,19 +490,23 @@ exports.new_course_study_mode_get = (req, res) => {
 
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
 
-  let back = ''
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
   // TODO: if organisation is a lead school else scitt
-  if (true) {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
-  } else {
+  if (false) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
+  }
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
   res.render('../views/courses/study-mode', {
     studyModeOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
-      back: back,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -453,20 +522,25 @@ exports.new_course_study_mode_post = (req, res) => {
 
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
 
-  let back = ''
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
+
   // TODO: if organisation is a lead school else scitt
-  if (true) {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
-  } else {
+  if (false) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
+  }
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
   if (errors.length) {
     res.render('../views/courses/study-mode', {
       studyModeOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
-        back: back,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -482,17 +556,24 @@ exports.new_course_study_mode_post = (req, res) => {
 
 exports.new_course_location_get = (req, res) => {
   let selectedLocation
-  if (req.session.data.course && req.session.data.course.location) {
-    selectedLocation = req.session.data.course.location
+  if (req.session.data.course && req.session.data.course.locations) {
+    selectedLocation = req.session.data.course.locations
   }
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/location', {
     locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -502,18 +583,25 @@ exports.new_course_location_post = (req, res) => {
   const errors = []
 
   let selectedLocation
-  if (req.session.data.course && req.session.data.course.location) {
-    selectedLocation = req.session.data.course.location
+  if (req.session.data.course && req.session.data.course.locations) {
+    selectedLocation = req.session.data.course.locations
   }
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
 
   if (errors.length) {
     res.render('../views/courses/location', {
       locationOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -542,12 +630,19 @@ exports.new_course_accredited_body_get = (req, res) => {
 
   const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/accredited-body', {
     accreditedBodyOptions,
     accreditedBodies,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -570,13 +665,20 @@ exports.new_course_accredited_body_post = (req, res) => {
 
   const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
       accreditedBodyOptions,
       accreditedBodies,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -591,10 +693,17 @@ exports.new_course_accredited_body_post = (req, res) => {
 }
 
 exports.new_course_applications_open_date_get = (req, res) => {
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/applications-open-date', {
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -603,11 +712,18 @@ exports.new_course_applications_open_date_get = (req, res) => {
 exports.new_course_applications_open_date_post = (req, res) => {
   const errors = []
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
@@ -629,11 +745,18 @@ exports.new_course_course_start_get = (req, res) => {
 
   const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   res.render('../views/courses/course-start', {
     courseStartOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
     }
   })
@@ -649,12 +772,19 @@ exports.new_course_course_start_post = (req, res) => {
 
   const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
   if (errors.length) {
     res.render('../views/courses/course-start', {
       courseStartOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
       },
       errors
