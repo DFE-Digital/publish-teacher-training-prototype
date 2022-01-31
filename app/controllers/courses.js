@@ -48,7 +48,7 @@ exports.new_course_subject_level_get = (req, res) => {
   }
 
   const subjectLevelOptions = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
-  const sendOptions = subjectHelper.getSendOptions(selectedSend)
+  const sendOptions = courseHelper.getSendOptions(selectedSend)
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
   if (req.query.referrer === 'check') {
@@ -80,7 +80,7 @@ exports.new_course_subject_level_post = (req, res) => {
   }
 
   const subjectLevelOptions = subjectHelper.getSubjectLevelOptions(selectedSubjectLevel)
-  const sendOptions = subjectHelper.getSendOptions(selectedSend)
+  const sendOptions = courseHelper.getSendOptions(selectedSend)
 
   if (errors.length) {
     res.render('../views/courses/subject-level', {
@@ -147,8 +147,8 @@ exports.new_course_subject_post = (req, res) => {
 
 exports.new_course_modern_language_get = (req, res) => {
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.childSubject) {
-    selectedSubject = req.session.data.course.childSubject
+  if (req.session.data.course && req.session.data.course.childSubjects) {
+    selectedSubject = req.session.data.course.childSubjects
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
@@ -174,8 +174,8 @@ exports.new_course_modern_language_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.childSubject) {
-    selectedSubject = req.session.data.course.childSubject
+  if (req.session.data.course && req.session.data.course.childSubjects) {
+    selectedSubject = req.session.data.course.childSubjects
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
@@ -216,7 +216,7 @@ exports.new_course_age_range_get = (req, res) => {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   } else {
-    if (req.session.data.course.childSubject && req.session.data.course.childSubject.length) {
+    if (req.session.data.course.childSubjects && req.session.data.course.childSubjects.length) {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
     }
   }
@@ -247,7 +247,7 @@ exports.new_course_age_range_post = (req, res) => {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   } else {
-    if (req.session.data.course.childSubject && req.session.data.course.childSubject.length) {
+    if (req.session.data.course.childSubjects && req.session.data.course.childSubjects.length) {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
     }
   }

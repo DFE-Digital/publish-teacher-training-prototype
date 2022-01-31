@@ -24,6 +24,26 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set locationHtml %}
+          <ul class="govuk-list">
+            {% for location in course.locations %}
+              <li>
+                {{ location | getLocationLabel }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endset %}
+
+        {% set childSubjectHtml %}
+          <ul class="govuk-list">
+            {% for subject in course.childSubjects %}
+              <li>
+                {{ subject | getSubjectLabel }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endset %}
+
         {{ govukSummaryList({
           rows: [
             {
@@ -31,7 +51,7 @@
                 text: "Subject level"
               },
               value: {
-                text: course.subjectLevel
+                text: course.subjectLevel | getSubjectLevelLabel
               },
               actions: {
                 items: [
@@ -48,7 +68,7 @@
                 text: "Special educational needs and disability (SEND)"
               },
               value: {
-                text: course.isSend
+                text: course.isSend | getSendLabel
               },
               actions: {
                 items: [
@@ -65,7 +85,7 @@
                 text: "Subject"
               },
               value: {
-                text: course.subject
+                text: course.subject | getSubjectLabel
               },
               actions: {
                 items: [
@@ -82,7 +102,7 @@
                 text: "Modern language" + ("s" if course.childSubject > 1)
               },
               value: {
-                text: course.childSubject
+                html: childSubjectHtml
               },
               actions: {
                 items: [
@@ -184,7 +204,7 @@
                 text: "Location"
               },
               value: {
-                text: course.location
+                html: locationHtml
               },
               actions: {
                 items: [
@@ -201,7 +221,7 @@
                 text: "Accredited body"
               },
               value: {
-                text: course.accreditedBody
+                text: course.accreditedBody | getOrganisationLabel
               },
               actions: {
                 items: [
@@ -218,7 +238,7 @@
                 text: "Applications open date"
               },
               value: {
-                text: course.applicationOpenDate
+                text: course.applicationOpenDate | date('dd LLLL yyyy')
               },
               actions: {
                 items: [

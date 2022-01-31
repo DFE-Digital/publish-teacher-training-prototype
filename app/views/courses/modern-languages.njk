@@ -29,14 +29,14 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukCheckboxes({
-          idPrefix: "child-subject",
-          name: "course[childSubject]",
+          idPrefix: "child-subjects",
+          name: "course[childSubjects]",
           fieldset: {
             legend: {
               html: headingHtml
             }
           },
-          errorMessage: errors | getErrorMessage("child-subject"),
+          errorMessage: errors | getErrorMessage("child-subjects"),
           items: subjectOptions
         }) }}
 
