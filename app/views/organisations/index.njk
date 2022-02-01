@@ -1,11 +1,69 @@
 {% extends "_layout.njk" %}
 
-{% set title = ""  %}
+{% set title = organisation.name  %}
+{% set caption = ""  %}
 
 {% block beforeContent %}
-
+{% if data.user.organisations.length > 1 %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/organisations"
+  }) }}
+{% endif %}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+      <p class="govuk-body-l">
+        Manage courses, locations and vacancies in the current cycle.
+      </p>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations">About your organisation</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>write about your organisation</li>
+        <li>set your contact details</li>
+        <li>publish this information on all course pages</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/locations">Locations</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>edit location names and addresses</li>
+        <li>add locations</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations/{{ organisation.code }}/cycles/2022/courses">Courses</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>add and remove courses</li>
+        <li>edit, preview and publish courses</li>
+        <li>assign locations to a course</li>
+        <li>copy content between courses</li>
+      </ul>
+
+    </div>
+  </div>
 {% endblock %}

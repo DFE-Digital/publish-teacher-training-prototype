@@ -116,6 +116,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', 
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
@@ -136,21 +138,19 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuth
 //
 // router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycles.list_get)
 //
-router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_detail)
+router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
 
-// router.get('/', organisations.home_get)
-
-/// ------------------------------------------------------------------------ ///
-/// HOME ROUTES
-/// ------------------------------------------------------------------------ ///
+// router.get('/', organisations.rollover)
 
 router.get('/', checkIsAuthenticated, (req, res) => {
-  res.render('index', {})
+  res.redirect('/organisations')
 })
 
 
-
+/// ------------------------------------------------------------------------ ///
+/// END
+/// ------------------------------------------------------------------------ ///
 module.exports = router

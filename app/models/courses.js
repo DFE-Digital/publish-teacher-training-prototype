@@ -1,24 +1,26 @@
-exports.find = (data) => {
-
+exports.find = (params) => {
+  let courses = require('../data/courses')
+  courses = courses.filter(course => course.trainingProvider.code === params.organisationId)
+  return courses
 }
 
 exports.findOne = (id) => {
 
 }
 
-exports.insertOne = (data) => {
+exports.insertOne = (params) => {
 
 }
 
-exports.insertMany = (data) => {
+exports.insertMany = (params) => {
 
 }
 
-exports.updateOne = (id, data) => {
+exports.updateOne = (id, params) => {
 
 }
 
-exports.updateMany = (data) => {
+exports.updateMany = (params) => {
 
 }
 
@@ -26,6 +28,6 @@ exports.deleteOne = (id) => {
 
 }
 
-exports.deleteMany = (data) => {
+exports.deleteMany = (params) => {
 
 }

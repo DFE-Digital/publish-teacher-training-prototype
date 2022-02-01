@@ -1,6 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Publish teacher training courses" %}
+{% set title = "Thorpe St Andrew School and Sixth Form" %}
+{% set caption = data.currentCycle.code | getCycleLabel %}
 
 {% block beforeContent %}
 
@@ -12,16 +13,50 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">
+          {{ caption }}
+        </span>
         {{ title }}
       </h1>
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="/organisations/1ZN/cycles/2022/courses/new/subject-level">New course</a>
+      <p class="govuk-body-l">
+        Manage courses, locations and vacancies in the current cycle.
       </p>
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="/organisations">Organisations</a>
-      </p>
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations">About your organisation</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>write about your organisation</li>
+        <li>set your contact details</li>
+        <li>publish this information on all course pages</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/locations">Locations</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>edit location names and addresses</li>
+        <li>add locations</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations/1ZN/cycles/2022/courses">Courses</a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>add and remove courses</li>
+        <li>edit, preview and publish courses</li>
+        <li>assign locations to a course</li>
+        <li>copy content between courses</li>
+      </ul>
 
     </div>
   </div>

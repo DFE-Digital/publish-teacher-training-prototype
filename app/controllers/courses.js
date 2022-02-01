@@ -1,6 +1,7 @@
 const courseModel = require('../models/courses')
-const courseHelper = require('../helpers/courses')
+const organisationRelationshipModel = require('../models/organisation-relationships')
 
+const courseHelper = require('../helpers/courses')
 const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
@@ -8,10 +9,43 @@ const subjectHelper = require('../helpers/subjects')
 exports.course_list = (req, res) => {
   // clean out course data
   delete req.session.data.course
+
+  const courses = courseModel.find({ organisationId: req.params.organisationId })
+
+  const relationships = organisationRelationshipModel.find({organisationId: req.params.organisationId}).accreditedBodies
+
+  let groupedCourses = []
+
+  if (relationships.length) {
+    courses.sort((a,b) => {
+      return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
+        || a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+
+    relationships.forEach((relationship, i) => {
+      const group = {}
+      group.code = relationship.code
+      group.name = relationship.name
+      group.courses = courses.filter(course => course.accreditedBody.code === relationship.code)
+      groupedCourses.push(group)
+    })
+  } else {
+    courses.sort((a,b) => {
+      return a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+    groupedCourses.push({courses: courses})
+  }
+
   res.render('../views/courses/list', {
+    courses: groupedCourses,
     actions: {
-      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
+      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      back: `/`
     }
   })
 }
@@ -35,6 +69,10 @@ exports.course_description = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 /// NEW COURSE
 /// ------------------------------------------------------------------------ ///
+
+exports.new_course_get = (req, res) => {
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`);
+}
 
 exports.new_course_subject_level_get = (req, res) => {
   let selectedSubjectLevel
