@@ -23,6 +23,12 @@
         </span>
         {{ title }}
       </h1>
+
+      {{ govukButton({
+        text: "Add course",
+        href: actions.new
+      }) }}
+
     </div>
   </div>
 
@@ -30,15 +36,17 @@
     <div class="govuk-grid-column-full">
 
       {% for provider in courses %}
-        <h2 class="govuk-heading-m">
-          <span class="govuk-caption-m">
-            Accredited body
-          </span>
-          {{ provider.name }}
-        </h2>
+
+        {% if provider.name %}
+          <h2 class="govuk-heading-m">
+            <span class="govuk-caption-m">
+              Accredited body
+            </span>
+            {{ provider.name }}
+          </h2>
+        {% endif %}
 
         <table class="govuk-table app-table--vertical-align-middle">
-          <!--  app-table--courses -->
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
               <th class="govuk-table__header govuk-!-width-one-third">Course</th>
@@ -84,13 +92,6 @@
         </table>
 
       {% endfor %}
-
-
-
-      {{ govukButton({
-        text: "Add course",
-        href: actions.new
-      }) }}
 
     </div>
   </div>
