@@ -1,4 +1,5 @@
 const courseModel = require('../models/courses')
+const organisationModel = require('../models/organisations')
 const organisationRelationshipModel = require('../models/organisation-relationships')
 
 const courseHelper = require('../helpers/courses')
@@ -55,11 +56,31 @@ exports.course_list = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.course_details = (req, res) => {
-  res.send('NOT IMPLEMENTED: Course detail: ' + req.params.courseId)
+  const course = courseModel.findOne(req.params.courseId)
+  const organisation = organisationModel.findOne(req.params.organisationId)
+  res.render('../views/courses/details', {
+    course,
+    organisation,
+    actions: {
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
 }
 
 exports.course_description = (req, res) => {
-  res.send('NOT IMPLEMENTED: Course description: ' + req.params.courseId)
+  const course = courseModel.findOne(req.params.courseId)
+  const organisation = organisationModel.findOne(req.params.organisationId)
+  res.render('../views/courses/description', {
+    course,
+    organisation,
+    actions: {
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
 }
 
 /// ------------------------------------------------------------------------ ///
