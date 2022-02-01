@@ -1,11 +1,39 @@
 {% extends "_layout.njk" %}
 
-{% set title = ""  %}
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = ""  %} <!-- organisation.name -->
+
+{% set subNavId = "details" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "./_sub-navigation.njk" %}
+
+    </div>
 {% endblock %}
