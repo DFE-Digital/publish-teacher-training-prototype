@@ -1,0 +1,17 @@
+.app-template--support {
+  .govuk-header__container {
+    margin-bottom: 0;
+  }
+
+  .govuk-header__logo {
+    @include govuk-media-query($from: tablet) {
+      width: 60%;
+    }
+  }
+
+  .govuk-header__content {
+    @include govuk-media-query($from: tablet) {
+      width: 40%;
+    }
+  }
+}
