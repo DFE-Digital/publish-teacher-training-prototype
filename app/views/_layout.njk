@@ -31,8 +31,19 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
-{% from "_components/autocomplete/macro.njk"   import appAutocompleteFromSelect %}
-{% from "_components/autocomplete/macro.njk"   import appAutocompleteFromInput %}
+{% from "_components/autocomplete/macro.njk"           import appAutocompleteFromInput %}
+{% from "_components/autocomplete/macro.njk"           import appAutocompleteFromSelect %}
+{% from "_components/badge/macro.njk"                  import appBadge %}
+{% from "_components/banner/macro.njk"                 import appBanner %}
+{% from "_components/filter/macro.njk"                 import appFilter %}
+{% from "_components/metric/macro.njk"                 import appMetric %}
+{% from "_components/page-header-actions/macro.njk"    import appPageHeaderActions %}
+{% from "_components/pagination/macro.njk"             import appPagination %}
+{% from "_components/primary-navigation/macro.njk"     import appPrimaryNavigation %}
+{% from "_components/search/macro.njk"                 import appSearch %}
+{% from "_components/sub-navigation/macro.njk"         import appSubNavigation %}
+{% from "_components/summary-card/macro.njk"           import appSummaryCard %}
+{% from "_components/timeline/macro.njk"               import appTimeline %}
 
 {% block head %}
   {% include "_includes/head.njk" %}
