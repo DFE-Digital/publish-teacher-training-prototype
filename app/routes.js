@@ -145,6 +145,10 @@ router.get('/organisations', checkIsAuthenticated, organisationController.organi
 
 // router.get('/', organisations.rollover)
 
+router.get('/', checkIsAuthenticated, (req, res) => {
+  res.redirect('/organisations')
+})
+
 
 /// ------------------------------------------------------------------------ ///
 /// END
