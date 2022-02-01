@@ -5,7 +5,9 @@ exports.find = (params) => {
 }
 
 exports.findOne = (id) => {
-
+  let courses = require('../data/courses')
+  courses = courses.find(course => course.code === id)
+  return courses
 }
 
 exports.insertOne = (params) => {
