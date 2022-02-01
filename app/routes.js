@@ -138,21 +138,15 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuth
 //
 // router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycles.list_get)
 //
-router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_detail)
+router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
 
-// router.get('/', organisations.home_get)
+// router.get('/', organisations.rollover)
+
 
 /// ------------------------------------------------------------------------ ///
-/// HOME ROUTES
+/// END
 /// ------------------------------------------------------------------------ ///
-
-router.get('/', checkIsAuthenticated, (req, res) => {
-  res.render('index', {})
-})
-
-
-
 module.exports = router

@@ -1,0 +1,35 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Organisations"  %}
+{% set caption = ""  %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+      <ul class="govuk-list govuk-list--spaced">
+        {% for organisation in organisations %}
+          <li>
+            <a class="govuk-link" href="/organisations/{{ organisation.code }}">
+              {{ organisation.name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+{% endblock %}

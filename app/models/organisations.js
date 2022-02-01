@@ -1,24 +1,26 @@
-exports.find = (data) => {
+exports.find = (params) => {
 
 }
 
 exports.findOne = (id) => {
+  let organisations = require('../data/organisations')
+  organisations = organisations.find(organisation => organisation.code === id)
+  return organisations
+}
+
+exports.insertOne = (params) => {
 
 }
 
-exports.insertOne = (data) => {
+exports.insertMany = (params) => {
 
 }
 
-exports.insertMany = (data) => {
+exports.updateOne = (id, params) => {
 
 }
 
-exports.updateOne = (id, data) => {
-
-}
-
-exports.updateMany = (data) => {
+exports.updateMany = (params) => {
 
 }
 
@@ -26,6 +28,6 @@ exports.deleteOne = (id) => {
 
 }
 
-exports.deleteMany = (data) => {
+exports.deleteMany = (params) => {
 
 }
