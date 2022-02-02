@@ -199,6 +199,20 @@
         Requirements and eligibility
       </h2>
 
+      {% set degreeHtml %}
+        <p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Enter degree requirements</a>
+        </p>
+      {% endset %}
+
+      {% set gcseHtml %}
+        <p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Enter GCSE and equivalency test requirements</a>
+        </p>
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -206,7 +220,10 @@
               text: "Degree"
             },
             value: {
-              text: "Item value"
+              html: govukInsetText({
+                html: degreeHtml,
+                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+              })
             },
             actions: {
               items: [
@@ -214,7 +231,7 @@
                   href: "Item URL",
                   text: "Change",
                   visuallyHiddenText: "degree"
-                }
+                } if 1 == 0
               ]
             }
           },
@@ -223,7 +240,10 @@
               text: "GCSEs"
             },
             value: {
-              text: "Item value"
+              html: govukInsetText({
+                html: gcseHtml,
+                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+              })
             },
             actions: {
               items: [
@@ -231,7 +251,7 @@
                   href: "Item URL",
                   text: "Change",
                   visuallyHiddenText: "GCSEs"
-                }
+                } if 1 == 0
               ]
             }
           },
