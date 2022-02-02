@@ -1,0 +1,68 @@
+{% if subNavId == "description" %}
+  <div class="app-status-box">
+    <h3 class="govuk-heading-m">Status</h3>
+
+    <p class="govuk-body">
+      {{ govukTag({
+        text: "Empty",
+        classes: "govuk-tag--grey app-tag--grey"
+      }) }}
+    </p>
+
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+      Is it on <abbr class="app-!-text-decoration-underline-dotted" title="Find postgraduate teacher training">Find</abbr>?
+    </h3>
+    <p class="govuk-body">
+      No – still in draft
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+
+    <h3 class="govuk-heading-m">Preview</h3>
+    <p class="govuk-body">See how your unpublished changes will look on Find.</p>
+    <p class="govuk-body">Preview to check for mistakes before publishing.</p>
+    <p class="govuk-body">
+      <a class="govuk-link" href="{{ actions.preview }}">Preview course</a>
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+
+    <h4 class="govuk-heading-m">Publish</h4>
+    <p class="govuk-body">Publish your changes.</p>
+    <p class="govuk-body">You can make changes to this course after publishing it.</p>
+
+    {{ govukButton({
+      text: "Publish",
+      href: actions.publish,
+      classes: "govuk-!-margin-bottom-0"
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+
+    <h3 class="govuk-heading-m govuk-visually-hidden">Delete</h3>
+    <p class="govuk-body">
+      <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete this course</a>
+    </p>
+  </div>
+{% endif %}
+
+{% if subNavId == "details" %}
+  <div class="app-status-box">
+    <h3 class="govuk-heading-m">Changing your basic details</h3>
+    <p class="govuk-body">At the moment you can change:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><abbr class="app-!-text-decoration-underline-dotted" title="Special educational needs and disability">SEND</abbr> specialism</li>
+      <li>age range</li>
+      <li>outcome</li>
+      <li>full time or part time</li>
+      <li>application open date</li>
+      <li>course start date</li>
+      <li>GCSE requirements</li>
+    </ul>
+
+    <p class="govuk-body">
+      To request other changes to your basic details contact the Becoming a Teacher team:<br>
+      <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Edit%20Design%20and%20technology%20%281A4%2FB250%29">becomingateacher<wbr>@digital.education.gov.uk</a>
+    </p>
+  </div>
+{% endif %}

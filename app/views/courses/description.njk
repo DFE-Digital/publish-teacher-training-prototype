@@ -36,4 +36,247 @@
       {% include "./_sub-navigation.njk" %}
 
     </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">
+        Course information
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "About this course"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "about this course"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Interview process (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "interview process"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "How school placements work"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "how school placements work"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Course length and fees
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Course length"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "course length"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee for UK student"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "fee for UK student"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee for international students (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "fee for international students"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee details (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "fee details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Financial support you offer (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "financial support you offer"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Requirements and eligibility
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Degree"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "degree"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "GCSEs"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "GCSEs"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Personal qualities (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "personal qualities"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Other requirements (optional)"
+            },
+            value: {
+              text: "Item value"
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "other requirements"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+      {% include "./_sidebar.njk" %}
+
+    </div>
+  </div>
 {% endblock %}
