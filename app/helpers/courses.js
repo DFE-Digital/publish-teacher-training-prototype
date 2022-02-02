@@ -37,7 +37,13 @@ exports.getSendOptions = (selectedItem) => {
 }
 
 exports.getSendLabel = (code) => {
-  const label = sendOptions.find(send => send.code === code).name
+  const option = sendOptions.find(send => send.code === code)
+  let label = code
+
+  if (option) {
+    label = option.name
+  }
+
   return label
 }
 
@@ -80,8 +86,13 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
 
 exports.getAgeRangeLabel = (code) => {
   const ageRanges = require('../data/age-ranges')
+  const ageRange = ageRanges.find(ageRange => ageRange.code === code)
 
-  let label = ageRanges.find(ageRange => ageRange.code === code).name
+  let label = code
+
+  if (ageRange) {
+    label = ageRange.name
+  }
 
   if (code === 'other') {
     label = 'Another age range'
@@ -115,7 +126,14 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
 
 exports.getQualificationLabel = (code) => {
   const qualifications = require('../data/qualifications')
-  const label = qualifications.find(qualification => qualification.code === code).name
+  const qualification = qualifications.find(qualification => qualification.code === code)
+
+  let label = code
+
+  if (qualification) {
+    label = qualification.name
+  }
+
   return label
 }
 
@@ -145,8 +163,13 @@ exports.getFundingTypeOptions = (selectedItem) => {
 
 exports.getFundingTypeLabel = (code) => {
   const fundingTypes = require('../data/funding-types')
+  const fundingType = fundingTypes.find(fundingType => fundingType.code === code)
 
-  const label = fundingTypes.find(fundingType => fundingType.code === code).name
+  let label = code
+
+  if (fundingType) {
+    label = fundingType.name
+  }
 
   return label
 }
@@ -171,7 +194,14 @@ exports.getStudyModeOptions = (selectedItem) => {
 
 exports.getStudyModeLabel = (code) => {
   const studyModes = require('../data/study-modes')
-  const label = studyModes.find(studyMode => studyMode.code === code).name
+  const studyMode = studyModes.find(studyMode => studyMode.code === code)
+
+  let label = code
+
+  if (studyMode) {
+    label = studyMode.name
+  }
+
   return label
 }
 

@@ -40,6 +40,13 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
 
 exports.getLocationLabel = (code) => {
   const locations = require('../data/locations')
-  const label = locations.find(location => location.id === code).name
+  const location = locations.find(location => location.id === code)
+
+  let label = code
+
+  if (location) {
+    label = location.name
+  }
+
   return label
 }

@@ -24,6 +24,13 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
 
 exports.getOrganisationLabel = (code) => {
   const organisations = require('../data/organisations')
-  const label = organisations.find(organisation => organisation.code === code).name
+  const organisation = organisations.find(organisation => organisation.code === code)
+
+  let label = code
+
+  if (organisation) {
+    label = organisation.name
+  }
+
   return label
 }

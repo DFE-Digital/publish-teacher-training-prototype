@@ -18,7 +18,14 @@ exports.getSubjectLevelOptions = (selectedItem) => {
 
 exports.getSubjectLevelLabel = (code) => {
   const subjectLevels = require('../data/subject-levels')
-  const label = subjectLevels.find(subjectLevel => subjectLevel.code === code).name
+  const subjectLevel = subjectLevels.find(subjectLevel => subjectLevel.code === code)
+
+  let label = code
+
+  if (subjectLevel) {
+    label = subjectLevel.name
+  }
+
   return label
 }
 
@@ -51,7 +58,14 @@ exports.getSubjectOptions = (subjectLevel, selectedItem) => {
 
 exports.getSubjectLabel = (code) => {
   const subjects = require('../data/subjects')
-  const label = subjects.find(subject => subject.code === code).name
+  const subject = subjects.find(subject => subject.code === code)
+
+  let label = code
+
+  if (subject) {
+    label = subject.name
+  }
+
   return label
 }
 
