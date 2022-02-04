@@ -10,7 +10,7 @@ const utils = require('./utils')
 exports.getLocationOptions = (organisationId, selectedItem) => {
   const items = []
 
-  let locations = require('../data/locations')
+  let locations = require('../data/temp/locations')
   locations = locations.filter(location => location.organisation.code === organisationId)
 
   locations.forEach((location, i) => {
@@ -39,7 +39,7 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
 }
 
 exports.getLocationLabel = (code) => {
-  const locations = require('../data/locations')
+  const locations = require('../data/temp/locations')
   const location = locations.find(location => location.id === code)
 
   let label = code
