@@ -268,6 +268,21 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the course status colour
+  example: {{ "1" | getCourseStatusColour }}
+  outputs: "govuk-tag--green"
+  ------------------------------------------------------------------ */
+  filters.getCourseStatusClasses = (status) => {
+    let label
+
+    if (status.toString()) {
+      label = courseHelper.getCourseStatusClasses(status)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters

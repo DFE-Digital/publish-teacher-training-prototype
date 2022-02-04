@@ -313,9 +313,6 @@ exports.getCourseLengthLabel = (code) => {
 exports.getCourseStatusLabel = (code) => {
   const courseStatuses = require('../data/course-statuses')
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
-console.log(code);
-console.log(courseStatuses);
-console.log(courseStatus);
 
   let label = code
 
@@ -324,4 +321,17 @@ console.log(courseStatus);
   }
 
   return label
+}
+
+exports.getCourseStatusClasses = (code) => {
+  const courseStatuses = require('../data/course-statuses')
+  const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
+
+  let classes
+
+  if (courseStatus) {
+    classes = courseStatus.classes
+  }
+
+  return classes
 }
