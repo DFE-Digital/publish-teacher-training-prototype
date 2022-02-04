@@ -70,7 +70,8 @@ exports.course_details = (req, res) => {
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
 }
@@ -84,7 +85,8 @@ exports.course_description = (req, res) => {
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
 }
