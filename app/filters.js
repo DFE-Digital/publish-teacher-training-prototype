@@ -5,6 +5,7 @@ const organisationHelper = require('./helpers/organisations')
 const subjectHelper = require('./helpers/subjects')
 
 const _ = require('lodash')
+const numeral = require('numeral');
 const fs = require('fs')
 const path = require('path')
 const individualFiltersFolder = path.join(__dirname, './filters')
@@ -56,6 +57,15 @@ module.exports = (env) => {
       else if (falsyValues.includes(input.toLowerCase())) return false
     }
     return input
+  }
+
+  /* ------------------------------------------------------------------
+   numeral filter for use in Nunjucks
+   example: {{ params.number | numeral("0,00.0") }}
+   outputs: 1,000.00
+  ------------------------------------------------------------------ */
+  filters.numeral = (number, format) => {
+   return numeral(number).format(format)
   }
 
   /* ------------------------------------------------------------------
@@ -222,6 +232,21 @@ module.exports = (env) => {
 
     if (organisation) {
       label = organisationHelper.getOrganisationLabel(organisation)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the course length label
+  example: {{ 'OneYear' | getCourseLengthLabel }}
+  outputs: "One year"
+  ------------------------------------------------------------------ */
+  filters.getCourseLengthLabel = (length) => {
+    let label = length
+
+    if (length) {
+      label = courseHelper.getCourseLengthLabel(length)
     }
 
     return label
