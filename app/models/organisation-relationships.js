@@ -1,5 +1,5 @@
 exports.find = (params) => {
-  let relationships = require('../data/organisation-relationships')
+  let relationships = require('../data/temp/organisation-relationships')
   relationships = relationships.find(relationship => relationship.code === params.organisationId)
 
   relationships.accreditedBodies.sort((a,b) => {
