@@ -309,3 +309,19 @@ exports.getCourseLengthLabel = (code) => {
 
   return label
 }
+
+exports.getCourseStatusLabel = (code) => {
+  const courseStatuses = require('../data/course-statuses')
+  const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
+console.log(code);
+console.log(courseStatuses);
+console.log(courseStatus);
+
+  let label = code
+
+  if (courseStatus) {
+    label = courseStatus.name
+  }
+
+  return label
+}

@@ -253,6 +253,21 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the course status label
+  example: {{ "1" | getCourseStatusLabel }}
+  outputs: "Published"
+  ------------------------------------------------------------------ */
+  filters.getCourseStatusLabel = (status) => {
+    let label = status
+
+    if (status.toString()) {
+      label = courseHelper.getCourseStatusLabel(status)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters
