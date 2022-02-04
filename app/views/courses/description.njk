@@ -52,12 +52,12 @@
               text: "About this course"
             },
             value: {
-              text: "Item value"
+              text: course.aboutCourse
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/about-course?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "about this course"
                 }
@@ -69,12 +69,12 @@
               text: "Interview process (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.interviewProcess
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/interview-process?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "interview process"
                 }
@@ -86,12 +86,12 @@
               text: "How school placements work"
             },
             value: {
-              text: "Item value"
+              text: course.howSchoolPlacementsWork
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/school-placements",
                   text: "Change",
                   visuallyHiddenText: "how school placements work"
                 }
@@ -112,12 +112,13 @@
               text: "Course length"
             },
             value: {
-              text: "Item value"
+              text: course.courseLength | getCourseLengthLabel if course.courseLength.length else "Not entered",
+              classes: "govuk-hint" if not course.courseLength.length
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/course-length",
                   text: "Change",
                   visuallyHiddenText: "course length"
                 }
@@ -129,12 +130,13 @@
               text: "Fee for UK student"
             },
             value: {
-              text: "Item value"
+              text: course.feesUK | numeral('0,0.[00]') if course.feesUK else "Not entered",
+              classes: "govuk-hint" if not course.feesUK
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee for UK student"
                 }
@@ -146,12 +148,13 @@
               text: "Fee for international students (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.feesInternational if course.feesInternational else "Not entered",
+              classes: "govuk-hint" if not course.feesInternational
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee for international students"
                 }
@@ -163,12 +166,13 @@
               text: "Fee details (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.feeDetails if course.feeDetails.length else "Not entered",
+              classes: "govuk-hint" if not course.feeDetails.length
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee details"
                 }
@@ -180,12 +184,13 @@
               text: "Financial support you offer (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.financialSupport if course.financialSupport.length else "Not entered",
+              classes: "govuk-hint" if not course.financialSupport.length
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/financial-support?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "financial support you offer"
                 }
@@ -228,7 +233,7 @@
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/degree?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "degree"
                 } if 1 == 0
@@ -248,7 +253,7 @@
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/gcse?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "GCSEs"
                 } if 1 == 0
@@ -260,12 +265,12 @@
               text: "Personal qualities (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.personalQualities
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/personal-qualities?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "personal qualities"
                 }
@@ -277,12 +282,12 @@
               text: "Other requirements (optional)"
             },
             value: {
-              text: "Item value"
+              text: course.otherRequirements
             },
             actions: {
               items: [
                 {
-                  href: "Item URL",
+                  href: actions.change + "/other-requirements?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "other requirements"
                 }

@@ -41,21 +41,21 @@
 
       {% set locationHtml %}
         <ul class="govuk-list">
-          {#% for location in course.locations %}
+          {% for location in course.locations %}
             <li>
-              {{ location | getLocationLabel }}
+              {{ location.id | getLocationLabel }}
             </li>
-          {% endfor %#}
+          {% endfor %}
         </ul>
       {% endset %}
 
-      {% set childSubjectHtml %}
+      {% set subjectHtml %}
         <ul class="govuk-list">
-          {#% for subject in course.childSubjects %}
+          {% for subject in course.subjects %}
             <li>
-              {{ subject | getSubjectLabel }}
+              {{ subject.code | getSubjectLabel }}
             </li>
-          {% endfor %#}
+          {% endfor %}
         </ul>
       {% endset %}
 
@@ -100,7 +100,7 @@
               text: "Subject"
             },
             value: {
-              text: course.subject | getSubjectLabel
+              html: subjectHtml
             },
             actions: {
               items: [
@@ -216,7 +216,7 @@
           },
           {
             key: {
-              text: "Location"
+              text: "Location" + ("s" if course.locations > 1)
             },
             value: {
               html: locationHtml
@@ -236,7 +236,7 @@
               text: "Accredited body"
             },
             value: {
-              text: course.accreditedBody | getOrganisationLabel
+              text: course.accreditedBody.id | getOrganisationLabel
             },
             actions: {
               items: [
@@ -253,7 +253,7 @@
               text: "Applications open date"
             },
             value: {
-              text: course.applicationOpenDate | date('dd LLLL yyyy')
+              text: "PLACEHOLDER"
             },
             actions: {
               items: [
@@ -270,7 +270,7 @@
               text: "Course start"
             },
             value: {
-              text: course.courseStart | date("MMMM yyyy")
+              text: course.startDate | date("MMMM yyyy")
             },
             actions: {
               items: [
