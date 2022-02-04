@@ -212,23 +212,23 @@ const seedCourses = () => {
       c.updatedAt = ce.updated_at
     }
 
-    if (c.trainingProvider) {
-      // write course data to file
-      const directoryPath = path.join(__dirname, '../data/seed/courses/' + c.trainingProvider.id)
-
-      // check if document directory exists
-      if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath)
-      }
-
-      const raw = JSON.stringify(c)
-
-      const fileName = c.id + '.json'
-      const filePath = directoryPath + '/' + fileName
-
-      // write the JSON data
-      fs.writeFileSync(filePath, raw)
-    }
+    // if (c.trainingProvider) {
+    //   // write course data to file
+    //   const directoryPath = path.join(__dirname, '../data/seed/courses/' + c.trainingProvider.id)
+    //
+    //   // check if document directory exists
+    //   if (!fs.existsSync(directoryPath)) {
+    //     fs.mkdirSync(directoryPath)
+    //   }
+    //
+    //   const raw = JSON.stringify(c)
+    //
+    //   const fileName = c.id + '.json'
+    //   const filePath = directoryPath + '/' + fileName
+    //
+    //   // write the JSON data
+    //   fs.writeFileSync(filePath, raw)
+    // }
 
     // output course info
     console.log(i, c);
