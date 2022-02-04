@@ -6,6 +6,7 @@ const passport = require('passport')
 // Controller modules
 const authenticationController = require('./controllers/authentication.js')
 const courseController = require('./controllers/courses.js')
+const dataController = require('./controllers/data.js')
 const locationController = require('./controllers/locations.js')
 const organisationController = require('./controllers/organisations.js')
 
@@ -149,6 +150,7 @@ router.get('/', checkIsAuthenticated, (req, res) => {
   res.redirect('/organisations')
 })
 
+router.get('/seed', dataController.seed)
 
 /// ------------------------------------------------------------------------ ///
 /// END
