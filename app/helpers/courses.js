@@ -296,3 +296,16 @@ exports.getApprenticeshipOptions = (selectedItem) => {
 
   return items
 }
+
+exports.getCourseLengthLabel = (code) => {
+  const courseLengths = require('../data/course-lengths')
+  const courseLength = courseLengths.find(courseLength => courseLength.code === code)
+
+  let label = code
+
+  if (courseLength) {
+    label = courseLength.name
+  }
+
+  return label
+}
