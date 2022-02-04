@@ -4,8 +4,8 @@
 
     <p class="govuk-body">
       {{ govukTag({
-        text: "Empty",
-        classes: "govuk-tag--grey app-tag--grey"
+        text: course.status | getCourseStatusLabel,
+        classes: course.status | getCourseStatusClasses
       }) }}
     </p>
 

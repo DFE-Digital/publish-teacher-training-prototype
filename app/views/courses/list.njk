@@ -61,7 +61,11 @@
                   </span>
                 </td>
                 <td class="govuk-table__cell">
-                  <strong class="govuk-tag govuk-tag--green">Published</strong>
+                  {{ govukTag({
+                    text: course.status | getCourseStatusLabel,
+                    classes: course.status | getCourseStatusClasses
+                  }) }}
+                  <!-- <strong class="govuk-tag govuk-tag--green">Published</strong> -->
                 </td>
                 <td class="govuk-table__cell">
                   <a class="govuk-link" href="#">
