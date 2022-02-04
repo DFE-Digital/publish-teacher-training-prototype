@@ -30,7 +30,7 @@
       </p>
 
       <h2 class="govuk-heading-m">
-        <a class="govuk-link" href="/organisations">About your organisation</a>
+        <a class="govuk-link" href="/organisations/{{ organisation.id }}">About your organisation</a>
       </h2>
 
       <p class="govuk-body">Use this section to:</p>
@@ -42,7 +42,7 @@
       </ul>
 
       <h2 class="govuk-heading-m">
-        <a class="govuk-link" href="/locations">Locations</a>
+        <a class="govuk-link" href="/organisations/{{ organisation.id }}/locations">Locations</a>
       </h2>
 
       <p class="govuk-body">Use this section to:</p>
@@ -52,7 +52,7 @@
       </ul>
 
       <h2 class="govuk-heading-m">
-        <a class="govuk-link" href="/organisations/{{ organisation.code }}/cycles/2022/courses">Courses</a>
+        <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022/courses">Courses</a>
       </h2>
 
       <p class="govuk-body">Use this section to:</p>
