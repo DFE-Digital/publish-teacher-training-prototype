@@ -3,8 +3,8 @@ exports.find = (params) => {
 }
 
 exports.findOne = (id) => {
-  let organisations = require('../data/organisations')
-  organisations = organisations.find(organisation => organisation.code === id)
+  let organisations = require('../data/temp/organisations')
+  organisations = organisations.find(organisation => organisation.id === id)
   return organisations
 }
 
