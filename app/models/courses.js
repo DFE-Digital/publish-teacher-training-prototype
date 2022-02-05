@@ -44,26 +44,37 @@ exports.findOne = (params = {}) => {
   return course
 }
 
-exports.insertOne = (params) => {
+exports.insertOne = (params = {}) => {
 
 }
 
-exports.insertMany = (params) => {
+// exports.insertMany = (params = {}) => {
+//
+// }
 
+exports.updateOne = (params = {}) => {
+  if (params.organisationId && params.courseId) {
+
+    let course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
+
+
+
+  }
 }
 
-exports.updateOne = (id, params) => {
+// exports.updateMany = (params) => {
+//
+// }
 
+exports.deleteOne = (params = {}) => {
+  if (params.organisationId && params.courseId) {
+    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.courseId + '.json'
+    fs.unlinkSync(filePath)
+  }
 }
 
-exports.updateMany = (params) => {
-
-}
-
-exports.deleteOne = (id) => {
-
-}
-
-exports.deleteMany = (params) => {
-
-}
+// exports.deleteMany = (params) => {
+//
+// }
