@@ -86,7 +86,7 @@ const seedCourses = () => {
 
     // course subjects
     // TODO: use course.id
-    const cs = courseSubjects.find(courseSubject => courseSubject.code === course.code)
+    const cs = courseSubjects.find(courseSubject => courseSubject.uuid === course.id)
 
     if (cs) {
       const subj = []
@@ -111,8 +111,7 @@ const seedCourses = () => {
     }
 
     // course locations
-    // TODO: use course.id
-    const cl = courseLocations.find(courseLocation => courseLocation.code === course.code)
+    const cl = courseLocations.find(courseLocation => courseLocation.uuid === course.id)
 
     if (cl) {
       c.locations = cl.locations
@@ -224,8 +223,12 @@ const seedCourses = () => {
       }
 
       c.status = ce.status
+
       c.createdAt = ce.created_at
-      c.updatedAt = ce.updated_at
+
+      if (ce.updated_at || ce.updated_at !== null) {
+        c.updatedAt = ce.updated_at
+      }
     }
 
     // if (c.trainingProvider) {
@@ -247,7 +250,7 @@ const seedCourses = () => {
     // }
 
     // output course info
-    // console.log(i, c)
+    console.log(i, c)
 
   })
 
