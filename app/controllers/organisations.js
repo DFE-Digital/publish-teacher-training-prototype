@@ -22,7 +22,7 @@ exports.organisations_list = (req, res) => {
       organisations
     })
   } else {
-    const organisationId = req.session.data.user.organisations[0].code
+    const organisationId = req.session.data.user.organisations[0].id
     res.redirect(`/organisations/${organisationId}`);
   }
 }

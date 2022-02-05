@@ -1,7 +1,7 @@
 exports.getAccreditedBodySelectOptions = (selectedItem) => {
   const items = []
 
-  let organisations = require('../data/organisations')
+  let organisations = require('../data/temp/organisations')
   organisations = organisations.filter(organisation => organisation.isAccreditedBody === 'true')
 
   organisations.forEach((organisation, i) => {
@@ -23,7 +23,14 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
 }
 
 exports.getOrganisationLabel = (code) => {
-  const organisations = require('../data/organisations')
-  const label = organisations.find(organisation => organisation.code === code).name
+  const organisations = require('../data/temp/organisations')
+  const organisation = organisations.find(organisation => organisation.id === code)
+
+  let label = code
+
+  if (organisation) {
+    label = organisation.name
+  }
+
   return label
 }

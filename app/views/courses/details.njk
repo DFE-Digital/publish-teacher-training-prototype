@@ -1,11 +1,286 @@
 {% extends "_layout.njk" %}
 
-{% set title = ""  %}
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = ""  %} <!-- organisation.name -->
+
+{% set subNavId = "details" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "./_sub-navigation.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set locationHtml %}
+        <ul class="govuk-list">
+          {% for location in course.locations %}
+            <li>
+              {{ location.id | getLocationLabel }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {% set subjectHtml %}
+        <ul class="govuk-list">
+          {% for subject in course.subjects %}
+            <li>
+              {{ subject.code | getSubjectLabel }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Subject level"
+            },
+            value: {
+              text: course.subjectLevel | getSubjectLevelLabel
+            }
+          },
+          {
+            key: {
+              text: "Special educational needs and disability (SEND) specialism"
+            },
+            value: {
+              text: course.isSend | getSendLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/subject-level?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "special educational needs and disability (SEND)"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Subject" + ("s" if course.subjects.length > 1)
+            },
+            value: {
+              html: subjectHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/subject?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "subject"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Modern language" + ("s" if course.childSubject > 1)
+            },
+            value: {
+              html: childSubjectHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/modern-language?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "modern language"
+                }
+              ]
+            }
+          } if course.subject == 'ML',
+          {
+            key: {
+              text: "Age range"
+            },
+            value: {
+              text: course.ageRange | getAgeRangeLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/age-range?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "age range"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Qualification"
+            },
+            value: {
+              text: course.qualification | getQualificationLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/qualification?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "qualification"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Teaching apprenticeship"
+            },
+            value: {
+              text: course.apprenticeship | capitalize
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/apprenticeship?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "apprenticeship"
+                }
+              ]
+            }
+          } if course.apprenticeship,
+          {
+            key: {
+              text: "Funding type"
+            },
+            value: {
+              text: course.fundingType | getFundingTypeLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/funding-type?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "funding type"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Full time or part time"
+            },
+            value: {
+              text: course.studyMode | getStudyModeLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/study-mode?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "full time or part time"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Location" + ("s" if course.locations > 1)
+            },
+            value: {
+              html: locationHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/location?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "location"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Accredited body"
+            },
+            value: {
+              text: course.accreditedBody.id | getOrganisationLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/accredited-body?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "accredited body"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Applications open date"
+            },
+            value: {
+              text: (course.applicationsOpenDate if course.applicationsOpenDate else data.currentCycle.applyOpens) | date("dd MMMM yyyy")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/applications-open-date?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "applications-open-date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Course start"
+            },
+            value: {
+              text: course.startDate | date("MMMM yyyy")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/course-start?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "course start"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+      {% include "./_sidebar.njk" %}
+
+    </div>
+  </div>
 {% endblock %}

@@ -1,11 +1,307 @@
 {% extends "_layout.njk" %}
 
-{% set title = ""  %}
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = ""  %} <!-- organisation.name -->
+
+{% set subNavId = "description" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "./_sub-navigation.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">
+        Course information
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "About this course"
+            },
+            value: {
+              text: course.aboutCourse
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/about-course?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "about this course"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Interview process (optional)"
+            },
+            value: {
+              text: course.interviewProcess
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/interview-process?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "interview process"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "How school placements work"
+            },
+            value: {
+              text: course.howSchoolPlacementsWork
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/school-placements",
+                  text: "Change",
+                  visuallyHiddenText: "how school placements work"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Course length and fees
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Course length"
+            },
+            value: {
+              text: course.courseLength | getCourseLengthLabel if course.courseLength.length else "Not entered",
+              classes: "govuk-hint" if not course.courseLength.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/course-length",
+                  text: "Change",
+                  visuallyHiddenText: "course length"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee for UK student"
+            },
+            value: {
+              text: "£" + course.feesUK | numeral('0,0.[00]') if course.feesUK else "Not entered",
+              classes: "govuk-hint" if not course.feesUK
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/fees?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "fee for UK student"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee for international students (optional)"
+            },
+            value: {
+              text: "£" + course.feesInternational if course.feesInternational else "Not entered",
+              classes: "govuk-hint" if not course.feesInternational
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/fees?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "fee for international students"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fee details (optional)"
+            },
+            value: {
+              text: course.feeDetails if course.feeDetails.length else "Not entered",
+              classes: "govuk-hint" if not course.feeDetails.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/fees?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "fee details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Financial support you offer (optional)"
+            },
+            value: {
+              text: course.financialSupport if course.financialSupport.length else "Not entered",
+              classes: "govuk-hint" if not course.financialSupport.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/financial-support?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "financial support you offer"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Requirements and eligibility
+      </h2>
+
+      {% set degreeHtml %}
+        <p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Enter degree requirements</a>
+        </p>
+      {% endset %}
+
+      {% set gcseHtml %}
+        <p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Enter GCSE and equivalency test requirements</a>
+        </p>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Degree"
+            },
+            value: {
+              html: govukInsetText({
+                html: degreeHtml,
+                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+              })
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/degree?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "degree"
+                } if 1 == 0
+              ]
+            }
+          },
+          {
+            key: {
+              text: "GCSEs"
+            },
+            value: {
+              html: govukInsetText({
+                html: gcseHtml,
+                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+              })
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/gcse?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "GCSEs"
+                } if 1 == 0
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Personal qualities (optional)"
+            },
+            value: {
+              text: course.personalQualities
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/personal-qualities?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "personal qualities"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Other requirements (optional)"
+            },
+            value: {
+              text: course.otherRequirements
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/other-requirements?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "other requirements"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+      {% include "./_sidebar.njk" %}
+
+    </div>
+  </div>
 {% endblock %}

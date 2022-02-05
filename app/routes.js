@@ -6,6 +6,7 @@ const passport = require('passport')
 // Controller modules
 const authenticationController = require('./controllers/authentication.js')
 const courseController = require('./controllers/courses.js')
+const dataController = require('./controllers/data.js')
 const locationController = require('./controllers/locations.js')
 const organisationController = require('./controllers/organisations.js')
 
@@ -114,9 +115,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-s
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
-
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
@@ -149,6 +150,7 @@ router.get('/', checkIsAuthenticated, (req, res) => {
   res.redirect('/organisations')
 })
 
+router.get('/seed', dataController.seed)
 
 /// ------------------------------------------------------------------------ ///
 /// END
