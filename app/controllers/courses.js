@@ -109,8 +109,8 @@ exports.edit_course_send_get = (req, res) => {
     course,
     sendOptions,
     actions: {
-      save: ``,
-      back: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/special-educational-needs-disability`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -132,13 +132,14 @@ exports.edit_course_send_post = (req, res) => {
       course,
       sendOptions,
       actions: {
-        save: ``,
-        back: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/special-educational-needs-disability`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','SEND specialism updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -158,7 +159,7 @@ exports.edit_course_subject_get = (req, res) => {
     subjectOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -181,12 +182,13 @@ exports.edit_course_subject_post = (req, res) => {
       subjectOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Subject updated')
     if (selectedSubject === 'ML') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
     } else {
@@ -210,7 +212,7 @@ exports.edit_course_modern_language_get = (req, res) => {
     subjectOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -233,12 +235,13 @@ exports.edit_course_modern_language_post = (req, res) => {
       subjectOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Subject updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`)
   }
 }
@@ -258,7 +261,7 @@ exports.edit_course_age_range_get = (req, res) => {
     ageRangeOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -281,12 +284,13 @@ exports.edit_course_age_range_post = (req, res) => {
       ageRangeOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Age range updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -306,7 +310,7 @@ exports.edit_course_qualification_get = (req, res) => {
     qualificationOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -329,12 +333,13 @@ exports.edit_course_qualification_post = (req, res) => {
       qualificationOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Qualification updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -354,7 +359,7 @@ exports.edit_course_funding_type_get = (req, res) => {
     fundingTypeOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -377,12 +382,13 @@ exports.edit_course_funding_type_post = (req, res) => {
       fundingTypeOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Funding type updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -402,7 +408,7 @@ exports.edit_course_apprenticeship_get = (req, res) => {
     apprenticeshipOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -426,12 +432,13 @@ exports.edit_course_apprenticeship_post = (req, res) => {
       apprenticeshipOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Apprenticeship updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -451,7 +458,7 @@ exports.edit_course_study_mode_get = (req, res) => {
     studyModeOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -474,12 +481,13 @@ exports.edit_course_study_mode_post = (req, res) => {
       studyModeOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Full time or part time updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -499,7 +507,7 @@ exports.edit_course_location_get = (req, res) => {
     locationOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -522,12 +530,13 @@ exports.edit_course_location_post = (req, res) => {
       locationOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Location updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -555,7 +564,7 @@ exports.edit_course_accredited_body_get = (req, res) => {
     accreditedBodies,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -586,12 +595,13 @@ exports.edit_course_accredited_body_post = (req, res) => {
       accreditedBodies,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Accredited body updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -603,7 +613,7 @@ exports.edit_course_applications_open_date_get = (req, res) => {
     course,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -618,12 +628,13 @@ exports.edit_course_applications_open_date_post = (req, res) => {
       course,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Date applications open updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -643,7 +654,7 @@ exports.edit_course_course_start_get = (req, res) => {
     courseStartOptions,
     actions: {
       save: ``,
-      back: ``,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -666,12 +677,13 @@ exports.edit_course_course_start_post = (req, res) => {
       courseStartOptions,
       actions: {
         save: ``,
-        back: ``,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    req.flash('success','Start date updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
