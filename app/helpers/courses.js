@@ -208,7 +208,7 @@ exports.getStudyModeLabel = (code) => {
 exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
   const items = []
 
-  let relationships = require('../data/organisation-relationships')
+  let relationships = require('../data/temp/organisation-relationships')
   if (organisationId) {
     relationships = relationships.find(relationship => relationship.code === organisationId)
   }
