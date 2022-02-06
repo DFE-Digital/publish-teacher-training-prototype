@@ -99,9 +99,10 @@ exports.edit_course_send_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedSend
-  if (req.session.data.course && req.session.data.course.isSend) {
-    selectedSend = req.session.data.course.isSend
+  if (course && course.isSend) {
+    selectedSend = course.isSend
   }
+
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
   res.render('../views/courses/special-educational-needs-disability', {
@@ -146,8 +147,8 @@ exports.edit_course_subject_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (course && course.subject) {
+    selectedSubject = course.subject
   }
 
   const subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
@@ -198,8 +199,8 @@ exports.edit_course_modern_language_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+  if (course && course.childSubjects) {
+    selectedSubject = course.childSubjects
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions(course.subject, selectedSubject)
@@ -246,8 +247,8 @@ exports.edit_course_age_range_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedAgeRange
-  if (req.session.data.course && req.session.data.course.ageRange) {
-    selectedAgeRange = req.session.data.course.ageRange
+  if (course && course.ageRange) {
+    selectedAgeRange = course.ageRange
   }
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(course.subjectLevel, selectedAgeRange)
@@ -294,8 +295,8 @@ exports.edit_course_qualification_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedQualification
-  if (req.session.data.course && req.session.data.course.qualification) {
-    selectedQualification = req.session.data.course.qualification
+  if (course && course.qualification) {
+    selectedQualification = course.qualification
   }
 
   const qualificationOptions = courseHelper.getQualificationOptions(course.subjectLevel, selectedQualification)
@@ -342,8 +343,8 @@ exports.edit_course_funding_type_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedFundingType
-  if (req.session.data.course && req.session.data.course.fundingType) {
-    selectedFundingType = req.session.data.course.fundingType
+  if (course && course.fundingType) {
+    selectedFundingType = course.fundingType
   }
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
@@ -390,8 +391,8 @@ exports.edit_course_apprenticeship_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedApprenticeshipOption
-  if (req.session.data.course && req.session.data.course.apprenticeship) {
-    selectedApprenticeshipOption = req.session.data.course.apprenticeship
+  if (course && course.apprenticeship) {
+    selectedApprenticeshipOption = course.apprenticeship
   }
 
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
@@ -439,8 +440,8 @@ exports.edit_course_study_mode_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedStudyMode
-  if (req.session.data.course && req.session.data.course.studyMode) {
-    selectedStudyMode = req.session.data.course.studyMode
+  if (course && course.studyMode) {
+    selectedStudyMode = course.studyMode
   }
 
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
@@ -487,8 +488,8 @@ exports.edit_course_location_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedLocation
-  if (req.session.data.course && req.session.data.course.locations) {
-    selectedLocation = req.session.data.course.locations
+  if (course && course.locations) {
+    selectedLocation = course.locations
   }
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
@@ -535,15 +536,15 @@ exports.edit_course_accredited_body_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedAccreditedBody
-  if (req.session.data.course && req.session.data.course.accreditedBody) {
-    selectedAccreditedBody = req.session.data.course.accreditedBody
+  if (course && course.accreditedBody) {
+    selectedAccreditedBody = course.accreditedBody
   }
 
   const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let selectedAccreditedBodyOther
-  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
-    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  if (course && course.accreditedBodyOther) {
+    selectedAccreditedBodyOther = course.accreditedBodyOther
   }
 
   const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
@@ -630,12 +631,12 @@ exports.edit_course_applications_open_date_post = (req, res) => {
 exports.edit_course_course_start_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
-  let selectedCourseStart
-  if (req.session.data.course && req.session.data.course.courseStart) {
-    selectedCourseStart = req.session.data.course.courseStart
+  let selectedCourseStartDate
+  if (req.session.data.course && req.session.data.course.startDate) {
+    selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
 
   res.render('../views/courses/course-start', {
     course,
