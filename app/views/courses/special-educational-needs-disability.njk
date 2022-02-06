@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Edit course" %}
 {% set title = ("Error: " if errors) + "Special educational needs and disability (SEND)" %}
+{% set caption = course.name + " (" + course.code + ")" %}
 
 {% block beforeContent %}
 {{ govukBackLink({

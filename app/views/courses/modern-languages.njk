@@ -1,7 +1,12 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Add course" %}
 {% set title = ("Error: " if errors) + "Pick all the languages for this course" %}
+
+{% if course %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
 
 {% block beforeContent %}
 {{ govukBackLink({
