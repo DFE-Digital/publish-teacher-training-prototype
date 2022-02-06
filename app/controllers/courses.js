@@ -95,6 +95,562 @@ exports.course_description = (req, res) => {
 /// EDIT COURSE
 /// ------------------------------------------------------------------------ ///
 
+exports.edit_course_send_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedSend
+  if (req.session.data.course && req.session.data.course.isSend) {
+    selectedSend = req.session.data.course.isSend
+  }
+  const sendOptions = courseHelper.getSendOptions(selectedSend)
+
+  res.render('../views/courses/special-educational-needs-disability', {
+    sendOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_send_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedSend
+  if (req.session.data.course && req.session.data.course.isSend) {
+    selectedSend = req.session.data.course.isSend
+  }
+
+  const sendOptions = courseHelper.getSendOptions(selectedSend)
+
+  if (errors.length) {
+    res.render('../views/courses/special-educational-needs-disability', {
+      sendOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_subject_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subject) {
+    selectedSubject = req.session.data.course.subject
+  }
+
+  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+
+  res.render('../views/courses/subject', {
+    subjectOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_subject_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.subject) {
+    selectedSubject = req.session.data.course.subject
+  }
+
+  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+
+  if (errors.length) {
+    res.render('../views/courses/subject', {
+      subjectOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    if (selectedSubject === 'ML') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    }
+  }
+}
+
+exports.edit_course_modern_language_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.childSubjects) {
+    selectedSubject = req.session.data.course.childSubjects
+  }
+
+  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+
+  res.render('../views/courses/modern-languages', {
+    subjectOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_modern_language_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedSubject
+  if (req.session.data.course && req.session.data.course.childSubjects) {
+    selectedSubject = req.session.data.course.childSubjects
+  }
+
+  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+
+  if (errors.length) {
+    res.render('../views/courses/modern-languages', {
+      subjectOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`)
+  }
+}
+
+exports.edit_course_age_range_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedAgeRange
+  if (req.session.data.course && req.session.data.course.ageRange) {
+    selectedAgeRange = req.session.data.course.ageRange
+  }
+
+  const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+
+  res.render('../views/courses/age-range', {
+    ageRangeOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_age_range_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedAgeRange
+  if (req.session.data.course && req.session.data.course.ageRange) {
+    selectedAgeRange = req.session.data.course.ageRange
+  }
+
+  const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+
+  if (errors.length) {
+    res.render('../views/courses/age-range', {
+      ageRangeOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_qualification_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedQualification
+  if (req.session.data.course && req.session.data.course.qualification) {
+    selectedQualification = req.session.data.course.qualification
+  }
+
+  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
+
+  res.render('../views/courses/qualification', {
+    qualificationOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_qualification_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedQualification
+  if (req.session.data.course && req.session.data.course.qualification) {
+    selectedQualification = req.session.data.course.qualification
+  }
+
+  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
+
+  if (errors.length) {
+    res.render('../views/courses/qualification', {
+      qualificationOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_funding_type_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedFundingType
+  if (req.session.data.course && req.session.data.course.fundingType) {
+    selectedFundingType = req.session.data.course.fundingType
+  }
+
+  const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
+
+  res.render('../views/courses/funding-type', {
+    fundingTypeOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_funding_type_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedFundingType
+  if (req.session.data.course && req.session.data.course.fundingType) {
+    selectedFundingType = req.session.data.course.fundingType
+  }
+
+  const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
+
+  if (errors.length) {
+    res.render('../views/courses/funding-type', {
+      fundingTypeOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_apprenticeship_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedApprenticeshipOption
+  if (req.session.data.course && req.session.data.course.apprenticeship) {
+    selectedApprenticeshipOption = req.session.data.course.apprenticeship
+  }
+
+  const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
+
+  res.render('../views/courses/apprenticeship', {
+    apprenticeshipOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_apprenticeship_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  const errors = []
+
+  let selectedApprenticeshipOption
+  if (req.session.data.course && req.session.data.course.apprenticeship) {
+    selectedApprenticeshipOption = req.session.data.course.apprenticeship
+  }
+
+  const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
+
+  if (errors.length) {
+    res.render('../views/courses/apprenticeship', {
+      apprenticeshipOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_study_mode_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedStudyMode
+  if (req.session.data.course && req.session.data.course.studyMode) {
+    selectedStudyMode = req.session.data.course.studyMode
+  }
+
+  const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
+
+  res.render('../views/courses/study-mode', {
+    studyModeOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_study_mode_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedStudyMode
+  if (req.session.data.course && req.session.data.course.studyMode) {
+    selectedStudyMode = req.session.data.course.studyMode
+  }
+
+  const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
+
+  if (errors.length) {
+    res.render('../views/courses/study-mode', {
+      studyModeOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_location_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedLocation
+  if (req.session.data.course && req.session.data.course.locations) {
+    selectedLocation = req.session.data.course.locations
+  }
+
+  const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
+
+  res.render('../views/courses/location', {
+    locationOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_location_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedLocation
+  if (req.session.data.course && req.session.data.course.locations) {
+    selectedLocation = req.session.data.course.locations
+  }
+
+  const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
+
+  if (errors.length) {
+    res.render('../views/courses/location', {
+      locationOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_accredited_body_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedAccreditedBody
+  if (req.session.data.course && req.session.data.course.accreditedBody) {
+    selectedAccreditedBody = req.session.data.course.accreditedBody
+  }
+
+  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+
+  let selectedAccreditedBodyOther
+  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
+    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+
+  res.render('../views/courses/accredited-body', {
+    accreditedBodyOptions,
+    accreditedBodies,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_accredited_body_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedAccreditedBody
+  if (req.session.data.course && req.session.data.course.accreditedBody) {
+    selectedAccreditedBody = req.session.data.course.accreditedBody
+  }
+
+  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+
+  let selectedAccreditedBodyOther
+  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
+    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  }
+
+  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+
+  if (errors.length) {
+    res.render('../views/courses/accredited-body', {
+      accreditedBodyOptions,
+      accreditedBodies,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_applications_open_date_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/applications-open-date', {
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_applications_open_date_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/applications-open-date', {
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_course_start_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedCourseStart
+  if (req.session.data.course && req.session.data.course.courseStart) {
+    selectedCourseStart = req.session.data.course.courseStart
+  }
+
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+
+  res.render('../views/courses/course-start', {
+    courseStartOptions,
+    actions: {
+      save: ``,
+      back: ``,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_course_start_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedCourseStart
+  if (req.session.data.course && req.session.data.course.courseStart) {
+    selectedCourseStart = req.session.data.course.courseStart
+  }
+
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+
+  if (errors.length) {
+    res.render('../views/courses/course-start', {
+      courseStartOptions,
+      actions: {
+        save: ``,
+        back: ``,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
 /// ------------------------------------------------------------------------ ///
 /// NEW COURSE
 /// ------------------------------------------------------------------------ ///
