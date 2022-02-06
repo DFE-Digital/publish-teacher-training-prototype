@@ -33,12 +33,18 @@ const seedCourses = () => {
   const courseSubjects = require('../data/seed/temp/course-subjects')
   const courseLocations = require('../data/seed/temp/course-locations')
 
+  const courseApplicationsOpenDates = require('../data/seed/temp/course-application-open-dates')
+
   const courseEnrichment1 = require('../data/seed/temp/course-enrichment-01')
   const courseEnrichment2 = require('../data/seed/temp/course-enrichment-02')
   const courseEnrichment3 = require('../data/seed/temp/course-enrichment-03')
   const courseEnrichment4 = require('../data/seed/temp/course-enrichment-04')
 
   const courseEnrichment = [...courseEnrichment1, ...courseEnrichment2, ...courseEnrichment3, ...courseEnrichment4]
+
+  courseEnrichment.sort((a,b) => {
+    return a.uuid.localeCompare(b.uuid) || new Date(a.created_at) - new Date(b.created_at)
+  })
 
   courses.forEach((course, i) => {
     const c = {}
@@ -48,6 +54,14 @@ const seedCourses = () => {
     c.code = course.code
     c.qualification = course.qualification
     c.startDate = course.startDate
+
+    const ad = courseApplicationsOpenDates.find(openDate => openDate.id === course.id)
+
+    if (ad) {
+      c.applicationsOpenDate = ad.applicationsopendate
+    } else {
+      c.applicationsOpenDate = new Date(2021, 9, 12)
+    }
 
     c.programType = course.programType
 
@@ -71,7 +85,8 @@ const seedCourses = () => {
     c.isSend = (course.isSend === 'true') ? 'yes' : 'no'
 
     // course subjects
-    const cs = courseSubjects.find(courseSubject => courseSubject.code === course.code)
+    // TODO: use course.id
+    const cs = courseSubjects.find(courseSubject => courseSubject.uuid === course.id)
 
     if (cs) {
       const subj = []
@@ -96,7 +111,7 @@ const seedCourses = () => {
     }
 
     // course locations
-    const cl = courseLocations.find(courseLocation => courseLocation.code === course.code)
+    const cl = courseLocations.find(courseLocation => courseLocation.uuid === course.id)
 
     if (cl) {
       c.locations = cl.locations
@@ -173,11 +188,11 @@ const seedCourses = () => {
     }
 
     // course enrichment
-    const ce = courseEnrichment.find(enrichment => enrichment.course_code === course.code)
+    const ce = courseEnrichment.find(enrichment => enrichment.uuid === course.id)
 
     if (ce) {
-      if (ce.json_data) {
-        const d = ce.json_data
+      if (ce.data) {
+        const d = ce.data
 
         // course length
         c.courseLength = d.CourseLength
@@ -208,8 +223,12 @@ const seedCourses = () => {
       }
 
       c.status = ce.status
+
       c.createdAt = ce.created_at
-      c.updatedAt = ce.updated_at
+
+      if (ce.updated_at || ce.updated_at !== null) {
+        c.updatedAt = ce.updated_at
+      }
     }
 
     // if (c.trainingProvider) {
@@ -231,7 +250,7 @@ const seedCourses = () => {
     // }
 
     // output course info
-    console.log(i, c);
+    console.log(i, c)
 
   })
 
