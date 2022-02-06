@@ -1,7 +1,11 @@
 {% extends "_layout.njk" %}
 
-{% set title = ("Error: " if errors) + "Special educational needs and disability (SEND)" %}
+{% set title = "Special educational needs and disability (SEND)" %}
 {% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({

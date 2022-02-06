@@ -1,12 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set title = ("Error: " if errors) + "Is this a teaching apprenticeship?" %}
+{% set title = "Is this a teaching apprenticeship?" %}
 
 {% if course %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
 {% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({

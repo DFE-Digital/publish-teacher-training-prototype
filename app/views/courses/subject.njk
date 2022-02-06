@@ -1,12 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set title = ("Error: " if errors) + "Pick a " + (data.course.subjectLevel | lower) + " subject" %}
+{% set title = "Pick a " + (data.course.subjectLevel | lower) + " subject" %}
 
 {% if course %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
 {% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
