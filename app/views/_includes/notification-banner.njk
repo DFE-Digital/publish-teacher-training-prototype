@@ -1,5 +1,5 @@
 {{ govukNotificationBanner({
   type: "success",
-  titleText: flash[0].title,
-  text: flash[0].description
+  html: "<h2 class=\"govuk-heading-m\">"+flash+"</h2>",
+  icon: false
 }) if flash | falsify }}
