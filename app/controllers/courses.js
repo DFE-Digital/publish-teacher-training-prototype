@@ -105,6 +105,7 @@ exports.edit_course_send_get = (req, res) => {
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
   res.render('../views/courses/special-educational-needs-disability', {
+    course,
     sendOptions,
     actions: {
       save: ``,
@@ -127,6 +128,7 @@ exports.edit_course_send_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/special-educational-needs-disability', {
+      course,
       sendOptions,
       actions: {
         save: ``,
@@ -148,9 +150,10 @@ exports.edit_course_subject_get = (req, res) => {
     selectedSubject = req.session.data.course.subject
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  const subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
 
   res.render('../views/courses/subject', {
+    course,
     subjectOptions,
     actions: {
       save: ``,
@@ -169,10 +172,11 @@ exports.edit_course_subject_post = (req, res) => {
     selectedSubject = req.session.data.course.subject
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  const subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
 
   if (errors.length) {
     res.render('../views/courses/subject', {
+      course,
       subjectOptions,
       actions: {
         save: ``,
@@ -198,9 +202,10 @@ exports.edit_course_modern_language_get = (req, res) => {
     selectedSubject = req.session.data.course.childSubjects
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions(course.subject, selectedSubject)
 
   res.render('../views/courses/modern-languages', {
+    course,
     subjectOptions,
     actions: {
       save: ``,
@@ -219,10 +224,11 @@ exports.edit_course_modern_language_post = (req, res) => {
     selectedSubject = req.session.data.course.childSubjects
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions(course.subject, selectedSubject)
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
+      course,
       subjectOptions,
       actions: {
         save: ``,
@@ -244,9 +250,10 @@ exports.edit_course_age_range_get = (req, res) => {
     selectedAgeRange = req.session.data.course.ageRange
   }
 
-  const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+  const ageRangeOptions = courseHelper.getAgeRangeOptions(course.subjectLevel, selectedAgeRange)
 
   res.render('../views/courses/age-range', {
+    course,
     ageRangeOptions,
     actions: {
       save: ``,
@@ -265,10 +272,11 @@ exports.edit_course_age_range_post = (req, res) => {
     selectedAgeRange = req.session.data.course.ageRange
   }
 
-  const ageRangeOptions = courseHelper.getAgeRangeOptions(req.session.data.course.subjectLevel, selectedAgeRange)
+  const ageRangeOptions = courseHelper.getAgeRangeOptions(course.subjectLevel, selectedAgeRange)
 
   if (errors.length) {
     res.render('../views/courses/age-range', {
+      course,
       ageRangeOptions,
       actions: {
         save: ``,
@@ -290,9 +298,10 @@ exports.edit_course_qualification_get = (req, res) => {
     selectedQualification = req.session.data.course.qualification
   }
 
-  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
+  const qualificationOptions = courseHelper.getQualificationOptions(course.subjectLevel, selectedQualification)
 
   res.render('../views/courses/qualification', {
+    course,
     qualificationOptions,
     actions: {
       save: ``,
@@ -311,10 +320,11 @@ exports.edit_course_qualification_post = (req, res) => {
     selectedQualification = req.session.data.course.qualification
   }
 
-  const qualificationOptions = courseHelper.getQualificationOptions(req.session.data.course.subjectLevel, selectedQualification)
+  const qualificationOptions = courseHelper.getQualificationOptions(course.subjectLevel, selectedQualification)
 
   if (errors.length) {
     res.render('../views/courses/qualification', {
+      course,
       qualificationOptions,
       actions: {
         save: ``,
@@ -339,6 +349,7 @@ exports.edit_course_funding_type_get = (req, res) => {
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
 
   res.render('../views/courses/funding-type', {
+    course,
     fundingTypeOptions,
     actions: {
       save: ``,
@@ -361,6 +372,7 @@ exports.edit_course_funding_type_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/funding-type', {
+      course,
       fundingTypeOptions,
       actions: {
         save: ``,
@@ -385,6 +397,7 @@ exports.edit_course_apprenticeship_get = (req, res) => {
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
   res.render('../views/courses/apprenticeship', {
+    course,
     apprenticeshipOptions,
     actions: {
       save: ``,
@@ -408,6 +421,7 @@ exports.edit_course_apprenticeship_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
+      course,
       apprenticeshipOptions,
       actions: {
         save: ``,
@@ -432,6 +446,7 @@ exports.edit_course_study_mode_get = (req, res) => {
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
 
   res.render('../views/courses/study-mode', {
+    course,
     studyModeOptions,
     actions: {
       save: ``,
@@ -454,6 +469,7 @@ exports.edit_course_study_mode_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/study-mode', {
+      course,
       studyModeOptions,
       actions: {
         save: ``,
@@ -478,6 +494,7 @@ exports.edit_course_location_get = (req, res) => {
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
   res.render('../views/courses/location', {
+    course,
     locationOptions,
     actions: {
       save: ``,
@@ -500,6 +517,7 @@ exports.edit_course_location_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/location', {
+      course,
       locationOptions,
       actions: {
         save: ``,
@@ -531,6 +549,7 @@ exports.edit_course_accredited_body_get = (req, res) => {
   const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
 
   res.render('../views/courses/accredited-body', {
+    course,
     accreditedBodyOptions,
     accreditedBodies,
     actions: {
@@ -561,6 +580,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
+      course,
       accreditedBodyOptions,
       accreditedBodies,
       actions: {
@@ -579,6 +599,7 @@ exports.edit_course_applications_open_date_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   res.render('../views/courses/applications-open-date', {
+    course,
     actions: {
       save: ``,
       back: ``,
@@ -593,6 +614,7 @@ exports.edit_course_applications_open_date_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
+      course,
       actions: {
         save: ``,
         back: ``,
@@ -616,6 +638,7 @@ exports.edit_course_course_start_get = (req, res) => {
   const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
 
   res.render('../views/courses/course-start', {
+    course,
     courseStartOptions,
     actions: {
       save: ``,
@@ -638,6 +661,7 @@ exports.edit_course_course_start_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
+      course,
       courseStartOptions,
       actions: {
         save: ``,
