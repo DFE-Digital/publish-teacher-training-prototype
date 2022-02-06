@@ -38,12 +38,12 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukSelect({
-          id: "course-start",
-          name: "course[courseStart]",
+          id: "start-date",
+          name: "course[startDate]",
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("course-start"),
+          errorMessage: errors | getErrorMessage("start-date"),
           items: courseStartOptions
         }) }}
 
