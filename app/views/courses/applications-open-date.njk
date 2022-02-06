@@ -100,9 +100,15 @@
           ]
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update date applications open"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

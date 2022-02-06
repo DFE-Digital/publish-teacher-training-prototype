@@ -37,9 +37,17 @@
 
 
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+
+
+        {% if course %}
+          {{ govukButton({
+            text: "Update visa sponsorship"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

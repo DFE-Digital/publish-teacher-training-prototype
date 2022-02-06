@@ -49,9 +49,15 @@
           items: apprenticeshipOptions
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update apprenticeship"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

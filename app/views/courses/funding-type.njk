@@ -49,9 +49,15 @@
           items: fundingTypeOptions
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update funding type"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

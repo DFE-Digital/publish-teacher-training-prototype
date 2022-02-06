@@ -47,9 +47,15 @@
           items: courseStartOptions
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update start date"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

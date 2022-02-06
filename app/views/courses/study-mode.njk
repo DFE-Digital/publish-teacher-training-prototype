@@ -49,9 +49,15 @@
           items: studyModeOptions
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update full time or part time"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 
