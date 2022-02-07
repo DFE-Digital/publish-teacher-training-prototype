@@ -2,10 +2,10 @@ exports.find = (params) => {
 
 }
 
-exports.findOne = (id) => {
-  let organisations = require('../data/temp/organisations')
-  organisations = organisations.find(organisation => organisation.id === id)
-  return organisations
+exports.findOne = (params) => {
+  const organisations = require('../data/temp/organisations')
+  const organisation = organisations.find(organisation => organisation.id === params.organisationId)
+  return organisation
 }
 
 exports.insertOne = (params) => {
