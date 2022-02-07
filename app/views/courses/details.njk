@@ -62,6 +62,14 @@
         </ul>
       {% endset %}
 
+      {% set ageRangeHtml %}
+        {% if course.ageRangeOther %}
+          <p class="govuk-body">{{ course.ageRangeOther.from }} to {{ course.ageRangeOther.to }}</p>
+        {% else %}
+          <p class="govuk-body">{{ course.ageRange | getAgeRangeLabel }}</p>
+        {% endif %}
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -128,7 +136,7 @@
               text: "Age range"
             },
             value: {
-              text: course.ageRange | getAgeRangeLabel
+              html: ageRangeHtml
             },
             actions: {
               items: [

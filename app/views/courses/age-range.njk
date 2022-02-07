@@ -74,6 +74,8 @@
                       label: {
                         text: "From"
                       },
+                      errorMessage: errors | getErrorMessage("age-range-other-from"),
+                      value: course.ageRangeOther.from,
                       classes: "govuk-input--width-2"
                     }) }}
 
@@ -83,6 +85,8 @@
                       label: {
                         text: "To"
                       },
+                      errorMessage: errors | getErrorMessage("age-range-other-to"),
+                      value: course.ageRangeOther.to,
                       classes: "govuk-input--width-2"
                     }) }}
                   </div>

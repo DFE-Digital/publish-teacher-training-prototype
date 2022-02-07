@@ -119,10 +119,12 @@ exports.updateOne = (params) => {
       course.ageRange = params.course.ageRange
 
       // handle 'other' age ranges
-      if (params.course.ageRangeOther) {
+      if (params.course.ageRange === 'other') {
         course.ageRangeOther = {}
         course.ageRangeOther.from = params.course.ageRangeOther.from
         course.ageRangeOther.to = params.course.ageRangeOther.to
+      } else {
+        delete course.ageRangeOther
       }
     }
 
