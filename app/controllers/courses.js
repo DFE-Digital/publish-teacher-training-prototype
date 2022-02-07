@@ -601,10 +601,10 @@ exports.edit_course_accredited_body_get = (req, res) => {
 
   let selectedAccreditedBody
   if (course && course.accreditedBody) {
-    selectedAccreditedBody = course.accreditedBody
+    selectedAccreditedBody = course.accreditedBody.id
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let selectedAccreditedBodyOther
   if (course && course.accreditedBodyOther) {
@@ -634,7 +634,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let selectedAccreditedBodyOther
   if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
