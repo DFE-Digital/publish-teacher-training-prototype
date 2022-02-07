@@ -41,7 +41,7 @@
 
           {{ govukDateInput({
             id: "application-open-date-other",
-            namePrefix: "course[applicationOpenDateOther]",
+            namePrefix: "course[applicationsOpenDateOther]",
             fieldset: {
               legend: {
                 text: "When will applications open?",
@@ -75,8 +75,8 @@
         {% endset %}
 
         {{ govukRadios({
-          idPrefix: "application-open-date",
-          name: "course[applicationOpenDate]",
+          idPrefix: "applications-open-date",
+          name: "course[applicationsOpenDate]",
           fieldset: {
             legend: {
               html: headingHtml
@@ -87,12 +87,12 @@
             {
               value: data.currentCycle.applyOpens | date,
               text: "As soon as the course is on Find (recommended)",
-              checked: true if data.course.applicationOpenDate == (data.currentCycle.applyOpens | date)
+              checked: true if (data.course.applicationsOpenDate | date) == (data.currentCycle.applyOpens | date)
             },
             {
               value: "other",
               text: "Another date",
-              checked: true if data.course.applicationOpenDate == "other",
+              checked: true if data.course.applicationsOpenDate == "other",
               conditional: {
                 html: otherHtml
               }
