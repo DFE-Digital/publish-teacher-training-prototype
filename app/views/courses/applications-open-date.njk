@@ -85,7 +85,7 @@
           errorMessage: errors | getErrorMessage("application-open-date"),
           items: [
             {
-              value: data.currentCycle.applyOpens | date,
+              value: data.currentCycle.applyOpens,
               text: "As soon as the course is on Find (recommended)",
               checked: true if (course.applicationsOpenDate | date) == (data.currentCycle.applyOpens | date)
             },
