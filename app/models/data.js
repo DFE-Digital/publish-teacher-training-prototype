@@ -8,7 +8,66 @@ exports.seed = () => {
   // seedLocations()
   // seedOrganisations()
   // seedCourses()
+  // seedRelationships()
 }
+
+const seedRelationships = () => {
+  console.log('Seed organisations')
+
+  const organisations = require('../data/seed/temp/organisations')
+  const relationships = require('../data/seed/temp/organisation-relationships')
+
+  const providers = []
+
+  relationships.forEach((relationship, i) => {
+    const tp = {}
+
+    const tpo = organisations.find(o => o.code === relationship.code)
+
+    tp.id = tpo.id
+    tp.code = tpo.code
+    tp.name = tpo.name
+
+    tp.accreditedBodies = []
+
+    relationship.accreditedBodies.forEach((accreditedBody, i) => {
+      const ab = {}
+
+      const abo = organisations.find(o => o.code === accreditedBody.code)
+
+      ab.id = abo.id
+      ab.code = abo.code
+      ab.name = abo.name
+      ab.description = accreditedBody.description
+
+      tp.accreditedBodies.push(ab)
+    })
+
+    providers.push(tp)
+  })
+
+  // if (providers) {
+  //   // write course data to file
+  //   const directoryPath = path.join(__dirname, '../data/seed/temp/')
+  //
+  //   // check if document directory exists
+  //   // if (!fs.existsSync(directoryPath)) {
+  //   //   fs.mkdirSync(directoryPath)
+  //   // }
+  //
+  //   const raw = JSON.stringify(providers)
+  //
+  //   const fileName = 'relationships.json'
+  //   const filePath = directoryPath + '/' + fileName
+  //
+  //   // write the JSON data
+  //   fs.writeFileSync(filePath, raw)
+  // }
+
+  console.log(providers)
+}
+
+
 
 const seedOrganisations = () => {
   console.log('Seed organisations')
