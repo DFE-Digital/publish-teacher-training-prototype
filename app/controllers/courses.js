@@ -6,6 +6,7 @@ const courseHelper = require('../helpers/courses')
 const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
+const utilHelper = require('../helpers/utils')
 
 exports.course_list = (req, res) => {
   // clean out course data
@@ -63,7 +64,7 @@ exports.course_list = (req, res) => {
 
 exports.course_details = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const organisation = organisationModel.findOne(req.params.organisationId)
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/details', {
     course,
     organisation,
@@ -78,7 +79,7 @@ exports.course_details = (req, res) => {
 
 exports.course_description = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const organisation = organisationModel.findOne(req.params.organisationId)
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/description', {
     course,
     organisation,
@@ -139,6 +140,12 @@ exports.edit_course_send_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','SEND specialism updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -188,6 +195,12 @@ exports.edit_course_subject_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Subject updated')
     if (selectedSubject === 'ML') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
@@ -241,6 +254,12 @@ exports.edit_course_modern_language_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Subject updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`)
   }
@@ -290,6 +309,12 @@ exports.edit_course_age_range_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Age range updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -339,6 +364,12 @@ exports.edit_course_qualification_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Qualification updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -388,6 +419,12 @@ exports.edit_course_funding_type_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Funding type updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -438,6 +475,12 @@ exports.edit_course_apprenticeship_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Apprenticeship updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -487,6 +530,12 @@ exports.edit_course_study_mode_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Full time or part time updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -536,6 +585,12 @@ exports.edit_course_location_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Location updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -601,6 +656,12 @@ exports.edit_course_accredited_body_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Accredited body updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -634,6 +695,17 @@ exports.edit_course_applications_open_date_post = (req, res) => {
       errors
     })
   } else {
+    // parse the date entered into a date object
+    if (req.session.data.course.applicationsOpenDateOther) {
+      req.session.data.course.applicationsOpenDateOther = utilHelper.arrayToDateObject(req.session.data.course.applicationsOpenDateOther)
+    }
+
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Date applications open updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
@@ -683,6 +755,12 @@ exports.edit_course_course_start_post = (req, res) => {
       errors
     })
   } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
     req.flash('success','Start date updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
