@@ -56,17 +56,17 @@
             items: [
             {
               name: "day",
-              value: data.course.applicationOpenDateOther[0],
+              value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
               classes: "govuk-input--width-2"
             },
             {
               name: "month",
-              value: data.course.applicationOpenDateOther[1],
+              value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
               classes: "govuk-input--width-2"
             },
             {
               name: "year",
-              value: data.course.applicationOpenDateOther[2],
+              value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
               classes: "govuk-input--width-4"
             }
             ]
@@ -87,12 +87,12 @@
             {
               value: data.currentCycle.applyOpens | date,
               text: "As soon as the course is on Find (recommended)",
-              checked: true if (data.course.applicationsOpenDate | date) == (data.currentCycle.applyOpens | date)
+              checked: true if (course.applicationsOpenDate | date) == (data.currentCycle.applyOpens | date)
             },
             {
               value: "other",
               text: "Another date",
-              checked: true if data.course.applicationsOpenDate == "other",
+              checked: true if course.applicationsOpenDate == "other",
               conditional: {
                 html: otherHtml
               }

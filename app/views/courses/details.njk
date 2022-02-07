@@ -247,7 +247,7 @@
               text: "Applications open date"
             },
             value: {
-              text: (course.applicationsOpenDate if course.applicationsOpenDate else data.currentCycle.applyOpens) | date("dd MMMM yyyy")
+              text: (course.applicationsOpenDate if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther) | date("d MMMM yyyy")
             },
             actions: {
               items: [
