@@ -1,0 +1,94 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Course fees" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">
+          {{ caption }}
+        </span>
+        {{ title }}
+      </h1>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukInput({
+          id: "fees-uk",
+          name: "course[feesUK]",
+          label: {
+            text: "Fees for UK students",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          errorMessage: errors | getErrorMessage("fee-uk"),
+          value: course.feesUK,
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukInput({
+          id: "fees-international",
+          name: "course[feesInternational]",
+          label: {
+            text: "Fees for international students (optional)",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          errorMessage: errors | getErrorMessage("fees-international"),
+          value: course.feesInternational,
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukCharacterCount({
+          id: "fee-details",
+          name: "course[feeDetails]",
+          rows: 10,
+          maxwords: 250,
+          label: {
+            text: "Fee details (optional)",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "If applicable, give further details abouyt the fees for this course. This could include any top up fees and other costs."
+          },
+          errorMessage: errors | getErrorMessage("fee-details"),
+          value: course.feeDetails
+        }) }}
+
+        {{ govukButton({
+          text: "Update course fees"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
