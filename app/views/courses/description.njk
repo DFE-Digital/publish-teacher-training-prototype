@@ -161,7 +161,7 @@
               text: "Fee for international students (optional)"
             },
             value: {
-              text: "£" + course.feesInternational if course.feesInternational else "Not entered",
+              text: "£" + course.feesInternational | numeral('0,0.[00]') if course.feesInternational else "Not entered",
               classes: "govuk-hint" if not course.feesInternational
             },
             actions: {
