@@ -1,0 +1,63 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Other requirements" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCharacterCount({
+          id: "other-requirements",
+          name: "course[otherRequirements]",
+          rows: 10,
+          maxwords: 100,
+          label: {
+            html: headingHtml
+          },
+          hint: {
+            text: "If applicants need any non-academic qualifications or documents, list them here (such as criminal record checks or relevant work experience)"
+          },
+          errorMessage: errors | getErrorMessage("other-requirements"),
+          value: course.otherRequirements
+        }) }}
+
+        {{ govukButton({
+          text: "Update other requirements"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
