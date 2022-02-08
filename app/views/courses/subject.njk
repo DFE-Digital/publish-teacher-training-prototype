@@ -37,27 +37,33 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukSelect({
-          idPrefix: "subject",
-          name: "course[subjects][]",
-          label: {
-            html: headingHtml
-          },
-          errorMessage: errors | getErrorMessage("subjects"),
-          items: subjectOptions
-        }) }}
+        {% if course.subjectLevel == "secondary" %}
 
-        {#{ govukRadios({
-          idPrefix: "subject",
-          name: "course[subjects][]",
-          fieldset: {
-            legend: {
+          {{ govukSelect({
+            idPrefix: "subject",
+            name: "course[subjects][]",
+            label: {
               html: headingHtml
-            }
-          },
-          errorMessage: errors | getErrorMessage("subjects"),
-          items: subjectOptions
-        }) }#}
+            },
+            errorMessage: errors | getErrorMessage("subjects"),
+            items: subjectOptions
+          }) }}
+
+        {% else %}
+
+          {{ govukRadios({
+            idPrefix: "subject",
+            name: "course[subjects][]",
+            fieldset: {
+              legend: {
+                html: headingHtml
+              }
+            },
+            errorMessage: errors | getErrorMessage("subjects"),
+            items: subjectOptions
+          }) }}
+
+        {% endif %}
 
         {% if course %}
           {{ govukButton({

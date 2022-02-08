@@ -163,7 +163,12 @@ exports.edit_course_subject_get = (req, res) => {
     })
   }
 
-  const subjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
+  }
 
   res.render('../views/courses/subject', {
     course,
@@ -185,7 +190,12 @@ exports.edit_course_subject_post = (req, res) => {
     selectedSubject = req.session.data.course.subjects
   }
 
-  const subjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
+  }
 
   if (errors.length) {
     res.render('../views/courses/subject', {
