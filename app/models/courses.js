@@ -196,6 +196,26 @@ exports.updateOne = (params) => {
       }
     }
 
+    if (params.course.aboutCourse !== undefined) {
+      course.aboutCourse = params.course.aboutCourse
+    }
+
+    if (params.course.interviewProcess !== undefined) {
+      course.interviewProcess = params.course.interviewProcess
+    }
+
+    if (params.course.howSchoolPlacementsWork !== undefined) {
+      course.howSchoolPlacementsWork = params.course.howSchoolPlacementsWork
+    }
+
+    if (params.course.personalQualities !== undefined) {
+      course.personalQualities = params.course.personalQualities
+    }
+
+    if (params.course.otherRequirements !== undefined) {
+      course.otherRequirements = params.course.otherRequirements
+    }
+
     course.updatedAt = new Date()
 
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
