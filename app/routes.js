@@ -173,6 +173,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ot
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-fees', checkIsAuthenticated, courseController.edit_course_fees_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-fees', checkIsAuthenticated, courseController.edit_course_fees_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
