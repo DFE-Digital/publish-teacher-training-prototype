@@ -37,7 +37,17 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukRadios({
+        {{ govukSelect({
+          idPrefix: "subject",
+          name: "course[subjects][]",
+          label: {
+            html: headingHtml
+          },
+          errorMessage: errors | getErrorMessage("subjects"),
+          items: subjectOptions
+        }) }}
+
+        {#{ govukRadios({
           idPrefix: "subject",
           name: "course[subjects][]",
           fieldset: {
@@ -47,7 +57,7 @@
           },
           errorMessage: errors | getErrorMessage("subjects"),
           items: subjectOptions
-        }) }}
+        }) }#}
 
         {% if course %}
           {{ govukButton({
