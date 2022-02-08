@@ -155,6 +155,15 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ap
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)

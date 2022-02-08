@@ -784,6 +784,123 @@ exports.edit_course_course_start_post = (req, res) => {
   }
 }
 
+exports.edit_about_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/about-course', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/about-course`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_about_course_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/about-course', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/about-course`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','About this course updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+exports.edit_interview_process_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/interview-process', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/interview-process`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_interview_process_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/interview-process', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/interview-process`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','Interview process updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+exports.edit_school_placements_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/school-placements', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_school_placements_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/school-placements', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','How school placements work updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
 /// ------------------------------------------------------------------------ ///
 /// NEW COURSE
 /// ------------------------------------------------------------------------ ///
