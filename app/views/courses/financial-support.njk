@@ -1,0 +1,68 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Financial support" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set hintTextHtml %}
+        <p class="govuk-hint">If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
+        <p class="govuk-hint">You do not need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
+        {% endset %}
+
+        {{ govukCharacterCount({
+          id: "financial-support",
+          name: "course[financialSupport]",
+          rows: 10,
+          maxwords: 250,
+          label: {
+            html: headingHtml
+          },
+          hint: {
+            html: hintTextHtml
+          },
+          errorMessage: errors | getErrorMessage("financial-support"),
+          value: course.financialSupport
+        }) }}
+
+        {{ govukButton({
+          text: "Update financial support"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
