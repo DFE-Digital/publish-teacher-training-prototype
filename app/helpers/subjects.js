@@ -56,6 +56,33 @@ exports.getSubjectOptions = (subjectLevel, selectedItem) => {
   return items
 }
 
+exports.getSubjectSelectOptions = (subjectLevel, selectedItem) => {
+  const items = []
+
+  let subjects = require('../data/subjects')
+  subjects = subjects.filter(subject => subject.level === subjectLevel
+    && subject.code !== '24'
+    && subject.parentCode === undefined)
+
+  subjects.forEach((subject, i) => {
+    const item = {}
+
+    item.text = subject.name
+    // item.text += ' (' + subject.code + ')'
+    item.value = subject.code
+    item.id = subject.id
+    item.selected = (selectedItem && selectedItem.includes(subject.code)) ? 'selected' : ''
+
+    items.push(item)
+  })
+
+  items.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  return items
+}
+
 exports.getSubjectLabel = (code) => {
   const subjects = require('../data/subjects')
   const subject = subjects.find(subject => subject.code === code)
@@ -82,6 +109,7 @@ exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
       lastItem = {}
       lastItem.text = subject.name
       // lastItem.text += ' (' + subject.code + ')'
+
       lastItem.value = subject.code
       lastItem.id = subject.id
       lastItem.checked = (selectedItem && selectedItem.includes(subject.code)) ? 'checked' : ''

@@ -1,7 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Add course" %}
-{% set title = ("Error: " if errors) + "Full time or part time" %}
+{% set title = "Full time or part time" %}
+
+{% if course %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -40,9 +49,15 @@
           items: studyModeOptions
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update full time or part time"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

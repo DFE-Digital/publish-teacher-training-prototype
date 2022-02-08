@@ -1,12 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "When does the course start?" %}
-
-{% if course %}
-  {% set caption = course.name + " (" + course.code + ")" %}
-{% else %}
-  {% set caption = "Add course" %}
-{% endif %}
+{% set title = "Financial support" %}
+{% set caption = course.name + " (" + course.code + ")" %}
 
 {% block pageTitle %}
   ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -37,25 +32,29 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukSelect({
-          id: "start-date",
-          name: "course[startDate]",
+        {% set hintTextHtml %}
+        <p class="govuk-hint">If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
+        <p class="govuk-hint">You do not need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
+        {% endset %}
+
+        {{ govukCharacterCount({
+          id: "financial-support",
+          name: "course[financialSupport]",
+          rows: 10,
+          maxwords: 250,
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("start-date"),
-          items: courseStartOptions
+          hint: {
+            html: hintTextHtml
+          },
+          errorMessage: errors | getErrorMessage("financial-support"),
+          value: course.financialSupport
         }) }}
 
-        {% if course %}
-          {{ govukButton({
-            text: "Update start date"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Update financial support"
+        }) }}
 
       </form>
 

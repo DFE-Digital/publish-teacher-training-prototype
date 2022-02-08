@@ -1,7 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Add course" %}
-{% set title = ("Error: " if errors) + "" %}
+{% set title = "Visa sponsorship" %}
+
+{% if course %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -28,9 +37,17 @@
 
 
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+
+
+        {% if course %}
+          {{ govukButton({
+            text: "Update visa sponsorship"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

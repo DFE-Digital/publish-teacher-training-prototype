@@ -1,7 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Add course" %}
-{% set title = ("Error: " if errors) + "Pick a " + (data.course.subjectLevel | lower) + " subject" %}
+{% set title = "Pick a " + (data.course.subjectLevel | lower) + " subject" %}
+
+{% if course %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -28,21 +37,43 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukRadios({
-          idPrefix: "subject",
-          name: "course[subject]",
-          fieldset: {
-            legend: {
-              html: headingHtml
-            }
-          },
-          errorMessage: errors | getErrorMessage("subject"),
-          items: subjectOptions
-        }) }}
+        {% if course.subjectLevel == "secondary" %}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+          {{ govukSelect({
+            idPrefix: "subject",
+            name: "course[subjects][]",
+            label: {
+              html: headingHtml
+            },
+            errorMessage: errors | getErrorMessage("subjects"),
+            items: subjectOptions
+          }) }}
+
+        {% else %}
+
+          {{ govukRadios({
+            idPrefix: "subject",
+            name: "course[subjects][]",
+            fieldset: {
+              legend: {
+                html: headingHtml
+              }
+            },
+            errorMessage: errors | getErrorMessage("subjects"),
+            items: subjectOptions
+          }) }}
+
+        {% endif %}
+
+        {% if course %}
+          {{ govukButton({
+            text: "Update subjects"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

@@ -19,4 +19,8 @@ exports.slugify = (text) => {
     .replace(/[\s_-]+/g, '-')
     // remove leading, trailing -
     .replace(/^-+|-+$/g, '')
-  }
+}
+
+exports.arrayToDateObject = (array) => {
+  return new Date(array[2], array[1] -1, array[0])
+}

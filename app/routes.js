@@ -119,6 +119,66 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIs
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/subject', checkIsAuthenticated, courseController.edit_course_subject_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/subject', checkIsAuthenticated, courseController.edit_course_subject_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/modern-language', checkIsAuthenticated, courseController.edit_course_modern_language_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/modern-language', checkIsAuthenticated, courseController.edit_course_modern_language_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/age-range', checkIsAuthenticated, courseController.edit_course_age_range_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/age-range', checkIsAuthenticated, courseController.edit_course_age_range_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/qualification', checkIsAuthenticated, courseController.edit_course_qualification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/qualification', checkIsAuthenticated, courseController.edit_course_qualification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/funding-type', checkIsAuthenticated, courseController.edit_course_funding_type_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/funding-type', checkIsAuthenticated, courseController.edit_course_funding_type_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/apprenticeship', checkIsAuthenticated, courseController.edit_course_apprenticeship_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/apprenticeship', checkIsAuthenticated, courseController.edit_course_apprenticeship_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/location', checkIsAuthenticated, courseController.edit_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/location', checkIsAuthenticated, courseController.edit_course_location_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/personal-qualities', checkIsAuthenticated, courseController.edit_personal_qualities_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/personal-qualities', checkIsAuthenticated, courseController.edit_personal_qualities_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/other-requirements', checkIsAuthenticated, courseController.edit_other_requirements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/other-requirements', checkIsAuthenticated, courseController.edit_other_requirements_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-fees', checkIsAuthenticated, courseController.edit_course_fees_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-fees', checkIsAuthenticated, courseController.edit_course_fees_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)

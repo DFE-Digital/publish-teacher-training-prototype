@@ -1,6 +1,8 @@
 const { DateTime } = require('luxon')
 
 const cycleHelper = require('./cycles')
+const subjectHelper = require('./subjects')
+const utilHelper = require('./utils')
 
 // const DEGREE_GRADES = {
 //   0: "2:1 or above, or equivalent",
@@ -178,13 +180,13 @@ exports.getStudyModeOptions = (selectedItem) => {
   const items = []
   const studyModes = require('../data/study-modes')
 
-  studyModes.forEach((studyModes, i) => {
+  studyModes.forEach((studyMode, i) => {
     const item = {}
 
-    item.text = studyModes.name
-    item.value = studyModes.code
-    item.id = studyModes.id
-    item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
+    item.text = studyMode.name
+    item.value = studyMode.code
+    item.id = studyMode.id
+    item.checked = (selectedItem && selectedItem.includes(studyMode.code)) ? 'checked' : ''
 
     items.push(item)
   })
@@ -203,43 +205,6 @@ exports.getStudyModeLabel = (code) => {
   }
 
   return label
-}
-
-exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
-  const items = []
-
-  let relationships = require('../data/organisation-relationships')
-  if (organisationId) {
-    relationships = relationships.find(relationship => relationship.code === organisationId)
-  }
-
-  relationships.accreditedBodies.forEach((accreditedBody, i) => {
-    const item = {}
-
-    item.text = accreditedBody.name
-    item.value = accreditedBody.code
-    item.id = accreditedBody.code
-    item.checked = (selectedItem && selectedItem.includes(accreditedBody.code)) ? 'checked' : ''
-
-    items.push(item)
-  })
-
-  items.sort((a,b) => {
-    return a.text.localeCompare(b.text)
-  })
-
-  const divider = { divider: 'or' }
-  items.push(divider)
-
-  const other = {}
-  other.text = 'Another accredited body'
-  other.value = 'other'
-  other.id = 'accredited-body-other'
-  other.checked = (selectedItem && selectedItem.includes('other')) ? 'checked' : ''
-  other.conditional = true
-  items.push(other)
-
-  return items
 }
 
 exports.getCourseStartSelectOptions = (selectedItem) => {
@@ -297,6 +262,39 @@ exports.getApprenticeshipOptions = (selectedItem) => {
   return items
 }
 
+exports.getCourseLengthOptions = (selectedItem) => {
+  const items = []
+  const courseLengths = require('../data/course-lengths')
+
+  courseLengths.forEach((courseLength, i) => {
+    const item = {}
+
+    item.text = courseLength.name
+    item.value = courseLength.code
+    item.id = courseLength.id
+    item.checked = (selectedItem && selectedItem.includes(courseLength.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  // items.sort((a,b) => {
+  //   return a.text.localeCompare(b.text)
+  // })
+
+  const divider = { divider: 'or' }
+  items.push(divider)
+
+  const other = {}
+  other.text = 'Another course length'
+  other.value = 'other'
+  other.id = 'course-length-other'
+  other.checked = (selectedItem && selectedItem.includes('other')) ? 'checked' : ''
+  other.conditional = true
+  items.push(other)
+
+  return items
+}
+
 exports.getCourseLengthLabel = (code) => {
   const courseLengths = require('../data/course-lengths')
   const courseLength = courseLengths.find(courseLength => courseLength.code === code)
@@ -334,4 +332,27 @@ exports.getCourseStatusClasses = (code) => {
   }
 
   return classes
+}
+
+exports.createCourseName = (subjects) => {
+  let courseName = ''
+  if (subjects) {
+    const names = []
+
+    subjects.forEach((subject, i) => {
+      if (subject !== 'ML') {
+        names.push(
+          subjectHelper.getSubjectLabel(subject)
+        )
+      }
+    })
+
+    courseName = utilHelper.arrayToList(
+      array = names,
+      join = ' with ',
+      final = ' and '
+    )
+  }
+
+  return courseName
 }

@@ -1,0 +1,99 @@
+{% extends "_layout.njk" %}
+
+{% set title = "About this course" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCharacterCount({
+          id: "about-course",
+          name: "course[aboutCourse]",
+          rows: 20,
+          maxwords: 400,
+          label: {
+            html: headingHtml
+          },
+          errorMessage: errors | getErrorMessage("about-course"),
+          value: course.aboutCourse
+        }) }}
+
+        {% set helpTextHtml %}
+          <p class="govuk-body">Give candidates a short summary of the course to help them decide if it’s right for them.</p>
+
+          <p class="govuk-body">Provide information like:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>what they’ll learn (for example, what units are taught)</li>
+            <li>how the course is structured</li>
+            <li>whether it has any distinctive features</li>
+          </ul>
+
+          <p class="govuk-body">You could include details such as:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>how candidates are assessed</li>
+            <li>the size of the workload (for example, how many essays per term)</li>
+            <li>league-table rankings and student employability ratings</li>
+            <li>quotes from past students</li>
+          </ul>
+
+          <p class="govuk-body">Remember to:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>use short paragraphs (no more than five sentences each)</li>
+            <li>use bullet points where possible (to check formatting, use the ‘preview’ function after saving your content)</li>
+            <li>spell out all acronyms the first time you use them, for example, ITT, NQT, EAL, ICT (candidates may not be familiar with these terms)
+            </li>
+          </ul>
+
+          <p class="govuk-body">Several courses in the same subject?</p>
+
+          <p class="govuk-body">If you offer more than one course in the same subject, such as two Primary courses, it’s important to say how they differ (for example, differences in teaching placements or in the focus of the training). Otherwise, candidates may be unable to decide between them.</p>
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "Help with about this course",
+          html: helpTextHtml
+        }) }}
+
+        {{ govukButton({
+          text: "Update about this course"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

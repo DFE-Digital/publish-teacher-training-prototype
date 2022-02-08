@@ -11,7 +11,7 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
   const items = []
 
   let locations = require('../data/temp/locations')
-  locations = locations.filter(location => location.organisation.code === organisationId)
+  locations = locations.filter(location => location.organisation.id === organisationId)
 
   locations.forEach((location, i) => {
     const item = {}

@@ -13,6 +13,9 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -59,6 +62,14 @@
         </ul>
       {% endset %}
 
+      {% set ageRangeHtml %}
+        {% if course.ageRangeOther %}
+          <p class="govuk-body">{{ course.ageRangeOther.from }} to {{ course.ageRangeOther.to }}</p>
+        {% else %}
+          <p class="govuk-body">{{ course.ageRange | getAgeRangeLabel }}</p>
+        {% endif %}
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -79,7 +90,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/subject-level?referrer=details",
+                  href: actions.change + "/special-educational-needs-disability?referrer=details",
                   text: "Change",
                   visuallyHiddenText: "special educational needs and disability (SEND)"
                 }
@@ -125,7 +136,7 @@
               text: "Age range"
             },
             value: {
-              text: course.ageRange | getAgeRangeLabel
+              html: ageRangeHtml
             },
             actions: {
               items: [
@@ -244,7 +255,7 @@
               text: "Applications open date"
             },
             value: {
-              text: (course.applicationsOpenDate if course.applicationsOpenDate else data.currentCycle.applyOpens) | date("dd MMMM yyyy")
+              text: (course.applicationsOpenDate if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther) | date("d MMMM yyyy")
             },
             actions: {
               items: [

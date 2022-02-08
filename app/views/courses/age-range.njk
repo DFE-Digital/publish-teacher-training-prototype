@@ -1,7 +1,16 @@
 {% extends "_layout.njk" %}
 
-{% set caption = "Add course" %}
-{% set title = ("Error: " if errors) + "Specify an age range" %}
+{% set title = "Specify an age range" %}
+
+{% if course %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -65,6 +74,8 @@
                       label: {
                         text: "From"
                       },
+                      errorMessage: errors | getErrorMessage("age-range-other-from"),
+                      value: course.ageRangeOther.from,
                       classes: "govuk-input--width-2"
                     }) }}
 
@@ -74,6 +85,8 @@
                       label: {
                         text: "To"
                       },
+                      errorMessage: errors | getErrorMessage("age-range-other-to"),
+                      value: course.ageRangeOther.to,
                       classes: "govuk-input--width-2"
                     }) }}
                   </div>
@@ -86,9 +99,15 @@
 
         </div>
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        {% if course %}
+          {{ govukButton({
+            text: "Update age range"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
 
       </form>
 

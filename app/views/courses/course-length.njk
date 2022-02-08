@@ -1,12 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Who is the accredited body?" %}
-
-{% if course %}
-  {% set caption = course.name + " (" + course.code + ")" %}
-{% else %}
-  {% set caption = "Add course" %}
-{% endif %}
+{% set title = "Course length" %}
+{% set caption = course.name + " (" + course.code + ")" %}
 
 {% block pageTitle %}
   ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -46,18 +41,18 @@
           }) %}
 
           {% if errors %}
-            <span id=" accredited-body-error" class="govuk-error-message">
-              <div><span class="govuk-visually-hidden">Error:</span> Enter an accredited body</div>
+            <span id="age-range-error" class="govuk-error-message">
+              <div><span class="govuk-visually-hidden">Error:</span> Enter a course length</div>
             </span>
           {% endif %}
 
           <div class="govuk-radios" data-module="govuk-radios">
-            {% for option in accreditedBodyOptions %}
+            {% for option in courseLengthOptions %}
               {% if option.divider %}
                 <div class="govuk-radios__divider">{{ option.divider }}</div>
               {% else %}
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="{{ option.id }}" name="course[accreditedBody]" type="radio" value="{{ option.value }}" {{ option.checked }} {% if option.conditional %}data-aria-controls="conditional-{{ option.id }}"{% endif %}>
+                  <input class="govuk-radios__input" id="{{ option.id }}" name="course[courseLength]" type="radio" value="{{ option.value }}" {{ option.checked }} {% if option.conditional %}data-aria-controls="conditional-{{ option.id }}"{% endif %}>
                   <label class="govuk-label govuk-radios__label" for="{{ option.id }}">
                     {{- option.text -}}
                   </label>
@@ -65,24 +60,16 @@
                 {% if option.conditional %}
                   <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
 
-                    {{ appAutocompleteFromSelect({
-                      id: "accredited-body-other",
-                      name: "course[accreditedBodyOther]",
+                    {{ govukInput({
+                      id: option.id + "-other",
+                      name: "course[courseLengthOther]",
                       label: {
-                        text: "Accredited body",
+                        text: "Course length",
                         classes: "govuk-label--s"
                       },
-                      hint: {
-                        text: "Search for a provider name or code"
-                      },
-                      classes: "govuk-!-width-two-thirds",
-                      items: accreditedBodies,
-                      value: data.course.accreditedBodyOther[1],
-                      autocompleteOptions: {
-                        autoselect: true,
-                        showAllValues: false,
-                        allowEmpty: true
-                      }
+                      errorMessage: errors | getErrorMessage("course-length-other"),
+                      value: course.courseLengthOther,
+                      classes: "govuk-input--width-20"
                     }) }}
 
                   </div>
@@ -95,15 +82,9 @@
 
         </div>
 
-        {% if course %}
-          {{ govukButton({
-            text: "Update accredited body"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Update course length"
+        }) }}
 
       </form>
 

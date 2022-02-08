@@ -2,7 +2,10 @@ const path = require('path')
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
-exports.find = (params = {}) => {
+const organisationModel = require('./organisations')
+const subjectModel = require('./subjects')
+
+exports.find = (params) => {
   let courses = []
 
   if (params.organisationId) {
@@ -29,7 +32,7 @@ exports.find = (params = {}) => {
   return courses
 }
 
-exports.findOne = (params = {}) => {
+exports.findOne = (params) => {
   let course = {}
 
   if (params.organisationId && params.courseId) {
@@ -45,25 +48,228 @@ exports.findOne = (params = {}) => {
 }
 
 exports.insertOne = (params) => {
+  if (params) {
 
+    let course = {}
+
+
+
+    course.createdAt = new Date()
+
+    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.courseId + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(course)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+  }
 }
 
-exports.insertMany = (params) => {
+// exports.insertMany = (params) => {
+//
+// }
 
+exports.updateOne = (params) => {
+  console.log('params',params);
+  if (params.organisationId && params.courseId) {
+
+    let course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
+
+    if (params.course.name) {
+      course.name = params.course.name
+    }
+
+    if (params.course.code) {
+      course.code = params.course.code
+    }
+
+    if (params.course.subjectLevel) {
+      course.subjectLevel = params.course.subjectLevel
+    }
+
+    if (params.course.isSend) {
+      course.isSend = params.course.isSend
+    }
+
+    if (params.course.subjects) {
+      const subjects = []
+
+      params.course.subjects.forEach((courseSubject, i) => {
+        const subject = {}
+
+        const s = subjectModel.findOne({ subjectCode: courseSubject })
+
+        subject.id = s.id
+        subject.code = s.code
+        subject.name = s.name
+
+        subjects.push(subject)
+      })
+
+      course.subjects = subjects
+
+      // update course name if subjects change
+      if (params.course.name) {
+        course.name = params.course.name
+      }
+    }
+
+    if (params.course.locations) {
+
+    }
+
+    if (params.course.ageRange) {
+      course.ageRange = params.course.ageRange
+
+      // handle 'other' age ranges
+      if (params.course.ageRange === 'other') {
+        course.ageRangeOther = {}
+        course.ageRangeOther.from = params.course.ageRangeOther.from
+        course.ageRangeOther.to = params.course.ageRangeOther.to
+      } else {
+        delete course.ageRangeOther
+      }
+    }
+
+    if (params.course.courseLength) {
+      course.courseLength = params.course.courseLength
+
+      // handle 'other' course length
+      if (params.course.courseLength === 'other') {
+        course.courseLengthOther = params.course.courseLengthOther
+      } else {
+        delete course.courseLengthOther
+      }
+    }
+
+    if (params.course.fundingType) {
+      course.fundingType = params.course.fundingType
+
+      // update programType based on organisation type and funding type
+      const tp = organisationModel.findOne({ organisationId: params.organisationId })
+
+      if (tp.type === 'lead_school') {
+        if (params.course.fundingType === 'fee') {
+          course.programType = 'SD'
+        }
+
+        if (params.course.fundingType === 'salary') {
+          course.programType = 'SS'
+        }
+
+        if (params.course.fundingType === 'apprenticeship') {
+          course.programType = 'TA'
+        }
+      }
+
+      if (tp.type === 'scitt') {
+        course.programType = 'SC'
+      }
+
+      if (tp.type === 'hei') {
+        course.programType = 'HE'
+      }
+
+    }
+
+    if (params.course.studyMode) {
+      course.studyMode = params.course.studyMode
+    }
+
+    if (params.course.qualification) {
+      course.qualification = params.course.qualification
+    }
+
+    if (params.course.accreditedBody) {
+      const ab = organisationModel.findOne({ organisationId: params.course.accreditedBody })
+
+      course.accreditedBody = {}
+      course.accreditedBody.id = ab.id
+      course.accreditedBody.code = ab.code
+      course.accreditedBody.name = ab.name
+    }
+
+    if (params.course.startDate) {
+      course.startDate = params.course.startDate
+    }
+
+    if (params.course.applicationsOpenDate) {
+      course.applicationsOpenDate = params.course.applicationsOpenDate
+
+      // handle 'other' applications open dates
+      if (params.course.applicationsOpenDate === 'other') {
+        course.applicationsOpenDateOther = params.course.applicationsOpenDateOther
+      } else {
+        delete course.applicationsOpenDateOther
+      }
+    }
+
+    if (params.course.aboutCourse !== undefined) {
+      course.aboutCourse = params.course.aboutCourse
+    }
+
+    if (params.course.interviewProcess !== undefined) {
+      course.interviewProcess = params.course.interviewProcess
+    }
+
+    if (params.course.howSchoolPlacementsWork !== undefined) {
+      course.howSchoolPlacementsWork = params.course.howSchoolPlacementsWork
+    }
+
+    if (params.course.personalQualities !== undefined) {
+      course.personalQualities = params.course.personalQualities
+    }
+
+    if (params.course.otherRequirements !== undefined) {
+      course.otherRequirements = params.course.otherRequirements
+    }
+
+    if (params.course.feesUK !== undefined) {
+      course.feesUK = params.course.feesUK
+    }
+
+    if (params.course.feesInternational !== undefined) {
+      course.feesInternational = params.course.feesInternational
+    }
+
+    if (params.course.feeDetails !== undefined) {
+      course.feeDetails = params.course.feeDetails
+    }
+
+    if (params.course.financialSupport !== undefined) {
+      course.financialSupport = params.course.financialSupport
+    }
+
+    course.updatedAt = new Date()
+
+    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.courseId + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(course)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+  }
 }
 
-exports.updateOne = (id, params) => {
+// exports.updateMany = (params) => {
+//
+// }
 
+exports.deleteOne = (params) => {
+  if (params.organisationId && params.courseId) {
+    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.courseId + '.json'
+    fs.unlinkSync(filePath)
+  }
 }
 
-exports.updateMany = (params) => {
-
-}
-
-exports.deleteOne = (id) => {
-
-}
-
-exports.deleteMany = (params) => {
-
-}
+// exports.deleteMany = (params) => {
+//
+// }

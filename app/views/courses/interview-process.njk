@@ -1,0 +1,76 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Interview process" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCharacterCount({
+          id: "interview-process",
+          name: "course[interviewProcess]",
+          rows: 20,
+          maxwords: 250,
+          label: {
+            html: headingHtml
+          },
+          errorMessage: errors | getErrorMessage("interview-process"),
+          value: course.interviewProcess
+        }) }}
+
+        {% set helpTextHtml %}
+          <p class="govuk-body">Tell candidates:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>how many interviews they’ll have</li>
+            <li>how long each interview will be</li>
+            <li>who’ll be interviewing them - will it be one-on-one or a group interview?</li>
+            <li>whether they’ll have to sit any tests - if so, how can they prepare?</li>
+          </ul>
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "Help with interview process",
+          html: helpTextHtml
+        }) }}
+
+        {{ govukButton({
+          text: "Update interview process"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

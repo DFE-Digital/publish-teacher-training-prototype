@@ -1,12 +1,7 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Pick all the languages for this course" %}
-
-{% if course %}
-  {% set caption = course.name + " (" + course.code + ")" %}
-{% else %}
-  {% set caption = "Add course" %}
-{% endif %}
+{% set title = "Special educational needs and disability (SEND)" %}
+{% set caption = course.name + " (" + course.code + ")" %}
 
 {% block pageTitle %}
   ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -37,21 +32,21 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukCheckboxes({
-          idPrefix: "child-subjects",
-          name: "course[childSubjects][]",
+        {{ govukRadios({
+          idPrefix: "send",
+          name: "course[isSend]",
           fieldset: {
             legend: {
               html: headingHtml
             }
           },
-          errorMessage: errors | getErrorMessage("child-subjects"),
-          items: subjectOptions
+          errorMessage: errors | getErrorMessage("send"),
+          items: sendOptions
         }) }}
 
         {% if course %}
           {{ govukButton({
-            text: "Update subjects"
+            text: "Update SEND specialism"
           }) }}
         {% else %}
           {{ govukButton({

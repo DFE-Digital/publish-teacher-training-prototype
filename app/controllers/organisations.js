@@ -2,14 +2,14 @@ const organisationModel = require('../models/organisations')
 const organisationHelper = require('../helpers/organisations')
 
 // exports.home_get = (req, res) => {
-//   const organisation = organisationModel.findOne(req.params.organisationId)
+//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 //   res.render('../views/organisations/index', {
 //     organisation
 //   })
 // }
 
 exports.organisation_home = (req, res) => {
-  const organisation = organisationModel.findOne(req.params.organisationId)
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/organisations/index', {
     organisation
   })

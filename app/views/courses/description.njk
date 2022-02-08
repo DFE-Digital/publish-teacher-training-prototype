@@ -13,6 +13,9 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -24,8 +27,6 @@
         {% endif %}
         {{ title }}
       </h1>
-
-
 
     </div>
   </div>
@@ -91,7 +92,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/school-placements",
+                  href: actions.change + "/school-placements?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "how school placements work"
                 }
@@ -105,6 +106,18 @@
         Course length and fees
       </h2>
 
+      {% set courseLengthText %}
+        {% if course.courseLength.length %}
+          {% if course.courseLength == "other" %}
+            {{ course.courseLengthOther }}
+          {% else %}
+            {{ course.courseLength | getCourseLengthLabel }}
+          {% endif %}
+        {% else %}
+          Not entered
+        {% endif %}
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -112,7 +125,7 @@
               text: "Course length"
             },
             value: {
-              text: course.courseLength | getCourseLengthLabel if course.courseLength.length else "Not entered",
+              text: courseLengthText,
               classes: "govuk-hint" if not course.courseLength.length
             },
             actions: {
@@ -136,7 +149,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/fees?referrer=description",
+                  href: actions.change + "/course-fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee for UK student"
                 }
@@ -148,13 +161,13 @@
               text: "Fee for international students (optional)"
             },
             value: {
-              text: "£" + course.feesInternational if course.feesInternational else "Not entered",
+              text: "£" + course.feesInternational | numeral('0,0.[00]') if course.feesInternational else "Not entered",
               classes: "govuk-hint" if not course.feesInternational
             },
             actions: {
               items: [
                 {
-                  href: actions.change + "/fees?referrer=description",
+                  href: actions.change + "/course-fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee for international students"
                 }
@@ -172,7 +185,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/fees?referrer=description",
+                  href: actions.change + "/course-fees?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "fee details"
                 }
