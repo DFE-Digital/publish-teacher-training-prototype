@@ -1,6 +1,8 @@
 const { DateTime } = require('luxon')
 
 const cycleHelper = require('./cycles')
+const subjectHelper = require('./subjects')
+const utilHelper = require('./utils')
 
 // const DEGREE_GRADES = {
 //   0: "2:1 or above, or equivalent",
@@ -297,4 +299,27 @@ exports.getCourseStatusClasses = (code) => {
   }
 
   return classes
+}
+
+exports.createCourseName = (subjects) => {
+  let courseName = ''
+  if (subjects) {
+    const names = []
+
+    subjects.forEach((subject, i) => {
+      if (subject !== 'ML') {
+        names.push(
+          subjectHelper.getSubjectLabel(subject)
+        )
+      }
+    })
+
+    courseName = utilHelper.arrayToList(
+      array = names,
+      join = ' with ',
+      final = ' and '
+    )
+  }
+
+  return courseName
 }
