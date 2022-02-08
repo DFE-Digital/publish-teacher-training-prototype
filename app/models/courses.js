@@ -134,6 +134,17 @@ exports.updateOne = (params) => {
       }
     }
 
+    if (params.course.courseLength) {
+      course.courseLength = params.course.courseLength
+
+      // handle 'other' course length
+      if (params.course.courseLength === 'other') {
+        course.courseLengthOther = params.course.courseLengthOther
+      } else {
+        delete course.courseLengthOther
+      }
+    }
+
     if (params.course.fundingType) {
       course.fundingType = params.course.fundingType
 
