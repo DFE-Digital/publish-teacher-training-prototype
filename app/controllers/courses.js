@@ -1083,6 +1083,45 @@ exports.edit_course_fees_post = (req, res) => {
   }
 }
 
+exports.edit_financial_support_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/financial-support', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/financial-support`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_financial_support_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/financial-support', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/financial-support`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','Financial support updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
 /// ------------------------------------------------------------------------ ///
 /// NEW COURSE
 /// ------------------------------------------------------------------------ ///
