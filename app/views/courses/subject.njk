@@ -39,13 +39,13 @@
 
         {{ govukRadios({
           idPrefix: "subject",
-          name: "course[subject]",
+          name: "course[subjects][]",
           fieldset: {
             legend: {
               html: headingHtml
             }
           },
-          errorMessage: errors | getErrorMessage("subject"),
+          errorMessage: errors | getErrorMessage("subjects"),
           items: subjectOptions
         }) }}
 

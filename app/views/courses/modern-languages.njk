@@ -39,7 +39,7 @@
 
         {{ govukCheckboxes({
           idPrefix: "child-subjects",
-          name: "course[childSubjects]",
+          name: "course[childSubjects][]",
           fieldset: {
             legend: {
               html: headingHtml
@@ -51,7 +51,7 @@
 
         {% if course %}
           {{ govukButton({
-            text: "Update subject"
+            text: "Update subjects"
           }) }}
         {% else %}
           {{ govukButton({
