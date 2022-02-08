@@ -47,7 +47,7 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
     item.text = organisation.name
     item.value = organisation.id
     item.id = organisation.id
-    item.checked = (selectedItem && selectedItem.includes(organisation.code)) ? 'checked' : ''
+    item.selected = (selectedItem && selectedItem.includes(organisation.code)) ? 'selected' : ''
 
     items.push(item)
   })
