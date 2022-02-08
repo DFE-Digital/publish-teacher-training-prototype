@@ -227,6 +227,22 @@ exports.updateOne = (params) => {
       course.otherRequirements = params.course.otherRequirements
     }
 
+    if (params.course.feesUK !== undefined) {
+      course.feesUK = params.course.feesUK
+    }
+
+    if (params.course.feesInternational !== undefined) {
+      course.feesInternational = params.course.feesInternational
+    }
+
+    if (params.course.feeDetails !== undefined) {
+      course.feeDetails = params.course.feeDetails
+    }
+
+    if (params.course.financialSupport !== undefined) {
+      course.financialSupport = params.course.financialSupport
+    }
+
     course.updatedAt = new Date()
 
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
