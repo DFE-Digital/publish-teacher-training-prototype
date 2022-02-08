@@ -13,36 +13,70 @@
       Is it on <abbr class="app-!-text-decoration-underline-dotted" title="Find postgraduate teacher training">Find</abbr>?
     </h3>
     <p class="govuk-body">
-      No – still in draft
+      {% if course.status == 0 %}
+        No – still in draft
+      {% elif course.status == 3 %}
+        No – withdrawn
+      {% else %}
+        <a class="govuk-link" href="#">Yes - view online</a>
+      {% endif %}
     </p>
 
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+    {% if course.status == 1 %}
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Applications</h3>
+      <p class="govuk-body" data-qa="course__open_for_applications">Open</p>
 
-    <h3 class="govuk-heading-m">Preview</h3>
-    <p class="govuk-body">See how your unpublished changes will look on Find.</p>
-    <p class="govuk-body">Preview to check for mistakes before publishing.</p>
-    <p class="govuk-body">
-      <a class="govuk-link" href="{{ actions.preview }}">Preview course</a>
-    </p>
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Vacancies</h3>
+      <p class="govuk-body">
+        Yes (<a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> vacancies for Art and design (J084)</span></a>)
+      </p>
+    {% endif %}
 
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+    {% if course.status == 0 %}
 
-    <h4 class="govuk-heading-m">Publish</h4>
-    <p class="govuk-body">Publish your changes.</p>
-    <p class="govuk-body">You can make changes to this course after publishing it.</p>
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
 
-    {{ govukButton({
-      text: "Publish",
-      href: actions.publish,
-      classes: "govuk-!-margin-bottom-0"
-    }) }}
+      <h3 class="govuk-heading-m">Preview</h3>
+      <p class="govuk-body">See how your unpublished changes will look on Find.</p>
+      <p class="govuk-body">Preview to check for mistakes before publishing.</p>
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.preview }}">Preview course</a>
+      </p>
 
-    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
 
-    <h3 class="govuk-heading-m govuk-visually-hidden">Delete</h3>
-    <p class="govuk-body">
-      <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete this course</a>
-    </p>
+      <h4 class="govuk-heading-m">Publish</h4>
+      <p class="govuk-body">Publish your changes.</p>
+      <p class="govuk-body">You can make changes to this course after publishing it.</p>
+
+      {{ govukButton({
+        text: "Publish",
+        href: actions.publish,
+        classes: "govuk-!-margin-bottom-0"
+      }) }}
+
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+
+      <h3 class="govuk-heading-m govuk-visually-hidden">Delete</h3>
+      <p class="govuk-body">
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete this course</a>
+      </p>
+    {% endif %}
+
+    {% if course.status == 1 %}
+      <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
+
+      <h3 class="govuk-heading-m">Withdraw</h3>
+
+      <p class="govuk-body">
+        Remove this course from Find and close applications.
+      </p>
+
+      <p class="govuk-body">
+        <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw this course</a>
+      </p>
+    {% endif %}
+
   </div>
 {% endif %}
 
