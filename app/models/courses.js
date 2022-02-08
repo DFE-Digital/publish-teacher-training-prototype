@@ -243,6 +243,10 @@ exports.updateOne = (params) => {
       course.financialSupport = params.course.financialSupport
     }
 
+    if (params.course.status) {
+      course.status = params.course.status
+    }
+
     course.updatedAt = new Date()
 
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
