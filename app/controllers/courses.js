@@ -989,6 +989,61 @@ exports.edit_other_requirements_post = (req, res) => {
   }
 }
 
+exports.edit_course_length_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedCourseLength
+  if (course && course.courseLength) {
+    selectedCourseLength = course.courseLength
+  }
+
+  const courseLengthOptions = courseHelper.getCourseLengthOptions(selectedCourseLength)
+
+  res.render('../views/courses/course-length', {
+    course,
+    courseLengthOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/course-length`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_course_length_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedCourseLength
+  if (req.session.data.course && req.session.data.course.courseLength) {
+    selectedCourseLength = req.session.data.course.courseLength
+  }
+
+  const courseLengthOptions = courseHelper.getCourseLengthOptions(selectedCourseLength)
+
+  if (errors.length) {
+    res.render('../views/courses/course-length', {
+      course,
+      courseLengthOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/course-length`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','Course length updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
 /// ------------------------------------------------------------------------ ///
 /// NEW COURSE
 /// ------------------------------------------------------------------------ ///

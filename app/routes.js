@@ -170,6 +170,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/pe
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/other-requirements', checkIsAuthenticated, courseController.edit_other_requirements_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/other-requirements', checkIsAuthenticated, courseController.edit_other_requirements_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-length', checkIsAuthenticated, courseController.edit_course_length_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
