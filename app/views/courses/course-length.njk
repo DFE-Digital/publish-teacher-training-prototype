@@ -1,0 +1,98 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Course length" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors }}">
+
+          {% call govukFieldset({
+            legend: {
+              html: headingHtml
+            }
+          }) %}
+
+          {% if errors %}
+            <span id="age-range-error" class="govuk-error-message">
+              <div><span class="govuk-visually-hidden">Error:</span> Enter a course length</div>
+            </span>
+          {% endif %}
+
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% for option in courseLengthOptions %}
+              {% if option.divider %}
+                <div class="govuk-radios__divider">{{ option.divider }}</div>
+              {% else %}
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="{{ option.id }}" name="course[courseLength]" type="radio" value="{{ option.value }}" {{ option.checked }} {% if option.conditional %}data-aria-controls="conditional-{{ option.id }}"{% endif %}>
+                  <label class="govuk-label govuk-radios__label" for="{{ option.id }}">
+                    {{- option.text -}}
+                  </label>
+                </div>
+                {% if option.conditional %}
+                  <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
+
+                    {{ govukInput({
+                      id: option.id + "-other",
+                      name: "course[courseLengthOther]",
+                      label: {
+                        text: "Course length",
+                        classes: "govuk-label--s"
+                      },
+                      errorMessage: errors | getErrorMessage("course-length-other"),
+                      value: course.courseLengthOther,
+                      classes: "govuk-input--width-20"
+                    }) }}
+
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% endcall %}
+
+        </div>
+
+        {{ govukButton({
+          text: "Update course length"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
