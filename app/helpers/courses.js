@@ -180,13 +180,13 @@ exports.getStudyModeOptions = (selectedItem) => {
   const items = []
   const studyModes = require('../data/study-modes')
 
-  studyModes.forEach((studyModes, i) => {
+  studyModes.forEach((studyMode, i) => {
     const item = {}
 
-    item.text = studyModes.name
-    item.value = studyModes.code
-    item.id = studyModes.id
-    item.checked = (selectedItem && selectedItem.includes(studyModes.code)) ? 'checked' : ''
+    item.text = studyMode.name
+    item.value = studyMode.code
+    item.id = studyMode.id
+    item.checked = (selectedItem && selectedItem.includes(studyMode.code)) ? 'checked' : ''
 
     items.push(item)
   })
@@ -258,6 +258,39 @@ exports.getApprenticeshipOptions = (selectedItem) => {
 
     items.push(item)
   })
+
+  return items
+}
+
+exports.getCourseLengthOptions = (selectedItem) => {
+  const items = []
+  const courseLengths = require('../data/course-lengths')
+
+  courseLengths.forEach((courseLength, i) => {
+    const item = {}
+
+    item.text = courseLength.name
+    item.value = courseLength.code
+    item.id = courseLength.id
+    item.checked = (selectedItem && selectedItem.includes(courseLength.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  // items.sort((a,b) => {
+  //   return a.text.localeCompare(b.text)
+  // })
+
+  const divider = { divider: 'or' }
+  items.push(divider)
+
+  const other = {}
+  other.text = 'Another course length'
+  other.value = 'other'
+  other.id = 'course-length-other'
+  other.checked = (selectedItem && selectedItem.includes('other')) ? 'checked' : ''
+  other.conditional = true
+  items.push(other)
 
   return items
 }
