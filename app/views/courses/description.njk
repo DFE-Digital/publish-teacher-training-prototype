@@ -13,6 +13,9 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -24,8 +27,6 @@
         {% endif %}
         {{ title }}
       </h1>
-
-
 
     </div>
   </div>
@@ -91,7 +92,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/school-placements",
+                  href: actions.change + "/school-placements?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "how school placements work"
                 }
