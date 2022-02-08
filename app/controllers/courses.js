@@ -155,8 +155,12 @@ exports.edit_course_subject_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedSubject
-  if (course && course.subject) {
-    selectedSubject = course.subject
+  if (course && course.subjects) {
+    selectedSubject = []
+
+    course.subjects.forEach((subject, i) => {
+      selectedSubject.push(subject.code)
+    })
   }
 
   const subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
@@ -177,8 +181,8 @@ exports.edit_course_subject_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = req.session.data.course.subjects
   }
 
   const subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
@@ -195,16 +199,18 @@ exports.edit_course_subject_post = (req, res) => {
       errors
     })
   } else {
-    courseModel.updateOne({
-      organisationId: req.params.organisationId,
-      courseId: req.params.courseId,
-      course: req.session.data.course
-    })
-
-    req.flash('success','Subject updated')
-    if (selectedSubject === 'ML') {
+    if (selectedSubject.includes('ML')) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
     } else {
+      req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+
+      courseModel.updateOne({
+        organisationId: req.params.organisationId,
+        courseId: req.params.courseId,
+        course: req.session.data.course
+      })
+
+      req.flash('success','Subject updated')
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     }
   }
@@ -214,18 +220,22 @@ exports.edit_course_modern_language_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedSubject
-  if (course && course.childSubjects) {
-    selectedSubject = course.childSubjects
+  if (course && course.subjects) {
+    selectedSubject = []
+
+    course.subjects.forEach((subject, i) => {
+      selectedSubject.push(subject.code)
+    })
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   res.render('../views/courses/modern-languages', {
     course,
     subjectOptions,
     actions: {
       save: ``,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -240,7 +250,7 @@ exports.edit_course_modern_language_post = (req, res) => {
     selectedSubject = req.session.data.course.childSubjects
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
@@ -248,12 +258,20 @@ exports.edit_course_modern_language_post = (req, res) => {
       subjectOptions,
       actions: {
         save: ``,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
+    // combine parent and child subjects
+    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+
+    // delete the child subjects as no longer needed
+    delete req.session.data.course.childSubjects
+
+    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+
     courseModel.updateOne({
       organisationId: req.params.organisationId,
       courseId: req.params.courseId,
@@ -261,7 +279,7 @@ exports.edit_course_modern_language_post = (req, res) => {
     })
 
     req.flash('success','Subject updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`)
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
 

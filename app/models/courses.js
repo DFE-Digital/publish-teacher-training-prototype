@@ -73,6 +73,7 @@ exports.insertOne = (params) => {
 // }
 
 exports.updateOne = (params) => {
+  console.log('params',params);
   if (params.organisationId && params.courseId) {
 
     let course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
@@ -99,7 +100,7 @@ exports.updateOne = (params) => {
       params.course.subjects.forEach((courseSubject, i) => {
         const subject = {}
 
-        const s = subjectModel.findOne({ subjectId: courseSubject })
+        const s = subjectModel.findOne({ subjectCode: courseSubject })
 
         subject.id = s.id
         subject.code = s.code
@@ -109,6 +110,11 @@ exports.updateOne = (params) => {
       })
 
       course.subjects = subjects
+
+      // update course name if subjects change
+      if (params.course.name) {
+        course.name = params.course.name
+      }
     }
 
     if (params.course.locations) {
