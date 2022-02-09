@@ -2,10 +2,48 @@ const path = require('path')
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
+const generateLocationCode = (params) => {
+  let locationCode = ''
+
+  const alphaNumerics = [
+    '-',
+    'A','B','C','D','E','F','G','H','I','J','K','L','M',
+    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+    '0','1','2','3','4','5','6','7','8','9'
+  ]
+
+  const locations = this.find({
+    organisationId: params.organisationId
+  })
+
+  if (!locations.length) {
+    locationCode = '-'
+  } else {
+    const locationCodes = []
+
+    // get the location codes already in use
+    locations.forEach((location, i) => {
+      locationCodes.push(location.code)
+    })
+
+    // sort codes
+    locationCodes.sort()
+
+    alphaNumerics.forEach((code, i) => {
+      if (locationCodes.includes(code)) {
+        locationCode = alphaNumerics[i + 1]
+      }
+    })
+  }
+
+  return locationCode
+}
+
 exports.find = (params) => {
   let locations = []
 
   if (params.organisationId) {
+
     const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
 
     // to prevent errors when an organisation doesn't have any locations
@@ -62,9 +100,9 @@ exports.insertOne = (params) => {
       location.urn = params.location.urn
     }
 
-    if (params.location.code) {
-      location.code = ''
-    }
+    location.code = generateLocationCode({
+      organisationId: params.organisationId
+    })
 
     location.address = {}
 
