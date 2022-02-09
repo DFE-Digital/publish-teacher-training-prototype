@@ -1,0 +1,56 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Are you sure you want to withdraw this course?" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">
+          {{ caption }}
+        </span>
+        {{ title }}
+      </h1>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        <p class="govuk-body">Withdrawing this course will:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>immediately remove it from Find</li>
+          <li>close applications for it</li>
+        </ul>
+
+        <p class="govuk-body">Once you’ve withdrawn a course, you cannot publish it again this cycle.</p>
+
+        {{ govukButton({
+          text: "Withdraw course",
+          classes: "govuk-button--warning"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

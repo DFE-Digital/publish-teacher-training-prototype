@@ -72,7 +72,9 @@ exports.course_details = (req, res) => {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`
     }
   })
 }
@@ -87,7 +89,9 @@ exports.course_description = (req, res) => {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`
     }
   })
 }
@@ -174,7 +178,7 @@ exports.edit_course_subject_get = (req, res) => {
     course,
     subjectOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -202,7 +206,7 @@ exports.edit_course_subject_post = (req, res) => {
       course,
       subjectOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -244,7 +248,7 @@ exports.edit_course_modern_language_get = (req, res) => {
     course,
     subjectOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-langauge`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -267,7 +271,7 @@ exports.edit_course_modern_language_post = (req, res) => {
       course,
       subjectOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -307,7 +311,7 @@ exports.edit_course_age_range_get = (req, res) => {
     course,
     ageRangeOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -330,7 +334,7 @@ exports.edit_course_age_range_post = (req, res) => {
       course,
       ageRangeOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/age-range`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -362,7 +366,7 @@ exports.edit_course_qualification_get = (req, res) => {
     course,
     qualificationOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/qualification`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -385,7 +389,7 @@ exports.edit_course_qualification_post = (req, res) => {
       course,
       qualificationOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/qualification`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -417,7 +421,7 @@ exports.edit_course_funding_type_get = (req, res) => {
     course,
     fundingTypeOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/funding-type`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -440,7 +444,7 @@ exports.edit_course_funding_type_post = (req, res) => {
       course,
       fundingTypeOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/funding-type`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -472,7 +476,7 @@ exports.edit_course_apprenticeship_get = (req, res) => {
     course,
     apprenticeshipOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/apprenticeship`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -496,7 +500,7 @@ exports.edit_course_apprenticeship_post = (req, res) => {
       course,
       apprenticeshipOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/apprenticeship`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -528,7 +532,7 @@ exports.edit_course_study_mode_get = (req, res) => {
     course,
     studyModeOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/study-mode`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -551,7 +555,7 @@ exports.edit_course_study_mode_post = (req, res) => {
       course,
       studyModeOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/study-mode`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -583,7 +587,7 @@ exports.edit_course_location_get = (req, res) => {
     course,
     locationOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/location`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -606,7 +610,7 @@ exports.edit_course_location_post = (req, res) => {
       course,
       locationOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/location`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -646,7 +650,7 @@ exports.edit_course_accredited_body_get = (req, res) => {
     accreditedBodyOptions,
     accreditedBodies,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/accredited-body`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -677,7 +681,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
       accreditedBodyOptions,
       accreditedBodies,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/accredited-body`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -701,7 +705,7 @@ exports.edit_course_applications_open_date_get = (req, res) => {
   res.render('../views/courses/applications-open-date', {
     course,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/applications-open-date`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -716,7 +720,7 @@ exports.edit_course_applications_open_date_post = (req, res) => {
     res.render('../views/courses/applications-open-date', {
       course,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/applications-open-date`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -753,7 +757,7 @@ exports.edit_course_course_start_get = (req, res) => {
     course,
     courseStartOptions,
     actions: {
-      save: ``,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/course-start`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -776,7 +780,7 @@ exports.edit_course_course_start_post = (req, res) => {
       course,
       courseStartOptions,
       actions: {
-        save: ``,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/course-start`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -1119,6 +1123,93 @@ exports.edit_financial_support_post = (req, res) => {
 
     req.flash('success','Financial support updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
+/// WITHDRAW COURSE
+/// ------------------------------------------------------------------------ ///
+
+exports.withdraw_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/withdraw', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.withdraw_course_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/withdraw', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    const status = { status: 3 }
+
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: status
+    })
+
+    req.flash('success','Course withdrawn')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
+/// DELETE COURSE
+/// ------------------------------------------------------------------------ ///
+
+exports.delete_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/delete', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.delete_course_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/delete', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.deleteOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId
+    })
+
+    req.flash('success','Course deleted')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
   }
 }
 

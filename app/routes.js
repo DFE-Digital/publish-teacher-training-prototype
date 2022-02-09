@@ -179,6 +179,12 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/co
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)

@@ -68,15 +68,29 @@
                   <!-- <strong class="govuk-tag govuk-tag--green">Published</strong> -->
                 </td>
                 <td class="govuk-table__cell">
-                  <a class="govuk-link" href="#">
-                    Yes - view online
-                  </a>
+                  {% if course.status == 0 %}
+                    No – still in draft
+                  {% elif course.status == 3 %}
+                    No – withdrawn
+                  {% else %}
+                    <a class="govuk-link" href="#">
+                      Yes - view online
+                    </a>
+                  {% endif %}
                 </td>
                 <td class="govuk-table__cell">
-                  Open
+                  {% if course.status == 1 %}
+                    Open
+                  {% elif course.status == 3 %}
+                    Closed
+                  {% endif %}
                 </td>
                 <td class="govuk-table__cell">
-                  Yes (<a class="govuk-link" href="/organisations/1A4/2022/courses/J084/vacancies">Edit<span class="govuk-visually-hidden"> vacancies for Art and design (J084)</span></a>)
+                  {% if course.status == 1 %}
+                    Yes (<a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                  {% elif course.status == 3 %}
+                    No
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}
