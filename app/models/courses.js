@@ -73,7 +73,7 @@ exports.insertOne = (params) => {
 // }
 
 exports.updateOne = (params) => {
-  console.log('params',params);
+
   if (params.organisationId && params.courseId) {
 
     let course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
