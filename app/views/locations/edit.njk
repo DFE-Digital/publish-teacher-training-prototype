@@ -1,0 +1,135 @@
+{% extends "_layout.njk" %}
+
+{% if location %}
+  {% set title = location.name %}
+{% else %}
+  {% set title = "Add location" %}
+{% endif %}
+
+{% set caption = data.currentCycle.code | getCycleLabel %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">
+          {{ caption }}
+        </span>
+        {{ title }}
+      </h1>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukInput({
+          id: "location-name",
+          name: "location[name]",
+          label: {
+            text: "Name",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("location-name"),
+          value: location.name
+        }) }}
+
+        {{ govukInput({
+          id: "location-urn",
+          name: "location[urn]",
+          label: {
+            text: "Unique reference number (URN)",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            html: 'Find URNs on <a href="https://www.get-information-schools.service.gov.uk/" target="_blank">Get information about schools (opens in new tab)</a>'
+          },
+          errorMessage: errors | getErrorMessage("location-urn"),
+          value: location.urn
+        }) }}
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m",
+            isPageHeading: false
+          }
+        }) %}
+
+          {{ govukInput({
+            id: "address-line-1",
+            name: "location[address][addressLine1]",
+            label: {
+              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-1"),
+            value: location.address.addressLine1
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-2",
+            name: "location[address][addressLine2]",
+            label: {
+              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-2"),
+            value: location.address.addressLine2
+          }) }}
+
+          {{ govukInput({
+            id: "address-town",
+            name: "location[address][town]",
+            label: {
+              text: "Town or city"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "address-level2",
+            errorMessage: errors | getErrorMessage("address-town"),
+            value: location.address.town
+          }) }}
+
+          {{ govukInput({
+            id: "address-county",
+            name: "location[address][county]",
+            label: {
+              text: "County"
+            },
+            classes: "govuk-!-width-two-thirds",
+            errorMessage: errors | getErrorMessage("address-county"),
+            value: location.address.county
+          }) }}
+
+          {{ govukInput({
+            id: "address-postcode",
+            name: "location[address][postcode]",
+            label: {
+              text: "Postcode"
+            },
+            classes: "govuk-input--width-10",
+            autocomplete: "postal-code",
+            errorMessage: errors | getErrorMessage("address-postcode"),
+            value: location.address.postcode
+          }) }}
+
+        {% endcall %}
+
+        {{ govukButton({
+          text: "Update location" if location else "Add location"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
