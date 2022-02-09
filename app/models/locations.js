@@ -34,11 +34,74 @@ exports.find = (params) => {
 }
 
 exports.findOne = (params) => {
+  let location = {}
 
+  if (params.organisationId && params.locationId) {
+    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.locationId + '.json'
+
+    let raw = fs.readFileSync(filePath)
+    location = JSON.parse(raw)
+  }
+
+  return location
 }
 
 exports.insertOne = (params) => {
+  let location = {}
 
+  if (params.organisationId) {
+    location.id = uuid()
+
+    if (params.location.name) {
+      location.name = params.location.name
+    }
+
+    if (params.location.urn) {
+      location.urn = params.location.urn
+    }
+
+    if (params.location.code) {
+      location.code = ''
+    }
+
+    location.address = {}
+
+    if (params.location.address.addressLine1) {
+      location.address.addressLine1 = params.location.address.addressLine1
+    }
+
+    if (params.location.address.addressLine2) {
+      location.address.addressLine2 = params.location.address.addressLine2
+    }
+
+    if (params.location.address.town) {
+      location.address.town = params.location.address.town
+    }
+
+    if (params.location.address.county) {
+      location.address.county = params.location.address.county
+    }
+
+    if (params.location.address.postcode) {
+      location.address.postcode = params.location.address.postcode
+    }
+
+    location.createdAt = new Date()
+
+    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + location.id + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(location)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+  }
+
+  return location
 }
 
 // exports.insertMany = (params) => {
@@ -46,7 +109,57 @@ exports.insertOne = (params) => {
 // }
 
 exports.updateOne = (params) => {
+  if (params.organisationId && params.locationId) {
+    let location = this.findOne({ organisationId: params.organisationId, locationId: params.locationId })
 
+    if (params.location.name) {
+      location.name = params.location.name
+    }
+
+    if (params.location.urn) {
+      location.urn = params.location.urn
+    }
+
+    if (params.location.code) {
+      location.code = ''
+    }
+
+    if (params.location.address.addressLine1) {
+      location.address.addressLine1 = params.location.address.addressLine1
+    }
+
+    if (params.location.address.addressLine2) {
+      location.address.addressLine2 = params.location.address.addressLine2
+    } else {
+      delete location.address.addressLine2
+    }
+
+    if (params.location.address.town) {
+      location.address.town = params.location.address.town
+    }
+
+    if (params.location.address.county) {
+      location.address.county = params.location.address.county
+    } else {
+      delete location.address.county
+    }
+
+    if (params.location.address.postcode) {
+      location.address.postcode = params.location.address.postcode
+    }
+
+    location.updatedAt = new Date()
+
+    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + params.locationId + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(location)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+  }
 }
 
 // exports.updateMany = (params) => {
@@ -54,7 +167,12 @@ exports.updateOne = (params) => {
 // }
 
 exports.deleteOne = (params) => {
+  if (params.organisationId && params.locationId) {
+    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
 
+    const filePath = directoryPath + '/' + params.locationId + '.json'
+    fs.unlinkSync(filePath)
+  }
 }
 
 // exports.deleteMany = (params) => {
