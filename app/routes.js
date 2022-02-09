@@ -195,7 +195,7 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuth
 
 // router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.show_get)
 //
-// router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.list_get)
+router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES

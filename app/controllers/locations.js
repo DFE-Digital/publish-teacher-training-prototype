@@ -1,7 +1,18 @@
-const locations = require('../models/locations')
+const locationModel = require('../models/locations')
 
 exports.location_list = (req, res) => {
-  res.send('NOT IMPLEMENTED: Location list')
+  delete req.session.data.location
+
+  let locations = locationModel.find({ organisationId: req.params.organisationId })
+
+  res.render('../views/locations/list', {
+    locations: locations,
+    actions: {
+      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
+      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      back: `/`
+    }
+  })
 }
 
 /// ------------------------------------------------------------------------ ///
