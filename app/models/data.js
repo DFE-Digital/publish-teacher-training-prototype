@@ -75,12 +75,88 @@ const seedOrganisations = () => {
   const organisations = require('../data/seed/temp/organisations')
 }
 
+// {
+//   "id": "6e17935e-8481-4dff-8e35-e07c4e5231a2",
+//   "name": "Peterbrough",
+//   "code": "U",
+//   "address": {
+//     "postcode": "PE1 1EJ"
+//   },
+//   "organisation": {
+//     "code": "2LC",
+//     "name": "National Online Teacher Training"
+//   }
+// }
+
 const seedLocations = () => {
   console.log('Seed locations')
 
   const organisations = require('../data/seed/temp/organisations')
 
   const locations = require('../data/seed/temp/locations')
+
+  locations.forEach((location, i) => {
+    const l = {}
+    const o = organisations.find(organisation => organisation.code === location.organisation.code)
+
+    l.id = location.id
+    l.name = location.name
+    l.code = location.code
+
+    l.address = {}
+
+    if (location.address) {
+      if (location.address.addressLine1) {
+        l.address.addressLine1 = location.address.addressLine1
+      }
+
+      if (location.address.addressLine2) {
+        l.address.addressLine2 = location.address.addressLine2
+      }
+
+      if (location.address.town) {
+        l.address.town = location.address.town
+      }
+
+      if (location.address.county) {
+        l.address.county = location.address.county
+      }
+
+      if (location.address.postcode) {
+        l.address.postcode = location.address.postcode
+      }
+    }
+
+    l.organisation = {}
+
+    l.organisation.id = o.id
+    l.organisation.code = o.code
+    l.organisation.name = o.name
+
+    // if (l) {
+    //   // write course data to file
+    //   const directoryPath = path.join(__dirname, '../data/seed/locations/' + o.id)
+    //
+    //   // check if document directory exists
+    //   if (!fs.existsSync(directoryPath)) {
+    //     fs.mkdirSync(directoryPath)
+    //   }
+    //
+    //   const raw = JSON.stringify(l)
+    //
+    //   const fileName = l.id + '.json'
+    //   const filePath = directoryPath + '/' + fileName
+    //
+    //   // write the JSON data
+    //   fs.writeFileSync(filePath, raw)
+    // }
+
+    // output location info
+    console.log(i, l);
+  })
+
+
+
 }
 
 const seedCourses = () => {
