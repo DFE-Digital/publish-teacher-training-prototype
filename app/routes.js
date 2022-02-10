@@ -219,6 +219,18 @@ router.get('/organisations/:organisationId/details', checkIsAuthenticated, organ
 router.get('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
 router.post('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
 
+router.get('/organisations/:organisationId/training', checkIsAuthenticated, organisationController.edit_training_get)
+router.post('/organisations/:organisationId/training', checkIsAuthenticated, organisationController.edit_training_post)
+
+router.get('/organisations/:organisationId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_get)
+router.post('/organisations/:organisationId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_post)
+
+router.get('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_get)
+router.post('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_post)
+
+router.get('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_get)
+router.post('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_post)
+
 router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
