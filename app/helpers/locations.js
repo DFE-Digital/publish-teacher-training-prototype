@@ -1,5 +1,7 @@
 const utils = require('./utils')
 
+const locationModel = require('../models/locations')
+
 // const STATUSES = {
 //   discontinued: "Discontinued", // "D" in the live service
 //   new: "New", // "N" in the live service
@@ -10,8 +12,9 @@ const utils = require('./utils')
 exports.getLocationOptions = (organisationId, selectedItem) => {
   const items = []
 
-  let locations = require('../data/temp/locations')
-  locations = locations.filter(location => location.organisation.id === organisationId)
+  const locations = locationModel.find({
+    organisationId: organisationId
+  })
 
   locations.forEach((location, i) => {
     const item = {}
@@ -29,10 +32,6 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
       )
 
     items.push(item)
-  })
-
-  items.sort((a,b) => {
-    return a.text.localeCompare(b.text)
   })
 
   return items
