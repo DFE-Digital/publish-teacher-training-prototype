@@ -17,8 +17,6 @@ const seedRelationships = () => {
   const organisations = require('../data/seed/temp/organisations')
   const relationships = require('../data/seed/temp/organisation-relationships')
 
-  const providers = []
-
   relationships.forEach((relationship, i) => {
     const tp = {}
 
@@ -68,11 +66,99 @@ const seedRelationships = () => {
 }
 
 
+// {
+//   "id": "82fd3a3b-6bfd-40d1-8343-0c19e34a847a",
+//   "name": "2Schools Consortium",
+//   "code": "T92",
+//   "type": "scitt",
+//   "ukprn": "10045988",
+//   "address": {
+//     "addressLine1": "Oakthorpe Primary School",
+//     "addressLine2": "c/o Tile Kiln Lane",
+//     "town": "Palmers Green",
+//     "county": "London",
+//     "postcode": "N13 6BY"
+//   },
+//   "url": "http://www.2schools.org/",
+//   "email": "training@oakthorpe.enfield.sch.uk",
+//   "telephone": "02088076906",
+//   "isAccreditedBody": true
+// }
 
 const seedOrganisations = () => {
   console.log('Seed organisations')
 
   const organisations = require('../data/seed/temp/organisations')
+  const relationships = require('../data/seed/temp/relationships')
+  const tempOrganisations = require('../data/seed/temp/temp-organisations')
+
+  organisations.forEach((organisation, i) => {
+    const o = {}
+
+    const to = tempOrganisations.find(org => org.code === organisation.code)
+
+    o.id = organisation.id
+    o.name = organisation.name
+    o.code = organisation.code
+    o.type = organisation.type
+    o.isAccreditedBody = organisation.isAccreditedBody
+
+    if (organisation.urn) {
+      o.urn = organisation.urn
+    }
+
+    o.ukprn = organisation.ukprn
+
+    o.address = organisation.address
+
+    o.contact = to.contact
+
+    o.location = to.location
+
+    if (to.trainWithUs) {
+      o.trainWithUs = to.trainWithUs
+    }
+
+    if (to.trainWithDisability) {
+      o.trainWithDisability = to.trainWithDisability
+    }
+
+    o.visaSponsorship = to.visas
+
+    if (!organisation.isAccreditedBody) {
+      const r = relationships.find(rel => rel.code === organisation.code)
+
+      o.accreditedBodies = r.accreditedBodies
+
+    }
+
+    o.createdAt = to.createdAt
+    o.updatedAt = to.updatedAt
+
+
+    // if (o) {
+    //   // write course data to file
+    //   const directoryPath = path.join(__dirname, '../data/seed/organisations/')
+    //
+    //   // check if document directory exists
+    //   if (!fs.existsSync(directoryPath)) {
+    //     fs.mkdirSync(directoryPath)
+    //   }
+    //
+    //   const raw = JSON.stringify(o)
+    //
+    //   const fileName = o.id + '.json'
+    //   const filePath = directoryPath + '/' + fileName
+    //
+    //   // write the JSON data
+    //   fs.writeFileSync(filePath, raw)
+    // }
+
+    // output organisation info
+    console.log(i, o)
+
+  })
+
 }
 
 // {
@@ -152,7 +238,7 @@ const seedLocations = () => {
     // }
 
     // output location info
-    console.log(i, l);
+    console.log(i, l)
   })
 
 
