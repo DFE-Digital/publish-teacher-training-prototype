@@ -3,6 +3,7 @@ const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
 const organisationModel = require('./organisations')
+const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
 exports.find = (params) => {
@@ -118,7 +119,20 @@ exports.updateOne = (params) => {
     }
 
     if (params.course.locations) {
+      const locations = []
 
+      params.course.locations.forEach((courseLocation, i) => {
+        const location = {}
+
+        const cl = locationModel.findOne({ organisationId: params.organisationId, locationId: courseLocation })
+
+        location.id = cl.id
+        location.name = cl.name
+
+        locations.push(location)
+      })
+
+      course.locations = locations
     }
 
     if (params.course.ageRange) {

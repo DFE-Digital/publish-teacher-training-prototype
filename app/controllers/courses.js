@@ -576,9 +576,11 @@ exports.edit_course_study_mode_post = (req, res) => {
 exports.edit_course_location_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
-  let selectedLocation
+  let selectedLocation = []
   if (course && course.locations) {
-    selectedLocation = course.locations
+    course.locations.forEach((location, i) => {
+      selectedLocation.push(location.id)
+    })
   }
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
