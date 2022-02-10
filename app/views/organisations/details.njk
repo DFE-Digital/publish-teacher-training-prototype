@@ -1,0 +1,279 @@
+{% extends "_layout.njk" %}
+
+{% set title = organisation.name %}
+{#% set caption = data.currentCycle.code | getCycleLabel %#}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <h1 class="govuk-heading-l">
+        {% if caption %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+      <h2 class="govuk-heading-m">Organisation details</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: organisation.name
+            }
+          },
+          {
+            key: {
+              text: "Code"
+            },
+            value: {
+              text: organisation.code
+            }
+          },
+          {
+            key: {
+              text: "UK provider reference number (UKPRN)"
+            },
+            value: {
+              text: organisation.ukprn if organisation.ukprn.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "UK provider reference number (UKPRN)"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Unique reference number (URN)"
+            },
+            value: {
+              text: organisation.urn if organisation.urn.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "unique reference number (URN)"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Training with your organisation"
+            },
+            value: {
+              html: (organisation.trainWithUs | nl2br | markdownToHtml | safe) if organisation.trainWithUs.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "information about training with your organisation"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Training with disabilities and other needs"
+            },
+            value: {
+              html: (organisation.trainWithDisability | nl2br | markdownToHtml | safe) if organisation.trainWithDisability.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "information about training with disabilities and other needs"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Contact details</h2>
+
+      {% set addressHtml %}
+        <p class="govuk-body">
+          {% if organisation.address.addressLine1.length %}
+            {{ organisation.address.addressLine1 }}<br>
+          {% endif %}
+          {% if organisation.address.addressLine2.length %}
+            {{ organisation.address.addressLine2 }}<br>
+          {% endif %}
+          {% if organisation.address.town.length %}
+            {{ organisation.address.town }}<br>
+          {% endif %}
+          {% if organisation.address.county.length %}
+            {{ organisation.address.county }}<br>
+          {% endif %}
+          {% if organisation.address.postcode.length %}
+            {{ organisation.address.postcode }}<br>
+          {% endif %}
+        </p>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: organisation.contact.email if organisation.contact.email.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "email address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Telephone number"
+            },
+            value: {
+              text: organisation.contact.telephone if organisation.contact.telephone.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "telephone number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Website"
+            },
+            value: {
+              text: organisation.contact.website if organisation.contact.website.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "website"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: addressHtml if addressHtml.length else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "website"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Visa sponsorship</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Can candidates get a sponsored Student visa for your fee-paying courses?"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorStudentVisa | capitalize
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Can candidates get a sponsored Skilled Worker visa for your salaried courses?"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | capitalize
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Accredited bodies</h2>
+
+      <dl class="govuk-summary-list">
+        {% for accreditedBody in organisation.accreditedBodies %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{ accreditedBody.name }}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">
+              Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
+            </a>
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
+
+    </div>
+  </div>
+
+{% endblock %}
