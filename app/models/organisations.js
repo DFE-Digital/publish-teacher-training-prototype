@@ -1,33 +1,25 @@
+const path = require('path')
+const fs = require('fs')
+
 exports.find = (params) => {
 
 }
 
 exports.findOne = (params) => {
-  const organisations = require('../data/temp/organisations')
-  const organisation = organisations.find(organisation => organisation.id === params.organisationId)
+  let organisation = {}
+
+  if (params.organisationId) {
+    const directoryPath = path.join(__dirname, '../data/organisations/')
+
+    const filePath = directoryPath + '/' + params.organisationId + '.json'
+
+    let raw = fs.readFileSync(filePath)
+    organisation = JSON.parse(raw)
+  }
+
   return organisation
 }
 
-exports.insertOne = (params) => {
-
-}
-
-exports.insertMany = (params) => {
-
-}
-
-exports.updateOne = (id, params) => {
-
-}
-
-exports.updateMany = (params) => {
-
-}
-
-exports.deleteOne = (id) => {
-
-}
-
-exports.deleteMany = (params) => {
+exports.updateOne = (params) => {
 
 }
