@@ -1,13 +1,15 @@
+const _ = require('lodash')
+const fs = require('fs')
+const path = require('path')
+const marked = require('marked')
+const numeral = require('numeral')
+
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
 const locationHelper = require('./helpers/locations')
 const organisationHelper = require('./helpers/organisations')
 const subjectHelper = require('./helpers/subjects')
 
-const _ = require('lodash')
-const numeral = require('numeral');
-const fs = require('fs')
-const path = require('path')
 const individualFiltersFolder = path.join(__dirname, './filters')
 
 module.exports = (env) => {
@@ -280,6 +282,20 @@ module.exports = (env) => {
     }
 
     return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to parse markdown as HTML
+  example: {{ "## Title" | markdownToHtml }}
+  outputs: "<h2>Title</h2>"
+  ------------------------------------------------------------------ */
+
+  filters.markdownToHtml = (markdown) => {
+    if (!markdown) {
+      return null
+    }
+    const html = marked.parse(markdown)
+    return html
   }
 
   /* ------------------------------------------------------------------
