@@ -3,10 +3,6 @@
 {% set title = "Are you sure you want to delete this course?" %}
 {% set caption = course.name + " (" + course.code + ")" %}
 
-{% block pageTitle %}
-  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
-{% endblock %}
-
 {% block beforeContent %}
 {{ govukBackLink({
   text: "Back",
