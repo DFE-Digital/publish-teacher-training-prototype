@@ -1,12 +1,11 @@
 {% extends "_layout.njk" %}
 
-{% if organisation %}
-  {% set title = organisation.name %}
-{% else %}
-  {% set title = "Add organisation" %}
-{% endif %}
+{% set title = "Organisation details" %}
+{% set caption = organisation.name %}
 
-{% set caption = data.currentCycle.code | getCycleLabel %}
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -30,17 +29,6 @@
       </h1>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-
-        {{ govukInput({
-          id: "organisation-name",
-          name: "organisation[name]",
-          label: {
-            text: "Name",
-            classes: "govuk-label--s"
-          },
-          errorMessage: errors | getErrorMessage("organisation-name"),
-          value: organisation.name
-        }) }}
 
         {{ govukInput({
           id: "organisation-ukprn",
@@ -70,75 +58,8 @@
           value: organisation.urn
         }) }}
 
-        {% call govukFieldset({
-          legend: {
-            text: "Address",
-            classes: "govuk-fieldset__legend--m",
-            isPageHeading: false
-          }
-        }) %}
-
-          {{ govukInput({
-            id: "address-line-1",
-            name: "organisation[address][addressLine1]",
-            label: {
-              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
-            },
-            autocomplete: "address-line1",
-            errorMessage: errors | getErrorMessage("address-line-1"),
-            value: organisation.address.addressLine1
-          }) }}
-
-          {{ govukInput({
-            id: "address-line-2",
-            name: "organisation[address][addressLine2]",
-            label: {
-              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
-            },
-            autocomplete: "address-line1",
-            errorMessage: errors | getErrorMessage("address-line-2"),
-            value: organisation.address.addressLine2
-          }) }}
-
-          {{ govukInput({
-            id: "address-town",
-            name: "organisation[address][town]",
-            label: {
-              text: "Town or city"
-            },
-            classes: "govuk-!-width-two-thirds",
-            autocomplete: "address-level2",
-            errorMessage: errors | getErrorMessage("address-town"),
-            value: organisation.address.town
-          }) }}
-
-          {{ govukInput({
-            id: "address-county",
-            name: "organisation[address][county]",
-            label: {
-              text: "County"
-            },
-            classes: "govuk-!-width-two-thirds",
-            errorMessage: errors | getErrorMessage("address-county"),
-            value: organisation.address.county
-          }) }}
-
-          {{ govukInput({
-            id: "address-postcode",
-            name: "organisation[address][postcode]",
-            label: {
-              text: "Postcode"
-            },
-            classes: "govuk-input--width-10",
-            autocomplete: "postal-code",
-            errorMessage: errors | getErrorMessage("address-postcode"),
-            value: organisation.address.postcode
-          }) }}
-
-        {% endcall %}
-
         {{ govukButton({
-          text: "Update organisation"
+          text: "Update organisation details"
         }) }}
 
       </form>
