@@ -214,6 +214,11 @@ router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAu
 //
 // router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycles.list_get)
 //
+router.get('/organisations/:organisationId/details', checkIsAuthenticated, organisationController.organisation_details)
+
+router.get('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
+router.post('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
+
 router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
