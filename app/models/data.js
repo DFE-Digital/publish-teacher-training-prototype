@@ -123,11 +123,11 @@ const seedOrganisations = () => {
       o.trainWithDisability = to.trainWithDisability
     }
 
-    if (to.enrichments) {
-      if (to.enrichments[0].Description) {
-        o.description = to.enrichments[0].Description
-      }
-    }
+    // if (to.enrichments) {
+    //   if (to.enrichments[0].Description) {
+    //     o.description = to.enrichments[0].Description
+    //   }
+    // }
 
     o.visaSponsorship = to.visas
 
