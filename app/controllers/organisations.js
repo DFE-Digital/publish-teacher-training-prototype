@@ -1,5 +1,6 @@
 const organisationModel = require('../models/organisations')
 const organisationHelper = require('../helpers/organisations')
+const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
 // exports.home_get = (req, res) => {
 //   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
@@ -36,7 +37,7 @@ exports.organisation_details = (req, res) => {
   res.render('../views/organisations/details', {
     organisation,
     actions: {
-      change: ``
+      change: `/organisations/${req.params.organisationId}`
     }
   })
 }
@@ -77,7 +78,188 @@ exports.edit_organisation_details_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Location updated')
+    req.flash('success','Organisation details updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_training_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  res.render('../views/organisations/training', {
+    organisation,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/training`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_training_post = (req, res) => {
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/organisations/training', {
+      organisation: req.session.data.organisation,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/training`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Training with your organisation updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_disabilities_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  res.render('../views/organisations/disabilities', {
+    organisation,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/training-with-disabilities`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_disabilities_post = (req, res) => {
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/organisations/disabilities', {
+      organisation: req.session.data.organisation,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/training-with-disabilities`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Training with disabilites and other needs updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_contact_details_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  res.render('../views/organisations/contact-details', {
+    organisation,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/contact-details`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_contact_details_post = (req, res) => {
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/organisations/contact-details', {
+      organisation: req.session.data.organisation,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/contact-details`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Contact details updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_visa_sponsorship_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  let selectedStudentVisa
+  if (organisation && organisation.visaSponsorship.canSponsorStudentVisa) {
+    selectedStudentVisa = organisation.visaSponsorship.canSponsorStudentVisa
+  }
+
+  const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
+
+  let selectedSkilledWorkerVisa
+  if (organisation && organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
+    selectedSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+  }
+
+  const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
+
+  res.render('../views/organisations/visa-sponsorship', {
+    organisation,
+    studentVisaOptions,
+    skilledWorkerVisaOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_visa_sponsorship_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const errors = []
+
+  let selectedStudentVisa
+  if (req.session.data.organisation && req.session.data.organisation.visaSponsorship.canSponsorStudentVisa) {
+    selectedStudentVisa = req.session.data.organisation.visaSponsorship.canSponsorStudentVisa
+  }
+
+  const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
+
+  let selectedSkilledWorkerVisa
+  if (req.session.data.organisation && req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
+    selectedSkilledWorkerVisa = req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+  }
+
+  const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
+
+  if (errors.length) {
+    res.render('../views/organisations/visa-sponsorship', {
+      organisation,
+      studentVisaOptions,
+      skilledWorkerVisaOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Visa sponsorship updated')
     res.redirect(`/organisations/${req.params.organisationId}/details`)
   }
 }
