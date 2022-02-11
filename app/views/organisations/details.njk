@@ -51,7 +51,8 @@
               text: "UK provider reference number (UKPRN)"
             },
             value: {
-              text: organisation.ukprn if organisation.ukprn.length else "Not entered"
+              text: organisation.ukprn if organisation.ukprn.length else "Not entered",
+              classes: "govuk-hint" if not organisation.ukprn.length
             },
             actions: {
               items: [
@@ -68,7 +69,8 @@
               text: "Unique reference number (URN)"
             },
             value: {
-              text: organisation.urn if organisation.urn.length else "Not entered"
+              text: organisation.urn if organisation.urn.length else "Not entered",
+              classes: "govuk-hint" if not organisation.urn.length
             },
             actions: {
               items: [
@@ -85,7 +87,8 @@
               text: "Training with your organisation"
             },
             value: {
-              html: (organisation.trainWithUs | nl2br | markdownToHtml | safe) if organisation.trainWithUs.length else "Not entered"
+              html: (organisation.trainWithUs | nl2br | markdownToHtml | safe) if organisation.trainWithUs.length else "Not entered",
+              classes: "govuk-hint" if not organisation.trainWithUs.length
             },
             actions: {
               items: [
@@ -102,7 +105,8 @@
               text: "Training with disabilities and other needs"
             },
             value: {
-              html: (organisation.trainWithDisability | nl2br | markdownToHtml | safe) if organisation.trainWithDisability.length else "Not entered"
+              html: (organisation.trainWithDisability | nl2br | markdownToHtml | safe) if organisation.trainWithDisability.length else "Not entered",
+              classes: "govuk-hint" if not organisation.trainWithDisability.length
             },
             actions: {
               items: [
@@ -120,23 +124,21 @@
       <h2 class="govuk-heading-m govuk-!-margin-top-9">Contact details</h2>
 
       {% set addressHtml %}
-        <p class="govuk-body">
-          {% if organisation.address.addressLine1.length %}
-            {{ organisation.address.addressLine1 }}<br>
-          {% endif %}
-          {% if organisation.address.addressLine2.length %}
-            {{ organisation.address.addressLine2 }}<br>
-          {% endif %}
-          {% if organisation.address.town.length %}
-            {{ organisation.address.town }}<br>
-          {% endif %}
-          {% if organisation.address.county.length %}
-            {{ organisation.address.county }}<br>
-          {% endif %}
-          {% if organisation.address.postcode.length %}
-            {{ organisation.address.postcode }}<br>
-          {% endif %}
-        </p>
+        {% if organisation.address.addressLine1.length %}
+          {{ organisation.address.addressLine1 }}<br>
+        {% endif %}
+        {% if organisation.address.addressLine2.length %}
+          {{ organisation.address.addressLine2 }}<br>
+        {% endif %}
+        {% if organisation.address.town.length %}
+          {{ organisation.address.town }}<br>
+        {% endif %}
+        {% if organisation.address.county.length %}
+          {{ organisation.address.county }}<br>
+        {% endif %}
+        {% if organisation.address.postcode.length %}
+          {{ organisation.address.postcode }}<br>
+        {% endif %}
       {% endset %}
 
       {{ govukSummaryList({
@@ -146,7 +148,8 @@
               text: "Email address"
             },
             value: {
-              text: organisation.contact.email if organisation.contact.email.length else "Not entered"
+              text: organisation.contact.email if organisation.contact.email.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.email.length
             },
             actions: {
               items: [
@@ -163,7 +166,8 @@
               text: "Telephone number"
             },
             value: {
-              text: organisation.contact.telephone if organisation.contact.telephone.length else "Not entered"
+              text: organisation.contact.telephone if organisation.contact.telephone.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.telephone.length
             },
             actions: {
               items: [
@@ -180,7 +184,8 @@
               text: "Website"
             },
             value: {
-              text: organisation.contact.website if organisation.contact.website.length else "Not entered"
+              text: organisation.contact.website if organisation.contact.website.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.website.length
             },
             actions: {
               items: [
@@ -197,7 +202,8 @@
               text: "Address"
             },
             value: {
-              html: addressHtml if addressHtml.length else "Not entered"
+              html: ('<p class="govuk-body">' + addressHtml + '</p>') if addressHtml | trim | length else "Not entered",
+              classes: "govuk-hint" if not addressHtml | trim | length
             },
             actions: {
               items: [
