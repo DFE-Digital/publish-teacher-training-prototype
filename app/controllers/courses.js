@@ -1,6 +1,5 @@
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
-const organisationRelationshipModel = require('../models/organisation-relationships')
 
 const courseHelper = require('../helpers/courses')
 const locationHelper = require('../helpers/locations')
@@ -12,44 +11,40 @@ exports.course_list = (req, res) => {
   // clean out course data
   delete req.session.data.course
 
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   let courses = courseModel.find({ organisationId: req.params.organisationId })
 
-  courses.sort((a,b) => {
-    return a.name.localeCompare(b.name)
-      || a.qualification.localeCompare(b.qualification)
-      || a.studyMode.localeCompare(b.studyMode)
-  })
+  const relationships = organisation.accreditedBodies
 
-  // const relationships = organisationRelationshipModel.find({organisationId: req.params.organisationId}).accreditedBodies
-  //
-  // let groupedCourses = []
-  //
-  // if (relationships.length) {
-  //   courses.sort((a,b) => {
-  //     return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
-  //       || a.name.localeCompare(b.name)
-  //       || a.qualification.localeCompare(b.qualification)
-  //       || a.studyMode.localeCompare(b.studyMode)
-  //   })
-  //
-  //   relationships.forEach((relationship, i) => {
-  //     const group = {}
-  //     group.code = relationship.code
-  //     group.name = relationship.name
-  //     group.courses = courses.filter(course => course.accreditedBody.code === relationship.code)
-  //     groupedCourses.push(group)
-  //   })
-  // } else {
-  //   courses.sort((a,b) => {
-  //     return a.name.localeCompare(b.name)
-  //       || a.qualification.localeCompare(b.qualification)
-  //       || a.studyMode.localeCompare(b.studyMode)
-  //   })
-  //   groupedCourses.push({courses: courses})
-  // }
+  let groupedCourses = []
+
+  if (relationships && relationships.length) {
+    courses.sort((a,b) => {
+      return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
+        || a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+
+    relationships.forEach((relationship, i) => {
+      const group = {}
+      group.id = relationship.id
+      group.name = relationship.name
+      group.courses = courses.filter(course => course.accreditedBody.id === relationship.id)
+      groupedCourses.push(group)
+    })
+  } else {
+    courses.sort((a,b) => {
+      return a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+    groupedCourses.push({courses: courses})
+  }
 
   res.render('../views/courses/list', {
-    courses: courses,
+    courses: groupedCourses,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
