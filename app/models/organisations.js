@@ -21,5 +21,83 @@ exports.findOne = (params) => {
 }
 
 exports.updateOne = (params) => {
+  if (params.organisationId) {
+    let organisation = this.findOne({ organisationId: params.organisationId })
+
+    if (params.organisation.urn !== undefined) {
+      organisation.urn = params.organisation.urn
+    }
+
+    if (params.organisation.ukprn !== undefined) {
+      organisation.ukprn = params.organisation.ukprn
+    }
+
+    if (params.organisation.trainWithUs !== undefined) {
+      organisation.trainWithUs = params.organisation.trainWithUs
+    }
+
+    if (params.organisation.trainWithDisability !== undefined) {
+      organisation.trainWithDisability = params.organisation.trainWithDisability
+    }
+
+    if (params.organisation.contact !== undefined) {
+      if (params.organisation.contact.email !== undefined) {
+        organisation.contact.email = params.organisation.contact.email
+      }
+
+      if (params.organisation.contact.telephone !== undefined) {
+        organisation.contact.telephone = params.organisation.contact.telephone
+      }
+
+      if (params.organisation.contact.website !== undefined) {
+        organisation.contact.website = params.organisation.contact.website
+      }
+    }
+
+    if (params.organisation.address !== undefined) {
+      if (params.organisation.address.addressLine1 !== undefined) {
+        organisation.address.addressLine1 = params.organisation.address.addressLine1
+      }
+
+      if (params.organisation.address.addressLine2 !== undefined) {
+        organisation.address.addressLine2 = params.organisation.address.addressLine2
+      }
+
+      if (params.organisation.address.town !== undefined) {
+        organisation.address.town = params.organisation.address.town
+      }
+
+      if (params.organisation.address.county !== undefined) {
+        organisation.address.county = params.organisation.address.county
+      }
+
+      if (params.organisation.address.postcode !== undefined) {
+        organisation.address.postcode = params.organisation.address.postcode
+      }
+    }
+
+    if (params.organisation.visaSponsorship !== undefined) {
+      if (params.organisation.visaSponsorship.canSponsorStudentVisa !== undefined) {
+        organisation.visaSponsorship.canSponsorStudentVisa = params.organisation.visaSponsorship.canSponsorStudentVisa
+      }
+
+      if (params.organisation.visaSponsorship.canSponsorSkilledWorkerVisa !== undefined) {
+        organisation.visaSponsorship.canSponsorSkilledWorkerVisa = params.organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+      }
+    }
+
+    organisation.updatedAt = new Date()
+
+    const directoryPath = path.join(__dirname, '../data/organisations/')
+
+    const filePath = directoryPath + '/' + params.organisationId + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(organisation)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+
+  }
 
 }
