@@ -37,6 +37,7 @@ exports.organisation_details = (req, res) => {
   res.render('../views/organisations/details', {
     organisation,
     actions: {
+      back: `/organisations/${req.params.organisationId}`,
       change: `/organisations/${req.params.organisationId}`
     }
   })
@@ -260,6 +261,51 @@ exports.edit_visa_sponsorship_post = (req, res) => {
     })
 
     req.flash('success','Visa sponsorship updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_accredited_body_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+
+  res.render('../views/organisations/accredited-body', {
+    organisation,
+    accreditedBody,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/accredited-bodies/${req.params.accreditedBodyId}`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_accredited_body_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  let accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+  accreditedBody.description = req.session.data.organisation.accreditedBody.description
+
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/organisations/accredited-body', {
+      organisation,
+      accreditedBody,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/accredited-bodies/${req.params.accreditedBodyId}`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      accreditedBodyId: req.params.accreditedBodyId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Accredited body description updated')
     res.redirect(`/organisations/${req.params.organisationId}/details`)
   }
 }

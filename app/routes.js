@@ -231,6 +231,9 @@ router.post('/organisations/:organisationId/contact-details', checkIsAuthenticat
 router.get('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_get)
 router.post('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_post)
 
+router.get('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_get)
+router.post('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_post)
+
 router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
