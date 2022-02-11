@@ -123,6 +123,12 @@ const seedOrganisations = () => {
       o.trainWithDisability = to.trainWithDisability
     }
 
+    // if (to.enrichments) {
+    //   if (to.enrichments[0].Description) {
+    //     o.description = to.enrichments[0].Description
+    //   }
+    // }
+
     o.visaSponsorship = to.visas
 
     if (!organisation.isAccreditedBody) {
@@ -134,7 +140,6 @@ const seedOrganisations = () => {
 
     o.createdAt = to.createdAt
     o.updatedAt = to.updatedAt
-
 
     // if (o) {
     //   // write course data to file

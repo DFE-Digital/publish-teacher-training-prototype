@@ -1,0 +1,77 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Training with disabilities and other needs" %}
+{% set caption = organisation.name %}
+
+{% block pageTitle %}
+  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        <h1 class="govuk-heading-l">
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+          {{ title }}
+        </h1>
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCharacterCount({
+          id: "train-with-disability",
+          name: "organisation[trainWithDisability]",
+          rows: 15,
+          maxwords: 250,
+          label: {
+            html: headingHtml
+          },
+          errorMessage: errors | getErrorMessage("train-with-disability"),
+          value: organisation.trainWithDisability
+        }) }}
+
+        {% set helpTextHtml %}
+          <p class="govuk-body">Say how you support candidates with disabilities and other needs. This could include candidates with:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>dyslexia</li>
+            <li>physical, hearing and visual impairments</li>
+            <li>mental health conditions</li>
+          </ul>
+
+          <p class="govuk-body">If accessibility varies between locations, give details. It’s also useful for applicants to know how you’ve accommodated others with specific access needs in the past.</p>
+        {% endset %}
+
+        {{ govukDetails({
+          summaryText: "Help with describing training with disabilities and other needs",
+          html: helpTextHtml
+        }) }}
+
+        {{ govukButton({
+          text: "Update training with disabilities"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

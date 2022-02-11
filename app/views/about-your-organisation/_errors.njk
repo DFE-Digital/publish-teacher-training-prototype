@@ -1,6 +1,0 @@
-{% if data["about-your-organisation-show-publish-errors"] and errors.length > 0 %}
-  {{ govukErrorSummary({
-    titleText: "We couldn’t publish this because some information was missing",
-    errorList: errors
-  }) }}
-{% endif %}
