@@ -227,7 +227,7 @@
               text: "Can candidates get a sponsored Student visa for your fee-paying courses?"
             },
             value: {
-              text: organisation.visaSponsorship.canSponsorStudentVisa | capitalize
+              text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel
             },
             actions: {
               items: [
@@ -244,7 +244,7 @@
               text: "Can candidates get a sponsored Skilled Worker visa for your salaried courses?"
             },
             value: {
-              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | capitalize
+              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
             },
             actions: {
               items: [

@@ -9,6 +9,7 @@ const cycleHelper = require('./helpers/cycles')
 const locationHelper = require('./helpers/locations')
 const organisationHelper = require('./helpers/organisations')
 const subjectHelper = require('./helpers/subjects')
+const visaSponsorshipHelper = require('./helpers/visa-sponsorship')
 
 const individualFiltersFolder = path.join(__dirname, './filters')
 
@@ -285,11 +286,40 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the student visa label
+  example: {{ "yes" | getStudentVisaLabel }}
+  outputs: "Yes"
+  ------------------------------------------------------------------ */
+  filters.getStudentVisaLabel = (code) => {
+    let label
+
+    if (code) {
+      label = visaSponsorshipHelper.getStudentVisaLabel(code)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the skilled worker visa label
+  example: {{ "no" | getStudentVisaLabel }}
+  outputs: "No, or not applicable"
+  ------------------------------------------------------------------ */
+  filters.getSkilledWorkerVisaLabel = (code) => {
+    let label
+
+    if (code) {
+      label = visaSponsorshipHelper.getSkilledWorkerVisaLabel(code)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
   utility function to parse markdown as HTML
   example: {{ "## Title" | markdownToHtml }}
   outputs: "<h2>Title</h2>"
   ------------------------------------------------------------------ */
-
   filters.markdownToHtml = (markdown) => {
     if (!markdown) {
       return null
