@@ -86,6 +86,14 @@ exports.updateOne = (params) => {
       }
     }
 
+    if (params.accreditedBodyId) {
+      organisation.accreditedBodies.forEach((accreditedBody, i) => {
+        if (accreditedBody.id === params.accreditedBodyId) {
+          accreditedBody.description = params.organisation.accreditedBody.description
+        }
+      })
+    }
+
     organisation.updatedAt = new Date()
 
     const directoryPath = path.join(__dirname, '../data/organisations/')
