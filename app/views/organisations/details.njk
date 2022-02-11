@@ -259,30 +259,34 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">Accredited bodies</h2>
+      {% if organisation.type == "lead_school" %}
 
-      {#{ govukButton({
-        text: "Add accredited body",
-        href: "#"
-      }) }#}
+        <h2 class="govuk-heading-m govuk-!-margin-top-9">Accredited bodies</h2>
 
-      <dl class="govuk-summary-list">
-        {% for accreditedBody in organisation.accreditedBodies %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            {{ accreditedBody.name }}
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
-          </dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}">
-              Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
-            </a>
-          </dd>
-        </div>
-        {% endfor %}
-      </dl>
+        {#{ govukButton({
+          text: "Add accredited body",
+          href: "#"
+        }) }#}
+
+        <dl class="govuk-summary-list">
+          {% for accreditedBody in organisation.accreditedBodies %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              {{ accreditedBody.name }}
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}">
+                Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
+              </a>
+            </dd>
+          </div>
+          {% endfor %}
+        </dl>
+
+      {% endif %}
 
     </div>
   </div>
