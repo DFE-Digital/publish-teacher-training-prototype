@@ -1,10 +1,10 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Organisation details" %}
-{% set caption = organisation.name %}
+{% set title = "Accredited body description" %}
+{% set caption = accreditedBody.name %}
 
 {% block pageTitle %}
-  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+  ("Error: " if errors.length) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -33,19 +33,19 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukCharacterCount({
-          id: "accreditied-body",
-          name: "organisation[accreditedBody]",
+          id: "accreditied-body-description",
+          name: "organisation[accreditedBody][description]",
           rows: 10,
           maxwords: 100,
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("accreditied-body"),
-          value: organisation.accreditedBody
+          errorMessage: errors | getErrorMessage("accreditied-body-description"),
+          value: accreditedBody.description
         }) }}
 
         {{ govukButton({
-          text: "Update accredited body details"
+          text: "Update accredited body description"
         }) }}
 
       </form>
