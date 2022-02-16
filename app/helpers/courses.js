@@ -231,6 +231,14 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
     items.push(item)
   }
 
+  const firstItem = {}
+  firstItem.text = ""
+  firstItem.value = ""
+  firstItem.id = "blank"
+  firstItem.selected = (selectedItem && selectedItem === '') ? 'selected' : ''
+
+  items.unshift(firstItem)
+
   return items
 }
 
