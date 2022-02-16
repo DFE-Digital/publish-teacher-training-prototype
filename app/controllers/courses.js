@@ -1,4 +1,5 @@
 const courseModel = require('../models/courses')
+const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
 
 const courseHelper = require('../helpers/courses')
@@ -12,6 +13,7 @@ exports.course_list = (req, res) => {
   delete req.session.data.course
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
 
   let courses = courseModel.find({ organisationId: req.params.organisationId })
 
@@ -44,6 +46,8 @@ exports.course_list = (req, res) => {
   }
 
   res.render('../views/courses/list', {
+    organisation,
+    locations,
     courses: groupedCourses,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
