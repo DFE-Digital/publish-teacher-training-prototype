@@ -2,7 +2,7 @@
 
 {% set title = "Specify an age range" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -99,7 +99,7 @@
 
         </div>
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update age range"
           }) }}

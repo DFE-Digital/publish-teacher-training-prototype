@@ -2,7 +2,7 @@
 
 {% set title = "Visa sponsorship" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -39,7 +39,7 @@
 
 
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update visa sponsorship"
           }) }}

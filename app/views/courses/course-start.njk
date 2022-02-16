@@ -2,7 +2,7 @@
 
 {% set title = "When does the course start?" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -47,7 +47,7 @@
           items: courseStartOptions
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update start date"
           }) }}

@@ -2,7 +2,7 @@
 
 {% set title = "Full time or part time" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -49,7 +49,7 @@
           items: studyModeOptions
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update full time or part time"
           }) }}

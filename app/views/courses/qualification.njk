@@ -2,7 +2,7 @@
 
 {% set title = "Pick a course outcome" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -49,7 +49,7 @@
           items: qualificationOptions
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update qualification"
           }) }}

@@ -2,7 +2,7 @@
 
 {% set title = "Who is the accredited body?" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -95,7 +95,7 @@
 
         </div>
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update accredited body"
           }) }}
