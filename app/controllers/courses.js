@@ -2073,7 +2073,11 @@ exports.new_course_course_start_post = (req, res) => {
 }
 
 exports.new_course_check_answers_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
   res.render('../views/courses/check-your-answers', {
+    organisation,
+    locations,
     course: req.session.data.course,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
