@@ -2,7 +2,7 @@
 
 {% set title = "What type of course?" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -61,7 +61,7 @@
           items: sendOptions
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update subject level"
           }) }}
