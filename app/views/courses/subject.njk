@@ -1,8 +1,8 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Pick a " + (data.course.subjectLevel | lower) + " subject" %}
+{% set title = "Pick a " + (course.subjectLevel | lower) + " subject" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
@@ -45,8 +45,28 @@
             label: {
               html: headingHtml
             },
-            errorMessage: errors | getErrorMessage("subjects"),
+            errorMessage: errors | getErrorMessage("subject"),
             items: subjectOptions
+          }) }}
+
+          {% set secondSubjectHtml %}
+            <p class="govuk-body">Your first subject is the main one. It will appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
+
+            {{ govukSelect({
+              idPrefix: "second-subject",
+              name: "course.secondSubject",
+              label: {
+                text: "Subject",
+                classes: "govuk-label--s"
+              },
+              errorMessage: errors | getErrorMessage("second-subject"),
+              items: secondSubjectOptions
+            }) }}
+          {% endset %}
+
+          {{ govukDetails({
+            summaryText: "Add a second subject (optional)",
+            html: secondSubjectHtml
           }) }}
 
         {% else %}
@@ -59,15 +79,15 @@
                 html: headingHtml
               }
             },
-            errorMessage: errors | getErrorMessage("subjects"),
+            errorMessage: errors | getErrorMessage("subject"),
             items: subjectOptions
           }) }}
 
         {% endif %}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
-            text: "Update subjects"
+            text: "Update subject"
           }) }}
         {% else %}
           {{ govukButton({
