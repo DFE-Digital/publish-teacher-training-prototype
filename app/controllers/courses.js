@@ -1279,6 +1279,7 @@ exports.new_course_subject_level_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/subject-level', {
+      course: req.session.data.course,
       subjectLevelOptions,
       sendOptions,
       actions: {
@@ -1289,17 +1290,39 @@ exports.new_course_subject_level_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`)
+    if (req.session.data.course.subjectLevel === 'further_education') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`)
+    }
+
   }
 }
 
 exports.new_course_subject_get = (req, res) => {
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = req.session.data.course.subjects
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  }
+
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  }
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
@@ -1309,7 +1332,9 @@ exports.new_course_subject_get = (req, res) => {
   }
 
   res.render('../views/courses/subject', {
+    course: req.session.data.course,
     subjectOptions,
+    secondSubjectOptions,
     actions: {
       save,
       back,
@@ -1322,11 +1347,28 @@ exports.new_course_subject_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = req.session.data.course.subjects
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  }
+
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  }
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
@@ -1335,9 +1377,19 @@ exports.new_course_subject_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (req.session.data.course.subjects[0] === '') {
+    let error = {}
+    error.fieldName = 'subject'
+    error.href = '#subject'
+    error.text = 'Select a subject'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
+      course: req.session.data.course,
       subjectOptions,
+      secondSubjectOptions,
       actions: {
         save,
         back,
@@ -1370,6 +1422,7 @@ exports.new_course_modern_language_get = (req, res) => {
   }
 
   res.render('../views/courses/modern-languages', {
+    course: req.session.data.course,
     subjectOptions,
     actions: {
       save,
@@ -1398,6 +1451,7 @@ exports.new_course_modern_language_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
+      course: req.session.data.course,
       subjectOptions,
       actions: {
         save,
@@ -1431,6 +1485,7 @@ exports.new_course_age_range_get = (req, res) => {
   }
 
   res.render('../views/courses/age-range', {
+    course: req.session.data.course,
     ageRangeOptions,
     actions: {
       save,
@@ -1463,6 +1518,7 @@ exports.new_course_age_range_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/age-range', {
+      course: req.session.data.course,
       ageRangeOptions,
       actions: {
         save,
@@ -1496,6 +1552,7 @@ exports.new_course_qualification_get = (req, res) => {
   }
 
   res.render('../views/courses/qualification', {
+    course: req.session.data.course,
     qualificationOptions,
     actions: {
       save,
@@ -1506,6 +1563,7 @@ exports.new_course_qualification_get = (req, res) => {
 }
 
 exports.new_course_qualification_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
   let selectedQualification
@@ -1524,6 +1582,7 @@ exports.new_course_qualification_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/qualification', {
+      course: req.session.data.course,
       qualificationOptions,
       actions: {
         save,
@@ -1536,11 +1595,11 @@ exports.new_course_qualification_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      // TODO: if organisation is a lead school else scitt/hei
-      if (true) {
-        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
-      } else {
+      // if organisation is an accredited body (SCITT or HEI), else they're a lead school
+      if (organisation.isAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
       }
     }
   }
@@ -1562,6 +1621,7 @@ exports.new_course_funding_type_get = (req, res) => {
   }
 
   res.render('../views/courses/funding-type', {
+    course: req.session.data.course,
     fundingTypeOptions,
     actions: {
       save,
@@ -1590,6 +1650,7 @@ exports.new_course_funding_type_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/funding-type', {
+      course: req.session.data.course,
       fundingTypeOptions,
       actions: {
         save,
@@ -1623,6 +1684,7 @@ exports.new_course_apprenticeship_get = (req, res) => {
   }
 
   res.render('../views/courses/apprenticeship', {
+    course: req.session.data.course,
     apprenticeshipOptions,
     actions: {
       save,
@@ -1651,6 +1713,7 @@ exports.new_course_apprenticeship_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
+      course: req.session.data.course,
       apprenticeshipOptions,
       actions: {
         save,
@@ -1689,6 +1752,7 @@ exports.new_course_study_mode_get = (req, res) => {
   }
 
   res.render('../views/courses/study-mode', {
+    course: req.session.data.course,
     studyModeOptions,
     actions: {
       save,
@@ -1723,6 +1787,7 @@ exports.new_course_study_mode_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/study-mode', {
+      course: req.session.data.course,
       studyModeOptions,
       actions: {
         save,
@@ -1741,6 +1806,8 @@ exports.new_course_study_mode_post = (req, res) => {
 }
 
 exports.new_course_location_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   let selectedLocation
   if (req.session.data.course && req.session.data.course.locations) {
     selectedLocation = req.session.data.course.locations
@@ -1755,17 +1822,25 @@ exports.new_course_location_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
-  res.render('../views/courses/location', {
-    locationOptions,
-    actions: {
-      save,
-      back,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
-    }
-  })
+  // if there's only one location, auto-select and move on
+  if (locationOptions.length === 1) {
+    req.session.data.course.locations = locationOptions[0].value
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+  } else {
+    res.render('../views/courses/location', {
+      course: req.session.data.course,
+      locationOptions,
+      actions: {
+        save,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      }
+    })
+  }
 }
 
 exports.new_course_location_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
   let selectedLocation
@@ -1784,6 +1859,7 @@ exports.new_course_location_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/location', {
+      course: req.session.data.course,
       locationOptions,
       actions: {
         save,
@@ -1796,7 +1872,12 @@ exports.new_course_location_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+      if (organisation.isAccreditedBody) {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+      }
+
     }
   }
 }
@@ -1807,7 +1888,7 @@ exports.new_course_accredited_body_get = (req, res) => {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let selectedAccreditedBodyOther
   if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
@@ -1824,6 +1905,7 @@ exports.new_course_accredited_body_get = (req, res) => {
   }
 
   res.render('../views/courses/accredited-body', {
+    course: req.session.data.course,
     accreditedBodyOptions,
     accreditedBodies,
     actions: {
@@ -1842,7 +1924,7 @@ exports.new_course_accredited_body_post = (req, res) => {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let selectedAccreditedBodyOther
   if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
@@ -1860,6 +1942,7 @@ exports.new_course_accredited_body_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
+      course: req.session.data.course,
       accreditedBodyOptions,
       accreditedBodies,
       actions: {
@@ -1887,6 +1970,7 @@ exports.new_course_applications_open_date_get = (req, res) => {
   }
 
   res.render('../views/courses/applications-open-date', {
+    course: req.session.data.course,
     actions: {
       save,
       back,
@@ -1907,6 +1991,7 @@ exports.new_course_applications_open_date_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
+      course: req.session.data.course,
       actions: {
         save,
         back,
@@ -1915,6 +2000,11 @@ exports.new_course_applications_open_date_post = (req, res) => {
       errors
     })
   } else {
+    // parse the date entered into a date object
+    if (req.session.data.course.applicationsOpenDateOther) {
+      req.session.data.course.applicationsOpenDateOther = utilHelper.arrayToDateObject(req.session.data.course.applicationsOpenDateOther)
+    }
+
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
@@ -1939,6 +2029,7 @@ exports.new_course_course_start_get = (req, res) => {
   }
 
   res.render('../views/courses/course-start', {
+    course: req.session.data.course,
     courseStartOptions,
     actions: {
       save,
@@ -1967,6 +2058,7 @@ exports.new_course_course_start_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
+      course: req.session.data.course,
       courseStartOptions,
       actions: {
         save,
