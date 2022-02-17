@@ -259,8 +259,12 @@ exports.edit_course_modern_language_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = []
+
+    req.session.data.course.subjects.forEach((subject, i) => {
+      selectedSubject.push(subject.code)
+    })
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
@@ -1398,7 +1402,7 @@ exports.new_course_subject_post = (req, res) => {
       errors
     })
   } else {
-    if (selectedSubject === 'ML') {
+    if (selectedSubject.includes('ML')) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`)
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
@@ -1409,10 +1413,14 @@ exports.new_course_subject_post = (req, res) => {
 exports.new_course_modern_language_get = (req, res) => {
   let selectedSubject
   if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+    selectedSubject = []
+
+    req.session.data.course.childSubjects.forEach((subject, i) => {
+      selectedSubject.push(subject)
+    })
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
@@ -1437,10 +1445,14 @@ exports.new_course_modern_language_post = (req, res) => {
 
   let selectedSubject
   if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+    selectedSubject = []
+
+    req.session.data.course.childSubjects.forEach((subject, i) => {
+      selectedSubject.push(subject)
+    })
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
@@ -2089,6 +2101,10 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
+
+  req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+
+
   req.flash('success', {
     title: 'Success',
     description: 'Course added'
