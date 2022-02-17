@@ -228,7 +228,7 @@
                 text: "Applications open date"
               },
               value: {
-                text: (course.applicationsOpenDate if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther) | date("d MMMM yyyy")
+                text: "As soon as the course is on Find" if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther | date("d MMMM yyyy")
               },
               actions: {
                 items: [
