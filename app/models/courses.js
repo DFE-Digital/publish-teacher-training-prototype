@@ -400,6 +400,14 @@ exports.updateOne = (params) => {
       course.financialSupport = params.course.financialSupport
     }
 
+    if (params.course.canSponsorStudentVisa !== undefined) {
+      course.canSponsorStudentVisa = params.course.canSponsorStudentVisa
+    }
+
+    if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
+      course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
+    }
+
     if (params.course.status) {
       course.status = params.course.status
     }
