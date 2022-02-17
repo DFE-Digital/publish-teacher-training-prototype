@@ -7,6 +7,7 @@ const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
 const utilHelper = require('../helpers/utils')
+const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
 exports.course_list = (req, res) => {
   // clean out course data
@@ -1127,6 +1128,81 @@ exports.edit_financial_support_post = (req, res) => {
     })
 
     req.flash('success','Financial support updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+exports.edit_visa_sponsorship_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedVisaOption
+  if (course) {
+    if (course.fundingType === 'fee') {
+      selectedVisaOption = course.canSponsorStudentVisa
+    } else if (course.fundingType === 'salary') {
+      selectedVisaOption = course.canSponsorSkilledWorkerVisa
+    }
+  }
+
+  let visaOptions = []
+
+  if (course.fundingType === 'fee') {
+    visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+  } else if (course.fundingType === 'salary') {
+    visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+  }
+
+  res.render('../views/courses/visa-sponsorship', {
+    course,
+    visaOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.edit_visa_sponsorship_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedVisaOption
+  if (course && req.session.data.course) {
+    if (course.fundingType === 'fee') {
+      selectedVisaOption = req.session.data.course.canSponsorStudentVisa
+    } else if (course.fundingType === 'salary') {
+      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
+    }
+  }
+
+  let visaOptions = []
+  if (course && req.session.data.course) {
+    if (course.fundingType === 'fee') {
+      visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+    } else if (course.fundingType === 'salary') {
+      visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+    }
+  }
+
+  if (errors.length) {
+    res.render('../views/courses/visa-sponsorship', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','Visa sponsorship updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
