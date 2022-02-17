@@ -35,9 +35,35 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% if course.fundingType == "fee" %}
 
+          {{ govukRadios({
+            idPrefix: "student-visa",
+            name: "course[canSponsorStudentVisa]",
+            fieldset: {
+              legend: {
+                text: "Can candidates get a sponsored Student visa?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: visaOptions
+          }) }}
 
+        {% elif course.fundingType == "salary" %}
 
+          {{ govukRadios({
+            idPrefix: "student-visa",
+            name: "course[canSponsorSkilledWorkerVisa]",
+            fieldset: {
+              legend: {
+                text: "Can candidates get a sponsored Skilled Worker visa?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: visaOptions
+          }) }}
+
+        {% endif %}
 
         {% if course.id %}
           {{ govukButton({
