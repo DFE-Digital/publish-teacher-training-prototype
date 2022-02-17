@@ -1836,8 +1836,14 @@ exports.new_course_location_get = (req, res) => {
 
   // if there's only one location, auto-select and move on
   if (locationOptions.length === 1) {
-    req.session.data.course.locations = locationOptions[0].value
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+    req.session.data.course.locations = []
+    req.session.data.course.locations.push(locationOptions[0].value)
+
+    if (organisation.isAccreditedBody) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+    }
   } else {
     res.render('../views/courses/location', {
       course: req.session.data.course,
@@ -1889,7 +1895,6 @@ exports.new_course_location_post = (req, res) => {
       } else {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
       }
-
     }
   }
 }
