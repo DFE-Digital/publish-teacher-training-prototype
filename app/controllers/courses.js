@@ -2101,14 +2101,32 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
+  // create the course name based on the subjects chosen
+  if (req.session.data.course.subjectLevel === 'further_education') {
+    req.session.data.course.name = 'Further education'
+  } else {
+    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+  }
 
-  req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+  // create a random course 4-digit alphanumeric code for the course
+  req.session.data.course.code = courseHelper.createCourseCode()
 
+  // combine parent and child subjects
+  if (req.session.data.course.childSubjects) {
+    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
 
-  req.flash('success', {
-    title: 'Success',
-    description: 'Course added'
+    // delete the child subjects as no longer needed
+    delete req.session.data.course.childSubjects
+  }
+
+  courseModel.insertOne({
+    organisationId: req.params.organisationId,
+    course: req.session.data.course
   })
 
+  // delete the course data as no longer needed
+  delete req.session.data.course
+
+  req.flash('success','Course added')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
 }
