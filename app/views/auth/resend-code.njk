@@ -3,7 +3,7 @@
 {% set title = "Resend verification email"  %}
 
 {% block pageTitle %}
-{{ 'Error: ' if errors.length}} {{- title }} – {{ serviceName }} – GOV.UK
+{{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
