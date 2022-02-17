@@ -364,3 +364,9 @@ exports.createCourseName = (subjects) => {
 
   return courseName
 }
+
+exports.createCourseCode = () => {
+  let courseCode = 'Z123'
+
+  return courseCode
+}
