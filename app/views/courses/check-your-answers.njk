@@ -24,21 +24,28 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set subjectHtml %}
+          <ul class="govuk-list">
+            {% for subject in course.subjects %}
+              <li>
+                {{ subject | getSubjectLabel }}
+              </li>
+              {% if subject == "ML" %}
+                {% for subject in course.childSubjects %}
+                  <li>
+                    {{ subject | getSubjectLabel }}
+                  </li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endset %}
+
         {% set locationHtml %}
           <ul class="govuk-list">
             {% for location in course.locations %}
               <li>
                 {{ location | getLocationLabel }}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endset %}
-
-        {% set childSubjectHtml %}
-          <ul class="govuk-list">
-            {% for subject in course.childSubjects %}
-              <li>
-                {{ subject | getSubjectLabel }}
               </li>
             {% endfor %}
           </ul>
@@ -82,10 +89,10 @@
             },
             {
               key: {
-                text: "Subject"
+                text: "Subject" + ("s" if course.subjects.length > 1)
               },
               value: {
-                text: course.subject | getSubjectLabel
+                html: subjectHtml
               },
               actions: {
                 items: [
@@ -96,24 +103,7 @@
                   }
                 ]
               }
-            },
-            {
-              key: {
-                text: "Modern language" + ("s" if course.childSubject > 1)
-              },
-              value: {
-                html: childSubjectHtml
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/modern-language?referrer=check",
-                    text: "Change",
-                    visuallyHiddenText: "modern language"
-                  }
-                ]
-              }
-            } if course.subject == 'ML',
+            } if course.subjectLevel != "further_education",
             {
               key: {
                 text: "Age range"
@@ -130,7 +120,7 @@
                   }
                 ]
               }
-            },
+            } if course.subjectLevel != "further_education",
             {
               key: {
                 text: "Qualification"
@@ -201,7 +191,7 @@
             },
             {
               key: {
-                text: "Location"
+                text: "Location" + ("s" if course.locations.length > 1)
               },
               value: {
                 html: locationHtml
@@ -214,7 +204,7 @@
                     visuallyHiddenText: "location"
                   }
                 ]
-              }
+              } if locations.length > 1
             },
             {
               key: {
@@ -232,20 +222,20 @@
                   }
                 ]
               }
-            },
+            } if not organisation.isAccreditedBody,
             {
               key: {
                 text: "Applications open date"
               },
               value: {
-                text: course.applicationOpenDate | date('dd LLLL yyyy')
+                text: (course.applicationsOpenDate if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther) | date("d MMMM yyyy")
               },
               actions: {
                 items: [
                   {
                     href: actions.change + "/applications-open-date?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "applications-open-date"
+                    visuallyHiddenText: "applications open date"
                   }
                 ]
               }
@@ -255,7 +245,7 @@
                 text: "Course start"
               },
               value: {
-                text: course.courseStart | date("MMMM yyyy")
+                text: course.startDate | date("MMMM yyyy")
               },
               actions: {
                 items: [
@@ -271,7 +261,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Save course"
+          text: "Add course"
         }) }}
 
       </form>
