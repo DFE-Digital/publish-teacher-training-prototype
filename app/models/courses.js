@@ -105,6 +105,10 @@ exports.insertOne = (params) => {
       course.qualification = params.course.qualification
     }
 
+    if (params.course.apprenticeship) {
+      course.apprenticeship = params.course.apprenticeship
+    }
+
     if (params.course.fundingType) {
       course.fundingType = params.course.fundingType
 
@@ -253,23 +257,6 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.course.locations) {
-      const locations = []
-
-      params.course.locations.forEach((courseLocation, i) => {
-        const location = {}
-
-        const cl = locationModel.findOne({ organisationId: params.organisationId, locationId: courseLocation })
-
-        location.id = cl.id
-        location.name = cl.name
-
-        locations.push(location)
-      })
-
-      course.locations = locations
-    }
-
     if (params.course.ageRange) {
       course.ageRange = params.course.ageRange
 
@@ -283,15 +270,12 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.course.courseLength) {
-      course.courseLength = params.course.courseLength
+    if (params.course.qualification) {
+      course.qualification = params.course.qualification
+    }
 
-      // handle 'other' course length
-      if (params.course.courseLength === 'other') {
-        course.courseLengthOther = params.course.courseLengthOther
-      } else {
-        delete course.courseLengthOther
-      }
+    if (params.course.apprenticeship) {
+      course.apprenticeship = params.course.apprenticeship
     }
 
     if (params.course.fundingType) {
@@ -328,8 +312,21 @@ exports.updateOne = (params) => {
       course.studyMode = params.course.studyMode
     }
 
-    if (params.course.qualification) {
-      course.qualification = params.course.qualification
+    if (params.course.locations) {
+      const locations = []
+
+      params.course.locations.forEach((courseLocation, i) => {
+        const location = {}
+
+        const cl = locationModel.findOne({ organisationId: params.organisationId, locationId: courseLocation })
+
+        location.id = cl.id
+        location.name = cl.name
+
+        locations.push(location)
+      })
+
+      course.locations = locations
     }
 
     if (params.course.accreditedBody) {
@@ -353,6 +350,17 @@ exports.updateOne = (params) => {
         course.applicationsOpenDateOther = params.course.applicationsOpenDateOther
       } else {
         delete course.applicationsOpenDateOther
+      }
+    }
+
+    if (params.course.courseLength) {
+      course.courseLength = params.course.courseLength
+
+      // handle 'other' course length
+      if (params.course.courseLength === 'other') {
+        course.courseLengthOther = params.course.courseLengthOther
+      } else {
+        delete course.courseLengthOther
       }
     }
 
