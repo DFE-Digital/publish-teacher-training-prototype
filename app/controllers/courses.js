@@ -63,6 +63,9 @@ exports.course_list = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.course_details = (req, res) => {
+  // clean out course data
+  delete req.session.data.course
+
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/details', {
@@ -80,6 +83,9 @@ exports.course_details = (req, res) => {
 }
 
 exports.course_description = (req, res) => {
+  // clean out course data
+  delete req.session.data.course
+
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/description', {
@@ -1135,6 +1141,13 @@ exports.edit_financial_support_post = (req, res) => {
 exports.edit_visa_sponsorship_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let accreditedBody
+  if (course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: course.accreditedBody.id })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+  }
+
   let selectedVisaOption
   if (course) {
     if (course.fundingType === 'fee') {
@@ -1155,6 +1168,7 @@ exports.edit_visa_sponsorship_get = (req, res) => {
   res.render('../views/courses/visa-sponsorship', {
     course,
     visaOptions,
+    accreditedBody,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -1165,6 +1179,14 @@ exports.edit_visa_sponsorship_get = (req, res) => {
 
 exports.edit_visa_sponsorship_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let accreditedBody
+  if (course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: course.accreditedBody.id })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+  }
+
   const errors = []
 
   let selectedVisaOption
@@ -1177,7 +1199,7 @@ exports.edit_visa_sponsorship_post = (req, res) => {
   }
 
   let visaOptions = []
-  if (course && req.session.data.course) {
+  if (course) {
     if (course.fundingType === 'fee') {
       visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
     } else if (course.fundingType === 'salary') {
@@ -1185,9 +1207,29 @@ exports.edit_visa_sponsorship_post = (req, res) => {
     }
   }
 
+  if (!req.session.data.course) {
+    if (course.fundingType === 'fee') {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Student visa'
+      errors.push(error)
+    }
+
+    if (course.fundingType === 'salary') {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Skilled Worker visa'
+      errors.push(error)
+    }
+  }
+
   if (errors.length) {
     res.render('../views/courses/visa-sponsorship', {
       course,
+      visaOptions,
+      accreditedBody,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -1203,7 +1245,7 @@ exports.edit_visa_sponsorship_post = (req, res) => {
     })
 
     req.flash('success','Visa sponsorship updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
 
