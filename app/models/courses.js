@@ -178,6 +178,18 @@ exports.insertOne = (params) => {
       course.accreditedBody.name = ab.name
     }
 
+    if (course.fundingType === 'fee') {
+      if (params.course.canSponsorStudentVisa) {
+        course.canSponsorStudentVisa = params.course.canSponsorStudentVisa
+      }
+    }
+
+    if (course.fundingType === 'salary') {
+      if (params.course.canSponsorSkilledWorkerVisa) {
+        course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
+      }
+    }
+
     if (params.course.startDate) {
       course.startDate = params.course.startDate
     }
@@ -400,9 +412,6 @@ exports.updateOne = (params) => {
       course.financialSupport = params.course.financialSupport
     }
 
-    // if course.fundingType === 'fee'
-    // if fundingType changes from 'fee', we need to delete the canSponsorStudentVisa
-    // and replace with canSponsorSkilledWorkerVisa if 'salary'
     if (course.fundingType === 'fee') {
       if (params.course.canSponsorStudentVisa !== undefined) {
         course.canSponsorStudentVisa = params.course.canSponsorStudentVisa
@@ -411,9 +420,6 @@ exports.updateOne = (params) => {
       delete course.canSponsorStudentVisa
     }
 
-    // if course.fundingType === 'salary'
-    // if fundingType changes from 'fee', we need to delete the canSponsorSkilledWorkerVisa
-    // and replace with canSponsorStudentVisa if 'fee'
     if (course.fundingType === 'salary') {
       if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
         course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
