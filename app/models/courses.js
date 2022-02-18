@@ -400,12 +400,33 @@ exports.updateOne = (params) => {
       course.financialSupport = params.course.financialSupport
     }
 
-    if (params.course.canSponsorStudentVisa !== undefined) {
-      course.canSponsorStudentVisa = params.course.canSponsorStudentVisa
+    // if course.fundingType === 'fee'
+    // if fundingType changes from 'fee', we need to delete the canSponsorStudentVisa
+    // and replace with canSponsorSkilledWorkerVisa if 'salary'
+    if (course.fundingType === 'fee') {
+      if (params.course.canSponsorStudentVisa !== undefined) {
+        course.canSponsorStudentVisa = params.course.canSponsorStudentVisa
+      }
+    } else {
+      delete course.canSponsorStudentVisa
     }
 
-    if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
-      course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
+    // if course.fundingType === 'salary'
+    // if fundingType changes from 'fee', we need to delete the canSponsorSkilledWorkerVisa
+    // and replace with canSponsorStudentVisa if 'fee'
+    if (course.fundingType === 'salary') {
+      if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
+        course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
+      }
+    } else {
+      delete course.canSponsorSkilledWorkerVisa
+    }
+
+    // if fundingType === 'apprenticeship'
+    // delete canSponsorStudentVisa and canSponsorSkilledWorkerVisa
+    if (course.fundingType === 'apprenticeship') {
+      delete course.canSponsorStudentVisa
+      delete course.canSponsorSkilledWorkerVisa
     }
 
     if (params.course.status) {
