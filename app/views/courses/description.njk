@@ -217,49 +217,6 @@
       }) }}
 
       <h2 class="govuk-heading-m">
-        Visa sponsorship
-      </h2>
-
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "Can candidates get a sponsored Student visa?"
-            },
-            value: {
-              text: course.canSponsorStudentVisa | getStudentVisaLabel
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/visa-sponsorship?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "if candidates can get a sponsored Student visa"
-                }
-              ]
-            }
-          } if course.fundingType == "fee",
-          {
-            key: {
-              text: "Can candidates get a sponsored Skilled Worker visa?"
-            },
-            value: {
-              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/visa-sponsorship?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
-                }
-              ]
-            }
-          } if course.fundingType == "salary"
-        ]
-      }) }}
-
-      <h2 class="govuk-heading-m">
         Requirements and eligibility
       </h2>
 
