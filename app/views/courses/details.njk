@@ -235,6 +235,40 @@
           } if not organisation.isAccreditedBody,
           {
             key: {
+              text: "Can candidates get a sponsored Student visa?"
+            },
+            value: {
+              text: course.canSponsorStudentVisa | getStudentVisaLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/visa-sponsorship?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Student visa"
+                }
+              ]
+            }
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Can candidates get a sponsored Skilled Worker visa?"
+            },
+            value: {
+              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/visa-sponsorship?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
+                }
+              ]
+            }
+          } if course.fundingType == "salary",
+          {
+            key: {
               text: "Applications open date"
             },
             value: {
