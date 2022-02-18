@@ -1,4 +1,6 @@
 const { DateTime } = require('luxon')
+const faker = require('faker')
+faker.locale = 'en_GB'
 
 const cycleHelper = require('./cycles')
 const subjectHelper = require('./subjects')
@@ -365,8 +367,25 @@ exports.createCourseName = (subjects) => {
   return courseName
 }
 
-exports.createCourseCode = () => {
+// a course code must be 4 characters
+// it must contain a combination of:
+//  - numbers 2 - 9 (i.e. avoid 0 and 1)
+//  - letters A - H, J - N, P - Z
+//  - it must start with a letter
+//  - not match any other course codes within the provider
+//  - preferably be a completely UNIQUE course code
+
+exports.createCourseCode = (organisationId) => {
   let courseCode = 'Z123'
+
+  // get a list of current course codes
+
+  // generate new code
+  courseCode = faker.random.alphaNumeric(4).toUpperCase()
+
+  // compare to current list
+  // if not exists, return code, else generate new code and try again
+
 
   return courseCode
 }
