@@ -35,10 +35,23 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set visaSponsorshipText %}
+          {% if course.fundingType == "fee" %}
+            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
+          {% endif %}
+          {% if course.fundingType == "salary" %}
+            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else "can’t" }} sponsor Skilled Worker visas.
+          {% endif %}
+        {% endset %}
+
+        {{ govukInsetText({
+          text: visaSponsorshipText
+        }) }}
+
         {% if course.fundingType == "fee" %}
 
           {{ govukRadios({
-            idPrefix: "student-visa",
+            idPrefix: "visa-sponsorship",
             name: "course[canSponsorStudentVisa]",
             fieldset: {
               legend: {
@@ -46,13 +59,14 @@
                 classes: "govuk-fieldset__legend--m"
               }
             },
+            errorMessage: errors | getErrorMessage("visa-sponsorship"),
             items: visaOptions
           }) }}
 
         {% elif course.fundingType == "salary" %}
 
           {{ govukRadios({
-            idPrefix: "student-visa",
+            idPrefix: "visa-sponsorship",
             name: "course[canSponsorSkilledWorkerVisa]",
             fieldset: {
               legend: {
@@ -60,6 +74,7 @@
                 classes: "govuk-fieldset__legend--m"
               }
             },
+            errorMessage: errors | getErrorMessage("visa-sponsorship"),
             items: visaOptions
           }) }}
 
