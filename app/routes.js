@@ -106,6 +106,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/location
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/visa-sponsorship', checkIsAuthenticated, courseController.new_course_visa_sponsorship_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/visa-sponsorship', checkIsAuthenticated, courseController.new_course_visa_sponsorship_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_post)
 
@@ -179,8 +182,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/co
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_visa_sponsorship_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_visa_sponsorship_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_post)
