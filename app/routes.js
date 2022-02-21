@@ -112,8 +112,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/visa-spo
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/applications-open-date', checkIsAuthenticated, courseController.new_course_applications_open_date_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_course_start_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_course_start_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_start_date_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/course-start', checkIsAuthenticated, courseController.new_course_start_date_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_post)
@@ -155,8 +155,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ac
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_course_start_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_start_date_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/course-start', checkIsAuthenticated, courseController.edit_course_start_date_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/about-course', checkIsAuthenticated, courseController.edit_about_course_post)
