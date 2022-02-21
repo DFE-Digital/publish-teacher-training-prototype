@@ -469,7 +469,7 @@ exports.edit_course_funding_type_post = (req, res) => {
 
     req.flash('success','Funding type updated')
 
-    if ((course.fundingType == req.session.data.course.fundingType) || req.session.data.course.fundingType === 'apprenticeship') {
+    if (course.fundingType === req.session.data.course.fundingType) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`)
@@ -712,7 +712,12 @@ exports.edit_course_accredited_body_post = (req, res) => {
     })
 
     req.flash('success','Accredited body updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+
+    if (course.accreditedBody.id === req.session.data.course.accreditedBody) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`)
+    }
   }
 }
 
@@ -1153,11 +1158,13 @@ exports.edit_course_visa_sponsorship_get = (req, res) => {
     accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
   }
 
+  // TODO: if lead_school pre-populate answer depending on accredited body's answer
+
   let selectedVisaOption
   if (course) {
     if (course.fundingType === 'fee') {
       selectedVisaOption = course.canSponsorStudentVisa
-    } else if (course.fundingType === 'salary') {
+    } else {
       selectedVisaOption = course.canSponsorSkilledWorkerVisa
     }
   }
@@ -1166,7 +1173,7 @@ exports.edit_course_visa_sponsorship_get = (req, res) => {
 
   if (course.fundingType === 'fee') {
     visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
-  } else if (course.fundingType === 'salary') {
+  } else {
     visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
   }
 
@@ -1198,7 +1205,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
   if (course && req.session.data.course) {
     if (course.fundingType === 'fee') {
       selectedVisaOption = req.session.data.course.canSponsorStudentVisa
-    } else if (course.fundingType === 'salary') {
+    } else {
       selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
     }
   }
@@ -1207,7 +1214,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
   if (course) {
     if (course.fundingType === 'fee') {
       visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
-    } else if (course.fundingType === 'salary') {
+    } else {
       visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
     }
   }
@@ -2108,6 +2115,8 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
   } else {
     accreditedBody = organisationModel.findOne({ organisationId: req.params.organisationId })
   }
+
+  // TODO: if lead_school pre-populate answer depending on accredited body's answer
 
   let selectedVisaOption
   if (req.session.data.course) {
