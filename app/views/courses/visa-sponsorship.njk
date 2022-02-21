@@ -35,18 +35,17 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {% set visaSponsorshipText %}
-          {% if course.fundingType == "fee" %}
+        {% if course.fundingType == "fee" %}
+          {% set visaSponsorshipText %}
             {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
-          {% endif %}
-          {% if course.fundingType == "salary" %}
-            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else "can’t" }} sponsor Skilled Worker visas.
-          {% endif %}
-        {% endset %}
+          {% endset %}
 
-        {{ govukInsetText({
-          text: visaSponsorshipText
-        }) }}
+          {{ govukInsetText({
+            text: visaSponsorshipText
+          }) }}
+        {% endif %}
+
+        <!-- TODO: prepopulate answer depending on AB's answer -->
 
         {% if course.fundingType == "fee" %}
 
