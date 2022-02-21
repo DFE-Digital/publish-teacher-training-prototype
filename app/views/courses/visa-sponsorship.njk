@@ -45,8 +45,6 @@
           }) }}
         {% endif %}
 
-        <!-- TODO: prepopulate answer depending on AB's answer -->
-
         {% if course.fundingType == "fee" %}
 
           {{ govukRadios({
@@ -62,7 +60,7 @@
             items: visaOptions
           }) }}
 
-        {% elif course.fundingType in ["salary","apprenticeship"] %}
+        {% else %}
 
           {{ govukRadios({
             idPrefix: "visa-sponsorship",
