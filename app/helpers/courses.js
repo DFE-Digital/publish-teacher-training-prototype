@@ -228,7 +228,7 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
 
     item.value = code
     item.id = code
-    item.selected = (selectedItem && selectedItem.includes(code)) ? 'selected' : ''
+    item.selected = (selectedItem && selectedItem === code) ? 'selected' : ''
 
     items.push(item)
   }
