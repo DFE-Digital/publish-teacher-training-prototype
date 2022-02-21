@@ -2054,13 +2054,6 @@ exports.new_course_accredited_body_get = (req, res) => {
 
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
-  // let selectedAccreditedBodyOther
-  // if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
-  //   selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
-  // }
-  //
-  // const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
-
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
   if (req.query.referrer === 'check') {
@@ -2075,7 +2068,6 @@ exports.new_course_accredited_body_get = (req, res) => {
     res.render('../views/courses/accredited-body', {
       course: req.session.data.course,
       accreditedBodyOptions,
-      // accreditedBodies,
       actions: {
         save,
         back,
@@ -2095,13 +2087,6 @@ exports.new_course_accredited_body_post = (req, res) => {
 
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
-  // let selectedAccreditedBodyOther
-  // if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
-  //   selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
-  // }
-  //
-  // const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
-
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
   if (req.query.referrer === 'check') {
@@ -2113,7 +2098,6 @@ exports.new_course_accredited_body_post = (req, res) => {
     res.render('../views/courses/accredited-body', {
       course: req.session.data.course,
       accreditedBodyOptions,
-      // accreditedBodies,
       actions: {
         save,
         back,
@@ -2123,7 +2107,6 @@ exports.new_course_accredited_body_post = (req, res) => {
     })
   } else {
     if (req.query.referrer === 'check') {
-      // if accredited body changes, route to visa sponsorship with ?referrer=check
       if (req.session.data.course.accreditedBody === req.session.data.course.tempAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
       } else {
