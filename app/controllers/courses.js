@@ -468,7 +468,12 @@ exports.edit_course_funding_type_post = (req, res) => {
     })
 
     req.flash('success','Funding type updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+
+    if ((course.fundingType == req.session.data.course.fundingType) || req.session.data.course.fundingType === 'apprenticeship') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`)
+    }
   }
 }
 
