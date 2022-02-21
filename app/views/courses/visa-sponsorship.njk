@@ -62,7 +62,7 @@
             items: visaOptions
           }) }}
 
-        {% elif course.fundingType == "salary" %}
+        {% elif course.fundingType in ["salary","apprenticeship"] %}
 
           {{ govukRadios({
             idPrefix: "visa-sponsorship",
