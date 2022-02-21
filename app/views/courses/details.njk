@@ -95,7 +95,7 @@
                   visuallyHiddenText: "special educational needs and disability (SEND)"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -112,7 +112,7 @@
                   visuallyHiddenText: "subject"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -129,7 +129,7 @@
                   visuallyHiddenText: "age range"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -146,7 +146,7 @@
                   visuallyHiddenText: "qualification"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -163,7 +163,7 @@
                   visuallyHiddenText: "apprenticeship"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.apprenticeship,
           {
             key: {
@@ -180,7 +180,7 @@
                   visuallyHiddenText: "funding type"
                 }
               ]
-            }
+            } if course.status == "0"
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -197,7 +197,7 @@
                   visuallyHiddenText: "full time or part time"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -214,7 +214,7 @@
                   visuallyHiddenText: "location"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -231,7 +231,7 @@
                   visuallyHiddenText: "accredited body"
                 }
               ]
-            }
+            } if course.status == "0"
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -248,7 +248,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Student visa"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.fundingType == "fee",
           {
             key: {
@@ -265,7 +265,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.fundingType != "fee",
           {
             key: {
@@ -282,7 +282,7 @@
                   visuallyHiddenText: "applications open date"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -299,7 +299,7 @@
                   visuallyHiddenText: "course start"
                 }
               ]
-            }
+            } if course.status == "0"
           }
         ]
       }) }}
