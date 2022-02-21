@@ -1150,6 +1150,7 @@ exports.edit_financial_support_post = (req, res) => {
 
 exports.edit_course_visa_sponsorship_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
   let accreditedBody
   if (course.accreditedBody) {
@@ -1158,14 +1159,13 @@ exports.edit_course_visa_sponsorship_get = (req, res) => {
     accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
   }
 
-  // TODO: if lead_school pre-populate answer depending on accredited body's answer
-
   let selectedVisaOption
   if (course) {
     if (course.fundingType === 'fee') {
-      selectedVisaOption = course.canSponsorStudentVisa
+      selectedVisaOption = course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
     } else {
       selectedVisaOption = course.canSponsorSkilledWorkerVisa
+       // || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
     }
   }
 
