@@ -184,7 +184,7 @@ exports.insertOne = (params) => {
       }
     }
 
-    if (course.fundingType === 'salary') {
+    if (['salary','apprenticeship'].includes(course.fundingType)) {
       if (params.course.canSponsorSkilledWorkerVisa) {
         course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
       }
@@ -420,18 +420,11 @@ exports.updateOne = (params) => {
       delete course.canSponsorStudentVisa
     }
 
-    if (course.fundingType === 'salary') {
+    if (['salary','apprenticeship'].includes(course.fundingType)) {
       if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
         course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
       }
     } else {
-      delete course.canSponsorSkilledWorkerVisa
-    }
-
-    // if fundingType === 'apprenticeship'
-    // delete canSponsorStudentVisa and canSponsorSkilledWorkerVisa
-    if (course.fundingType === 'apprenticeship') {
-      delete course.canSponsorStudentVisa
       delete course.canSponsorSkilledWorkerVisa
     }
 
