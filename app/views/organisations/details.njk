@@ -218,46 +218,50 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">Visa sponsorship</h2>
+      {% if organisation.type != "lead_school" %}
 
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "Can candidates get a sponsored Student visa for your fee-paying courses?"
+        <h2 class="govuk-heading-m govuk-!-margin-top-9">Visa sponsorship</h2>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Can candidates get a sponsored Student visa for your fee-paying courses?"
+              },
+              value: {
+                text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/visa-sponsorship",
+                    text: "Change",
+                    visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
+                  }
+                ]
+              }
             },
-            value: {
-              text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/visa-sponsorship",
-                  text: "Change",
-                  visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
-                }
-              ]
+            {
+              key: {
+                text: "Can candidates get a sponsored Skilled Worker visa for your salaried courses?"
+              },
+              value: {
+                text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/visa-sponsorship",
+                    text: "Change",
+                    visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
+                  }
+                ]
+              }
             }
-          },
-          {
-            key: {
-              text: "Can candidates get a sponsored Skilled Worker visa for your salaried courses?"
-            },
-            value: {
-              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/visa-sponsorship",
-                  text: "Change",
-                  visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
-                }
-              ]
-            }
-          }
-        ]
-      }) }}
+          ]
+        }) }}
+
+      {% endif %}
 
       {% if organisation.type == "lead_school" %}
 
