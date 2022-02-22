@@ -9,6 +9,74 @@ exports.seed = () => {
   // seedOrganisations()
   // seedCourses()
   // seedRelationships()
+  seedCourseVisaSponsorship()
+}
+
+const seedCourseVisaSponsorship = () => {
+  const organisations = []
+  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations')
+
+  let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
+
+  // Only get JSON documents
+  oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+  oDocuments.forEach((filename) => {
+    let raw = fs.readFileSync(oDirectoryPath + '/' + filename)
+    let organisation = JSON.parse(raw)
+    // organisations.push(organisation)
+
+    console.log('==============================');
+    console.log('Organisation: ', organisation.id);
+
+    if (organisation.id) {
+      const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+
+      // not all organisations have courses, so wrap with try/catch
+      try {
+        let cDocuments = fs.readdirSync(cDirectoryPath,'utf8')
+
+        // Only get JSON documents
+        cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+        cDocuments.forEach((filename) => {
+          let raw = fs.readFileSync(cDirectoryPath + '/' + filename)
+          let course = JSON.parse(raw)
+
+          if (organisation.visaSponsorship) {
+            if (course.fundingType === 'fee') {
+              course.canSponsorStudentVisa = organisation.visaSponsorship.canSponsorStudentVisa
+            } else {
+              course.canSponsorSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+            }
+          }
+
+          console.log('Course: ', course.id);
+
+          // write course data to file
+          if (course) {
+            // check if document directory exists
+            if (!fs.existsSync(cDirectoryPath)) {
+              fs.mkdirSync(cDirectoryPath)
+            }
+
+            const raw = JSON.stringify(course)
+
+            const fileName = course.id + '.json'
+            const filePath = cDirectoryPath + '/' + fileName
+
+            // write the JSON data
+            fs.writeFileSync(filePath, raw)
+          }
+        })
+      } catch (e) {
+        console.error(e)
+      }
+
+    }
+
+  })
+
 }
 
 const seedRelationships = () => {
