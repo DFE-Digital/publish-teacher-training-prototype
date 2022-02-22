@@ -9,7 +9,7 @@ exports.seed = () => {
   // seedOrganisations()
   // seedCourses()
   // seedRelationships()
-  seedCourseVisaSponsorship()
+  // seedCourseVisaSponsorship()
 }
 
 const seedCourseVisaSponsorship = () => {
@@ -43,31 +43,44 @@ const seedCourseVisaSponsorship = () => {
           let raw = fs.readFileSync(cDirectoryPath + '/' + filename)
           let course = JSON.parse(raw)
 
-          if (organisation.visaSponsorship) {
-            if (course.fundingType === 'fee') {
-              course.canSponsorStudentVisa = organisation.visaSponsorship.canSponsorStudentVisa
-            } else {
-              course.canSponsorSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+          if (organisation.isAccreditedBody) {
+            if (organisation.visaSponsorship) {
+              if (course.fundingType === 'fee') {
+                course.canSponsorStudentVisa = organisation.visaSponsorship.canSponsorStudentVisa
+              } else {
+                course.canSponsorSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+              }
+            }
+          } else {
+            let accreditedBodyRaw = fs.readFileSync(oDirectoryPath + '/' + course.accreditedBody.id + '.json')
+            let accreditedBody = JSON.parse(accreditedBodyRaw)
+
+            if (accreditedBody.visaSponsorship) {
+              if (course.fundingType === 'fee') {
+                course.canSponsorStudentVisa = accreditedBody.visaSponsorship.canSponsorStudentVisa
+              } else {
+                course.canSponsorSkilledWorkerVisa = accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+              }
             }
           }
 
           console.log('Course: ', course.id);
 
           // write course data to file
-          if (course) {
-            // check if document directory exists
-            if (!fs.existsSync(cDirectoryPath)) {
-              fs.mkdirSync(cDirectoryPath)
-            }
-
-            const raw = JSON.stringify(course)
-
-            const fileName = course.id + '.json'
-            const filePath = cDirectoryPath + '/' + fileName
-
-            // write the JSON data
-            fs.writeFileSync(filePath, raw)
-          }
+          // if (course) {
+          //   // check if document directory exists
+          //   if (!fs.existsSync(cDirectoryPath)) {
+          //     fs.mkdirSync(cDirectoryPath)
+          //   }
+          //
+          //   const raw = JSON.stringify(course)
+          //
+          //   const fileName = course.id + '.json'
+          //   const filePath = cDirectoryPath + '/' + fileName
+          //
+          //   // write the JSON data
+          //   fs.writeFileSync(filePath, raw)
+          // }
         })
       } catch (e) {
         console.error(e)
