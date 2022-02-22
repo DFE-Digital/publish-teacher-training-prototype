@@ -66,11 +66,14 @@ exports.course_details = (req, res) => {
   // clean out course data
   delete req.session.data.course
 
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
   res.render('../views/courses/details', {
-    course,
     organisation,
+    locations,
+    course,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -86,11 +89,14 @@ exports.course_description = (req, res) => {
   // clean out course data
   delete req.session.data.course
 
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
   res.render('../views/courses/description', {
-    course,
     organisation,
+    locations,
+    course,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
