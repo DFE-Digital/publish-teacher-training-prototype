@@ -80,6 +80,14 @@ exports.getSubjectSelectOptions = (subjectLevel, selectedItem) => {
     return a.text.localeCompare(b.text)
   })
 
+  const firstItem = {}
+  firstItem.text = ""
+  firstItem.value = ""
+  firstItem.id = "blank"
+  firstItem.selected = (selectedItem && selectedItem === '') ? 'selected' : ''
+
+  items.unshift(firstItem)
+
   return items
 }
 

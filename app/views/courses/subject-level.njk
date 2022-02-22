@@ -2,14 +2,14 @@
 
 {% set title = "What type of course?" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
 {% endif %}
 
 {% block pageTitle %}
-  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -61,7 +61,7 @@
           items: sendOptions
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update subject level"
           }) }}

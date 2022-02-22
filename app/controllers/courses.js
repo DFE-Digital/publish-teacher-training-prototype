@@ -1,55 +1,55 @@
 const courseModel = require('../models/courses')
+const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
-const organisationRelationshipModel = require('../models/organisation-relationships')
 
 const courseHelper = require('../helpers/courses')
 const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
 const utilHelper = require('../helpers/utils')
+const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
 exports.course_list = (req, res) => {
   // clean out course data
   delete req.session.data.course
 
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
   let courses = courseModel.find({ organisationId: req.params.organisationId })
 
-  courses.sort((a,b) => {
-    return a.name.localeCompare(b.name)
-      || a.qualification.localeCompare(b.qualification)
-      || a.studyMode.localeCompare(b.studyMode)
-  })
+  const relationships = organisation.accreditedBodies
 
-  // const relationships = organisationRelationshipModel.find({organisationId: req.params.organisationId}).accreditedBodies
-  //
-  // let groupedCourses = []
-  //
-  // if (relationships.length) {
-  //   courses.sort((a,b) => {
-  //     return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
-  //       || a.name.localeCompare(b.name)
-  //       || a.qualification.localeCompare(b.qualification)
-  //       || a.studyMode.localeCompare(b.studyMode)
-  //   })
-  //
-  //   relationships.forEach((relationship, i) => {
-  //     const group = {}
-  //     group.code = relationship.code
-  //     group.name = relationship.name
-  //     group.courses = courses.filter(course => course.accreditedBody.code === relationship.code)
-  //     groupedCourses.push(group)
-  //   })
-  // } else {
-  //   courses.sort((a,b) => {
-  //     return a.name.localeCompare(b.name)
-  //       || a.qualification.localeCompare(b.qualification)
-  //       || a.studyMode.localeCompare(b.studyMode)
-  //   })
-  //   groupedCourses.push({courses: courses})
-  // }
+  let groupedCourses = []
+
+  if (relationships && relationships.length) {
+    courses.sort((a,b) => {
+      return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
+        || a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+
+    relationships.forEach((relationship, i) => {
+      const group = {}
+      group.id = relationship.id
+      group.name = relationship.name
+      group.courses = courses.filter(course => course.accreditedBody.id === relationship.id)
+      groupedCourses.push(group)
+    })
+  } else {
+    courses.sort((a,b) => {
+      return a.name.localeCompare(b.name)
+        || a.qualification.localeCompare(b.qualification)
+        || a.studyMode.localeCompare(b.studyMode)
+    })
+    groupedCourses.push({courses: courses})
+  }
 
   res.render('../views/courses/list', {
-    courses: courses,
+    organisation,
+    locations,
+    courses: groupedCourses,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
@@ -63,6 +63,9 @@ exports.course_list = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.course_details = (req, res) => {
+  // clean out course data
+  delete req.session.data.course
+
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/details', {
@@ -80,6 +83,9 @@ exports.course_details = (req, res) => {
 }
 
 exports.course_description = (req, res) => {
+  // clean out course data
+  delete req.session.data.course
+
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   res.render('../views/courses/description', {
@@ -260,8 +266,12 @@ exports.edit_course_modern_language_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = []
+
+    req.session.data.course.subjects.forEach((subject, i) => {
+      selectedSubject.push(subject.code)
+    })
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
@@ -458,7 +468,12 @@ exports.edit_course_funding_type_post = (req, res) => {
     })
 
     req.flash('success','Funding type updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+
+    if (course.fundingType === req.session.data.course.fundingType) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`)
+    }
   }
 }
 
@@ -697,7 +712,12 @@ exports.edit_course_accredited_body_post = (req, res) => {
     })
 
     req.flash('success','Accredited body updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+
+    if (course.accreditedBody.id === req.session.data.course.accreditedBody) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`)
+    }
   }
 }
 
@@ -745,12 +765,12 @@ exports.edit_course_applications_open_date_post = (req, res) => {
   }
 }
 
-exports.edit_course_course_start_get = (req, res) => {
+exports.edit_course_start_date_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedCourseStartDate
-  if (req.session.data.course && req.session.data.course.startDate) {
-    selectedCourseStartDate = req.session.data.course.startDate
+  if (course && course.startDate) {
+    selectedCourseStartDate = course.startDate
   }
 
   const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
@@ -766,16 +786,16 @@ exports.edit_course_course_start_get = (req, res) => {
   })
 }
 
-exports.edit_course_course_start_post = (req, res) => {
+exports.edit_course_start_date_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const errors = []
 
-  let selectedCourseStart
-  if (req.session.data.course && req.session.data.course.courseStart) {
-    selectedCourseStart = req.session.data.course.courseStart
+  let selectedCourseStartDate
+  if (req.session.data.course && req.session.data.course.startDate) {
+    selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
@@ -1128,6 +1148,119 @@ exports.edit_financial_support_post = (req, res) => {
   }
 }
 
+exports.edit_course_visa_sponsorship_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  let accreditedBody
+  if (course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: course.accreditedBody.id })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+  }
+
+  let selectedVisaOption
+  if (course) {
+    if (course.fundingType === 'fee') {
+      selectedVisaOption = course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
+    } else {
+      selectedVisaOption = course.canSponsorSkilledWorkerVisa
+       // || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+    }
+  }
+
+  let visaOptions = []
+
+  if (course.fundingType === 'fee') {
+    visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+  } else {
+    visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+  }
+
+  res.render('../views/courses/visa-sponsorship', {
+    course,
+    visaOptions,
+    accreditedBody,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_visa_sponsorship_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let accreditedBody
+  if (course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: course.accreditedBody.id })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+  }
+
+  const errors = []
+
+  let selectedVisaOption
+  if (course && req.session.data.course) {
+    if (course.fundingType === 'fee') {
+      selectedVisaOption = req.session.data.course.canSponsorStudentVisa
+    } else {
+      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
+    }
+  }
+
+  let visaOptions = []
+  if (course) {
+    if (course.fundingType === 'fee') {
+      visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+    } else {
+      visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+    }
+  }
+
+  if (!req.session.data.course) {
+    if (course.fundingType === 'fee') {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Student visa'
+      errors.push(error)
+    }
+
+    if (course.fundingType === 'salary') {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Skilled Worker visa'
+      errors.push(error)
+    }
+  }
+
+  if (errors.length) {
+    res.render('../views/courses/visa-sponsorship', {
+      course,
+      visaOptions,
+      accreditedBody,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    req.flash('success','Visa sponsorship updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
 /// ------------------------------------------------------------------------ ///
 /// WITHDRAW COURSE
 /// ------------------------------------------------------------------------ ///
@@ -1280,6 +1413,7 @@ exports.new_course_subject_level_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/subject-level', {
+      course: req.session.data.course,
       subjectLevelOptions,
       sendOptions,
       actions: {
@@ -1290,17 +1424,39 @@ exports.new_course_subject_level_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`)
+    if (req.session.data.course.subjectLevel === 'further_education') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`)
+    }
+
   }
 }
 
 exports.new_course_subject_get = (req, res) => {
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = req.session.data.course.subjects
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  }
+
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  }
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
@@ -1310,7 +1466,9 @@ exports.new_course_subject_get = (req, res) => {
   }
 
   res.render('../views/courses/subject', {
+    course: req.session.data.course,
     subjectOptions,
+    secondSubjectOptions,
     actions: {
       save,
       back,
@@ -1323,11 +1481,28 @@ exports.new_course_subject_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subject) {
-    selectedSubject = req.session.data.course.subject
+  if (req.session.data.course && req.session.data.course.subjects) {
+    selectedSubject = req.session.data.course.subjects
   }
 
-  const subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  let subjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    subjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  } else {
+    subjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSubject)
+  }
+
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (req.session.data.course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(req.session.data.course.subjectLevel, selectedSecondSubject)
+  }
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`
@@ -1336,9 +1511,19 @@ exports.new_course_subject_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (req.session.data.course.subjects[0] === '') {
+    let error = {}
+    error.fieldName = 'subject'
+    error.href = '#subject'
+    error.text = 'Select a subject'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
+      course: req.session.data.course,
       subjectOptions,
+      secondSubjectOptions,
       actions: {
         save,
         back,
@@ -1347,7 +1532,7 @@ exports.new_course_subject_post = (req, res) => {
       errors
     })
   } else {
-    if (selectedSubject === 'ML') {
+    if (selectedSubject.includes('ML')) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`)
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
@@ -1358,10 +1543,14 @@ exports.new_course_subject_post = (req, res) => {
 exports.new_course_modern_language_get = (req, res) => {
   let selectedSubject
   if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+    selectedSubject = []
+
+    req.session.data.course.childSubjects.forEach((subject, i) => {
+      selectedSubject.push(subject)
+    })
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
@@ -1371,6 +1560,7 @@ exports.new_course_modern_language_get = (req, res) => {
   }
 
   res.render('../views/courses/modern-languages', {
+    course: req.session.data.course,
     subjectOptions,
     actions: {
       save,
@@ -1385,10 +1575,14 @@ exports.new_course_modern_language_post = (req, res) => {
 
   let selectedSubject
   if (req.session.data.course && req.session.data.course.childSubjects) {
-    selectedSubject = req.session.data.course.childSubjects
+    selectedSubject = []
+
+    req.session.data.course.childSubjects.forEach((subject, i) => {
+      selectedSubject.push(subject)
+    })
   }
 
-  const subjectOptions = subjectHelper.getChildSubjectOptions(req.session.data.course.subject, selectedSubject)
+  const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
@@ -1399,6 +1593,7 @@ exports.new_course_modern_language_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
+      course: req.session.data.course,
       subjectOptions,
       actions: {
         save,
@@ -1432,6 +1627,7 @@ exports.new_course_age_range_get = (req, res) => {
   }
 
   res.render('../views/courses/age-range', {
+    course: req.session.data.course,
     ageRangeOptions,
     actions: {
       save,
@@ -1464,6 +1660,7 @@ exports.new_course_age_range_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/age-range', {
+      course: req.session.data.course,
       ageRangeOptions,
       actions: {
         save,
@@ -1497,6 +1694,7 @@ exports.new_course_qualification_get = (req, res) => {
   }
 
   res.render('../views/courses/qualification', {
+    course: req.session.data.course,
     qualificationOptions,
     actions: {
       save,
@@ -1507,6 +1705,7 @@ exports.new_course_qualification_get = (req, res) => {
 }
 
 exports.new_course_qualification_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
   let selectedQualification
@@ -1525,6 +1724,7 @@ exports.new_course_qualification_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/qualification', {
+      course: req.session.data.course,
       qualificationOptions,
       actions: {
         save,
@@ -1537,11 +1737,11 @@ exports.new_course_qualification_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      // TODO: if organisation is a lead school else scitt/hei
-      if (true) {
-        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
-      } else {
+      // if organisation is an accredited body (SCITT or HEI), else they're a lead school
+      if (organisation.isAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
       }
     }
   }
@@ -1551,6 +1751,11 @@ exports.new_course_funding_type_get = (req, res) => {
   let selectedFundingType
   if (req.session.data.course && req.session.data.course.fundingType) {
     selectedFundingType = req.session.data.course.fundingType
+  }
+
+  if (req.query.referrer === 'check') {
+    // hold fundinng so we can determine if it has changed
+    req.session.data.course.tempFundingType = selectedFundingType
   }
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
@@ -1563,6 +1768,7 @@ exports.new_course_funding_type_get = (req, res) => {
   }
 
   res.render('../views/courses/funding-type', {
+    course: req.session.data.course,
     fundingTypeOptions,
     actions: {
       save,
@@ -1591,6 +1797,7 @@ exports.new_course_funding_type_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/funding-type', {
+      course: req.session.data.course,
       fundingTypeOptions,
       actions: {
         save,
@@ -1601,7 +1808,11 @@ exports.new_course_funding_type_post = (req, res) => {
     })
   } else {
     if (req.query.referrer === 'check') {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+      if (req.session.data.course.fundingType === req.session.data.course.tempFundingType) {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship?referrer=check`)
+      }
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
     }
@@ -1617,13 +1828,14 @@ exports.new_course_apprenticeship_get = (req, res) => {
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/qualification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
   res.render('../views/courses/apprenticeship', {
+    course: req.session.data.course,
     apprenticeshipOptions,
     actions: {
       save,
@@ -1644,7 +1856,7 @@ exports.new_course_apprenticeship_post = (req, res) => {
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/qualification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
@@ -1652,6 +1864,7 @@ exports.new_course_apprenticeship_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
+      course: req.session.data.course,
       apprenticeshipOptions,
       actions: {
         save,
@@ -1670,6 +1883,8 @@ exports.new_course_apprenticeship_post = (req, res) => {
 }
 
 exports.new_course_study_mode_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   let selectedStudyMode
   if (req.session.data.course && req.session.data.course.studyMode) {
     selectedStudyMode = req.session.data.course.studyMode
@@ -1679,8 +1894,8 @@ exports.new_course_study_mode_get = (req, res) => {
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
-  // TODO: if organisation is a lead school else scitt
-  if (false) {
+
+  if (organisation.isAccreditedBody) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
   }
 
@@ -1690,6 +1905,7 @@ exports.new_course_study_mode_get = (req, res) => {
   }
 
   res.render('../views/courses/study-mode', {
+    course: req.session.data.course,
     studyModeOptions,
     actions: {
       save,
@@ -1700,6 +1916,8 @@ exports.new_course_study_mode_get = (req, res) => {
 }
 
 exports.new_course_study_mode_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   const errors = []
 
   let selectedStudyMode
@@ -1712,8 +1930,7 @@ exports.new_course_study_mode_post = (req, res) => {
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
 
-  // TODO: if organisation is a lead school else scitt
-  if (false) {
+  if (organisation.isAccreditedBody) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
   }
 
@@ -1724,6 +1941,7 @@ exports.new_course_study_mode_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/study-mode', {
+      course: req.session.data.course,
       studyModeOptions,
       actions: {
         save,
@@ -1742,6 +1960,8 @@ exports.new_course_study_mode_post = (req, res) => {
 }
 
 exports.new_course_location_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   let selectedLocation
   if (req.session.data.course && req.session.data.course.locations) {
     selectedLocation = req.session.data.course.locations
@@ -1756,17 +1976,31 @@ exports.new_course_location_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
-  res.render('../views/courses/location', {
-    locationOptions,
-    actions: {
-      save,
-      back,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+  // if there's only one location, auto-select and move on
+  if (locationOptions.length === 1) {
+    req.session.data.course.locations = []
+    req.session.data.course.locations.push(locationOptions[0].value)
+
+    if (organisation.isAccreditedBody) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
     }
-  })
+  } else {
+    res.render('../views/courses/location', {
+      course: req.session.data.course,
+      locationOptions,
+      actions: {
+        save,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      }
+    })
+  }
 }
 
 exports.new_course_location_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
   let selectedLocation
@@ -1785,6 +2019,7 @@ exports.new_course_location_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/location', {
+      course: req.session.data.course,
       locationOptions,
       actions: {
         save,
@@ -1797,36 +2032,155 @@ exports.new_course_location_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+      if (organisation.isAccreditedBody) {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`)
+      }
     }
   }
 }
 
 exports.new_course_accredited_body_get = (req, res) => {
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
   let selectedAccreditedBody
   if (req.session.data.course && req.session.data.course.accreditedBody) {
     selectedAccreditedBody = req.session.data.course.accreditedBody
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
-
-  let selectedAccreditedBodyOther
-  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
-    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  if (req.query.referrer === 'check') {
+    // hold accredited body so we can determine if it has changed
+    req.session.data.course.tempAccreditedBody = selectedAccreditedBody
   }
 
-  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+
+  if (locations.length === 1) {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  }
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+  // if there's only one accredited body, auto-select and move on
+  if (accreditedBodyOptions.length === 1) {
+    req.session.data.course.accreditedBody = accreditedBodyOptions[0].value
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`)
+  } else {
+    res.render('../views/courses/accredited-body', {
+      course: req.session.data.course,
+      accreditedBodyOptions,
+      actions: {
+        save,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      }
+    })
+  }
+}
+
+exports.new_course_accredited_body_post = (req, res) => {
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
+  const errors = []
+
+  let selectedAccreditedBody
+  if (req.session.data.course && req.session.data.course.accreditedBody) {
+    selectedAccreditedBody = req.session.data.course.accreditedBody
+  }
+
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+
+  if (locations.length === 1) {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+  }
+
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
-  res.render('../views/courses/accredited-body', {
-    accreditedBodyOptions,
-    accreditedBodies,
+  if (errors.length) {
+    res.render('../views/courses/accredited-body', {
+      course: req.session.data.course,
+      accreditedBodyOptions,
+      actions: {
+        save,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      },
+      errors
+    })
+  } else {
+    if (req.query.referrer === 'check') {
+      if (req.session.data.course.accreditedBody === req.session.data.course.tempAccreditedBody) {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship?referrer=check`)
+      }
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`)
+    }
+  }
+}
+
+exports.new_course_visa_sponsorship_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
+  let accreditedBody
+  if (req.session.data.course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: req.session.data.course.accreditedBody })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: req.params.organisationId })
+  }
+
+  let selectedVisaOption
+  if (req.session.data.course) {
+    if (req.session.data.course.fundingType === 'fee') {
+      selectedVisaOption = req.session.data.course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
+    } else {
+      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
+      //  || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+    }
+  }
+
+  let visaOptions = []
+  if (req.session.data.course.fundingType === 'fee') {
+    visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+  } else {
+    visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+  }
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`
+
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+
+  if (organisation.isAccreditedBody) {
+    if (locations.length > 1) {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+    } else {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+    }
+  }
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  res.render('../views/courses/visa-sponsorship', {
+    course: req.session.data.course,
+    visaOptions,
+    accreditedBody,
     actions: {
       save,
       back,
@@ -1835,34 +2189,79 @@ exports.new_course_accredited_body_get = (req, res) => {
   })
 }
 
-exports.new_course_accredited_body_post = (req, res) => {
+exports.new_course_visa_sponsorship_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
+  let accreditedBody
+  if (req.session.data.course.accreditedBody) {
+    accreditedBody = organisationModel.findOne({ organisationId: req.session.data.course.accreditedBody })
+  } else {
+    accreditedBody = organisationModel.findOne({ organisationId: req.params.organisationId })
+  }
+
   const errors = []
 
-  let selectedAccreditedBody
-  if (req.session.data.course && req.session.data.course.accreditedBody) {
-    selectedAccreditedBody = req.session.data.course.accreditedBody
+  let selectedVisaOption
+  if (req.session.data.course) {
+    if (req.session.data.course.fundingType === 'fee') {
+      selectedVisaOption = req.session.data.course.canSponsorStudentVisa
+    } else {
+      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
+    }
   }
 
-  const accreditedBodyOptions = courseHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
-
-  let selectedAccreditedBodyOther
-  if (req.session.data.course && req.session.data.course.accreditedBodyOther) {
-    selectedAccreditedBodyOther = req.session.data.course.accreditedBodyOther
+  let visaOptions = []
+  if (req.session.data.course) {
+    if (req.session.data.course.fundingType === 'fee') {
+      visaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedVisaOption)
+    } else {
+      visaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedVisaOption)
+    }
   }
 
-  const accreditedBodies = organisationHelper.getAccreditedBodySelectOptions(selectedAccreditedBodyOther)
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+
+  if (organisation.isAccreditedBody) {
+    if (locations.length > 1) {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+    } else {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
+    }
+  }
+
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (req.session.data.course.fundingType === 'fee') {
+    if (req.session.data.course.canSponsorStudentVisa === undefined) {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Student visa'
+      errors.push(error)
+    }
+  }
+
+  if (req.session.data.course.fundingType === 'salary') {
+    if (req.session.data.course.canSponsorSkilledWorkerVisa === undefined) {
+      const error = {}
+      error.fieldName = 'visa-sponsorship'
+      error.href = '#visa-sponsorship'
+      error.text = 'Select if candidates can get a sponsored Skilled Worker visa'
+      errors.push(error)
+    }
+  }
+
   if (errors.length) {
-    res.render('../views/courses/accredited-body', {
-      accreditedBodyOptions,
-      accreditedBodies,
+    res.render('../views/courses/visa-sponsorship', {
+      course: req.session.data.course,
+      visaOptions,
+      accreditedBody,
       actions: {
         save,
         back,
@@ -1881,13 +2280,15 @@ exports.new_course_accredited_body_post = (req, res) => {
 
 exports.new_course_applications_open_date_get = (req, res) => {
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`
+
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
   res.render('../views/courses/applications-open-date', {
+    course: req.session.data.course,
     actions: {
       save,
       back,
@@ -1900,7 +2301,7 @@ exports.new_course_applications_open_date_post = (req, res) => {
   const errors = []
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
@@ -1908,6 +2309,7 @@ exports.new_course_applications_open_date_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
+      course: req.session.data.course,
       actions: {
         save,
         back,
@@ -1916,6 +2318,11 @@ exports.new_course_applications_open_date_post = (req, res) => {
       errors
     })
   } else {
+    // parse the date entered into a date object
+    if (req.session.data.course.applicationsOpenDateOther) {
+      req.session.data.course.applicationsOpenDateOther = utilHelper.arrayToDateObject(req.session.data.course.applicationsOpenDateOther)
+    }
+
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
@@ -1924,13 +2331,13 @@ exports.new_course_applications_open_date_post = (req, res) => {
   }
 }
 
-exports.new_course_course_start_get = (req, res) => {
-  let selectedCourseStart
-  if (req.session.data.course && req.session.data.course.courseStart) {
-    selectedCourseStart = req.session.data.course.courseStart
+exports.new_course_start_date_get = (req, res) => {
+  let selectedCourseStartDate
+  if (req.session.data.course && req.session.data.course.startDate) {
+    selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
@@ -1940,6 +2347,7 @@ exports.new_course_course_start_get = (req, res) => {
   }
 
   res.render('../views/courses/course-start', {
+    course: req.session.data.course,
     courseStartOptions,
     actions: {
       save,
@@ -1949,15 +2357,15 @@ exports.new_course_course_start_get = (req, res) => {
   })
 }
 
-exports.new_course_course_start_post = (req, res) => {
+exports.new_course_start_date_post = (req, res) => {
   const errors = []
 
-  let selectedCourseStart
-  if (req.session.data.course && req.session.data.course.courseStart) {
-    selectedCourseStart = req.session.data.course.courseStart
+  let selectedCourseStartDate
+  if (req.session.data.course && req.session.data.course.startDate) {
+    selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStart)
+  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
@@ -1968,6 +2376,7 @@ exports.new_course_course_start_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
+      course: req.session.data.course,
       courseStartOptions,
       actions: {
         save,
@@ -1982,7 +2391,16 @@ exports.new_course_course_start_post = (req, res) => {
 }
 
 exports.new_course_check_answers_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const locations = locationModel.find({ organisationId: req.params.organisationId })
+
+  // remove temporary data as no longer needed
+  delete req.session.data.course.tempFundingType
+  delete req.session.data.course.tempAccreditedBody
+
   res.render('../views/courses/check-your-answers', {
+    organisation,
+    locations,
     course: req.session.data.course,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
@@ -1994,10 +2412,32 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
-  req.flash('success', {
-    title: 'Success',
-    description: 'Course added'
+  // create the course name based on the subjects chosen
+  if (req.session.data.course.subjectLevel === 'further_education') {
+    req.session.data.course.name = 'Further education'
+  } else {
+    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+  }
+
+  // create a random course 4-digit alphanumeric code for the course
+  req.session.data.course.code = courseHelper.createCourseCode()
+
+  // combine parent and child subjects
+  if (req.session.data.course.childSubjects) {
+    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+
+    // delete the child subjects as no longer needed
+    delete req.session.data.course.childSubjects
+  }
+
+  courseModel.insertOne({
+    organisationId: req.params.organisationId,
+    course: req.session.data.course
   })
 
+  // delete the course data as no longer needed
+  delete req.session.data.course
+
+  req.flash('success','Course added')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
 }

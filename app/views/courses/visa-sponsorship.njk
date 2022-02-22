@@ -2,14 +2,14 @@
 
 {% set title = "Visa sponsorship" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
 {% endif %}
 
 {% block pageTitle %}
-  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -35,11 +35,49 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% if course.fundingType == "fee" %}
+          {% set visaSponsorshipText %}
+            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
+          {% endset %}
 
+          {{ govukInsetText({
+            text: visaSponsorshipText
+          }) }}
+        {% endif %}
 
+        {% if course.fundingType == "fee" %}
 
+          {{ govukRadios({
+            idPrefix: "visa-sponsorship",
+            name: "course[canSponsorStudentVisa]",
+            fieldset: {
+              legend: {
+                text: "Can candidates get a sponsored Student visa?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            errorMessage: errors | getErrorMessage("visa-sponsorship"),
+            items: visaOptions
+          }) }}
 
-        {% if course %}
+        {% else %}
+
+          {{ govukRadios({
+            idPrefix: "visa-sponsorship",
+            name: "course[canSponsorSkilledWorkerVisa]",
+            fieldset: {
+              legend: {
+                text: "Can candidates get a sponsored Skilled Worker visa?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            errorMessage: errors | getErrorMessage("visa-sponsorship"),
+            items: visaOptions
+          }) }}
+
+        {% endif %}
+
+        {% if course.id %}
           {{ govukButton({
             text: "Update visa sponsorship"
           }) }}

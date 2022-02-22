@@ -2,14 +2,14 @@
 
 {% set title = "When will applications open?" %}
 
-{% if course %}
+{% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
 {% else %}
   {% set caption = "Add course" %}
 {% endif %}
 
 {% block pageTitle %}
-  ("Error: " if errors) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -100,7 +100,7 @@
           ]
         }) }}
 
-        {% if course %}
+        {% if course.id %}
           {{ govukButton({
             text: "Update date applications open"
           }) }}

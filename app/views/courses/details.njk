@@ -113,24 +113,7 @@
                 }
               ]
             }
-          },
-          {
-            key: {
-              text: "Modern language" + ("s" if course.childSubject > 1)
-            },
-            value: {
-              html: childSubjectHtml
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/modern-language?referrer=details",
-                  text: "Change",
-                  visuallyHiddenText: "modern language"
-                }
-              ]
-            }
-          } if course.subject == 'ML',
+          } if course.subjectLevel != "further_education",
           {
             key: {
               text: "Age range"
@@ -147,7 +130,7 @@
                 }
               ]
             }
-          },
+          } if course.subjectLevel != "further_education",
           {
             key: {
               text: "Qualification"
@@ -180,7 +163,7 @@
                   visuallyHiddenText: "apprenticeship"
                 }
               ]
-            }
+            } if course.status == "0"
           } if course.apprenticeship,
           {
             key: {
@@ -197,8 +180,8 @@
                   visuallyHiddenText: "funding type"
                 }
               ]
-            }
-          },
+            } if course.status == "0"
+          } if not organisation.isAccreditedBody,
           {
             key: {
               text: "Full time or part time"
@@ -231,7 +214,7 @@
                   visuallyHiddenText: "location"
                 }
               ]
-            }
+            }if course.locations.length > 1
           },
           {
             key: {
@@ -248,24 +231,58 @@
                   visuallyHiddenText: "accredited body"
                 }
               ]
-            }
-          },
+            } if course.status == "0"
+          } if not organisation.isAccreditedBody,
+          {
+            key: {
+              text: "Can candidates get a sponsored Student visa?"
+            },
+            value: {
+              text: course.canSponsorStudentVisa | getStudentVisaLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/visa-sponsorship?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Student visa"
+                }
+              ]
+            } if course.status == "0"
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Can candidates get a sponsored Skilled Worker visa?"
+            },
+            value: {
+              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/visa-sponsorship?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
+                }
+              ]
+            } if course.status == "0"
+          } if course.fundingType in ["salary", "apprenticeship"],
           {
             key: {
               text: "Applications open date"
             },
             value: {
-              text: (course.applicationsOpenDate if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther) | date("d MMMM yyyy")
+              text: "As soon as the course is on Find" if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther | date("d MMMM yyyy")
             },
             actions: {
               items: [
                 {
                   href: actions.change + "/applications-open-date?referrer=details",
                   text: "Change",
-                  visuallyHiddenText: "applications-open-date"
+                  visuallyHiddenText: "applications open date"
                 }
               ]
-            }
+            } if course.status == "0"
           },
           {
             key: {
@@ -282,7 +299,7 @@
                   visuallyHiddenText: "course start"
                 }
               ]
-            }
+            } if course.status == "0"
           }
         ]
       }) }}

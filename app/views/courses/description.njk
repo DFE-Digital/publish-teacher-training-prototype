@@ -53,7 +53,8 @@
               text: "About this course"
             },
             value: {
-              text: course.aboutCourse
+              text: course.aboutCourse if course.aboutCourse.length else "Not entered",
+              classes: "govuk-hint" if not course.aboutCourse.length
             },
             actions: {
               items: [
@@ -67,10 +68,11 @@
           },
           {
             key: {
-              text: "Interview process (optional)"
+              text: "Interview process"
             },
             value: {
-              text: course.interviewProcess
+              text: course.interviewProcess if course.interviewProcess.length else "Not entered",
+              classes: "govuk-hint" if not course.interviewProcess.length
             },
             actions: {
               items: [
@@ -87,7 +89,8 @@
               text: "How school placements work"
             },
             value: {
-              text: course.howSchoolPlacementsWork
+              text: course.howSchoolPlacementsWork if course.howSchoolPlacementsWork.length else "Not entered",
+              classes: "govuk-hint" if not course.howSchoolPlacementsWork.length
             },
             actions: {
               items: [
@@ -140,7 +143,7 @@
           },
           {
             key: {
-              text: "Fee for UK student"
+              text: "Fee for UK students"
             },
             value: {
               text: "£" + course.feesUK | numeral('0,0.[00]') if course.feesUK else "Not entered",
@@ -158,7 +161,7 @@
           },
           {
             key: {
-              text: "Fee for international students (optional)"
+              text: "Fee for international students"
             },
             value: {
               text: "£" + course.feesInternational | numeral('0,0.[00]') if course.feesInternational else "Not entered",
@@ -176,7 +179,7 @@
           },
           {
             key: {
-              text: "Fee details (optional)"
+              text: "Fee details"
             },
             value: {
               text: course.feeDetails if course.feeDetails.length else "Not entered",
@@ -194,7 +197,7 @@
           },
           {
             key: {
-              text: "Financial support you offer (optional)"
+              text: "Financial support you offer"
             },
             value: {
               text: course.financialSupport if course.financialSupport.length else "Not entered",
@@ -275,10 +278,11 @@
           },
           {
             key: {
-              text: "Personal qualities (optional)"
+              text: "Personal qualities"
             },
             value: {
-              text: course.personalQualities
+              text: course.personalQualities if course.personalQualities.length else "Not entered",
+              classes: "govuk-hint" if not course.personalQualities.length
             },
             actions: {
               items: [
@@ -292,10 +296,11 @@
           },
           {
             key: {
-              text: "Other requirements (optional)"
+              text: "Other requirements"
             },
             value: {
-              text: course.otherRequirements
+              text: course.otherRequirements if course.otherRequirements.length else "Not entered",
+              classes: "govuk-hint" if not course.otherRequirements.length
             },
             actions: {
               items: [
