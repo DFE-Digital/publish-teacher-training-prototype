@@ -35,14 +35,16 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {% if course.fundingType == "fee" %}
-          {% set visaSponsorshipText %}
-            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
-          {% endset %}
+        {% if not organisation.isAccreditedBody %}
+          {% if course.fundingType == "fee" %}
+            {% set visaSponsorshipText %}
+              {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
+            {% endset %}
 
-          {{ govukInsetText({
-            text: visaSponsorshipText
-          }) }}
+            {{ govukInsetText({
+              text: visaSponsorshipText
+            }) }}
+          {% endif %}
         {% endif %}
 
         {% if course.fundingType == "fee" %}
