@@ -64,6 +64,15 @@ const seedCourseVisaSponsorship = () => {
             }
           }
 
+          // course.cycle = '2022'
+          //
+          // let applicationsOpenDate = course.applicationsOpenDate
+          //
+          // if (applicationsOpenDate !== '2021-10-12T00:00:00.000Z') {
+          //   course.applicationsOpenDate = 'other'
+          //   course.applicationsOpenDateOther = applicationsOpenDate
+          // }
+
           console.log('Course: ', course.id);
 
           // write course data to file
