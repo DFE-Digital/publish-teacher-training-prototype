@@ -1169,8 +1169,7 @@ exports.edit_course_visa_sponsorship_get = (req, res) => {
     if (course.fundingType === 'fee') {
       selectedVisaOption = course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
     } else {
-      selectedVisaOption = course.canSponsorSkilledWorkerVisa
-       // || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      selectedVisaOption = course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
     }
   }
 
@@ -2165,8 +2164,7 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
     if (req.session.data.course.fundingType === 'fee') {
       selectedVisaOption = req.session.data.course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
     } else {
-      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
-      //  || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
     }
   }
 
