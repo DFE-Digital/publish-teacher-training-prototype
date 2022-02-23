@@ -1175,7 +1175,11 @@ exports.edit_course_visa_sponsorship_get = (req, res) => {
     if (course.fundingType === 'fee') {
       selectedVisaOption = course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
     } else {
-      selectedVisaOption = course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      if (organisation.isAccreditedBody) {
+        selectedVisaOption = course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      } else {
+        selectedVisaOption = course.canSponsorSkilledWorkerVisa
+      }
     }
   }
 
@@ -2142,10 +2146,15 @@ exports.new_course_accredited_body_post = (req, res) => {
       errors
     })
   } else {
+    // TODO: if (organisation.type === 'scitt' && fundingType === 'fee') skip visa question and default to 'no'
     if (req.query.referrer === 'check') {
       if (req.session.data.course.accreditedBody === req.session.data.course.tempAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
       } else {
+        // TODO: delete the student visa choice so it defaults to the accredited body's answer?
+        // delete req.session.data.course.canSponsorStudentVisa
+        // do we need to delete the Skilled Worker visa?
+        // delete req.session.data.course.canSponsorSkilledWorkerVisa
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship?referrer=check`)
       }
     } else {
@@ -2170,7 +2179,11 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
     if (req.session.data.course.fundingType === 'fee') {
       selectedVisaOption = req.session.data.course.canSponsorStudentVisa || accreditedBody.visaSponsorship.canSponsorStudentVisa
     } else {
-      selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      if (organisation.isAccreditedBody) {
+        selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa || accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa
+      } else {
+        selectedVisaOption = req.session.data.course.canSponsorSkilledWorkerVisa
+      }
     }
   }
 
@@ -2435,6 +2448,15 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
+
+  // combine parent and child subjects
+  if (req.session.data.course.childSubjects) {
+    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+
+    // delete the child subjects as no longer needed
+    delete req.session.data.course.childSubjects
+  }
+
   // create the course name based on the subjects chosen
   if (req.session.data.course.subjectLevel === 'further_education') {
     req.session.data.course.name = 'Further education'
@@ -2444,14 +2466,6 @@ exports.new_course_check_answers_post = (req, res) => {
 
   // create a random course 4-digit alphanumeric code for the course
   req.session.data.course.code = courseHelper.createCourseCode()
-
-  // combine parent and child subjects
-  if (req.session.data.course.childSubjects) {
-    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
-
-    // delete the child subjects as no longer needed
-    delete req.session.data.course.childSubjects
-  }
 
   courseModel.insertOne({
     organisationId: req.params.organisationId,
