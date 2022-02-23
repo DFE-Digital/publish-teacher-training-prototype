@@ -234,9 +234,6 @@ router.post('/organisations/:organisationId/training-with-disabilities', checkIs
 router.get('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_get)
 router.post('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_post)
 
-// router.get('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_get)
-// router.post('/organisations/:organisationId/visa-sponsorship', checkIsAuthenticated, organisationController.edit_visa_sponsorship_post)
-
 router.get('/organisations/:organisationId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_get)
 router.post('/organisations/:organisationId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_post)
 
