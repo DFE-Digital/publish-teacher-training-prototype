@@ -384,11 +384,22 @@ exports.createCourseName = (subjects) => {
       }
     })
 
-    courseName = utilHelper.arrayToList(
-      array = names,
-      join = ' with ',
-      final = ' and '
-    )
+    if (subjects.includes('ML')) {
+      courseName = 'Modern languages'
+      courseName += ' ('
+      courseName += utilHelper.arrayToList(
+        array = names,
+        join = ', ',
+        final = ' and '
+      )
+      courseName += ')'
+    } else {
+      courseName = utilHelper.arrayToList(
+        array = names,
+        join = ' with ',
+        final = ' and '
+      )
+    }
   }
 
   return courseName
@@ -403,7 +414,7 @@ exports.createCourseName = (subjects) => {
 //  - preferably be a completely UNIQUE course code
 
 exports.createCourseCode = (organisationId) => {
-  let courseCode = 'Z123'
+  let courseCode = ''
 
   // get a list of current course codes
 
