@@ -195,7 +195,77 @@ exports.edit_contact_details_post = (req, res) => {
   }
 }
 
-exports.edit_visa_sponsorship_get = (req, res) => {
+// exports.edit_visa_sponsorship_get = (req, res) => {
+//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+//
+//   let selectedStudentVisa
+//   if (organisation && organisation.visaSponsorship.canSponsorStudentVisa) {
+//     selectedStudentVisa = organisation.visaSponsorship.canSponsorStudentVisa
+//   }
+//
+//   const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
+//
+//   let selectedSkilledWorkerVisa
+//   if (organisation && organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
+//     selectedSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+//   }
+//
+//   const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
+//
+//   res.render('../views/organisations/visa-sponsorship', {
+//     organisation,
+//     studentVisaOptions,
+//     skilledWorkerVisaOptions,
+//     actions: {
+//       save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+//       back: `/organisations/${req.params.organisationId}/details`,
+//       cancel: `/organisations/${req.params.organisationId}/details`
+//     }
+//   })
+// }
+//
+// exports.edit_visa_sponsorship_post = (req, res) => {
+//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+//   const errors = []
+//
+//   let selectedStudentVisa
+//   if (req.session.data.organisation && req.session.data.organisation.visaSponsorship.canSponsorStudentVisa) {
+//     selectedStudentVisa = req.session.data.organisation.visaSponsorship.canSponsorStudentVisa
+//   }
+//
+//   const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
+//
+//   let selectedSkilledWorkerVisa
+//   if (req.session.data.organisation && req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
+//     selectedSkilledWorkerVisa = req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+//   }
+//
+//   const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
+//
+//   if (errors.length) {
+//     res.render('../views/organisations/visa-sponsorship', {
+//       organisation,
+//       studentVisaOptions,
+//       skilledWorkerVisaOptions,
+//       actions: {
+//         save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+//         back: `/organisations/${req.params.organisationId}/details`,
+//         cancel: `/organisations/${req.params.organisationId}/details`
+//       },
+//       errors
+//     })
+//   } else {
+//     organisationModel.updateOne({
+//       organisationId: req.params.organisationId,
+//       organisation: req.session.data.organisation
+//     })
+//
+//     req.flash('success','Visa sponsorship updated')
+//     res.redirect(`/organisations/${req.params.organisationId}/details`)
+//   }
+// }
+
+exports.edit_student_visa_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
   let selectedStudentVisa
@@ -205,26 +275,18 @@ exports.edit_visa_sponsorship_get = (req, res) => {
 
   const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
 
-  let selectedSkilledWorkerVisa
-  if (organisation && organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
-    selectedSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
-  }
-
-  const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
-
-  res.render('../views/organisations/visa-sponsorship', {
+  res.render('../views/organisations/student-visa', {
     organisation,
     studentVisaOptions,
-    skilledWorkerVisaOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+      save: `/organisations/${req.params.organisationId}/student-visa`,
       back: `/organisations/${req.params.organisationId}/details`,
       cancel: `/organisations/${req.params.organisationId}/details`
     }
   })
 }
 
-exports.edit_visa_sponsorship_post = (req, res) => {
+exports.edit_student_visa_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
@@ -235,6 +297,53 @@ exports.edit_visa_sponsorship_post = (req, res) => {
 
   const studentVisaOptions = visaSponsorshipHelper.getStudentVisaOptions(selectedStudentVisa)
 
+  if (errors.length) {
+    res.render('../views/organisations/student-visa', {
+      organisation,
+      studentVisaOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/student-visa`,
+        back: `/organisations/${req.params.organisationId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success','Visa sponsorship updated')
+    res.redirect(`/organisations/${req.params.organisationId}/details`)
+  }
+}
+
+exports.edit_skilled_worker_visa_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  let selectedSkilledWorkerVisa
+  if (organisation && organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
+    selectedSkilledWorkerVisa = organisation.visaSponsorship.canSponsorSkilledWorkerVisa
+  }
+
+  const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
+
+  res.render('../views/organisations/skilled-worker-visa', {
+    organisation,
+    skilledWorkerVisaOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/skilled-worker-visa`,
+      back: `/organisations/${req.params.organisationId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/details`
+    }
+  })
+}
+
+exports.edit_skilled_worker_visa_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const errors = []
+
   let selectedSkilledWorkerVisa
   if (req.session.data.organisation && req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa) {
     selectedSkilledWorkerVisa = req.session.data.organisation.visaSponsorship.canSponsorSkilledWorkerVisa
@@ -243,12 +352,11 @@ exports.edit_visa_sponsorship_post = (req, res) => {
   const skilledWorkerVisaOptions = visaSponsorshipHelper.getSkilledWorkerVisaOptions(selectedSkilledWorkerVisa)
 
   if (errors.length) {
-    res.render('../views/organisations/visa-sponsorship', {
+    res.render('../views/organisations/skilled-worker-visa', {
       organisation,
-      studentVisaOptions,
       skilledWorkerVisaOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/visa-sponsorship`,
+        save: `/organisations/${req.params.organisationId}/skilled-worker-visa`,
         back: `/organisations/${req.params.organisationId}/details`,
         cancel: `/organisations/${req.params.organisationId}/details`
       },
