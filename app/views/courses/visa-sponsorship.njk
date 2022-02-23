@@ -38,7 +38,7 @@
         {% if not organisation.isAccreditedBody %}
           {% if course.fundingType == "fee" %}
             {% set visaSponsorshipText %}
-              {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
+              {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "cannot" }} sponsor Student visas.
             {% endset %}
 
             {{ govukInsetText({
