@@ -14,7 +14,7 @@ const skilledWorkerVisaOptions = [{
   code: 'yes'
 },{
   id: '782589c9-bf24-473c-ae56-b2fc22a512b0',
-  name: 'No, or not applicable',
+  name: 'No',
   code: 'no'
 }]
 
