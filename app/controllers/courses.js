@@ -2263,6 +2263,7 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
     course: req.session.data.course,
     visaOptions,
     accreditedBody,
+    fundingType: req.session.data.course.fundingType,
     actions: {
       save,
       back,
@@ -2345,6 +2346,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
       course: req.session.data.course,
       visaOptions,
       accreditedBody,
+      fundingType: req.session.data.course.fundingType,
       actions: {
         save,
         back,
