@@ -37,27 +37,27 @@
         {{ title }}
       </h1>
 
+      {% if referrer == "funding-type" %}
+        <p class="govuk-body">You’re being shown this page because you changed your answer to funding type.</p>
+      {% elif referrer == "apprenticeship" %}
+        <p class="govuk-body">You’re being shown this page because you changed your answer to whether this is a teaching apprenticeship.</p>
+      {% elif referrer == "accredited-body" %}
+        <p class="govuk-body">You’re being shown this page because you changed the accredited body for this course.</p>
+      {% endif %}
+
+      {% if not organisation.isAccreditedBody %}
+        {% if fundingType == "fee" %}
+          {% set visaSponsorshipText %}
+            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "cannot" }} sponsor Student visas.
+          {% endset %}
+
+          {{ govukInsetText({
+            text: visaSponsorshipText
+          }) }}
+        {% endif %}
+      {% endif %}
+
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-
-        {% if referrer == "funding-type" %}
-          <p class="govuk-body">You’re being shown this page because you changed your answer to funding type.</p>
-        {% elif referrer == "apprenticeship" %}
-          <p class="govuk-body">You’re being shown this page because you changed your answer to whether this is a teaching apprenticeship.</p>
-        {% elif referrer == "accredited-body" %}
-          <p class="govuk-body">You’re being shown this page because you changed the accredited body for this course.</p>
-        {% endif %}
-
-        {% if not organisation.isAccreditedBody %}
-          {% if fundingType == "fee" %}
-            {% set visaSponsorshipText %}
-              {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "cannot" }} sponsor Student visas.
-            {% endset %}
-
-            {{ govukInsetText({
-              text: visaSponsorshipText
-            }) }}
-          {% endif %}
-        {% endif %}
 
         {% if fundingType == "fee" %}
 

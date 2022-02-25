@@ -238,7 +238,7 @@
               text: "Student visa"
             },
             value: {
-              text: course.canSponsorStudentVisa | getStudentVisaLabel
+              text: course.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if course.canSponsorStudentVisa == "yes" else " - cannot sponsor")
             },
             actions: {
               items: [
@@ -255,7 +255,7 @@
               text: "Skilled Worker visa"
             },
             value: {
-              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
+              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if course.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
             },
             actions: {
               items: [
