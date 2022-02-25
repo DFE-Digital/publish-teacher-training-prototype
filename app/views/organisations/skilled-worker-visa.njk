@@ -1,6 +1,6 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Visa sponsorship" %}
+{% set title = "Skilled Worker visa" %}
 {% set caption = organisation.name %}
 
 {% block beforeContent %}
@@ -24,17 +24,32 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-body">
-        Non-UK teacher training candidates need the correct visa or immigration status to work or study in England.
-      </p>
+      {% set helpHtml %}
+        <p class="govuk-body">
+          Non-UK teacher training candidates need the correct visa or immigration status to work or study in England.
+        </p>
 
-      <p class="govuk-body">
-        Skilled Worker visas are sponsored by the employing school, local authority or multi-academy trust.
-      </p>
+        <p class="govuk-body">
+          Skilled Worker visas are sponsored by the employing school, local authority or multi-academy trust.
+        </p>
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor">Learn more about visa sponsorship</a>
-      </p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor">Learn more about visa sponsorship</a>
+        </p>
+      {% endset %}
+
+      {% if query.show and query.show in ["true","yes"] %}
+
+        {{ govukDetails({
+          summaryText: "Help with Skilled Worker visas",
+          html: helpHtml
+        }) }}
+
+      {% else %}
+
+        {#{ helpHtml | safe }#}
+
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -52,7 +67,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Update visa sponsorship"
+          text: "Update Skilled Worker visa"
         }) }}
 
       </form>

@@ -1,6 +1,6 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Visa sponsorship" %}
+{% set title = "Student visa" %}
 {% set caption = organisation.name %}
 
 {% block beforeContent %}
@@ -24,17 +24,32 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-body">
-        Non-UK teacher training candidates need the correct visa or immigration status to work or study in England.
-      </p>
+      {% set helpHtml %}
+        <p class="govuk-body">
+          Non-UK teacher training candidates need the correct visa or immigration status to work or study in England.
+        </p>
 
-      <p class="govuk-body">
-        Student visas are sponsored by the teacher training provider that ratifies your course.
-      </p>
+        <p class="govuk-body">
+          Student visas are sponsored by the teacher training provider that ratifies your course.
+        </p>
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor">Learn more about visa sponsorship</a>
-      </p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor">Learn more about visa sponsorship</a>
+        </p>
+      {% endset %}
+
+      {% if query.show and query.show in ["true","yes"] %}
+
+        {{ govukDetails({
+          summaryText: "Help with Student visas",
+          html: helpHtml
+        }) }}
+
+      {% else %}
+
+        {#{ helpHtml | safe }#}
+
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -52,7 +67,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Update visa sponsorship"
+          text: "Update Student visa"
         }) }}
 
       </form>
