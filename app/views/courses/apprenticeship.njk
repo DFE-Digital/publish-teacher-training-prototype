@@ -38,14 +38,14 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukRadios({
-          idPrefix: "apprenticeship",
-          name: "course[apprenticeship]",
+          idPrefix: "funding-type",
+          name: "course[fundingType]",
           fieldset: {
             legend: {
               html: headingHtml
             }
           },
-          errorMessage: errors | getErrorMessage("apprenticeship"),
+          errorMessage: errors | getErrorMessage("funding-type"),
           items: apprenticeshipOptions
         }) }}
 

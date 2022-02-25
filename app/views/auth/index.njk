@@ -126,6 +126,11 @@
           classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
+        {{ govukTag({
+          text: "Lead school",
+          classes: "govuk-tag--yellow govuk-!-margin-bottom-5"
+        }) }}
+
         <p class="govuk-body">
           Anne is a course administrator who belongs to one school direct.
         </p>
@@ -147,6 +152,11 @@
           classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
+        {{ govukTag({
+          text: "SCITT",
+          classes: "govuk-tag--yellow govuk-!-margin-bottom-5"
+        }) }}
+
         <p class="govuk-body">
           Susy is a SCITT service manager who belongs to one accredited body.
         </p>
@@ -161,11 +171,37 @@
 
         <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
 
+        <h2 class="govuk-heading-m">Grace</h2>
+
+        {{ govukTag({
+          text: "Accredited body",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+        }) }}
+
+        {{ govukTag({
+          text: "University",
+          classes: "govuk-tag--yellow govuk-!-margin-bottom-5"
+        }) }}
+
+        <p class="govuk-body">
+          Grace is a university admissions manager who belongs to one accredited body.
+        </p>
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="grace@example.com">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Grace"
+          }) }}
+        </form>
+
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
         <h2 class="govuk-heading-m">Mary</h2>
 
         {{ govukTag({
           text: "Multi-Org",
-          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+          classes: "govuk-tag--purple govuk-!-margin-bottom-5"
         }) }}
 
         {{ govukTag({

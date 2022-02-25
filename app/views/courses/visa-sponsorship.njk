@@ -1,6 +1,10 @@
 {% extends "_layout.njk" %}
 
-{% set title = "Visa sponsorship" %}
+{% if fundingType == "fee" %}
+  {% set title = "Student visa" %}
+{% else %}
+  {% set title = "Skilled Worker visa" %}
+{% endif %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -33,19 +37,29 @@
         {{ title }}
       </h1>
 
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+      {% if referrer == "funding-type" %}
+        <p class="govuk-body">You’re being shown this page because you changed your answer to funding type.</p>
+      {% elif referrer == "apprenticeship" %}
+        <p class="govuk-body">You’re being shown this page because you changed your answer to whether this is a teaching apprenticeship.</p>
+      {% elif referrer == "accredited-body" %}
+        <p class="govuk-body">You’re being shown this page because you changed the accredited body for this course.</p>
+      {% endif %}
 
-        {% if course.fundingType == "fee" %}
+      {% if not organisation.isAccreditedBody %}
+        {% if fundingType == "fee" %}
           {% set visaSponsorshipText %}
-            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "can’t" }} sponsor Student visas.
+            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "cannot" }} sponsor Student visas.
           {% endset %}
 
           {{ govukInsetText({
             text: visaSponsorshipText
           }) }}
         {% endif %}
+      {% endif %}
 
-        {% if course.fundingType == "fee" %}
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% if fundingType == "fee" %}
 
           {{ govukRadios({
             idPrefix: "visa-sponsorship",
@@ -79,7 +93,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update visa sponsorship"
+            text: "Update Student visa" if fundingType == "fee" else "Update Skilled Worker visa"
           }) }}
         {% else %}
           {{ govukButton({

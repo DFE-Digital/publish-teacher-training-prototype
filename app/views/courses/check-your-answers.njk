@@ -143,7 +143,7 @@
                 text: "Teaching apprenticeship"
               },
               value: {
-                text: course.apprenticeship | capitalize
+                text: course.fundingType | getApprenticeshipLabel
               },
               actions: {
                 items: [
@@ -154,7 +154,7 @@
                   }
                 ]
               }
-            } if course.apprenticeship,
+            } if organisation.isAccreditedBody,
             {
               key: {
                 text: "Funding type"
@@ -225,10 +225,10 @@
             } if not organisation.isAccreditedBody,
             {
               key: {
-                text: "Can candidates get a sponsored Student visa?"
+                text: "Student visa"
               },
               value: {
-                text: course.canSponsorStudentVisa | getStudentVisaLabel
+                text: course.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if course.canSponsorStudentVisa == "yes" else " - cannot sponsor")
               },
               actions: {
                 items: [
@@ -242,10 +242,10 @@
             } if course.fundingType == "fee",
             {
               key: {
-                text: "Can candidates get a sponsored Skilled Worker visa?"
+                text: "Skilled Worker visa"
               },
               value: {
-                text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel
+                text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if course.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
               },
               actions: {
                 items: [
@@ -256,7 +256,7 @@
                   }
                 ]
               }
-            } if course.fundingType == "salary",
+            } if course.fundingType in ["salary","apprenticeship"],
             {
               key: {
                 text: "Applications open date"

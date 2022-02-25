@@ -250,11 +250,15 @@ exports.getCourseStartLabel = (code) => {
 
 exports.getApprenticeshipOptions = (selectedItem) => {
   const items = []
+
+  // from funding-types.json
   const options = [{
-    code: 'yes',
+    id: '7c66b08b-d3ab-4678-861c-21ae6e1c08e7',
+    code: 'apprenticeship',
     name: 'Yes'
   }, {
-    code: 'no',
+    id: 'e9d75c90-eec3-446e-8b2e-1afa096b422b',
+    code: 'fee',
     name: 'No'
   }]
 
@@ -263,13 +267,36 @@ exports.getApprenticeshipOptions = (selectedItem) => {
 
     item.text = options.name
     item.value = options.code
-    item.id = options.code
+    item.id = options.id
     item.checked = (selectedItem && selectedItem.includes(options.code)) ? 'checked' : ''
 
     items.push(item)
   })
 
   return items
+}
+
+exports.getApprenticeshipLabel = (code) => {
+  // from funding-types.json
+  const options = [{
+    id: '7c66b08b-d3ab-4678-861c-21ae6e1c08e7',
+    code: 'apprenticeship',
+    name: 'Yes'
+  }, {
+    id: 'e9d75c90-eec3-446e-8b2e-1afa096b422b',
+    code: 'fee',
+    name: 'No'
+  }]
+
+  const answer = options.find(option => option.code === code)
+
+  let label = code
+
+  if (answer) {
+    label = answer.name
+  }
+
+  return label
 }
 
 exports.getCourseLengthOptions = (selectedItem) => {
@@ -357,11 +384,22 @@ exports.createCourseName = (subjects) => {
       }
     })
 
-    courseName = utilHelper.arrayToList(
-      array = names,
-      join = ' with ',
-      final = ' and '
-    )
+    if (subjects.includes('ML')) {
+      courseName = 'Modern languages'
+      courseName += ' ('
+      courseName += utilHelper.arrayToList(
+        array = names,
+        join = ', ',
+        final = ' and '
+      )
+      courseName += ')'
+    } else {
+      courseName = utilHelper.arrayToList(
+        array = names,
+        join = ' with ',
+        final = ' and '
+      )
+    }
   }
 
   return courseName
@@ -376,7 +414,7 @@ exports.createCourseName = (subjects) => {
 //  - preferably be a completely UNIQUE course code
 
 exports.createCourseCode = (organisationId) => {
-  let courseCode = 'Z123'
+  let courseCode = ''
 
   // get a list of current course codes
 

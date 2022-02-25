@@ -30,6 +30,21 @@
     "active": true
   },
   {
+    "id": "849a7781-35fa-4063-8b02-e21394a42325",
+    "username": "grace@example.com",
+    "password": "bat",
+    "firstName": "Grace",
+    "lastName": "Hopper",
+    "email": "grace@example.com",
+    "organisations": [{
+      "id": "b8bcaeed-f311-4867-a1e3-c0fde20809d6",
+      "code": "E14",
+      "name": "University of East Anglia",
+      "roles": ["admin"]
+    }],
+    "active": true
+  },
+  {
     "id": "eb81d689-f47a-4cd1-8e72-23e967816b2f",
     "username": "mary@example.com",
     "password": "bat",

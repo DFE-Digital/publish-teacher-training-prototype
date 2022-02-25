@@ -162,6 +162,21 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the apprenticeship label (based on funding type)
+  example: {{ 'fee' | getApprenticeshipLabel }}
+  outputs: "No"
+  ------------------------------------------------------------------ */
+  filters.getApprenticeshipLabel = (fundingType) => {
+    let label = fundingType
+
+    if (fundingType) {
+      label = courseHelper.getApprenticeshipLabel(fundingType)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
   utility function to get the study mode label
   example: {{ 'both' | getStudyModeLabel }}
   outputs: "Full time or part time"

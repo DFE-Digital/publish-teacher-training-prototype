@@ -105,10 +105,6 @@ exports.insertOne = (params) => {
       course.qualification = params.course.qualification
     }
 
-    if (params.course.apprenticeship) {
-      course.apprenticeship = params.course.apprenticeship
-    }
-
     if (params.course.fundingType) {
       course.fundingType = params.course.fundingType
 
@@ -220,10 +216,6 @@ exports.insertOne = (params) => {
   }
 }
 
-// exports.insertMany = (params) => {
-//
-// }
-
 exports.updateOne = (params) => {
 
   if (params.organisationId && params.courseId) {
@@ -284,10 +276,6 @@ exports.updateOne = (params) => {
 
     if (params.course.qualification) {
       course.qualification = params.course.qualification
-    }
-
-    if (params.course.apprenticeship) {
-      course.apprenticeship = params.course.apprenticeship
     }
 
     if (params.course.fundingType) {
@@ -446,10 +434,6 @@ exports.updateOne = (params) => {
   }
 }
 
-// exports.updateMany = (params) => {
-//
-// }
-
 exports.deleteOne = (params) => {
   if (params.organisationId && params.courseId) {
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
@@ -458,7 +442,3 @@ exports.deleteOne = (params) => {
     fs.unlinkSync(filePath)
   }
 }
-
-// exports.deleteMany = (params) => {
-//
-// }
