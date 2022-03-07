@@ -12,7 +12,11 @@ exports.user_list = (req, res) => {
   res.render('../views/users/list', {
     organisation,
     users,
-    actions: {}
+    actions: {
+      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
+      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
+      back: `/`
+    }
   })
 }
 
@@ -22,12 +26,16 @@ exports.user_list = (req, res) => {
 
 exports.user_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const user = userModel.findOne({ userId: req.params.userId })
-
+  const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
+console.log('Controller: ', user);
   res.render('../views/users/details', {
     organisation,
     user,
-    actions: {}
+    actions: {
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+    }
   })
 }
 
@@ -64,7 +72,7 @@ exports.new_user_post = (req, res) => {
     //   user: req.session.data.user
     // })
 
-    req.flash('success','Location added')
+    req.flash('success','User added')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
   }
 }
@@ -80,8 +88,8 @@ exports.edit_user_get = (req, res) => {
     user,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
     }
   })
 }
@@ -94,8 +102,8 @@ exports.edit_user_post = (req, res) => {
       user: req.session.data.user,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
       },
       errors
     })
@@ -106,8 +114,8 @@ exports.edit_user_post = (req, res) => {
     //   user: req.session.data.user
     // })
 
-    req.flash('success','Location updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
+    req.flash('success','User updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`)
   }
 }
 
@@ -122,8 +130,8 @@ exports.delete_user_get = (req, res) => {
     user,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
     }
   })
 }
@@ -137,8 +145,8 @@ exports.delete_user_post = (req, res) => {
       user,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
       },
       errors
     })
@@ -148,7 +156,7 @@ exports.delete_user_post = (req, res) => {
       userId: req.params.userId
     })
 
-    req.flash('success','Location deleted')
+    req.flash('success','User deleted')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
   }
 }
