@@ -3,7 +3,7 @@ const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
 exports.find = (params) => {
-  const users = require('../data/users')
+  let users = require('../data/users')
 
   if (params.organisationId) {
     users = users.filter(user => {
@@ -22,10 +22,12 @@ exports.findOne = (params) => {
   let user = {}
 
   if (params.organisationId && params.userId) {
-    user = this.findOne({
+    user = this.find({
       organisationId: params.organisationId,
       userId: params.userId
     })
+
+    console.log('Model: ', user);
   }
 
   return user
@@ -36,5 +38,9 @@ exports.insertOne = (params) => {
 }
 
 exports.updateOne = (params) => {
+
+}
+
+exports.deleteOne = (params) => {
 
 }
