@@ -220,13 +220,13 @@ router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAu
 router.get('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.edit_user_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.edit_user_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_post)
 
-// router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.user_details)
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.user_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthenticated, userController.user_list)
 
