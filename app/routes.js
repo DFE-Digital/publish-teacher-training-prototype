@@ -9,6 +9,7 @@ const courseController = require('./controllers/courses.js')
 const dataController = require('./controllers/data.js')
 const locationController = require('./controllers/locations.js')
 const organisationController = require('./controllers/organisations.js')
+const userController = require('./controllers/users.js')
 
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
@@ -211,6 +212,23 @@ router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationI
 // router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.location_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
+
+/// ------------------------------------------------------------------------ ///
+/// LOCATION ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.edit_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.edit_user_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_post)
+
+// router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.user_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthenticated, userController.user_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES
