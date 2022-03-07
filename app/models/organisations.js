@@ -2,7 +2,26 @@ const path = require('path')
 const fs = require('fs')
 
 exports.find = (params) => {
+  let organisations = []
 
+  const directoryPath = path.join(__dirname, '../data/organisations/')
+
+  let documents = fs.readdirSync(directoryPath,'utf8')
+
+  // Only get JSON documents
+  documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
+
+  documents.forEach((filename) => {
+    let raw = fs.readFileSync(directoryPath + '/' + filename)
+    let data = JSON.parse(raw)
+    organisations.push(data)
+  })
+
+  if (params.code) {
+    organisations = organisations.find(organisation => organisation.code === params.code)
+  }
+
+  return organisations
 }
 
 exports.findOne = (params) => {
