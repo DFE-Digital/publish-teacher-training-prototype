@@ -25,6 +25,7 @@ const seedUsers = () => {
   const tempDirectoryPath = path.join(__dirname, '../data/temp/users')
 
   const tempUsers = require('../data/temp/users')
+  const prototypeUsers = require('../data/temp/prototype-users')
 
   tempUsers.forEach((tUser, i) => {
     const user = {}
@@ -74,6 +75,8 @@ const seedUsers = () => {
 
     users.push(user)
   })
+
+  users = [...prototypeUsers, ...users]
 
   // if (users) {
   //   // write course data to file
