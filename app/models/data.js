@@ -2,7 +2,14 @@ const path = require('path')
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
+const faker = require('faker')
+faker.locale = 'en_GB'
+
 const subjects = require('../data/seed/subjects')
+
+const utilsHelper = require('../helpers/utils')
+
+const organisationModel = require('./organisations')
 
 exports.seed = () => {
   // seedLocations()
@@ -10,6 +17,74 @@ exports.seed = () => {
   // seedCourses()
   // seedRelationships()
   // seedCourseVisaSponsorship()
+  // seedUsers()
+}
+
+const seedUsers = () => {
+  const users = []
+  const tempDirectoryPath = path.join(__dirname, '../data/temp/users')
+
+  const tempUsers = require('../data/temp/users')
+
+  tempUsers.forEach((tUser, i) => {
+    const user = {}
+
+    user.id = uuid()
+    user.firstName = faker.name.firstName()
+    user.lastName = faker.name.lastName()
+
+    // tidy up the names for email
+    const emailFirstName = utilsHelper.slugify(user.firstName)
+    const emailLastName = utilsHelper.slugify(user.lastName)
+
+    user.email = `${emailFirstName}.${emailLastName}-${tUser.id}@example.com`
+
+    user.username = user.email
+    user.password = 'bat'
+
+    user.organisations = []
+
+    tUser.providers.forEach((tProvider, i) => {
+      const organisation = {}
+
+      const o = organisationModel.find({ code: tProvider.code })
+
+      try {
+        organisation.id = o.id
+        organisation.code = o.code
+        organisation.name = o.name
+
+        if (tProvider.isAdmin) {
+          organisation.roles = ['admin']
+        } else {
+          organisation.roles = []
+        }
+
+        user.organisations.push(organisation)
+      } catch (e) {
+        console.log(tProvider.code)
+      }
+
+    })
+
+    user.active = false
+    user.createdAt = new Date()
+
+    // console.log(user)
+
+    users.push(user)
+  })
+
+  // if (users) {
+  //   // write course data to file
+  //   const directoryPath = path.join(__dirname, '../data/seed/')
+  //   const raw = JSON.stringify(users)
+  //   const fileName = 'users.json'
+  //   const filePath = directoryPath + '/' + fileName
+  //   // write the JSON data
+  //   fs.writeFileSync(filePath, raw)
+  // }
+
 }
 
 const seedCourseVisaSponsorship = () => {
