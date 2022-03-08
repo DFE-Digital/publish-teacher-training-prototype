@@ -4,6 +4,7 @@ const router = express.Router()
 const passport = require('passport')
 
 // Controller modules
+const accountController = require('./controllers/account.js')
 const authenticationController = require('./controllers/authentication.js')
 const courseController = require('./controllers/courses.js')
 const dataController = require('./controllers/data.js')
@@ -71,6 +72,12 @@ router.post('/password-reset', authenticationController.password_reset_post)
 router.get('/registration-complete', authenticationController.registration_complete_get)
 
 router.get('/terms-and-conditions', authenticationController.terms_and_conditions_get)
+
+/// ------------------------------------------------------------------------ ///
+/// YOUR ACCOUNT ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/account', checkIsAuthenticated, accountController.user_details)
 
 /// ------------------------------------------------------------------------ ///
 /// COURSE ROUTES
@@ -213,7 +220,7 @@ router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationI
 router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
 
 /// ------------------------------------------------------------------------ ///
-/// LOCATION ROUTES
+/// USER ROUTES
 /// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_get)
