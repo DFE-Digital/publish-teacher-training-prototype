@@ -26,8 +26,6 @@ exports.findOne = (params) => {
       organisationId: params.organisationId,
       userId: params.userId
     })
-
-    console.log('Model: ', user);
   }
 
   return user
