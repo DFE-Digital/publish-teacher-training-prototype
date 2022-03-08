@@ -1,7 +1,7 @@
 const authentication = require('../models/authentication')
 
 exports.sign_in_get = (req, res) => {
-  if (req.session.passport || req.session.data.user) {
+  if (req.session.passport) {
     res.redirect('/')
   } else {
     const errors = req.flash()
@@ -20,8 +20,6 @@ exports.sign_in_get = (req, res) => {
 exports.auth_get = (req, res) => {
   delete req.session.data.username
   delete req.session.data.password
-  req.session.data.user = req.session.passport.user
-  // TODO: load user's organisations and courses into session
   res.redirect('/organisations')
 }
 
