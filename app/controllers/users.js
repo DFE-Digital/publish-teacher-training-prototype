@@ -9,6 +9,10 @@ exports.user_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const users = userModel.find({ organisationId: req.params.organisationId })
 
+  users.sort((a, b) => {
+    return a.firstName.localeCompare(b.firstName) || a.lastName.localeCompare(b.lastName)
+  })
+
   res.render('../views/users/list', {
     organisation,
     users,
@@ -27,7 +31,7 @@ exports.user_list = (req, res) => {
 exports.user_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
-console.log('Controller: ', user);
+
   res.render('../views/users/details', {
     organisation,
     user,
