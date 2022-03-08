@@ -29,6 +29,9 @@
           {% for organisation in user.organisations %}
             <li>
               {{ organisation.name }}
+              {% if "admin" in organisation.roles %}
+                <br><span class="govuk-hint">Course administrator</span>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
