@@ -1,0 +1,63 @@
+{% extends "_layout.njk" %}
+
+{% set title = user.firstName + " " + user.lastName %}
+{% set caption = "Users" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">
+          {{ caption }}
+        </span>
+        {{ title }}
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: user.firstName
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: user.lastName
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: user.email
+            }
+          }
+        ]
+      }) }}
+
+      <p class="govuk-body">
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete user</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

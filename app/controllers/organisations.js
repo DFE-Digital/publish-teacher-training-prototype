@@ -17,13 +17,13 @@ exports.organisation_home = (req, res) => {
 }
 
 exports.organisations_list = (req, res) => {
-  if (req.session.data.user.organisations && req.session.data.user.organisations.length > 1) {
-    const organisations = req.session.data.user.organisations
+  if (req.session.passport.user.organisations && req.session.passport.user.organisations.length > 1) {
+    const organisations = req.session.passport.user.organisations
     res.render('../views/organisations/list', {
       organisations
     })
   } else {
-    const organisationId = req.session.data.user.organisations[0].id
+    const organisationId = req.session.passport.user.organisations[0].id
     res.redirect(`/organisations/${organisationId}`);
   }
 }

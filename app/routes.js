@@ -4,16 +4,17 @@ const router = express.Router()
 const passport = require('passport')
 
 // Controller modules
+const accountController = require('./controllers/account.js')
 const authenticationController = require('./controllers/authentication.js')
 const courseController = require('./controllers/courses.js')
 const dataController = require('./controllers/data.js')
 const locationController = require('./controllers/locations.js')
 const organisationController = require('./controllers/organisations.js')
+const userController = require('./controllers/users.js')
 
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
-  if (req.session.passport || req.session.data.user) {
-    req.session.data.user = req.session.passport.user
+  if (req.session.passport) {
     next()
   } else {
     delete req.session.data
@@ -71,6 +72,12 @@ router.post('/password-reset', authenticationController.password_reset_post)
 router.get('/registration-complete', authenticationController.registration_complete_get)
 
 router.get('/terms-and-conditions', authenticationController.terms_and_conditions_get)
+
+/// ------------------------------------------------------------------------ ///
+/// YOUR ACCOUNT ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/account', checkIsAuthenticated, accountController.user_details)
 
 /// ------------------------------------------------------------------------ ///
 /// COURSE ROUTES
@@ -211,6 +218,23 @@ router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationI
 // router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.location_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
+
+/// ------------------------------------------------------------------------ ///
+/// USER ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.user_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthenticated, userController.user_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES
