@@ -1,0 +1,104 @@
+{% extends "_layout.njk" %}
+
+{% set title = "Invite user" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukInput({
+          id: "firstName",
+          name: "user[firstName]",
+          label: {
+            text: "First name",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("firstName"),
+          value: user.firstName,
+          classes: "govuk-!-width-two-thirds"
+        }) }}
+
+        {{ govukInput({
+          id: "lastName",
+          name: "user[lastName]",
+          label: {
+            text: "Last name",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("lastName"),
+          value: user.lastName,
+          classes: "govuk-!-width-two-thirds"
+        }) }}
+
+        {{ govukInput({
+          id: "email",
+          name: "user[email]",
+          label: {
+            text: "Email address",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("email"),
+          value: user.email
+        }) }}
+
+        {{ govukInput({
+          id: "organisation",
+          name: "user[organisation]",
+          label: {
+            text: "Organisation name",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("organisation"),
+          value: user.organisation
+        }) }}
+
+        {{ govukTextarea({
+          id: "reason",
+          name: "user[reason]",
+          label: {
+            text: "Reason",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("reason"),
+          value: user.reason
+        }) }}
+
+        {{ govukButton({
+          text: "Invite user"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
