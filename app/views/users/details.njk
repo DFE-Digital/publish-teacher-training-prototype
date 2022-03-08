@@ -24,19 +24,6 @@
         {{ title }}
       </h1>
 
-      {% set organisationHtml %}
-        <ul class="govuk-list">
-          {% for organisation in user.organisations %}
-            <li>
-              {{ organisation.name }}
-              {% if "admin" in organisation.roles %}
-                <br><span class="govuk-hint">Course administrator</span>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endset %}
-
       {{ govukSummaryList({
         rows: [
           {
@@ -61,14 +48,6 @@
             },
             value: {
               text: user.email
-            }
-          },
-          {
-            key: {
-              text: "Organisations"
-            },
-            value: {
-              html: organisationHtml
             }
           }
         ]
