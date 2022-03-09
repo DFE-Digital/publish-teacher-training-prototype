@@ -35,7 +35,7 @@
           {% for organisation in user.organisations %}
             <li>
               {{ organisation.name }}
-              {% if "admin" in organisation.roles %}
+              {% if "admin" in organisation.permissions %}
                 <br><span class="govuk-hint">Course administrator</span>
               {% endif %}
             </li>
