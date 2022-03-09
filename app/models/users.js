@@ -5,7 +5,20 @@ const { v4: uuid } = require('uuid')
 const organisationModel = require('./organisations')
 
 exports.find = (params) => {
-  let users = require('../data/users')
+  let users = []
+
+  const directoryPath = path.join(__dirname, '../data/users/')
+
+  let documents = fs.readdirSync(directoryPath,'utf8')
+
+  // Only get JSON documents
+  documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
+
+  documents.forEach((filename) => {
+    let raw = fs.readFileSync(directoryPath + '/' + filename)
+    let data = JSON.parse(raw)
+    users.push(data)
+  })
 
   if (params.organisationId) {
     users = users.filter(user => {
@@ -28,6 +41,18 @@ exports.findOne = (params) => {
       organisationId: params.organisationId,
       userId: params.userId
     })
+  }
+
+  return user
+}
+
+exports.saveOne = (params) => {
+  let user = this.find({ email: params.user.email })
+
+  if (user) {
+    user = this.updateOne(params)
+  } else {
+    user = this.insertOne(params)
   }
 
   return user
@@ -59,7 +84,7 @@ exports.insertOne = (params) => {
     organisation.id = o.id
     organisation.code = o.code
     organisation.name = o.name
-    organisation.roles = []
+    organisation.permissions = []
 
     user.organisations.push(organisation)
 
