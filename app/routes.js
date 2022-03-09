@@ -15,6 +15,7 @@ const userController = require('./controllers/users.js')
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
   if (req.session.passport) {
+    res.locals.passport = req.session.passport
     next()
   } else {
     delete req.session.data
