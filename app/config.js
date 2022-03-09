@@ -25,9 +25,5 @@ module.exports = {
   // Enable or disable Browser Sync
   useBrowserSync: 'true',
 
-  useLogin: 'false',
-
-  // Current and next cycle prototypes
-  currentCyclePrototype: 'https://manage-courses-prototype.herokuapp.com',
-  nextCyclePrototype: 'https://manage-courses-prototype-next.herokuapp.com'
+  useLogin: 'false'
 }
