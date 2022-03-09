@@ -21,74 +21,137 @@ exports.seed = () => {
 }
 
 const seedUsers = () => {
-  const users = []
-  const tempDirectoryPath = path.join(__dirname, '../data/temp/users')
+  const users = require('../data/seed/users')
 
-  const tempUsers = require('../data/temp/users')
-  const prototypeUsers = require('../data/temp/prototype-users')
-
-  tempUsers.forEach((tUser, i) => {
+  users.forEach((u, i) => {
     const user = {}
 
-    user.id = uuid()
-    user.firstName = faker.name.firstName()
-    user.lastName = faker.name.lastName()
+    user.id = u.id
+    user.firstName = u.firstName
+    user.lastName = u.lastName
 
-    // tidy up the names for email
-    const emailFirstName = utilsHelper.slugify(user.firstName)
-    const emailLastName = utilsHelper.slugify(user.lastName)
+    user.email = u.email
 
-    user.email = `${emailFirstName}.${emailLastName}-${tUser.id}@example.com`
-
-    user.username = user.email
-    user.password = 'bat'
+    user.username = u.username
+    user.password = u.password
 
     user.organisations = []
 
-    tUser.providers.forEach((tProvider, i) => {
+    u.organisations.forEach((o, i) => {
       const organisation = {}
 
-      const o = organisationModel.find({ code: tProvider.code })
+      organisation.id = o.id
+      organisation.code = o.code
+      organisation.name = o.name
+      organisation.permissions = o.roles
 
-      try {
-        organisation.id = o.id
-        organisation.code = o.code
-        organisation.name = o.name
-
-        if (tProvider.isAdmin) {
-          organisation.roles = ['admin']
-        } else {
-          organisation.roles = []
-        }
-
-        user.organisations.push(organisation)
-      } catch (e) {
-        console.log(tProvider.code)
-      }
-
+      user.organisations.push(organisation)
     })
 
-    user.active = false
-    user.createdAt = new Date()
+    user.notifications = []
 
-    // console.log(user)
+    user.createdAt = u.createdAt
+    user.updatedAt = new Date()
 
-    users.push(user)
+    if (!u.active) {
+      user.active = faker.datatype.boolean()
+    }
+
+    if (user && user.id) {
+      // write course data to file
+      const directoryPath = path.join(__dirname, '../data/seed/users/')
+
+      // check if document directory exists
+      if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath)
+      }
+
+      const raw = JSON.stringify(user)
+
+      const fileName = user.id + '.json'
+      const filePath = directoryPath + '/' + fileName
+
+      // write the JSON data
+      // fs.writeFileSync(filePath, raw)
+
+      // output user info
+      console.log(i, user)
+    }
+
   })
 
-  users = [...prototypeUsers, ...users]
-
-  // if (users) {
-  //   // write course data to file
-  //   const directoryPath = path.join(__dirname, '../data/seed/')
-  //   const raw = JSON.stringify(users)
-  //   const fileName = 'users.json'
-  //   const filePath = directoryPath + '/' + fileName
-  //   // write the JSON data
-  //   fs.writeFileSync(filePath, raw)
-  // }
 
 }
+
+// const seedUsers = () => {
+//   const users = []
+//   const tempDirectoryPath = path.join(__dirname, '../data/temp/users')
+//
+//   const tempUsers = require('../data/temp/users')
+//   const prototypeUsers = require('../data/temp/prototype-users')
+//
+//   tempUsers.forEach((tUser, i) => {
+//     const user = {}
+//
+//     user.id = uuid()
+//     user.firstName = faker.name.firstName()
+//     user.lastName = faker.name.lastName()
+//
+//     // tidy up the names for email
+//     const emailFirstName = utilsHelper.slugify(user.firstName)
+//     const emailLastName = utilsHelper.slugify(user.lastName)
+//
+//     user.email = `${emailFirstName}.${emailLastName}-${tUser.id}@example.com`
+//
+//     user.username = user.email
+//     user.password = 'bat'
+//
+//     user.organisations = []
+//
+//     tUser.providers.forEach((tProvider, i) => {
+//       const organisation = {}
+//
+//       const o = organisationModel.find({ code: tProvider.code })
+//
+//       try {
+//         organisation.id = o.id
+//         organisation.code = o.code
+//         organisation.name = o.name
+//
+//         if (tProvider.isAdmin) {
+//           organisation.roles = ['admin']
+//         } else {
+//           organisation.roles = []
+//         }
+//
+//         user.organisations.push(organisation)
+//       } catch (e) {
+//         console.log(tProvider.code)
+//       }
+//
+//     })
+//
+//     user.active = false
+//     user.createdAt = new Date()
+//
+//     // console.log(user)
+//
+//     users.push(user)
+//   })
+//
+//   users = [...prototypeUsers, ...users]
+//
+//   // if (users) {
+//   //   // write course data to file
+//   //   const directoryPath = path.join(__dirname, '../data/seed/')
+//   //   const raw = JSON.stringify(users)
+//   //   const fileName = 'users.json'
+//   //   const filePath = directoryPath + '/' + fileName
+//   //   // write the JSON data
+//   //   fs.writeFileSync(filePath, raw)
+//   // }
+//
+// }
 
 const seedCourseVisaSponsorship = () => {
   const organisations = []
