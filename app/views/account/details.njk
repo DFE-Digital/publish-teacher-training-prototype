@@ -35,7 +35,7 @@
           <ul class="govuk-list">
             {% for notification in user.organisations[0].notifications %}
               <li>
-                {{ notification }}
+                {{ notification | getNotificationLabel }}
               </li>
             {% endfor %}
           </ul>
@@ -103,7 +103,7 @@
                 {% if organisation.notifications.length %}
                   <ul class="govuk-list">
                     {% for notification in organisation.notifications %}
-                      <li>{{ notification }}</li>
+                      <li>{{ notification | getNotificationLabel }}</li>
                     {% endfor %}
                   </ul>
                 {% else %}
