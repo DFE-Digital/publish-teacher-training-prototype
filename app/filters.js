@@ -345,9 +345,9 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
-  utility function to get the student visa label
-  example: {{ "yes" | getStudentVisaLabel }}
-  outputs: "Yes"
+  utility function to get the notification label
+  example: {{ "course_changed" | getNotificationLabel }}
+  outputs: "Course is changed"
   ------------------------------------------------------------------ */
   filters.getNotificationLabel = (code) => {
     let label
