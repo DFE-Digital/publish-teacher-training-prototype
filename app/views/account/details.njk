@@ -16,7 +16,7 @@
 
 {% block content %}
 
-  {% include "_includes/error-summary.njk" %}
+  {% include "_includes/notification-banner.njk" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -30,17 +30,18 @@
         {{ title }}
       </h1>
 
-      {% set organisationHtml %}
-        <ul class="govuk-list">
-          {% for organisation in user.organisations %}
-            <li>
-              {{ organisation.name }}
-              {% if "admin" in organisation.permissions %}
-                <br><span class="govuk-hint">Course administrator</span>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+      {% set notificationHtml %}
+        {% if user.organisations[0].notifications.length %}
+          <ul class="govuk-list">
+            {% for notification in user.organisations[0].notifications %}
+              <li>
+                {{ notification }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="govuk-body">None</p>
+        {% endif %}
       {% endset %}
 
       {{ govukSummaryList({
@@ -71,14 +72,54 @@
           },
           {
             key: {
-              text: "Organisations"
+              text: "Email notifications"
             },
             value: {
-              html: organisationHtml
+              html: notificationHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/account/organisations/" + user.organisations[0].id + "/notifications",
+                  text: "Change",
+                  visuallyHiddenText: "notifications"
+                }
+              ]
             }
-          }
+          } if user.organisations.length == 1
         ]
       }) }}
+
+      {% if user.organisations.length > 1 %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-9">Email notifications</h2>
+
+        <dl class="govuk-summary-list">
+          {% for organisation in user.organisations %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ organisation.name }}
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if organisation.notifications.length %}
+                  <ul class="govuk-list">
+                    {% for notification in organisation.notifications %}
+                      <li>{{ notification }}</li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p class="govuk-body">None</p>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/account/organisations/{{ organisation.id }}/notifications">
+                  Change<span class="govuk-visually-hidden"> {{ organisation.name }} email notifications</span>
+                </a>
+              </dd>
+            </div>
+          {% endfor %}
+        </dl>
+
+      {% endif %}
 
     </div>
   </div>
