@@ -43,7 +43,7 @@
           name: "notifications[course_published]",
           fieldset: {
             legend: {
-              text: "Course is published",
+              text: "course_published" | getNotificationLabel,
               isPageHeading: false,
               classes: "govuk-fieldset__legend--m"
             }
@@ -68,7 +68,7 @@
           name: "notifications[course_changed]",
           fieldset: {
             legend: {
-              text: "Course is changed",
+              text: "course_changed" | getNotificationLabel,
               isPageHeading: false,
               classes: "govuk-fieldset__legend--m"
             }
@@ -93,7 +93,7 @@
           name: "notifications[course_withdrawn]",
           fieldset: {
             legend: {
-              text: "Course is withdrawn",
+              text: "course_withdrawn" | getNotificationLabel,
               isPageHeading: false,
               classes: "govuk-fieldset__legend--m"
             }
@@ -118,7 +118,7 @@
           name: "notifications[vacancies_changed]",
           fieldset: {
             legend: {
-              text: "Course vacancies are changed",
+              text: "vacancies_changed" | getNotificationLabel,
               isPageHeading: false,
               classes: "govuk-fieldset__legend--m"
             }
