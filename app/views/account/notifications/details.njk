@@ -38,6 +38,12 @@
           <h2 class="govuk-heading-m {{- ' govuk-!-margin-top-9' if loop.index > 1 }}">{{ organisation.name }}</h2>
         {% endif %}
 
+        <p class="govuk-body">
+          <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
+            Edit email notifications<span class="govuk-visually-hidden"> for {{ organisation.name }}</span>
+          </a>
+        </p>
+
         <dl class="govuk-summary-list">
           {% for notification in notificationOptions %}
             <div class="govuk-summary-list__row">
@@ -47,11 +53,11 @@
               <dd class="govuk-summary-list__value">
                 {{ "Yes" if (organisation.notifications and notification.code in organisation.notifications) else "No" }}
               </dd>
-              <dd class="govuk-summary-list__actions">
+              <!-- <dd class="govuk-summary-list__actions">
                 <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
                   Change<span class="govuk-visually-hidden"> {{ organisation.name }} email notifications</span>
                 </a>
-              </dd>
+              </dd> -->
             </div>
           {% endfor %}
         </dl>
