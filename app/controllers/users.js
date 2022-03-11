@@ -32,9 +32,12 @@ exports.user_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
 
+  const signedInUser = userModel.find({ userId: req.session.passport.user.id })
+
   res.render('../views/users/details', {
     organisation,
     user,
+    signedInUser,
     actions: {
       delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
