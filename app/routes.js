@@ -78,10 +78,14 @@ router.get('/terms-and-conditions', authenticationController.terms_and_condition
 /// YOUR ACCOUNT ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/account/organisations/:organisationId/notifications', checkIsAuthenticated, accountController.edit_notifications_get)
-router.post('/account/organisations/:organisationId/notifications', checkIsAuthenticated, accountController.edit_notifications_post)
+router.get('/account/notifications/organisations/:organisationId/edit', checkIsAuthenticated, accountController.edit_notifications_get)
+router.post('/account/notifications/organisations/:organisationId/edit', checkIsAuthenticated, accountController.edit_notifications_post)
 
-router.get('/account', checkIsAuthenticated, accountController.user_details)
+router.get('/account/notifications', checkIsAuthenticated, accountController.notification_details)
+
+router.get('/account/personal-details', checkIsAuthenticated, accountController.personal_details)
+
+router.get('/account', checkIsAuthenticated, accountController.user_account)
 
 /// ------------------------------------------------------------------------ ///
 /// COURSE ROUTES

@@ -1,0 +1,78 @@
+{% extends "_layout.njk" %}
+
+{% set headerNavId = "account" %}
+
+{% set title = "Your email notifications" %}
+{% if user.organisations.length > 1 %}
+  {% set caption = organisation.name %}
+{% endif %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+
+      <p class="govuk-hint">Choose which email notifications you want to receive.</p>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% for notification in notificationOptions %}
+          {{ govukRadios({
+            idPrefix: "notifications",
+            name: "notifications[" + notification.code + "]",
+            fieldset: {
+              legend: {
+                text: notification.name,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "yes",
+                text: "Yes",
+                checked: true if (notifications and notification.code in notifications) else false
+              },
+              {
+                value: "no",
+                text: "No",
+                checked: true if (notifications and notification.code not in notifications) else false
+              }
+            ],
+            classes: "govuk-radios--inline"
+          }) }}
+        {% endfor %}
+
+        {{ govukButton({
+          text: "Update email notifications"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+
+    </div>
+  </div>
+
+{% endblock %}

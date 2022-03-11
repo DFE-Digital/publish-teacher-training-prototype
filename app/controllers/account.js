@@ -3,15 +3,49 @@ const organisationModel = require('../models/organisations')
 const userModel = require('../models/users')
 
 /// ------------------------------------------------------------------------ ///
-/// SHOW USER
+/// SHOW USER ACCOUNT
 /// ------------------------------------------------------------------------ ///
 
-exports.user_details = (req, res) => {
+exports.user_account = (req, res) => {
   const user = userModel.find({ userId: req.session.passport.user.id })
 
-  res.render('../views/account/details', {
+  res.render('../views/account/index', {
+    user,
+    actions: {
+      notifications: `/account/notifications`,
+      personalDetails: `/account/personal-details`
+    }
+  })
+}
+
+/// ------------------------------------------------------------------------ ///
+/// SHOW PERSONAL DETAILS
+/// ------------------------------------------------------------------------ ///
+
+exports.personal_details = (req, res) => {
+  const user = userModel.find({ userId: req.session.passport.user.id })
+
+  res.render('../views/account/personal-details/details', {
     user,
     actions: {}
+  })
+}
+
+/// ------------------------------------------------------------------------ ///
+/// SHOW NOTIFICATIONS
+/// ------------------------------------------------------------------------ ///
+
+exports.notification_details = (req, res) => {
+  const user = userModel.find({ userId: req.session.passport.user.id })
+
+  const notificationOptions = require('../data/notification-types')
+
+  res.render('../views/account/notifications/details', {
+    user,
+    notificationOptions,
+    actions: {
+      change: `/account/notifications`
+    }
   })
 }
 
@@ -23,18 +57,21 @@ exports.edit_notifications_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const user = userModel.find({ userId: req.session.passport.user.id })
 
+  const notificationOptions = require('../data/notification-types')
+
   const notifications = user.organisations.find(
     organisation => organisation.id === req.params.organisationId
   ).notifications
 
-  res.render('../views/account/notifications', {
+  res.render('../views/account/notifications/edit', {
     organisation,
     user,
+    notificationOptions,
     notifications,
     actions: {
-      save: `/account/organisations/${req.params.organisationId}/notifications`,
-      back: `/account`,
-      cancel: `/account`
+      save: `/account/notifications/organisations/${req.params.organisationId}/edit`,
+      back: `/account/notifications`,
+      cancel: `/account/notifications`
     }
   })
 }
@@ -46,13 +83,15 @@ exports.edit_notifications_post = (req, res) => {
   const errors = []
 
   if (errors.length) {
-    res.render('../views/account/notifications', {
+    res.render('../views/account/notifications/edit', {
       organisation,
       user,
+      notificationOptions,
+      notifications: req.session.data.notifications,
       actions: {
-        save: `/account/organisations/${req.params.organisationId}/notifications`,
-        back: `/account`,
-        cancel: `/account`
+        save: `/account/notifications/organisations/${req.params.organisationId}/edit`,
+        back: `/account/notifications`,
+        cancel: `/account/notifications`
       },
       errors
     })
@@ -73,6 +112,6 @@ exports.edit_notifications_post = (req, res) => {
     })
 
     req.flash('success','Email notifications updated')
-    res.redirect(`/account`)
+    res.redirect(`/account/notifications`)
   }
 }
