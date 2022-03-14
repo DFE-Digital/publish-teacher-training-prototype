@@ -100,7 +100,7 @@ exports.edit_notifications_post = (req, res) => {
     const notifications = []
 
     for (const [key, value] of Object.entries(req.session.data.notifications)) {
-      if (value === 'yes') {
+      if (value === 'on') {
         notifications.push(key)
       }
     }

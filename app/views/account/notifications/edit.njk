@@ -30,8 +30,6 @@
         {{ title }}
       </h1>
 
-      <p class="govuk-hint">Choose which email notifications you want to receive.</p>
-
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% for notification in notificationOptions %}
@@ -47,13 +45,13 @@
             },
             items: [
               {
-                value: "yes",
-                text: "Yes",
+                value: "on",
+                text: "On",
                 checked: true if (notifications and notification.code in notifications) else false
               },
               {
-                value: "no",
-                text: "No",
+                value: "off",
+                text: "Off",
                 checked: true if (notifications and notification.code not in notifications) else false
               }
             ],

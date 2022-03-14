@@ -40,7 +40,7 @@
 
         <p class="govuk-body">
           <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
-            Edit email notifications<span class="govuk-visually-hidden"> for {{ organisation.name }}</span>
+            Change email notifications<span class="govuk-visually-hidden"> for {{ organisation.name }}</span>
           </a>
         </p>
 
@@ -51,7 +51,7 @@
                 {{ notification.name }}
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ "Yes" if (organisation.notifications and notification.code in organisation.notifications) else "No" }}
+                {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
               </dd>
               <!-- <dd class="govuk-summary-list__actions">
                 <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
