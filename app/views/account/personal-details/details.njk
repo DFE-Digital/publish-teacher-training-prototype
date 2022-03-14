@@ -2,21 +2,23 @@
 
 {% set headerNavId = "account" %}
 
-{% set title = "Your account" %}
+{% set title = "Your personal details" %}
 {#% set caption = user.firstName + " " + user.lastName %#}
 
 {% block beforeContent %}
 {{ govukBreadcrumbs({
   items: [{
-    text: "Home",
-    href: "/"
+    text: "Your account",
+    href: "/account"
+  }, {
+    text: title
   }]
 }) }}
 {% endblock %}
 
 {% block content %}
 
-  {% include "_includes/error-summary.njk" %}
+  {% include "_includes/notification-banner.njk" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -29,19 +31,6 @@
         {% endif %}
         {{ title }}
       </h1>
-
-      {% set organisationHtml %}
-        <ul class="govuk-list">
-          {% for organisation in user.organisations %}
-            <li>
-              {{ organisation.name }}
-              {% if "admin" in organisation.permissions %}
-                <br><span class="govuk-hint">Course administrator</span>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endset %}
 
       {{ govukSummaryList({
         rows: [
@@ -67,14 +56,6 @@
             },
             value: {
               text: user.email
-            }
-          },
-          {
-            key: {
-              text: "Organisations"
-            },
-            value: {
-              html: organisationHtml
             }
           }
         ]

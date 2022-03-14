@@ -232,6 +232,32 @@
           }) }}
         </form>
 
+        <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+        <h2 class="govuk-heading-m">Alysa</h2>
+
+        {{ govukTag({
+          text: "Multi-Org",
+          classes: "govuk-tag--purple govuk-!-margin-bottom-5"
+        }) }}
+
+        {{ govukTag({
+          text: "School direct",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+        }) }}
+
+        <p class="govuk-body">
+          Alysa is a course administrator who belongs multiple school directs.
+        </p>
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+          <input type="hidden" name="username" value="alysa.hane-11672@example.com">
+          <input type="hidden" name="password" value="bat">
+          {{ govukButton({
+            text: "Sign in as Alysa"
+          }) }}
+        </form>
+
         <!-- <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
 
         <h2 class="govuk-heading-m">Colin</h2>

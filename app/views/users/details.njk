@@ -53,9 +53,11 @@
         ]
       }) }}
 
-      <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete user</a>
-      </p>
+      {% if not (user.id == signedInUser.id) %}
+        <p class="govuk-body">
+          <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete user</a>
+        </p>
+      {% endif %}
 
     </div>
   </div>

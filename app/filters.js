@@ -7,6 +7,7 @@ const numeral = require('numeral')
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
 const locationHelper = require('./helpers/locations')
+const notificationHelper = require('./helpers/notifications')
 const organisationHelper = require('./helpers/organisations')
 const subjectHelper = require('./helpers/subjects')
 const visaSponsorshipHelper = require('./helpers/visa-sponsorship')
@@ -341,6 +342,21 @@ module.exports = (env) => {
     }
     const html = marked.parse(markdown)
     return html
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the notification label
+  example: {{ "course_changed" | getNotificationLabel }}
+  outputs: "Course is changed"
+  ------------------------------------------------------------------ */
+  filters.getNotificationLabel = (code) => {
+    let label
+
+    if (code) {
+      label = notificationHelper.getNotificationLabel(code)
+    }
+
+    return label
   }
 
   /* ------------------------------------------------------------------

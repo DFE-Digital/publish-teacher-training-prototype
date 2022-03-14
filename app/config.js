@@ -27,7 +27,5 @@ module.exports = {
 
   useLogin: 'false',
 
-  // Current and next cycle prototypes
-  currentCyclePrototype: 'https://manage-courses-prototype.herokuapp.com',
-  nextCyclePrototype: 'https://manage-courses-prototype-next.herokuapp.com'
+  useLoginFallback: 'false'
 }
