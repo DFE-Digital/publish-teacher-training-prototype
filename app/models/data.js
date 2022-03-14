@@ -21,67 +21,98 @@ exports.seed = () => {
 }
 
 const seedUsers = () => {
-  const users = require('../data/seed/users')
+  const directoryPath = path.join(__dirname, '../data/seed/users/')
 
-  users.forEach((u, i) => {
-    const user = {}
+  let documents = fs.readdirSync(directoryPath,'utf8')
 
-    user.id = u.id
-    user.firstName = u.firstName
-    user.lastName = u.lastName
+  // Only get JSON documents
+  documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
-    user.email = u.email
+  documents.forEach((fileName) => {
+    const filePath = directoryPath + '/' + fileName
+    const raw = fs.readFileSync(filePath)
+    let user = JSON.parse(raw)
 
-    user.username = u.username
-    user.password = u.password
+    user.organisations.forEach((organisation, i) => {
+      organisation.notifications = ['course_published','course_changed','course_withdrawn','course_vacancies_changed']
+    });
 
-    user.organisations = []
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(user)
 
-    u.organisations.forEach((o, i) => {
-      const organisation = {}
+    // write the JSON data
+    // fs.writeFileSync(filePath, fileData)
 
-      organisation.id = o.id
-      organisation.code = o.code
-      organisation.name = o.name
-      organisation.permissions = o.roles
-
-      user.organisations.push(organisation)
-    })
-
-    user.notifications = []
-
-    user.createdAt = u.createdAt
-    user.updatedAt = new Date()
-
-    if (!u.active) {
-      user.active = faker.datatype.boolean()
-    }
-
-    if (user && user.id) {
-      // write course data to file
-      const directoryPath = path.join(__dirname, '../data/seed/users/')
-
-      // check if document directory exists
-      if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath)
-      }
-
-      const raw = JSON.stringify(user)
-
-      const fileName = user.id + '.json'
-      const filePath = directoryPath + '/' + fileName
-
-      // write the JSON data
-      // fs.writeFileSync(filePath, raw)
-
-      // output user info
-      console.log(i, user)
-    }
+    // console.log(filePath);
+    console.log(user);
 
   })
 
 
 }
+
+// const seedUsers = () => {
+//   const users = require('../data/seed/users')
+//
+//   users.forEach((u, i) => {
+//     const user = {}
+//
+//     user.id = u.id
+//     user.firstName = u.firstName
+//     user.lastName = u.lastName
+//
+//     user.email = u.email
+//
+//     user.username = u.username
+//     user.password = u.password
+//
+//     user.organisations = []
+//
+//     u.organisations.forEach((o, i) => {
+//       const organisation = {}
+//
+//       organisation.id = o.id
+//       organisation.code = o.code
+//       organisation.name = o.name
+//       organisation.permissions = o.roles
+//
+//       user.organisations.push(organisation)
+//     })
+//
+//     user.notifications = []
+//
+//     user.createdAt = u.createdAt
+//     user.updatedAt = new Date()
+//
+//     if (!u.active) {
+//       user.active = faker.datatype.boolean()
+//     }
+//
+//     if (user && user.id) {
+//       // write course data to file
+//       const directoryPath = path.join(__dirname, '../data/seed/users/')
+//
+//       // check if document directory exists
+//       if (!fs.existsSync(directoryPath)) {
+//         fs.mkdirSync(directoryPath)
+//       }
+//
+//       const raw = JSON.stringify(user)
+//
+//       const fileName = user.id + '.json'
+//       const filePath = directoryPath + '/' + fileName
+//
+//       // write the JSON data
+//       // fs.writeFileSync(filePath, raw)
+//
+//       // output user info
+//       console.log(i, user)
+//     }
+//
+//   })
+//
+//
+// }
 
 // const seedUsers = () => {
 //   const users = []
