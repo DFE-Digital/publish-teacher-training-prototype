@@ -55,6 +55,9 @@
                 checked: true if (notifications and notification.code not in notifications) else false
               }
             ],
+            hint: {
+              text: notification.hint
+            } if notification.hint,
             classes: "govuk-radios--inline"
           }) }}
         {% endfor %}
