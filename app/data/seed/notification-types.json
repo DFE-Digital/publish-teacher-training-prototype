@@ -2,21 +2,77 @@
   {
     "id": "a698f193-7761-4f69-b7db-73abda1a5bfb",
     "code": "course_published",
-    "name": "Course is published"
+    "name": "Course published",
+    "providerTypes": [
+      "lead_school",
+      "scitt",
+      "hei"
+    ]
   },
   {
     "id": "0c0ecdeb-b461-4f97-8d3d-78bed87b64d1",
     "code": "course_changed",
-    "name": "Course is changed"
+    "name": "Course changed",
+    "providerTypes": [
+      "lead_school",
+      "scitt",
+      "hei"
+    ]
   },
   {
     "id": "896939ad-a954-4744-8bf4-e4b179d68486",
     "code": "course_withdrawn",
-    "name": "Course is withdrawn"
+    "name": "Course withdrawn",
+    "providerTypes": [
+      "lead_school",
+      "scitt",
+      "hei"
+    ]
   },
   {
     "id": "3a066aac-b81d-4f60-a3b9-f46e59c514b9",
-    "code": "course_vacancies_changed",
-    "name": "Course vacancies are changed"
+    "code": "vacancies_changed",
+    "name": "Course vacancies changed",
+    "providerTypes": [
+      "lead_school",
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "34532b35-f364-4080-8779-e00151cb3fbd",
+    "code": "course_published_training_provider",
+    "name": "Course published by training provider",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "9102baa2-2c70-4759-b3a1-191a47222eaf",
+    "code": "course_changed_training_provider",
+    "name": "Course changed by training provider",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "5ae879ab-0006-466b-9c0f-19067e1d8f2a",
+    "code": "course_withdrawn_training_provider",
+    "name": "Course withdrawn by training provider",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "b3aaa06d-9421-4103-b8ed-8bd7ba78b4c9",
+    "code": "vacancies_changed_training_provider",
+    "name": "Course vacancies changed by training provider",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
   }
 ]
