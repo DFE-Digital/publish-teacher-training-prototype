@@ -48,17 +48,12 @@
           {% for notification in notificationOptions %}
             {% if organisation.type in notification.providerTypes %}
             <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
+              <dt class="govuk-summary-list__key govuk-!-width-one-half">
                 {{ notification.name }}
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
               </dd>
-              <!-- <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
-                  Change<span class="govuk-visually-hidden"> {{ organisation.name }} email notifications</span>
-                </a>
-              </dd> -->
             </div>
             {% endif %}
           {% endfor %}
