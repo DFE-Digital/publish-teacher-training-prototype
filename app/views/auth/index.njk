@@ -242,12 +242,17 @@
         }) }}
 
         {{ govukTag({
+          text: "Accredited body",
+          classes: "govuk-tag--blue govuk-!-margin-bottom-5"
+        }) }}
+
+        {{ govukTag({
           text: "School direct",
           classes: "govuk-tag--blue govuk-!-margin-bottom-5"
         }) }}
 
         <p class="govuk-body">
-          Alysa is a course administrator who belongs multiple school directs.
+          Alysa is a course administrator who belongs multiple organisations.
         </p>
 
         <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
