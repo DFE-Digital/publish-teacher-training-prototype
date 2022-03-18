@@ -359,6 +359,10 @@ module.exports = (env) => {
     return label
   }
 
+  // filters.modulo = (dividend, divisor) => {
+  //   return dividend % divisor
+  // }
+
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
