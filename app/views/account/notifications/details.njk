@@ -44,55 +44,22 @@
           </a>
         </p>
 
-        {% if organisation.type in ["hei","scitt"] %}
-
-          {% if user.organisations.length > 1 %}
-            <h3 class="govuk-heading-s">Courses run by my organisation</h3>
-          {% else %}
-            <h2 class="govuk-heading-m">Courses run by my organisation</h2>
-          {% endif %}
-
-        {% endif %}
-
         <dl class="govuk-summary-list">
+          {% set loopCount = 0 %}
           {% for notification in notificationOptions %}
-            {% if notification.providerTypes.length == 3 and organisation.type in notification.providerTypes %}
+            {% if organisation.type in notification.providerTypes %}
               <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
                   {{ notification.name }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
                 </dd>
               </div>
+              {% set loopCount = loopCount + 1 %}
             {% endif %}
           {% endfor %}
         </dl>
-
-        {% if organisation.type in ["hei","scitt"] %}
-
-          {% if user.organisations.length > 1 %}
-            <h3 class="govuk-heading-s">Courses run by partner organisations</h3>
-          {% else %}
-            <h2 class="govuk-heading-m">Courses run by partner organisations</h2>
-          {% endif %}
-
-          <dl class="govuk-summary-list">
-            {% for notification in notificationOptions %}
-              {% if notification.providerTypes.length == 2 and organisation.type in notification.providerTypes %}
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                    {{ notification.name }}
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
-                  </dd>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </dl>
-        {% endif %}
-
 
       {% endfor %}
 

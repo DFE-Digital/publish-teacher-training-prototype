@@ -3,8 +3,9 @@
 {% set headerNavId = "account" %}
 
 {% set title = "Your email notifications" %}
+{% set caption = "Update your email notifications" %}
 {% if user.organisations.length > 1 %}
-  {% set caption = organisation.name %}
+  {% set caption = caption + " - " + organisation.name %}
 {% endif %}
 
 {% block beforeContent %}
@@ -32,14 +33,8 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {% if organisation.type in ["hei","scitt"] %}
-
-            <h2 class="govuk-heading-m">Courses run by my organisation</h2>
-
-        {% endif %}
-
         {% for notification in notificationOptions %}
-          {% if notification.providerTypes.length == 3 and organisation.type in notification.providerTypes %}
+          {% if organisation.type in notification.providerTypes %}
             {{ govukRadios({
               idPrefix: "notifications",
               name: "notifications[" + notification.code + "]",
@@ -47,7 +42,7 @@
                 legend: {
                   text: notification.name,
                   isPageHeading: false,
-                  classes: "govuk-fieldset__legend--m" if organisation.type == "lead_school" else "govuk-fieldset__legend--s"
+                  classes: "govuk-fieldset__legend--m"
                 }
               },
               items: [
@@ -68,45 +63,8 @@
               classes: "govuk-radios--inline"
             }) }}
           {% endif %}
+
         {% endfor %}
-
-        {% if organisation.type in ["hei","scitt"] %}
-
-          <h2 class="govuk-heading-m">Courses run by partner organisations</h2>
-
-          {% for notification in notificationOptions %}
-            {% if notification.providerTypes.length == 2 and organisation.type in notification.providerTypes %}
-              {{ govukRadios({
-                idPrefix: "notifications",
-                name: "notifications[" + notification.code + "]",
-                fieldset: {
-                  legend: {
-                    text: notification.name,
-                    isPageHeading: false,
-                    classes: "govuk-fieldset__legend--s"
-                  }
-                },
-                items: [
-                  {
-                    value: "on",
-                    text: "On",
-                    checked: true if (notifications and notification.code in notifications) else false
-                  },
-                  {
-                    value: "off",
-                    text: "Off",
-                    checked: true if (notifications and notification.code not in notifications) else false
-                  }
-                ],
-                hint: {
-                  text: notification.hint
-                } if notification.hint,
-                classes: "govuk-radios--inline"
-              }) }}
-            {% endif %}
-          {% endfor %}
-
-        {% endif %}
 
         {{ govukButton({
           text: "Update email notifications"
@@ -117,7 +75,6 @@
       <p class="govuk-body">
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
-
 
     </div>
   </div>
