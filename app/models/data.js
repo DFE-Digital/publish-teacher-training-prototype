@@ -34,8 +34,29 @@ const seedUsers = () => {
     let user = JSON.parse(raw)
 
     user.organisations.forEach((organisation, i) => {
-      organisation.notifications = ['course_published','course_changed','course_withdrawn','course_vacancies_changed']
-    });
+      const o = organisationModel.findOne({ organisationId: organisation.id })
+
+      if (['hei','scitt'].includes(o.type)) {
+        organisation.notifications = [
+          'course_published',
+          'course_changed',
+          'course_withdrawn',
+          'course_vacancies_changed',
+          'course_published_training_provider',
+          'course_changed_training_provider',
+          'course_withdrawn_training_provider',
+          'course_vacancies_changed_training_provider'
+        ]
+      } else {
+        organisation.notifications = [
+          'course_published',
+          'course_changed',
+          'course_withdrawn',
+          'course_vacancies_changed'
+        ]
+      }
+      // console.log(organisation);
+    })
 
     // create a JSON sting for the submitted data
     const fileData = JSON.stringify(user)
