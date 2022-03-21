@@ -44,6 +44,8 @@
           </a>
         </p>
 
+        {% set loopCount = 0 %}
+
         <dl class="govuk-summary-list">
           {% for notification in notificationOptions %}
             {% if organisation.type in notification.providerTypes %}
@@ -55,6 +57,11 @@
                   {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
                 </dd>
               </div>
+              {% if organisation.type in ["hei","scitt"] and (loopCount | remainder(2)) %}
+                </dl>
+                <dl class="govuk-summary-list">
+              {% endif %}
+              {% set loopCount = loopCount + 1 %}
             {% endif %}
           {% endfor %}
         </dl>
