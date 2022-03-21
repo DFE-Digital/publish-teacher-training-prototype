@@ -36,7 +36,11 @@ exports.personal_details = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.notification_details = (req, res) => {
-  const user = userModel.find({ userId: req.session.passport.user.id })
+  let user = userModel.find({ userId: req.session.passport.user.id })
+
+  user.organisations.forEach((organisation, i) => {
+    organisation.type = organisationModel.findOne({ organisationId: organisation.id }).type
+  })
 
   const notificationOptions = require('../data/notification-types')
 
@@ -57,7 +61,8 @@ exports.edit_notifications_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const user = userModel.find({ userId: req.session.passport.user.id })
 
-  const notificationOptions = require('../data/notification-types')
+  let notificationOptions = require('../data/notification-types')
+  notificationOptions = notificationOptions.filter(option => option.providerTypes.includes(organisation.type))
 
   const notifications = user.organisations.find(
     organisation => organisation.id === req.params.organisationId

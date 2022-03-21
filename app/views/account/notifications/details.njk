@@ -44,21 +44,25 @@
           </a>
         </p>
 
+        {% set loopCount = 0 %}
+
         <dl class="govuk-summary-list">
           {% for notification in notificationOptions %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                {{ notification.name }}
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
-              </dd>
-              <!-- <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="/account/notifications/organisations/{{ organisation.id }}/edit">
-                  Change<span class="govuk-visually-hidden"> {{ organisation.name }} email notifications</span>
-                </a>
-              </dd> -->
-            </div>
+            {% if organisation.type in notification.providerTypes %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+                  {{ notification.name }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ "On" if (organisation.notifications and notification.code in organisation.notifications) else "Off" }}
+                </dd>
+              </div>
+              {% if organisation.type in ["hei","scitt"] and (loopCount | remainder(2)) %}
+                </dl>
+                <dl class="govuk-summary-list">
+              {% endif %}
+              {% set loopCount = loopCount + 1 %}
+            {% endif %}
           {% endfor %}
         </dl>
 

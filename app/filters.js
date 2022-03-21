@@ -360,6 +360,16 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the remainder when one operand is divided by
+  a second operand
+  example: {{ 4 | remainder(2) }}
+  outputs: 0
+  ------------------------------------------------------------------ */
+  filters.remainder = (dividend, divisor) => {
+    return dividend % divisor
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters
