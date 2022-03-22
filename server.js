@@ -41,6 +41,7 @@ const useLogin = process.env.USE_LOGIN || config.useLogin
 const useLoginFallback = process.env.USE_LOGIN_FALLBACK || config.useLoginFallback
 let useHttps = process.env.USE_HTTPS || config.useHttps
 useHttps = useHttps.toLowerCase()
+const phaseTagText = process.env.PHASE_TAG_TEXT || config.phaseTagText
 
 // Force HTTPS on production. Do this before using basicAuth to avoid
 // asking for username/password twice (for `http`, then `https`).
@@ -99,6 +100,7 @@ app.locals.serviceName = config.serviceName
 app.locals.environment = env
 app.locals.useLogin = useLogin
 app.locals.useLoginFallback = useLoginFallback
+app.locals.phaseTagText = phaseTagText
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 
