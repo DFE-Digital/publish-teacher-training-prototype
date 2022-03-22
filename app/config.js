@@ -27,5 +27,7 @@ module.exports = {
 
   useLogin: 'false',
 
-  useLoginFallback: 'false'
+  useLoginFallback: 'false',
+
+  phaseTagText: 'beta'
 }
