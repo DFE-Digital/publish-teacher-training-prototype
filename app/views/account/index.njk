@@ -2,11 +2,20 @@
 
 {% set headerNavId = "account" %}
 
+{% set hideNavigation = true %}
+
 {% set title = "Your account" %}
 {#% set caption = user.firstName + " " + user.lastName %#}
 
 {% block beforeContent %}
-
+{{ govukBreadcrumbs({
+  items: [
+    {
+      text: "Home",
+      href: "/"
+    }
+  ]
+}) }}
 {% endblock %}
 
 {% block content %}

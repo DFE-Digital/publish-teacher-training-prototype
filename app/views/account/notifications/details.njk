@@ -2,12 +2,17 @@
 
 {% set headerNavId = "account" %}
 
+{% set hideNavigation = true %}
+
 {% set title = "Your email notifications" %}
 {#% set caption = user.firstName + " " + user.lastName %#}
 
 {% block beforeContent %}
 {{ govukBreadcrumbs({
   items: [{
+    text: "Home",
+    href: "/"
+  }, {
     text: "Your account",
     href: "/account"
   }, {
