@@ -2,20 +2,6 @@ const organisationModel = require('../models/organisations')
 const organisationHelper = require('../helpers/organisations')
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
-// exports.home_get = (req, res) => {
-//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-//   res.render('../views/organisations/index', {
-//     organisation
-//   })
-// }
-
-exports.organisation_home = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  res.render('../views/organisations/index', {
-    organisation
-  })
-}
-
 exports.organisations_list = (req, res) => {
   if (req.session.passport.user.organisations && req.session.passport.user.organisations.length > 1) {
     const organisations = req.session.passport.user.organisations
@@ -24,7 +10,7 @@ exports.organisations_list = (req, res) => {
     })
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
-    res.redirect(`/organisations/${organisationId}`);
+    res.redirect(`/organisations/${organisationId}/cycles/2022`);
   }
 }
 
