@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "courses" %}
+
 {% set title = course.name + " (" + course.code + ")" %}
 {% set caption = ""  %} <!-- organisation.name -->
 
@@ -19,14 +21,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        {% if caption.length %}
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-        {% endif %}
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
     </div>
   </div>

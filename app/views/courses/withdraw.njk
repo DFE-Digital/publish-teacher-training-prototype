@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "courses" %}
+
 {% set title = "Are you sure you want to withdraw this course?" %}
 {% set caption = course.name + " (" + course.code + ")" %}
 
@@ -17,12 +19,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
