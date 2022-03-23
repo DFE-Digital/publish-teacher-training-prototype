@@ -59,18 +59,17 @@
     productName: serviceName,
     containerClasses: "govuk-width-container",
     navigationClasses: "govuk-header__navigation--end",
-    navigation: [{
-      href: "/notifications",
-      text: "Notifications",
-      active: true if (headerNavId == "notifications")
-    } if 1 == 0, {
-      href: "/account",
-      text: "Your account",
-      active: true if (headerNavId == "account")
-    }, {
-      href: "/sign-out",
-      text: "Sign out"
-    }]
+    navigation: [
+      {
+        href: "/account",
+        text: "Your account",
+        active: headerNavId == "account"
+      },
+      {
+        href: "/sign-out",
+        text: "Sign out"
+      }
+    ]
   }) }}
 
   {{ govukPhaseBanner({
@@ -81,6 +80,34 @@
     html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
     classes: "govuk-width-container"
   }) }}
+
+  {% if not hideNavigation %}
+    {{ appPrimaryNavigation({
+      items: [
+        {
+          href: baseUrl + "/courses",
+          text: "Courses",
+          active: primaryNavId == "courses"
+        },
+        {
+          href: baseUrl + "/locations",
+          text: "Locations",
+          active: primaryNavId == "locations"
+        },
+        {
+          href: baseUrl + "/users",
+          text: "Users",
+          active: primaryNavId == "users"
+        },
+        {
+          href: baseUrl + "/details",
+          text: "Organisation settings",
+          active: primaryNavId == "settings"
+        }
+      ]
+    }) }}
+  {% endif %}
+
 {% endblock %}
 
 {% block beforeContent %}
