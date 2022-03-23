@@ -1,13 +1,12 @@
 {% extends "_layout.njk" %}
 
-{% set title = organisation.name %}
+{% set primaryNavId = "settings" %}
+
+{% set title = "Organisation details" %}
 {#% set caption = data.currentCycle.code | getCycleLabel %#}
 
 {% block beforeContent %}
-{{ govukBackLink({
-  text: "Back",
-  href: actions.back
-}) }}
+
 {% endblock %}
 
 {% block content %}
@@ -26,7 +25,7 @@
         {{ title }}
       </h1>
 
-      <h2 class="govuk-heading-m">Organisation details</h2>
+      <!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
 
       {{ govukSummaryList({
         rows: [

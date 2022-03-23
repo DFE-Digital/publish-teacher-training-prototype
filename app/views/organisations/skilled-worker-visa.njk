@@ -1,7 +1,9 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "settings" %}
+
 {% set title = "Skilled Worker visa" %}
-{% set caption = organisation.name %}
+{#% set caption = organisation.name %#}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -17,12 +19,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       {% if query.show and query.show == "help" %}
 

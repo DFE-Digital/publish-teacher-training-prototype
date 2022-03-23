@@ -1,7 +1,9 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "settings" %}
+
 {% set title = "Contact details" %}
-{% set caption = organisation.name %}
+{#% set caption = organisation.name %#}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -17,12 +19,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
