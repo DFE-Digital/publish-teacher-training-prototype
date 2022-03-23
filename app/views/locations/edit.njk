@@ -1,12 +1,14 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "locations" %}
+
 {% if location %}
   {% set title = location.name %}
 {% else %}
   {% set title = "Add location" %}
 {% endif %}
 
-{% set caption = data.currentCycle.code | getCycleLabel %}
+{#% set caption = data.currentCycle.code | getCycleLabel %#}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -22,12 +24,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
