@@ -1,7 +1,9 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "users" %}
+
 {% set title = user.firstName + " " + user.lastName %}
-{% set caption = "Users" %}
+{#% set caption = "Users" %#}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -17,12 +19,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       {{ govukSummaryList({
         rows: [
