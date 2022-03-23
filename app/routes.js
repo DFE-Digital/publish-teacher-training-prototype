@@ -4,28 +4,21 @@ const router = express.Router()
 const passport = require('passport')
 
 // Controller modules
-const accountController = require('./controllers/account.js')
-const authenticationController = require('./controllers/authentication.js')
-const courseController = require('./controllers/courses.js')
-const dataController = require('./controllers/data.js')
-const locationController = require('./controllers/locations.js')
-const organisationController = require('./controllers/organisations.js')
-const userController = require('./controllers/users.js')
+const accountController = require('./controllers/account')
+const authenticationController = require('./controllers/authentication')
+const courseController = require('./controllers/courses')
+const dataController = require('./controllers/data')
+const locationController = require('./controllers/locations')
+const organisationController = require('./controllers/organisations')
+const userController = require('./controllers/users')
 
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
   if (req.session.passport) {
     // the signed in user
     res.locals.passport = req.session.passport
-
-    // the selected organisation
-    res.locals.organisation = req.session.passport.user.organisations.find(
-      organisation => organisation.id === req.params.organisationId
-    )
-
     // the base URL for navigation
     res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
-
     next()
   } else {
     delete req.session.data
@@ -285,9 +278,7 @@ router.post('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa'
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, (req, res) => {
-  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
-})
+router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, organisationController.organisation)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
