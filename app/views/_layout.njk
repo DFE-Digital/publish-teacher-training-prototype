@@ -114,6 +114,11 @@
           active: primaryNavId == "users"
         },
         {
+          href: "#",
+          text: "Training providers",
+          active: primaryNavId == "partners"
+        } if organisation.type in ["hei","scitt"],
+        {
           href: baseUrl + "/details",
           text: "Organisation details",
           active: primaryNavId == "settings"
