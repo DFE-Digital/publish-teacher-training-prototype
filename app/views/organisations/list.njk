@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 
+{% set hideNavigation = true %}
+
 {% set title = "Organisations"  %}
 {% set caption = ""  %}
 
@@ -23,7 +25,7 @@
       <ul class="govuk-list govuk-list--spaced">
         {% for organisation in organisations %}
           <li>
-            <a class="govuk-link" href="/organisations/{{ organisation.id }}">
+            <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022">
               {{ organisation.name }}
             </a>
           </li>
