@@ -37,6 +37,7 @@
 {% from "_components/banner/macro.njk"                 import appBanner %}
 {% from "_components/filter/macro.njk"                 import appFilter %}
 {% from "_components/metric/macro.njk"                 import appMetric %}
+{% from "_components/organisation-switcher/macro.njk"  import appOrganisationSwitcher %}
 {% from "_components/page-header-actions/macro.njk"    import appPageHeaderActions %}
 {% from "_components/pagination/macro.njk"             import appPagination %}
 {% from "_components/primary-navigation/macro.njk"     import appPrimaryNavigation %}
@@ -80,6 +81,19 @@
     html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
     classes: "govuk-width-container"
   }) }}
+
+  {% if passport.user.organisations.length > 1 %}
+    {% if not hideOrganisationSwitcher %}
+      {{ appOrganisationSwitcher({
+        text: organisation.name,
+        link: {
+          text: "Change organisation",
+          href: "/"
+        },
+        classes: "govuk-width-container"
+      }) }}
+    {% endif %}
+  {% endif %}
 
   {% if not hidePrimaryNavigation %}
     {{ appPrimaryNavigation({
