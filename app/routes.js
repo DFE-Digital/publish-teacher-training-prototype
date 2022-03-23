@@ -16,6 +16,7 @@ const userController = require('./controllers/users.js')
 const checkIsAuthenticated = (req, res, next) => {
   if (req.session.passport) {
     res.locals.passport = req.session.passport
+    res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
     next()
   } else {
     delete req.session.data
@@ -252,10 +253,6 @@ router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthen
 /// ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-// router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, cycles.show_get)
-//
-// router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycles.list_get)
-
 router.get('/organisations/:organisationId/details', checkIsAuthenticated, organisationController.organisation_details)
 
 router.get('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
@@ -279,7 +276,9 @@ router.post('/organisations/:organisationId/skilled-worker-visa', checkIsAuthent
 router.get('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_get)
 router.post('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_post)
 
-router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
+router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, (req, res) => {
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
+})
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
