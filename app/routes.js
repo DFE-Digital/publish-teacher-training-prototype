@@ -15,8 +15,17 @@ const userController = require('./controllers/users.js')
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
   if (req.session.passport) {
+    // the signed in user
     res.locals.passport = req.session.passport
+
+    // the selected organisation
+    res.locals.organisation = req.session.passport.user.organisations.find(
+      organisation => organisation.id === req.params.organisationId
+    )
+
+    // the base URL for navigation
     res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+
     next()
   } else {
     delete req.session.data
