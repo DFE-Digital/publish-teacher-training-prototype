@@ -21,8 +21,9 @@ exports.organisations_list = (req, res) => {
 exports.organisation = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // put the selected organistion into the local scope
-  res.locals.organisation = organisation
+  // put the selected organistion into the passport object
+  // for use around the service
+  req.session.passport.organisation = organisation
 
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
 }
