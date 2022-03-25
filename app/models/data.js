@@ -18,6 +18,51 @@ exports.seed = () => {
   // seedRelationships()
   // seedCourseVisaSponsorship()
   // seedUsers()
+  seedFundingType()
+}
+
+const seedFundingType = () => {
+  const oDirectoryPath = path.join(__dirname, '../data/organisations/')
+
+  let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
+
+  // Only get JSON documents
+  oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+  oDocuments.forEach((oFileName) => {
+    const oFilePath = oDirectoryPath + '/' + oFileName
+    const oRaw = fs.readFileSync(oFilePath)
+    let organisation = JSON.parse(oRaw)
+
+    // console.log(oFileName);
+
+    const cDirectoryPath = path.join(__dirname, '../data/courses/' + organisation.id)
+
+    // check if document directory exists
+    if (!fs.existsSync(cDirectoryPath)) {
+      fs.mkdirSync(cDirectoryPath)
+    }
+
+    let cDocuments = fs.readdirSync(cDirectoryPath,'utf8')
+
+    // Only get JSON documents
+    cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+    cDocuments.forEach((cFileName) => {
+      const cFilePath = cDirectoryPath + '/' + cFileName
+      const cRaw = fs.readFileSync(cFilePath)
+      let course = JSON.parse(cRaw)
+
+      if (!course.fundingType) {
+        console.log(course.id, ":", course.name, course.code, "- Program type:", course.programType);
+      }
+
+    })
+
+
+  })
+
+
 }
 
 const seedUsers = () => {
