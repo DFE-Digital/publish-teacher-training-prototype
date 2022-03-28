@@ -18,6 +18,79 @@ exports.seed = () => {
   // seedRelationships()
   // seedCourseVisaSponsorship()
   // seedUsers()
+  seedFundingType()
+}
+
+const seedFundingType = () => {
+  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
+
+  let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
+
+  // Only get JSON documents
+  oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+  oDocuments.forEach((oFileName) => {
+    const oFilePath = oDirectoryPath + '/' + oFileName
+    const oRaw = fs.readFileSync(oFilePath)
+    let organisation = JSON.parse(oRaw)
+
+    // console.log(oFileName);
+
+    const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+
+    // check if document directory exists
+    if (!fs.existsSync(cDirectoryPath)) {
+      fs.mkdirSync(cDirectoryPath)
+    }
+
+    let cDocuments = fs.readdirSync(cDirectoryPath,'utf8')
+
+    // Only get JSON documents
+    cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+    cDocuments.forEach((cFileName) => {
+      const cFilePath = cDirectoryPath + '/' + cFileName
+      const cRaw = fs.readFileSync(cFilePath)
+      let course = JSON.parse(cRaw)
+
+      if (!course.fundingType) {
+        if (course.trainingProvider) {
+          const o = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+
+          if (o.visaSponsorship) {
+            if (course.programType === 'SC') {
+              course.fundingType = 'fee'
+              course.canSponsorStudentVisa = o.visaSponsorship.canSponsorStudentVisa
+              delete course.canSponsorSkilledWorkerVisa
+              // console.log(course);
+            }
+
+            if (course.programType === 'HE') {
+              course.fundingType = 'fee'
+              course.canSponsorStudentVisa = o.visaSponsorship.canSponsorStudentVisa
+              delete course.canSponsorSkilledWorkerVisa
+              // console.log(course);
+            }
+
+            // create a JSON string for the course data
+            const cFileData = JSON.stringify(course)
+
+            // write the JSON data
+            // fs.writeFileSync(cFilePath, cFileData)
+
+            console.log(cFilePath);
+          }
+
+        }
+
+      }
+
+    })
+
+
+  })
+
+
 }
 
 const seedUsers = () => {
