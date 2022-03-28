@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "courses" %}
+
 {% set title = "Full time or part time" %}
 
 {% if course.id %}
@@ -27,12 +29,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        <h1 class="govuk-heading-l">
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-          {{ title }}
-        </h1>
+        {% include "_includes/page-heading.njk" %}
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>

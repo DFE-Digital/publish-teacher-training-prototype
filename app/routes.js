@@ -4,18 +4,21 @@ const router = express.Router()
 const passport = require('passport')
 
 // Controller modules
-const accountController = require('./controllers/account.js')
-const authenticationController = require('./controllers/authentication.js')
-const courseController = require('./controllers/courses.js')
-const dataController = require('./controllers/data.js')
-const locationController = require('./controllers/locations.js')
-const organisationController = require('./controllers/organisations.js')
-const userController = require('./controllers/users.js')
+const accountController = require('./controllers/account')
+const authenticationController = require('./controllers/authentication')
+const courseController = require('./controllers/courses')
+const dataController = require('./controllers/data')
+const locationController = require('./controllers/locations')
+const organisationController = require('./controllers/organisations')
+const userController = require('./controllers/users')
 
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
   if (req.session.passport) {
+    // the signed in user
     res.locals.passport = req.session.passport
+    // the base URL for navigation
+    res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
     next()
   } else {
     delete req.session.data
@@ -252,34 +255,30 @@ router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthen
 /// ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-// router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, cycles.show_get)
-//
-// router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycles.list_get)
+router.get('/organisations/:organisationId/cycles/:cycleId/details', checkIsAuthenticated, organisationController.organisation_details)
 
-router.get('/organisations/:organisationId/details', checkIsAuthenticated, organisationController.organisation_details)
+router.get('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
 
-router.get('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
-router.post('/organisations/:organisationId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/training', checkIsAuthenticated, organisationController.edit_training_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/training', checkIsAuthenticated, organisationController.edit_training_post)
 
-router.get('/organisations/:organisationId/training', checkIsAuthenticated, organisationController.edit_training_get)
-router.post('/organisations/:organisationId/training', checkIsAuthenticated, organisationController.edit_training_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_post)
 
-router.get('/organisations/:organisationId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_get)
-router.post('/organisations/:organisationId/training-with-disabilities', checkIsAuthenticated, organisationController.edit_disabilities_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_post)
 
-router.get('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_get)
-router.post('/organisations/:organisationId/contact-details', checkIsAuthenticated, organisationController.edit_contact_details_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_post)
 
-router.get('/organisations/:organisationId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_get)
-router.post('/organisations/:organisationId/student-visa', checkIsAuthenticated, organisationController.edit_student_visa_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_post)
 
-router.get('/organisations/:organisationId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_get)
-router.post('/organisations/:organisationId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_post)
 
-router.get('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_get)
-router.post('/organisations/:organisationId/accredited-bodies/:accreditedBodyId', checkIsAuthenticated, organisationController.edit_accredited_body_post)
-
-router.get('/organisations/:organisationId', checkIsAuthenticated, organisationController.organisation_home)
+router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, organisationController.organisation)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 

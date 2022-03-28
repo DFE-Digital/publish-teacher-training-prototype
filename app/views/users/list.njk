@@ -1,13 +1,11 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "users" %}
+
 {% set title = "Users" %}
-{#% set caption = data.currentCycle.code | getCycleLabel %#}
 
 {% block beforeContent %}
-{{ govukBackLink({
-  text: "Back",
-  href: actions.back
-}) }}
+
 {% endblock %}
 
 {% block content %}
@@ -17,14 +15,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        {% if caption.length %}
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-        {% endif %}
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       {{ govukButton({
         text: "Invite user",

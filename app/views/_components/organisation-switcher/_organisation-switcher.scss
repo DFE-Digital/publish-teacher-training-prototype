@@ -1,0 +1,22 @@
+.app-organisation-nav {
+  @include govuk-clearfix;
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(2);
+  // padding-bottom: govuk-spacing(1);
+  // border-bottom: 1px solid $govuk-border-colour;
+}
+
+.app-organisation-nav__title {
+  @include govuk-font($size: 19, $weight: "bold");
+  @include govuk-media-query($from: tablet) {
+    float: left;
+    width: 75%;
+  }
+}
+
+.app-organisation-nav__link {
+  @include govuk-link-common;
+  @include govuk-media-query($from: tablet) {
+    float: right;
+  }
+}

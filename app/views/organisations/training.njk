@@ -1,7 +1,8 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "settings" %}
+
 {% set title = "Training with your organisation" %}
-{% set caption = organisation.name %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -22,12 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        <h1 class="govuk-heading-l">
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-          {{ title }}
-        </h1>
+        {% include "_includes/page-heading.njk" %}
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>

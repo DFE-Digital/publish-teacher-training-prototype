@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 
+{% set primaryNavId = "courses" %}
+
 {% if fundingType == "fee" %}
   {% set title = "Student visa" %}
 {% else %}
@@ -30,12 +32,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">
-          {{ caption }}
-        </span>
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       {% if referrer == "funding-type" %}
         <p class="govuk-body">You’re being shown this page because you changed your answer to funding type.</p>

@@ -38,6 +38,7 @@
 {% from "_components/filter/macro.njk"                 import appFilter %}
 {% from "_components/footer/macro.njk"                 import appFooter %}
 {% from "_components/metric/macro.njk"                 import appMetric %}
+{% from "_components/organisation-switcher/macro.njk"  import appOrganisationSwitcher %}
 {% from "_components/page-header-actions/macro.njk"    import appPageHeaderActions %}
 {% from "_components/pagination/macro.njk"             import appPagination %}
 {% from "_components/primary-navigation/macro.njk"     import appPrimaryNavigation %}
@@ -60,18 +61,17 @@
     productName: serviceName,
     containerClasses: "govuk-width-container",
     navigationClasses: "govuk-header__navigation--end",
-    navigation: [{
-      href: "/notifications",
-      text: "Notifications",
-      active: true if (headerNavId == "notifications")
-    } if 1 == 0, {
-      href: "/account",
-      text: "Your account",
-      active: true if (headerNavId == "account")
-    }, {
-      href: "/sign-out",
-      text: "Sign out"
-    }]
+    navigation: [
+      {
+        href: "/account",
+        text: "Your account",
+        active: headerNavId == "account"
+      },
+      {
+        href: "/sign-out",
+        text: "Sign out"
+      }
+    ]
   }) }}
 
   {{ govukPhaseBanner({
@@ -80,8 +80,54 @@
       classes: "app-tag--prototype" if environment != 'production'
     },
     html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
-    classes: "govuk-width-container"
+    classes: "govuk-width-container" + (" govuk-phase-banner--no-border-bottom" if passport.user.organisations.length == 1 and headerNavId != "account")
   }) }}
+
+  {% if passport.user.organisations.length > 1 %}
+    {% if not hideOrganisationSwitcher %}
+      {{ appOrganisationSwitcher({
+        text: organisation.name,
+        link: {
+          text: "Change organisation",
+          href: "/"
+        },
+        classes: "govuk-width-container"
+      }) }}
+    {% endif %}
+  {% endif %}
+
+  {% if not hidePrimaryNavigation %}
+    {{ appPrimaryNavigation({
+      items: [
+        {
+          href: baseUrl + "/courses",
+          text: "Courses",
+          active: primaryNavId == "courses"
+        },
+        {
+          href: baseUrl + "/locations",
+          text: "Locations",
+          active: primaryNavId == "locations"
+        },
+        {
+          href: baseUrl + "/users",
+          text: "Users",
+          active: primaryNavId == "users"
+        },
+        {
+          href: "#",
+          text: "Training providers",
+          active: primaryNavId == "partners"
+        } if passport.organisation.type in ["hei","scitt"],
+        {
+          href: baseUrl + "/details",
+          text: "Organisation details",
+          active: primaryNavId == "settings"
+        }
+      ]
+    }) }}
+  {% endif %}
+
 {% endblock %}
 
 {% block beforeContent %}

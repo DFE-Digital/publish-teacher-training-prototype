@@ -2,12 +2,17 @@
 
 {% set headerNavId = "account" %}
 
+{% set hidePrimaryNavigation = true %}
+{% set hideOrganisationSwitcher = true %}
+
 {% set title = "Your email notifications" %}
-{#% set caption = user.firstName + " " + user.lastName %#}
 
 {% block beforeContent %}
 {{ govukBreadcrumbs({
   items: [{
+    text: "Home",
+    href: "/"
+  }, {
     text: "Your account",
     href: "/account"
   }, {
@@ -23,14 +28,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        {% if caption.length %}
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-        {% endif %}
-        {{ title }}
-      </h1>
+      {% include "_includes/page-heading.njk" %}
 
       {% for organisation in user.organisations %}
 
