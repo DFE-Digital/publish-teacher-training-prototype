@@ -22,7 +22,7 @@ exports.seed = () => {
 }
 
 const seedFundingType = () => {
-  const oDirectoryPath = path.join(__dirname, '../data/organisations/')
+  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
 
   let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
 
@@ -36,7 +36,7 @@ const seedFundingType = () => {
 
     // console.log(oFileName);
 
-    const cDirectoryPath = path.join(__dirname, '../data/courses/' + organisation.id)
+    const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
 
     // check if document directory exists
     if (!fs.existsSync(cDirectoryPath)) {
@@ -54,7 +54,35 @@ const seedFundingType = () => {
       let course = JSON.parse(cRaw)
 
       if (!course.fundingType) {
-        console.log(course.id, ":", course.name, course.code, "- Program type:", course.programType);
+        if (course.trainingProvider) {
+          const o = organisationModel.findOne({ organisationId: course.trainingProvider.id })
+
+          if (o.visaSponsorship) {
+            if (course.programType === 'SC') {
+              course.fundingType = 'fee'
+              course.canSponsorStudentVisa = o.visaSponsorship.canSponsorStudentVisa
+              delete course.canSponsorSkilledWorkerVisa
+              // console.log(course);
+            }
+
+            if (course.programType === 'HE') {
+              course.fundingType = 'fee'
+              course.canSponsorStudentVisa = o.visaSponsorship.canSponsorStudentVisa
+              delete course.canSponsorSkilledWorkerVisa
+              // console.log(course);
+            }
+
+            // create a JSON string for the course data
+            const cFileData = JSON.stringify(course)
+
+            // write the JSON data
+            // fs.writeFileSync(cFilePath, cFileData)
+
+            console.log(cFilePath);
+          }
+
+        }
+
       }
 
     })
