@@ -1,5 +1,46 @@
-{{ govukFooter({
+{% set helpHtml %}
+<div class="govuk-grid-row">
+  <!-- <div class="govuk-grid-column-one-half">
+    <div class="app-footer__chat">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+        Online chat
+      </h3>
+      <p class="govuk-!-font-size-16"><span class="app-web-chat">You cannot use online chat because there’s a problem. Send an email if you keep seeing this message.</span></p>
+    </div>
+  </div> -->
+  <div class="govuk-grid-column-two-thirds">
+    <div class="app-footer__email">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+        Email
+      </h3>
+      <p class="govuk-!-font-size-16 govuk-!-margin-bottom-1">
+        <a class="govuk-footer__link" href="mailto:becomingateacher@digital.education.gov.uk?subject=Publish%20teacher%20training%20courses%20support">
+          becomingateacher@digital.education.gov.uk
+        </a>
+      </p>
+      <p class="govuk-!-font-size-16">You’ll get a response within 5 working days, or one working day for urgent requests.</p>
+      <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-8">
+        <li>
+          <a class="govuk-footer__link" href="#">
+            How to publish teacher training courses
+          </a>
+        </li>
+        <li>
+          <a class="govuk-footer__link" href="https://api.publish-teacher-training-courses.service.gov.uk">
+            Teacher Training Courses API documentation
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endset %}
+
+{{ appFooter({
+  classes: "app-footer",
   meta: {
+    title: "Get help",
+    html: helpHtml,
     items: [{
       href: "#",
       text: "Accessibility"
