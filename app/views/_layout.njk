@@ -96,14 +96,7 @@
 
 {% if useAutoStoreData %}
   {% block footer %}
-    {{ govukFooter({
-      meta: {
-        items: [{
-          href: "/prototype-admin/clear-data",
-          text: "Clear data"
-        }]
-      }
-    }) }}
+    {% include "_includes/footer.njk" %}
   {% endblock %}
 {% endif %}
 
