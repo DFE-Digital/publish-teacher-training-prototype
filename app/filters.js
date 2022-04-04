@@ -279,8 +279,8 @@ module.exports = (env) => {
   filters.getCourseStatusLabel = (status) => {
     let label = status
 
-    if (status.toString()) {
-      label = courseHelper.getCourseStatusLabel(status)
+    if (status !== undefined) {
+      label = courseHelper.getCourseStatusLabel(status.toString())
     }
 
     return label
@@ -294,8 +294,8 @@ module.exports = (env) => {
   filters.getCourseStatusClasses = (status) => {
     let label
 
-    if (status.toString()) {
-      label = courseHelper.getCourseStatusClasses(status)
+    if (status !== undefined) {
+      label = courseHelper.getCourseStatusClasses(status.toString())
     }
 
     return label

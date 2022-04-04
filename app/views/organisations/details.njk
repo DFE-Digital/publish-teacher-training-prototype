@@ -168,10 +168,10 @@
 
         <h2 class="govuk-heading-m govuk-!-margin-top-9">Accredited bodies</h2>
 
-        {#{ govukButton({
+        {{ govukButton({
           text: "Add accredited body",
           href: "#"
-        }) }#}
+        }) }}
 
         <dl class="govuk-summary-list">
           {% for accreditedBody in organisation.accreditedBodies %}

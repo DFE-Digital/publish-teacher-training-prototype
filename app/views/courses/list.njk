@@ -26,10 +26,22 @@
             href: actions.new
           }) }}
 
+        {% elif locations.length and (not organisation.accreditedBodies.length) %}
+
+          {{ govukInsetText({
+            text: "Add an accredited body before adding courses"
+          }) }}
+
+        {% elif (not locations.length) and organisation.accreditedBodies.length %}
+
+          {{ govukInsetText({
+            text: "Add a location before adding courses"
+          }) }}
+
         {% else %}
 
           {{ govukInsetText({
-            text: "MISSING LOCATIONS OR ACCREDITED BODY PLACEHOLDER"
+            text: "Add an accredited body and a location before adding courses"
           }) }}
 
         {% endif %}
@@ -46,7 +58,7 @@
         {% else %}
 
           {{ govukInsetText({
-            text: "MISSING LOCATIONS PLACEHOLDER"
+            text: "Add a location before adding courses"
           }) }}
 
         {% endif %}
