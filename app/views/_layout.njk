@@ -86,7 +86,7 @@
   {% if passport.user.organisations.length > 1 %}
     {% if not hideOrganisationSwitcher %}
       {{ appOrganisationSwitcher({
-        text: organisation.name,
+        text: passport.organisation.name,
         link: {
           text: "Change organisation",
           href: "/"
