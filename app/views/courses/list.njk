@@ -115,7 +115,7 @@
                     }) }}
                   </td>
                   <td class="govuk-table__cell">
-                    {% if course.status == 0 %}
+                    {% if course.status in [0,2] %}
                       No – still in draft
                     {% elif course.status == 3 %}
                       No – withdrawn
