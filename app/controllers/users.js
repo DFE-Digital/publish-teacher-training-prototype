@@ -7,7 +7,7 @@ const organisationModel = require('../models/organisations')
 
 exports.user_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const users = userModel.find({ organisationId: req.params.organisationId })
+  const users = userModel.findMany({ organisationId: req.params.organisationId })
 
   users.sort((a, b) => {
     return a.firstName.localeCompare(b.firstName) || a.lastName.localeCompare(b.lastName)
@@ -30,9 +30,9 @@ exports.user_list = (req, res) => {
 
 exports.user_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
+  const user = userModel.findOne({ userId: req.params.userId })
 
-  const signedInUser = userModel.find({ userId: req.session.passport.user.id })
+  const signedInUser = userModel.findOne({ userId: req.session.passport.user.id })
 
   res.render('../views/users/details', {
     organisation,
@@ -74,10 +74,10 @@ exports.new_user_post = (req, res) => {
       errors
     })
   } else {
-    // userModel.insertOne({
-    //   organisationId: req.params.organisationId,
-    //   user: req.session.data.user
-    // })
+    userModel.saveOne({
+      organisationId: req.params.organisationId,
+      user: req.session.data.user
+    })
 
     req.flash('success','User added')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
@@ -115,11 +115,11 @@ exports.edit_user_post = (req, res) => {
       errors
     })
   } else {
-    // userModel.updateOne({
-    //   organisationId: req.params.organisationId,
-    //   userId: req.params.userId,
-    //   user: req.session.data.user
-    // })
+    userModel.saveOne({
+      organisationId: req.params.organisationId,
+      userId: req.params.userId,
+      user: req.session.data.user
+    })
 
     req.flash('success','User updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`)
@@ -144,26 +144,11 @@ exports.delete_user_get = (req, res) => {
 }
 
 exports.delete_user_post = (req, res) => {
-  const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
-  const errors = []
+  userModel.deleteOne({
+    organisationId: req.params.organisationId,
+    userId: req.params.userId
+  })
 
-  if (errors.length) {
-    res.render('../views/users/delete', {
-      user,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
-      },
-      errors
-    })
-  } else {
-    userModel.deleteOne({
-      organisationId: req.params.organisationId,
-      userId: req.params.userId
-    })
-
-    req.flash('success','User deleted')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
-  }
+  req.flash('success','User deleted')
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
 }
