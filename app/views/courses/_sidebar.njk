@@ -13,7 +13,7 @@
       Is it on <abbr class="app-!-text-decoration-underline-dotted" title="Find postgraduate teacher training">Find</abbr>?
     </h3>
     <p class="govuk-body">
-      {% if course.status == 0 %}
+      {% if course.status in [0,2] %}
         No – still in draft
       {% elif course.status == 3 %}
         No – withdrawn
@@ -32,7 +32,7 @@
       </p>
     {% endif %}
 
-    {% if course.status == 0 %}
+    {% if course.status in [0,2] %}
 
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
 
@@ -59,7 +59,7 @@
 
       <h3 class="govuk-heading-m govuk-visually-hidden">Delete</h3>
       <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete this course</a>
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Delete course</a>
       </p>
     {% endif %}
 
@@ -73,7 +73,7 @@
       </p>
 
       <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw this course</a>
+        <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw course</a>
       </p>
     {% endif %}
 
