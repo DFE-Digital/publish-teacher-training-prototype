@@ -4,10 +4,10 @@ const { v4: uuid } = require('uuid')
 
 const organisationModel = require('./organisations')
 
-exports.find = (params) => {
-  let users = []
+const directoryPath = path.join(__dirname, '../data/users/')
 
-  const directoryPath = path.join(__dirname, '../data/users/')
+exports.findMany = (params) => {
+  let users = []
 
   let documents = fs.readdirSync(directoryPath,'utf8')
 
@@ -26,33 +26,39 @@ exports.find = (params) => {
     })
   }
 
-  if (params.userId) {
-    users = users.find(user => user.id === params.userId)
-  }
-
   return users
 }
 
 exports.findOne = (params) => {
+  const users = this.findMany({ organisationId: params.organisationId })
   let user = {}
 
-  if (params.organisationId && params.userId) {
-    user = this.find({
-      organisationId: params.organisationId,
-      userId: params.userId
-    })
+  if (params.userId) {
+    user = users.find(user => user.id === params.userId)
+  }
+
+  if (params.email) {
+    user = users.find(user => user.email === params.email)
   }
 
   return user
 }
 
 exports.saveOne = (params) => {
-  let user = this.find({ email: params.user.email })
+  let user = {}
 
-  if (user) {
-    user = this.updateOne(params)
-  } else {
-    user = this.insertOne(params)
+  if (params.organisationId) {
+    if (params.userId) {
+      user = this.updateOne(params)
+    } else {
+      const userExists = this.findOne({ email: params.user.email })
+
+      if (userExists) {
+        user = this.updateOne(params)
+      } else {
+        user = this.insertOne(params)
+      }
+    }
   }
 
   return user
@@ -62,6 +68,7 @@ exports.insertOne = (params) => {
   let user = {}
 
   if (params.organisationId) {
+
     user.id = uuid()
 
     if (params.user.firstName) {
@@ -74,7 +81,10 @@ exports.insertOne = (params) => {
 
     if (params.user.email) {
       user.email = params.user.email
+      user.username = params.user.email
     }
+
+    user.password = 'bat'
 
     user.organisations = []
 
@@ -86,54 +96,134 @@ exports.insertOne = (params) => {
     organisation.name = o.name
     organisation.permissions = []
 
+    if (['hei','scitt'].includes(o.type)) {
+      organisation.notifications = [
+        'course_published',
+        'course_changed',
+        'course_withdrawn',
+        'course_vacancies_changed',
+        'course_published_training_provider',
+        'course_changed_training_provider',
+        'course_withdrawn_training_provider',
+        'course_vacancies_changed_training_provider'
+      ]
+    } else {
+      organisation.notifications = [
+        'course_published',
+        'course_changed',
+        'course_withdrawn',
+        'course_vacancies_changed'
+      ]
+    }
+
     user.organisations.push(organisation)
 
+    user.active = true
     user.createdAt = new Date()
 
-    // const directoryPath = path.join(__dirname, '../data/users/')
-    //
-    // const filePath = directoryPath + '/' + user.id + '.json'
-    //
-    // // create a JSON sting for the submitted data
-    // const fileData = JSON.stringify(user)
-    //
-    // // write the JSON data
-    // fs.writeFileSync(filePath, fileData)
+    const filePath = directoryPath + '/' + user.id + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(user)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
   }
 
   return user
 }
 
 exports.updateOne = (params) => {
-  if (params.organisationId && params.userId) {
-    let user = this.findOne({ organisationId: params.organisationId, userId: params.userId })
+  let user
+  if (params.userId) {
+    user = this.findOne({ userId: params.userId })
+  } else {
+    user = this.findOne({ email: params.user.email })
+  }
 
-    if (params.user.firstName) {
-      user.firstName = params.user.firstName
+  if (user) {
+    // if (params.user.firstName) {
+    //   user.firstName = params.user.firstName
+    // }
+    //
+    // if (params.user.lastName) {
+    //   user.lastName = params.user.lastName
+    // }
+    //
+    // if (params.user.email) {
+    //   user.email = params.user.email
+    // }
+
+    const organisationExists = user.organisations.find(
+      organisation => organisation.id === params.organisationId
+    )
+
+    if (!organisationExists) {
+      const o = organisationModel.findOne({ organisationId: params.organisationId })
+
+      const organisation = {}
+      organisation.id = o.id
+      organisation.code = o.code
+      organisation.name = o.name
+      organisation.permissions = []
+
+      if (['hei','scitt'].includes(o.type)) {
+        organisation.notifications = [
+          'course_published',
+          'course_changed',
+          'course_withdrawn',
+          'course_vacancies_changed',
+          'course_published_training_provider',
+          'course_changed_training_provider',
+          'course_withdrawn_training_provider',
+          'course_vacancies_changed_training_provider'
+        ]
+      } else {
+        organisation.notifications = [
+          'course_published',
+          'course_changed',
+          'course_withdrawn',
+          'course_vacancies_changed'
+        ]
+      }
+
+      user.organisations.push(organisation)
     }
 
-    if (params.user.lastName) {
-      user.lastName = params.user.lastName
-    }
-
-    if (params.user.email) {
-      user.email = params.user.email
-    }
-
+    user.active = true
     user.updatedAt = new Date()
 
-    // const directoryPath = path.join(__dirname, '../data/users/')
-    //
-    // const filePath = directoryPath + '/' + params.userId + '.json'
-    //
-    // // create a JSON sting for the submitted data
-    // const fileData = JSON.stringify(user)
-    //
-    // // write the JSON data
-    // fs.writeFileSync(filePath, fileData)
+    const filePath = directoryPath + '/' + user.id + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(user)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
   }
+
+  return user
 }
 
 exports.deleteOne = (params) => {
+  if (params.organisationId && params.userId) {
+    let user = this.findOne({ userId: params.userId })
 
+    user.organisations = user.organisations.filter(
+      organisation => organisation.id !== params.organisationId
+    )
+
+    const filePath = directoryPath + '/' + user.id + '.json'
+
+    if (user.organisations.length) {
+      // create a JSON sting for the submitted data
+      const fileData = JSON.stringify(user)
+      // write the JSON data
+      fs.writeFileSync(filePath, fileData)
+    } else {
+      // remove the user altogether since they're no longer associated with an
+     // organisation
+     fs.unlinkSync(filePath)
+    }
+  }
 }
