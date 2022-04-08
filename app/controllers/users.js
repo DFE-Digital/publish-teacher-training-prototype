@@ -67,7 +67,7 @@ exports.new_user_post = (req, res) => {
   if (!req.session.data.user.firstName.length) {
     const error = {}
     error.fieldName = 'firstName'
-    error.href = '#firstname'
+    error.href = '#firstName'
     error.text = 'Enter a first name'
     errors.push(error)
   }
@@ -75,7 +75,7 @@ exports.new_user_post = (req, res) => {
   if (!req.session.data.user.lastName.length) {
     const error = {}
     error.fieldName = 'lastName'
-    error.href = '#lastname'
+    error.href = '#lastName'
     error.text = 'Enter a last name'
     errors.push(error)
   }
@@ -132,7 +132,7 @@ exports.edit_user_post = (req, res) => {
   if (!req.session.data.user.firstName.length) {
     const error = {}
     error.fieldName = 'firstName'
-    error.href = '#firstname'
+    error.href = '#firstName'
     error.text = 'Enter a first name'
     errors.push(error)
   }
@@ -140,7 +140,7 @@ exports.edit_user_post = (req, res) => {
   if (!req.session.data.user.lastName.length) {
     const error = {}
     error.fieldName = 'lastName'
-    error.href = '#lastname'
+    error.href = '#lastName'
     error.text = 'Enter a last name'
     errors.push(error)
   }
