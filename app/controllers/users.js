@@ -1,5 +1,6 @@
 const userModel = require('../models/users')
 const organisationModel = require('../models/organisations')
+const validationHelper = require('../helpers/validators')
 
 /// ------------------------------------------------------------------------ ///
 /// SHOW USER
@@ -63,6 +64,30 @@ exports.new_user_get = (req, res) => {
 exports.new_user_post = (req, res) => {
   const errors = []
 
+  if (!req.session.data.user.firstName.length) {
+    const error = {}
+    error.fieldName = 'firstName'
+    error.href = '#firstname'
+    error.text = 'Enter a first name'
+    errors.push(error)
+  }
+
+  if (!req.session.data.user.lastName.length) {
+    const error = {}
+    error.fieldName = 'lastName'
+    error.href = '#lastname'
+    error.text = 'Enter a last name'
+    errors.push(error)
+  }
+
+  if (!validationHelper.isValidEmail(req.session.data.user.email)) {
+    const error = {}
+    error.fieldName = 'email'
+    error.href = '#email'
+    error.text = 'Enter an email address'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/users/edit', {
       user: req.session.data.user,
@@ -103,6 +128,30 @@ exports.edit_user_get = (req, res) => {
 
 exports.edit_user_post = (req, res) => {
   const errors = []
+
+  if (!req.session.data.user.firstName.length) {
+    const error = {}
+    error.fieldName = 'firstName'
+    error.href = '#firstname'
+    error.text = 'Enter a first name'
+    errors.push(error)
+  }
+
+  if (!req.session.data.user.lastName.length) {
+    const error = {}
+    error.fieldName = 'lastName'
+    error.href = '#lastname'
+    error.text = 'Enter a last name'
+    errors.push(error)
+  }
+
+  if (!validationHelper.isValidEmail(req.session.data.user.email)) {
+    const error = {}
+    error.fieldName = 'email'
+    error.href = '#email'
+    error.text = 'Enter an email address'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/users/edit', {
