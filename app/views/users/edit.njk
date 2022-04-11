@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "users" %}
 
-{% set title = "Invite user" %}
+{% set title = "Add user" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -61,30 +61,8 @@
           value: user.email
         }) }}
 
-        {{ govukInput({
-          id: "organisation",
-          name: "user[organisation]",
-          label: {
-            text: "Organisation name",
-            classes: "govuk-label--s"
-          },
-          errorMessage: errors | getErrorMessage("organisation"),
-          value: user.organisation
-        }) }}
-
-        {{ govukTextarea({
-          id: "reason",
-          name: "user[reason]",
-          label: {
-            text: "Reason",
-            classes: "govuk-label--s"
-          },
-          errorMessage: errors | getErrorMessage("reason"),
-          value: user.reason
-        }) }}
-
         {{ govukButton({
-          text: "Invite user"
+          text: "Add user"
         }) }}
 
       </form>

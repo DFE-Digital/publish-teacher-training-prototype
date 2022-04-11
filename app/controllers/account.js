@@ -7,7 +7,7 @@ const userModel = require('../models/users')
 /// ------------------------------------------------------------------------ ///
 
 exports.user_account = (req, res) => {
-  const user = userModel.find({ userId: req.session.passport.user.id })
+  const user = userModel.findOne({ userId: req.session.passport.user.id })
 
   res.render('../views/account/index', {
     user,
@@ -23,7 +23,7 @@ exports.user_account = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.personal_details = (req, res) => {
-  const user = userModel.find({ userId: req.session.passport.user.id })
+  const user = userModel.findOne({ userId: req.session.passport.user.id })
 
   res.render('../views/account/personal-details/details', {
     user,
@@ -36,7 +36,7 @@ exports.personal_details = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.notification_details = (req, res) => {
-  let user = userModel.find({ userId: req.session.passport.user.id })
+  let user = userModel.findOne({ userId: req.session.passport.user.id })
 
   user.organisations.forEach((organisation, i) => {
     organisation.type = organisationModel.findOne({ organisationId: organisation.id }).type
@@ -59,7 +59,7 @@ exports.notification_details = (req, res) => {
 
 exports.edit_notifications_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const user = userModel.find({ userId: req.session.passport.user.id })
+  const user = userModel.findOne({ userId: req.session.passport.user.id })
 
   let notificationOptions = require('../data/notification-types')
   notificationOptions = notificationOptions.filter(option => option.providerTypes.includes(organisation.type))
@@ -83,7 +83,7 @@ exports.edit_notifications_get = (req, res) => {
 
 exports.edit_notifications_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const user = userModel.find({ userId: req.session.passport.user.id })
+  const user = userModel.findOne({ userId: req.session.passport.user.id })
 
   const errors = []
 
