@@ -61,28 +61,6 @@
           value: user.email
         }) }}
 
-        <!-- {#{ govukInput({
-          id: "organisation",
-          name: "user[organisation]",
-          label: {
-            text: "Organisation name",
-            classes: "govuk-label--s"
-          },
-          errorMessage: errors | getErrorMessage("organisation"),
-          value: user.organisation
-        }) }#} -->
-
-        <!-- {#{ govukTextarea({
-          id: "reason",
-          name: "user[reason]",
-          label: {
-            text: "Reason",
-            classes: "govuk-label--s"
-          },
-          errorMessage: errors | getErrorMessage("reason"),
-          value: user.reason
-        }) }#} -->
-
         {{ govukButton({
           text: "Add user"
         }) }}
