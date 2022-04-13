@@ -1,0 +1,198 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "partners" %}
+
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = partner.name %}
+
+{% set subNavId = "details" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+        {{ govukTag({
+          text: course.status | getCourseStatusLabel,
+          classes: course.status | getCourseStatusClasses
+        }) }}
+      </h1>
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "../../courses/_sub-navigation.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set locationHtml %}
+        <ul class="govuk-list">
+          {% for location in course.locations %}
+            <li>
+              {{ location.id | getLocationLabel }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {% set subjectHtml %}
+        <ul class="govuk-list">
+          {% for subject in course.subjects %}
+            <li>
+              {{ subject.code | getSubjectLabel }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {% set ageRangeHtml %}
+        {% if course.ageRangeOther %}
+          <p class="govuk-body">{{ course.ageRangeOther.from }} to {{ course.ageRangeOther.to }}</p>
+        {% else %}
+          <p class="govuk-body">{{ course.ageRange | getAgeRangeLabel }}</p>
+        {% endif %}
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Subject level"
+            },
+            value: {
+              text: course.subjectLevel | getSubjectLevelLabel
+            }
+          },
+          {
+            key: {
+              text: "Special educational needs and disability (SEND) specialism"
+            },
+            value: {
+              text: course.isSend | getSendLabel
+            }
+          },
+          {
+            key: {
+              text: "Subject" + ("s" if course.subjects.length > 1)
+            },
+            value: {
+              html: subjectHtml
+            }
+          } if course.subjectLevel != "further_education",
+          {
+            key: {
+              text: "Age range"
+            },
+            value: {
+              html: ageRangeHtml
+            }
+          } if course.subjectLevel != "further_education",
+          {
+            key: {
+              text: "Qualification"
+            },
+            value: {
+              text: course.qualification | getQualificationLabel
+            }
+          },
+          {
+            key: {
+              text: "Teaching apprenticeship"
+            },
+            value: {
+              text: course.fundingType | getApprenticeshipLabel
+            }
+          } if organisation.isAccreditedBody,
+          {
+            key: {
+              text: "Funding type"
+            },
+            value: {
+              text: course.fundingType | getFundingTypeLabel
+            }
+          } if not organisation.isAccreditedBody,
+          {
+            key: {
+              text: "Full time or part time"
+            },
+            value: {
+              text: course.studyMode | getStudyModeLabel
+            }
+          },
+          {
+            key: {
+              text: "Location" + ("s" if course.locations.length > 1)
+            },
+            value: {
+              html: locationHtml
+            }
+          },
+          {
+            key: {
+              text: "Accredited body"
+            },
+            value: {
+              text: course.accreditedBody.id | getOrganisationLabel
+            }
+          } if not organisation.isAccreditedBody,
+          {
+            key: {
+              text: "Student visa"
+            },
+            value: {
+              text: course.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if course.canSponsorStudentVisa == "yes" else " - cannot sponsor")
+            }
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Skilled Worker visa"
+            },
+            value: {
+              text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if course.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
+            }
+          } if course.fundingType in ["salary", "apprenticeship"],
+          {
+            key: {
+              text: "Applications open date"
+            },
+            value: {
+              text: "As soon as the course is on Find" if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther | date("d MMMM yyyy")
+            }
+          },
+          {
+            key: {
+              text: "Course start"
+            },
+            value: {
+              text: course.startDate | date("MMMM yyyy")
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
