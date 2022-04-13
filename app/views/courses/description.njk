@@ -45,7 +45,7 @@
               text: "About this course"
             },
             value: {
-              text: course.aboutCourse if course.aboutCourse.length else "Not entered",
+              text: (course.aboutCourse | nl2br | markdownToHtml | safe) if course.aboutCourse.length else "Not entered",
               classes: "govuk-hint" if not course.aboutCourse.length
             },
             actions: {
@@ -63,7 +63,7 @@
               text: "Interview process"
             },
             value: {
-              text: course.interviewProcess if course.interviewProcess.length else "Not entered",
+              text: (course.interviewProcess | nl2br | markdownToHtml | safe) if course.interviewProcess.length else "Not entered",
               classes: "govuk-hint" if not course.interviewProcess.length
             },
             actions: {
@@ -81,7 +81,7 @@
               text: "How school placements work"
             },
             value: {
-              text: course.howSchoolPlacementsWork if course.howSchoolPlacementsWork.length else "Not entered",
+              text: (course.howSchoolPlacementsWork | nl2br | markdownToHtml | safe) if course.howSchoolPlacementsWork.length else "Not entered",
               classes: "govuk-hint" if not course.howSchoolPlacementsWork.length
             },
             actions: {
@@ -174,7 +174,7 @@
               text: "Fee details"
             },
             value: {
-              text: course.feeDetails if course.feeDetails.length else "Not entered",
+              text: (course.feeDetails | nl2br | markdownToHtml | safe) if course.feeDetails.length else "Not entered",
               classes: "govuk-hint" if not course.feeDetails.length
             },
             actions: {
@@ -192,7 +192,7 @@
               text: "Financial support you offer"
             },
             value: {
-              text: course.financialSupport if course.financialSupport.length else "Not entered",
+              text: (course.financialSupport | nl2br | markdownToHtml | safe) if course.financialSupport.length else "Not entered",
               classes: "govuk-hint" if not course.financialSupport.length
             },
             actions: {
@@ -273,7 +273,7 @@
               text: "Personal qualities"
             },
             value: {
-              text: course.personalQualities if course.personalQualities.length else "Not entered",
+              text: (course.personalQualities | nl2br | markdownToHtml | safe) if course.personalQualities.length else "Not entered",
               classes: "govuk-hint" if not course.personalQualities.length
             },
             actions: {
@@ -291,7 +291,7 @@
               text: "Other requirements"
             },
             value: {
-              text: course.otherRequirements if course.otherRequirements.length else "Not entered",
+              text: (course.otherRequirements | nl2br | markdownToHtml | safe) if course.otherRequirements.length else "Not entered",
               classes: "govuk-hint" if not course.otherRequirements.length
             },
             actions: {
