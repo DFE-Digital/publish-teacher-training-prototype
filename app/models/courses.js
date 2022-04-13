@@ -6,7 +6,7 @@ const organisationModel = require('./organisations')
 const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
-exports.find = (params) => {
+exports.findMany = (params) => {
   let courses = []
 
   if (params.organisationId) {
