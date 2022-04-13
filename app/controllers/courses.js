@@ -14,7 +14,7 @@ exports.course_list = (req, res) => {
   delete req.session.data.course
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   let courses = courseModel.findMany({ organisationId: req.params.organisationId })
 
@@ -67,7 +67,7 @@ exports.course_details = (req, res) => {
   delete req.session.data.course
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   res.render('../views/courses/details', {
@@ -90,7 +90,7 @@ exports.course_description = (req, res) => {
   delete req.session.data.course
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   res.render('../views/courses/description', {
@@ -2115,7 +2115,7 @@ exports.new_course_location_post = (req, res) => {
 }
 
 exports.new_course_accredited_body_get = (req, res) => {
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   let selectedAccreditedBody
   if (req.session.data.course && req.session.data.course.accreditedBody) {
@@ -2158,7 +2158,7 @@ exports.new_course_accredited_body_get = (req, res) => {
 }
 
 exports.new_course_accredited_body_post = (req, res) => {
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   const errors = []
 
@@ -2212,7 +2212,7 @@ exports.new_course_accredited_body_post = (req, res) => {
 
 exports.new_course_visa_sponsorship_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   let accreditedBody
   if (req.session.data.course.accreditedBody) {
@@ -2274,7 +2274,7 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
 
 exports.new_course_visa_sponsorship_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   let accreditedBody
   if (req.session.data.course.accreditedBody) {
@@ -2477,7 +2477,7 @@ exports.new_course_start_date_post = (req, res) => {
 
 exports.new_course_check_answers_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.find({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   // remove temporary data as no longer needed
   delete req.session.data.course.tempFundingType

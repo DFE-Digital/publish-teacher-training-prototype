@@ -12,7 +12,7 @@ const generateLocationCode = (params) => {
     '0','1','2','3','4','5','6','7','8','9'
   ]
 
-  const locations = this.find({
+  const locations = this.findMany({
     organisationId: params.organisationId
   })
 
@@ -39,7 +39,7 @@ const generateLocationCode = (params) => {
   return locationCode
 }
 
-exports.find = (params) => {
+exports.findMany = (params) => {
   let locations = []
 
   if (params.organisationId) {
