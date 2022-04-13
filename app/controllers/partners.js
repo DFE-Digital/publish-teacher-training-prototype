@@ -11,6 +11,10 @@ exports.partners_list = (req, res) => {
   })
 }
 
+/// ------------------------------------------------------------------------ ///
+/// LIST PARTNER COURSES
+/// ------------------------------------------------------------------------ ///
+
 exports.partner_courses_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const partner = organisationModel.findOne({ organisationId: req.params.partnerId })
@@ -38,6 +42,10 @@ exports.partner_courses_list = (req, res) => {
     }
   })
 }
+
+/// ------------------------------------------------------------------------ ///
+/// SHOW PARTNER COURSE
+/// ------------------------------------------------------------------------ ///
 
 exports.partner_course_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
