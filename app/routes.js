@@ -10,6 +10,7 @@ const courseController = require('./controllers/courses')
 const dataController = require('./controllers/data')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
+const partnerController = require('./controllers/partners')
 const userController = require('./controllers/users')
 
 // Authentication middleware
@@ -142,8 +143,6 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', 
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
-
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_post)
 
@@ -213,6 +212,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/wi
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
@@ -250,6 +251,19 @@ router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete
 router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', checkIsAuthenticated, userController.user_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthenticated, userController.user_list)
+
+
+/// ------------------------------------------------------------------------ ///
+/// PARTNER ORGANISATION ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, partnerController.partner_course_description)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId', checkIsAuthenticated, partnerController.partner_course_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses', checkIsAuthenticated, partnerController.partner_courses_list)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAuthenticated, partnerController.partners_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES

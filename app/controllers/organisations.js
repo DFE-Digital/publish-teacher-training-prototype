@@ -21,7 +21,7 @@ exports.organisations_list = (req, res) => {
 exports.organisation = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // put the selected organistion into the passport object
+  // put the selected organisation into the passport object
   // for use around the service
   req.session.passport.organisation = organisation
 
@@ -35,7 +35,7 @@ exports.organisation = (req, res) => {
 exports.organisation_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // put the selected organistion into the local scope
+  // put the selected organisation into the local scope
   // res.locals.organisation = organisation
 
   res.render('../views/organisations/details', {

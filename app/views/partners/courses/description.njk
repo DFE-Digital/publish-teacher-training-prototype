@@ -1,14 +1,17 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "courses" %}
+{% set primaryNavId = "partners" %}
 
 {% set title = course.name + " (" + course.code + ")" %}
-{% set caption = ""  %} <!-- organisation.name -->
+{% set caption = partner.name %}
 
 {% set subNavId = "description" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +21,18 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+        {{ govukTag({
+          text: course.status | getCourseStatusLabel,
+          classes: course.status | getCourseStatusClasses
+        }) }}
+      </h1>
 
     </div>
   </div>
@@ -26,13 +40,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-      {% include "./_sub-navigation.njk" %}
+      {% include "../../courses/_sub-navigation.njk" %}
 
     </div>
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
         Course information
@@ -47,15 +61,6 @@
             value: {
               text: (course.aboutCourse | nl2br | markdownToHtml | safe) if course.aboutCourse.length else "Not entered",
               classes: "govuk-hint" if not course.aboutCourse.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/about-course?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "about this course"
-                }
-              ]
             }
           },
           {
@@ -65,15 +70,6 @@
             value: {
               text: (course.interviewProcess | nl2br | markdownToHtml | safe) if course.interviewProcess.length else "Not entered",
               classes: "govuk-hint" if not course.interviewProcess.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/interview-process?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "interview process"
-                }
-              ]
             }
           },
           {
@@ -83,15 +79,6 @@
             value: {
               text: (course.howSchoolPlacementsWork | nl2br | markdownToHtml | safe) if course.howSchoolPlacementsWork.length else "Not entered",
               classes: "govuk-hint" if not course.howSchoolPlacementsWork.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/school-placements?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "how school placements work"
-                }
-              ]
             }
           }
         ]
@@ -122,15 +109,6 @@
             value: {
               text: courseLengthText,
               classes: "govuk-hint" if not course.courseLength.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/course-length",
-                  text: "Change",
-                  visuallyHiddenText: "course length"
-                }
-              ]
             }
           },
           {
@@ -140,15 +118,6 @@
             value: {
               text: "£" + course.feesUK | numeral('0,0.[00]') if course.feesUK else "Not entered",
               classes: "govuk-hint" if not course.feesUK
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/course-fees?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "fee for UK student"
-                }
-              ]
             }
           },
           {
@@ -158,15 +127,6 @@
             value: {
               text: "£" + course.feesInternational | numeral('0,0.[00]') if course.feesInternational else "Not entered",
               classes: "govuk-hint" if not course.feesInternational
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/course-fees?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "fee for international students"
-                }
-              ]
             }
           },
           {
@@ -176,15 +136,6 @@
             value: {
               text: (course.feeDetails | nl2br | markdownToHtml | safe) if course.feeDetails.length else "Not entered",
               classes: "govuk-hint" if not course.feeDetails.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/course-fees?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "fee details"
-                }
-              ]
             }
           },
           {
@@ -194,15 +145,6 @@
             value: {
               text: (course.financialSupport | nl2br | markdownToHtml | safe) if course.financialSupport.length else "Not entered",
               classes: "govuk-hint" if not course.financialSupport.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/financial-support?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "financial support you offer"
-                }
-              ]
             }
           }
         ]
@@ -237,15 +179,6 @@
                 html: degreeHtml,
                 classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
               })
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/degree?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "degree"
-                } if 1 == 0
-              ]
             }
           },
           {
@@ -257,15 +190,6 @@
                 html: gcseHtml,
                 classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
               })
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/gcse?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "GCSEs"
-                } if 1 == 0
-              ]
             }
           },
           {
@@ -275,15 +199,6 @@
             value: {
               text: (course.personalQualities | nl2br | markdownToHtml | safe) if course.personalQualities.length else "Not entered",
               classes: "govuk-hint" if not course.personalQualities.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/personal-qualities?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "personal qualities"
-                }
-              ]
             }
           },
           {
@@ -293,24 +208,10 @@
             value: {
               text: (course.otherRequirements | nl2br | markdownToHtml | safe) if course.otherRequirements.length else "Not entered",
               classes: "govuk-hint" if not course.otherRequirements.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/other-requirements?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "other requirements"
-                }
-              ]
             }
           }
         ]
       }) }}
-
-    </div>
-    <div class="govuk-grid-column-one-third">
-
-      {% include "./_sidebar.njk" %}
 
     </div>
   </div>
