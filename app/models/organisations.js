@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-exports.find = (params) => {
+exports.findMany = (params) => {
   let organisations = []
 
   const directoryPath = path.join(__dirname, '../data/organisations/')
