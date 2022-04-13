@@ -16,7 +16,7 @@ exports.course_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.find({ organisationId: req.params.organisationId })
 
-  let courses = courseModel.find({ organisationId: req.params.organisationId })
+  let courses = courseModel.findMany({ organisationId: req.params.organisationId })
 
   const relationships = organisation.accreditedBodies
 
