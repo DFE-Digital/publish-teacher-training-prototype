@@ -34,7 +34,7 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
     item.text = organisation.name
     item.value = organisation.id
     item.id = organisation.id
-    item.selected = (selectedItem && selectedItem.includes(organisation.code)) ? 'selected' : ''
+    item.selected = (selectedItem && selectedItem.includes(organisation.id)) ? 'selected' : ''
 
     items.push(item)
   })
