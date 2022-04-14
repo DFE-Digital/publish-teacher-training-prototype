@@ -1,0 +1,30 @@
+<h2 class="govuk-heading-m govuk-!-margin-top-9">Accredited bodies</h2>
+
+{{ govukButton({
+  text: "Add accredited body",
+  href: actions.new + "/accredited-bodies/new"
+}) }}
+
+<dl class="govuk-summary-list">
+  {% for accreditedBody in organisation.accreditedBodies %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      {{ accreditedBody.name }}
+    </dt>
+    {% if accreditedBody.description.length %}
+      <dd class="govuk-summary-list__value">
+        {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
+      </dd>
+    {% else %}
+      <dd class="govuk-summary-list__value govuk-hint">
+        Not entered
+      </dd>
+    {% endif %}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}/description">
+        Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
+      </a>
+    </dd>
+  </div>
+  {% endfor %}
+</dl>

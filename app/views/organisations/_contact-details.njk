@@ -1,0 +1,96 @@
+<h2 class="govuk-heading-m govuk-!-margin-top-9">Contact details</h2>
+
+{% set addressHtml %}
+  {% if organisation.address.addressLine1.length %}
+    {{ organisation.address.addressLine1 }}<br>
+  {% endif %}
+  {% if organisation.address.addressLine2.length %}
+    {{ organisation.address.addressLine2 }}<br>
+  {% endif %}
+  {% if organisation.address.town.length %}
+    {{ organisation.address.town }}<br>
+  {% endif %}
+  {% if organisation.address.county.length %}
+    {{ organisation.address.county }}<br>
+  {% endif %}
+  {% if organisation.address.postcode.length %}
+    {{ organisation.address.postcode }}<br>
+  {% endif %}
+{% endset %}
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: (organisation.contact.email | urlize | safe) if organisation.contact.email.length else "Not entered",
+        classes: "govuk-hint" if not organisation.contact.email.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "email address"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Telephone number"
+      },
+      value: {
+        text: organisation.contact.telephone if organisation.contact.telephone.length else "Not entered",
+        classes: "govuk-hint" if not organisation.contact.telephone.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "telephone number"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Website"
+      },
+      value: {
+        text: (organisation.contact.website | urlize | safe) if organisation.contact.website.length else "Not entered",
+        classes: "govuk-hint" if not organisation.contact.website.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "website"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Address"
+      },
+      value: {
+        html: ('<p class="govuk-body">' + addressHtml + '</p>') if addressHtml | trim | length else "Not entered",
+        classes: "govuk-hint" if not addressHtml | trim | length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "website"
+          }
+        ]
+      }
+    }
+  ]
+}) }}

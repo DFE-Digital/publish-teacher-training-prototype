@@ -1,0 +1,94 @@
+<!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Name"
+      },
+      value: {
+        text: organisation.name
+      }
+    },
+    {
+      key: {
+        text: "Code"
+      },
+      value: {
+        text: organisation.code
+      }
+    },
+    {
+      key: {
+        text: "UK provider reference number (UKPRN)"
+      },
+      value: {
+        text: organisation.ukprn if organisation.ukprn.length else "Not entered",
+        classes: "govuk-hint" if not organisation.ukprn.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/edit",
+            text: "Change",
+            visuallyHiddenText: "UK provider reference number (UKPRN)"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Unique reference number (URN)"
+      },
+      value: {
+        text: organisation.urn if organisation.urn.length else "Not entered",
+        classes: "govuk-hint" if not organisation.urn.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/edit",
+            text: "Change",
+            visuallyHiddenText: "unique reference number (URN)"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Training with your organisation"
+      },
+      value: {
+        html: (organisation.trainWithUs | nl2br | markdownToHtml | safe) if organisation.trainWithUs.length else "Not entered",
+        classes: "govuk-hint" if not organisation.trainWithUs.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/training",
+            text: "Change",
+            visuallyHiddenText: "information about training with your organisation"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Training with disabilities and other needs"
+      },
+      value: {
+        html: (organisation.trainWithDisability | nl2br | markdownToHtml | safe) if organisation.trainWithDisability.length else "Not entered",
+        classes: "govuk-hint" if not organisation.trainWithDisability.length
+      },
+      actions: {
+        items: [
+          {
+            href: actions.change + "/training-with-disabilities",
+            text: "Change",
+            visuallyHiddenText: "information about training with disabilities and other needs"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
