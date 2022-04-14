@@ -17,8 +17,13 @@ exports.findMany = (params) => {
     organisations.push(data)
   })
 
+  // TODO: this is really findOne
   if (params.code) {
     organisations = organisations.find(organisation => organisation.code === params.code)
+  }
+
+  if (typeof(params.isAccreditedBody) === 'boolean') {
+    organisations = organisations.filter(organisation => organisation.isAccreditedBody === params.isAccreditedBody)
   }
 
   return organisations
