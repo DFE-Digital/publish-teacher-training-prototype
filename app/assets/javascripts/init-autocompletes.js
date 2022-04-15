@@ -32,7 +32,7 @@ const menuResultItem = (result) => {
 const onConfirm = function(selected) {
 
   // Create a hidden input and use this to submit the value or the name
-  
+
   // Visible input that user interacts with
   let autocompleteInput = document.getElementById(this.id)
   let autocompleteId = autocompleteInput.id
@@ -121,7 +121,7 @@ const setupAutocomplete = (component) => {
   const showAllValues       = element.getAttribute('data-show-all-values') || false
   const showNoOptionsFound  = element.getAttribute('data-show-no-options-found') || true
   const showSuggestions     = element.getAttribute('data-show-suggestions') || false
-  // Default value should be set to '' if there's no item or else the autocomplete will display the 
+  // Default value should be set to '' if there's no item or else the autocomplete will display the
   // initial value of the select 'please select'
   const defaultValue               = element.getAttribute('data-value') || ''
 
@@ -167,7 +167,7 @@ const setupAutocomplete = (component) => {
         component.classList.remove('app-autocomplete--with-suggestions-no-results')
       }
     }
-    
+
     populateResults(results)
   }
 
@@ -225,7 +225,7 @@ const setupAutocomplete = (component) => {
   // Remove the original input
   element.remove()
 
-  // If there should be a default value, set this manually after the autocomplete input is 
+  // If there should be a default value, set this manually after the autocomplete input is
   // created. This avoids the issue documented at https://github.com/alphagov/accessible-autocomplete/issues/424
   if (defaultValue){
     document.getElementById(id).value = defaultValue
