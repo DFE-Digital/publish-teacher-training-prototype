@@ -35,8 +35,8 @@ exports.organisation = (req, res) => {
 exports.organisation_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // put the selected organisation into the local scope
-  // res.locals.organisation = organisation
+  // clear out the session
+  delete req.session.data.organisation
 
   res.render('../views/organisations/details', {
     organisation,
