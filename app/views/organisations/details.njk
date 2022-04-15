@@ -19,14 +19,20 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
       {% include "./_organisation-details.njk" %}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% include "./_organisation-description.njk" %}
     </div>
   </div>
 
   {% if organisation.type in ["hei","scitt"] %}
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
+      <div class="govuk-grid-column-two-thirds">
         {% include "./_visa-sponsorship.njk" %}
       </div>
     </div>
