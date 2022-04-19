@@ -110,13 +110,13 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.accreditedBodyId) {
-      organisation.accreditedBodies.forEach((accreditedBody, i) => {
-        if (accreditedBody.id === params.accreditedBodyId) {
-          accreditedBody.description = params.organisation.accreditedBody.description
-        }
-      })
-    }
+    // if (params.accreditedBodyId) {
+    //   organisation.accreditedBodies.forEach((accreditedBody, i) => {
+    //     if (accreditedBody.id === params.accreditedBodyId) {
+    //       accreditedBody.description = params.organisation.accreditedBody.description
+    //     }
+    //   })
+    // }
 
     organisation.updatedAt = new Date()
 
