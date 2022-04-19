@@ -406,6 +406,14 @@ exports.new_accredited_body_post = (req, res) => {
 
   const errors = []
 
+  // if (!selectedAccreditedBody) {
+  //   const error = {}
+  //   error.fieldName = 'accredited-body'
+  //   error.href = '#accredited-body'
+  //   error.text = 'Enter an accredited body'
+  //   errors.push(error)
+  // }
+
   if (errors.length) {
     res.render('../views/organisations/accredited-bodies/new', {
       organisation,
