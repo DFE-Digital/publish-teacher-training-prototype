@@ -46,6 +46,27 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
   return items
 }
 
+exports.getAccreditedBodyAutocompleteOptions = () => {
+  const items = []
+
+  const organisations = organisationModel.findMany({ isAccreditedBody: true })
+
+  organisations.forEach((organisation, i) => {
+    const item = {}
+
+    item.text = organisation.name
+    item.value = organisation.id
+
+    items.push(item)
+  })
+
+  items.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  return items
+}
+
 exports.getOrganisationLabel = (organisationId) => {
   const organisation = organisationModel.findOne({ organisationId: organisationId })
 
