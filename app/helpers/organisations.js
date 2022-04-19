@@ -46,7 +46,7 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
   return items
 }
 
-exports.getAccreditedBodyAutocompleteOptions = () => {
+exports.getAccreditedBodyAutocompleteOptions = (selectedItem) => {
   const items = []
 
   const organisations = organisationModel.findMany({ isAccreditedBody: true })
@@ -56,6 +56,7 @@ exports.getAccreditedBodyAutocompleteOptions = () => {
 
     item.text = organisation.name
     item.value = organisation.id
+    item.selected = (selectedItem && selectedItem.includes(organisation.id)) ? true : false
 
     items.push(item)
   })
