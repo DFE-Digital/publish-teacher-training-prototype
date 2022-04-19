@@ -370,7 +370,7 @@ exports.new_accredited_body_get = (req, res) => {
     selectedAccreditedBody = req.session.data.accreditedBody.id
   }
 
-  const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions()
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions(selectedAccreditedBody)
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
   if (req.query.referrer === 'check') {
@@ -397,7 +397,7 @@ exports.new_accredited_body_post = (req, res) => {
     selectedAccreditedBody = req.session.data.accreditedBody.id
   }
 
-  const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions()
+  const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions(selectedAccreditedBody)
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
   if (req.query.referrer === 'check') {
