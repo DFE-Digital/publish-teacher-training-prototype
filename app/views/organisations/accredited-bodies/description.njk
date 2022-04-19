@@ -4,14 +4,14 @@
 
 {% set title = "Accredited body description" %}
 
-{% if accreditedBody.id %}
+{% if referrer == "change" %}
   {% set caption = accreditedBody.name + " (" + accreditedBody.code + ")" %}
 {% else %}
   {% set caption = "Add accredited body" %}
 {% endif %}
 
 {% block pageTitle %}
-  ("Error: " if errors.length) + {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -36,7 +36,7 @@
 
         {{ govukCharacterCount({
           id: "accreditied-body-description",
-          name: "organisation[accreditedBody][description]",
+          name: "accreditedBody[description]",
           rows: 10,
           maxwords: 100,
           label: {
@@ -46,7 +46,7 @@
           value: accreditedBody.description
         }) }}
 
-        {% if accreditedBody.id %}
+        {% if referrer == "change" %}
           {{ govukButton({
             text: "Update accredited body description"
           }) }}
@@ -61,6 +61,8 @@
       <p class="govuk-body">
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
+
+      {{data.organisation|dump|safe}}
 
     </div>
   </div>

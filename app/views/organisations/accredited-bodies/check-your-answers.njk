@@ -39,7 +39,7 @@
               actions: {
                 items: [
                   {
-                    href: "Item URL",
+                    href: actions.change + "?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "accredited body"
                   }
@@ -57,7 +57,7 @@
               actions: {
                 items: [
                   {
-                    href: "Item URL",
+                    href: actions.change + "/description?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "description"
                   }
@@ -76,6 +76,8 @@
       <p class="govuk-body">
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
+
+      {{data.organisation|dump|safe}}
 
     </div>
   </div>
