@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
+const directoryPath = path.join(__dirname, '../data/organisations/')
+
 exports.findMany = (params) => {
   let organisations = []
-
-  const directoryPath = path.join(__dirname, '../data/organisations/')
 
   let documents = fs.readdirSync(directoryPath,'utf8')
 
@@ -33,8 +33,6 @@ exports.findOne = (params) => {
   let organisation = {}
 
   if (params.organisationId) {
-    const directoryPath = path.join(__dirname, '../data/organisations/')
-
     const filePath = directoryPath + '/' + params.organisationId + '.json'
 
     let raw = fs.readFileSync(filePath)
@@ -110,17 +108,7 @@ exports.updateOne = (params) => {
       }
     }
 
-    // if (params.accreditedBodyId) {
-    //   organisation.accreditedBodies.forEach((accreditedBody, i) => {
-    //     if (accreditedBody.id === params.accreditedBodyId) {
-    //       accreditedBody.description = params.organisation.accreditedBody.description
-    //     }
-    //   })
-    // }
-
     organisation.updatedAt = new Date()
-
-    const directoryPath = path.join(__dirname, '../data/organisations/')
 
     const filePath = directoryPath + '/' + params.organisationId + '.json'
 

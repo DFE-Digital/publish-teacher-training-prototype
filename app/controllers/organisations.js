@@ -430,11 +430,6 @@ exports.new_accredited_body_post = (req, res) => {
 exports.new_accredited_body_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // let description
-  // if (req.session.data.organisation && req.session.data.organisation.accreditedBody.description) {
-  //   description = req.session.data.organisation.accreditedBody.description
-  // }
-
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`
@@ -453,11 +448,6 @@ exports.new_accredited_body_description_get = (req, res) => {
 
 exports.new_accredited_body_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  // let description
-  // if (req.session.data.organisation && req.session.data.organisation.accreditedBody.description) {
-  //   description = req.session.data.organisation.accreditedBody.description
-  // }
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
