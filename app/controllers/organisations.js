@@ -365,8 +365,6 @@ exports.edit_accredited_body_description_post = (req, res) => {
 exports.new_accredited_body_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  console.log('New (GET)', req.session.data.accreditedBody);
-
   let selectedAccreditedBody
   if (req.session.data.accreditedBody && req.session.data.accreditedBody.id) {
     selectedAccreditedBody = req.session.data.accreditedBody.id
@@ -393,8 +391,6 @@ exports.new_accredited_body_get = (req, res) => {
 
 exports.new_accredited_body_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  console.log('New (POST)', req.session.data.accreditedBody);
 
   let selectedAccreditedBody
   if (req.session.data.accreditedBody && req.session.data.accreditedBody.id) {

@@ -6,14 +6,13 @@ const organisationModel = require('./organisations')
 const directoryPath = path.join(__dirname, '../data/organisations/')
 
 exports.insertOne = (params) => {
-  console.log('insertOne',params);
   let organisation
 
   if (params.organisationId) {
     organisation = organisationModel.findOne({ organisationId: params.organisationId })
 
     const accreditedBody = organisationModel.findOne({ organisationId: params.accreditedBody.id })
-console.log(accreditedBody);
+
     const ab = {}
     ab.id = accreditedBody.id
     ab.code = accreditedBody.code
@@ -21,7 +20,7 @@ console.log(accreditedBody);
     ab.description = params.accreditedBody.description
 
     organisation.accreditedBodies.push(ab)
-console.log(organisation.accreditedBodies);
+
     organisation.updatedAt = new Date()
 
     const filePath = directoryPath + '/' + params.organisationId + '.json'
@@ -37,7 +36,6 @@ console.log(organisation.accreditedBodies);
 }
 
 exports.updateOne = (params) => {
-  console.log('updateOne',params);
   let organisation
 
   if (params.organisationId) {
@@ -63,4 +61,8 @@ exports.updateOne = (params) => {
   }
 
   return organisation
+}
+
+exports.deleteOne = (params) => {
+
 }
