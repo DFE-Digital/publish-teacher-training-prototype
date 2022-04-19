@@ -44,10 +44,10 @@
                     {{ location.name }}
                   </a>
                 </td>
-                <td class="govuk-table__cell">
+                <td class="govuk-table__cell {{- ' govuk-hint' if not location.code }}">
                   {{ location.code if location.code else "Not entered" }}
                 </td>
-                <td class="govuk-table__cell">
+                <td class="govuk-table__cell {{- ' govuk-hint' if not location.urn }}">
                   {{ location.urn if location.urn else "Not entered" }}
                 </td>
               </tr>
