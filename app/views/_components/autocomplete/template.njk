@@ -10,7 +10,6 @@
   "data-show-no-options-found": params.autocompleteOptions['show-no-options-found'],
   "data-value": params.value if (params.value | falsify),
   "data-autocomplete-values": params.autocompleteOptions.values | dump
-
 } | deleteBlankAttributes %}
 
 {% set showSuggestions = params.autocompleteOptions.showSuggestionsBanner %}
@@ -46,8 +45,6 @@ to the parent #}
 
   {% elseif autocompleteType == "select" %}
 
-    {% from "govuk/components/select/macro.njk" import govukSelect %}
-
     {# Prepare a default first item #}
     {% set defaultItemShouldBeSelected = true %}
 
@@ -81,14 +78,21 @@ to the parent #}
     {# Loop through items and check if any should be selected #}
     {% for item in params.items %}
       {% if (params.value == item.value) or (params.value == item.text) %}
-        {% set item = item | setAttribute('selected', true) %}
+        {% set item = item | setAttribute("selected", "true") %}
+      {% endif %}
+      {% if item.hint %}
+        {% set item = item | setAttribute("attributes", {
+          "data-hint": item.hint.html or item.hint.text
+        }) %}
       {% endif %}
       {% set selectItems = selectItems | push(item) %}
     {% endfor %}
 
     {% set params = params | setAttribute("items", selectItems) %}
 
+    {% from "govuk/components/select/macro.njk" import govukSelect %}
     {{ govukSelect(params) }}
+
     <div id="{{params.id}}-autocomplete-container" class=""></div>
 
   {% endif %}
