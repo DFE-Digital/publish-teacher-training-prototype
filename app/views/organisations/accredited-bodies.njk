@@ -1,0 +1,70 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "settings" %}
+{% set subNavId = "partners" %}
+
+{% set title = "Organisation details" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "_includes/page-heading.njk" %}
+    </div>
+  </div>
+
+  {% include "./_sub-navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <h2 class="govuk-heading-m">Accredited bodies</h2>
+
+      {{ govukButton({
+        text: "Add accredited body",
+        href: actions.new + "/accredited-bodies/new"
+      }) }}
+
+      <dl class="govuk-summary-list">
+        {% for accreditedBody in organisation.accreditedBodies %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{ accreditedBody.name }}
+          </dt>
+          {% if accreditedBody.description.length %}
+            <dd class="govuk-summary-list__value">
+              {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
+            </dd>
+          {% else %}
+            <dd class="govuk-summary-list__value govuk-hint">
+              Not entered
+            </dd>
+          {% endif %}
+          <dd class="govuk-summary-list__actions">
+            <ul class="govuk-summary-list__actions-list">
+              <li class="govuk-summary-list__actions-list-item">
+                <a class="govuk-link" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}/description?referrer=change">
+                  Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
+                  </a>
+              </li>
+              <li class="govuk-summary-list__actions-list-item">
+                <a class="govuk-link app-link--destructive" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}/delete">
+                  Delete<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
+                  </a>
+              </li>
+            </ul>
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "settings" %}
+{% set subNavId = "visas" %}
+
+{% set title = "Organisation details" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "_includes/page-heading.njk" %}
+    </div>
+  </div>
+
+  {% include "./_sub-navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">Visa sponsorship</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Student visa"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorStudentVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/student-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
+                }
+              ]
+            } if organisation.type == "hei"
+          },
+          {
+            key: {
+              text: "Skilled Worker visa"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/skilled-worker-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+{% endblock %}

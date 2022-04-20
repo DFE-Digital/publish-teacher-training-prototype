@@ -1,6 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set primaryNavId = "settings" %}
+{% set subNavId = "details" %}
 
 {% set title = "Organisation details" %}
 
@@ -18,37 +19,169 @@
     </div>
   </div>
 
+  {% include "./_sub-navigation.njk" %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {% include "./_organisation-details.njk" %}
+      <!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: organisation.name
+            }
+          },
+          {
+            key: {
+              text: "Code"
+            },
+            value: {
+              text: organisation.code
+            }
+          },
+          {
+            key: {
+              text: "UK provider reference number (UKPRN)"
+            },
+            value: {
+              text: organisation.ukprn if organisation.ukprn.length else "Not entered",
+              classes: "govuk-hint" if not organisation.ukprn.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit",
+                  text: "Change",
+                  visuallyHiddenText: "UK provider reference number (UKPRN)"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Unique reference number (URN)"
+            },
+            value: {
+              text: organisation.urn if organisation.urn.length else "Not entered",
+              classes: "govuk-hint" if not organisation.urn.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit",
+                  text: "Change",
+                  visuallyHiddenText: "unique reference number (URN)"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
     </div>
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      {% include "./_organisation-description.njk" %}
-    </div>
-  </div>
-
-  {% if organisation.type in ["hei","scitt"] %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        {% include "./_visa-sponsorship.njk" %}
-      </div>
-    </div>
-  {% endif %}
-
-  {% if organisation.type == "lead_school" %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        {% include "./_accredited-bodies.njk" %}
-      </div>
-    </div>
-  {% endif %}
-
-  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {% include "./_contact-details.njk" %}
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Contact details</h2>
+
+      {% set addressHtml %}
+        {% if organisation.address.addressLine1.length %}
+          {{ organisation.address.addressLine1 }}<br>
+        {% endif %}
+        {% if organisation.address.addressLine2.length %}
+          {{ organisation.address.addressLine2 }}<br>
+        {% endif %}
+        {% if organisation.address.town.length %}
+          {{ organisation.address.town }}<br>
+        {% endif %}
+        {% if organisation.address.county.length %}
+          {{ organisation.address.county }}<br>
+        {% endif %}
+        {% if organisation.address.postcode.length %}
+          {{ organisation.address.postcode }}<br>
+        {% endif %}
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: (organisation.contact.email | urlize | safe) if organisation.contact.email.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.email.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "email address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Telephone number"
+            },
+            value: {
+              text: organisation.contact.telephone if organisation.contact.telephone.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.telephone.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "telephone number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Website"
+            },
+            value: {
+              text: (organisation.contact.website | urlize | safe) if organisation.contact.website.length else "Not entered",
+              classes: "govuk-hint" if not organisation.contact.website.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "website"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: ('<p class="govuk-body">' + addressHtml + '</p>') if addressHtml | trim | length else "Not entered",
+              classes: "govuk-hint" if not addressHtml | trim | length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "website"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
     </div>
   </div>
 
