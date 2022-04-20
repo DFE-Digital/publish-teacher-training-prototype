@@ -4,9 +4,9 @@
     * Providing params.meta.title (shows params.meta.visuallyHiddenTitle if not set)
     * Moving meta.text/meta.html above meta.items
 #}
-<footer class="govuk-footer {{ params.classes if params.classes }}" role="contentinfo"
-        {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
-  <div class="govuk-width-container {{ params.containerClasses if params.containerClasses }}">
+<footer class="govuk-footer {{- ' ' +  params.classes if params.classes }}" role="contentinfo"
+        {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  <div class="govuk-width-container {{- ' ' + params.containerClasses if params.containerClasses }}">
     {% if params.navigation %}
       <div class="govuk-footer__navigation">
         {% for nav in params.navigation %}
@@ -22,7 +22,7 @@
                 {% for item in nav.items %}
                   {% if item.href and item.text %}
                     <li class="govuk-footer__list-item">
-                      <a class="govuk-footer__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+                      <a class="govuk-footer__link" href="{{ item.href }}" {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
                         {{ item.text }}
                       </a>
                     </li>
@@ -52,7 +52,7 @@
             <ul class="govuk-footer__inline-list">
               {% for item in params.meta.items %}
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+                  <a class="govuk-footer__link" href="{{ item.href }}" {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
                     {{ item.text }}
                   </a>
                 </li>

@@ -33,7 +33,7 @@ to the parent #}
   {% endfor %}
 {% endif %}
 
-<div data-module="app-autocomplete" class="govuk-form-group {{ 'app-autocomplete--with-suggestions' if showSuggestions}} {{params.autocompleteOptions.classes}} {{widthClass if widthClass}}">
+<div data-module="app-autocomplete" class="govuk-form-group {{- ' app-autocomplete--with-suggestions' if showSuggestions }} {{- ' ' + params.autocompleteOptions.classes if params.autocompleteOptions.classes }} {{- ' ' + widthClass if widthClass }}">
 
   {% if autocompleteType == "input" %}
 
