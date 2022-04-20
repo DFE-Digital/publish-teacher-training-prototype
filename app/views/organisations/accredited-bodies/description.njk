@@ -5,7 +5,8 @@
 {% set title = "Accredited body description" %}
 
 {% if referrer == "change" %}
-  {% set caption = accreditedBody.name + " (" + accreditedBody.code + ")" %}
+  {% set caption = accreditedBody.name %}
+  <!-- + " (" + accreditedBody.code + ")" -->
 {% else %}
   {% set caption = "Add accredited body" %}
 {% endif %}
@@ -61,8 +62,6 @@
       <p class="govuk-body">
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
-
-      {{data.organisation|dump|safe}}
 
     </div>
   </div>
