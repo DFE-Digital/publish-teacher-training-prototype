@@ -43,8 +43,10 @@ exports.findOne = (params) => {
 }
 
 exports.updateOne = (params) => {
+  let organisation
+
   if (params.organisationId) {
-    let organisation = this.findOne({ organisationId: params.organisationId })
+    organisation = this.findOne({ organisationId: params.organisationId })
 
     if (params.organisation.urn !== undefined) {
       organisation.urn = params.organisation.urn
@@ -117,7 +119,7 @@ exports.updateOne = (params) => {
 
     // write the JSON data
     fs.writeFileSync(filePath, fileData)
-
   }
 
+  return organisation
 }
