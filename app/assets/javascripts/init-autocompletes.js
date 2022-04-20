@@ -14,7 +14,7 @@ const valueForInput = (result) => {
 // What gets displayed for each option
 const menuResultItem = (result) => {
   if (result) {
-    // If using DefaultValue, result can be a string - bug with autcomplete  https://github.com/alphagov/accessible-autocomplete/issues/424
+    // If using DefaultValue, result can be a string - bug with autocomplete  https://github.com/alphagov/accessible-autocomplete/issues/424
     if (typeof result == 'string') {
       return result
     }
