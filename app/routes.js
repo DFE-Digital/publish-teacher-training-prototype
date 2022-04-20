@@ -268,6 +268,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/ne
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, organisationController.edit_accredited_body_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, organisationController.edit_accredited_body_description_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, organisationController.delete_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, organisationController.delete_accredited_body_post)
+
 /// ------------------------------------------------------------------------ ///
 /// PARTNER ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
@@ -285,6 +288,12 @@ router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAut
 /// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/details', checkIsAuthenticated, organisationController.organisation_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/description', checkIsAuthenticated, organisationController.organisation_description)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, organisationController.organisation_accredited_bodies)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/visa-sponsorship', checkIsAuthenticated, organisationController.organisation_visa_sponsorship)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
