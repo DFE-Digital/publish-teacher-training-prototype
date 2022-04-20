@@ -64,5 +64,21 @@ exports.updateOne = (params) => {
 }
 
 exports.deleteOne = (params) => {
+  if (params.organisationId && params.accreditedBodyId) {
+    let organisation = organisationModel.findOne({ organisationId: params.organisationId })
 
+    organisation.accreditedBodies = organisation.accreditedBodies.filter(
+      accreditedBody => accreditedBody.id !== params.accreditedBodyId
+    )
+
+    organisation.updatedAt = new Date()
+
+    const filePath = directoryPath + '/' + organisation.id + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(organisation)
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+
+  }
 }
