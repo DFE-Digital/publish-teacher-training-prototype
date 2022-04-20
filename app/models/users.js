@@ -213,6 +213,8 @@ exports.deleteOne = (params) => {
       organisation => organisation.id !== params.organisationId
     )
 
+    user.updatedAt = new Date()
+
     const filePath = directoryPath + '/' + user.id + '.json'
 
     if (user.organisations.length) {
