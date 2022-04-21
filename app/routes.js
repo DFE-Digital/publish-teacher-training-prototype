@@ -5,6 +5,7 @@ const passport = require('passport')
 
 // Controller modules
 const accountController = require('./controllers/account')
+const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
 const dataController = require('./controllers/data')
@@ -256,20 +257,22 @@ router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthen
 /// ACCREDITED BODY ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new', checkIsAuthenticated, organisationController.new_accredited_body_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new', checkIsAuthenticated, organisationController.new_accredited_body_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new', checkIsAuthenticated, accreditedBodyController.new_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new', checkIsAuthenticated, accreditedBodyController.new_accredited_body_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, organisationController.new_accredited_body_description_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, organisationController.new_accredited_body_description_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, organisationController.new_accredited_body_check_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, organisationController.new_accredited_body_check_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, organisationController.edit_accredited_body_description_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, organisationController.edit_accredited_body_description_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, organisationController.delete_accredited_body_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, organisationController.delete_accredited_body_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, accreditedBodyController.accredited_bodies_list)
 
 /// ------------------------------------------------------------------------ ///
 /// PARTNER ORGANISATION ROUTES
@@ -289,11 +292,11 @@ router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAut
 
 router.get('/organisations/:organisationId/cycles/:cycleId/details', checkIsAuthenticated, organisationController.organisation_details)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/description', checkIsAuthenticated, organisationController.organisation_description)
+// router.get('/organisations/:organisationId/cycles/:cycleId/description', checkIsAuthenticated, organisationController.organisation_description)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, organisationController.organisation_accredited_bodies)
+// router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, organisationController.organisation_accredited_bodies)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/visa-sponsorship', checkIsAuthenticated, organisationController.organisation_visa_sponsorship)
+// router.get('/organisations/:organisationId/cycles/:cycleId/visa-sponsorship', checkIsAuthenticated, organisationController.organisation_visa_sponsorship)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
