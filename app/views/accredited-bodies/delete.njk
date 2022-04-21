@@ -10,10 +10,6 @@
 
 {% set caption = accreditedBody.name %}
 
-{% block pageTitle %}
-  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
-{% endblock %}
-
 {% block beforeContent %}
 {{ govukBackLink({
   text: "Back",
@@ -33,8 +29,8 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% if hasCourses %}
-          <p class="govuk-body">{{ accreditedBody.name }} ratifies courses for {{ organisation.name }} and cannot be deleted.</p>
-          <p class="govuk-body">To delete {{ accreditedBody.name }} you must first update the accredited body for all the courses they ratify.</p>
+          <p class="govuk-body">{{ accreditedBody.name }} is the accredited body for courses run by {{ organisation.name }}.</p>
+          <p class="govuk-body">To delete {{ accreditedBody.name }}, you must first update the accredited body for all of the courses they are the accredited body for.</p>
         {% else %}
           {{ govukButton({
             text: "Delete accredited body",
