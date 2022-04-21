@@ -79,6 +79,7 @@ exports.deleteOne = (params) => {
 
     // create a JSON sting for the submitted data
     const fileData = JSON.stringify(organisation)
+
     // write the JSON data
     fs.writeFileSync(filePath, fileData)
   }
