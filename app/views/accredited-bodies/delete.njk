@@ -29,13 +29,17 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% if hasCourses %}
-          <p class="govuk-body">{{ accreditedBody.name }} is the accredited body for courses run by {{ organisation.name }}.</p>
-          <p class="govuk-body">To delete {{ accreditedBody.name }}, you must first update the accredited body for all of the courses they are the accredited body for.</p>
+
+          <p class="govuk-body">{{ accreditedBody.name }} is an accredited body for courses run by {{ organisation.name }}.</p>
+          <p class="govuk-body">To delete {{ accreditedBody.name }}, you must first change the accredited body for those courses.</p>
+
         {% else %}
+
           {{ govukButton({
             text: "Delete accredited body",
             classes: "govuk-button--warning"
           }) }}
+
         {% endif %}
 
       </form>
