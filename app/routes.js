@@ -232,8 +232,6 @@ router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationI
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_post)
 
-// router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.location_details)
-
 router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
 
 /// ------------------------------------------------------------------------ ///
@@ -291,12 +289,6 @@ router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAut
 /// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/details', checkIsAuthenticated, organisationController.organisation_details)
-
-// router.get('/organisations/:organisationId/cycles/:cycleId/description', checkIsAuthenticated, organisationController.organisation_description)
-
-// router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, organisationController.organisation_accredited_bodies)
-
-// router.get('/organisations/:organisationId/cycles/:cycleId/visa-sponsorship', checkIsAuthenticated, organisationController.organisation_visa_sponsorship)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/edit', checkIsAuthenticated, organisationController.edit_organisation_details_post)
