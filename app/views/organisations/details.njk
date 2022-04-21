@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  {% include "./_sub-navigation.njk" %}
+  {#% include "./_sub-navigation.njk" %#}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -75,6 +75,98 @@
                   href: actions.change + "/edit",
                   text: "Change",
                   visuallyHiddenText: "unique reference number (URN)"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Training with your organisation</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Training with your organisation"
+            },
+            value: {
+              html: (organisation.trainWithUs | nl2br | markdownToHtml | safe) if organisation.trainWithUs.length else "Not entered",
+              classes: "govuk-hint" if not organisation.trainWithUs.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/training",
+                  text: "Change",
+                  visuallyHiddenText: "information about training with your organisation"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Training with disabilities and other needs"
+            },
+            value: {
+              html: (organisation.trainWithDisability | nl2br | markdownToHtml | safe) if organisation.trainWithDisability.length else "Not entered",
+              classes: "govuk-hint" if not organisation.trainWithDisability.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/training-with-disabilities",
+                  text: "Change",
+                  visuallyHiddenText: "information about training with disabilities and other needs"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Visa sponsorship</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Student visa"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorStudentVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/student-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
+                }
+              ]
+            } if organisation.type == "hei"
+          },
+          {
+            key: {
+              text: "Skilled Worker visa"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/skilled-worker-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
                 }
               ]
             }
