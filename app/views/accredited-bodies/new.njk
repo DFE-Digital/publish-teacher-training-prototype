@@ -1,15 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "settings" %}
+{% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Accredited body description" %}
-
-{% if referrer == "change" %}
-  {% set caption = accreditedBody.name %}
-  <!-- + " (" + accreditedBody.code + ")" -->
-{% else %}
-  {% set caption = "Add accredited body" %}
-{% endif %}
+{% set title = "Accredited body" %}
+{% set caption = "Add accredited body" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -35,27 +29,28 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukCharacterCount({
-          id: "accreditied-body-description",
-          name: "accreditedBody[description]",
-          rows: 10,
-          maxwords: 100,
+        {{ appAutocompleteFromSelect({
+          id: "accredited-body",
+          name: "accreditedBody[id]",
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("accredited-body-description"),
-          value: accreditedBody.description
+          hint: {
+            text: "Search for the accredited body"
+          },
+          classes: "govuk-!-width-two-thirds",
+          items: accreditedBodyOptions,
+          errorMessage: errors | getErrorMessage("accredited-body"),
+          autocompleteOptions: {
+            autoselect: true,
+            showAllValues: false,
+            allowEmpty: true
+          }
         }) }}
 
-        {% if referrer == "change" %}
-          {{ govukButton({
-            text: "Update accredited body description"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
 
       </form>
 
