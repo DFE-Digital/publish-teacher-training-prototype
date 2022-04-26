@@ -1,6 +1,6 @@
 {% set navigationLabel = params.navigationLabel | default('pagination') %}
 
-<nav class="app-pagination {{- ' ' + params.classes if params.classes}}" aria-label="{{navigationLabel}}">
+<nav class="app-pagination {{- ' ' + params.classes if params.classes}}" aria-label="{{ navigationLabel }}">
 
   <ul class="app-pagination__list">
     {%- if params.previous %}

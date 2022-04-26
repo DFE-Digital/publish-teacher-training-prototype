@@ -1,14 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "courses" %}
+{% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Pick a course outcome" %}
-
-{% if course.id %}
-  {% set caption = course.name + " (" + course.code + ")" %}
-{% else %}
-  {% set caption = "Add course" %}
-{% endif %}
+{% set title = "Accredited body" %}
+{% set caption = "Add accredited body" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -34,27 +29,28 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukRadios({
-          idPrefix: "qualification",
-          name: "course[qualification]",
-          fieldset: {
-            legend: {
-              html: headingHtml
-            }
+        {{ appAutocompleteFromSelect({
+          id: "accredited-body",
+          name: "accreditedBody[id]",
+          label: {
+            html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("qualification"),
-          items: qualificationOptions
+          hint: {
+            text: "Search for the accredited body"
+          },
+          classes: "govuk-!-width-two-thirds",
+          items: accreditedBodyOptions,
+          errorMessage: errors | getErrorMessage("accredited-body"),
+          autocompleteOptions: {
+            autoselect: true,
+            showAllValues: false,
+            allowEmpty: true
+          }
         }) }}
 
-        {% if course.id %}
-          {{ govukButton({
-            text: "Update qualification"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
 
       </form>
 
