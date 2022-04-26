@@ -316,6 +316,16 @@ router.get('/', checkIsAuthenticated, (req, res) => {
   res.redirect('/organisations')
 })
 
+/// ------------------------------------------------------------------------ ///
+/// PROTOTYPE ADMIN
+/// ------------------------------------------------------------------------ ///
+
+router.get('/prototype-admin/clear-data', checkIsAuthenticated, (req, res) => {
+  delete req.session.data
+  delete req.session.passport
+  res.redirect('/')
+})
+
 router.get('/seed', dataController.seed)
 
 /// ------------------------------------------------------------------------ ///
