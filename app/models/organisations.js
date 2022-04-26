@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
+const directoryPath = path.join(__dirname, '../data/organisations/')
+
 exports.findMany = (params) => {
   let organisations = []
-
-  const directoryPath = path.join(__dirname, '../data/organisations/')
 
   let documents = fs.readdirSync(directoryPath,'utf8')
 
@@ -17,8 +17,13 @@ exports.findMany = (params) => {
     organisations.push(data)
   })
 
+  // TODO: this is really findOne
   if (params.code) {
     organisations = organisations.find(organisation => organisation.code === params.code)
+  }
+
+  if (typeof(params.isAccreditedBody) === 'boolean') {
+    organisations = organisations.filter(organisation => organisation.isAccreditedBody === params.isAccreditedBody)
   }
 
   return organisations
@@ -28,8 +33,6 @@ exports.findOne = (params) => {
   let organisation = {}
 
   if (params.organisationId) {
-    const directoryPath = path.join(__dirname, '../data/organisations/')
-
     const filePath = directoryPath + '/' + params.organisationId + '.json'
 
     let raw = fs.readFileSync(filePath)
@@ -40,8 +43,10 @@ exports.findOne = (params) => {
 }
 
 exports.updateOne = (params) => {
+  let organisation
+
   if (params.organisationId) {
-    let organisation = this.findOne({ organisationId: params.organisationId })
+    organisation = this.findOne({ organisationId: params.organisationId })
 
     if (params.organisation.urn !== undefined) {
       organisation.urn = params.organisation.urn
@@ -105,17 +110,7 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.accreditedBodyId) {
-      organisation.accreditedBodies.forEach((accreditedBody, i) => {
-        if (accreditedBody.id === params.accreditedBodyId) {
-          accreditedBody.description = params.organisation.accreditedBody.description
-        }
-      })
-    }
-
     organisation.updatedAt = new Date()
-
-    const directoryPath = path.join(__dirname, '../data/organisations/')
 
     const filePath = directoryPath + '/' + params.organisationId + '.json'
 
@@ -124,7 +119,7 @@ exports.updateOne = (params) => {
 
     // write the JSON data
     fs.writeFileSync(filePath, fileData)
-
   }
 
+  return organisation
 }

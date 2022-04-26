@@ -4,6 +4,10 @@
 
 {% set title = "Student visa" %}
 
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
 {% block beforeContent %}
 {{ govukBackLink({
   text: "Back",

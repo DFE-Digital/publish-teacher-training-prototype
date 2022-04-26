@@ -1,12 +1,11 @@
+const organisationModel = require('../models/organisations')
+
 exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
   const items = []
 
-  let relationships = require('../data/temp/relationships')
-  if (organisationId) {
-    relationships = relationships.find(relationship => relationship.id === organisationId)
-  }
+  const organisation = organisationModel.findOne({ organisationId: organisationId })
 
-  relationships.accreditedBodies.forEach((accreditedBody, i) => {
+  organisation.accreditedBodies.forEach((accreditedBody, i) => {
     const item = {}
 
     item.text = accreditedBody.name
@@ -21,25 +20,13 @@ exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
     return a.text.localeCompare(b.text)
   })
 
-  // const divider = { divider: 'or' }
-  // items.push(divider)
-  //
-  // const other = {}
-  // other.text = 'Another accredited body'
-  // other.value = 'other'
-  // other.id = 'accredited-body-other'
-  // other.checked = (selectedItem && selectedItem.includes('other')) ? 'checked' : ''
-  // other.conditional = true
-  // items.push(other)
-
   return items
 }
 
 exports.getAccreditedBodySelectOptions = (selectedItem) => {
   const items = []
 
-  let organisations = require('../data/temp/organisations')
-  organisations = organisations.filter(organisation => organisation.isAccreditedBody === 'true')
+  const organisations = organisationModel.findMany({ isAccreditedBody: true })
 
   organisations.forEach((organisation, i) => {
     const item = {}
@@ -47,7 +34,7 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
     item.text = organisation.name
     item.value = organisation.id
     item.id = organisation.id
-    item.selected = (selectedItem && selectedItem.includes(organisation.code)) ? 'selected' : ''
+    item.selected = (selectedItem && selectedItem.includes(organisation.id)) ? 'selected' : ''
 
     items.push(item)
   })
@@ -59,11 +46,32 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
   return items
 }
 
-exports.getOrganisationLabel = (code) => {
-  const organisations = require('../data/temp/organisations')
-  const organisation = organisations.find(organisation => organisation.id === code)
+exports.getAccreditedBodyAutocompleteOptions = (selectedItem) => {
+  const items = []
 
-  let label = code
+  const organisations = organisationModel.findMany({ isAccreditedBody: true })
+
+  organisations.forEach((organisation, i) => {
+    const item = {}
+
+    item.text = organisation.name
+    item.value = organisation.id
+    item.selected = (selectedItem && selectedItem.includes(organisation.id)) ? true : false
+
+    items.push(item)
+  })
+
+  items.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  return items
+}
+
+exports.getOrganisationLabel = (organisationId) => {
+  const organisation = organisationModel.findOne({ organisationId: organisationId })
+
+  let label = organisationId
 
   if (organisation) {
     label = organisation.name

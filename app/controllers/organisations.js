@@ -1,3 +1,4 @@
+const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
 const organisationHelper = require('../helpers/organisations')
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
@@ -35,10 +36,31 @@ exports.organisation = (req, res) => {
 exports.organisation_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
-  // put the selected organisation into the local scope
-  // res.locals.organisation = organisation
-
   res.render('../views/organisations/details', {
+    organisation,
+    actions: {
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+    }
+  })
+}
+
+exports.organisation_description = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  res.render('../views/organisations/description', {
+    organisation,
+    actions: {
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+    }
+  })
+}
+
+exports.organisation_visa_sponsorship = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  res.render('../views/organisations/visa-sponsorship', {
     organisation,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
@@ -303,51 +325,6 @@ exports.edit_skilled_worker_visa_post = (req, res) => {
     })
 
     req.flash('success','Visa sponsorship updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
-  }
-}
-
-exports.edit_accredited_body_get = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
-
-  res.render('../views/organisations/accredited-body', {
-    organisation,
-    accreditedBody,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
-    }
-  })
-}
-
-exports.edit_accredited_body_post = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  let accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
-  accreditedBody.description = req.session.data.organisation.accreditedBody.description
-
-  const errors = []
-
-  if (errors.length) {
-    res.render('../views/organisations/accredited-body', {
-      organisation,
-      accreditedBody,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
-      },
-      errors
-    })
-  } else {
-    organisationModel.updateOne({
-      organisationId: req.params.organisationId,
-      accreditedBodyId: req.params.accreditedBodyId,
-      organisation: req.session.data.organisation
-    })
-
-    req.flash('success','Accredited body description updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }

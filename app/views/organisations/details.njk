@@ -1,6 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set primaryNavId = "settings" %}
+{% set subNavId = "details" %}
 
 {% set title = "Organisation details" %}
 
@@ -14,16 +15,14 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% include "_includes/page-heading.njk" %}
+    </div>
+  </div>
 
-      <h1 class="govuk-heading-l">
-        {% if caption %}
-          <span class="govuk-caption-l">
-            {{ caption }}
-          </span>
-        {% endif %}
-        {{ title }}
-      </h1>
+  {#% include "./_sub-navigation.njk" %#}
 
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
 
       {{ govukSummaryList({
@@ -79,7 +78,18 @@
                 }
               ]
             }
-          },
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Training with your organisation</h2>
+
+      {{ govukSummaryList({
+        rows: [
           {
             key: {
               text: "Training with your organisation"
@@ -118,88 +128,57 @@
           }
         ]
       }) }}
+    </div>
+  </div>
 
-      {% if organisation.type in ["hei","scitt"] %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Visa sponsorship</h2>
 
-        <h2 class="govuk-heading-m govuk-!-margin-top-9">Visa sponsorship</h2>
-
-        {{ govukSummaryList({
-          rows: [
-            {
-              key: {
-                text: "Student visa"
-              },
-              value: {
-                text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorStudentVisa == "yes" else " - cannot sponsor")
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/student-visa",
-                    text: "Change",
-                    visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
-                  }
-                ]
-              } if organisation.type == "hei"
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Student visa"
             },
-            {
-              key: {
-                text: "Skilled Worker visa"
-              },
-              value: {
-                text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/skilled-worker-visa",
-                    text: "Change",
-                    visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
-                  }
-                ]
-              }
+            value: {
+              text: organisation.visaSponsorship.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorStudentVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/student-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Student visa for your fee-paying courses"
+                }
+              ]
+            } if organisation.type == "hei"
+          },
+          {
+            key: {
+              text: "Skilled Worker visa"
+            },
+            value: {
+              text: organisation.visaSponsorship.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if organisation.visaSponsorship.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/skilled-worker-visa",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates get a sponsored Skilled Worker visa for your salaried courses"
+                }
+              ]
             }
-          ]
-        }) }}
+          }
+        ]
+      }) }}
+    </div>
+  </div>
 
-      {% endif %}
-
-      {% if organisation.type == "lead_school" %}
-
-        <h2 class="govuk-heading-m govuk-!-margin-top-9">Accredited bodies</h2>
-
-        {{ govukButton({
-          text: "Add accredited body",
-          href: "#"
-        }) }}
-
-        <dl class="govuk-summary-list">
-          {% for accreditedBody in organisation.accreditedBodies %}
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              {{ accreditedBody.name }}
-            </dt>
-            {% if accreditedBody.description.length %}
-              <dd class="govuk-summary-list__value">
-                {{ accreditedBody.description | nl2br | markdownToHtml | safe }}
-              </dd>
-            {% else %}
-              <dd class="govuk-summary-list__value govuk-hint">
-                Not entered
-              </dd>
-            {% endif %}
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="{{ actions.change }}/accredited-bodies/{{ accreditedBody.id }}">
-                Change<span class="govuk-visually-hidden"> {{ accreditedBody.name }}’s description</span>
-              </a>
-            </dd>
-          </div>
-          {% endfor %}
-        </dl>
-
-      {% endif %}
-
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">Contact details</h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Contact details</h2>
 
       {% set addressHtml %}
         {% if organisation.address.addressLine1.length %}
@@ -226,7 +205,7 @@
               text: "Email address"
             },
             value: {
-              text: organisation.contact.email if organisation.contact.email.length else "Not entered",
+              text: (organisation.contact.email | urlize | safe) if organisation.contact.email.length else "Not entered",
               classes: "govuk-hint" if not organisation.contact.email.length
             },
             actions: {
@@ -262,7 +241,7 @@
               text: "Website"
             },
             value: {
-              text: organisation.contact.website if organisation.contact.website.length else "Not entered",
+              text: (organisation.contact.website | urlize | safe) if organisation.contact.website.length else "Not entered",
               classes: "govuk-hint" if not organisation.contact.website.length
             },
             actions: {
@@ -295,7 +274,6 @@
           }
         ]
       }) }}
-
     </div>
   </div>
 

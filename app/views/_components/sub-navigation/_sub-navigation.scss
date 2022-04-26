@@ -2,7 +2,6 @@
   margin-bottom: govuk-spacing(7);
 }
 
-
 .app-sub-navigation__list {
   font-size: 0; // Removes white space when using inline-block on child element.
   list-style: none;
@@ -18,9 +17,7 @@
   @include govuk-if-ie8 {
     border-bottom: 1px solid $govuk-border-colour;
   }
-
 }
-
 
 .app-sub-navigation__item {
   @include govuk-font(19);
@@ -38,17 +35,18 @@
     margin-right: govuk-spacing(4);
     margin-top: 0;
   }
-
 }
 
-
 .app-sub-navigation__link {
+  @include govuk-link-common;
+  @include govuk-link-style-default;
   display: block;
   padding-top: 12px;
-  padding-bottom: 12px;
+  padding-bottom: 17px;
   padding-left: govuk-spacing(3);
   text-decoration: none;
   position: relative;
+  font-weight: bold;
 
   @include govuk-media-query($from: tablet) {
     padding-left: 0;
@@ -68,7 +66,6 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     height: 5px;
   }
-
 }
 
 
@@ -89,11 +86,9 @@
       height: 5px;
       width: 100%;
     }
-
   }
 
   &:focus:before {
     background-color: govuk-colour("black");
   }
-
 }
