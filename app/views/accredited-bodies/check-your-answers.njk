@@ -27,6 +27,20 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set permissionsHtml %}
+          {% if accreditedBody.permissions.length %}
+            <ul class="govuk-list">
+              {% for permission in accreditedBody.permissions %}
+                <li>
+                  {{ permission | getPermissionLabel }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="govuk-body">View only</p>
+          {% endif %}
+        {% endset %}
+
         {{ govukSummaryList({
           rows: [
             {
@@ -60,6 +74,23 @@
                     href: actions.change + "/description?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "description"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Permissions"
+              },
+              value: {
+                html: permissionsHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/permissions?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "permissions"
                   }
                 ]
               }

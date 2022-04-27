@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Accredited body description (optional)" %}
+{% set title = "Description (optional)" %}
 
 {% if referrer == "change" %}
   {% set caption = accreditedBody.name %}
@@ -49,7 +49,7 @@
 
         {% if referrer == "change" %}
           {{ govukButton({
-            text: "Update accredited body description"
+            text: "Update description"
           }) }}
         {% else %}
           {{ govukButton({
