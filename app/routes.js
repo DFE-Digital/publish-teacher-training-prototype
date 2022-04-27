@@ -261,11 +261,17 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/ne
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_post)
