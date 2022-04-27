@@ -9,6 +9,7 @@ const cycleHelper = require('./helpers/cycles')
 const locationHelper = require('./helpers/locations')
 const notificationHelper = require('./helpers/notifications')
 const organisationHelper = require('./helpers/organisations')
+const permissionHelper = require('./helpers/permissions')
 const subjectHelper = require('./helpers/subjects')
 const visaSponsorshipHelper = require('./helpers/visa-sponsorship')
 
@@ -354,6 +355,21 @@ module.exports = (env) => {
 
     if (code) {
       label = notificationHelper.getNotificationLabel(code)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the permission label
+  example: {{ "change_courses" | getPermissionLabel }}
+  outputs: "Change courses"
+  ------------------------------------------------------------------ */
+  filters.getPermissionLabel = (code) => {
+    let label
+
+    if (code) {
+      label = permissionHelper.getPermissionLabel(code)
     }
 
     return label

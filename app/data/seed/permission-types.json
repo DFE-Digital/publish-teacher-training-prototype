@@ -1,0 +1,47 @@
+[
+  {
+    "id": "8b11c89a-2a9c-4d28-8b18-d54a72e6790d",
+    "code": "change_courses",
+    "name": "Change courses",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "628e6fdc-9c3b-43f6-b8f7-40bd53cec3e1",
+    "code": "publish_courses",
+    "name": "Publish courses",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "6fcfaac6-7df2-442d-a490-55969ba184c6",
+    "code": "withdraw_courses",
+    "name": "Withdraw courses",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "365998b4-89c9-48b4-b745-fb07167b57a6",
+    "code": "change_course_vacancies",
+    "name": "Change course vacancies",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  },
+  {
+    "id": "eeda3dd3-0c24-436c-9334-a1e4083413a8",
+    "code": "manage_locations",
+    "name": "Manage locations",
+    "providerTypes": [
+      "scitt",
+      "hei"
+    ]
+  }
+]
