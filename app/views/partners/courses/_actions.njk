@@ -1,0 +1,16 @@
+{% if course.status in ["0","2"] %}
+  {{ govukButton({
+    text: "Publish course",
+    href: "#"
+  }) }}
+{% else %}
+  <ul class="govuk-list app-list--inline">
+    <li><a class="govuk-link govuk-!-margin-right-2" href="#">View on Find</a></li>
+    {% if permissions and "change_course_vacancies" in permissions %}
+      <li><a class="govuk-link govuk-!-margin-right-2" href="#">Edit vacancies</a></li>
+    {% endif %}
+    {% if permissions and "withdraw_courses" in permissions %}
+      <li><a class="govuk-link app-link--destructive" href="#">Withdraw course</a></li>
+    {% endif %}
+  </ul>
+{% endif %}
