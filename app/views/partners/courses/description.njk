@@ -34,6 +34,8 @@
         }) }}
       </h1>
 
+      {% include "./_actions.njk" %}
+
     </div>
   </div>
 
@@ -61,7 +63,16 @@
             value: {
               text: (course.aboutCourse | nl2br | markdownToHtml | safe) if course.aboutCourse.length else "Not entered",
               classes: "govuk-hint" if not course.aboutCourse.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "about this course"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -70,7 +81,16 @@
             value: {
               text: (course.interviewProcess | nl2br | markdownToHtml | safe) if course.interviewProcess.length else "Not entered",
               classes: "govuk-hint" if not course.interviewProcess.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "interview process"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -79,7 +99,16 @@
             value: {
               text: (course.howSchoolPlacementsWork | nl2br | markdownToHtml | safe) if course.howSchoolPlacementsWork.length else "Not entered",
               classes: "govuk-hint" if not course.howSchoolPlacementsWork.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "how school placements work"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           }
         ]
       }) }}
@@ -109,7 +138,16 @@
             value: {
               text: courseLengthText,
               classes: "govuk-hint" if not course.courseLength.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/course-length",
+                  text: "Change",
+                  visuallyHiddenText: "course length"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -118,7 +156,16 @@
             value: {
               text: "£" + course.feesUK | numeral('0,0.[00]') if course.feesUK else "Not entered",
               classes: "govuk-hint" if not course.feesUK
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "fee for UK student"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -127,7 +174,16 @@
             value: {
               text: "£" + course.feesInternational | numeral('0,0.[00]') if course.feesInternational else "Not entered",
               classes: "govuk-hint" if not course.feesInternational
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "fee for international students"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -136,7 +192,16 @@
             value: {
               text: (course.feeDetails | nl2br | markdownToHtml | safe) if course.feeDetails.length else "Not entered",
               classes: "govuk-hint" if not course.feeDetails.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "fee details"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -145,7 +210,16 @@
             value: {
               text: (course.financialSupport | nl2br | markdownToHtml | safe) if course.financialSupport.length else "Not entered",
               classes: "govuk-hint" if not course.financialSupport.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "financial support you offer"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           }
         ]
       }) }}
@@ -179,7 +253,16 @@
                 html: degreeHtml,
                 classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
               })
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "degree"
+                } if 1 == 0
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -190,7 +273,16 @@
                 html: gcseHtml,
                 classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
               })
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "GCSEs"
+                } if 1 == 0
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -199,7 +291,16 @@
             value: {
               text: (course.personalQualities | nl2br | markdownToHtml | safe) if course.personalQualities.length else "Not entered",
               classes: "govuk-hint" if not course.personalQualities.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "personal qualities"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -208,7 +309,16 @@
             value: {
               text: (course.otherRequirements | nl2br | markdownToHtml | safe) if course.otherRequirements.length else "Not entered",
               classes: "govuk-hint" if not course.otherRequirements.length
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "other requirements"
+                }
+              ]
+            } if permissions and "change_courses" in permissions
           }
         ]
       }) }}
