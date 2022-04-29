@@ -1,6 +1,6 @@
 const cycles = require('../helpers/cycles')
 
-let defaults = {}
+const defaults = {}
 
 defaults.currentCycle = cycles.CURRENT_CYCLE
 defaults.previousCycle = cycles.PREVIOUS_CYCLE
