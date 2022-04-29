@@ -26,10 +26,10 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
 
     item.hint = {}
     item.hint.text = utils.arrayToList(
-        array = Object.values(location.address),
-        join = ', ',
-        final = ', '
-      )
+      array = Object.values(location.address),
+      join = ', ',
+      final = ', '
+    )
 
     items.push(item)
   })
