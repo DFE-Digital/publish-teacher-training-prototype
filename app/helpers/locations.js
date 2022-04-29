@@ -12,7 +12,7 @@ const locationModel = require('../models/locations')
 exports.getLocationOptions = (organisationId, selectedItem) => {
   const items = []
 
-  const locations = locationModel.find({
+  const locations = locationModel.findMany({
     organisationId: organisationId
   })
 

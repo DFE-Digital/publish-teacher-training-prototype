@@ -18,6 +18,13 @@
 
       {% include "_includes/page-heading.njk" %}
 
+      {% if permissions and "add_courses" in permissions %}
+        {{ govukButton({
+          text: "Add course",
+          href: "#"
+        }) }}
+      {% endif %}
+
     </div>
   </div>
 
@@ -76,7 +83,11 @@
                 </td>
                 <td class="govuk-table__cell">
                   {% if course.status == 1 %}
-                    Yes (<a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                    {% if permissions and "change_course_vacancies" in permissions %}
+                      Yes (<a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                    {% else %}
+                      Yes
+                    {% endif %}
                   {% elif course.status == 3 %}
                     No
                   {% endif %}

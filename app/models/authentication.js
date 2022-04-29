@@ -1,11 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 
+const directoryPath = path.join(__dirname, '../data/users/')
+
 exports.findOne = (params) => {
   const users = []
   let user = {}
-
-  const directoryPath = path.join(__dirname, '../data/users/')
 
   let documents = fs.readdirSync(directoryPath,'utf8')
 

@@ -18,6 +18,7 @@ exports.insertOne = (params) => {
     ab.code = accreditedBody.code
     ab.name = accreditedBody.name
     ab.description = params.accreditedBody.description
+    ab.permissions = params.accreditedBody.permissions
 
     organisation.accreditedBodies.push(ab)
 
@@ -44,7 +45,15 @@ exports.updateOne = (params) => {
     if (params.accreditedBodyId) {
       organisation.accreditedBodies.forEach((accreditedBody, i) => {
         if (accreditedBody.id === params.accreditedBodyId) {
-          accreditedBody.description = params.accreditedBody.description
+
+          if (params.accreditedBody.description) {
+            accreditedBody.description = params.accreditedBody.description
+          }
+
+          if (params.accreditedBody.permissions) {
+            accreditedBody.permissions = params.accreditedBody.permissions
+          }
+
         }
       })
     }

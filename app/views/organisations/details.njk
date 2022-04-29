@@ -4,6 +4,7 @@
 {% set subNavId = "details" %}
 
 {% set title = "Organisation details" %}
+{#% set title = organisation.name + " (" + organisation.code + ")" %#}
 
 {% block beforeContent %}
 
@@ -18,8 +19,6 @@
       {% include "_includes/page-heading.njk" %}
     </div>
   </div>
-
-  {#% include "./_sub-navigation.njk" %#}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

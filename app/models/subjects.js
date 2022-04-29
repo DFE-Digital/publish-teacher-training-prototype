@@ -1,7 +1,3 @@
-exports.find = (params) => {
-
-}
-
 exports.findOne = (params) => {
   const subjects = require('../data/subjects')
 

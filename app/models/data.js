@@ -18,7 +18,7 @@ exports.seed = () => {
   // seedRelationships()
   // seedCourseVisaSponsorship()
   // seedUsers()
-  seedFundingType()
+  // seedFundingType()
 }
 
 const seedFundingType = () => {
@@ -236,7 +236,7 @@ const seedUsers = () => {
 //     tUser.providers.forEach((tProvider, i) => {
 //       const organisation = {}
 //
-//       const o = organisationModel.find({ code: tProvider.code })
+//       const o = organisationModel.findMany({ code: tProvider.code })
 //
 //       try {
 //         organisation.id = o.id

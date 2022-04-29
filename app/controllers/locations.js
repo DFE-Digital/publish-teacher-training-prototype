@@ -3,7 +3,7 @@ const locationModel = require('../models/locations')
 exports.location_list = (req, res) => {
   delete req.session.data.location
 
-  let locations = locationModel.find({ organisationId: req.params.organisationId })
+  let locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   res.render('../views/locations/list', {
     locations: locations,

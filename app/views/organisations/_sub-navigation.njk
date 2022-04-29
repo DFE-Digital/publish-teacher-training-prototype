@@ -6,19 +6,13 @@
       href: actions.details,
       active: true if subNavId == "details"
     }, {
-      text: "Description",
+      text: "Contact details",
       href: actions.description,
-      active: true if subNavId == "description"
-    },
-    {
+      active: true if subNavId == "contact"
+    }, {
       text: "Accredited bodies",
-      href: actions.partners,
-      active: true if subNavId == "partners"
-    } if organisation.type == "lead_school",
-    {
-      text: "Visa sponsorship",
-      href: actions.visas,
-      active: true if subNavId == "visas"
-    } if organisation.type in ["hei","scitt"]
+      href: "#",
+      active: true if subNavId == "accreditedBodies"
+    } if organisation.type == "lead_school"
   ]
 }) }}

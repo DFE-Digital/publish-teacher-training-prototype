@@ -34,6 +34,8 @@
         }) }}
       </h1>
 
+      {% include "./_actions.njk" %}
+
     </div>
   </div>
 
@@ -92,7 +94,16 @@
             },
             value: {
               text: course.isSend | getSendLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "special educational needs and disability (SEND)"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -100,7 +111,16 @@
             },
             value: {
               html: subjectHtml
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "subject"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -108,7 +128,16 @@
             },
             value: {
               html: ageRangeHtml
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "age range"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -116,7 +145,16 @@
             },
             value: {
               text: course.qualification | getQualificationLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "qualification"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -124,7 +162,16 @@
             },
             value: {
               text: course.fundingType | getApprenticeshipLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "apprenticeship"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if organisation.isAccreditedBody,
           {
             key: {
@@ -132,7 +179,16 @@
             },
             value: {
               text: course.fundingType | getFundingTypeLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "funding type"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -140,7 +196,16 @@
             },
             value: {
               text: course.studyMode | getStudyModeLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "full time or part time"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -148,7 +213,16 @@
             },
             value: {
               html: locationHtml
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "location"
+                }
+              ]
+            } if locations.length > 1 and permissions and "change_courses" in permissions
           },
           {
             key: {
@@ -156,7 +230,16 @@
             },
             value: {
               text: course.accreditedBody.id | getOrganisationLabel
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "accredited body"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -164,7 +247,16 @@
             },
             value: {
               text: course.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if course.canSponsorStudentVisa == "yes" else " - cannot sponsor")
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Student visa"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.fundingType == "fee",
           {
             key: {
@@ -172,7 +264,16 @@
             },
             value: {
               text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if course.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.fundingType in ["salary", "apprenticeship"],
           {
             key: {
@@ -180,7 +281,16 @@
             },
             value: {
               text: "As soon as the course is on Find" if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther | date("d MMMM yyyy")
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "applications open date"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -188,7 +298,16 @@
             },
             value: {
               text: course.startDate | date("MMMM yyyy")
-            }
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "course start"
+                }
+              ]
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           }
         ]
       }) }}
