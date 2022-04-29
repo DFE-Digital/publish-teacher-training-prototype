@@ -9,14 +9,14 @@ const directoryPath = path.join(__dirname, '../data/users/')
 exports.findMany = (params) => {
   let users = []
 
-  let documents = fs.readdirSync(directoryPath,'utf8')
+  let documents = fs.readdirSync(directoryPath, 'utf8')
 
   // Only get JSON documents
   documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
   documents.forEach((filename) => {
-    let raw = fs.readFileSync(directoryPath + '/' + filename)
-    let data = JSON.parse(raw)
+    const raw = fs.readFileSync(directoryPath + '/' + filename)
+    const data = JSON.parse(raw)
     users.push(data)
   })
 
@@ -65,10 +65,9 @@ exports.saveOne = (params) => {
 }
 
 exports.insertOne = (params) => {
-  let user = {}
+  const user = {}
 
   if (params.organisationId) {
-
     user.id = uuid()
 
     if (params.user.firstName) {
@@ -96,7 +95,7 @@ exports.insertOne = (params) => {
     organisation.name = o.name
     organisation.permissions = []
 
-    if (['hei','scitt'].includes(o.type)) {
+    if (['hei', 'scitt'].includes(o.type)) {
       organisation.notifications = [
         'course_published',
         'course_changed',
@@ -167,7 +166,7 @@ exports.updateOne = (params) => {
       organisation.name = o.name
       organisation.permissions = []
 
-      if (['hei','scitt'].includes(o.type)) {
+      if (['hei', 'scitt'].includes(o.type)) {
         organisation.notifications = [
           'course_published',
           'course_changed',
@@ -207,7 +206,7 @@ exports.updateOne = (params) => {
 
 exports.deleteOne = (params) => {
   if (params.organisationId && params.userId) {
-    let user = this.findOne({ userId: params.userId })
+    const user = this.findOne({ userId: params.userId })
 
     user.organisations = user.organisations.filter(
       organisation => organisation.id !== params.organisationId
@@ -224,8 +223,8 @@ exports.deleteOne = (params) => {
       fs.writeFileSync(filePath, fileData)
     } else {
       // remove the user altogether since they're no longer associated with an
-     // organisation
-     fs.unlinkSync(filePath)
+      // organisation
+      fs.unlinkSync(filePath)
     }
   }
 }

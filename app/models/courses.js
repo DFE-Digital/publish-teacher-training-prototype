@@ -7,7 +7,7 @@ const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
 exports.findMany = (params) => {
-  let courses = []
+  const courses = []
 
   if (params.organisationId) {
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
@@ -18,14 +18,14 @@ exports.findMany = (params) => {
       fs.mkdirSync(directoryPath)
     }
 
-    let documents = fs.readdirSync(directoryPath,'utf8')
+    let documents = fs.readdirSync(directoryPath, 'utf8')
 
     // Only get JSON documents
     documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
     documents.forEach((filename) => {
-      let raw = fs.readFileSync(directoryPath + '/' + filename)
-      let data = JSON.parse(raw)
+      const raw = fs.readFileSync(directoryPath + '/' + filename)
+      const data = JSON.parse(raw)
       courses.push(data)
     })
   }
@@ -41,7 +41,7 @@ exports.findOne = (params) => {
 
     const filePath = directoryPath + '/' + params.courseId + '.json'
 
-    let raw = fs.readFileSync(filePath)
+    const raw = fs.readFileSync(filePath)
     course = JSON.parse(raw)
   }
 
@@ -50,8 +50,7 @@ exports.findOne = (params) => {
 
 exports.insertOne = (params) => {
   if (params) {
-
-    let course = {}
+    const course = {}
 
     course.id = uuid()
 
@@ -87,7 +86,6 @@ exports.insertOne = (params) => {
       })
 
       course.subjects = subjects
-
     }
 
     if (params.course.ageRange) {
@@ -132,7 +130,6 @@ exports.insertOne = (params) => {
       if (tp.type === 'hei') {
         course.programType = 'HE'
       }
-
     }
 
     if (params.course.studyMode) {
@@ -180,7 +177,7 @@ exports.insertOne = (params) => {
       }
     }
 
-    if (['salary','apprenticeship'].includes(course.fundingType)) {
+    if (['salary', 'apprenticeship'].includes(course.fundingType)) {
       if (params.course.canSponsorSkilledWorkerVisa) {
         course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
       }
@@ -217,10 +214,8 @@ exports.insertOne = (params) => {
 }
 
 exports.updateOne = (params) => {
-
   if (params.organisationId && params.courseId) {
-
-    let course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
+    const course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
 
     if (params.course.name) {
       course.name = params.course.name
@@ -305,7 +300,6 @@ exports.updateOne = (params) => {
       if (tp.type === 'hei') {
         course.programType = 'HE'
       }
-
     }
 
     if (params.course.studyMode) {
@@ -408,7 +402,7 @@ exports.updateOne = (params) => {
       delete course.canSponsorStudentVisa
     }
 
-    if (['salary','apprenticeship'].includes(course.fundingType)) {
+    if (['salary', 'apprenticeship'].includes(course.fundingType)) {
       if (params.course.canSponsorSkilledWorkerVisa !== undefined) {
         course.canSponsorSkilledWorkerVisa = params.course.canSponsorSkilledWorkerVisa
       }

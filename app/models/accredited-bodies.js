@@ -45,7 +45,6 @@ exports.updateOne = (params) => {
     if (params.accreditedBodyId) {
       organisation.accreditedBodies.forEach((accreditedBody, i) => {
         if (accreditedBody.id === params.accreditedBodyId) {
-
           if (params.accreditedBody.description) {
             accreditedBody.description = params.accreditedBody.description
           }
@@ -53,7 +52,6 @@ exports.updateOne = (params) => {
           if (params.accreditedBody.permissions) {
             accreditedBody.permissions = params.accreditedBody.permissions
           }
-
         }
       })
     }

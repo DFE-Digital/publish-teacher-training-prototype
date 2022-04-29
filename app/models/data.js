@@ -24,7 +24,7 @@ exports.seed = () => {
 const seedFundingType = () => {
   const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
 
-  let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
+  let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
 
   // Only get JSON documents
   oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
@@ -32,7 +32,7 @@ const seedFundingType = () => {
   oDocuments.forEach((oFileName) => {
     const oFilePath = oDirectoryPath + '/' + oFileName
     const oRaw = fs.readFileSync(oFilePath)
-    let organisation = JSON.parse(oRaw)
+    const organisation = JSON.parse(oRaw)
 
     // console.log(oFileName);
 
@@ -43,7 +43,7 @@ const seedFundingType = () => {
       fs.mkdirSync(cDirectoryPath)
     }
 
-    let cDocuments = fs.readdirSync(cDirectoryPath,'utf8')
+    let cDocuments = fs.readdirSync(cDirectoryPath, 'utf8')
 
     // Only get JSON documents
     cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
@@ -51,7 +51,7 @@ const seedFundingType = () => {
     cDocuments.forEach((cFileName) => {
       const cFilePath = cDirectoryPath + '/' + cFileName
       const cRaw = fs.readFileSync(cFilePath)
-      let course = JSON.parse(cRaw)
+      const course = JSON.parse(cRaw)
 
       if (!course.fundingType) {
         if (course.trainingProvider) {
@@ -78,25 +78,18 @@ const seedFundingType = () => {
             // write the JSON data
             // fs.writeFileSync(cFilePath, cFileData)
 
-            console.log(cFilePath);
+            console.log(cFilePath)
           }
-
         }
-
       }
-
     })
-
-
   })
-
-
 }
 
 const seedUsers = () => {
   const directoryPath = path.join(__dirname, '../data/seed/users/')
 
-  let documents = fs.readdirSync(directoryPath,'utf8')
+  let documents = fs.readdirSync(directoryPath, 'utf8')
 
   // Only get JSON documents
   documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
@@ -104,12 +97,12 @@ const seedUsers = () => {
   documents.forEach((fileName) => {
     const filePath = directoryPath + '/' + fileName
     const raw = fs.readFileSync(filePath)
-    let user = JSON.parse(raw)
+    const user = JSON.parse(raw)
 
     user.organisations.forEach((organisation, i) => {
       const o = organisationModel.findOne({ organisationId: organisation.id })
 
-      if (['hei','scitt'].includes(o.type)) {
+      if (['hei', 'scitt'].includes(o.type)) {
         organisation.notifications = [
           'course_published',
           'course_changed',
@@ -138,11 +131,8 @@ const seedUsers = () => {
     // fs.writeFileSync(filePath, fileData)
 
     // console.log(filePath);
-    console.log(user);
-
+    console.log(user)
   })
-
-
 }
 
 // const seedUsers = () => {
@@ -282,32 +272,32 @@ const seedCourseVisaSponsorship = () => {
   const organisations = []
   const oDirectoryPath = path.join(__dirname, '../data/seed/organisations')
 
-  let oDocuments = fs.readdirSync(oDirectoryPath,'utf8')
+  let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
 
   // Only get JSON documents
   oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
 
   oDocuments.forEach((filename) => {
-    let raw = fs.readFileSync(oDirectoryPath + '/' + filename)
-    let organisation = JSON.parse(raw)
+    const raw = fs.readFileSync(oDirectoryPath + '/' + filename)
+    const organisation = JSON.parse(raw)
     // organisations.push(organisation)
 
-    console.log('==============================');
-    console.log('Organisation: ', organisation.id);
+    console.log('==============================')
+    console.log('Organisation: ', organisation.id)
 
     if (organisation.id) {
       const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
 
       // not all organisations have courses, so wrap with try/catch
       try {
-        let cDocuments = fs.readdirSync(cDirectoryPath,'utf8')
+        let cDocuments = fs.readdirSync(cDirectoryPath, 'utf8')
 
         // Only get JSON documents
         cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
 
         cDocuments.forEach((filename) => {
-          let raw = fs.readFileSync(cDirectoryPath + '/' + filename)
-          let course = JSON.parse(raw)
+          const raw = fs.readFileSync(cDirectoryPath + '/' + filename)
+          const course = JSON.parse(raw)
 
           if (organisation.isAccreditedBody) {
             if (organisation.visaSponsorship) {
@@ -318,8 +308,8 @@ const seedCourseVisaSponsorship = () => {
               }
             }
           } else {
-            let accreditedBodyRaw = fs.readFileSync(oDirectoryPath + '/' + course.accreditedBody.id + '.json')
-            let accreditedBody = JSON.parse(accreditedBodyRaw)
+            const accreditedBodyRaw = fs.readFileSync(oDirectoryPath + '/' + course.accreditedBody.id + '.json')
+            const accreditedBody = JSON.parse(accreditedBodyRaw)
 
             if (accreditedBody.visaSponsorship) {
               if (course.fundingType === 'fee') {
@@ -339,7 +329,7 @@ const seedCourseVisaSponsorship = () => {
           //   course.applicationsOpenDateOther = applicationsOpenDate
           // }
 
-          console.log('Course: ', course.id);
+          console.log('Course: ', course.id)
 
           // write course data to file
           // if (course) {
@@ -360,11 +350,8 @@ const seedCourseVisaSponsorship = () => {
       } catch (e) {
         console.error(e)
       }
-
     }
-
   })
-
 }
 
 const seedRelationships = () => {
@@ -420,7 +407,6 @@ const seedRelationships = () => {
 
   console.log(providers)
 }
-
 
 // {
 //   "id": "82fd3a3b-6bfd-40d1-8343-0c19e34a847a",
@@ -491,7 +477,6 @@ const seedOrganisations = () => {
       const r = relationships.find(rel => rel.code === organisation.code)
 
       o.accreditedBodies = r.accreditedBodies
-
     }
 
     o.createdAt = to.createdAt
@@ -517,9 +502,7 @@ const seedOrganisations = () => {
 
     // output organisation info
     console.log(i, o)
-
   })
-
 }
 
 // {
@@ -601,9 +584,6 @@ const seedLocations = () => {
     // output location info
     console.log(i, l)
   })
-
-
-
 }
 
 const seedCourses = () => {
@@ -624,7 +604,7 @@ const seedCourses = () => {
 
   const courseEnrichment = [...courseEnrichment1, ...courseEnrichment2, ...courseEnrichment3, ...courseEnrichment4]
 
-  courseEnrichment.sort((a,b) => {
+  courseEnrichment.sort((a, b) => {
     return a.uuid.localeCompare(b.uuid) || new Date(a.created_at) - new Date(b.created_at)
   })
 
@@ -647,7 +627,7 @@ const seedCourses = () => {
 
     c.programType = course.programType
 
-    if (['SD','SS','TA'].includes(course.programType)) {
+    if (['SD', 'SS', 'TA'].includes(course.programType)) {
       switch (course.programType) {
         case 'SD':
           c.fundingType = 'fee'
@@ -714,7 +694,6 @@ const seedCourses = () => {
       const ab = organisations.find(organisation => organisation.code === course.accreditedBody.code)
 
       if (ab) {
-
         // if there isn't a training provider, use the accredited body
         if (!c.trainingProvider) {
           c.trainingProvider = {}
@@ -727,7 +706,6 @@ const seedCourses = () => {
           c.accreditedBody.code = ab.code
           c.accreditedBody.name = ab.name
         }
-
       }
     }
 
@@ -833,8 +811,5 @@ const seedCourses = () => {
 
     // output course info
     console.log(i, c)
-
   })
-
-
 }

@@ -7,9 +7,9 @@ const generateLocationCode = (params) => {
 
   const alphaNumerics = [
     '-',
-    'A','B','C','D','E','F','G','H','I','J','K','L','M',
-    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-    '0','1','2','3','4','5','6','7','8','9'
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
   ]
 
   const locations = this.findMany({
@@ -40,10 +40,9 @@ const generateLocationCode = (params) => {
 }
 
 exports.findMany = (params) => {
-  let locations = []
+  const locations = []
 
   if (params.organisationId) {
-
     const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
 
     // to prevent errors when an organisation doesn't have any locations
@@ -52,18 +51,18 @@ exports.findMany = (params) => {
       fs.mkdirSync(directoryPath)
     }
 
-    let documents = fs.readdirSync(directoryPath,'utf8')
+    let documents = fs.readdirSync(directoryPath, 'utf8')
 
     // Only get JSON documents
     documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
     documents.forEach((filename) => {
-      let raw = fs.readFileSync(directoryPath + '/' + filename)
-      let data = JSON.parse(raw)
+      const raw = fs.readFileSync(directoryPath + '/' + filename)
+      const data = JSON.parse(raw)
       locations.push(data)
     })
 
-    locations.sort((a,b) => {
+    locations.sort((a, b) => {
       return a.name.localeCompare(b.name)
     })
   }
@@ -79,7 +78,7 @@ exports.findOne = (params) => {
 
     const filePath = directoryPath + '/' + params.locationId + '.json'
 
-    let raw = fs.readFileSync(filePath)
+    const raw = fs.readFileSync(filePath)
     location = JSON.parse(raw)
   }
 
@@ -87,7 +86,7 @@ exports.findOne = (params) => {
 }
 
 exports.insertOne = (params) => {
-  let location = {}
+  const location = {}
 
   if (params.organisationId) {
     location.id = uuid()
@@ -148,7 +147,7 @@ exports.insertOne = (params) => {
 
 exports.updateOne = (params) => {
   if (params.organisationId && params.locationId) {
-    let location = this.findOne({ organisationId: params.organisationId, locationId: params.locationId })
+    const location = this.findOne({ organisationId: params.organisationId, locationId: params.locationId })
 
     if (params.location.name) {
       location.name = params.location.name
