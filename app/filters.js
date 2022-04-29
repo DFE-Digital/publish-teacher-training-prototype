@@ -28,7 +28,7 @@ module.exports = (env) => {
   if (fs.existsSync(individualFiltersFolder)) {
     const files = fs.readdirSync(individualFiltersFolder)
     files.forEach(file => {
-      let fileData = require(path.join(individualFiltersFolder, file))
+      const fileData = require(path.join(individualFiltersFolder, file))
       // Loop through each exported function in file (likely just one)
       Object.keys(fileData).forEach((filterGroup) => {
         // Get each method from the file
@@ -39,7 +39,7 @@ module.exports = (env) => {
     })
   }
 
-  filters.includes = (route, string) =>{
+  filters.includes = (route, string) => {
     if (route && route.includes(string)) {
       return true
     } else {
@@ -55,8 +55,8 @@ module.exports = (env) => {
   filters.falsify = (input) => {
     if (_.isNumber(input)) return input
     else if (input == false) return false
-    if (_.isString(input)){
-      const truthyValues = ['yes','true']
+    if (_.isString(input)) {
+      const truthyValues = ['yes', 'true']
       const falsyValues = ['no', 'false']
       if (truthyValues.includes(input.toLowerCase())) return true
       else if (falsyValues.includes(input.toLowerCase())) return false
@@ -70,7 +70,7 @@ module.exports = (env) => {
    outputs: 1,000.00
   ------------------------------------------------------------------ */
   filters.numeral = (number, format) => {
-   return numeral(number).format(format)
+    return numeral(number).format(format)
   }
 
   /* ------------------------------------------------------------------

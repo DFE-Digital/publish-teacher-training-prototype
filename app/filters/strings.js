@@ -8,17 +8,16 @@ const string = require('string')
 // Leave this filters line
 const filters = {}
 
-
 // Create url / slugs from text
 // This is a heading => this-is-a-heading
 filters.slugify = (input) => {
-  if (!input) throw "Error in slugify: no input", input;
-  else return string(input).slugify().toString();
+  if (!input) throw 'Error in slugify: no input', input
+  else return string(input).slugify().toString()
 }
 
 // Split a string using a separator
 filters.split = (string, separator) => {
-  if (!string || typeof string != "string") return
+  if (!string || typeof string !== 'string') return
   else return string.split(separator)
 }
 
@@ -31,23 +30,21 @@ filters.kebabCase = (string) => {
 // Sentence case - uppercase first latter
 filters.sentenceCase = (input) => {
   if (!input) return '' // avoid printing false to client
-  if (_.isString(input)){
-    return input.charAt(0).toUpperCase() + input.slice(1);
-  }
-  else return input
+  if (_.isString(input)) {
+    return input.charAt(0).toUpperCase() + input.slice(1)
+  } else return input
 }
 
 filters.startLowerCase = (input) => {
   if (!input) return '' // avoid printing false to client
-  if (_.isString(input)){
-    return input.charAt(0).toLowerCase() + input.slice(1);
-  }
-  else return input
+  if (_.isString(input)) {
+    return input.charAt(0).toLowerCase() + input.slice(1)
+  } else return input
 }
 
 // Is it a string or not?
 filters.isString = str => {
-  let isString = _.isString(str)
+  const isString = _.isString(str)
   return _.isString(str)
 }
 
@@ -58,23 +55,21 @@ filters.prependWithAOrAn = string => {
   const matched = string.match(vowelRegex)
   if (matched) {
     return `an ${string}`
-  }
-  else{
+  } else {
     return `a ${string}`
   }
 }
 
 // Format a number as £x,xxx
 filters.currency = input => {
-  let inputAsInt = parseInt(input, 10)
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const inputAsInt = parseInt(input, 10)
+  function numberWithCommas (x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
-  if ( inputAsInt > 0 ) { return `£${numberWithCommas(inputAsInt)}` }
+  if (inputAsInt > 0) { return `£${numberWithCommas(inputAsInt)}` }
 
   // makes negative number positive and puts minus sign in front of £
-  else if ( inputAsInt < 0 ) { return `–£${numberWithCommas(inputAsInt * -1 )}` }
-  else return ''
+  else if (inputAsInt < 0) { return `–£${numberWithCommas(inputAsInt * -1)}` } else return ''
 }
 
 // Emulate support for string literals in Nunjucks
@@ -94,7 +89,7 @@ filters.markDown = input => {
 
 // Checks if a string starts with something
 filters.startsWith = (string, target) => {
-  if (typeof string == "string"){
+  if (typeof string === 'string') {
     return string.startsWith(target)
   } else {
     return false
