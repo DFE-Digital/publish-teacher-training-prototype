@@ -31,7 +31,7 @@
 
       {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
-        <p class="govuk-body">You can give {{ accreditedBody.name }} permission to make changes to your courses in their account.</p>
+        <p class="govuk-body">You can give {{ accreditedBody.name if accreditedBody.name else (accreditedBody.id | getOrganisationLabel) }} permission to make changes to your courses in their account.</p>
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -51,7 +51,6 @@
         }) }}
 
         {% if referrer == "change" %}
-
           {{ govukWarningText({
             text: "All users at " + accreditedBody.name + " will be sent an email to let them know their permissions have changed.",
             iconFallbackText: "Warning"
