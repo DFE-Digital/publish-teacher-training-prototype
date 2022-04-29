@@ -16,18 +16,18 @@ exports.course_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
-  let courses = courseModel.findMany({ organisationId: req.params.organisationId })
+  const courses = courseModel.findMany({ organisationId: req.params.organisationId })
 
   const relationships = organisation.accreditedBodies
 
-  let groupedCourses = []
+  const groupedCourses = []
 
   if (relationships && relationships.length) {
-    courses.sort((a,b) => {
-      return a.accreditedBody.name.localeCompare(b.accreditedBody.name)
-        || a.name.localeCompare(b.name)
-        || a.qualification.localeCompare(b.qualification)
-        || a.studyMode.localeCompare(b.studyMode)
+    courses.sort((a, b) => {
+      return a.accreditedBody.name.localeCompare(b.accreditedBody.name) ||
+        a.name.localeCompare(b.name) ||
+        a.qualification.localeCompare(b.qualification) ||
+        a.studyMode.localeCompare(b.studyMode)
     })
 
     relationships.forEach((relationship, i) => {
@@ -38,12 +38,12 @@ exports.course_list = (req, res) => {
       groupedCourses.push(group)
     })
   } else {
-    courses.sort((a,b) => {
-      return a.name.localeCompare(b.name)
-        || a.qualification.localeCompare(b.qualification)
-        || a.studyMode.localeCompare(b.studyMode)
+    courses.sort((a, b) => {
+      return a.name.localeCompare(b.name) ||
+        a.qualification.localeCompare(b.qualification) ||
+        a.studyMode.localeCompare(b.studyMode)
     })
-    groupedCourses.push({courses: courses})
+    groupedCourses.push({ courses: courses })
   }
 
   res.render('../views/courses/list', {
@@ -53,7 +53,7 @@ exports.course_list = (req, res) => {
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
-      back: `/`
+      back: '/'
     }
   })
 }
@@ -162,7 +162,7 @@ exports.edit_course_send_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','SEND specialism updated')
+    req.flash('success', 'SEND specialism updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -236,7 +236,7 @@ exports.edit_course_subject_post = (req, res) => {
         course: req.session.data.course
       })
 
-      req.flash('success','Subject updated')
+      req.flash('success', 'Subject updated')
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     }
   }
@@ -308,7 +308,7 @@ exports.edit_course_modern_language_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Subject updated')
+    req.flash('success', 'Subject updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -363,7 +363,7 @@ exports.edit_course_age_range_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Age range updated')
+    req.flash('success', 'Age range updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -418,7 +418,7 @@ exports.edit_course_qualification_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Qualification updated')
+    req.flash('success', 'Qualification updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -474,7 +474,7 @@ exports.edit_course_funding_type_post = (req, res) => {
         course: req.session.data.course
       })
 
-      req.flash('success','Funding type updated')
+      req.flash('success', 'Funding type updated')
 
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     } else {
@@ -535,7 +535,7 @@ exports.edit_course_apprenticeship_post = (req, res) => {
         course: req.session.data.course
       })
 
-      req.flash('success','Teaching apprenticeship updated')
+      req.flash('success', 'Teaching apprenticeship updated')
 
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     } else {
@@ -594,7 +594,7 @@ exports.edit_course_study_mode_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Full time or part time updated')
+    req.flash('success', 'Full time or part time updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -602,7 +602,7 @@ exports.edit_course_study_mode_post = (req, res) => {
 exports.edit_course_location_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
-  let selectedLocation = []
+  const selectedLocation = []
   if (course && course.locations) {
     course.locations.forEach((location, i) => {
       selectedLocation.push(location.id)
@@ -651,7 +651,7 @@ exports.edit_course_location_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Location updated')
+    req.flash('success', 'Location updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -707,7 +707,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
         course: req.session.data.course
       })
 
-      req.flash('success','Accredited body updated')
+      req.flash('success', 'Accredited body updated')
 
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     } else {
@@ -755,7 +755,7 @@ exports.edit_course_applications_open_date_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Date applications open updated')
+    req.flash('success', 'Date applications open updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -810,7 +810,7 @@ exports.edit_course_start_date_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Start date updated')
+    req.flash('success', 'Start date updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -849,7 +849,7 @@ exports.edit_about_course_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','About this course updated')
+    req.flash('success', 'About this course updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -888,7 +888,7 @@ exports.edit_interview_process_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Interview process updated')
+    req.flash('success', 'Interview process updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -927,7 +927,7 @@ exports.edit_school_placements_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','How school placements work updated')
+    req.flash('success', 'How school placements work updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -966,7 +966,7 @@ exports.edit_personal_qualities_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Personal qualities updated')
+    req.flash('success', 'Personal qualities updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1005,7 +1005,7 @@ exports.edit_other_requirements_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Other requirements updated')
+    req.flash('success', 'Other requirements updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1060,7 +1060,7 @@ exports.edit_course_length_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Course length updated')
+    req.flash('success', 'Course length updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1099,7 +1099,7 @@ exports.edit_course_fees_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Course fees updated')
+    req.flash('success', 'Course fees updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1138,7 +1138,7 @@ exports.edit_financial_support_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success','Financial support updated')
+    req.flash('success', 'Financial support updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1296,13 +1296,13 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
     }
 
     if (req.query.referrer === 'funding-type') {
-      req.flash('success',`Funding type and ${visa} updated`)
+      req.flash('success', `Funding type and ${visa} updated`)
     } else if (req.query.referrer === 'apprenticeship') {
-      req.flash('success',`Teaching apprenticeship and ${visa} updated`)
+      req.flash('success', `Teaching apprenticeship and ${visa} updated`)
     } else if (req.query.referrer === 'accredited-body') {
-      req.flash('success',`Accredited body and ${visa} updated`)
+      req.flash('success', `Accredited body and ${visa} updated`)
     } else {
-      req.flash('success',`${visa} updated`)
+      req.flash('success', `${visa} updated`)
     }
 
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
@@ -1349,7 +1349,7 @@ exports.withdraw_course_post = (req, res) => {
       course: status
     })
 
-    req.flash('success','Course withdrawn')
+    req.flash('success', 'Course withdrawn')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
@@ -1391,7 +1391,7 @@ exports.delete_course_post = (req, res) => {
       courseId: req.params.courseId
     })
 
-    req.flash('success','Course deleted')
+    req.flash('success', 'Course deleted')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
   }
 }
@@ -1401,7 +1401,7 @@ exports.delete_course_post = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.new_course_get = (req, res) => {
-  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`);
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject-level`)
 }
 
 exports.new_course_subject_level_get = (req, res) => {
@@ -1477,7 +1477,6 @@ exports.new_course_subject_level_post = (req, res) => {
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`)
     }
-
   }
 }
 
@@ -1560,7 +1559,7 @@ exports.new_course_subject_post = (req, res) => {
   }
 
   if (req.session.data.course.subjects[0] === '') {
-    let error = {}
+    const error = {}
     error.fieldName = 'subject'
     error.href = '#subject'
     error.text = 'Select a subject'
@@ -2481,7 +2480,6 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
-
   // combine parent and child subjects
   if (req.session.data.course.childSubjects) {
     req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
@@ -2508,6 +2506,6 @@ exports.new_course_check_answers_post = (req, res) => {
   // delete the course data as no longer needed
   delete req.session.data.course
 
-  req.flash('success','Course added')
+  req.flash('success', 'Course added')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
 }

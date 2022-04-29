@@ -26,7 +26,7 @@ exports.auth_get = (req, res) => {
 exports.sign_out_get = (req, res) => {
   delete req.session.data
   delete req.session.passport
-  req.flash('success','Signed out')
+  req.flash('success', 'Signed out')
   res.redirect('/sign-in')
 }
 

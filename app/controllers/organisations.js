@@ -11,7 +11,7 @@ exports.organisations_list = (req, res) => {
     })
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
-    res.redirect(`/organisations/${organisationId}/cycles/2022`);
+    res.redirect(`/organisations/${organisationId}/cycles/2022`)
   }
 }
 
@@ -105,7 +105,7 @@ exports.edit_organisation_details_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Organisation details updated')
+    req.flash('success', 'Organisation details updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
@@ -142,7 +142,7 @@ exports.edit_training_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Training with your organisation updated')
+    req.flash('success', 'Training with your organisation updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
@@ -179,7 +179,7 @@ exports.edit_disabilities_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Training with disabilites and other needs updated')
+    req.flash('success', 'Training with disabilites and other needs updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
@@ -216,7 +216,7 @@ exports.edit_contact_details_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Contact details updated')
+    req.flash('success', 'Contact details updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
@@ -270,7 +270,7 @@ exports.edit_student_visa_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Visa sponsorship updated')
+    req.flash('success', 'Visa sponsorship updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
@@ -324,7 +324,7 @@ exports.edit_skilled_worker_visa_post = (req, res) => {
       organisation: req.session.data.organisation
     })
 
-    req.flash('success','Visa sponsorship updated')
+    req.flash('success', 'Visa sponsorship updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }
