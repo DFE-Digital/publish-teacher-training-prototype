@@ -4,9 +4,9 @@ const debugAutocomplete = false
 const valueForInput = (result) => {
   if (!result) {
     return ''
-  } else if (typeof result == 'string') {
+  } else if (typeof result === 'string') {
     return result
-  } else if (typeof result == 'object') {
+  } else if (typeof result === 'object') {
     return result.name
   }
 }
@@ -15,13 +15,13 @@ const valueForInput = (result) => {
 const menuResultItem = (result) => {
   if (result) {
     // If using DefaultValue, result can be a string - bug with autocomplete  https://github.com/alphagov/accessible-autocomplete/issues/424
-    if (typeof result == 'string') {
+    if (typeof result === 'string') {
       return result
     }
     // What our sort function returns
-    else if (typeof result == 'object') {
-      let name = (debugAutocomplete) ? `${result.name} (${result.weight})` : result.name
-      let output = result.append ? `<span>${name}</span> ${result.append}` : `<span>${name}</span>`
+    else if (typeof result === 'object') {
+      const name = (debugAutocomplete) ? `${result.name} (${result.weight})` : result.name
+      const output = result.append ? `<span>${name}</span> ${result.append}` : `<span>${name}</span>`
       return result.hint ? `${output}<span class="autocomplete__option--hint">${result.hint}</span>` : output
     }
   } else {
@@ -29,33 +29,33 @@ const menuResultItem = (result) => {
   }
 }
 
-const onConfirm = function(selected, autocompleteInput = false) {
+const onConfirm = function (selected, autocompleteInput = false) {
   // Create a hidden input and use this to submit the value or the name
 
   // Visible input that user interacts with
   autocompleteInput = autocompleteInput || document.getElementById(this.id)
 
-  let autocompleteId = autocompleteInput.id
+  const autocompleteId = autocompleteInput.id
 
   // Hidden input to store value / submit data
-  let autocompleteValueId = `${autocompleteId}-value`
+  const autocompleteValueId = `${autocompleteId}-value`
   let autocompleteValueInput = document.getElementById(autocompleteValueId)
 
   // Create hidden input if it doesn’t already exist
   if (!autocompleteValueInput) {
-    let hiddenInput = document.createElement('input')
-    hiddenInput.setAttribute("type", "hidden")
+    const hiddenInput = document.createElement('input')
+    hiddenInput.setAttribute('type', 'hidden')
 
     // Copy over attributes from visible input
-    hiddenInput.setAttribute("id", autocompleteValueId)
-    hiddenInput.setAttribute("name", autocompleteInput.name || this.name)
+    hiddenInput.setAttribute('id', autocompleteValueId)
+    hiddenInput.setAttribute('name', autocompleteInput.name || this.name)
     hiddenInput.value = autocompleteInput.value
 
     // Save the string from the input so we can compare it later
-    hiddenInput.setAttribute("data-text", autocompleteInput.value)
+    hiddenInput.setAttribute('data-text', autocompleteInput.value)
 
     // Clear the original input's name, so it doesn't get submitted
-    autocompleteInput.setAttribute("name", "")
+    autocompleteInput.setAttribute('name', '')
 
     // Append after the visible input
     autocompleteInput.parentElement.append(hiddenInput)
@@ -69,25 +69,24 @@ const onConfirm = function(selected, autocompleteInput = false) {
   // If we have a selected item we co
   if (selected) {
     autocompleteValueInput.value = selected.value || selected.name
-    autocompleteValueInput.setAttribute("data-text", selected.name)
+    autocompleteValueInput.setAttribute('data-text', selected.name)
   }
   // Probably running on blur
   else {
     // If the source input is blank, our value should be too
     if (autocompleteInput.value == '') {
       autocompleteValueInput.value = ''
-      autocompleteValueInput.setAttribute("data-text", "")
+      autocompleteValueInput.setAttribute('data-text', '')
     }
     // If the value is not blank and doesn’t match the stored data-text, then the user
     // must have typed something in the autocomplete without picking an option. Therefore we
     // need to store the current typed text.
     else if (autocompleteInput.value != autocompleteValueInput.getAttribute('data-text')) {
       autocompleteValueInput.value = autocompleteInput.value
-      autocompleteValueInput.setAttribute("data-text", autocompleteInput.value)
+      autocompleteValueInput.setAttribute('data-text', autocompleteInput.value)
     }
   }
-
- };
+}
 
 // Extract data attributes from select options
 const enhanceSelectOption = (option) => {
@@ -103,7 +102,6 @@ const enhanceSelectOption = (option) => {
 }
 
 const setupAutocomplete = (component) => {
-
   // Locate the elements
   const selectElement = component.querySelector('select')
   const inputElement = component.querySelector('input')
@@ -123,25 +121,23 @@ const setupAutocomplete = (component) => {
   const showNoOptionsFound = element.getAttribute('data-show-no-options-found') || true
   const showSuggestions = element.getAttribute('data-show-suggestions') || false
 
-
-
-  let values = JSON.parse(element.getAttribute('data-autocomplete-values') || "[]")
+  let values = JSON.parse(element.getAttribute('data-autocomplete-values') || '[]')
 
   // If the enhanced element has aria-describedBy, grab the description to pass
   // to the autocomplete
   let describedBy = null
-  if (describedById){
+  if (describedById) {
     describedBy = document.getElementById(describedById).innerText
     // Add a full stop if the hint didn't have one.
-    describedBy = (describedBy.endsWith(".")) ? describedBy : `${describedBy}.`
+    describedBy = (describedBy.endsWith('.')) ? describedBy : `${describedBy}.`
   }
 
   // If enhancing a select and values not provided, fall back to options from select
   if (!values.length && elementType == 'select') {
-    let selectOptions = Array.from(selectElement?.options)
+    const selectOptions = Array.from(selectElement?.options)
       // Remove empty or disabled select options
       .filter(option => {
-        if (option.disabled || option.label == "") {
+        if (option.disabled || option.label == '') {
           return false
         } else {
           return true
@@ -160,9 +156,9 @@ const setupAutocomplete = (component) => {
   const dataHasSelected = values.some(value => value.selected === true)
 
   if (dataValue || dataHasSelected) {
-    let selectedItem = values.find(value => value.value === dataValue
-      || value.name === dataValue
-      || value.selected === true
+    const selectedItem = values.find(value => value.value === dataValue ||
+      value.name === dataValue ||
+      value.selected === true
     )
 
     if (selectedItem) {
@@ -180,7 +176,7 @@ const setupAutocomplete = (component) => {
   }
 
   const filter = (query, populateResults) => {
-    let results = autocompleteSort(query, values)
+    const results = autocompleteSort(query, values)
 
     // If in suggestions mode we don’t want to show a 'suggestions' banner when there are no results
     if (showSuggestions) {
@@ -198,7 +194,7 @@ const setupAutocomplete = (component) => {
   const suggestionNoResults = () => 'No suggestions found. Enter your own answer'
   const suggestionStatusNoResults = () => 'No suggestions found'
 
-  let autocompleteOptions = {
+  const autocompleteOptions = {
     id,
     name: element.name,
     templates: {
@@ -215,7 +211,7 @@ const setupAutocomplete = (component) => {
     source: filter,
     ...(describedBy ? { tAssistiveHint: describedByHint } : {}),
     ...(showSuggestions ? { tNoResults: suggestionNoResults } : {}), // conditional
-    ...(showSuggestions ? { tStatusNoResults: suggestionStatusNoResults } : {}), // conditional
+    ...(showSuggestions ? { tStatusNoResults: suggestionStatusNoResults } : {}) // conditional
   }
 
   // Select mode commented out, because of bug https://github.com/alphagov/accessible-autocomplete/issues/495 - where the select's default 'Please select' would get pre-filled as if it's a valid option, and then render as an option when you focus the field.
@@ -230,19 +226,19 @@ const setupAutocomplete = (component) => {
   // }
   // else if (inputElement){
 
-    const autocompleteContainer = document.getElementById(`${element.id}-autocomplete-container`)
+  const autocompleteContainer = document.getElementById(`${element.id}-autocomplete-container`)
 
-    // Because of the govuk macros, the container for the autocomplete is initially
-    // placed _after_ the input. We now move the container within the input container.
-    const inputFormGroup = autocompleteContainer.previousElementSibling
-    if (inputFormGroup.contains(element)) {
-      inputFormGroup.appendChild(autocompleteContainer)
-    }
+  // Because of the govuk macros, the container for the autocomplete is initially
+  // placed _after_ the input. We now move the container within the input container.
+  const inputFormGroup = autocompleteContainer.previousElementSibling
+  if (inputFormGroup.contains(element)) {
+    inputFormGroup.appendChild(autocompleteContainer)
+  }
 
-    accessibleAutocomplete({
-      element: autocompleteContainer,
-      ...autocompleteOptions
-    })
+  accessibleAutocomplete({
+    element: autocompleteContainer,
+    ...autocompleteOptions
+  })
   // }
 
   // Remove the original input
@@ -253,7 +249,6 @@ const setupAutocomplete = (component) => {
   if (defaultValue) {
     document.getElementById(id).value = defaultValue
   }
-
 }
 
 const initAutocompletes = () => {
