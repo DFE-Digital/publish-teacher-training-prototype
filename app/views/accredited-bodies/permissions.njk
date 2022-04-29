@@ -51,6 +51,12 @@
         }) }}
 
         {% if referrer == "change" %}
+
+          {{ govukWarningText({
+            text: "All users at " + accreditedBody.name + " will be sent an email to let them know their permissions have changed.",
+            iconFallbackText: "Warning"
+          }) }}
+
           {{ govukButton({
             text: "Update permissions"
           }) }}

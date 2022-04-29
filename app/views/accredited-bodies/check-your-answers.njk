@@ -98,6 +98,11 @@
           ]
         }) }}
 
+        {{ govukWarningText({
+          text: "All users at " + (accreditedBody.id | getOrganisationLabel) + " will be sent an email to let them know they've been added.",
+          iconFallbackText: "Warning"
+        }) }}
+
         {{ govukButton({
           text: "Add accredited body"
         }) }}
