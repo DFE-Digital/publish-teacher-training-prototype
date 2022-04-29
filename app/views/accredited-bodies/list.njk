@@ -40,7 +40,7 @@
                 {% endfor %}
               </ul>
             {% else %}
-              <p class="govuk-body">View only</p>
+              <p class="govuk-body">None - view only</p>
             {% endif %}
           {% endset %}
 
@@ -91,11 +91,6 @@
           html: summaryHtml,
           actions: {
             items: [
-              {
-                href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/description?referrer=change",
-                text: "Change",
-                visuallyHiddenText: accreditedBody.name + "’s description"
-              } if 1 == 0,
               {
                 href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/delete",
                 text: "Delete",
