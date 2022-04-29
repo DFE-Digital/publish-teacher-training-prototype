@@ -103,7 +103,7 @@
                   visuallyHiddenText: "special educational needs and disability (SEND)"
                 }
               ]
-            } if permissions and "change_courses" in permissions
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -120,7 +120,7 @@
                   visuallyHiddenText: "subject"
                 }
               ]
-            } if permissions and "change_courses" in permissions
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -137,7 +137,7 @@
                   visuallyHiddenText: "age range"
                 }
               ]
-            } if permissions and "change_courses" in permissions
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -154,7 +154,7 @@
                   visuallyHiddenText: "qualification"
                 }
               ]
-            } if permissions and "change_courses" in permissions
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -171,7 +171,7 @@
                   visuallyHiddenText: "apprenticeship"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if organisation.isAccreditedBody,
           {
             key: {
@@ -188,7 +188,7 @@
                   visuallyHiddenText: "funding type"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -205,7 +205,7 @@
                   visuallyHiddenText: "full time or part time"
                 }
               ]
-            } if permissions and "change_courses" in permissions
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -239,7 +239,7 @@
                   visuallyHiddenText: "accredited body"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -256,7 +256,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Student visa"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.fundingType == "fee",
           {
             key: {
@@ -273,7 +273,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           } if course.fundingType in ["salary", "apprenticeship"],
           {
             key: {
@@ -290,7 +290,7 @@
                   visuallyHiddenText: "applications open date"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           },
           {
             key: {
@@ -307,7 +307,7 @@
                   visuallyHiddenText: "course start"
                 }
               ]
-            } if course.status in ["0","2"] and permissions and "change_courses" in permissions
+            } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
           }
         ]
       }) }}
