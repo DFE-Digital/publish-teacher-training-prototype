@@ -73,10 +73,10 @@ AppFrontend.ButtonMenu.prototype.removeButtonClasses = function () {
 
 AppFrontend.ButtonMenu.prototype.addButtonClasses = function () {
   this.menu.find('.app-button-menu__item').each(function (index, el) {
-    if ($(el).attr('data-secondary') == 'true') {
+    if ($(el).attr('data-secondary') === 'true') {
       $(el).addClass('govuk-button--secondary')
     }
-    if ($(el).attr('data-warning') == 'true') {
+    if ($(el).attr('data-warning') === 'true') {
       $(el).addClass('govuk-button--warning')
     }
     $(el).addClass('govuk-button')
@@ -96,7 +96,7 @@ AppFrontend.ButtonMenu.prototype.onMenuButtonClick = function () {
 }
 
 AppFrontend.ButtonMenu.prototype.toggle = function () {
-  if (this.menuButton.attr('aria-expanded') == 'false') {
+  if (this.menuButton.attr('aria-expanded') === 'false') {
     this.showMenu()
     this.menu.find('[role=menuitem]').first().focus()
   } else {

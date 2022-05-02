@@ -76,7 +76,7 @@ AppFrontend.FilterToggleButton.prototype.onMenuButtonClick = function () {
 }
 
 AppFrontend.FilterToggleButton.prototype.toggle = function () {
-  if (this.menuButton.attr('aria-expanded') == 'false') {
+  if (this.menuButton.attr('aria-expanded') === 'false') {
     this.showMenu()
     this.options.filter.container.focus()
   } else {
