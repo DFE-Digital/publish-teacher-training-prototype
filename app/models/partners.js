@@ -1,9 +1,4 @@
-const path = require('path')
-const fs = require('fs')
-
 const organisationModel = require('./organisations')
-
-const directoryPath = path.join(__dirname, '../data/organisations/')
 
 exports.findMany = (params) => {
   let organisations = []
