@@ -189,7 +189,7 @@ exports.getCycleLabel = (code) => {
     if (data.code === code) {
       label = data.shortDesc
 
-      if (data.code == getCurrentCycle().code) {
+      if (data.code === getCurrentCycle().code) {
         label += ' - current'
       }
     }
