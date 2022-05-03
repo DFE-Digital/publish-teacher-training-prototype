@@ -51,6 +51,8 @@ exports.updateOne = (params) => {
 
           if (params.accreditedBody.permissions) {
             accreditedBody.permissions = params.accreditedBody.permissions
+          } else {
+            accreditedBody.permissions = []
           }
         }
       })
