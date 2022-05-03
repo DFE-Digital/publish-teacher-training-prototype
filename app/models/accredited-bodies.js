@@ -47,6 +47,8 @@ exports.updateOne = (params) => {
         if (accreditedBody.id === params.accreditedBodyId) {
           if (params.accreditedBody.description) {
             accreditedBody.description = params.accreditedBody.description
+          } else {
+            accreditedBody.description = ''
           }
 
           if (params.accreditedBody.permissions) {

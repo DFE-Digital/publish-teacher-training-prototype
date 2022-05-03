@@ -62,7 +62,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
     accreditedBodyModel.updateOne({
       organisationId: req.params.organisationId,
       accreditedBodyId: req.params.accreditedBodyId,
-      accreditedBody: req.session.data.accreditedBody
+      accreditedBody
     })
 
     req.flash('success', 'Accredited body description updated')
@@ -123,7 +123,7 @@ exports.edit_accredited_body_permissions_post = (req, res) => {
     accreditedBodyModel.updateOne({
       organisationId: req.params.organisationId,
       accreditedBodyId: req.params.accreditedBodyId,
-      accreditedBody: req.session.data.accreditedBody
+      accreditedBody
     })
 
     req.flash('success', 'Accredited body permissions updated')
