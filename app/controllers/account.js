@@ -12,8 +12,8 @@ exports.user_account = (req, res) => {
   res.render('../views/account/index', {
     user,
     actions: {
-      notifications: `/account/notifications`,
-      personalDetails: `/account/personal-details`
+      notifications: '/account/notifications',
+      personalDetails: '/account/personal-details'
     }
   })
 }
@@ -36,7 +36,7 @@ exports.personal_details = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.notification_details = (req, res) => {
-  let user = userModel.findOne({ userId: req.session.passport.user.id })
+  const user = userModel.findOne({ userId: req.session.passport.user.id })
 
   user.organisations.forEach((organisation, i) => {
     organisation.type = organisationModel.findOne({ organisationId: organisation.id }).type
@@ -48,7 +48,7 @@ exports.notification_details = (req, res) => {
     user,
     notificationOptions,
     actions: {
-      change: `/account/notifications`
+      change: '/account/notifications'
     }
   })
 }
@@ -75,8 +75,8 @@ exports.edit_notifications_get = (req, res) => {
     notifications,
     actions: {
       save: `/account/notifications/organisations/${req.params.organisationId}/edit`,
-      back: `/account/notifications`,
-      cancel: `/account/notifications`
+      back: '/account/notifications',
+      cancel: '/account/notifications'
     }
   })
 }
@@ -95,13 +95,12 @@ exports.edit_notifications_post = (req, res) => {
       notifications: req.session.data.notifications,
       actions: {
         save: `/account/notifications/organisations/${req.params.organisationId}/edit`,
-        back: `/account/notifications`,
-        cancel: `/account/notifications`
+        back: '/account/notifications',
+        cancel: '/account/notifications'
       },
       errors
     })
   } else {
-
     const notifications = []
 
     for (const [key, value] of Object.entries(req.session.data.notifications)) {
@@ -116,7 +115,7 @@ exports.edit_notifications_post = (req, res) => {
       notifications
     })
 
-    req.flash('success','Email notifications updated')
-    res.redirect(`/account/notifications`)
+    req.flash('success', 'Email notifications updated')
+    res.redirect('/account/notifications')
   }
 }

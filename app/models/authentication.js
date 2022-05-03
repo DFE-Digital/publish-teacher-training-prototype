@@ -7,21 +7,21 @@ exports.findOne = (params) => {
   const users = []
   let user = {}
 
-  let documents = fs.readdirSync(directoryPath,'utf8')
+  let documents = fs.readdirSync(directoryPath, 'utf8')
 
   // Only get JSON documents
   documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
   documents.forEach((filename) => {
-    let raw = fs.readFileSync(directoryPath + '/' + filename)
-    let data = JSON.parse(raw)
+    const raw = fs.readFileSync(directoryPath + '/' + filename)
+    const data = JSON.parse(raw)
     users.push(data)
   })
 
   user = users.find(user =>
-    user.username === params.username
-    && user.password === params.password
-    && user.active === params.active
+    user.username === params.username &&
+    user.password === params.password &&
+    user.active === params.active
   )
 
   return user

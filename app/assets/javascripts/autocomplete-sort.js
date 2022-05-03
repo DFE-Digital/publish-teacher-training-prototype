@@ -8,7 +8,6 @@ const clean = s => s.trim().replace(/['’]/g, '').replace(/[.,"/#!$%^&*;:{}=\-_
 // Determines how closely a query matches either an option's name/synonyms.
 // Returns an integer ranging from 0 (no match) to 100 (exact name match).
 const calculateWeight = (rawName, query, rawSynonyms = []) => {
-
   const regexes = clean(query).split(/\s+/).map(word => new RegExp('\\b' + word, 'i'))
   const name = clean(rawName)
   const synonyms = rawSynonyms.map(s => clean(s))
@@ -62,10 +61,10 @@ function autocompleteSort (query, options) {
   // them above an exact name match.
   options.forEach(o => { o.weight = calculateWeight(o.name, query, o.synonyms) * (o.boost || 1) })
 
-  let results = options.filter(o => o.weight > 0)
+  const results = options.filter(o => o.weight > 0)
     .sort(byWeightThenAlphabetically)
 
-  if (debugAutocomplete){
+  if (debugAutocomplete) {
     console.log(results)
   }
   return results

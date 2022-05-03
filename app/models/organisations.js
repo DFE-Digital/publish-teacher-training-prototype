@@ -6,14 +6,14 @@ const directoryPath = path.join(__dirname, '../data/organisations/')
 exports.findMany = (params) => {
   let organisations = []
 
-  let documents = fs.readdirSync(directoryPath,'utf8')
+  let documents = fs.readdirSync(directoryPath, 'utf8')
 
   // Only get JSON documents
   documents = documents.filter(doc => doc.match(/.*\.(json)/ig))
 
   documents.forEach((filename) => {
-    let raw = fs.readFileSync(directoryPath + '/' + filename)
-    let data = JSON.parse(raw)
+    const raw = fs.readFileSync(directoryPath + '/' + filename)
+    const data = JSON.parse(raw)
     organisations.push(data)
   })
 
@@ -22,7 +22,7 @@ exports.findMany = (params) => {
     organisations = organisations.find(organisation => organisation.code === params.code)
   }
 
-  if (typeof(params.isAccreditedBody) === 'boolean') {
+  if (typeof (params.isAccreditedBody) === 'boolean') {
     organisations = organisations.filter(organisation => organisation.isAccreditedBody === params.isAccreditedBody)
   }
 
@@ -35,7 +35,7 @@ exports.findOne = (params) => {
   if (params.organisationId) {
     const filePath = directoryPath + '/' + params.organisationId + '.json'
 
-    let raw = fs.readFileSync(filePath)
+    const raw = fs.readFileSync(filePath)
     organisation = JSON.parse(raw)
   }
 

@@ -45,7 +45,7 @@ filters.date = (timestamp, format = 'yyyy-LL-dd') => {
 filters.govukDate = (date, format) => {
   let d
 
-  if (Array.isArray(date)){
+  if (Array.isArray(date)) {
     d = filters.arrayToGovukDate(date, format)
   } else {
     d = filters.dateToGovukDate(date, format)
@@ -120,7 +120,7 @@ filters.dateToGovukDate = (date, format = false) => {
 */
 
 filters.arrayToDateObject = (array) => {
-  return new Date(array[2], array[1] -1, array[0])
+  return new Date(array[2], array[1] - 1, array[0])
 }
 
 /*
@@ -141,7 +141,6 @@ filters.arrayToDateObject = (array) => {
 filters.today = () => {
   return DateTime.now().toFormat('yyyy-LL-dd')
 }
-
 
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app

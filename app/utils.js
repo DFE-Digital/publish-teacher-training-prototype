@@ -529,14 +529,14 @@ function validateOrg (data, view) {
     }
   }
 
-    if (!data.canSponsorStudentVisa) {
-      errors.push({
-        title: 'Select if you can sponsor visas',
-        id: 'visa-sponsorship',
-        link: '/about-your-organisation/visa-sponsorship',
-        page: 'about-your-organisation'
-      })
-    }
+  if (!data.canSponsorStudentVisa) {
+    errors.push({
+      title: 'Select if you can sponsor visas',
+      id: 'visa-sponsorship',
+      link: '/about-your-organisation/visa-sponsorship',
+      page: 'about-your-organisation'
+    })
+  }
 
   if (view === 'all' || view === 'contact-details') {
     if (!data.email) {

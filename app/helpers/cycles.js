@@ -74,9 +74,8 @@ const getCurrentCycle = () => {
   let cycle = {}
 
   for (const [year, data] of Object.entries(CYCLES)) {
-
-    let nextYear = parseInt(year) + 1
-    let fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
+    const nextYear = parseInt(year) + 1
+    const fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
     let toYear = fromYear
 
     if (CYCLES[nextYear]) {
@@ -88,7 +87,6 @@ const getCurrentCycle = () => {
     if (currentCycleYear > fromYear && currentCycleYear <= toYear) {
       cycle = data
     }
-
   }
 
   return cycle
@@ -101,9 +99,8 @@ const getPreviousCycle = () => {
   let cycle = {}
 
   for (const [year, data] of Object.entries(CYCLES)) {
-
-    let nextYear = parseInt(year) + 1
-    let fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
+    const nextYear = parseInt(year) + 1
+    const fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
     let toYear = fromYear
 
     if (CYCLES[nextYear]) {
@@ -115,7 +112,6 @@ const getPreviousCycle = () => {
     if (previousCycleYear > fromYear && previousCycleYear <= toYear) {
       cycle = data
     }
-
   }
 
   return cycle
@@ -128,9 +124,8 @@ const getNextCycle = () => {
   let cycle = {}
 
   for (const [year, data] of Object.entries(CYCLES)) {
-
-    let nextYear = parseInt(year) + 1
-    let fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
+    const nextYear = parseInt(year) + 1
+    const fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
     let toYear = fromYear
 
     if (CYCLES[nextYear]) {
@@ -142,7 +137,6 @@ const getNextCycle = () => {
     if (nextCycleYear > fromYear && nextCycleYear <= toYear) {
       cycle = data
     }
-
   }
 
   return cycle
@@ -157,8 +151,8 @@ exports.getCycleOptions = (selectedItems) => {
 
   for (const [year, data] of Object.entries(CYCLES)) {
     const item = {}
-    let nextYear = parseInt(year) + 1
-    let fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
+    const nextYear = parseInt(year) + 1
+    const fromYear = DateTime.fromJSDate(CYCLES[year].findOpens).year
     let toYear = fromYear
 
     if (CYCLES[nextYear]) {
@@ -167,10 +161,10 @@ exports.getCycleOptions = (selectedItems) => {
       toYear = DateTime.fromJSDate(CYCLES[year].findCloses).year
     }
 
-    if ((currentCycleYear > fromYear && currentCycleYear <= toYear)
-      || (previousCycleYear > fromYear && previousCycleYear <= toYear)) {
+    if ((currentCycleYear > fromYear && currentCycleYear <= toYear) ||
+      (previousCycleYear > fromYear && previousCycleYear <= toYear)) {
       item.text = data.shortDesc
-      if(data.code == getCurrentCycle().code) {
+      if (data.code == getCurrentCycle().code) {
         item.text += ' - current'
       }
       item.value = data.code
@@ -181,7 +175,7 @@ exports.getCycleOptions = (selectedItems) => {
     }
   }
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return b.text.localeCompare(a.text)
   })
 
@@ -195,10 +189,9 @@ exports.getCycleLabel = (code) => {
     if (data.code === code) {
       label = data.shortDesc
 
-      if(data.code == getCurrentCycle().code) {
+      if (data.code === getCurrentCycle().code) {
         label += ' - current'
       }
-
     }
   }
 

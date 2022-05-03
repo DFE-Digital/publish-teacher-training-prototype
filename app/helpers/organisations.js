@@ -16,7 +16,7 @@ exports.getAccreditedBodyOptions = (organisationId, selectedItem) => {
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 
@@ -39,7 +39,7 @@ exports.getAccreditedBodySelectOptions = (selectedItem) => {
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 
@@ -56,12 +56,12 @@ exports.getAccreditedBodyAutocompleteOptions = (selectedItem) => {
 
     item.text = organisation.name
     item.value = organisation.id
-    item.selected = (selectedItem && selectedItem.includes(organisation.id)) ? true : false
+    item.selected = !!((selectedItem && selectedItem.includes(organisation.id)))
 
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 

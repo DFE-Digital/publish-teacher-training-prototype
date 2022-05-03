@@ -3,14 +3,14 @@ const locationModel = require('../models/locations')
 exports.location_list = (req, res) => {
   delete req.session.data.location
 
-  let locations = locationModel.findMany({ organisationId: req.params.organisationId })
+  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   res.render('../views/locations/list', {
     locations: locations,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
-      back: `/`
+      back: '/'
     }
   })
 }
@@ -65,7 +65,7 @@ exports.new_location_post = (req, res) => {
       location: req.session.data.location
     })
 
-    req.flash('success','Location added')
+    req.flash('success', 'Location added')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`)
   }
 }
@@ -107,7 +107,7 @@ exports.edit_location_post = (req, res) => {
       location: req.session.data.location
     })
 
-    req.flash('success','Location updated')
+    req.flash('success', 'Location updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`)
   }
 }
@@ -149,7 +149,7 @@ exports.delete_location_post = (req, res) => {
       locationId: req.params.locationId
     })
 
-    req.flash('success','Location deleted')
+    req.flash('success', 'Location deleted')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`)
   }
 }

@@ -33,9 +33,9 @@ exports.getSubjectOptions = (subjectLevel, selectedItem) => {
   const items = []
 
   let subjects = require('../data/subjects')
-  subjects = subjects.filter(subject => subject.level === subjectLevel
-    && subject.code !== '24'
-    && subject.parentCode === undefined)
+  subjects = subjects.filter(subject => subject.level === subjectLevel &&
+    subject.code !== '24' &&
+    subject.parentCode === undefined)
 
   subjects.forEach((subject, i) => {
     const item = {}
@@ -49,7 +49,7 @@ exports.getSubjectOptions = (subjectLevel, selectedItem) => {
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 
@@ -60,9 +60,9 @@ exports.getSubjectSelectOptions = (subjectLevel, selectedItem) => {
   const items = []
 
   let subjects = require('../data/subjects')
-  subjects = subjects.filter(subject => subject.level === subjectLevel
-    && subject.code !== '24'
-    && subject.parentCode === undefined)
+  subjects = subjects.filter(subject => subject.level === subjectLevel &&
+    subject.code !== '24' &&
+    subject.parentCode === undefined)
 
   subjects.forEach((subject, i) => {
     const item = {}
@@ -76,14 +76,14 @@ exports.getSubjectSelectOptions = (subjectLevel, selectedItem) => {
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 
   const firstItem = {}
-  firstItem.text = ""
-  firstItem.value = ""
-  firstItem.id = "blank"
+  firstItem.text = ''
+  firstItem.value = ''
+  firstItem.id = 'blank'
   firstItem.selected = (selectedItem && selectedItem === '') ? 'selected' : ''
 
   items.unshift(firstItem)
@@ -108,8 +108,8 @@ exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
   const items = []
 
   let subjects = require('../data/subjects')
-  subjects = subjects.filter(subject => subject.level === 'secondary'
-    && subject.parentCode === parentSubjectCode)
+  subjects = subjects.filter(subject => subject.level === 'secondary' &&
+    subject.parentCode === parentSubjectCode)
 
   let lastItem
   subjects.forEach((subject, i) => {
@@ -134,7 +134,7 @@ exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
     }
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 

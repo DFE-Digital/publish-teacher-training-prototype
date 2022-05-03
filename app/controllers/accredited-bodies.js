@@ -42,7 +42,7 @@ exports.edit_accredited_body_description_get = (req, res) => {
 
 exports.edit_accredited_body_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  let accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
   accreditedBody.description = req.session.data.accreditedBody.description
 
   const errors = []
@@ -65,7 +65,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
       accreditedBody: req.session.data.accreditedBody
     })
 
-    req.flash('success','Accredited body description updated')
+    req.flash('success', 'Accredited body description updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
   }
 }
@@ -95,7 +95,7 @@ exports.edit_accredited_body_permissions_get = (req, res) => {
 
 exports.edit_accredited_body_permissions_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  let accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
   accreditedBody.permissions = req.session.data.accreditedBody.permissions
 
   let selectedPermissions
@@ -126,7 +126,7 @@ exports.edit_accredited_body_permissions_post = (req, res) => {
       accreditedBody: req.session.data.accreditedBody
     })
 
-    req.flash('success','Accredited body permissions updated')
+    req.flash('success', 'Accredited body permissions updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
   }
 }
@@ -331,7 +331,7 @@ exports.new_accredited_body_check_post = (req, res) => {
     accreditedBody: req.session.data.accreditedBody
   })
 
-  req.flash('success','Accredited body added')
+  req.flash('success', 'Accredited body added')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
 }
 
@@ -347,7 +347,7 @@ exports.delete_accredited_body_get = (req, res) => {
     .findMany({ organisationId: req.params.organisationId })
     .filter(course => course.accreditedBody.id === req.params.accreditedBodyId)
 
-  const hasCourses = courses.length ? true : false
+  const hasCourses = !!courses.length
 
   res.render('../views/accredited-bodies/delete', {
     organisation,
@@ -367,6 +367,6 @@ exports.delete_accredited_body_post = (req, res) => {
     accreditedBodyId: req.params.accreditedBodyId
   })
 
-  req.flash('success','Accredited body deleted')
+  req.flash('success', 'Accredited body deleted')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
 }

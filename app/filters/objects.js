@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------
 // Imports and setup
 // -------------------------------------------------------------------
-const _ = require('lodash');
+const _ = require('lodash')
 
 // Leave this filters line
 const filters = {}
@@ -44,9 +44,9 @@ filters.isObject = item => {
 */
 
 filters.objectArrayToArray = array => {
-  let newArray = []
+  const newArray = []
   array.forEach(item => {
-    let newItem = []
+    const newItem = []
     Object.keys(item).forEach(part => {
       newItem.push(item[part])
     })
@@ -57,7 +57,7 @@ filters.objectArrayToArray = array => {
 
 filters.objectToArray = object => {
   if (!object) return []
-  let newArray = []
+  const newArray = []
   Object.keys(object).forEach(key => {
     newArray.push(object[key])
   })
@@ -67,23 +67,22 @@ filters.objectToArray = object => {
 // Keep only whitelisted keys from object or array of objects
 filters.keepAttributes = (array, keysToKeep) => {
   const keepKeys = theObject => {
-    let newObj = {}
+    const newObj = {}
     // Re-orders in order of keysToKeep and keeps only selected keys
 
     // Coerce string to array
     if (_.isString(keysToKeep)) keysToKeep = [keysToKeep]
 
-
     keysToKeep.forEach(key => {
-      let objectKeys = Object.keys(theObject)
-      if (objectKeys.includes(key)){
+      const objectKeys = Object.keys(theObject)
+      if (objectKeys.includes(key)) {
         newObj[key] = theObject[key]
       }
     })
     return newObj
   }
   // Array of objects
-  if (_.isArray(array)){
+  if (_.isArray(array)) {
     return array.map(keepKeys)
   }
   // Single object
@@ -92,64 +91,61 @@ filters.keepAttributes = (array, keysToKeep) => {
 
 // set attribute on object
 filters.setAttribute = (dictionary, key, value) => {
-  var newDictionary = Object.assign({}, dictionary);
-  newDictionary[key] = value;
-  return newDictionary;
+  const newDictionary = Object.assign({}, dictionary)
+  newDictionary[key] = value
+  return newDictionary
 }
 
 // set attribute on object (or array of objects)
 filters.addAttribute = (dictionary, key, value) => {
-  if (Array.isArray(dictionary)){
+  if (Array.isArray(dictionary)) {
     newArr = []
     dictionary.forEach(item => {
-      var newItem = Object.assign({}, item)
+      const newItem = Object.assign({}, item)
       newItem[key] = value
       newArr.push(newItem)
     })
     return newArr
-  }
-  else {
-    var newDictionary = Object.assign({}, dictionary);
-    newDictionary[key] = value;
-    return newDictionary;
+  } else {
+    const newDictionary = Object.assign({}, dictionary)
+    newDictionary[key] = value
+    return newDictionary
   }
 }
 
 // Clear a single attribute
 filters.clearAttribute = (dictionary, key) => {
-  var newDictionary = Object.assign({}, dictionary);
-  newDictionary[key] = '';
-  return newDictionary;
+  const newDictionary = Object.assign({}, dictionary)
+  newDictionary[key] = ''
+  return newDictionary
 }
 
 // Rename a key on an object, preserving key order
 filters.renameAttribute = (dictionary, oldKey, newKey) => {
   const keys = Object.keys(dictionary)
-  const newObj = keys.reduce((acc, val)=>{
-    if(val === oldKey){
-        acc[newKey] = dictionary[oldKey]
-    }
-    else {
-        acc[val] = dictionary[val]
+  const newObj = keys.reduce((acc, val) => {
+    if (val === oldKey) {
+      acc[newKey] = dictionary[oldKey]
+    } else {
+      acc[val] = dictionary[val]
     }
     return acc
   }, {})
 
   return newObj
-};
+}
 
 // Delete a single attribute from an object or array of objects
 filters.deleteAttribute = (input, attribute) => {
-
-  const deleteAttributeFromObject = (object) =>{
+  const deleteAttributeFromObject = (object) => {
     // Don't modify the original
-    var newDictionary = Object.assign({}, object)
+    const newDictionary = Object.assign({}, object)
     delete newDictionary[attribute]
     return newDictionary
   }
 
   // Array of objects
-  if (_.isArray(input)){
+  if (_.isArray(input)) {
     return input.map(deleteAttributeFromObject)
   }
   // Single object
@@ -159,19 +155,19 @@ filters.deleteAttribute = (input, attribute) => {
 // Delete a keys with blank values
 filters.deleteBlankAttributes = (dictionary) => {
   // Don't modify the original
-  var newDictionary = Object.assign({}, dictionary)
+  const newDictionary = Object.assign({}, dictionary)
   Object.keys(newDictionary).forEach(key => {
-    if (newDictionary[key] == "" || newDictionary[key] == undefined){
+    if (newDictionary[key] == '' || newDictionary[key] == undefined) {
       delete newDictionary[key]
     }
   })
-  return newDictionary;
+  return newDictionary
 }
 
 // Filter results for only those containing attribute and value
 filters.where = (arr, key, compare) => {
   compare = [].concat(compare) // force to arr
-  let filtered = arr.filter(item => {
+  const filtered = arr.filter(item => {
     return compare.includes(_.get(item, key))
   })
   return filtered
@@ -180,7 +176,7 @@ filters.where = (arr, key, compare) => {
 // Remove items with a specified attribute and value
 filters.removeWhere = (arr, key, compare) => {
   compare = [].concat(compare) // force to arr
-  let filtered = arr.filter(item => {
+  const filtered = arr.filter(item => {
     return !compare.includes(_.get(item, key))
   })
   return filtered
@@ -205,7 +201,7 @@ filters.removeWhere = (arr, key, compare) => {
 
 filters.whereIncludes = (arr, key, compare) => {
   compare = [].concat(compare) // force to arr
-  let filtered = arr.filter(item => {
+  const filtered = arr.filter(item => {
     return compare.some(string => {
       return _.get(item, key) && _.get(item, key).includes(string)
     })
@@ -229,7 +225,7 @@ filters.whereIncludes = (arr, key, compare) => {
 */
 filters.whereDoesNotInclude = (arr, key, compare) => {
   compare = [].concat(compare) // force to arr
-  let filtered = arr.filter(item => {
+  const filtered = arr.filter(item => {
     return !compare.some(string => {
       return _.get(item, key) && _.get(item, key).includes(string)
     })

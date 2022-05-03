@@ -20,7 +20,7 @@ exports.user_list = (req, res) => {
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
-      back: `/`
+      back: '/'
     }
   })
 }
@@ -121,7 +121,7 @@ exports.new_user_post = (req, res) => {
       user: req.session.data.user
     })
 
-    req.flash('success','User added')
+    req.flash('success', 'User added')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
   }
 }
@@ -187,7 +187,7 @@ exports.edit_user_post = (req, res) => {
       user: req.session.data.user
     })
 
-    req.flash('success','User updated')
+    req.flash('success', 'User updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`)
   }
 }
@@ -215,6 +215,6 @@ exports.delete_user_post = (req, res) => {
     userId: req.params.userId
   })
 
-  req.flash('success','User deleted')
+  req.flash('success', 'User deleted')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
 }

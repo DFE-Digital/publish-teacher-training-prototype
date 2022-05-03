@@ -22,5 +22,5 @@ exports.slugify = (text) => {
 }
 
 exports.arrayToDateObject = (array) => {
-  return new Date(array[2], array[1] -1, array[0])
+  return new Date(array[2], array[1] - 1, array[0])
 }

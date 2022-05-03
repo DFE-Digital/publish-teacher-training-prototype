@@ -5,14 +5,12 @@ const userModel = require('./users')
 
 exports.updateOne = (params) => {
   if (params.organisationId && params.userId) {
-    let user = userModel.findOne({ organisationId: params.organisationId, userId: params.userId })
+    const user = userModel.findOne({ organisationId: params.organisationId, userId: params.userId })
 
     user.organisations.forEach((organisation, i) => {
-
       if (organisation.id === params.organisationId) {
         organisation.notifications = params.notifications
       }
-
     })
 
     user.updatedAt = new Date()

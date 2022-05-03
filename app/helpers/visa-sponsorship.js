@@ -2,7 +2,7 @@ const studentVisaOptions = [{
   id: 'f261618c-6ff3-49cc-9d7d-4dc1663e1ea1',
   name: 'Yes',
   code: 'yes'
-},{
+}, {
   id: '39e289d2-429b-4719-bee2-e0cb57a23f2d',
   name: 'No',
   code: 'no'
@@ -12,7 +12,7 @@ const skilledWorkerVisaOptions = [{
   id: '4787b15b-20e6-4159-84a6-6a256b18096a',
   name: 'Yes',
   code: 'yes'
-},{
+}, {
   id: '782589c9-bf24-473c-ae56-b2fc22a512b0',
   name: 'No',
   code: 'no'

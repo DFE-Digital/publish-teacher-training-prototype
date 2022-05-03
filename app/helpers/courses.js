@@ -2,7 +2,6 @@ const { DateTime } = require('luxon')
 const faker = require('faker')
 faker.locale = 'en_GB'
 
-const cycleHelper = require('./cycles')
 const subjectHelper = require('./subjects')
 const utilHelper = require('./utils')
 
@@ -17,7 +16,7 @@ const sendOptions = [{
   id: '5289e0bd-830b-46f6-948e-685214651beb',
   name: 'Yes',
   code: 'yes'
-},{
+}, {
   id: '0c4ababf-9acb-4105-973d-ce931cf89a94',
   name: 'No',
   code: 'no'
@@ -70,7 +69,7 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
     items.push(item)
   })
 
-  items.sort((a,b) => {
+  items.sort((a, b) => {
     return a.text.localeCompare(b.text)
   })
 
@@ -213,7 +212,7 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
   const items = []
 
   const startDate = DateTime.now().toJSDate()
-  const endDate = DateTime.now().plus({months:18}).toJSDate()
+  const endDate = DateTime.now().plus({ months: 18 }).toJSDate()
 
   for (let d = startDate; d <= endDate; d.setMonth(d.getMonth() + 1)) {
     const item = {}
@@ -234,9 +233,9 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
   }
 
   const firstItem = {}
-  firstItem.text = ""
-  firstItem.value = ""
-  firstItem.id = "blank"
+  firstItem.text = ''
+  firstItem.value = ''
+  firstItem.id = 'blank'
   firstItem.selected = (selectedItem && selectedItem === '') ? 'selected' : ''
 
   items.unshift(firstItem)
@@ -423,7 +422,6 @@ exports.createCourseCode = (organisationId) => {
 
   // compare to current list
   // if not exists, return code, else generate new code and try again
-
 
   return courseCode
 }

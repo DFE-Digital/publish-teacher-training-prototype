@@ -17,7 +17,7 @@ const copy = (source, destination) => {
       try {
         console.log('Creating directory: ' + destinationFile)
         fs.mkdirSync(destinationFile)
-      } catch(e) {
+      } catch (e) {
         console.log('Directory already exists: ' + destinationFile)
       }
       copy(sourceFile, destinationFile)
@@ -25,7 +25,7 @@ const copy = (source, destination) => {
       try {
         console.log('Copying file: ' + destinationFile)
         fs.writeFileSync(destinationFile, fs.readFileSync(sourceFile))
-      } catch(e) {
+      } catch (e) {
         console.log('Could’t copy file: ' + destinationFile)
       }
     }
@@ -34,6 +34,7 @@ const copy = (source, destination) => {
 
 const remove = (destination) => {
   const list = fs.readdirSync(destination)
+  let destinationFile
 
   list.forEach((file) => {
     destinationFile = destination + '/' + file
@@ -44,7 +45,7 @@ const remove = (destination) => {
         try {
           console.log('Removing directory: ' + destinationFile)
           fs.rmdirSync(destinationFile)
-        } catch(e) {
+        } catch (e) {
           console.log('Directory doesn’t exist: ' + destinationFile)
         }
         remove(destinationFile)
@@ -54,7 +55,7 @@ const remove = (destination) => {
         try {
           console.log('Removing file: ' + destinationFile)
           fs.unlinkSync(destinationFile)
-        } catch(e) {
+        } catch (e) {
           console.log('Could’t remove file: ' + destinationFile)
         }
       }
