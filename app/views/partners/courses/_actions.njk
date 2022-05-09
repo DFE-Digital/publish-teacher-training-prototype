@@ -1,10 +1,12 @@
 {% if course.status in ["0","2"] %}
   <div class="govuk-button-group">
-    {{ govukButton({
-      text: "Publish course",
-      href: "#",
-      classes: "govuk-!-margin-right-2"
-    }) }}
+    {% if permissions and "publish_courses" in permissions %}
+      {{ govukButton({
+        text: "Publish course",
+        href: "#",
+        classes: "govuk-!-margin-right-2"
+      }) }}
+    {% endif %}
 
     {% if permissions and "add_courses" in permissions %}
       <a class="govuk-link app-link--destructive" href="#">Delete course</a>
