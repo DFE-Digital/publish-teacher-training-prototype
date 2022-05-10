@@ -241,6 +241,9 @@ router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAu
 router.get('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/new', checkIsAuthenticated, userController.new_user_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/users/new/check', checkIsAuthenticated, userController.new_user_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/new/check', checkIsAuthenticated, userController.new_user_check_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_post)
 

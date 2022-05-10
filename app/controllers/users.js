@@ -14,6 +14,8 @@ exports.user_list = (req, res) => {
     return a.firstName.localeCompare(b.firstName) || a.lastName.localeCompare(b.lastName)
   })
 
+  delete req.session.data.user
+
   res.render('../views/users/list', {
     organisation,
     users,
@@ -52,10 +54,16 @@ exports.user_details = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.new_user_get = (req, res) => {
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+  if (req.query.referrer === 'check') {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new/check`
+  }
+
   res.render('../views/users/edit', {
+    user: req.session.data.user,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
     }
   })
@@ -116,14 +124,32 @@ exports.new_user_post = (req, res) => {
       errors
     })
   } else {
-    userModel.saveOne({
-      organisationId: req.params.organisationId,
-      user: req.session.data.user
-    })
-
-    req.flash('success', 'User added')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new/check`)
   }
+}
+
+exports.new_user_check_get = (req, res) => {
+  res.render('../views/users/check-your-answers', {
+    user: req.session.data.user,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new/check`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
+    }
+  })
+}
+
+exports.new_user_check_post = (req, res) => {
+  userModel.saveOne({
+    organisationId: req.params.organisationId,
+    user: req.session.data.user
+  })
+
+  delete req.session.data.user
+
+  req.flash('success', 'User added')
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
 }
 
 /// ------------------------------------------------------------------------ ///
