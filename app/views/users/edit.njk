@@ -2,7 +2,8 @@
 
 {% set primaryNavId = "users" %}
 
-{% set title = "Add user" %}
+{% set title = "Personal details" %}
+{% set caption = "Add user" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -62,7 +63,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Add user"
+          text: "Continue"
         }) }}
 
       </form>
