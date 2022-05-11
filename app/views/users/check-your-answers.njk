@@ -1,0 +1,104 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "users" %}
+
+{% set title = "Check your answers" %}
+{% set caption = "Add user" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "First name"
+              },
+              value: {
+                text: user.firstName
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "first name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Last name"
+              },
+              value: {
+                text: user.lastName
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "last name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Email address"
+              },
+              value: {
+                text: user.email
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "email address"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+        {{ govukWarningText({
+          text: "The user will be sent an email to tell them you’ve added them to the organisation",
+          iconFallbackText: "Warning"
+        }) }}
+
+        {{ govukButton({
+          text: "Add user"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
