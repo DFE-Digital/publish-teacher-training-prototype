@@ -241,6 +241,6 @@ exports.delete_user_post = (req, res) => {
     userId: req.params.userId
   })
 
-  req.flash('success', 'User deleted')
+  req.flash('success', 'User removed')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`)
 }
