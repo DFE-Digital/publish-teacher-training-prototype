@@ -33,9 +33,9 @@ You can also regenerate the data:
 
 The prototype includes a number of environment variables:
 
-- NODE_ENV - `development`, `staging` and `production`
-- USE_HTTPS - `true` or `false`
-- USE_AUTH - use to turn on/off the browser authentication. Values: `true` or `false`
-- USE_LOGIN - `true` or `false`
+- NODE_ENV - Values: `development`, `staging` and `production`
+- USE_HTTPS - force HTTP to redirect to HTTPS on production. Values: `true` or `false`
+- USE_AUTH - enable or disable password protection on production. Values: `true` or `false`
+- USE_LOGIN - use to turn on/off username and password login. If set to `false`, the login screen displays a list of test personas. Values: `true` or `false`
 - USE_LOGIN_FALLBACK - not implemented. Use to show email magic link flow. Values: `true` or `false`
 - PHASE_TAG_TEXT - use to change what text is displayed in the phase tag. Defaults to 'beta'
