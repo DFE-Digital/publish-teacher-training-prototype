@@ -40,7 +40,7 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
 exports.getLocationLabel = (locationId, organisationId) => {
   let locations = []
   let location
-  let label
+  let label = ""
 
   if (organisationId) {
     locations = locationModel.findMany({
