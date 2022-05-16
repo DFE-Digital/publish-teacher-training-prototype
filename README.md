@@ -4,45 +4,38 @@ This prototype is based on the [GOV.UK prototype kit](https://github.com/alphago
 
 ## Requirements
 
-* Node.js - version 14.x.x
+- Node.js - version 16.x.x
 
 ## Installation
 
-* Clone this repository to a folder on your computer
-* Open Terminal
-* In Terminal, change the path to the repository
-* Type `npm install` to install the dependencies
+- Clone this repository to a folder on your computer
+- Open Terminal
+- In Terminal, change the path to the repository
+- Type `npm install` to install the dependencies
 
 ## Working locally
 
-* In Terminal, change the path to the repository
-* Type `npm start`  and start the application
+- In Terminal, change the path to the repository
+- Type `npm start`  and start the application
 
-## Upgrading the prototype kit
+## Generating data
 
-Based on <https://govuk-prototype-kit.herokuapp.com/docs/updating-the-kit>
+The prototype uses JSON files to store data and includes a set of seed data.
 
-Add upstream to remotes:
+The seed data is copied to the working data directory when you run `npm install`.
 
-```bash
-git remote add upstream https://github.com/alphagov/govuk-prototype-kit.git
-```
+You can also regenerate the data:
 
-Merge upstream to a new branch:
+- In Terminal, change the path to the repository
+- Type `npm run generate-data`
 
-```bash
-git checkout -b upgrade-kit
-git fetch upstream latest-release
-git checkout upgrade-kit && git merge FETCH_HEAD --allow-unrelated-histories
-```
+## Environment variables
 
-You’ll get a few merge conflicts where both apps are trying to add the same files.
+The prototype includes a number of environment variables:
 
-When merging the upgrade, do a squash and merge to avoid adding 1500 new commits to the timeline.
-
-## Change the provider in the prototype
-
-* Copy `courses-clean.json` from [courses-clean.zip](https://github.com/DFE-Digital/search-and-compare-data/blob/master/courses-clean.zip) in the search-and-compare-data repo to this repo (it’s in .gitignore already)
-* Set the `provider` in [generate.rb](./generate.rb#L8) to the name of the provider in the JSON file
-* Run the ruby script: `./generate.rb`, which generates a new `prototype_data.json` file
-* Commit the changes to master, which auto-deploys to Heroku
+- NODE_ENV - Values: `development`, `staging` and `production`
+- USE_HTTPS - force HTTP to redirect to HTTPS on production. Values: `true` or `false`
+- USE_AUTH - enable or disable password protection on production. Values: `true` or `false`
+- USE_LOGIN - use to turn on/off username and password login. If set to `false`, the login screen displays a list of test personas. Values: `true` or `false`
+- USE_LOGIN_FALLBACK - not implemented. Use to show email magic link flow. Values: `true` or `false`
+- PHASE_TAG_TEXT - use to change what text is displayed in the phase tag. Defaults to 'beta'
