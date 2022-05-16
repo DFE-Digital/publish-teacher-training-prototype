@@ -54,7 +54,7 @@
         <ul class="govuk-list">
           {% for location in course.locations %}
             <li>
-              {{ location.id | getLocationLabel }}
+              {{ location.id | getLocationLabel(partner.id) }}
             </li>
           {% endfor %}
         </ul>
