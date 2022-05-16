@@ -212,14 +212,15 @@ module.exports = (env) => {
 
   /* ------------------------------------------------------------------
   utility function to get the location label
-  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2' | getLocationLabel }}
+  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2'
+              | getLocationLabel(d8370001-6f2b-4624-b30c-27ddc5beebfc) }}
   outputs: "Main site"
   ------------------------------------------------------------------ */
-  filters.getLocationLabel = (location) => {
+  filters.getLocationLabel = (location, organisation) => {
     let label = location
 
-    if (location) {
-      label = locationHelper.getLocationLabel(location)
+    if (location && organisation) {
+      label = locationHelper.getLocationLabel(location, organisation)
     }
 
     return label
