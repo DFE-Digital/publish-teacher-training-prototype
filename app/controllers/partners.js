@@ -1,4 +1,5 @@
 const courseModel = require('../models/courses')
+const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
 const partnerModel = require('../models/partners')
 const permissionsModel = require('../models/permissions')
@@ -53,12 +54,14 @@ exports.partner_courses_list = (req, res) => {
 exports.partner_course_details = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const partner = organisationModel.findOne({ organisationId: req.params.partnerId })
+  const locations = locationModel.findMany({ organisationId: req.params.partnerId })
   const permissions = permissionsModel.findOne({ trainingPartnerId: req.params.partnerId, accreditedBodyId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.partnerId, courseId: req.params.courseId })
 
   res.render('../views/partners/courses/details', {
     organisation,
     partner,
+    locations,
     permissions,
     course,
     actions: {

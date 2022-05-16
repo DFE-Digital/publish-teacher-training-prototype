@@ -37,14 +37,25 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
   return items
 }
 
-exports.getLocationLabel = (code) => {
-  const locations = require('../data/temp/locations')
-  const location = locations.find(location => location.id === code)
+exports.getLocationLabel = (locationId, organisationId) => {
+  let locations = []
+  let location
+  let label = ""
 
-  let label = code
+  if (organisationId) {
+    locations = locationModel.findMany({
+      organisationId: organisationId
+    })
+  }
 
-  if (location) {
-    label = location.name
+  if (locationId) {
+    location = locations.find(location => location.id === locationId)
+
+    label = locationId
+
+    if (location) {
+      label = location.name
+    }
   }
 
   return label
