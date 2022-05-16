@@ -38,16 +38,24 @@ exports.getLocationOptions = (organisationId, selectedItem) => {
 }
 
 exports.getLocationLabel = (locationId, organisationId) => {
-  const locations = locationModel.findMany({
-    organisationId: organisationId
-  })
+  let locations = []
+  let location
+  let label
 
-  const location = locations.find(location => location.id === locationId)
+  if (organisationId) {
+    locations = locationModel.findMany({
+      organisationId: organisationId
+    })
+  }
 
-  let label = locationId
+  if (locationId) {
+    location = locations.find(location => location.id === locationId)
 
-  if (location) {
-    label = location.name
+    label = locationId
+
+    if (location) {
+      label = location.name
+    }
   }
 
   return label
