@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const fs = require('fs')
 const path = require('path')
+const { DateTime } = require('luxon')
 const marked = require('marked')
 const numeral = require('numeral')
 
@@ -384,6 +385,31 @@ module.exports = (env) => {
   ------------------------------------------------------------------ */
   filters.remainder = (dividend, divisor) => {
     return dividend % divisor
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the academic year label
+  example: {{ "2022-09" | getAcademicYearLabel }}
+  outputs: "Academic year 2022 to 2023"
+  ------------------------------------------------------------------ */
+  filters.getAcademicYearLabel = (date) => {
+    let label = ''
+
+    if (date) {
+      // const nowYear = DateTime.now().year
+      const checkDate = DateTime.fromISO(date)
+
+      const startDate = DateTime.fromISO(checkDate.year + '-08-01T00:00:00')
+      const endDate = DateTime.fromISO((checkDate.year + 1) + '-07-31T23:59:59')
+
+      if (checkDate >= startDate && checkDate <= endDate) {
+        label = 'Academic year ' + checkDate.year + ' to ' + (checkDate.year + 1)
+      } else {
+        label = 'Academic year ' + (checkDate.year - 1) + ' to ' + checkDate.year
+      }
+    }
+
+    return label
   }
 
   /* ------------------------------------------------------------------
