@@ -9,6 +9,7 @@ const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
 const dataController = require('./controllers/data')
+const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
 const partnerController = require('./controllers/partners')
@@ -324,6 +325,14 @@ router.get('/organisations', checkIsAuthenticated, organisationController.organi
 router.get('/', checkIsAuthenticated, (req, res) => {
   res.redirect('/organisations')
 })
+
+/// ------------------------------------------------------------------------ ///
+/// GUIDANCE ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/guidance/:fileName', guidanceController.guidance)
+
+router.get('/guidance', guidanceController.guidance)
 
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
