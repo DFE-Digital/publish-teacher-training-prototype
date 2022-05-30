@@ -105,24 +105,26 @@ exports.insertOne = (params) => {
 
     location.address = {}
 
-    if (params.location.address.addressLine1) {
-      location.address.addressLine1 = params.location.address.addressLine1
-    }
+    if (params.location.address) {
+      if (params.location.address.addressLine1.length) {
+        location.address.addressLine1 = params.location.address.addressLine1
+      }
 
-    if (params.location.address.addressLine2) {
-      location.address.addressLine2 = params.location.address.addressLine2
-    }
+      if (params.location.address.addressLine2.length) {
+        location.address.addressLine2 = params.location.address.addressLine2
+      }
 
-    if (params.location.address.town) {
-      location.address.town = params.location.address.town
-    }
+      if (params.location.address.town.length) {
+        location.address.town = params.location.address.town
+      }
 
-    if (params.location.address.county) {
-      location.address.county = params.location.address.county
-    }
+      if (params.location.address.county.length) {
+        location.address.county = params.location.address.county
+      }
 
-    if (params.location.address.postcode) {
-      location.address.postcode = params.location.address.postcode
+      if (params.location.address.postcode.length) {
+        location.address.postcode = params.location.address.postcode.toUpperCase()
+      }
     }
 
     location.createdAt = new Date()
@@ -141,10 +143,6 @@ exports.insertOne = (params) => {
   return location
 }
 
-// exports.insertMany = (params) => {
-//
-// }
-
 exports.updateOne = (params) => {
   if (params.organisationId && params.locationId) {
     const location = this.findOne({ organisationId: params.organisationId, locationId: params.locationId })
@@ -155,34 +153,38 @@ exports.updateOne = (params) => {
 
     if (params.location.urn) {
       location.urn = params.location.urn
+    } else {
+      delete location.urn
     }
 
     if (params.location.code) {
       location.code = ''
     }
 
-    if (params.location.address.addressLine1) {
-      location.address.addressLine1 = params.location.address.addressLine1
-    }
+    if (params.location.address !== undefined) {
+      if (params.location.address.addressLine1.length) {
+        location.address.addressLine1 = params.location.address.addressLine1
+      }
 
-    if (params.location.address.addressLine2) {
-      location.address.addressLine2 = params.location.address.addressLine2
-    } else {
-      delete location.address.addressLine2
-    }
+      if (params.location.address.addressLine2.length) {
+        location.address.addressLine2 = params.location.address.addressLine2
+      } else {
+        delete location.address.addressLine2
+      }
 
-    if (params.location.address.town) {
-      location.address.town = params.location.address.town
-    }
+      if (params.location.address.town.length) {
+        location.address.town = params.location.address.town
+      }
 
-    if (params.location.address.county) {
-      location.address.county = params.location.address.county
-    } else {
-      delete location.address.county
-    }
+      if (params.location.address.county.length) {
+        location.address.county = params.location.address.county
+      } else {
+        delete location.address.county
+      }
 
-    if (params.location.address.postcode) {
-      location.address.postcode = params.location.address.postcode
+      if (params.location.address.postcode.length) {
+        location.address.postcode = params.location.address.postcode.toUpperCase()
+      }
     }
 
     location.updatedAt = new Date()
@@ -199,10 +201,6 @@ exports.updateOne = (params) => {
   }
 }
 
-// exports.updateMany = (params) => {
-//
-// }
-
 exports.deleteOne = (params) => {
   if (params.organisationId && params.locationId) {
     const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
@@ -211,7 +209,3 @@ exports.deleteOne = (params) => {
     fs.unlinkSync(filePath)
   }
 }
-
-// exports.deleteMany = (params) => {
-//
-// }
