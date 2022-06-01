@@ -8,6 +8,7 @@ const accountController = require('./controllers/account')
 const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
+const degreeController = require('./controllers/degrees')
 const dataController = require('./controllers/data')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
@@ -143,6 +144,18 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/check', c
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', checkIsAuthenticated, courseController.new_course_check_answers_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
+
+/// DEGREE ROUTES
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree', checkIsAuthenticated, degreeController.edit_degree_minimum_classification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree', checkIsAuthenticated, degreeController.edit_degree_minimum_classification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/classification', checkIsAuthenticated, degreeController.edit_degree_classification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/classification', checkIsAuthenticated, degreeController.edit_degree_classification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/subject-requirements', checkIsAuthenticated, degreeController.edit_degree_subject_requirements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/subject-requirements', checkIsAuthenticated, degreeController.edit_degree_subject_requirements_post)
+
+/// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_post)

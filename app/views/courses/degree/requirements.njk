@@ -1,0 +1,88 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set title = "Do you have any additional degree subject requirements?" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
+
+      <!-- <p class="govuk-body">
+        Candidates will be advised that their degree subject should match or be closely related to {{ course.name }}.
+      </p> -->
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set subjectRequirementsHtml %}
+          {{ govukTextarea({
+            id: "degree-requirements",
+            name: "degree[requirements]",
+            label: {
+              text: "Degree subject requirements",
+              classes: "govuk-label--s"
+            },
+            errorMessage: errors | getErrorMessage("degree-requirements"),
+            value: course.additionalDegreeSubjectRequirements
+          }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          idPrefix: "degree-subject-requirements",
+          name: "degree[subjectRequirements]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          hint: {
+            text: "Candidates will be advised that their degree subject should match or be closely related to " + course.name + "."
+          },
+          errorMessage: errors | getErrorMessage("degree-subject-requirements"),
+          items: [
+            {
+              id: "4b415817-fbba-4dcf-9258-7b0a44ea1615",
+              text: "Yes",
+              value: "yes",
+              checked: true if course.additionalDegreeSubjectRequirements.length else false,
+              conditional: {
+                html: subjectRequirementsHtml
+              }
+            }, {
+              id: "3162ccfa-eb8c-4e52-89d1-bd0ad4e19ef8",
+              text: "No",
+              value: "no",
+              checked: true if course.degreeGrade and not course.additionalDegreeSubjectRequirements.length else false
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

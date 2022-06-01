@@ -12,6 +12,7 @@ const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 exports.course_list = (req, res) => {
   // clean out course data
   delete req.session.data.course
+  delete req.session.data.degree
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
@@ -65,6 +66,7 @@ exports.course_list = (req, res) => {
 exports.course_details = (req, res) => {
   // clean out course data
   delete req.session.data.course
+  delete req.session.data.degree
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
@@ -88,6 +90,7 @@ exports.course_details = (req, res) => {
 exports.course_description = (req, res) => {
   // clean out course data
   delete req.session.data.course
+  delete req.session.data.degree
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
