@@ -9,6 +9,7 @@ const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
 const dataController = require('./controllers/data')
+const gcseController = require('./controllers/gcses')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
 const partnerController = require('./controllers/partners')
@@ -203,6 +204,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/co
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_post)

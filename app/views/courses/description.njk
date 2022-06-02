@@ -219,10 +219,57 @@
       {% endset %}
 
       {% set gcseHtml %}
-        <p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Enter GCSE and equivalency test requirements</a>
-        </p>
+
+        {% if course.acceptPendingGcse %}
+          <ul class="govuk-list">
+            <li>
+              {% if course.acceptPendingGcse == "yes" %}
+                Candidates with pending GCSEs will be considered
+              {% else %}
+                Candidates with pending GCSEs will not be considered
+              {% endif %}
+            </li>
+            <li>
+              {% if course.acceptGcseEquivalency == "yes" %}
+
+                {% set equivalencies = [] %}
+
+                {% if course.acceptEnglishGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('English') %}
+                {% endif %}
+
+                {% if course.acceptMathsGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('maths') %}
+                {% endif %}
+
+                {% if course.acceptScienceGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('science') %}
+                {% endif %}
+
+                Equivalency tests will be accepted in {{ equivalencies | joinify }}
+              {% else %}
+                Equivalency tests will not be accepted
+              {% endif %}
+            </li>
+            {% if course.additionalGcseEquivalencies %}
+              <li>{{ course.additionalGcseEquivalencies }}</li>
+            {% endif %}
+          </ul>
+        {% else %}
+
+          {{ govukInsetText({
+            html: '<p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
+            <p class="govuk-body">
+              <a class="govuk-link" href="' + actions.change + '/gcses?referrer=description">Enter GCSE and equivalency test requirements</a>
+            </p>',
+            classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+          }) }}
+
+        {% endif %}
+
+
+
+
       {% endset %}
 
       {{ govukSummaryList({
@@ -252,20 +299,17 @@
               text: "GCSEs"
             },
             value: {
-              html: govukInsetText({
-                html: gcseHtml,
-                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
-              })
+              html: gcseHtml
             },
             actions: {
               items: [
                 {
-                  href: actions.change + "/gcse?referrer=description",
+                  href: actions.change + "/gcses?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "GCSEs"
-                } if 1 == 0
+                }
               ]
-            }
+            } if course.acceptPendingGcse
           },
           {
             key: {
