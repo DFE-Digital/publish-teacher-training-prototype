@@ -39,6 +39,7 @@
           hint: {
             text: "These are candidates who expect to have the qualification before the beginning of the course. You can give them an offer, on the condition that they pass their GCSEs."
           },
+          errorMessage: errors | getErrorMessage("gcse-accept-pending"),
           items: [
             {
               id: "ce561351-50e1-4c7b-8511-14b18a31f25c",
@@ -67,6 +68,7 @@
                 classes: "govuk-fieldset__legend--s"
               }
             },
+            errorMessage: errors | getErrorMessage("gcse-equivalent-subjects"),
             items: [
               {
                 id: "18a86f7f-718a-497f-98c8-e24043b248e0",
@@ -100,6 +102,7 @@
             hint: {
               text: "For example, if you offer the tests or ask candidates to use a third party, and if there are any costs to pay"
             },
+            errorMessage: errors | getErrorMessage("gcse-equivalent-details"),
             value: course.additionalGcseEquivalencies
           }) }}
 
@@ -115,6 +118,7 @@
               classes: "govuk-fieldset__legend--m"
             }
           },
+          errorMessage: errors | getErrorMessage("gcse-accept-equivalency"),
           items: [
             {
               id: "0435d8cf-011b-42dc-92b2-a8197d656e76",
