@@ -13,7 +13,7 @@ exports.updateOne = (params) => {
 
     course.degreeGrade = params.degree.grade
 
-    if (params.degree.requirements) {
+    if (params.degree.subjectRequirements === 'yes' && params.degree.requirements) {
       course.additionalDegreeSubjectRequirements = params.degree.requirements
     } else {
       delete course.additionalDegreeSubjectRequirements

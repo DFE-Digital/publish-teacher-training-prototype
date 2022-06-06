@@ -23,10 +23,6 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
-      <!-- <p class="govuk-body">
-        Candidates will be advised that their degree subject should match or be closely related to {{ course.name }}.
-      </p> -->
-
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% set subjectRequirementsHtml %}
@@ -59,7 +55,7 @@
               id: "4b415817-fbba-4dcf-9258-7b0a44ea1615",
               text: "Yes",
               value: "yes",
-              checked: true if course.additionalDegreeSubjectRequirements.length else false,
+              checked: true if course.degreeGrade and course.additionalDegreeSubjectRequirements.length else false,
               conditional: {
                 html: subjectRequirementsHtml
               }
