@@ -1,0 +1,152 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set title = "GCSEs and equivalency tests"  %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukRadios({
+          idPrefix: "gcse-accept-pending",
+          name: "course[acceptPendingGcse]",
+          fieldset: {
+            legend: {
+              text: "Will you consider candidates with pending GCSEs?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "These are candidates who expect to have the qualification before the beginning of the course. You can give them an offer, on the condition that they pass their GCSEs."
+          },
+          errorMessage: errors | getErrorMessage("gcse-accept-pending"),
+          items: [
+            {
+              id: "ce561351-50e1-4c7b-8511-14b18a31f25c",
+              text: "Yes",
+              value: "yes",
+              checked: true if course.acceptPendingGcse == "yes" else false
+            },
+            {
+              id: "118768a8-3282-4b65-b732-ccea9a564685",
+              text: "No",
+              value: "no",
+              checked: true if course.acceptPendingGcse == "no" else false
+            }
+          ]
+        }) }}
+
+        {% set acceptGcseEquivalencyHtml %}
+
+          {{ govukCheckboxes({
+            idPrefix: "gcse-equivalent-subjects",
+            name: "course[equivalentSubjects]",
+            fieldset: {
+              legend: {
+                text: "Which subjects will you accept equivalency tests in?",
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            errorMessage: errors | getErrorMessage("gcse-equivalent-subjects"),
+            items: [
+              {
+                id: "18a86f7f-718a-497f-98c8-e24043b248e0",
+                text: "English",
+                value: "english",
+                checked: true if course.acceptEnglishGcseEquivalency == "yes" else false
+              },
+              {
+                id: "11e08749-8fb6-4430-87f0-d39d5caa5a62",
+                text: "Maths",
+                value: "maths",
+                checked: true if course.acceptMathsGcseEquivalency == "yes" else false
+              },
+              {
+                id: "9be9992d-c403-42b8-932c-7b54c1a9a407",
+                text: "Science",
+                value: "science",
+                checked: true if course.acceptScienceGcseEquivalency == "yes" else false
+              } if course.subjectLevel == "primary"
+            ]
+          }) }}
+
+          {{ govukCharacterCount({
+            id: "gcse-equivalent-details",
+            name: "course[additionalGcseEquivalencies]",
+            maxlength: 200,
+            label: {
+              text: "Details about equivalency tests you offer or accept",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "For example, if you offer the tests or ask candidates to use a third party, and if there are any costs to pay"
+            },
+            errorMessage: errors | getErrorMessage("gcse-equivalent-details"),
+            value: course.additionalGcseEquivalencies
+          }) }}
+
+        {% endset %}
+
+        {{ govukRadios({
+          idPrefix: "gcse-accept-equivalency",
+          name: "course[acceptGcseEquivalency]",
+          fieldset: {
+            legend: {
+              text: "Will you consider candidates who need to take an equivalency test in English, maths or science?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          errorMessage: errors | getErrorMessage("gcse-accept-equivalency"),
+          items: [
+            {
+              id: "0435d8cf-011b-42dc-92b2-a8197d656e76",
+              text: "Yes",
+              value: "yes",
+              checked: true if course.acceptGcseEquivalency == "yes" else false,
+              conditional: {
+                html: acceptGcseEquivalencyHtml
+              }
+            },
+            {
+              id: "55d0fdf6-736e-4436-9104-c5f20191b48d",
+              text: "No",
+              value: "no",
+              checked: true if course.acceptGcseEquivalency == "no" else false
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Update GCSE and equivalency tests"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+    </div>
+  </div>
+{% endblock %}
