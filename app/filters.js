@@ -8,6 +8,7 @@ const numeral = require('numeral')
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
 const degreeHelper = require('./helpers/degrees')
+const financialIncentivesHelper = require('./helpers/financial-incentives')
 const locationHelper = require('./helpers/locations')
 const notificationHelper = require('./helpers/notifications')
 const organisationHelper = require('./helpers/organisations')
@@ -408,12 +409,11 @@ module.exports = (env) => {
   example: {{ "2022-09" | getAcademicYearLabel }}
   outputs: "Academic year 2022 to 2023"
   ------------------------------------------------------------------ */
-  filters.getAcademicYearLabel = (date) => {
+  filters.getAcademicYearLabel = (courseStartDate) => {
     let label = ''
 
-    if (date) {
-      // const nowYear = DateTime.now().year
-      const checkDate = DateTime.fromISO(date)
+    if (courseStartDate) {
+      const checkDate = DateTime.fromISO(courseStartDate)
 
       const startDate = DateTime.fromISO(checkDate.year + '-08-01T00:00:00')
       const endDate = DateTime.fromISO((checkDate.year + 1) + '-07-31T23:59:59')
@@ -423,6 +423,34 @@ module.exports = (env) => {
       } else {
         label = 'Academic year ' + (checkDate.year - 1) + ' to ' + checkDate.year
       }
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the financial incentive label
+  example: {{ "F1" | getFinancialIncentiveLabel("2022-09") }}
+  outputs: "Bursaries of £24,000 available"
+  ------------------------------------------------------------------ */
+  filters.getFinancialIncentiveLabel = (subjectCode, courseStartDate) => {
+    let label = ''
+
+    if (subjectCode && courseStartDate) {
+      const checkDate = DateTime.fromISO(courseStartDate)
+
+      const startDate = DateTime.fromISO(checkDate.year + '-08-01T00:00:00')
+      const endDate = DateTime.fromISO((checkDate.year + 1) + '-07-31T23:59:59')
+
+      let academicYear
+
+      if (checkDate >= startDate && checkDate <= endDate) {
+        academicYear = (checkDate.year + 1)
+      } else {
+        academicYear = checkDate.year
+      }
+
+      label = financialIncentivesHelper.getFinancialIncentiveLabel(subjectCode, academicYear)
     }
 
     return label
