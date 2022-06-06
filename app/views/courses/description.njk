@@ -212,10 +212,22 @@
       </h2>
 
       {% set degreeHtml %}
-        <p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Enter degree requirements</a>
-        </p>
+        {% if course.degreeGrade %}
+          <ul class="govuk-list">
+            <li>{{ course.degreeGrade | getDegreeGradeLabel }}</li>
+            {% if course.additionalDegreeSubjectRequirements %}
+              <li>{{ course.additionalDegreeSubjectRequirements }}</li>
+            {% endif %}
+          </ul>
+        {% else %}
+          {{ govukInsetText({
+            html: '<p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
+            <p class="govuk-body">
+              <a class="govuk-link" href="'+ actions.change + '/degree?referrer=description">Enter degree requirements</a>
+            </p>',
+            classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+          }) }}
+        {% endif %}
       {% endset %}
 
       {% set gcseHtml %}
@@ -232,10 +244,7 @@
               text: "Degree"
             },
             value: {
-              html: govukInsetText({
-                html: degreeHtml,
-                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
-              })
+              html: degreeHtml
             },
             actions: {
               items: [
@@ -243,7 +252,7 @@
                   href: actions.change + "/degree?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "degree"
-                } if 1 == 0
+                } if course.degreeGrade
               ]
             }
           },
