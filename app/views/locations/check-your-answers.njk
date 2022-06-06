@@ -1,0 +1,113 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "locations" %}
+
+{% set title = "Check your answers" %}
+{% set caption = "Add location" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set addressHtml %}
+          <p class="govuk-body">
+            {% if location.address.addressLine1.length %}
+              {{ location.address.addressLine1 }}<br>
+            {% endif %}
+            {% if location.address.addressLine2.length %}
+              {{ location.address.addressLine2 }}<br>
+            {% endif %}
+            {% if location.address.town.length %}
+              {{ location.address.town }}<br>
+            {% endif %}
+            {% if location.address.county.length %}
+              {{ location.address.county }}<br>
+            {% endif %}
+            {% if location.address.postcode.length %}
+              {{ location.address.postcode | upper }}<br>
+            {% endif %}
+          </p>
+        {% endset %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                text: location.name
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Unique reference number (URN)"
+              },
+              value: {
+                text: location.urn
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "unique reference number (URN)"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Address"
+              },
+              value: {
+                html: addressHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/address?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "address"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Add location"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "locations" %}
+
+{% if referrer == "change" %}
+  {% set title = location.name %}
+{% else %}
+  {% set title = "Add location" %}
+{% endif %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m",
+            isPageHeading: false
+          }
+        }) %}
+
+          {{ govukInput({
+            id: "address-line-1",
+            name: "location[address][addressLine1]",
+            label: {
+              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-1"),
+            value: location.address.addressLine1
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-2",
+            name: "location[address][addressLine2]",
+            label: {
+              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-2"),
+            value: location.address.addressLine2
+          }) }}
+
+          {{ govukInput({
+            id: "address-town",
+            name: "location[address][town]",
+            label: {
+              text: "Town or city"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "address-level2",
+            errorMessage: errors | getErrorMessage("address-town"),
+            value: location.address.town
+          }) }}
+
+          {{ govukInput({
+            id: "address-county",
+            name: "location[address][county]",
+            label: {
+              text: "County"
+            },
+            classes: "govuk-!-width-two-thirds",
+            errorMessage: errors | getErrorMessage("address-county"),
+            value: location.address.county
+          }) }}
+
+          {{ govukInput({
+            id: "address-postcode",
+            name: "location[address][postcode]",
+            label: {
+              text: "Postcode"
+            },
+            classes: "govuk-input--width-10",
+            autocomplete: "postal-code",
+            errorMessage: errors | getErrorMessage("address-postcode"),
+            value: location.address.postcode | upper
+          }) }}
+
+        {% endcall %}
+
+        {{ govukButton({
+          text: "Update location address" if referrer == "change" else "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
