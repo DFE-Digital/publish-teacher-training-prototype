@@ -7,6 +7,7 @@ const numeral = require('numeral')
 
 const courseHelper = require('./helpers/courses')
 const cycleHelper = require('./helpers/cycles')
+const degreeHelper = require('./helpers/degrees')
 const locationHelper = require('./helpers/locations')
 const notificationHelper = require('./helpers/notifications')
 const organisationHelper = require('./helpers/organisations')
@@ -372,6 +373,21 @@ module.exports = (env) => {
 
     if (code) {
       label = permissionHelper.getPermissionLabel(code)
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the degree label
+  example: {{ "1" | getDegreeGradeLabel }}
+  outputs: "2:1 or above (or equivalent)"
+  ------------------------------------------------------------------ */
+  filters.getDegreeGradeLabel = (code) => {
+    let label
+
+    if (code) {
+      label = degreeHelper.getDegreeGradeLabel(code)
     }
 
     return label
