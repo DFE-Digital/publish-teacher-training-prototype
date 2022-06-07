@@ -5,7 +5,8 @@
 {% set hidePrimaryNavigation = true %}
 {% set hideOrganisationSwitcher = true %}
 
-{% set title = "Cycles" %}
+{% set title = "Recruitment cycles" %}
+{# {% set caption = organisation.name %} #}
 
 {% block beforeContent %}
 
@@ -20,12 +21,12 @@
       <ul class="govuk-list govuk-list--spaced">
         <li>
           <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022">
-            2022
+            {{ "2022" | getCycleLabel }}
           </a>
         </li>
         <li>
           <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2023">
-            2023
+            {{ "2023" | getCycleLabel }}
           </a>
         </li>
       </ul>
