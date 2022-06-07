@@ -8,6 +8,7 @@ const accountController = require('./controllers/account')
 const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
+const cycleController = require('./controllers/cycles')
 const degreeController = require('./controllers/degrees')
 const dataController = require('./controllers/data')
 const gcseController = require('./controllers/gcses')
@@ -23,6 +24,7 @@ const checkIsAuthenticated = (req, res, next) => {
     res.locals.passport = req.session.passport
     // the base URL for navigation
     res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+    res.locals.cycleId = req.params.cycleId
     next()
   } else {
     delete req.session.data
@@ -346,6 +348,8 @@ router.get('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa',
 router.post('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, organisationController.organisation)
+
+router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycleController.cycle_list)
 
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
