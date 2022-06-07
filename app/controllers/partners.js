@@ -21,7 +21,7 @@ exports.partner_courses_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const partner = organisationModel.findOne({ organisationId: req.params.partnerId })
   const permissions = permissionsModel.findOne({ trainingPartnerId: req.params.partnerId, accreditedBodyId: req.params.organisationId })
-  let courses = courseModel.findMany({ organisationId: req.params.partnerId })
+  let courses = courseModel.findMany({ organisationId: req.params.partnerId, cycleId: req.params.cycleId })
 
   courses = courses.filter(course => {
     if (course.accreditedBody) {
