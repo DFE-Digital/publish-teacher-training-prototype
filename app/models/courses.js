@@ -7,7 +7,7 @@ const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
 exports.findMany = (params) => {
-  const courses = []
+  let courses = []
 
   if (params.organisationId) {
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
@@ -28,6 +28,10 @@ exports.findMany = (params) => {
       const data = JSON.parse(raw)
       courses.push(data)
     })
+  }
+
+  if (params.cycleId) {
+    courses = courses.filter(course => course.cycle === params.cycleId)
   }
 
   return courses
