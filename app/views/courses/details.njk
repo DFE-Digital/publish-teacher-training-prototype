@@ -44,19 +44,13 @@
       {% endset %}
 
       {% set subjectHtml %}
-        {% set financialIncentivesHint = course.subjects[0].code | getFinancialIncentiveLabel(course.startDate) %}
-
         <ul class="govuk-list">
           {% for subject in course.subjects %}
-            <li {%- if loop.last %} class="govuk-!-margin-bottom-0"{% endif %}>
+            <li>
               {{ subject.code | getSubjectLabel }}
             </li>
           {% endfor %}
         </ul>
-
-        {%- if financialIncentivesHint.length %}
-          <span class="govuk-hint govuk-!-margin-top-2">{{ financialIncentivesHint }}</span>
-        {% endif -%}
       {% endset %}
 
       {% set ageRangeHtml %}

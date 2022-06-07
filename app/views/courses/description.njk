@@ -112,6 +112,15 @@
         {% endif %}
       {% endset %}
 
+      {% set financialIncentivesHtml %}
+        {% set financialIncentivesHint = course.subjects[0].code | getFinancialIncentiveLabel(course.startDate) %}
+        {%- if financialIncentivesHint.length %}
+          {{ financialIncentivesHint }}
+        {% else %}
+          None available
+        {% endif -%}
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -202,6 +211,14 @@
                   visuallyHiddenText: "financial support you offer"
                 }
               ]
+            }
+          },
+          {
+            key: {
+              text: "Financial incentives"
+            },
+            value: {
+              text: financialIncentivesHtml
             }
           }
         ]
