@@ -88,7 +88,7 @@
 
   {# {% if passport.user.organisations.length > 1 %} #}
     {% set organisationHtml %}
-      {{ passport.organisation.name }} <span class="govuk-hint">– 2022</span>
+      {{ passport.organisation.name }} <span class="govuk-hint">– {{ cycleId | getCycleLabel }}</span>
     {% endset %}
 
     {% if not hideOrganisationSwitcher %}
@@ -102,7 +102,7 @@
             } if passport.user.organisations.length > 1,
             {
               text: "Change recruitment cycle",
-              href: "/cycles"
+              href: "/organisations/" + passport.organisation.id + "/cycles"
             }
           ] | removeEmpty
         },
