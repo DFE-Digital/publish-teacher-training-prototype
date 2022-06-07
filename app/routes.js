@@ -8,7 +8,9 @@ const accountController = require('./controllers/account')
 const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
+const degreeController = require('./controllers/degrees')
 const dataController = require('./controllers/data')
+const gcseController = require('./controllers/gcses')
 const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
@@ -145,6 +147,18 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/check', 
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new', checkIsAuthenticated, courseController.new_course_get)
 
+/// DEGREE ROUTES
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree', checkIsAuthenticated, degreeController.edit_degree_minimum_classification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree', checkIsAuthenticated, degreeController.edit_degree_minimum_classification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/classification', checkIsAuthenticated, degreeController.edit_degree_classification_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/classification', checkIsAuthenticated, degreeController.edit_degree_classification_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/subject-requirements', checkIsAuthenticated, degreeController.edit_degree_subject_requirements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/degree/subject-requirements', checkIsAuthenticated, degreeController.edit_degree_subject_requirements_post)
+
+/// ------------------------------------------------------------------------ ///
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/special-educational-needs-disability', checkIsAuthenticated, courseController.edit_course_send_post)
 
@@ -205,6 +219,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/co
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_post)
 
@@ -227,11 +244,22 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuth
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.edit_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.edit_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.location_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
 
