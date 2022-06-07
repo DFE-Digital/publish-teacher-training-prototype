@@ -38,6 +38,7 @@
 {% from "_components/filter/macro.njk"                 import appFilter %}
 {% from "_components/footer/macro.njk"                 import appFooter %}
 {% from "_components/metric/macro.njk"                 import appMetric %}
+{% from "_components/organisation-actions/macro.njk"  import appOrganisationActions %}
 {% from "_components/organisation-switcher/macro.njk"  import appOrganisationSwitcher %}
 {% from "_components/page-header-actions/macro.njk"    import appPageHeaderActions %}
 {% from "_components/pagination/macro.njk"             import appPagination %}
@@ -80,22 +81,35 @@
       classes: "app-tag--prototype" if environment != 'production'
     },
     html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
-    classes: "govuk-width-container" + (" govuk-phase-banner--no-border-bottom" if passport.user.organisations.length == 1 and headerNavId != "account")
+    classes: "govuk-width-container"
   }) }}
 
-  {% if passport.user.organisations.length > 1 %}
+  {# + (" govuk-phase-banner--no-border-bottom" if passport.user.organisations.length == 1 and headerNavId != "account") #}
+
+  {# {% if passport.user.organisations.length > 1 %} #}
+    {% set organisationHtml %}
+      {{ passport.organisation.name }} <span class="govuk-hint">– 2022</span>
+    {% endset %}
+
     {% if not hideOrganisationSwitcher %}
-      {{ appOrganisationSwitcher({
-        text: passport.organisation.name,
-        link: {
-          text: "Change organisation",
-          href: "/",
-          classes: "govuk-link--no-visited-state"
+      {{ appOrganisationActions({
+        html: organisationHtml,
+        actions: {
+          items: [
+            {
+              text: "Change organisation",
+              href: "/"
+            } if passport.user.organisations.length > 1,
+            {
+              text: "Change recruitment cycle",
+              href: "/cycles"
+            }
+          ] | removeEmpty
         },
         classes: "govuk-width-container"
       }) }}
     {% endif %}
-  {% endif %}
+  {# {% endif %} #}
 
   {% if not hidePrimaryNavigation %}
     {{ appPrimaryNavigation({
@@ -129,7 +143,13 @@
           href: baseUrl + "/details",
           text: "Organisation details",
           active: primaryNavId == "settings"
-        }
+        },
+        {
+          href: baseUrl + "/details",
+          text: "Change recruitment cycle",
+          active: primaryNavId == "settings",
+          classes: "app-primary-navigation__item--align-right"
+        } if 1 == 0
       ]
     }) }}
   {% endif %}
