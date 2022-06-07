@@ -1,4 +1,4 @@
-.app-organisation-nav {
+.app-organisation-switcher {
   @include govuk-clearfix;
   margin-top: govuk-spacing(2);
   margin-bottom: govuk-spacing(2);
@@ -6,7 +6,7 @@
   // border-bottom: 1px solid $govuk-border-colour;
 }
 
-.app-organisation-nav__title {
+.app-organisation-switcher__title {
   @include govuk-font($size: 19, $weight: "bold");
   @include govuk-media-query($from: tablet) {
     float: left;
@@ -14,7 +14,7 @@
   }
 }
 
-.app-organisation-nav__link {
+.app-organisation-switcher__link {
   @include govuk-link-common;
   @include govuk-media-query($from: tablet) {
     float: right;
