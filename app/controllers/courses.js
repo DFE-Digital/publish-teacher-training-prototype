@@ -842,11 +842,11 @@ exports.edit_about_course_post = (req, res) => {
   const errors = []
 
   if (req.session.data.course.aboutCourse?.split(' ').length > wordCount) {
-    const error = {};
-    error.fieldName = "about-course";
-    error.href = "#about-course";
-    error.text = `Course summary must be ${wordCount} words or less`;
-    errors.push(error);
+    const error = {}
+    error.fieldName = "about-course"
+    error.href = "#about-course"
+    error.text = `Course summary must be ${wordCount} words or less`
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -896,11 +896,11 @@ exports.edit_interview_process_post = (req, res) => {
   const errors = []
 
   if (req.session.data.course.interviewProcess?.split(' ').length > wordCount) {
-    const error = {};
-    error.fieldName = "interview-process";
-    error.href = "#interview-process";
-    error.text = `Interview process must be ${wordCount} words or less`;
-    errors.push(error);
+    const error = {}
+    error.fieldName = "interview-process"
+    error.href = "#interview-process"
+    error.text = `Interview process must be ${wordCount} words or less`
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -950,11 +950,11 @@ exports.edit_school_placements_post = (req, res) => {
   const errors = []
 
   if (req.session.data.course.howSchoolPlacementsWork?.split(' ').length > wordCount) {
-    const error = {};
-    error.fieldName = "school-placements";
-    error.href = "#school-placements";
-    error.text = `How school placements work must be ${wordCount} words or less`;
-    errors.push(error);
+    const error = {}
+    error.fieldName = "school-placements"
+    error.href = "#school-placements"
+    error.text = `How school placements work must be ${wordCount} words or less`
+    errors.push(error)
   }
 
   if (errors.length) {
