@@ -19,13 +19,11 @@ exports.organisations_list = (req, res) => {
       })
     } else {
       const cycleId = cycleHelper.CURRENT_CYCLE.code || req.params.cycleId
-      console.log(cycleId);
       res.render('../views/organisations/list', {
         organisations,
         cycleId
       })
     }
-
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
     const cycleId = req.params.cycleId || cycleHelper.CURRENT_CYCLE.code
