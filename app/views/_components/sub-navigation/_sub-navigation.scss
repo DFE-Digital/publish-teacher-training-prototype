@@ -52,6 +52,11 @@
     padding-left: 0;
   }
 
+  &:link,
+  &:visited {
+    color: govuk-colour("blue");
+  }
+
   &:focus {
     color: govuk-colour("black"); // Focus colour on yellow should really be black.
     position: relative; // Ensure focus sits above everything else.
