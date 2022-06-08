@@ -61,6 +61,11 @@
         {% endif %}
       {% endset %}
 
+      {% set courseStartHtml %}
+        <p class="govuk-body">{{ course.startDate | date("MMMM yyyy") }}</p>
+        <p class="govuk-hint">{{ course.startDate | getAcademicYearLabel }}</p>
+      {% endset %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -280,7 +285,7 @@
               text: "Course start"
             },
             value: {
-              text: course.startDate | date("MMMM yyyy")
+              html: courseStartHtml
             },
             actions: {
               items: [
