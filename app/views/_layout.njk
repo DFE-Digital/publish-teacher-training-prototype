@@ -103,7 +103,7 @@
             {
               text: "Change recruitment cycle",
               href: "/organisations/" + passport.organisation.id + "/cycles"
-            }
+            } if isRollover == "true"
           ] | removeEmpty
         },
         classes: "govuk-width-container"
