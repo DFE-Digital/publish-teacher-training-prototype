@@ -18,18 +18,50 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      <ul class="govuk-list govuk-list--spaced">
-        <li>
-          <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022">
-            {{ "2022" | getCycleLabel }}
-          </a>
-        </li>
-        <li>
-          <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2023">
-            {{ "2023" | getCycleLabel }}
-          </a>
-        </li>
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022">
+          {{ "2022" | getCycleLabel }}
+        </a>
+      </h2>
+
+      <p class="govuk-body">Use this section to:</p>
+
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>manage current courses</li>
+        <li>edit locations and vacancies for current courses</li>
+        <li>see which courses you’re currently the accredited body for</li>
+        <li>view requests you’ve already made to recruit for fee-funded PE in the next cycle</li>
       </ul>
+
+      <h2 class="govuk-heading-m">
+        <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2023">
+          {{ "2023" | getCycleLabel }}
+        </a>
+      </h2>
+
+      {# if the organisation has courses in the previous cycle, there's something to roll over #}
+      {# {% if hasCourses %}
+
+      {% else %}
+
+      {% endif %} #}
+
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-8">
+        <li>prepare your courses for the next cycle</li>
+        <li>manage locations for the next cycle</li>
+        {% if organisation.isAccreditedBody %}
+          <li>see which courses in the next cycle you’re the accredited body for</li>
+          <li>view requests you’ve already made to recruit for fee-funded PE in the next cycle</li>
+        {% endif %}
+      </ul>
+
+      {# <p class="govuk-body">
+        You did not publish any courses in the last cycle. Only providers with published or withdrawn courses are rolled over.
+      </p>
+
+      <p class="govuk-body">
+        If you think this is a mistake contact us on <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>
+      </p> #}
 
     </div>
   </div>
