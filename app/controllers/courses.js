@@ -813,7 +813,7 @@ exports.edit_course_start_date_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'Start date updated')
+    req.flash('success', 'Course start updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
