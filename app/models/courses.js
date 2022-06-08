@@ -6,6 +6,8 @@ const organisationModel = require('./organisations')
 const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
+const cycleHelper = require('../helpers/cycles')
+
 exports.findMany = (params) => {
   let courses = []
 
@@ -198,6 +200,12 @@ exports.insertOne = (params) => {
       if (params.course.applicationsOpenDate === 'other') {
         course.applicationsOpenDateOther = params.course.applicationsOpenDateOther
       }
+    }
+
+    if (params.cycleId) {
+      course.cycle = params.cycleId
+    } else {
+      course.cycle = cycleHelper.CURRENT_CYCLE.code
     }
 
     // draft

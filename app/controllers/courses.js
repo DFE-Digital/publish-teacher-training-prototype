@@ -2503,6 +2503,7 @@ exports.new_course_check_answers_post = (req, res) => {
 
   courseModel.insertOne({
     organisationId: req.params.organisationId,
+    cycleId: req.params.cycleId,
     course: req.session.data.course
   })
 
