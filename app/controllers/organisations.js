@@ -1,5 +1,7 @@
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
+
+const cycleHelper = require('../helpers/cycles')
 const organisationHelper = require('../helpers/organisations')
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
@@ -11,7 +13,8 @@ exports.organisations_list = (req, res) => {
     })
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
-    res.redirect(`/organisations/${organisationId}/cycles/2022`)
+    const cycleId = req.params.cycleId || cycleHelper.CURRENT_CYCLE.code
+    res.redirect(`/organisations/${organisationId}/cycles/${cycleId}`)
   }
 }
 
