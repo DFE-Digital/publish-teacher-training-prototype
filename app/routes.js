@@ -351,6 +351,7 @@ router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticate
 
 router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycleController.cycle_list)
 
+router.get('/organisations/cycles/:cycleId', checkIsAuthenticated, organisationController.organisations_list)
 router.get('/organisations', checkIsAuthenticated, organisationController.organisations_list)
 
 router.get('/', checkIsAuthenticated, (req, res) => {
