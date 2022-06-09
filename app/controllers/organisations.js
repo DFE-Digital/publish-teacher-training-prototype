@@ -1,6 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
-
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
 

@@ -1,6 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
-
 const organisationModel = require('../models/organisations')
 
 const cycleHelper = require('../helpers/cycles')
