@@ -39,3 +39,4 @@ The prototype includes a number of environment variables:
 - USE_LOGIN - use to turn on/off username and password login. If set to `false`, the login screen displays a list of test personas. Values: `true` or `false`
 - USE_LOGIN_FALLBACK - not implemented. Use to show email magic link flow. Values: `true` or `false`
 - PHASE_TAG_TEXT - use to change what text is displayed in the phase tag. Defaults to 'beta'
+- IS_ROLLOVER - use to turn on/off roll over functionality. Values: `true` or `false`. Defaults to `false`.
