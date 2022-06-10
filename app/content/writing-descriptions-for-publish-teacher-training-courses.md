@@ -12,9 +12,9 @@ Aside from fundamental questions about entry requirements and funding, most of t
 - who they’ll be training with and how they will be supported
 - how they’ll be assessed and what the course outcomes will be
 
-Candidates say they can sometimes feel a little overwhelmed by the amount of content on course pages. There’s a lot to think about, so making the descriptions as clear and concise as possible means they are more likely to apply to a course that’s right for them.
+Candidates are looking for what they will get out of the course and how it will benefit them, so keep the focus how the course will help them to grow as a teacher.
 
-When browsing courses, candidates are looking for what they will get out of the course and how it will benefit them. With this in mind, it’s a good idea to focus how the course will help them to grow as a teacher, rather than what will be required of them.
+Candidates say they can sometimes feel a little overwhelmed by the amount of content on course pages. There’s a lot to think about, so making the descriptions as clear and concise as possible means they are more likely to apply to a course that’s right for them.
 
 ## Writing for the web
 
@@ -26,6 +26,6 @@ It’s important to format content to make it easy to scan and write it in plain
 - avoiding jargon and using common words
 - using as few words as possible
 
-There are several writing assistant tools available online such as [Grammarly](https://www.grammarly.com/) and [Hemmingway Editor](https://hemingwayapp.com/). You can use these tools to review your content for clarity and comprehension.
+On Find postgraduate teacher training, the 'Course summary' is the first description candidates will read. See our [examples of course summaries] that follow best practice for online content.
 
 Read more about [how to write for the web](https://www.gov.uk/guidance/content-design/writing-for-gov-uk).
