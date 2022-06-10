@@ -26,6 +26,6 @@ It’s important to format content to make it easy to scan and write it in plain
 - avoiding jargon and using common words
 - using as few words as possible
 
-On Find postgraduate teacher training, the 'Course summary' is the first description candidates will read. See our [examples of course summaries] that follow best practice for online content.
+On Find postgraduate teacher training, the 'Course summary' is the first description candidates will read. See our [examples of course summaries](/guidance/course-summary-examples) that follow best practice for online content.
 
 Read more about [how to write for the web](https://www.gov.uk/guidance/content-design/writing-for-gov-uk).
