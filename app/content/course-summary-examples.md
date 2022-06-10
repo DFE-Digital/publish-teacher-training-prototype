@@ -36,4 +36,4 @@ By the end of your training you’ll be ready to be assessed against the teachin
 
 (189 words)
 
-[View more guidance on writing descriptions for Publish teacher training courses]
+[View more guidance on writing course summary descriptions](/guidance/writing-descriptions-for-publish-teacher-training-courses)
