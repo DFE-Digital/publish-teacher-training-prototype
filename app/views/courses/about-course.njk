@@ -51,7 +51,7 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {% if query.version == 2 %}
+        {# {% if query.version == 2 %} #}
 
           {{ headingHtml | safe }}
 
@@ -70,7 +70,7 @@
             value: course.aboutCourse
           }) }}
 
-        {% else %}
+        {# {% else %}
 
           {{ govukCharacterCount({
             id: "about-course",
@@ -89,8 +89,11 @@
             html: helpTextHtml
           }) }}
 
-        {% endif %}
+        {% endif %} #}
 
+        {{ govukInsetText({
+          text: "The first 50 words of your course summary will be shown on the search results page on Find."
+        }) }}
 
 
         {{ govukButton({
@@ -103,6 +106,10 @@
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
 
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      {# {% include "./_sidebar-markdown-help.njk" %} #}
     </div>
   </div>
 
