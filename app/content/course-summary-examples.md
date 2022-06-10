@@ -2,7 +2,7 @@
 title: Course summary examples
 ---
 
-Based on our research into how candidates read course content, we’ve reduced the maximum word limit for the ‘Course summary’ (previously ‘About this course’) from 400 words to 200 words.
+Based on our research into how candidates read course content, we know that candidates prefer shorter content that's easy to read and scan. We’ve reduced the maximum word limit for the ‘Course summary’ (previously ‘About this course’) from 400 words to 200 words.
 
 Here are some ‘Course summary’ examples showing how you can keep descriptions short, well-formatted and focused.
 
