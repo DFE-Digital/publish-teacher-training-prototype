@@ -41,7 +41,7 @@
         rows: [
           {
             key: {
-              text: "About this course"
+              text: "Course summary"
             },
             value: {
               text: (course.aboutCourse | nl2br | markdownToHtml | safe) if course.aboutCourse.length else "Not entered",
@@ -52,25 +52,7 @@
                 {
                   href: actions.change + "/about-course?referrer=description",
                   text: "Change",
-                  visuallyHiddenText: "about this course"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Interview process"
-            },
-            value: {
-              text: (course.interviewProcess | nl2br | markdownToHtml | safe) if course.interviewProcess.length else "Not entered",
-              classes: "govuk-hint" if not course.interviewProcess.length
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/interview-process?referrer=description",
-                  text: "Change",
-                  visuallyHiddenText: "interview process"
+                  visuallyHiddenText: "course summary"
                 }
               ]
             }
@@ -89,6 +71,24 @@
                   href: actions.change + "/school-placements?referrer=description",
                   text: "Change",
                   visuallyHiddenText: "how school placements work"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Interview process"
+            },
+            value: {
+              text: (course.interviewProcess | nl2br | markdownToHtml | safe) if course.interviewProcess.length else "Not entered",
+              classes: "govuk-hint" if not course.interviewProcess.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/interview-process?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "interview process"
                 }
               ]
             }

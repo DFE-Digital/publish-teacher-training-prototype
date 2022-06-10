@@ -25,46 +25,69 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
+      {% set helpTextHtml %}
+        <p class="govuk-body">
+          Give candidates more information about the schools they’ll be teaching in. Tell them:
+        </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how many placements a candidate will have</li>
+          <li>how much time they’ll spend in each school</li>
+          <li>if mentors are available within the schools</li>
+        </ul>
+
+        <p class="govuk-body">You could also mention:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>the average distance candidates have to travel</li>
+          <li>how many schools you partner with in total</li>
+          <li>how placement schools are selected</li>
+        </ul>
+      {% endset %}
+
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukCharacterCount({
-          id: "school-placements",
-          name: "course[howSchoolPlacementsWork]",
-          rows: 20,
-          maxwords: 350,
-          label: {
-            html: headingHtml
-          },
-          errorMessage: errors | getErrorMessage("school-placements"),
-          value: course.howSchoolPlacementsWork
-        }) }}
+        {# {% if query.version == 2 %} #}
 
-        {% set helpTextHtml %}
-          <p class="govuk-body">
-            Give candidates more information about the schools they’ll be teaching in. Tell them:
-          </p>
+          {{ headingHtml | safe }}
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>how many placements a candidate will have</li>
-            <li>how much time they’ll spend in each school</li>
-            <li>if mentors are available within the schools</li>
-            <li>the average distance candidates have to travel from home to school</li>
-          </ul>
+          {{ helpTextHtml | safe }}
 
-          <p class="govuk-body">You could also mention:</p>
+          {{ govukCharacterCount({
+            id: "school-placements",
+            name: "course[howSchoolPlacementsWork]",
+            rows: 20,
+            maxwords: wordCount,
+            label: {
+              text: title,
+              classes: "govuk-label--s"
+            },
+            errorMessage: errors | getErrorMessage("school-placements"),
+            value: course.howSchoolPlacementsWork
+          }) }}
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>the age ranges taught (for example, 11 to 16 or 11 to 18)</li>
-            <li>how many schools you partner with in total</li>
-            <li>whether candidates are able to change schools</li>
-            <li>how placement schools are selected</li>
-          </ul>
-        {% endset %}
+        {# {% else %}
 
-        {{ govukDetails({
-          summaryText: "Help with how school placements work",
-          html: helpTextHtml
-        }) }}
+          {{ govukCharacterCount({
+            id: "school-placements",
+            name: "course[howSchoolPlacementsWork]",
+            rows: 20,
+            maxwords: wordCount,
+            label: {
+              html: headingHtml
+            },
+            errorMessage: errors | getErrorMessage("school-placements"),
+            value: course.howSchoolPlacementsWork
+          }) }}
+
+          {{ govukDetails({
+            summaryText: "Help with how school placements work",
+            html: helpTextHtml
+          }) }}
+
+        {% endif %} #}
+
+
 
         {{ govukButton({
           text: "Update how school placements work"
@@ -76,6 +99,10 @@
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
 
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      {# {% include "./_sidebar-markdown-help.njk" %} #}
     </div>
   </div>
 

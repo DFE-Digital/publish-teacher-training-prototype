@@ -1,0 +1,41 @@
+{% extends "_layout.njk" %}
+
+{% set hidePrimaryNavigation = true %}
+{% set hideOrganisationSwitcher = true %}
+
+{% set title = "How to use this service" %}
+
+{% block beforeContent %}
+{{ govukBreadcrumbs({
+  items: [
+    {
+      text: "Home",
+      href: "/"
+    }, {
+      text: title
+    }
+  ]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      {% if links.length %}
+        <ul class="govuk-list govuk-list--spaced">
+          {% for link in links %}
+            <li>
+              <a href="/guidance/{{ link.slug }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

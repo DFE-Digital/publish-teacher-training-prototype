@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "Interview process" %}
+{% set title = "Interview process (optional)" %}
 {% set caption = course.name + " (" + course.code + ")" %}
 
 {% block pageTitle %}
@@ -27,35 +27,57 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
+      {% set helpTextHtml %}
+        <p class="govuk-body">Include information about:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how many interviews candidates will have</li>
+          <li>who willll be interviewing them</li>
+          <li>any tests needed - if so, how they can prepare</li>
+        </ul>
+      {% endset %}
+
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukCharacterCount({
-          id: "interview-process",
-          name: "course[interviewProcess]",
-          rows: 20,
-          maxwords: 250,
-          label: {
-            html: headingHtml
-          },
-          errorMessage: errors | getErrorMessage("interview-process"),
-          value: course.interviewProcess
-        }) }}
+        {# {% if query.version == 2 %} #}
 
-        {% set helpTextHtml %}
-          <p class="govuk-body">Tell candidates:</p>
+          {{ headingHtml | safe }}
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>how many interviews they’ll have</li>
-            <li>how long each interview will be</li>
-            <li>who’ll be interviewing them - will it be one-on-one or a group interview?</li>
-            <li>whether they’ll have to sit any tests - if so, how can they prepare?</li>
-          </ul>
-        {% endset %}
+          {{ helpTextHtml | safe }}
 
-        {{ govukDetails({
-          summaryText: "Help with interview process",
-          html: helpTextHtml
-        }) }}
+          {{ govukCharacterCount({
+            id: "interview-process",
+            name: "course[interviewProcess]",
+            rows: 20,
+            maxwords: wordCount,
+            label: {
+              text: title,
+              classes: "govuk-label--s"
+            },
+            errorMessage: errors | getErrorMessage("interview-process"),
+            value: course.interviewProcess
+          }) }}
+
+        {# {% else %}
+
+          {{ govukCharacterCount({
+            id: "interview-process",
+            name: "course[interviewProcess]",
+            rows: 20,
+            maxwords: wordCount,
+            label: {
+              html: headingHtml
+            },
+            errorMessage: errors | getErrorMessage("interview-process"),
+            value: course.interviewProcess
+          }) }}
+
+          {{ govukDetails({
+            summaryText: "Help with interview process",
+            html: helpTextHtml
+          }) }}
+
+        {% endif %} #}
 
         {{ govukButton({
           text: "Update interview process"
@@ -67,6 +89,10 @@
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
 
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      {# {% include "./_sidebar-markdown-help.njk" %} #}
     </div>
   </div>
 

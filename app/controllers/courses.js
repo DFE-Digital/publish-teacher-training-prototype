@@ -820,9 +820,11 @@ exports.edit_course_start_date_post = (req, res) => {
 
 exports.edit_about_course_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const wordCount = 200
 
   res.render('../views/courses/about-course', {
     course,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/about-course`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -833,11 +835,24 @@ exports.edit_about_course_get = (req, res) => {
 
 exports.edit_about_course_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course.aboutCourse = req.session.data.course.aboutCourse
+
+  const wordCount = 200
+
   const errors = []
+
+  if (req.session.data.course.aboutCourse?.split(' ').length > wordCount) {
+    const error = {}
+    error.fieldName = "about-course"
+    error.href = "#about-course"
+    error.text = `Course summary must be ${wordCount} words or fewer`
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/about-course', {
       course,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/about-course`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -852,16 +867,18 @@ exports.edit_about_course_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'About this course updated')
+    req.flash('success', 'Course summary updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
   }
 }
 
 exports.edit_interview_process_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const wordCount = 250
 
   res.render('../views/courses/interview-process', {
     course,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/interview-process`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -872,11 +889,24 @@ exports.edit_interview_process_get = (req, res) => {
 
 exports.edit_interview_process_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course.interviewProcess = req.session.data.course.interviewProcess
+
+  const wordCount = 250
+
   const errors = []
+
+  if (req.session.data.course.interviewProcess?.split(' ').length > wordCount) {
+    const error = {}
+    error.fieldName = "interview-process"
+    error.href = "#interview-process"
+    error.text = `Interview process must be ${wordCount} words or fewer`
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/interview-process', {
       course,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/interview-process`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -898,9 +928,11 @@ exports.edit_interview_process_post = (req, res) => {
 
 exports.edit_school_placements_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const wordCount = 350
 
   res.render('../views/courses/school-placements', {
     course,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -911,11 +943,24 @@ exports.edit_school_placements_get = (req, res) => {
 
 exports.edit_school_placements_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course.howSchoolPlacementsWork = req.session.data.course.howSchoolPlacementsWork
+
+  const wordCount = 350
+
   const errors = []
+
+  if (req.session.data.course.howSchoolPlacementsWork?.split(' ').length > wordCount) {
+    const error = {}
+    error.fieldName = "school-placements"
+    error.href = "#school-placements"
+    error.text = `How school placements work must be ${wordCount} words or fewer`
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/school-placements', {
       course,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
