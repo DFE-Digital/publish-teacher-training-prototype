@@ -845,7 +845,7 @@ exports.edit_about_course_post = (req, res) => {
     const error = {}
     error.fieldName = "about-course"
     error.href = "#about-course"
-    error.text = `Course summary must be ${wordCount} words or less`
+    error.text = `Course summary must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
@@ -899,7 +899,7 @@ exports.edit_interview_process_post = (req, res) => {
     const error = {}
     error.fieldName = "interview-process"
     error.href = "#interview-process"
-    error.text = `Interview process must be ${wordCount} words or less`
+    error.text = `Interview process must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
@@ -953,7 +953,7 @@ exports.edit_school_placements_post = (req, res) => {
     const error = {}
     error.fieldName = "school-placements"
     error.href = "#school-placements"
-    error.text = `How school placements work must be ${wordCount} words or less`
+    error.text = `How school placements work must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
