@@ -12,17 +12,15 @@ This varied and inclusive art and design course is offered in collaboration with
 
 During the course, you’ll develop your subject knowledge and pedagogy to give you the skills needed to become a confident teacher.
 
-You’ll spend 1 day per week in university-lead lectures and seminars to develop your confidence in:
+You’ll spend 1 day per week in university-led lectures and 4 days per week in school-led sessions. This will help you to develop your confidence in:
 
 - classroom and behaviour management
 - meeting individual needs and inclusion
 - planning and assessment
 
-You’ll spend 4 days in school-led sessions to develop your understanding of teaching in a real school context. For example, there is a strong emphasis on social justice issues in education and mental health.
-
 At the end of the course, the e-portfolio you’ll have comprised throughout the year provides evidence that you have met the Teachers’ Standards for the award of Qualified Teacher Status (QTS). Our aim is that you’ll have the skills, experience and resilience needed to become a confident teacher.
 
-(168 words)
+(144 words)
 
 ## Biology
 
