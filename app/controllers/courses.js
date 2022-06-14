@@ -83,7 +83,7 @@ exports.course_details = (req, res) => {
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
       delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
-      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`
+      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover?referrer=details`
     }
   })
 }
@@ -108,7 +108,7 @@ exports.course_description = (req, res) => {
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
       delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
-      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`
+      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover?referrer=description`
     }
   })
 }
@@ -165,41 +165,45 @@ exports.withdraw_course_post = (req, res) => {
 exports.rollover_course_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer) {
+    save += `?referrer=${req.query.referrer}`
+    back += `?referrer=${req.query.referrer}`
+  }
+
+  if (req.query.referrer === 'details') {
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/details`
+  }
+
   res.render('../views/courses/rollover', {
     course,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      save,
+      back,
+      cancel
     }
   })
 }
 
 exports.rollover_course_post = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const errors = []
+  // const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const course = { status: 2, cycle: (req.params.cycleId + 1) }
 
-  if (errors.length) {
-    res.render('../views/courses/rollover', {
-      course,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
-      },
-      errors
-    })
+  // courseModel.copyOne({
+  //   organisationId: req.params.organisationId,
+  //   courseId: req.params.courseId,
+  //   course
+  // })
+
+  req.flash('success', 'Course rolled over')
+
+  if (req.query.referrer === 'details') {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   } else {
-    const course = { status: 2, cycle: (req.params.cycleId + 1) }
-
-    // courseModel.copyOne({
-    //   organisationId: req.params.organisationId,
-    //   courseId: req.params.courseId,
-    //   course
-    // })
-
-    req.flash('success', 'Course rolled over')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
   }
 }
 
