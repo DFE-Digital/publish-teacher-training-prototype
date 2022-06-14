@@ -8,8 +8,6 @@ const directoryPath = path.join(__dirname, '../data/courses')
 exports.updateOne = (params) => {
   let course
 
-  console.log(params);
-
   if (params.organisationId && params.courseId) {
     course = courseModel.findOne({ organisationId: params.organisationId, courseId: params.courseId })
 
