@@ -1,0 +1,37 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set title = "Are you sure you want to roll over the course into the next recruitment cycle?" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukButton({
+          text: "Roll over course"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
