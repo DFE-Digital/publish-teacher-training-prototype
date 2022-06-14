@@ -1,17 +1,35 @@
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
+
+const cycleHelper = require('../helpers/cycles')
 const organisationHelper = require('../helpers/organisations')
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
 exports.organisations_list = (req, res) => {
+  const isRollover = process.env.IS_ROLLOVER
+  const cycleId = req.params.cycleId || cycleHelper.CURRENT_CYCLE.code
+
   if (req.session.passport.user.organisations && req.session.passport.user.organisations.length > 1) {
     const organisations = req.session.passport.user.organisations
-    res.render('../views/organisations/list', {
-      organisations
-    })
+
+    if (isRollover === 'true') {
+      res.render('../views/organisations/list', {
+        organisations
+      })
+    } else {
+      res.render('../views/organisations/list', {
+        organisations,
+        cycleId
+      })
+    }
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
-    res.redirect(`/organisations/${organisationId}/cycles/2022`)
+
+    if (isRollover) {
+      res.redirect(`/organisations/${organisationId}/cycles`)
+    } else {
+      res.redirect(`/organisations/${organisationId}/cycles/${cycleId}`)
+    }
   }
 }
 

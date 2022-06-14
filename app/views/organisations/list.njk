@@ -20,7 +20,7 @@
       <ul class="govuk-list govuk-list--spaced">
         {% for organisation in organisations %}
           <li>
-            <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/2022">
+            <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/{{ cycleId }}">
               {{ organisation.name }}
             </a>
           </li>

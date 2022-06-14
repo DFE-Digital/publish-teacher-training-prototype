@@ -6,8 +6,10 @@ const organisationModel = require('./organisations')
 const locationModel = require('./locations')
 const subjectModel = require('./subjects')
 
+const cycleHelper = require('../helpers/cycles')
+
 exports.findMany = (params) => {
-  const courses = []
+  let courses = []
 
   if (params.organisationId) {
     const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
@@ -28,6 +30,10 @@ exports.findMany = (params) => {
       const data = JSON.parse(raw)
       courses.push(data)
     })
+  }
+
+  if (params.cycleId) {
+    courses = courses.filter(course => course.cycle === params.cycleId)
   }
 
   return courses
@@ -194,6 +200,12 @@ exports.insertOne = (params) => {
       if (params.course.applicationsOpenDate === 'other') {
         course.applicationsOpenDateOther = params.course.applicationsOpenDateOther
       }
+    }
+
+    if (params.cycleId) {
+      course.cycle = params.cycleId
+    } else {
+      course.cycle = cycleHelper.CURRENT_CYCLE.code
     }
 
     // draft

@@ -17,7 +17,7 @@ exports.course_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
-  const courses = courseModel.findMany({ organisationId: req.params.organisationId })
+  const courses = courseModel.findMany({ organisationId: req.params.organisationId, cycleId: req.params.cycleId })
 
   const relationships = organisation.accreditedBodies
 
@@ -813,7 +813,7 @@ exports.edit_course_start_date_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'Start date updated')
+    req.flash('success', 'Course start updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -2548,6 +2548,7 @@ exports.new_course_check_answers_post = (req, res) => {
 
   courseModel.insertOne({
     organisationId: req.params.organisationId,
+    cycleId: req.params.cycleId,
     course: req.session.data.course
   })
 

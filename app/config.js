@@ -29,5 +29,7 @@ module.exports = {
 
   useLoginFallback: 'false',
 
-  phaseTagText: 'beta'
+  phaseTagText: 'beta',
+
+  isRollover: 'false'
 }
