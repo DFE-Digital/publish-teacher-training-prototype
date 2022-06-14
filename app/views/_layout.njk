@@ -88,7 +88,7 @@
 
   {# {% if passport.user.organisations.length > 1 %} #}
     {% set organisationHtml %}
-      {{ passport.organisation.name }} <span class="govuk-hint">– {{ cycleId | getCycleLabel }}</span>
+      {{ passport.organisation.name }} {% if isRollover == "true" %}<span class="govuk-hint">– {{ cycleId | getCycleLabel }}</span>{% endif %}
     {% endset %}
 
     {% if not hideOrganisationSwitcher %}
