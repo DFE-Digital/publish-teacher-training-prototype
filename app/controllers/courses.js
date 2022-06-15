@@ -3,6 +3,7 @@ const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
 
 const courseHelper = require('../helpers/courses')
+const cycleHelper = require('../helpers/cycles')
 const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
@@ -72,10 +73,20 @@ exports.course_details = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let rolledOverCourse
+  if (process.env.IS_ROLLOVER) {
+    rolledOverCourse = courseModel.findMany({
+      organisationId: req.params.organisationId,
+      cycleId: cycleHelper.NEXT_CYCLE.code,
+      courseCode: course.code
+    })[0]
+  }
+
   res.render('../views/courses/details', {
     organisation,
     locations,
     course,
+    rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -97,10 +108,20 @@ exports.course_description = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let rolledOverCourse
+  if (process.env.IS_ROLLOVER) {
+    rolledOverCourse = courseModel.findMany({
+      organisationId: req.params.organisationId,
+      cycleId: cycleHelper.NEXT_CYCLE.code,
+      courseCode: course.code
+    })[0]
+  }
+
   res.render('../views/courses/description', {
     organisation,
     locations,
     course,
+    rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -189,14 +210,10 @@ exports.rollover_course_get = (req, res) => {
 }
 
 exports.rollover_course_post = (req, res) => {
-  // const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const course = { status: 2, cycle: (req.params.cycleId + 1) }
-
-  // courseModel.copyOne({
-  //   organisationId: req.params.organisationId,
-  //   courseId: req.params.courseId,
-  //   course
-  // })
+  courseModel.rollOverOne({
+    organisationId: req.params.organisationId,
+    courseId: req.params.courseId
+  })
 
   req.flash('success', 'Course rolled over')
 
