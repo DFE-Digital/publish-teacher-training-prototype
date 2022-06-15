@@ -67,6 +67,10 @@ $git-brand-colour: #159964;
   }
 }
 
+.app-inset-prompt {
+  background-color: govuk-colour("light-grey");
+}
+
 abbr[title] {
   text-decoration: underline;
   text-decoration-style: dotted;
