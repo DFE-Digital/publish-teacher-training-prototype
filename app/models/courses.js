@@ -429,7 +429,7 @@ exports.updateOne = (params) => {
     }
 
     if (params.course.status) {
-      course.status = params.course.status
+      course.status = parseInt(params.course.status)
     }
 
     course.updatedAt = new Date()
