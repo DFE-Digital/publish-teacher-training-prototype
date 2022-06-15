@@ -49,21 +49,11 @@
       <p class="govuk-body">Publish your changes.</p>
       <p class="govuk-body">You can make changes to this course after publishing it.</p>
 
-      <p class="govuk-body">
-        {{ govukButton({
-          text: "Publish course",
-          href: actions.publish,
-          classes: "govuk-!-margin-bottom-0"
-        }) }}
-      </p>
-
-      <p class="govuk-body">
-        {{ govukButton({
-          text: "Roll over course",
-          href: actions.rollover,
-          classes: "govuk-button--secondary"
-        }) }}
-      </p>
+      {{ govukButton({
+        text: "Publish course",
+        href: actions.publish,
+        classes: "govuk-!-margin-bottom-0"
+      }) }}
 
       <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m">
 
