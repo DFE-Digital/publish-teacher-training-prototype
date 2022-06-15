@@ -13,7 +13,7 @@
       classes: "govuk-!-margin-right-2"
     }) }}
 
-    {% if not rolledOverCourse %}
+    {% if isRollover and isCurrentCycle and not rolledOverCourse %}
       {{ govukButton({
         text: "Roll over course",
         href: actions.rollover,
