@@ -1,4 +1,4 @@
-{% if course.status in ["0","2"] %}
+{% if course.status in [0,2] %}
   <div class="govuk-button-group">
     {% if permissions and "publish_courses" in permissions %}
       {{ govukButton({
