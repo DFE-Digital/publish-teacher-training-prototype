@@ -1,10 +1,12 @@
 {% set rolledOverCourseHtml %}
   <p class="govuk-body">
-    <a href="/organisations/{{ organisation.id }}/cycles/{{ rolledOverCourse.cycle }}/courses/{{ rolledOverCourse.id }}">View the rolled over course</a>
+    <a class="govuk-link govuk-link--no-visited-state" href="/organisations/{{ organisation.id }}/cycles/{{ rolledOverCourse.cycle }}/courses/{{ rolledOverCourse.id }}">
+      View rolled over course
+    </a>
   </p>
 {% endset %}
 
 {{ govukInsetText({
   html: rolledOverCourseHtml,
-  classes: "govuk-!-margin-top-0"
+  classes: "app-inset-prompt govuk-!-margin-top-0"
 }) }}

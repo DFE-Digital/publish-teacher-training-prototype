@@ -35,9 +35,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {# {% if rolledOverCourse %}
+      {% if isCurrentCycle and isRollover and rolledOverCourse %}
         {% include "./_rolled-over-course.njk" %}
-      {% endif %} #}
+      {% endif %}
 
       {% set locationHtml %}
         <ul class="govuk-list">
@@ -309,7 +309,13 @@
     </div>
     <div class="govuk-grid-column-one-third">
 
-      {# {% include "./_sidebar.njk" %} #}
+      {# <div class="app-status-box">
+        <p class="govuk-body">
+          <a class="govuk-link govuk-link--no-visited-state" href="/organisations/{{ organisation.id }}/cycles/{{ rolledOverCourse.cycle }}/courses/{{ rolledOverCourse.id }}">
+            View rolled over course
+          </a>
+        </p>
+      </div> #}
 
     </div>
   </div>
