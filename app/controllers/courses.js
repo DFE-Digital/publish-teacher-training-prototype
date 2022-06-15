@@ -73,6 +73,8 @@ exports.course_details = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+
   let rolledOverCourse
   if (process.env.IS_ROLLOVER) {
     rolledOverCourse = courseModel.findMany({
@@ -86,6 +88,7 @@ exports.course_details = (req, res) => {
     organisation,
     locations,
     course,
+    isCurrentCycle,
     rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
@@ -108,6 +111,8 @@ exports.course_description = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+
   let rolledOverCourse
   if (process.env.IS_ROLLOVER) {
     rolledOverCourse = courseModel.findMany({
@@ -121,6 +126,7 @@ exports.course_description = (req, res) => {
     organisation,
     locations,
     course,
+    isCurrentCycle,
     rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
