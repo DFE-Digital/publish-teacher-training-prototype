@@ -35,6 +35,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+      {# {% if rolledOverCourse %}
+        {% include "./_rolled-over-course.njk" %}
+      {% endif %} #}
+
       {% set locationHtml %}
         <ul class="govuk-list">
           {% for location in course.locations %}
@@ -93,7 +97,7 @@
                   visuallyHiddenText: "special educational needs and disability (SEND)"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -110,7 +114,7 @@
                   visuallyHiddenText: "subject"
                 }
               ]
-            }
+            } if course.status != 3
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -127,7 +131,7 @@
                   visuallyHiddenText: "age range"
                 }
               ]
-            }
+            } if course.status != 3
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -144,7 +148,7 @@
                   visuallyHiddenText: "qualification"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -195,7 +199,7 @@
                   visuallyHiddenText: "full time or part time"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -212,7 +216,7 @@
                   visuallyHiddenText: "location"
                 }
               ]
-            } if locations.length > 1
+            } if locations.length > 1 and course.status != 3
           },
           {
             key: {

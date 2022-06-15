@@ -57,7 +57,7 @@
                   visuallyHiddenText: "course summary"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -75,7 +75,7 @@
                   visuallyHiddenText: "how school placements work"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -93,7 +93,7 @@
                   visuallyHiddenText: "interview process"
                 }
               ]
-            }
+            } if course.status != 3
           }
         ]
       }) }}
@@ -141,7 +141,7 @@
                   visuallyHiddenText: "course length"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -159,7 +159,7 @@
                   visuallyHiddenText: "fee for UK student"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -177,7 +177,7 @@
                   visuallyHiddenText: "fee for international students"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -195,7 +195,7 @@
                   visuallyHiddenText: "fee details"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -213,7 +213,7 @@
                   visuallyHiddenText: "financial support you offer"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -313,7 +313,7 @@
                   visuallyHiddenText: "degree"
                 } if course.degreeGrade
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -330,7 +330,7 @@
                   visuallyHiddenText: "GCSEs"
                 }
               ]
-            } if course.acceptPendingGcse
+            }  if course.status != 3 and course.acceptPendingGcse
           },
           {
             key: {
@@ -348,7 +348,7 @@
                   visuallyHiddenText: "personal qualities"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -366,7 +366,7 @@
                   visuallyHiddenText: "other requirements"
                 }
               ]
-            }
+            } if course.status != 3
           }
         ]
       }) }}
