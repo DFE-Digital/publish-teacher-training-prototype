@@ -213,7 +213,7 @@ exports.insertOne = (params) => {
     }
 
     // draft
-    course.status = '0'
+    course.status = 0
 
     course.createdAt = new Date()
 
