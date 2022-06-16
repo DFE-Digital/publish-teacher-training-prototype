@@ -1,5 +1,11 @@
 {% if course.status == 1 %}
   <div class="govuk-button-group">
+    {# {{ govukButton({
+      text: "Publish course",
+      href: actions.publish,
+      classes: "govuk-!-margin-right-2"
+    }) }} #}
+
     <a class="govuk-link govuk-!-margin-right-2" href="#">View on Find</a>
     <a class="govuk-link govuk-!-margin-right-2" href="#">Change vacancies</a>
     <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw course</a>
