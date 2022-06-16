@@ -71,6 +71,11 @@ $git-brand-colour: #159964;
   background-color: govuk-colour("light-grey");
 }
 
+.app-button--secondary {
+  border: 2px solid govuk-colour("mid-grey");
+  background-color: govuk-colour("white");
+}
+
 abbr[title] {
   text-decoration: underline;
   text-decoration-style: dotted;
