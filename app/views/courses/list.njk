@@ -107,6 +107,9 @@
                     <span class="govuk-body-s">
                       {{ course.qualification | getQualificationLabel }} - {{ course.studyMode | getStudyModeLabel | lower }}
                     </span>
+                    {# {% if course.status in [0,2] %}
+                      <br><span class="govuk-body-s">Has not been rolled over</span>
+                    {% endif %} #}
                   </td>
                   <td class="govuk-table__cell">
                     {{ govukTag({
