@@ -233,6 +233,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/wi
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/delete', checkIsAuthenticated, courseController.delete_course_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/rollover', checkIsAuthenticated, courseController.rollover_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/rollover', checkIsAuthenticated, courseController.rollover_course_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)

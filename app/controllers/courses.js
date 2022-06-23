@@ -3,6 +3,7 @@ const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
 
 const courseHelper = require('../helpers/courses')
+const cycleHelper = require('../helpers/cycles')
 const locationHelper = require('../helpers/locations')
 const organisationHelper = require('../helpers/organisations')
 const subjectHelper = require('../helpers/subjects')
@@ -72,17 +73,31 @@ exports.course_details = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+
+  let rolledOverCourse
+  if (process.env.IS_ROLLOVER) {
+    rolledOverCourse = courseModel.findMany({
+      organisationId: req.params.organisationId,
+      cycleId: cycleHelper.NEXT_CYCLE.code,
+      courseCode: course.code
+    })[0]
+  }
+
   res.render('../views/courses/details', {
     organisation,
     locations,
     course,
+    isCurrentCycle,
+    rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
-      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover?referrer=details`
     }
   })
 }
@@ -96,19 +111,165 @@ exports.course_description = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+
+  let rolledOverCourse
+  if (process.env.IS_ROLLOVER) {
+    rolledOverCourse = courseModel.findMany({
+      organisationId: req.params.organisationId,
+      cycleId: cycleHelper.NEXT_CYCLE.code,
+      courseCode: course.code
+    })[0]
+  }
+
   res.render('../views/courses/description', {
     organisation,
     locations,
     course,
+    isCurrentCycle,
+    rolledOverCourse,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       withdraw: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
-      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover?referrer=description`
     }
   })
+}
+
+/// ------------------------------------------------------------------------ ///
+/// WITHDRAW COURSE
+/// ------------------------------------------------------------------------ ///
+
+exports.withdraw_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/withdraw', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.withdraw_course_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/withdraw', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    const status = { status: 3 }
+
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: status
+    })
+
+    req.flash('success', 'Course withdrawn')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
+/// ROLLOVER COURSE
+/// ------------------------------------------------------------------------ ///
+
+exports.rollover_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer) {
+    save += `?referrer=${req.query.referrer}`
+    back += `?referrer=${req.query.referrer}`
+  }
+
+  if (req.query.referrer === 'details') {
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/details`
+  }
+
+  res.render('../views/courses/rollover', {
+    course,
+    actions: {
+      save,
+      back,
+      cancel
+    }
+  })
+}
+
+exports.rollover_course_post = (req, res) => {
+  courseModel.rollOverOne({
+    organisationId: req.params.organisationId,
+    courseId: req.params.courseId
+  })
+
+  req.flash('success', 'Course rolled over')
+
+  if (req.query.referrer === 'details') {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  } else {
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
+/// DELETE COURSE
+/// ------------------------------------------------------------------------ ///
+
+exports.delete_course_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  res.render('../views/courses/delete', {
+    course,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+    }
+  })
+}
+
+exports.delete_course_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  if (errors.length) {
+    res.render('../views/courses/delete', {
+      course,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      },
+      errors
+    })
+  } else {
+    courseModel.deleteOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId
+    })
+
+    req.flash('success', 'Course deleted')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
+  }
 }
 
 /// ------------------------------------------------------------------------ ///
@@ -1354,93 +1515,6 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
     }
 
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
-  }
-}
-
-/// ------------------------------------------------------------------------ ///
-/// WITHDRAW COURSE
-/// ------------------------------------------------------------------------ ///
-
-exports.withdraw_course_get = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-
-  res.render('../views/courses/withdraw', {
-    course,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
-    }
-  })
-}
-
-exports.withdraw_course_post = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const errors = []
-
-  if (errors.length) {
-    res.render('../views/courses/withdraw', {
-      course,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/withdraw`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
-      },
-      errors
-    })
-  } else {
-    const status = { status: 3 }
-
-    courseModel.updateOne({
-      organisationId: req.params.organisationId,
-      courseId: req.params.courseId,
-      course: status
-    })
-
-    req.flash('success', 'Course withdrawn')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
-  }
-}
-
-/// ------------------------------------------------------------------------ ///
-/// DELETE COURSE
-/// ------------------------------------------------------------------------ ///
-
-exports.delete_course_get = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-
-  res.render('../views/courses/delete', {
-    course,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
-    }
-  })
-}
-
-exports.delete_course_post = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const errors = []
-
-  if (errors.length) {
-    res.render('../views/courses/delete', {
-      course,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/delete`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
-      },
-      errors
-    })
-  } else {
-    courseModel.deleteOne({
-      organisationId: req.params.organisationId,
-      courseId: req.params.courseId
-    })
-
-    req.flash('success', 'Course deleted')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`)
   }
 }
 

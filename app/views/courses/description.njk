@@ -17,7 +17,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% include "./_page-heading.njk" %}
+
+      {% include "./_actions.njk" %}
+
+      {% if isCurrentCycle and isRollover and rolledOverCourse %}
+        {% include "./_rolled-over-course.njk" %}
+      {% endif %}
 
     </div>
   </div>
@@ -31,7 +37,7 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
         Course information
@@ -55,7 +61,7 @@
                   visuallyHiddenText: "course summary"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -73,7 +79,7 @@
                   visuallyHiddenText: "how school placements work"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -91,10 +97,16 @@
                   visuallyHiddenText: "interview process"
                 }
               ]
-            }
+            } if course.status != 3
           }
         ]
       }) }}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
       <h2 class="govuk-heading-m">
         Course length and fees
@@ -139,7 +151,7 @@
                   visuallyHiddenText: "course length"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -157,7 +169,7 @@
                   visuallyHiddenText: "fee for UK student"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -175,7 +187,7 @@
                   visuallyHiddenText: "fee for international students"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -193,7 +205,7 @@
                   visuallyHiddenText: "fee details"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -211,7 +223,7 @@
                   visuallyHiddenText: "financial support you offer"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -223,6 +235,12 @@
           }
         ]
       }) }}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
         Requirements and eligibility
@@ -248,7 +266,6 @@
       {% endset %}
 
       {% set gcseHtml %}
-
         {% if course.acceptPendingGcse %}
           <ul class="govuk-list">
             <li>
@@ -285,7 +302,6 @@
             {% endif %}
           </ul>
         {% else %}
-
           {{ govukInsetText({
             html: '<p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
             <p class="govuk-body">
@@ -293,12 +309,7 @@
             </p>',
             classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
           }) }}
-
         {% endif %}
-
-
-
-
       {% endset %}
 
       {{ govukSummaryList({
@@ -318,7 +329,7 @@
                   visuallyHiddenText: "degree"
                 } if course.degreeGrade
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -335,7 +346,7 @@
                   visuallyHiddenText: "GCSEs"
                 }
               ]
-            } if course.acceptPendingGcse
+            }  if course.status != 3 and course.acceptPendingGcse
           },
           {
             key: {
@@ -353,7 +364,7 @@
                   visuallyHiddenText: "personal qualities"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -371,15 +382,10 @@
                   visuallyHiddenText: "other requirements"
                 }
               ]
-            }
+            } if course.status != 3
           }
         ]
       }) }}
-
-    </div>
-    <div class="govuk-grid-column-one-third">
-
-      {% include "./_sidebar.njk" %}
 
     </div>
   </div>

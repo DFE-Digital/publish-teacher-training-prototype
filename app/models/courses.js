@@ -36,6 +36,10 @@ exports.findMany = (params) => {
     courses = courses.filter(course => course.cycle === params.cycleId)
   }
 
+  if (params.courseCode) {
+    courses = courses.filter(course => course.code === params.courseCode)
+  }
+
   return courses
 }
 
@@ -55,9 +59,9 @@ exports.findOne = (params) => {
 }
 
 exports.insertOne = (params) => {
-  if (params) {
-    const course = {}
+  const course = {}
 
+  if (params) {
     course.id = uuid()
 
     if (params.course.name) {
@@ -209,7 +213,7 @@ exports.insertOne = (params) => {
     }
 
     // draft
-    course.status = '0'
+    course.status = 0
 
     course.createdAt = new Date()
 
@@ -223,6 +227,8 @@ exports.insertOne = (params) => {
     // write the JSON data
     fs.writeFileSync(filePath, fileData)
   }
+
+  return course
 }
 
 exports.updateOne = (params) => {
@@ -423,7 +429,7 @@ exports.updateOne = (params) => {
     }
 
     if (params.course.status) {
-      course.status = params.course.status
+      course.status = parseInt(params.course.status)
     }
 
     course.updatedAt = new Date()
@@ -447,4 +453,49 @@ exports.deleteOne = (params) => {
     const filePath = directoryPath + '/' + params.courseId + '.json'
     fs.unlinkSync(filePath)
   }
+}
+
+exports.rollOverOne = (params) => {
+  let course
+
+  if (params.organisationId && params.courseId) {
+    course = this.findOne({ organisationId: params.organisationId, courseId: params.courseId })
+
+    course.id = uuid()
+    course.status = 2
+    course.cycle = cycleHelper.NEXT_CYCLE.code
+
+    const startDate = new Date(course.startDate)
+    startDate.setFullYear(startDate.getFullYear() + 1)
+
+    course.startDate = startDate
+
+    if (course.applicationsOpenDate === 'other') {
+      const applicationsOpenDateOther = new Date(course.applicationsOpenDateOther)
+      applicationsOpenDateOther.setFullYear(applicationsOpenDateOther.getFullYear() + 1)
+
+      course.applicationsOpenDateOther = applicationsOpenDateOther
+    } else {
+      const applicationsOpenDate = new Date(course.applicationsOpenDate)
+      applicationsOpenDate.setFullYear(applicationsOpenDate.getFullYear() + 1)
+
+      course.applicationsOpenDate = applicationsOpenDate
+    }
+
+    course.createdAt = new Date()
+
+    delete course.updatedAt
+
+    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+
+    const filePath = directoryPath + '/' + course.id + '.json'
+
+    // create a JSON sting for the submitted data
+    const fileData = JSON.stringify(course)
+
+    // write the JSON data
+    fs.writeFileSync(filePath, fileData)
+  }
+
+  return course
 }

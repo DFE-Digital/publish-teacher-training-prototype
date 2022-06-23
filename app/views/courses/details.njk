@@ -17,7 +17,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% include "./_page-heading.njk" %}
+
+      {% include "./_actions.njk" %}
+
+      {% if isCurrentCycle and isRollover and rolledOverCourse %}
+        {% include "./_rolled-over-course.njk" %}
+      {% endif %}
 
     </div>
   </div>
@@ -91,7 +97,7 @@
                   visuallyHiddenText: "special educational needs and disability (SEND)"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -108,7 +114,7 @@
                   visuallyHiddenText: "subject"
                 }
               ]
-            }
+            } if course.status != 3
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -125,7 +131,7 @@
                   visuallyHiddenText: "age range"
                 }
               ]
-            }
+            } if course.status != 3
           } if course.subjectLevel != "further_education",
           {
             key: {
@@ -142,7 +148,7 @@
                   visuallyHiddenText: "qualification"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -159,7 +165,7 @@
                   visuallyHiddenText: "apprenticeship"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           } if organisation.isAccreditedBody,
           {
             key: {
@@ -176,7 +182,7 @@
                   visuallyHiddenText: "funding type"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -193,7 +199,7 @@
                   visuallyHiddenText: "full time or part time"
                 }
               ]
-            }
+            } if course.status != 3
           },
           {
             key: {
@@ -210,7 +216,7 @@
                   visuallyHiddenText: "location"
                 }
               ]
-            } if locations.length > 1
+            } if locations.length > 1 and course.status != 3
           },
           {
             key: {
@@ -227,7 +233,7 @@
                   visuallyHiddenText: "accredited body"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           } if not organisation.isAccreditedBody,
           {
             key: {
@@ -244,7 +250,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Student visa"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           } if course.fundingType == "fee",
           {
             key: {
@@ -261,7 +267,7 @@
                   visuallyHiddenText: "if candidates can get a sponsored Skilled Worker visa"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           } if course.fundingType in ["salary", "apprenticeship"],
           {
             key: {
@@ -278,7 +284,7 @@
                   visuallyHiddenText: "applications open date"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           },
           {
             key: {
@@ -295,7 +301,7 @@
                   visuallyHiddenText: "course start"
                 }
               ]
-            } if course.status == "0"
+            } if course.status in [0,2]
           }
         ]
       }) }}
@@ -303,7 +309,15 @@
     </div>
     <div class="govuk-grid-column-one-third">
 
-      {% include "./_sidebar.njk" %}
+      {# {% include "./_sidebar.njk" %} #}
+
+      {# <div class="app-status-box">
+        <p class="govuk-body">
+          <a class="govuk-link govuk-link--no-visited-state" href="/organisations/{{ organisation.id }}/cycles/{{ rolledOverCourse.cycle }}/courses/{{ rolledOverCourse.id }}">
+            View rolled over course
+          </a>
+        </p>
+      </div> #}
 
     </div>
   </div>
