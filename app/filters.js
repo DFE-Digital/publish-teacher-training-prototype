@@ -457,6 +457,38 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  GOV.UK style dates
+  @type {Date} date
+  ------------------------------------------------------------------ */
+
+  filters.govukDateAtTime = (date) => {
+    const govukDate = filters.govukDate(date)
+    const time = filters.time(date)
+    return govukDate + ' at ' + time
+  }
+
+  filters.govukShortDateAtTime = (date) => {
+    const govukDate = filters.dateToGovukDate(date)
+    const time = filters.time(date)
+    return govukDate + ' at ' + time
+  }
+
+  /* ------------------------------------------------------------------
+  GOV.UK style times
+  @type {Date} date
+  ------------------------------------------------------------------ */
+
+  filters.time = (date) => {
+    let dt = DateTime.fromISO(date)
+    if (dt.minute > 0) {
+      dt = dt.toFormat('h:mma')
+    } else {
+      dt = dt.toFormat('ha')
+    }
+    return dt.toLowerCase()
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters

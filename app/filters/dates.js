@@ -95,13 +95,23 @@ filters.arrayToGovukDate = (array, format) => {
 */
 
 filters.dateToGovukDate = (date, format = false) => {
-  // if (date) {
-  //   let d = moment(date)
-  //   if (d.isValid) {
-  //     return d.format(format || 'D MMMM YYYY')
-  //   }
-  // }
-  // return ''
+  if (date) {
+    const theDate = DateTime.fromISO(date)
+    if (theDate.isValid) {
+      return theDate.toFormat('d MMMM yyyy')
+    }
+  }
+  return ''
+}
+
+filters.dateToGovukShortDate = (date) => {
+  if (date) {
+    const theDate = DateTime.fromISO(date)
+    if (theDate.isValid) {
+      return theDate.toFormat('d MMM yyyy')
+    }
+  }
+  return ''
 }
 
 /*
