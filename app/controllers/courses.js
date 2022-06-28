@@ -981,7 +981,7 @@ exports.edit_course_start_date_post = (req, res) => {
 
 exports.edit_about_course_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-  const wordCount = 200
+  const wordCount = 400
 
   res.render('../views/courses/about-course', {
     course,
@@ -998,7 +998,7 @@ exports.edit_about_course_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   course.aboutCourse = req.session.data.course.aboutCourse
 
-  const wordCount = 200
+  const wordCount = 400
 
   const errors = []
 

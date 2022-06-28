@@ -366,9 +366,9 @@ router.get('/', checkIsAuthenticated, (req, res) => {
 /// GUIDANCE ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/guidance/:fileName', guidanceController.guidance)
+router.get('/how-to-use-this-service/:fileName', guidanceController.guidance)
 
-router.get('/guidance', guidanceController.guidance)
+router.get('/how-to-use-this-service', guidanceController.guidance)
 
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN

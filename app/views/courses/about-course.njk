@@ -46,7 +46,7 @@
           <li>spell out acronyms the first time you use them, for example, ITT, NQT, SCITT</li>
         </ul>
 
-        <p class="govuk-body"><a class="govuk-link" href="/guidance/course-summary-examples">View more guidance and course summary examples</a></p>
+        <p class="govuk-body"><a class="govuk-link" href="/how-to-use-this-service/course-summary-examples">View more guidance and course summary examples</a></p>
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -60,7 +60,7 @@
           {{ govukCharacterCount({
             id: "about-course",
             name: "course[aboutCourse]",
-            rows: 10,
+            rows: 20,
             maxwords: wordCount,
             label: {
               text: title,
@@ -91,11 +91,6 @@
 
         {% endif %} #}
 
-        {{ govukInsetText({
-          text: "The first 50 words of your course summary will be shown on the search results page on Find."
-        }) }}
-
-
         {{ govukButton({
           text: "Update course summary"
         }) }}
@@ -106,10 +101,6 @@
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
 
-    </div>
-
-    <div class="govuk-grid-column-one-third">
-      {# {% include "./_sidebar-markdown-help.njk" %} #}
     </div>
   </div>
 
