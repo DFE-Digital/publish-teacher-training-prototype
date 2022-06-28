@@ -91,11 +91,6 @@
 
         {% endif %} #}
 
-        {{ govukInsetText({
-          text: "The first 50 words of your course summary will be shown on the search results page on Find."
-        }) }}
-
-
         {{ govukButton({
           text: "Update course summary"
         }) }}
@@ -106,10 +101,6 @@
         <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
       </p>
 
-    </div>
-
-    <div class="govuk-grid-column-one-third">
-      {# {% include "./_sidebar-markdown-help.njk" %} #}
     </div>
   </div>
 
