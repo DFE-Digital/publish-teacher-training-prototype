@@ -34,4 +34,4 @@ At the end of the course, the e-portfolio you’ll have comprised throughout the
 
 (144 words)
 
-[View more guidance on writing course summary descriptions](/guidance/writing-descriptions-for-publish-teacher-training-courses)
+[View more guidance on writing course summary descriptions](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses)
