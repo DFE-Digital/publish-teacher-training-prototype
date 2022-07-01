@@ -3,10 +3,12 @@
 {% set primaryNavId = "locations" %}
 
 {% if referrer == "change" %}
-  {% set title = location.name %}
+  {% set caption = location.name %}
 {% else %}
-  {% set title = "Add location" %}
+  {% set caption = "Add location" %}
 {% endif %}
+
+{% set title = "Address" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -22,13 +24,15 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% call govukFieldset({
           legend: {
-            text: "Address",
+            html: headingHtml,
             classes: "govuk-fieldset__legend--m",
             isPageHeading: false
           }
@@ -38,7 +42,8 @@
             id: "address-line-1",
             name: "location[address][addressLine1]",
             label: {
-              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
+              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+              classes: "govuk-label--s"
             },
             autocomplete: "address-line1",
             errorMessage: errors | getErrorMessage("address-line-1"),
@@ -49,7 +54,8 @@
             id: "address-line-2",
             name: "location[address][addressLine2]",
             label: {
-              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
+              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+              classes: "govuk-label--s"
             },
             autocomplete: "address-line1",
             errorMessage: errors | getErrorMessage("address-line-2"),
@@ -60,7 +66,8 @@
             id: "address-town",
             name: "location[address][town]",
             label: {
-              text: "Town or city"
+              text: "Town or city",
+              classes: "govuk-label--s"
             },
             classes: "govuk-!-width-two-thirds",
             autocomplete: "address-level2",
@@ -72,7 +79,8 @@
             id: "address-county",
             name: "location[address][county]",
             label: {
-              text: "County"
+              text: "County",
+              classes: "govuk-label--s"
             },
             classes: "govuk-!-width-two-thirds",
             errorMessage: errors | getErrorMessage("address-county"),
@@ -83,7 +91,8 @@
             id: "address-postcode",
             name: "location[address][postcode]",
             label: {
-              text: "Postcode"
+              text: "Postcode",
+              classes: "govuk-label--s"
             },
             classes: "govuk-input--width-10",
             autocomplete: "postal-code",
