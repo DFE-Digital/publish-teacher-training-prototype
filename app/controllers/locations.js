@@ -30,7 +30,7 @@ exports.location_details = (req, res) => {
     locationId: req.params.locationId,
   });
 
-  res.render("../views/locations/details", {
+  res.render("../views/locations/show", {
     location,
     actions: {
       delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/delete`,
@@ -201,7 +201,7 @@ exports.new_location_check_post = (req, res) => {
 
   req.flash("success", "Location added");
   res.redirect(
-    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${location.id}`
+    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
   );
 };
 
