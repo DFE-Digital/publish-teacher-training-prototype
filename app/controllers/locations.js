@@ -79,7 +79,7 @@ exports.new_location_post = (req, res) => {
     const error = {};
     error.fieldName = "location-name";
     error.href = "#location-name";
-    error.text = "Enter a location name";
+    error.text = "Enter a name";
     errors.push(error);
   }
 
@@ -232,7 +232,7 @@ exports.edit_location_post = (req, res) => {
     const error = {};
     error.fieldName = "location-name";
     error.href = "#location-name";
-    error.text = "Enter a location name";
+    error.text = "Enter a name";
     errors.push(error);
   }
 
