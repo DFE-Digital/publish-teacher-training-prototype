@@ -65,7 +65,8 @@
                 text: "Unique reference number (URN)"
               },
               value: {
-                text: location.urn
+                text: location.urn if location.urn else "Not entered",
+                classes: "govuk-hint" if not location.urn
               },
               actions: {
                 items: [
