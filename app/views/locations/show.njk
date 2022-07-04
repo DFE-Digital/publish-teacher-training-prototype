@@ -61,7 +61,7 @@
               text: "Location code"
             },
             value: {
-              text: location.code
+              text: "- (dash)" if location.code == "-" else location.code
             },
             actions: {
               items: [
