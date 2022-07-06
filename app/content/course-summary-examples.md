@@ -3,16 +3,16 @@ title: Course summary examples
 contents:
   items:
     - text: Example 1 - secondary art and design course provided by a university
-      href: "#example-1"
+      href: "#example-1---secondary-art-and-design-course-provided-by-a-university"
     - text: Example 2 - primary course provided by a SCITT
-      href: "#example-2"
+      href: "#example-2---primary-course-provided-by-a-scitt"
 ---
 
 Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses), here are some ‘Course summary’ examples.
 
 The examples are based on real descriptions that are currently live on Find postgraduate teacher training.
 
-## Example 1
+## Example 1 - secondary art and design course provided by a university
 
 In this example, the language used is clear and inspirational. It gives the candidates a good overview of what they can expect, without going into too much detail (as this can be added in other sections).
 
@@ -53,7 +53,7 @@ You’ll also build a portfolio of the educational outcomes you achieved during 
 
 Train with us and you’ll be part of a thriving creative network, with access to world class facilities and beautiful grounds at the Becoming a Teacher (BAT) university.
 
-## Example 2
+## Example 2 - primary course provided by a SCITT
 
 In this example, the provider focuses on how the candidate will be supported throughout their course through a school mentor and regular feedback.
 
