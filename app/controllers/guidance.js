@@ -8,7 +8,7 @@ exports.guidance = (req, res) => {
     })
 
     res.render('../views/guidance/show', {
-      title: markdown.data.title,
+      contentData: markdown.data,
       content: markdown.content
     })
   } else {

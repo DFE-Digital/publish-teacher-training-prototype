@@ -1,37 +1,84 @@
 ---
 title: Course summary examples
+contents:
+  items:
+    - text: Example 1 - secondary art and design course provided by a university
+      href: "#example-1---secondary-art-and-design-course-provided-by-a-university"
+    - text: Example 2 - primary course provided by a SCITT
+      href: "#example-2---primary-course-provided-by-a-scitt"
 ---
 
-Based on our research into how candidates read course content, we know that candidates prefer shorter content that's easy to read and scan. We’ve reduced the maximum word limit for the ‘Course summary’ (previously ‘About this course’) from 400 words to 200 words.
+Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses), here are some ‘Course summary’ examples.
 
-Here are some ‘Course summary’ examples showing how you can keep descriptions short, well-formatted and focused.
+The examples are based on real descriptions that are currently live on Find postgraduate teacher training.
 
-## Biology
+## Example 1 - secondary art and design course provided by a university
 
-You’ll spend the first 2 weeks of your training at the Becoming a Teacher (BAT) studio in Sheffield city centre. Here, you’ll meet other new trainees and learn about the principles of great teaching and behaviour management.
+In this example, the language used is clear and inspirational. It gives the candidates a good overview of what they can expect, without going into too much detail (as this can be added in other sections).
 
-You’ll then begin the first of your 2 school placements, where you’ll be matched with an experienced biology teacher (your ‘subject tutor’). They’ll support you to develop your own teaching practice and gain confidence leading a class.
+It’s well structured so the content is easy to read and scan.
 
-Each of your school placements lasts approximately 4 months, with breaks during school holidays. You’ll spend 4 days of the week observing, delivering, and preparing for lessons with the help of your subject tutor and mentor. The 5th day of the week is dedicated to theoretical learning, such as writing the 2 essays which are an essential part of getting your PGCE.
+### Art and design (235 words)
 
-By the end of your training you’ll be ready to be assessed against the teaching standards, so that you can get qualified teacher status (QTS). You’ll have an interview, share a portfolio of work, and be observed teaching. Your mentor will work with you throughout the year to ensure you’re ready for this.
+This Art and Design course was developed with our partner schools and features an ambitious curriculum.
 
-(189 words)
+It covers:
 
-## Art and Design
+- professional behaviours and responsibilities
+- subject knowledge and the national curriculum
+- how pupils learn
+- lesson planning
+- managing behaviour
+- adapting your teaching to respond to different pupil needs
+- pupil assessment
+- pupil wellbeing
 
-This varied and inclusive art and design course is offered in collaboration with the University of Becoming a Teacher (BAT). The course is taught by experienced staff who were successful teachers and maintain strong links with schools.
+By the end of the course you’ll be equipped to:
 
-During the course, you’ll develop your subject knowledge and pedagogy to give you the skills needed to become a confident teacher.
+- share your love for art and design, inspiring your students’ creativity
+- develop innovative teaching approaches, designing and implementing stimulating resources
+- teach art and design within the national curriculum framework, meeting exam requirements
 
-You’ll spend 1 day per week in university-led lectures and 4 days per week in school-led sessions. This will help you to develop your confidence in:
+Studio based activities are a key feature of this course. In our specialist art studio you’ll learn to teach 2 dimensional work, sculptural techniques, ceramics, puppetry, print-making, textiles, photography and multimedia.
 
-- classroom and behaviour management
-- meeting individual needs and inclusion
-- planning and assessment
+You’ll learn in different ways throughout this course, for example, through:
 
-At the end of the course, the e-portfolio you’ll have comprised throughout the year provides evidence that you have met the Teachers’ Standards for the award of Qualified Teacher Status (QTS). Our aim is that you’ll have the skills, experience and resilience needed to become a confident teacher.
+- practical experience in the classroom
+- working with practising teachers, who you’ll meet ahead of your placements
+- independent study
 
-(144 words)
+To enrich your professional practice and develop your subject expertise, you’ll complete 2 assignments. These are an essential part of getting your PGCE, and contribute 60 credits towards a master’s degree.
 
-[View more guidance on writing course summary descriptions](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses)
+You’ll also build a portfolio of the educational outcomes you achieved during the course. This is a great way of showcasing your work at future interviews.
+
+Train with us and you’ll be part of a thriving creative network, with access to world class facilities and beautiful grounds at the Becoming a Teacher (BAT) university.
+
+## Example 2 - primary course provided by a SCITT
+
+In this example, the provider focuses on how the candidate will be supported throughout their course through a school mentor and regular feedback.
+
+Again, the content is well-structured and provides a clear overview of how and where the candidate will spend their time.
+
+### Primary (264 words)
+
+The Becoming a Teacher (BAT) primary course leads to Qualified Teacher Status (QTS) and a Post-Graduate Certificate in Education (PGCE). You will train across the 5-11 age range, where you will learn from experienced practitioners, particularly your personal mentor.
+You’ll spend four days per week on placement in our partnership schools. In addition, you will join the rest of your cohort one day per week for training with the BAT SCITT.
+
+Our curriculum has six areas:
+
+- Pedagogy and how children learn
+- Behaviour management and setting high expectations
+- Adaptive teaching
+- Assessment of pupils
+- Professional behaviour, statutory responsibilities and wellbeing
+- Subject knowledge and curriculum
+
+You’ll receive regular formative feedback through observations, weekly mentor meetings, visits from BAT staff, and informal conversations with colleagues at your school.
+
+By demonstrating that you have been satisfactory progress in the six curriculum areas, we will be able to award you QTS at the end of the course. As a result, 100% of our graduates have secured teaching positions upon completing the course.
+
+Your school mentor will support you daily, and the mentors are supported in school by a nominated professional tutor. In addition, BAT staff will provide pastoral, academic and professional support. Ofsted described our training as ‘exemplary’.
+
+The PGCE is an academic qualification assessed through a group presentation and two written assignments exploring the topics of special educational needs and disabilities (SEND), behaviour management and assessment, and marking and feedback.
+
+Projects are spaced throughout the course with regular training sessions to develop your written and research skills, collaborate with others, and build your understanding of these key teaching areas.
