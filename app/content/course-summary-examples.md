@@ -5,7 +5,7 @@ contents:
     - text: Example 1 - secondary art and design course provided by a university
       href: "#example-1"
     - text: Example 2 - primary course provided by a SCITT
-      href: "#example-1"
+      href: "#example-2"
 ---
 
 Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses), here are some ‘Course summary’ examples.
