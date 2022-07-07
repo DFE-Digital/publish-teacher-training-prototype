@@ -202,7 +202,7 @@ exports.rollover_course_get = (req, res) => {
   }
 
   if (req.query.referrer === 'details') {
-    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/details`
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
   }
 
   res.render('../views/courses/rollover', {
