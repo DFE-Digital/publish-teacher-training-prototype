@@ -7,7 +7,7 @@
     }) }} #}
 
     <a class="govuk-link govuk-!-margin-right-2" href="#">View on Find</a>
-    <a class="govuk-link govuk-!-margin-right-2" href="#">Change vacancies</a>
+    <a class="govuk-link govuk-!-margin-right-2" href="{{ actions.vacancies }}">Change vacancies</a>
     <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw course</a>
   </div>
 {% elif course.status in [0,2] %}
