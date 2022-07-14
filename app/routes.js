@@ -17,6 +17,7 @@ const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
 const partnerController = require('./controllers/partners')
 const userController = require('./controllers/users')
+const vacancyController = require('./controllers/vacancies')
 
 // Authentication middleware
 const checkIsAuthenticated = (req, res, next) => {
@@ -241,6 +242,15 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/des
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
+
+/// ------------------------------------------------------------------------ ///
+/// VACANCIES ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies', checkIsAuthenticated, vacancyController.vacancy_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_post)
 
 /// ------------------------------------------------------------------------ ///
 /// LOCATION ROUTES
