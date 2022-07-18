@@ -73,6 +73,8 @@ exports.edit_vacancies_get = (req, res) => {
     back += '/description'
   } else if (req.query.referrer === 'list') {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+  } else {
+    back += '/vacancies'
   }
 
   res.render('../views/vacancies/edit', {
@@ -80,9 +82,9 @@ exports.edit_vacancies_get = (req, res) => {
     course,
     locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit?referrer=${req.query.referrer}`,
       back,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
+      cancel: back
     }
   })
 }
@@ -99,6 +101,15 @@ exports.edit_vacancies_post = (req, res) => {
   }
 
   const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
+
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+  if (req.query.referrer === 'description') {
+    back += '/description'
+  } else if (req.query.referrer === 'list') {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+  } else {
+    back += '/vacancies'
+  }
 
   const errors = []
 
@@ -117,9 +128,9 @@ exports.edit_vacancies_post = (req, res) => {
       locationOptions,
       errors,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit?referrer=${req.query.referrer}`,
+        back,
+        cancel: back
       }
     })
   } else {
