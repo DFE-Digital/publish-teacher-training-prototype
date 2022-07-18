@@ -156,11 +156,14 @@ exports.insertOne = (params) => {
 
         location.id = cl.id
         location.name = cl.name
+        location.vacancies = course.studyMode
 
         locations.push(location)
       })
 
       course.locations = locations
+
+      course.hasVacancies = 'yes'
     }
 
     if (params.organisationId) {
@@ -334,6 +337,9 @@ exports.updateOne = (params) => {
 
         location.id = cl.id
         location.name = cl.name
+        // TODO: only set vacancies to studyMode if this is a new location for
+        // the course, otherwise, keep the vacancies flag
+        location.vacancies = course.studyMode
 
         locations.push(location)
       })
