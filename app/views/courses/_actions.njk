@@ -1,4 +1,4 @@
-{% if course.status == 1 %}
+{% if course.status in [1,4] %}
   <div class="govuk-button-group">
     {# {{ govukButton({
       text: "Publish course",
