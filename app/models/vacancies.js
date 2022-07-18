@@ -13,11 +13,13 @@ exports.updateOne = (params) => {
 
     if (params.locations) {
       const locations = []
+      let hasVacancies = false
 
       course.locations.forEach((location, i) => {
 
         if (params.locations.vacancies?.includes(location.id)) {
           location.vacancies = course.studyMode
+          hasVacancies = true
         } else {
           location.vacancies = ''
         }
@@ -26,9 +28,17 @@ exports.updateOne = (params) => {
       })
 
       course.locations = locations
-      course.hasVacancies = 'yes'
+
+      if (hasVacancies) {
+        course.hasVacancies = 'yes'
+        course.status = 1
+      } else {
+        course.hasVacancies = 'no'
+        course.status = 4
+      }
     } else {
       course.hasVacancies = 'no'
+      course.status = 4
     }
 
     course.updatedAt = new Date()
