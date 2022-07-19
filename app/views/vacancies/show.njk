@@ -1,0 +1,56 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set caption = course.name + " (" + course.code + ")" %}
+{% set title = "Vacancies"  %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.change }}">Change vacancies</a>
+      </p>
+
+      <table class="govuk-table app-table--vertical-align-middle">
+        <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Location</th>
+          <th class="govuk-table__header" scope="col">Vacancies</th>
+        </tr>
+        </thead>
+
+        <tbody class="govuk-table__body">
+          {% for location in locationOptions %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">{{ location.text }}</p>
+                <span class="govuk-hint">{{ location.hint.text }}</span>
+              </td>
+              <td class="govuk-table__cell">
+                {{ "Yes" if location.checked else "No" }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+
+{% endblock %}
