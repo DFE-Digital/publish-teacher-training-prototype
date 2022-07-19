@@ -425,3 +425,21 @@ exports.createCourseCode = (organisationId) => {
 
   return courseCode
 }
+
+// a course has vacancies if one of its locations has F, P or B flags
+// F - full time
+// P - part time
+// B - full time and part time
+// empty string - no vacancies
+
+exports.hasVacancies = (locations) => {
+  let hasVacancies = false
+
+  locations.forEach((location, i) => {
+    if (['F','P','B'].includes(location.vacancies)) {
+      hasVacancies = true
+    }
+  })
+
+  return hasVacancies
+}
