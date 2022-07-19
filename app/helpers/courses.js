@@ -95,9 +95,9 @@ exports.getAgeRangeLabel = (code) => {
 
   if (ageRange) {
     label = ageRange.name
-  }
-
-  if (code === 'other') {
+  } else if (code === '3_to_11') {
+    label = '3 to 11'
+  } else if (code === 'other') {
     label = 'Another age range'
   }
 
