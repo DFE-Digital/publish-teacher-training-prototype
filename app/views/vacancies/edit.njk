@@ -3,7 +3,7 @@
 {% set primaryNavId = "courses" %}
 
 {% set caption = "Vacancies - " + course.name + " (" + course.code + ")" %}
-{% set title = "oh mio dio si"  %}
+{% set title = "Does the course have vacancies?"  %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -27,7 +27,7 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
-      {% set locationOptionsHtml %}
+      {# {% set locationOptionsHtml %}
         {{ govukCheckboxes({
           idPrefix: "locations-vacancies",
           name: "locations[vacancies]",
@@ -44,7 +44,7 @@
           errorMessage: errors | getErrorMessage("locations-vacancies"),
           items: locationOptions
         }) }}
-      {% endset %}
+      {% endset %} #}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -59,18 +59,18 @@
           errorMessage: errors | getErrorMessage("course-vacancies"),
           items: [
             {
-              id: "de213b97-4126-40dd-90f4-5d4abecf4aa6",
-              value: "no",
-              text: "No vacancies",
-              hint: {
-                text: "Close this course to new applications. You can reopen the course later."
-              },
-              checked: true if course.hasVacancies in ['no',false] else false
-            }, {
               id: "84f3e809-b98b-4141-b547-8f701aa65a11",
               value: "yes",
-              text: "Some vacancies",
-              checked: true if course.hasVacancies in ['yes',true] else false
+              text: "Yes, there are vacancies",
+              checked: true if course.hasVacancies == 'yes' else false
+            }, {
+              id: "de213b97-4126-40dd-90f4-5d4abecf4aa6",
+              value: "no",
+              text: "No",
+              hint: {
+                text: "You can reopen the course later."
+              } if 1 == 0,
+              checked: true if course.hasVacancies == 'no' else false
             }
           ]
         }) }}
