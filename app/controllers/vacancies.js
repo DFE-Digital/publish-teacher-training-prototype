@@ -7,6 +7,7 @@ const vacancyHelper = require('../helpers/vacancies')
 
 exports.vacancy_details = (req, res) => {
   delete req.session.data.course
+  delete req.session.data.locations
 
   // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
@@ -248,6 +249,24 @@ exports.edit_vacancies_check_get = (req, res) => {
 }
 
 exports.edit_vacancies_check_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  // replace the course data with submitted data
+  course.hasVacancies = req.session.data.course.hasVacancies
+
+  if (course.hasVacancies === 'yes') {
+    vacancyModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      locations: req.session.data.locations
+    })
+  } else {
+    vacancyModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      locations: {}
+    })
+  }
 
   req.flash('success', 'Vacancies updated')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`)
