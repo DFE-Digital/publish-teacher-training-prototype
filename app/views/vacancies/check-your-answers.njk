@@ -1,0 +1,54 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set caption = "Vacancies - " + course.name + " (" + course.code + ")" %}
+{% set title = "Check your answers"  %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% if course.hasVacancies == "yes" %}
+          {% if course.status == 4 %}
+            {{ govukWarningText({
+              text: "WARNING TEXT - CHANGE OF COURSE STATUS TO OPEN",
+              iconFallbackText: "Warning"
+            }) }}
+          {% endif %}
+        {% else %}
+          {% if course.status == 1 %}
+            {{ govukWarningText({
+              text: "WARNING TEXT - CHANGE OF COURSE STATUS TO CLOSED",
+              iconFallbackText: "Warning"
+            }) }}
+          {% endif %}
+        {% endif %}
+
+
+        {{ govukButton({
+          text: "Update vacancies"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
