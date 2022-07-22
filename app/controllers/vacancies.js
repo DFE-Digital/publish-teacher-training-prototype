@@ -57,7 +57,7 @@ exports.edit_vacancies_get = (req, res) => {
   if (req.session.data.course?.hasVacancies !== undefined) {
     course.hasVacancies = req.session.data.course.hasVacancies
   } else {
-    course.hasVacancies = courseHelper.hasVacancies(course.locations)
+    course.hasVacancies = courseHelper.hasVacancies(course.locations) ? 'yes' : 'no'
   }
 
   // const selectedLocation = []
@@ -141,7 +141,7 @@ exports.edit_vacancies_post = (req, res) => {
       locationOptions,
       errors,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit?referrer=${req.query.referrer}`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
       }
@@ -166,10 +166,8 @@ exports.edit_vacancies_post = (req, res) => {
     if (course.hasVacancies === 'yes') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check?referrer=edit`)
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`)
     }
-
-
   }
 }
 
@@ -234,7 +232,7 @@ exports.edit_vacancies_check_get = (req, res) => {
   }
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
-  if (req.query.referrer === 'edit') {
+  if (course.hasVacancies === 'no') {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
   }
 
