@@ -37,11 +37,14 @@ exports.vacancy_details = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
   }
 
-  res.render('../views/vacancies/show', {
+  res.render('../views/courses/vacancies/show', {
     course,
     locationOptions,
     actions: {
       back,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
+      vacancies: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies?referrer=description`,
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
     }
   })
@@ -66,7 +69,7 @@ exports.edit_vacancies_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
   }
 
-  res.render('../views/vacancies/edit', {
+  res.render('../views/courses/vacancies/edit', {
     course,
     actions: {
       save,
@@ -108,7 +111,7 @@ exports.edit_vacancies_post = (req, res) => {
   // }
 
   if (errors.length) {
-    res.render('../views/vacancies/edit', {
+    res.render('../views/courses/vacancies/edit', {
       course,
       locationOptions,
       errors,
@@ -149,7 +152,7 @@ exports.edit_vacancies_locations_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
   }
 
-  res.render('../views/vacancies/locations', {
+  res.render('../views/courses/vacancies/locations', {
     course,
     locationOptions,
     actions: {
@@ -182,12 +185,12 @@ exports.edit_vacancies_locations_post = (req, res) => {
     const error = {}
       error.fieldName = "locations-vacancies"
       error.href = "#locations-vacancies"
-      error.text = "Select which locations have vacancies"
+      error.text = "Select all locations with vacancies"
       errors.push(error)
   }
 
   if (errors.length) {
-    res.render('../views/vacancies/locations', {
+    res.render('../views/courses/vacancies/locations', {
       course,
       locationOptions,
       errors,
@@ -216,7 +219,7 @@ exports.edit_vacancies_check_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
   }
 
-  res.render('../views/vacancies/check-your-answers', {
+  res.render('../views/courses/vacancies/check-your-answers', {
     organisation,
     course,
     locations: req.session.data.locations,
