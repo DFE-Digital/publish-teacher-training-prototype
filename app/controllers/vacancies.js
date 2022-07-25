@@ -9,7 +9,6 @@ exports.vacancy_details = (req, res) => {
   delete req.session.data.course
   delete req.session.data.locations
 
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   const selectedLocation = []
@@ -39,7 +38,6 @@ exports.vacancy_details = (req, res) => {
   }
 
   res.render('../views/vacancies/show', {
-    // organisation,
     course,
     locationOptions,
     actions: {
@@ -50,7 +48,6 @@ exports.vacancy_details = (req, res) => {
 }
 
 exports.edit_vacancies_get = (req, res) => {
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   console.log(req.session.data.course?.hasVacancies);
@@ -61,49 +58,25 @@ exports.edit_vacancies_get = (req, res) => {
     course.hasVacancies = courseHelper.hasVacancies(course.locations) ? 'yes' : 'no'
   }
 
-  // const selectedLocation = []
-  // if (course && course.locations) {
-  //   course.locations.forEach((location, i) => {
-  //     if (['F','P','B'].includes(location.vacancies)) {
-  //       selectedLocation.push(location.id)
-  //     }
-  //   })
-  //
-  //   // if (selectedLocation.length) {
-  //   //   course.hasVacancies = 'yes'
-  //   // } else {
-  //   //   course.hasVacancies = 'no'
-  //   // }
-  // }
-  // // else {
-  // //   course.hasVacancies = 'no'
-  // // }
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
 
-  // const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
-
-  // let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
-  // if (req.query.referrer === 'description') {
-  //   back += '/description'
-  // } else if (req.query.referrer === 'list') {
-  //   back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
-  // } else {
-  //   back += '/vacancies'
-  // }
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
+  }
 
   res.render('../views/vacancies/edit', {
-    // organisation,
     course,
-    // locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
     }
   })
 }
 
 exports.edit_vacancies_post = (req, res) => {
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   // replace the course data with submitted data
@@ -116,14 +89,13 @@ exports.edit_vacancies_post = (req, res) => {
 
   const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
 
-  // let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
-  // if (req.query.referrer === 'description') {
-  //   back += '/description'
-  // } else if (req.query.referrer === 'list') {
-  //   back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
-  // } else {
-  //   back += '/vacancies'
-  // }
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
+  }
 
   const errors = []
 
@@ -137,33 +109,16 @@ exports.edit_vacancies_post = (req, res) => {
 
   if (errors.length) {
     res.render('../views/vacancies/edit', {
-      // organisation,
       course,
       locationOptions,
       errors,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
       }
     })
   } else {
-
-    // if (course.hasVacancies === 'yes') {
-    //   vacancyModel.updateOne({
-    //     organisationId: req.params.organisationId,
-    //     courseId: req.params.courseId,
-    //     locations: req.session.data.locations
-    //   })
-    // } else {
-    //   vacancyModel.updateOne({
-    //     organisationId: req.params.organisationId,
-    //     courseId: req.params.courseId,
-    //     locations: {}
-    //   })
-    // }
-
-    // req.flash('success', 'Vacancies updated')
     if (course.hasVacancies === 'yes') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`)
     } else {
@@ -173,7 +128,6 @@ exports.edit_vacancies_post = (req, res) => {
 }
 
 exports.edit_vacancies_locations_get = (req, res) => {
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   const selectedLocation = []
@@ -187,45 +141,70 @@ exports.edit_vacancies_locations_get = (req, res) => {
 
   const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
+  }
+
   res.render('../views/vacancies/locations', {
-    // organisation,
     course,
     locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
     }
   })
 }
 
 exports.edit_vacancies_locations_post = (req, res) => {
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  const locationOptions = vacancyHelper.getLocationOptions(
+    req.params.organisationId,
+    req.params.courseId,
+    req.session.data.locations.vacancies)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
+
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`
+  }
 
   const errors = []
 
+  if (req.session.data.locations.vacancies === undefined) {
+    const error = {}
+      error.fieldName = "locations-vacancies"
+      error.href = "#locations-vacancies"
+      error.text = "Select which locations have vacancies"
+      errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/vacancies/locations', {
-      // organisation,
       course,
       locationOptions,
       errors,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
       }
     })
   } else {
-
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`)
   }
 
 }
 
 exports.edit_vacancies_check_get = (req, res) => {
-  // const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   if (req.session.data.course?.hasVacancies !== undefined) {
@@ -238,9 +217,11 @@ exports.edit_vacancies_check_get = (req, res) => {
   }
 
   res.render('../views/vacancies/check-your-answers', {
-    // organisation,
+    organisation,
     course,
+    locations: req.session.data.locations,
     actions: {
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`,
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`,
       back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies`
