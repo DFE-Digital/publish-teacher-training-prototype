@@ -21,17 +21,64 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
+        {% set locationsHtml %}
+          <ul class="govuk-list">
+            {% for vacancy in locations.vacancies %}
+              <li>{{ vacancy | getLocationLabel(organisation.id) }}</li>
+            {% endfor %}
+          </ul>
+        {% endset %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Does the course have vacancies?"
+              },
+              value: {
+                text: course.hasVacancies | capitalize
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/edit?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "Item label"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Locations with vacancies"
+              },
+              value: {
+                html: locationsHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/locations?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "locations with vacancies"
+                  }
+                ]
+              }
+            } if course.hasVacancies == "yes"
+          ]
+        }) }}
+
         {% if course.hasVacancies == "yes" %}
           {% if course.status == 4 %}
             {{ govukWarningText({
-              text: "WARNING TEXT - CHANGE OF COURSE STATUS TO OPEN",
+              text: "Updating vacancies will open the course to applications",
               iconFallbackText: "Warning"
             }) }}
           {% endif %}
         {% else %}
           {% if course.status == 1 %}
             {{ govukWarningText({
-              text: "WARNING TEXT - CHANGE OF COURSE STATUS TO CLOSED",
+              text: "Updating vacancies will close the course to applications",
               iconFallbackText: "Warning"
             }) }}
           {% endif %}
