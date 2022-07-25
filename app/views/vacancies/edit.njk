@@ -27,25 +27,6 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
-      {# {% set locationOptionsHtml %}
-        {{ govukCheckboxes({
-          idPrefix: "locations-vacancies",
-          name: "locations[vacancies]",
-          fieldset: {
-            legend: {
-              text: "Locations",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          hint: {
-            text: "Select all locations with vacancies"
-          },
-          errorMessage: errors | getErrorMessage("locations-vacancies"),
-          items: locationOptions
-        }) }}
-      {% endset %} #}
-
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukRadios({
@@ -74,11 +55,6 @@
             }
           ]
         }) }}
-
-        {# ,
-        conditional: {
-          html: locationOptionsHtml
-        } #}
 
         {{ govukButton({
           text: "Continue"
