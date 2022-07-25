@@ -133,13 +133,17 @@ exports.edit_vacancies_post = (req, res) => {
 exports.edit_vacancies_locations_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
-  const selectedLocation = []
-  if (course && course.locations) {
-    course.locations.forEach((location, i) => {
-      if (['F','P','B'].includes(location.vacancies)) {
-        selectedLocation.push(location.id)
-      }
-    })
+  let selectedLocation = []
+  if (req.session.data.locations?.vacancies) {
+    selectedLocation = req.session.data.locations.vacancies
+  } else {
+    if (course && course.locations) {
+      course.locations.forEach((location, i) => {
+        if (['F','P','B'].includes(location.vacancies)) {
+          selectedLocation.push(location.id)
+        }
+      })
+    }
   }
 
   const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
