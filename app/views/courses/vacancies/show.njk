@@ -3,17 +3,11 @@
 {% set primaryNavId = "courses" %}
 {% set subNavId = "vacancies" %}
 
-{% set caption = course.name + " (" + course.code + ")" %}
-{% set title = "Vacancies"  %}
-
 {% set title = course.name + " (" + course.code + ")" %}
 {% set caption = ""  %}
 
 {% block beforeContent %}
-{# {{ govukBackLink({
-  text: "Back",
-  href: actions.back
-}) }} #}
+
 {% endblock %}
 
 {% block content %}
