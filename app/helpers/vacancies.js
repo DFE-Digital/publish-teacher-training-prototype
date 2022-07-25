@@ -25,8 +25,6 @@ exports.getLocationOptions = (organisationId, courseId, selectedItem = null) => 
 
     const l = locations.find(loc => loc.id === location.id)
 
-    // console.log(l.address);
-
     item.text = location.name
     item.value = location.id
     item.id = location.id

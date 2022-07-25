@@ -53,8 +53,6 @@ exports.vacancy_details = (req, res) => {
 exports.edit_vacancies_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
-  console.log(req.session.data.course?.hasVacancies);
-
   if (req.session.data.course?.hasVacancies !== undefined) {
     course.hasVacancies = req.session.data.course.hasVacancies
   } else {
