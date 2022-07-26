@@ -1,15 +1,13 @@
 {% extends "_layout.njk" %}
 
 {% set primaryNavId = "courses" %}
+{% set subNavId = "vacancies" %}
 
-{% set caption = course.name + " (" + course.code + ")" %}
-{% set title = "Vacancies"  %}
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = ""  %}
 
 {% block beforeContent %}
-{{ govukBackLink({
-  text: "Back",
-  href: actions.back
-}) }}
+
 {% endblock %}
 
 {% block content %}
@@ -19,7 +17,33 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% include "../_page-heading.njk" %}
+
+      {% include "../_meta-data.njk" %}
+
+      {% include "../_actions.njk" %}
+
+      {% if isCurrentCycle and isRollover and rolledOverCourse %}
+        {% include "../_rolled-over-course.njk" %}
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "../_sub-navigation.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">
+          Vacancies
+      </h2>
 
       <p class="govuk-body">
         <a class="govuk-link" href="{{ actions.change }}">Change vacancies</a>
@@ -28,10 +52,10 @@
       <table class="govuk-table app-table--vertical-align-middle">
         <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
         <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Location</th>
-          <th class="govuk-table__header" scope="col">Vacancies</th>
-        </tr>
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Location</th>
+            <th class="govuk-table__header" scope="col">Vacancies</th>
+          </tr>
         </thead>
 
         <tbody class="govuk-table__body">
@@ -51,6 +75,5 @@
 
     </div>
   </div>
-
 
 {% endblock %}

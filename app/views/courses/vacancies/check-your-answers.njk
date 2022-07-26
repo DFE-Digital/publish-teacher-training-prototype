@@ -1,0 +1,101 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set caption = "Vacancies - " + course.name + " (" + course.code + ")" %}
+{% set title = "Check your answers"  %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set locationsHtml %}
+          <ul class="govuk-list">
+            {% for vacancy in locations.vacancies %}
+              <li>{{ vacancy | getLocationLabel(organisation.id) }}</li>
+            {% endfor %}
+          </ul>
+        {% endset %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Does the course have vacancies?"
+              },
+              value: {
+                text: course.hasVacancies | capitalize
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/edit?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "Item label"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Locations with vacancies"
+              },
+              value: {
+                html: locationsHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/locations?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "locations with vacancies"
+                  }
+                ]
+              }
+            } if course.hasVacancies == "yes"
+          ]
+        }) }}
+
+        {% if course.hasVacancies == "yes" %}
+          {% if course.status == 4 %}
+            {{ govukWarningText({
+              text: "Updating vacancies will open the course to applications",
+              iconFallbackText: "Warning"
+            }) }}
+          {% endif %}
+        {% else %}
+          {% if course.status == 1 %}
+            {{ govukWarningText({
+              text: "Updating vacancies will close the course to applications",
+              iconFallbackText: "Warning"
+            }) }}
+          {% endif %}
+        {% endif %}
+
+
+        {{ govukButton({
+          text: "Update vacancies"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

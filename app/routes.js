@@ -252,6 +252,12 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vac
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/locations', checkIsAuthenticated, vacancyController.edit_vacancies_locations_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/locations', checkIsAuthenticated, vacancyController.edit_vacancies_locations_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/check', checkIsAuthenticated, vacancyController.edit_vacancies_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/check', checkIsAuthenticated, vacancyController.edit_vacancies_check_post)
+
 /// ------------------------------------------------------------------------ ///
 /// LOCATION ROUTES
 /// ------------------------------------------------------------------------ ///

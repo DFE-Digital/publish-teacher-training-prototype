@@ -1,0 +1,55 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set caption = "Vacancies - " + course.name + " (" + course.code + ")" %}
+{% set title = "Locations with vacancies"  %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCheckboxes({
+          idPrefix: "locations-vacancies",
+          name: "locations[vacancies]",
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
+          },
+          errorMessage: errors | getErrorMessage("locations-vacancies"),
+          items: locationOptions
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
