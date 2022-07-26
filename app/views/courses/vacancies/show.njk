@@ -45,9 +45,12 @@
           Vacancies
       </h2>
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="{{ actions.change }}">Change vacancies</a>
-      </p>
+      {# if the course is open or closed #}
+      {% if course.status in [1,4] %}
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.change }}">Change vacancies</a>
+        </p>
+      {% endif %}
 
       <table class="govuk-table app-table--vertical-align-middle">
         <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
