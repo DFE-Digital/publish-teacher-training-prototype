@@ -3,6 +3,7 @@ const organisationModel = require('../models/organisations')
 const vacancyModel = require('../models/vacancies')
 
 const courseHelper = require('../helpers/courses')
+const cycleHelper = require('../helpers/cycles')
 const vacancyHelper = require('../helpers/vacancies')
 
 exports.vacancy_details = (req, res) => {
@@ -10,6 +11,17 @@ exports.vacancy_details = (req, res) => {
   delete req.session.data.locations
 
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+
+  let rolledOverCourse
+  if (process.env.IS_ROLLOVER) {
+    rolledOverCourse = courseModel.findMany({
+      organisationId: req.params.organisationId,
+      cycleId: cycleHelper.NEXT_CYCLE.code,
+      courseCode: course.code
+    })[0]
+  }
 
   const selectedLocation = []
   if (course && course.locations) {
@@ -40,12 +52,15 @@ exports.vacancy_details = (req, res) => {
   res.render('../views/courses/vacancies/show', {
     course,
     locationOptions,
+    isCurrentCycle,
+    rolledOverCourse,
     actions: {
       back,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
       vacancies: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies?referrer=description`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`,
+      rollover: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/rollover?referrer=vacancies`
     }
   })
 }
