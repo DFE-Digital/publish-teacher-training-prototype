@@ -7,7 +7,7 @@ const permissionsModel = require('../models/permissions')
 exports.partners_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const partners = partnerModel.findMany({ organisationId: req.params.organisationId })
-  res.render('../views/partners/list', {
+  res.render('../views/training-partners/list', {
     organisation,
     partners
   })
@@ -35,14 +35,14 @@ exports.partner_courses_list = (req, res) => {
       a.studyMode.localeCompare(b.studyMode)
   })
 
-  res.render('../views/partners/courses/list', {
+  res.render('../views/training-partners/courses/list', {
     organisation,
     partner,
     permissions,
     courses,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners`,
-      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses`
+      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`
     }
   })
 }
@@ -58,16 +58,16 @@ exports.partner_course_details = (req, res) => {
   const permissions = permissionsModel.findOne({ trainingPartnerId: req.params.partnerId, accreditedBodyId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.partnerId, courseId: req.params.courseId })
 
-  res.render('../views/partners/courses/details', {
+  res.render('../views/training-partners/courses/details', {
     organisation,
     partner,
     locations,
     permissions,
     course,
     actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses`,
-      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
     }
   })
 }
@@ -78,15 +78,15 @@ exports.partner_course_description = (req, res) => {
   const permissions = permissionsModel.findOne({ trainingPartnerId: req.params.partnerId, accreditedBodyId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.partnerId, courseId: req.params.courseId })
 
-  res.render('../views/partners/courses/description', {
+  res.render('../views/training-partners/courses/description', {
     organisation,
     partner,
     permissions,
     course,
     actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses`,
-      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
     }
   })
 }
