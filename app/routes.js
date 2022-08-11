@@ -9,13 +9,13 @@ const accreditedBodyController = require('./controllers/accredited-bodies')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
 const cycleController = require('./controllers/cycles')
-const degreeController = require('./controllers/degrees')
 const dataController = require('./controllers/data')
+const degreeController = require('./controllers/degrees')
 const gcseController = require('./controllers/gcses')
 const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
-const partnerController = require('./controllers/partners')
+const trainingPartnerController = require('./controllers/training-partners')
 const userController = require('./controllers/users')
 const vacancyController = require('./controllers/vacancies')
 
@@ -335,13 +335,13 @@ router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', c
 /// PARTNER ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, partnerController.partner_course_description)
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, trainingPartnerController.partner_course_description)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId', checkIsAuthenticated, partnerController.partner_course_details)
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId', checkIsAuthenticated, trainingPartnerController.partner_course_details)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses', checkIsAuthenticated, partnerController.partner_courses_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses', checkIsAuthenticated, trainingPartnerController.partner_courses_list)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAuthenticated, partnerController.partners_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAuthenticated, trainingPartnerController.partners_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES
