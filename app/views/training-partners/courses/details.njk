@@ -1,11 +1,10 @@
 {% extends "_layout.njk" %}
 
 {% set primaryNavId = "trainingPartners" %}
+{% set subNavId = "details" %}
 
 {% set title = course.name + " (" + course.code + ")" %}
 {% set caption = partner.name %}
-
-{% set subNavId = "details" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -76,6 +75,11 @@
         {% else %}
           <p class="govuk-body">{{ course.ageRange | getAgeRangeLabel }}</p>
         {% endif %}
+      {% endset %}
+
+      {% set courseStartHtml %}
+        <p class="govuk-body">{{ course.startDate | date("MMMM yyyy") }}</p>
+        <p class="govuk-hint">{{ course.startDate | getAcademicYearLabel }}</p>
       {% endset %}
 
       {{ govukSummaryList({
@@ -297,7 +301,7 @@
               text: "Course start"
             },
             value: {
-              text: course.startDate | date("MMMM yyyy")
+              html: courseStartHtml
             },
             actions: {
               items: [

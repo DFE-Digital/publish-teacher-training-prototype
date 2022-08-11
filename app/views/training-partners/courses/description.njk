@@ -1,11 +1,10 @@
 {% extends "_layout.njk" %}
 
 {% set primaryNavId = "trainingPartners" %}
+{% set subNavId = "description" %}
 
 {% set title = course.name + " (" + course.code + ")" %}
 {% set caption = partner.name %}
-
-{% set subNavId = "description" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
