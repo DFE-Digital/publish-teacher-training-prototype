@@ -335,6 +335,8 @@ router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', c
 /// TRAINING PARTNER ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
+router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses/:courseId/vacancies', checkIsAuthenticated, trainingPartnerController.partner_course_vacancies)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, trainingPartnerController.partner_course_description)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses/:courseId', checkIsAuthenticated, trainingPartnerController.partner_course_details)
