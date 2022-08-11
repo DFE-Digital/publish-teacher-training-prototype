@@ -332,16 +332,16 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:a
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, accreditedBodyController.accredited_bodies_list)
 
 /// ------------------------------------------------------------------------ ///
-/// PARTNER ORGANISATION ROUTES
+/// TRAINING PARTNER ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, trainingPartnerController.partner_course_description)
+router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses/:courseId/description', checkIsAuthenticated, trainingPartnerController.partner_course_description)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses/:courseId', checkIsAuthenticated, trainingPartnerController.partner_course_details)
+router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses/:courseId', checkIsAuthenticated, trainingPartnerController.partner_course_details)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners/:partnerId/courses', checkIsAuthenticated, trainingPartnerController.partner_courses_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/training-partners/:partnerId/courses', checkIsAuthenticated, trainingPartnerController.partner_courses_list)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/partners', checkIsAuthenticated, trainingPartnerController.partners_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/training-partners', checkIsAuthenticated, trainingPartnerController.partners_list)
 
 /// ------------------------------------------------------------------------ ///
 /// ORGANISATION ROUTES
