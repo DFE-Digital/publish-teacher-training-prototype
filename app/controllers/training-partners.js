@@ -4,6 +4,8 @@ const organisationModel = require('../models/organisations')
 const partnerModel = require('../models/partners')
 const permissionsModel = require('../models/permissions')
 
+const vacancyHelper = require('../helpers/vacancies')
+
 exports.partners_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const partners = partnerModel.findMany({ organisationId: req.params.organisationId })
@@ -67,7 +69,8 @@ exports.partner_course_details = (req, res) => {
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`,
+      vacancies: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/vacancies`
     }
   })
 }
@@ -86,7 +89,30 @@ exports.partner_course_description = (req, res) => {
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}`,
-      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`,
+      vacancies: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/vacancies`
+    }
+  })
+}
+
+exports.partner_course_vacancies = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const partner = organisationModel.findOne({ organisationId: req.params.partnerId })
+  const permissions = permissionsModel.findOne({ trainingPartnerId: req.params.partnerId, accreditedBodyId: req.params.organisationId })
+  const course = courseModel.findOne({ organisationId: req.params.partnerId, courseId: req.params.courseId })
+  const locationOptions = vacancyHelper.getLocationOptions(req.params.partnerId, req.params.courseId)
+
+  res.render('../views/training-partners/courses/vacancies', {
+    organisation,
+    partner,
+    permissions,
+    course,
+    locationOptions,
+    actions: {
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses`,
+      details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}`,
+      description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/description`,
+      vacancies: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/training-partners/${req.params.partnerId}/courses/${req.params.courseId}/vacancies`
     }
   })
 }
