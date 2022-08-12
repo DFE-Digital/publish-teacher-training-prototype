@@ -1,5 +1,5 @@
 {% if course.status == 1 %}
-  <p class="govuk-hint govuk-!-font-size-16">Last published on {{ course.updatedAt | govukShortDateAtTime }}</p>
+  <p class="govuk-hint govuk-!-font-size-16">Last updated on {{ course.updatedAt | govukShortDateAtTime }}</p>
 {% elif course.status == 3 %}
   <p class="govuk-hint govuk-!-font-size-16">Withdrawn on {{ course.updatedAt | govukShortDateAtTime }}</p>
 {% endif %}
