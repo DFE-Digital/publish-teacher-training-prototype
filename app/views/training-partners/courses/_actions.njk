@@ -1,0 +1,34 @@
+{% if course.status in [1,4] %}
+  <div class="govuk-button-group">
+    <a class="govuk-link govuk-!-margin-right-2" href="#">View on Find</a>
+    {% if permissions and "withdraw_courses" in permissions %}
+      <a class="govuk-link app-link--destructive" href="#">Withdraw course</a>
+    {% endif %}
+  </div>
+{% elif course.status in [0,2] %}
+  <div class="govuk-button-group">
+    {% if permissions and "publish_courses" in permissions %}
+      {{ govukButton({
+        text: "Publish course",
+        href: "#",
+        classes: "govuk-!-margin-right-2"
+      }) }}
+    {% endif %}
+
+    {% if permissions and "rollover_courses" in permissions %}
+      {% if isRollover and isCurrentCycle and not rolledOverCourse %}
+        {{ govukButton({
+          text: "Roll over course",
+          href: actions.rollover,
+          classes: "govuk-button--secondary govuk-!-margin-right-2"
+        }) }}
+      {% endif %}
+    {% endif %}
+
+    <a class="govuk-link govuk-!-margin-right-2" href="#">Preview course</a>
+
+    {% if permissions and "add_courses" in permissions %}
+      <a class="govuk-link app-link--destructive" href="#">Delete course</a>
+    {% endif %}
+  </div>
+{% endif %}

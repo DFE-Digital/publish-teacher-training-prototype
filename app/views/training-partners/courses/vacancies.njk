@@ -1,0 +1,92 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "trainingPartners" %}
+{% set subNavId = "vacancies" %}
+
+{% set title = course.name + " (" + course.code + ")" %}
+{% set caption = partner.name %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if caption.length %}
+          <span class="govuk-caption-l">
+            {{ caption }}
+          </span>
+        {% endif %}
+        {{ title }}
+        {{ govukTag({
+          text: course.status | getCourseStatusLabel,
+          classes: course.status | getCourseStatusClasses
+        }) }}
+      </h1>
+
+      {% include "./_actions.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% include "../../courses/_sub-navigation.njk" %}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">
+          Vacancies
+      </h2>
+
+      {# if the course is open or closed #}
+      {% if course.status in [1,4] %}
+        {% if permissions and "change_vacancies" in permissions %}
+          <p class="govuk-body">
+            <a class="govuk-link" href="{{ actions.change }}">Change vacancies</a>
+          </p>
+        {% endif %}
+      {% endif %}
+
+      <table class="govuk-table app-table--vertical-align-middle">
+        <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Location</th>
+            <th class="govuk-table__header" scope="col">Vacancies</th>
+          </tr>
+        </thead>
+
+        <tbody class="govuk-table__body">
+          {% for location in locationOptions %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">{{ location.text }}</p>
+                <span class="govuk-hint">{{ location.hint.text }}</span>
+              </td>
+              <td class="govuk-table__cell">
+                {{ "Yes" if location.checked else "No" }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+{% endblock %}
