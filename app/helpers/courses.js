@@ -349,7 +349,6 @@ exports.getCourseStatusLabel = (code, openDate = null) => {
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
   const dateOpen = DateTime.fromISO(openDate)
-  const dateNow = DateTime.fromISO(new Date())
 
   // console.log('dateOpen', dateOpen);
   // console.log('dateNow', dateNow);
@@ -364,7 +363,7 @@ exports.getCourseStatusLabel = (code, openDate = null) => {
   let label = code
 
   // if the course is open/closed, and applications open is in the future
-  if ([1,4].includes(courseStatus.code) && dateDiff > 0) {
+  if ([1,4].includes(parseInt(courseStatus.code)) && dateDiff > 0) {
     label = 'scheduled'
   } else {
     if (courseStatus) {
@@ -380,23 +379,18 @@ exports.getCourseStatusClasses = (code, openDate = null) => {
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
   const dateOpen = DateTime.fromISO(openDate)
-  const dateNow = DateTime.fromISO(new Date())
 
   const dateDiff = dateOpen.diffNow('seconds').toObject().seconds
 
   let classes
 
   // if the course is open/closed, and applications open is in the future
-  if ([1,4].includes(courseStatus.code) && dateDiff > 0) {
+  if ([1,4].includes(parseInt(courseStatus.code)) && dateDiff > 0) {
     classes = 'govuk-tag--blue'
   } else {
     if (courseStatus) {
       classes = courseStatus.classes
     }
-  }
-
-  if (courseStatus) {
-    classes = courseStatus.classes
   }
 
   return classes
