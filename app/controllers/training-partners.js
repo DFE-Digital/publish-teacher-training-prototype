@@ -1,14 +1,14 @@
 const courseModel = require('../models/courses')
 const locationModel = require('../models/locations')
 const organisationModel = require('../models/organisations')
-const partnerModel = require('../models/partners')
+const trainingPartnerModel = require('../models/training-partners')
 const permissionsModel = require('../models/permissions')
 
 const vacancyHelper = require('../helpers/vacancies')
 
 exports.partners_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const partners = partnerModel.findMany({ organisationId: req.params.organisationId })
+  const partners = trainingPartnerModel.findMany({ organisationId: req.params.organisationId })
   res.render('../views/training-partners/list', {
     organisation,
     partners
