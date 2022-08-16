@@ -69,6 +69,8 @@ const CYCLES = {
   }
 }
 
+exports.CYCLES = CYCLES
+
 const getCurrentCycle = () => {
   const currentCycleYear = now.year
   let cycle = {}
