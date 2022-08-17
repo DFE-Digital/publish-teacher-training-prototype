@@ -350,14 +350,6 @@ exports.getCourseStatusLabel = (code, openDate = null) => {
 
   const dateOpen = DateTime.fromISO(openDate)
 
-  // console.log('dateOpen', dateOpen);
-  // console.log('dateNow', dateNow);
-  //
-  // console.log('compare', dateOpen <= dateNow);
-  //
-  // console.log('diffHours', dateOpen.diffNow('hours').toObject());
-  // console.log('diffSeconds', dateOpen.diffNow('seconds').toObject());
-
   const dateDiff = dateOpen.diffNow('seconds').toObject().seconds
 
   let label = code
