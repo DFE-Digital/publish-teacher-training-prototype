@@ -243,6 +243,33 @@ exports.getCourseStartSelectOptions = (selectedItem) => {
   return items
 }
 
+exports.getCourseStartRadioOptions = (selectedItem) => {
+  const items = []
+
+  const startDate = DateTime.now().toJSDate()
+  const endDate = DateTime.now().plus({ months: 12 }).toJSDate()
+
+  for (let d = startDate; d <= endDate; d.setMonth(d.getMonth() + 1)) {
+    const item = {}
+
+    const code = DateTime.fromJSDate(d, {
+      locale: 'en-GB'
+    }).toFormat('yyyy-LL')
+
+    item.text = DateTime.fromJSDate(d, {
+      locale: 'en-GB'
+    }).toFormat('MMMM yyyy')
+
+    item.value = code
+    item.id = code
+    item.checked = (selectedItem && selectedItem === code) ? 'checked' : ''
+
+    items.push(item)
+  }
+
+  return items
+}
+
 exports.getCourseStartLabel = (code) => {
 
 }
