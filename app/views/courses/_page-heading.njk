@@ -1,13 +1,20 @@
-<h1 class="govuk-heading-l {{- ' govuk-!-margin-bottom-2' if course.status in [1,3] }}">
+{% if course.applicationsOpenDate == "other" %}
+  {% set openDate = course.applicationsOpenDateOther %}
+{% else %}
+  {% set openDate = course.applicationsOpenDate %}
+{% endif %}
+
+<h1 class="govuk-heading-l {{- ' govuk-!-margin-bottom-2' if course.status in [1,3,4] }}">
   {% if caption.length %}
     <span class="govuk-caption-l">
       {{ caption }}
     </span>
   {% endif %}
+
   {{ title }}
+
   {{ govukTag({
-    text: course.status | getCourseStatusLabel,
-    classes: course.status | getCourseStatusClasses
+    text: course.status | getCourseStatusLabel(openDate),
+    classes: course.status | getCourseStatusClasses(openDate)
   }) }}
-  {# <span class="govuk-!-font-size-16 govuk-!-font-weight-regular">* Unpublished changes</span> #}
 </h1>

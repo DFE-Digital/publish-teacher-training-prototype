@@ -344,27 +344,45 @@ exports.getCourseLengthLabel = (code) => {
   return label
 }
 
-exports.getCourseStatusLabel = (code) => {
+exports.getCourseStatusLabel = (code, openDate = null) => {
   const courseStatuses = require('../data/course-statuses')
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
+  const dateOpen = DateTime.fromISO(openDate)
+
+  const dateDiff = dateOpen.diffNow('seconds').toObject().seconds
+
   let label = code
 
-  if (courseStatus) {
-    label = courseStatus.name
+  // if the course is open/closed, and applications open is in the future
+  if ([1,4].includes(parseInt(courseStatus.code)) && dateDiff > 0) {
+    label = 'scheduled'
+  } else {
+    if (courseStatus) {
+      label = courseStatus.name
+    }
   }
 
   return label
 }
 
-exports.getCourseStatusClasses = (code) => {
+exports.getCourseStatusClasses = (code, openDate = null) => {
   const courseStatuses = require('../data/course-statuses')
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
+  const dateOpen = DateTime.fromISO(openDate)
+
+  const dateDiff = dateOpen.diffNow('seconds').toObject().seconds
+
   let classes
 
-  if (courseStatus) {
-    classes = courseStatus.classes
+  // if the course is open/closed, and applications open is in the future
+  if ([1,4].includes(parseInt(courseStatus.code)) && dateDiff > 0) {
+    classes = 'govuk-tag--blue'
+  } else {
+    if (courseStatus) {
+      classes = courseStatus.classes
+    }
   }
 
   return classes

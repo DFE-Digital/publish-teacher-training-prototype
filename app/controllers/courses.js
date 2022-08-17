@@ -884,9 +884,11 @@ exports.edit_course_accredited_body_post = (req, res) => {
 
 exports.edit_course_applications_open_date_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
 
   res.render('../views/courses/applications-open-date', {
     course,
+    applicationsOpenDate,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/applications-open-date`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -897,11 +899,14 @@ exports.edit_course_applications_open_date_get = (req, res) => {
 
 exports.edit_course_applications_open_date_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
+
   const errors = []
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
       course,
+      applicationsOpenDate,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/applications-open-date`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -2479,8 +2484,11 @@ exports.new_course_applications_open_date_get = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
+
   res.render('../views/courses/applications-open-date', {
     course: req.session.data.course,
+    applicationsOpenDate,
     actions: {
       save,
       back,
@@ -2499,9 +2507,12 @@ exports.new_course_applications_open_date_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
+
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
       course: req.session.data.course,
+      applicationsOpenDate,
       actions: {
         save,
         back,

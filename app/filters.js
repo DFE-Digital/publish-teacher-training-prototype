@@ -281,11 +281,11 @@ module.exports = (env) => {
   example: {{ "1" | getCourseStatusLabel }}
   outputs: "Published"
   ------------------------------------------------------------------ */
-  filters.getCourseStatusLabel = (status) => {
+  filters.getCourseStatusLabel = (status, openDate = null) => {
     let label = status
 
     if (status !== undefined) {
-      label = courseHelper.getCourseStatusLabel(status.toString())
+      label = courseHelper.getCourseStatusLabel(status.toString(), openDate)
     }
 
     return label
@@ -296,11 +296,11 @@ module.exports = (env) => {
   example: {{ "1" | getCourseStatusColour }}
   outputs: "govuk-tag--green"
   ------------------------------------------------------------------ */
-  filters.getCourseStatusClasses = (status) => {
+  filters.getCourseStatusClasses = (status, openDate = null) => {
     let label
 
     if (status !== undefined) {
-      label = courseHelper.getCourseStatusClasses(status.toString())
+      label = courseHelper.getCourseStatusClasses(status.toString(), openDate)
     }
 
     return label
