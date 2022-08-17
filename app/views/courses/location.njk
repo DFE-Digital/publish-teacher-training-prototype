@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "Select the locations for this course" %}
+{% set title = "Locations" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -41,6 +41,9 @@
             legend: {
               html: headingHtml
             }
+          },
+          hint: {
+            text: "Select all that apply"
           },
           errorMessage: errors | getErrorMessage("location"),
           items: locationOptions
