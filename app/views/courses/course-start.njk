@@ -34,11 +34,13 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukSelect({
-          id: "start-date",
+        {{ govukRadios({
+          idPrefix: "start-date",
           name: "course[startDate]",
-          label: {
-            html: headingHtml
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
           },
           errorMessage: errors | getErrorMessage("start-date"),
           items: courseStartOptions
