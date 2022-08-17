@@ -939,7 +939,7 @@ exports.edit_course_start_date_get = (req, res) => {
     selectedCourseStartDate = course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
+  const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
 
   res.render('../views/courses/course-start', {
     course,
@@ -961,7 +961,7 @@ exports.edit_course_start_date_post = (req, res) => {
     selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
+  const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
@@ -2540,7 +2540,7 @@ exports.new_course_start_date_get = (req, res) => {
     selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
+  const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
@@ -2568,7 +2568,7 @@ exports.new_course_start_date_post = (req, res) => {
     selectedCourseStartDate = req.session.data.course.startDate
   }
 
-  const courseStartOptions = courseHelper.getCourseStartSelectOptions(selectedCourseStartDate)
+  const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/applications-open-date`
