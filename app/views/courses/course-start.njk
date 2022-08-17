@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "When does the course start?" %}
+{% set title = "Course start date" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -46,7 +46,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update start date"
+            text: "Update course start date"
           }) }}
         {% else %}
           {{ govukButton({
