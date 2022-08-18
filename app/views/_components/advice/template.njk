@@ -1,0 +1,22 @@
+<aside class="app-advice{%- if params.classes %} {{ params.classes }}{% endif %}" role="complementary">
+  {% if params.title %}
+    <h3 class="app-advice__title">
+      {% if params.caption != false %}
+        <span class="app-advice__caption">Advice from Get Into Teaching</span>
+      {% endif %}
+      {{ params.title }}
+    </h3>
+  {% endif %}
+  <div class="app-advice__body">
+    {% if params.html or params.text %}
+      {{ params.html | safe if params.html else params.text }}
+    {% endif %}
+    {% if params.more %}
+      <p class="govuk-body">
+        <a href="{{ params.more.href }}" class="govuk-link">
+          {{ params.more.html | safe if params.more.html else params.more.text }}
+        </a>
+      </p>
+    {% endif %}
+  </div>
+</aside>
