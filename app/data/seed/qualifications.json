@@ -10,16 +10,6 @@
     ]
   },
   {
-    "id": "955e00b4-8e87-4a5b-96b5-7ae1a888b650",
-    "code": "qts",
-    "name": "QTS",
-    "description": "Qualified teacher status",
-    "levels": [
-      "primary",
-      "secondary"
-    ]
-  },
-  {
     "id": "b05a3e1f-9bd3-4517-b9d9-139592170590",
     "code": "pgde_with_qts",
     "name": "PGDE with QTS",
@@ -45,6 +35,16 @@
     "description": "Postgraduate diploma in education",
     "levels": [
       "further_education"
+    ]
+  },
+  {
+    "id": "955e00b4-8e87-4a5b-96b5-7ae1a888b650",
+    "code": "qts",
+    "name": "QTS",
+    "description": "Qualified teacher status",
+    "levels": [
+      "primary",
+      "secondary"
     ]
   }
 ]

@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "When will applications open?" %}
+{% set title = "Applications open date" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -83,7 +83,7 @@
           items: [
             {
               value: applicationsOpenDate | date,
-              text: "As soon as the course is on Find (recommended)",
+              text: "As soon as the course is on Find - recommended",
               checked: true if (course.applicationsOpenDate | date) == (applicationsOpenDate | date)
             },
             {
@@ -99,7 +99,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update date applications open"
+            text: "Update applications open date"
           }) }}
         {% else %}
           {{ govukButton({

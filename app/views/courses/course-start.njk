@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "When does the course start?" %}
+{% set title = "Course start date" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -34,11 +34,13 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {{ govukSelect({
-          id: "start-date",
+        {{ govukRadios({
+          idPrefix: "start-date",
           name: "course[startDate]",
-          label: {
-            html: headingHtml
+          fieldset: {
+            legend: {
+              html: headingHtml
+            }
           },
           errorMessage: errors | getErrorMessage("start-date"),
           items: courseStartOptions
@@ -46,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update start date"
+            text: "Update course start date"
           }) }}
         {% else %}
           {{ govukButton({
