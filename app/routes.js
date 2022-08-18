@@ -239,6 +239,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ro
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/preview', checkIsAuthenticated, courseController.course_preview)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId', checkIsAuthenticated, courseController.course_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses', checkIsAuthenticated, courseController.course_list)
