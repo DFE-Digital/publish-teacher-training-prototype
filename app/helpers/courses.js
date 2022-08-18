@@ -249,6 +249,8 @@ exports.getCourseStartRadioOptions = (selectedItem) => {
   const startDate = DateTime.now().toJSDate()
   const endDate = DateTime.now().plus({ months: 12 }).toJSDate()
 
+  const checkedItem = DateTime.fromISO(selectedItem).toFormat('yyyy-LL')
+
   for (let d = startDate; d <= endDate; d.setMonth(d.getMonth() + 1)) {
     const item = {}
 
@@ -262,7 +264,7 @@ exports.getCourseStartRadioOptions = (selectedItem) => {
 
     item.value = code
     item.id = code
-    item.checked = (selectedItem && selectedItem === code) ? 'checked' : ''
+    item.checked = (checkedItem && checkedItem === code) ? 'checked' : ''
 
     items.push(item)
   }
