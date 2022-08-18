@@ -273,7 +273,7 @@
           } if course.fundingType in ["salary", "apprenticeship"],
           {
             key: {
-              text: "Course open date"
+              text: "Applications open date"
             },
             value: {
               text: "As soon as the course is on Find" if course.applicationsOpenDate != "other" else course.applicationsOpenDateOther | date("d MMMM yyyy")
