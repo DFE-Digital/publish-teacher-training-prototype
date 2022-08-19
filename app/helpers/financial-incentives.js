@@ -2,14 +2,24 @@ const numeral = require('numeral')
 
 const financialIncentives = require('../data/financial-incentives')
 
+exports.getFinancialIncentives = (subjectCode, academicYear) => {
+  const incentives = financialIncentives.filter(incentive =>
+    incentive.subjectCode === subjectCode
+    && incentive.academicYear === academicYear.toString()
+  )
+  return incentives
+}
+
 exports.getFinancialIncentiveLabel = (subjectCode, academicYear) => {
   let label = ''
 
   if (subjectCode && academicYear) {
-    const incentives = financialIncentives.filter(incentive =>
-      incentive.subjectCode === subjectCode
-      && incentive.academicYear === academicYear.toString()
-    )
+    const incentives = this.getFinancialIncentives(subjectCode, academicYear)
+
+    // financialIncentives.filter(incentive =>
+    //   incentive.subjectCode === subjectCode
+    //   && incentive.academicYear === academicYear.toString()
+    // )
 
     const bursary = incentives.find(incentive => incentive.type === 'bursary')
     const scholarship = incentives.find(incentive => incentive.type === 'scholarship')
