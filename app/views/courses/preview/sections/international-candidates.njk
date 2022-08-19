@@ -10,9 +10,9 @@
   </ul>
 
   {% set sponsorVisasHtml %}
-    {% if (not course.hasSalary) and provider.can_sponsor_student_visa %}
+    {% if (not course.hasSalary) and course.canSponsorStudentVisa %}
       {% include "./international-candidates/student-visas.md" %}
-    {% elif course.hasSalary and provider.can_sponsor_skilled_worker_visa %}
+    {% elif course.hasSalary and provider.canSponsorSkilledWorkerVisa %}
       {% include "./international-candidates/skilled-worker-visas.md" %}
     {% elif course.hasSalary %}
       {% include "./international-candidates/salary.md" %}

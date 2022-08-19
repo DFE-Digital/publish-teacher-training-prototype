@@ -1,6 +1,8 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 id="school-placements" class="govuk-heading-l">School placements</h2>
 
+  {% if course.howSchoolPlacementsWork %}
+
   {% set whereYouWillTrainHtml %}
     {% if course.programType == 'HE' and course.trainingProvider.code != 'B31' %}
       {% include "./school-placements/where-you-will-train-hei.md" %}
@@ -53,5 +55,13 @@
         {% endfor %}
       </tbody>
     </table>
+  {% endif %}
+
+  {% else %}
+
+    {{ govukInsetText({
+      html: '<a class="govuk-link" href="#">Enter details about school placements</a>'
+    }) }}
+
   {% endif %}
 </div>

@@ -3,6 +3,8 @@
   {% if course.aboutCourse.length %}
     {{ course.aboutCourse | markdownToHtml | safe }}
   {% else %}
-    <p class="govuk-hint">Not entered</p>
+    {{ govukInsetText({
+      html: '<a class="govuk-link" href="#">Enter course summary</a>'
+    }) }}
   {% endif %}
 </div>
