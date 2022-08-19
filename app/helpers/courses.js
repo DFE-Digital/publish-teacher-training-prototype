@@ -10,6 +10,8 @@ exports.decorate = course => {
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
 
+  course.hasVacancies = this.hasVacancies(course.locations)
+
   // TODO: replace feesUK in the data with feesDomestic
   course.feesDomestic = course.feesUK
 
