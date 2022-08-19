@@ -499,6 +499,16 @@ module.exports = (env) => {
     return dt.toLowerCase()
   }
 
+  /*  ------------------------------------------------------------------
+  Convert array to readable list format using 'and'
+  @param {Array} array Array to convert
+  @example [A, B, C] => A, B and C
+  ------------------------------------------------------------------  */
+  filters.formatList = (array = []) => {
+    const lf = new Intl.ListFormat('en')
+    return lf.format(array)
+  }
+
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
