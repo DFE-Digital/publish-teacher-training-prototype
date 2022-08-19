@@ -145,28 +145,18 @@ exports.course_description = (req, res) => {
 }
 
 exports.course_preview = (req, res) => {
-  // clean out course data
-  delete req.session.data.course
-  delete req.session.data.degree
+  let course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course = courseHelper.decorate(course)
 
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const locations = locationModel.findMany({ organisationId: req.params.organisationId })
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const trainingProvider = organisationModel.findOne({ organisationId: course.trainingProvider.id })
 
-  const isCurrentCycle = req.params.cycleId === cycleHelper.CURRENT_CYCLE.code
+  const accreditedBody = trainingProvider.accreditedBodies.find(accreditedBody => accreditedBody.id === course.accreditedBody.id)
 
-  let rolledOverCourse
-  if (process.env.IS_ROLLOVER) {
-    rolledOverCourse = courseModel.findMany({
-      organisationId: req.params.organisationId,
-      cycleId: cycleHelper.NEXT_CYCLE.code,
-      courseCode: course.code
-    })[0]
-  }
+  course.aboutAccreditingBody = accreditedBody.description
 
   res.render('../views/courses/preview/index', {
-    organisation,
     course,
+    trainingProvider,
     actions: {
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
