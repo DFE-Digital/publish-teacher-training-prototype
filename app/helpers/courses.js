@@ -6,8 +6,6 @@ const financialIncentivesHelper = require('./financial-incentives')
 const subjectHelper = require('./subjects')
 const utilHelper = require('./utils')
 
-// const financialIncentives = require('../data/financial-incentives')
-
 exports.decorate = course => {
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
@@ -21,11 +19,6 @@ exports.decorate = course => {
     course.subjects[0].code,
     academicYear.toString()
   )
-
-  // financialIncentives.filter(incentive =>
-  //   incentive.subjectCode === course.subjects[0].code
-  //   && incentive.academicYear === academicYear.toString()
-  // )
 
   const bursary = incentives.find(incentive => incentive.type === 'bursary')
 
