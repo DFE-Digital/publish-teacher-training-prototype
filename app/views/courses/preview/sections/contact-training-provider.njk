@@ -1,0 +1,25 @@
+<div class="govuk-!-margin-bottom-8">
+  <h2 id="contact-training-provider" class="govuk-heading-l">Contact this training provider</h2>
+  <dl class="app-description-list">
+    {% if trainingProvider.contact.email %}
+      <dt class="app-list--description__label">Email</dt>
+      <dd>{{ trainingProvider.contact.email | urlize | safe }}</dd>
+    {% endif %}
+    {% if trainingProvider.contact.telephone %}
+      <dt class="app-list--description__label">Telephone</dt>
+      <dd>{{ trainingProvider.contact.telephone }}</dd>
+    {% endif %}
+    {% if trainingProvider.contact.website %}
+      <dt class="app-list--description__label">Website</dt>
+      <dd>{{ trainingProvider.contact.website | urlize | safe }}</dd>
+    {% endif %}
+    <dt class="app-list--description__label">Address</dt>
+    <dd>
+      {% if trainingProvider.address.addressLine1 %}{{ trainingProvider.address.addressLine1 }}<br>{% endif %}
+      {% if trainingProvider.address.addressLine2 %}{{ trainingProvider.address.addressLine2 }}<br>{% endif %}
+      {% if trainingProvider.address.city %}{{ trainingProvider.address.city }}<br>{% endif %}
+      {% if trainingProvider.address.county %}{{ trainingProvider.address.county }}<br>{% endif %}
+      {% if trainingProvider.address.postcode %}{{ trainingProvider.address.postcode }}{% endif %}
+    </dd>
+  </dl>
+</div>
