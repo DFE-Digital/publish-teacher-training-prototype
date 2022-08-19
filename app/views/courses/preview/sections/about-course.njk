@@ -1,0 +1,8 @@
+<div class="govuk-!-margin-bottom-8">
+  <h2 id="about-course" class="govuk-heading-l">About the course</h2>
+  {% if course.aboutCourse.length %}
+    {{ course.aboutCourse | markdownToHtml | safe }}
+  {% else %}
+    <p class="govuk-hint">Not entered</p>
+  {% endif %}
+</div>
