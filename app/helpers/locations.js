@@ -9,6 +9,14 @@ const locationModel = require('../models/locations')
 //   suspended: "Suspended" // "S" in the live service
 // }
 
+exports.getLocations = (organisationId) => {
+  const locations = locationModel.findMany({
+    organisationId: organisationId
+  })
+
+  return locations
+}
+
 exports.getLocationOptions = (organisationId, selectedItem) => {
   const items = []
 
