@@ -28,8 +28,12 @@
 
   {% else %}
 
+    {% set insetHtml %}
+      <a class="govuk-link" href="{{ actions.change }}/degree">Enter degree requirements</a>
+    {% endset %}
+
     {{ govukInsetText({
-      html: '<a class="govuk-link" href="#">Enter degree requirements</a>'
+      html: insetHtml
     }) }}
 
   {% endif %}
@@ -82,8 +86,12 @@
 
   {% else %}
 
+    {% set insetHtml %}
+      <a class="govuk-link" href="{{ actions.change }}/gcses">Enter GCSE and equivalency test requirements</a>
+    {% endset %}
+
     {{ govukInsetText({
-      html: '<a class="govuk-link" href="#">Enter GCSE requirements</a>'
+      html: insetHtml
     }) }}
 
   {% endif %}

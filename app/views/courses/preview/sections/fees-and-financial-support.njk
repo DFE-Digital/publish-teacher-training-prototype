@@ -38,8 +38,12 @@
 
     {% else %}
 
+      {% set insetHtml %}
+        <a class="govuk-link" href="{{ actions.change }}/course-fees">Enter details about fees and financial support</a>
+      {% endset %}
+
       {{ govukInsetText({
-        html: '<a class="govuk-link" href="#">Enter details about fees and financial support</a>'
+        html: insetHtml
       }) }}
 
     {% endif %}

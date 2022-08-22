@@ -3,8 +3,11 @@
   {% if course.aboutCourse.length %}
     {{ course.aboutCourse | markdownToHtml | safe }}
   {% else %}
+    {% set insetHtml %}
+      <a class="govuk-link" href="{{ actions.change }}/about-course">Enter course summary</a>
+    {% endset %}
     {{ govukInsetText({
-      html: '<a class="govuk-link" href="#">Enter course summary</a>'
+      html: insetHtml
     }) }}
   {% endif %}
 </div>
