@@ -2,8 +2,147 @@ const { DateTime } = require('luxon')
 const faker = require('faker')
 faker.locale = 'en_GB'
 
+const financialIncentivesHelper = require('./financial-incentives')
+const locationHelper = require('./locations')
 const subjectHelper = require('./subjects')
-const utilHelper = require('./utils')
+const utils = require('./utils')
+
+exports.decorate = (course) => {
+  course.hasFees = course.fundingType === 'fee'
+  course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
+
+  course.hasVacancies = this.hasVacancies(course.locations)
+
+  // TODO: replace feesUK in the data with feesDomestic
+  course.feesDomestic = course.feesUK
+
+  const academicYear = this.getAcademicYear(course.startDate)
+
+  const incentives = financialIncentivesHelper.getFinancialIncentives(
+    course.subjects[0].code,
+    academicYear.toString()
+  )
+
+  const bursary = incentives.find(incentive => incentive.type === 'bursary')
+
+  course.hasBursary = false
+
+  if (bursary) {
+    course.hasBursary = true
+    course.bursaryAmount = bursary.amount
+  }
+
+  const scholarship = incentives.find(incentive => incentive.type === 'scholarship')
+
+  course.hasScholarship = false
+
+  if (scholarship) {
+    course.hasScholarship = true
+    course.scholarshipAmount = scholarship.amount
+  }
+
+  course.hasBursaryOnly = course.hasBursary && !course.hasScholarship
+  course.hasScholarshipAndBursary = course.hasBursary && course.hasScholarship
+
+  if (course.hasSalary) {
+    course.fundingOption = 'Salary'
+  } else if (course.hasScholarshipAndBursary) {
+    course.fundingOption = 'Scholarships or bursaries, as well as student finance, are available if you’re eligible'
+  } else if (course.hasBursary) {
+    course.fundingOption = 'Bursaries and student finance are available if you’re eligible'
+  } else {
+    course.fundingOption = 'Student finance if you’re eligible'
+  }
+
+  if (course.hasScholarship) {
+    if (course.subjects.length === 1) {
+      switch (course.subjects[0].code) {
+        case 'F1':
+          course.scholarshipBody = 'Royal Society of Chemistry'
+          course.scholarshipUrl = 'https://www.rsc.org/prizes-funding/funding/teacher-training-scholarships/'
+          break
+        case '11':
+          course.scholarshipBody = 'Chartered Institute for IT'
+          course.scholarshipUrl = 'https://www.bcs.org/qualifications-and-certifications/training-and-scholarships-for-teachers/bcs-computer-teacher-scholarships/'
+          break
+        case 'G1':
+          course.scholarshipBody = 'Institute of Mathematics and its Applications'
+          course.scholarshipUrl = 'http://teachingmathsscholars.org/about'
+          break
+        case 'F3':
+          course.scholarshipBody = 'Institute of Physics'
+          course.scholarshipUrl = 'https://www.iop.org/about/support-grants/iop-teacher-training-scholarships'
+          break
+      }
+    }
+  }
+
+  course.bursaryRequirements = ['a degree of 2:2 or above in any subject']
+
+  // if the course is 'primary with mathematics'
+  if (course.code === '03') {
+    course.bursaryRequirements.push('at least grade B in maths A-level (or an equivalent')
+  }
+
+  if (course.bursaryRequirements.length > 1) {
+    course.bursaryFirstLineEnding = ':'
+  } else {
+    course.bursaryFirstLineEnding = course.bursaryRequirements[0]
+  }
+
+  course.yearRange = this.getAcademicYearRange(course.startDate)
+
+  if (course.locations?.length) {
+    const trainingLocations = locationHelper.getLocations(course.trainingProvider.id)
+
+    course.locations.forEach((location, i) => {
+      const trainingLocation = trainingLocations.find(trainingLocation => trainingLocation.id === location.id)
+      location.address = utils.arrayToList(
+        array = Object.values(trainingLocation.address),
+        join = ', ',
+        final = ', '
+      )
+    })
+  }
+
+  return course
+}
+
+exports.getAcademicYear = (courseStartDate) => {
+  const checkDate = DateTime.fromISO(courseStartDate)
+
+  const startDate = DateTime.fromISO(checkDate.year + '-08-01T00:00:00')
+  const endDate = DateTime.fromISO((checkDate.year + 1) + '-07-31T23:59:59')
+
+  let academicYear
+
+  if (checkDate >= startDate && checkDate <= endDate) {
+    academicYear = (checkDate.year + 1)
+  } else {
+    academicYear = checkDate.year
+  }
+
+  return academicYear
+}
+
+exports.getAcademicYearRange = (courseStartDate) => {
+  let yearRange = ''
+
+  if (courseStartDate) {
+    const checkDate = DateTime.fromISO(courseStartDate)
+
+    const startDate = DateTime.fromISO(checkDate.year + '-08-01T00:00:00')
+    const endDate = DateTime.fromISO((checkDate.year + 1) + '-07-31T23:59:59')
+
+    if (checkDate >= startDate && checkDate <= endDate) {
+      yearRange = checkDate.year + ' to ' + (checkDate.year + 1)
+    } else {
+      yearRange = (checkDate.year - 1) + ' to ' + checkDate.year
+    }
+  }
+
+  return yearRange
+}
 
 // const DEGREE_GRADES = {
 //   0: "2:1 or above, or equivalent",
@@ -435,14 +574,14 @@ exports.createCourseName = (subjects) => {
     if (subjects.includes('ML')) {
       courseName = 'Modern languages'
       courseName += ' ('
-      courseName += utilHelper.arrayToList(
+      courseName += utils.arrayToList(
         array = names,
         join = ', ',
         final = ' and '
       )
       courseName += ')'
     } else {
-      courseName = utilHelper.arrayToList(
+      courseName = utils.arrayToList(
         array = names,
         join = ' with ',
         final = ' and '
