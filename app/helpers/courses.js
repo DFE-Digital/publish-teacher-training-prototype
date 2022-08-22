@@ -3,10 +3,11 @@ const faker = require('faker')
 faker.locale = 'en_GB'
 
 const financialIncentivesHelper = require('./financial-incentives')
+const locationHelper = require('./locations')
 const subjectHelper = require('./subjects')
-const utilHelper = require('./utils')
+const utils = require('./utils')
 
-exports.decorate = course => {
+exports.decorate = (course) => {
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
 
@@ -90,6 +91,19 @@ exports.decorate = course => {
   }
 
   course.yearRange = this.getAcademicYearRange(course.startDate)
+
+  if (course.locations?.length) {
+    const trainingLocations = locationHelper.getLocations(course.trainingProvider.id)
+
+    course.locations.forEach((location, i) => {
+      const trainingLocation = trainingLocations.find(trainingLocation => trainingLocation.id === location.id)
+      location.address = utils.arrayToList(
+        array = Object.values(trainingLocation.address),
+        join = ', ',
+        final = ', '
+      )
+    })
+  }
 
   return course
 }
@@ -560,14 +574,14 @@ exports.createCourseName = (subjects) => {
     if (subjects.includes('ML')) {
       courseName = 'Modern languages'
       courseName += ' ('
-      courseName += utilHelper.arrayToList(
+      courseName += utils.arrayToList(
         array = names,
         join = ', ',
         final = ' and '
       )
       courseName += ')'
     } else {
-      courseName = utilHelper.arrayToList(
+      courseName = utils.arrayToList(
         array = names,
         join = ' with ',
         final = ' and '
