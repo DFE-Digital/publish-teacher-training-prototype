@@ -11,7 +11,52 @@ const utilsHelper = require('../helpers/utils')
 
 const organisationModel = require('./organisations')
 
+const findUUIDs = () => {
+  const courses = []
+  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
+
+  let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
+  // Only get JSON documents
+  oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+  oDocuments.forEach((oFileName) => {
+
+    const oFilePath = oDirectoryPath + '/' + oFileName
+    const oRaw = fs.readFileSync(oFilePath)
+    const organisation = JSON.parse(oRaw)
+
+    const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+
+    // check if document directory exists
+    if (!fs.existsSync(cDirectoryPath)) {
+      fs.mkdirSync(cDirectoryPath)
+    }
+
+    let cDocuments = fs.readdirSync(cDirectoryPath, 'utf8')
+
+    // Only get JSON documents
+    cDocuments = cDocuments.filter(doc => doc.match(/.*\.(json)/ig))
+
+    cDocuments.forEach((cFileName) => {
+      const cFilePath = cDirectoryPath + '/' + cFileName
+      const cRaw = fs.readFileSync(cFilePath)
+      const course = JSON.parse(cRaw)
+
+      if (course.fundingType === 'salary') {
+        // console.log(course.id)
+        courses.push(course.id)
+      }
+    })
+
+  })
+
+  console.log(courses);
+
+}
+
+
 exports.seed = () => {
+  findUUIDs()
   // seedLocations()
   // seedOrganisations()
   // seedCourses()
