@@ -2,7 +2,8 @@
 
 {% set primaryNavId = "settings" %}
 
-{% set title = "Student visa" %}
+{% set title = "Student visas" %}
+{% set caption = "Visa sponsorship" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -24,7 +25,7 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      {% if query.show and query.show == "help" %}
+      {# {% if query.show and query.show == "help" %}
         <p class="govuk-body">
           Non-UK teacher training candidates need the correct visa or immigration status to work or study in England.
         </p>
@@ -36,7 +37,7 @@
         <p class="govuk-body">
           <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers#recruit-by-becoming-a-visa-sponsor">Learn more about visa sponsorship</a>
         </p>
-      {% endif %}
+      {% endif %} #}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -45,7 +46,7 @@
           name: "organisation[visaSponsorship][canSponsorStudentVisa]",
           fieldset: {
             legend: {
-              text: "Can candidates get a sponsored Student visa for your fee-paying courses?",
+              text: "Can your organisation sponsor Student visas for courses run by you or your training partners?",
               classes: "govuk-fieldset__legend--m"
             }
           },
@@ -53,8 +54,12 @@
           items: studentVisaOptions
         }) }}
 
+        {{ govukInsetText({
+          text: "Changing your answer will not change visa information for courses you or your training partners have already created."
+        }) }}
+
         {{ govukButton({
-          text: "Update Student visa"
+          text: "Update " + title
         }) }}
 
       </form>
