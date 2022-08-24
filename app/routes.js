@@ -222,6 +222,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/co
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/financial-support', checkIsAuthenticated, courseController.edit_financial_support_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/salary-details', checkIsAuthenticated, courseController.edit_salary_details_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/salary-details', checkIsAuthenticated, courseController.edit_salary_details_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gcses', checkIsAuthenticated, gcseController.edit_gcses_post)
 
