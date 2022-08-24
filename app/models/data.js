@@ -15,6 +15,8 @@ const findUUIDs = () => {
   const courses = []
   const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
 
+  const salaryDetails = require('../data/temp/salary-details')
+
   let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
   // Only get JSON documents
   oDocuments = oDocuments.filter(doc => doc.match(/.*\.(json)/ig))
@@ -43,14 +45,31 @@ const findUUIDs = () => {
       const course = JSON.parse(cRaw)
 
       if (course.fundingType === 'salary') {
-        // console.log(course.id)
-        courses.push(course.id)
+        const details = salaryDetails.find(salaryDetail => salaryDetail.id === course.id)
+        console.log(course.id)
+
+        if (details?.data) {
+          course.salaryDetails = details.data.SalaryDetails
+          console.log(details.data.SalaryDetails)
+
+          // create a JSON string for the course data
+          const cFileData = JSON.stringify(course)
+
+          // write the JSON data
+          // fs.writeFileSync(cFilePath, cFileData)
+
+        } else {
+          console.log('No salary details')
+        }
+
+        console.log('----------------------------------------');
+        // courses.push(course.id)
       }
     })
 
   })
 
-  console.log(courses);
+  // console.log(courses);
 
 }
 
