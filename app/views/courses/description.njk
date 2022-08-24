@@ -172,7 +172,7 @@
                 }
               ]
             } if course.status != 3
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee for international students"
@@ -190,7 +190,7 @@
                 }
               ]
             } if course.status != 3
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee details"
@@ -208,7 +208,7 @@
                 }
               ]
             } if course.status != 3
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Financial support you offer"
@@ -226,7 +226,7 @@
                 }
               ]
             } if course.status != 3
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Financial support from the government"
@@ -234,7 +234,7 @@
             value: {
               text: financialIncentivesHtml
             }
-          }
+          } if course.fundingType == "fee"
         ]
       }) }}
 
