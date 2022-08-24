@@ -108,7 +108,7 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
         Course length and fees
@@ -234,7 +234,25 @@
             value: {
               text: financialIncentivesHtml
             }
-          } if course.fundingType == "fee"
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Salary details"
+            },
+            value: {
+              text: (course.salaryDetails | nl2br | markdownToHtml | safe) if course.salaryDetails.length else "Not entered",
+              classes: "govuk-hint" if not course.salaryDetails.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/salary-details?referrer=description",
+                  text: "Change",
+                  visuallyHiddenText: "salary details"
+                }
+              ]
+            } if course.status != 3
+          }
         ]
       }) }}
 
