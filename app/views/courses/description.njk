@@ -111,7 +111,7 @@
     <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
-        Course length and fees
+        Course length and {{ "salary details" if course.fundingType == "salary" else "fees" }}
       </h2>
 
       {% set courseLengthText %}
