@@ -165,7 +165,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee for international students"
@@ -183,7 +183,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee details"
@@ -201,7 +201,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Financial support you offer"
@@ -219,7 +219,25 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          }
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Salary details"
+            },
+            value: {
+              text: (course.salaryDetails | nl2br | markdownToHtml | safe) if course.salaryDetails.length else "Not entered",
+              classes: "govuk-hint" if not course.salaryDetails.length
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "salary details"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
+          } if course.fundingType == "salary"
         ]
       }) }}
 
@@ -228,17 +246,69 @@
       </h2>
 
       {% set degreeHtml %}
-        <p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Enter degree requirements</a>
-        </p>
+        {% if course.degreeGrade %}
+          <ul class="govuk-list">
+            <li>{{ course.degreeGrade | getDegreeGradeLabel }}</li>
+            {% if course.additionalDegreeSubjectRequirements %}
+              <li>{{ course.additionalDegreeSubjectRequirements }}</li>
+            {% endif %}
+          </ul>
+        {% else %}
+          {{ govukInsetText({
+            html: '<p class="govuk-heading-s app-inset-text__title">Do you require a minimum degree classification?</p>
+            <p class="govuk-body">
+              <a class="govuk-link" href="'+ actions.change + '/degree?referrer=description">Enter degree requirements</a>
+            </p>',
+            classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+          }) }}
+        {% endif %}
       {% endset %}
 
       {% set gcseHtml %}
-        <p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Enter GCSE and equivalency test requirements</a>
-        </p>
+        {% if course.acceptPendingGcse %}
+          <ul class="govuk-list">
+            <li>
+              {% if course.acceptPendingGcse == "yes" %}
+                Candidates with pending GCSEs will be considered
+              {% else %}
+                Candidates with pending GCSEs will not be considered
+              {% endif %}
+            </li>
+            <li>
+              {% if course.acceptGcseEquivalency == "yes" %}
+
+                {% set equivalencies = [] %}
+
+                {% if course.acceptEnglishGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('English') %}
+                {% endif %}
+
+                {% if course.acceptMathsGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('maths') %}
+                {% endif %}
+
+                {% if course.acceptScienceGcseEquivalency == "yes" %}
+                  {% set equivalencies = equivalencies | push('science') %}
+                {% endif %}
+
+                Equivalency tests will be accepted in {{ equivalencies | joinify }}
+              {% else %}
+                Equivalency tests will not be accepted
+              {% endif %}
+            </li>
+            {% if course.additionalGcseEquivalencies %}
+              <li>{{ course.additionalGcseEquivalencies }}</li>
+            {% endif %}
+          </ul>
+        {% else %}
+          {{ govukInsetText({
+            html: '<p class="govuk-heading-s app-inset-text__title">GCSE and equivalency tests</p>
+            <p class="govuk-body">
+              <a class="govuk-link" href="' + actions.change + '/gcses?referrer=description">Enter GCSE and equivalency test requirements</a>
+            </p>',
+            classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+          }) }}
+        {% endif %}
       {% endset %}
 
       {{ govukSummaryList({
@@ -248,10 +318,7 @@
               text: "Degree"
             },
             value: {
-              html: govukInsetText({
-                html: degreeHtml,
-                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
-              })
+              html: degreeHtml
             },
             actions: {
               items: [
@@ -268,10 +335,7 @@
               text: "GCSEs"
             },
             value: {
-              html: govukInsetText({
-                html: gcseHtml,
-                classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
-              })
+              html: gcseHtml
             },
             actions: {
               items: [
