@@ -423,6 +423,10 @@ exports.updateOne = (params) => {
       course.feeDetails = params.course.feeDetails
     }
 
+    if (params.course.salaryDetails !== undefined) {
+      course.salaryDetails = params.course.salaryDetails
+    }
+
     if (params.course.financialSupport !== undefined) {
       course.financialSupport = params.course.financialSupport
     }

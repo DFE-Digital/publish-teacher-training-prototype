@@ -1,0 +1,73 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set title = "Salary details" %}
+{% set caption = course.name + " (" + course.code + ")" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% set hintTextHtml %}
+        <p class="govuk-body">Give details about the salary for this course.</p>
+        <p class="govuk-body">You should:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            give an indication of the salary – if you don’t have the figure, say how it will be calculated (eg using the unqualified teachers’ pay scales)
+          </li>
+          <li>
+            say whether there are any fees or others costs – if there are no fees for this course, you should also say so
+          </li>
+        </ul>
+        {% endset %}
+
+        {{ govukCharacterCount({
+          id: "salary details",
+          name: "course[salaryDetails]",
+          rows: 10,
+          maxwords: 250,
+          label: {
+            html: headingHtml
+          },
+          hint: {
+            html: hintTextHtml
+          },
+          errorMessage: errors | getErrorMessage("salary details"),
+          value: course.salaryDetails
+        }) }}
+
+        {{ govukButton({
+          text: "Update salary details"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
