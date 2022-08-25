@@ -165,7 +165,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee for international students"
@@ -183,7 +183,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Fee details"
@@ -201,7 +201,7 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          },
+          } if course.fundingType == "fee",
           {
             key: {
               text: "Financial support you offer"
@@ -219,7 +219,25 @@
                 }
               ]
             } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          }
+          } if course.fundingType == "fee",
+          {
+            key: {
+              text: "Salary details"
+            },
+            value: {
+              text: (course.salaryDetails | nl2br | markdownToHtml | safe) if course.salaryDetails.length else "Not entered",
+              classes: "govuk-hint" if not course.salaryDetails.length
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "salary details"
+                }
+              ]
+            } if permissions and ("add_courses" in permissions or "change_courses" in permissions)
+          } if course.fundingType == "salary"
         ]
       }) }}
 
