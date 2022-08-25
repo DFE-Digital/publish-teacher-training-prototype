@@ -3,9 +3,9 @@
 {% set primaryNavId = "courses" %}
 
 {% if fundingType == "fee" %}
-  {% set title = "Student visa" %}
+  {% set title = "Student visas" %}
 {% else %}
-  {% set title = "Skilled Worker visa" %}
+  {% set title = "Skilled Worker visas" %}
 {% endif %}
 
 {% if course.id %}
@@ -45,16 +45,34 @@
       {% if not organisation.isAccreditedBody %}
         {% if fundingType == "fee" %}
           {% set visaSponsorshipText %}
-            {{ accreditedBody.name }} {{ "can" if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" else "cannot" }} sponsor Student visas.
+            {% if accreditedBody.visaSponsorship.canSponsorStudentVisa == "yes" %}
+              <p class="body">{{ accreditedBody.name }} can sponsor Student visas for some of their courses.</p>
+            {% else %}
+              <p class="body">{{ accreditedBody.name }} have said they cannot sponsor Student visas so we have defaulted your answer to ‘No’.</p>
+              <p class="body">If your organisation would like to sponsor Student visas, contact {{ accreditedBody.name }}.</p>
+            {% endif %}
           {% endset %}
 
           {{ govukInsetText({
-            text: visaSponsorshipText
+            html: visaSponsorshipText
           }) }}
         {% endif %}
       {% endif %}
 
-      <p class="govuk-body">Learn more about <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers">recruiting trainee teachers from overseas</a>.</p>
+      {% if organisation.isAccreditedBody %}
+        {% set studentVisaQuestion = "Can your organisation sponsor Student visas for this course?" %}
+        {% set skilledWorkerVisaQuestion = "Can your organisation sponsor Skilled Worker visas for this course?" %}
+      {% else %}
+        {% set studentVisaQuestion = "Is Student visa sponsorship available for this course?" %}
+        {% set skilledWorkerVisaQuestion = "Can your organisation sponsor Skilled Worker visas for this course?" %}
+      {% endif %}
+
+      {% if organisation.isAccreditedBody and (
+          (fundingType == "fee" and accreditedBody.visaSponsorship.canSponsorStudentVisa == "no") or
+          (fundingType == "apprenticeship" and accreditedBody.visaSponsorship.canSponsorSkilledWorkerVisa == "no")
+        ) %}
+          <p class="govuk-body">Learn more about <a class="govuk-link" href="https://www.gov.uk/guidance/recruit-trainee-teachers-from-overseas-accredited-itt-providers">recruiting trainee teachers from overseas</a>.</p>
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -65,7 +83,7 @@
             name: "course[canSponsorStudentVisa]",
             fieldset: {
               legend: {
-                text: "Can candidates get a sponsored Student visa?",
+                text: studentVisaQuestion,
                 classes: "govuk-fieldset__legend--m"
               }
             },
@@ -80,7 +98,7 @@
             name: "course[canSponsorSkilledWorkerVisa]",
             fieldset: {
               legend: {
-                text: "Can candidates get a sponsored Skilled Worker visa?",
+                text: skilledWorkerVisaQuestion,
                 classes: "govuk-fieldset__legend--m"
               }
             },
@@ -92,7 +110,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update Student visa" if fundingType == "fee" else "Update Skilled Worker visa"
+            text: "Update " + title
           }) }}
         {% else %}
           {{ govukButton({
