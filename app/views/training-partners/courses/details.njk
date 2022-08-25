@@ -176,7 +176,7 @@
                 }
               ]
             } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          } if organisation.isAccreditedBody,
+          } if partner.isAccreditedBody,
           {
             key: {
               text: "Funding type"
@@ -193,7 +193,7 @@
                 }
               ]
             } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          } if not organisation.isAccreditedBody,
+          } if not partner.isAccreditedBody,
           {
             key: {
               text: "Full time or part time"
@@ -244,7 +244,7 @@
                 }
               ]
             } if course.status in ["0","2"] and permissions and ("add_courses" in permissions or "change_courses" in permissions)
-          } if not organisation.isAccreditedBody,
+          } if not partner.isAccreditedBody,
           {
             key: {
               text: "Student visa"
