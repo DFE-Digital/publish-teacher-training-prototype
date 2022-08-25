@@ -23,73 +23,42 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
-      {% endset %}
+      {% include "_includes/page-heading.njk" %}
 
-      {% set helpTextHtml %}
-        <p class="govuk-body">The course summary appears at the top of the page on Find, so it's important that candidates can quickly learn why this course is different from another.</p>
+      <p class="govuk-body">The course summary appears at the top of the page on Find, so it's important that candidates can quickly learn why this course is different from another.</p>
 
-        <p class="govuk-body">Tell candidates:</p>
+      <p class="govuk-body">Tell candidates:</p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>where they’ll spend their time</li>
-          <li>how the course is structured</li>
-          <li>how they’ll be supported - for example, tutors and mentoring</li>
-        </ul>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>where they’ll spend their time</li>
+        <li>how the course is structured</li>
+        <li>how they’ll be supported - for example, tutors and mentoring</li>
+      </ul>
 
-        <p class="govuk-body">Remember to:</p>
+      <p class="govuk-body">Remember to:</p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>avoid too much detail - you can use the other sections to elaborate</li>
-          <li>use bullet points and paragraphs to make your content easy to read</li>
-          <li>spell out acronyms the first time you use them, for example, ITT, NQT, SCITT</li>
-        </ul>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>avoid too much detail - you can use the other sections to elaborate</li>
+        <li>use bullet points and paragraphs to make your content easy to read</li>
+        <li>spell out acronyms the first time you use them, for example, ITT, NQT, SCITT</li>
+      </ul>
 
-        <p class="govuk-body"><a class="govuk-link" href="/how-to-use-this-service/course-summary-examples">View more guidance and course summary examples</a></p>
-      {% endset %}
+      <p class="govuk-body"><a class="govuk-link" href="/how-to-use-this-service/course-summary-examples">View more guidance and course summary examples</a></p>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {# {% if query.version == 2 %} #}
-
-          {{ headingHtml | safe }}
-
-          {{ helpTextHtml | safe }}
-
-          {{ govukCharacterCount({
-            id: "about-course",
-            name: "course[aboutCourse]",
-            rows: 20,
-            maxwords: wordCount,
-            label: {
-              text: title,
-              classes: "govuk-label--s"
-            },
-            errorMessage: errors | getErrorMessage("about-course"),
-            value: course.aboutCourse
-          }) }}
-
-        {# {% else %}
-
-          {{ govukCharacterCount({
-            id: "about-course",
-            name: "course[aboutCourse]",
-            rows: 10,
-            maxwords: wordCount,
-            label: {
-              html: headingHtml
-            },
-            errorMessage: errors | getErrorMessage("about-course"),
-            value: course.aboutCourse
-          }) }}
-
-          {{ govukDetails({
-            summaryText: "Help with writing a course summary",
-            html: helpTextHtml
-          }) }}
-
-        {% endif %} #}
+        {{ govukCharacterCount({
+          id: "about-course",
+          name: "course[aboutCourse]",
+          rows: 20,
+          maxwords: wordCount,
+          label: {
+            text: title,
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("about-course"),
+          value: course.aboutCourse
+        }) }}
 
         {{ govukButton({
           text: "Update course summary"
