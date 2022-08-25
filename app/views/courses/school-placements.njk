@@ -21,73 +21,40 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
-      {% endset %}
+      {% include "_includes/page-heading.njk" %}
 
-      {% set helpTextHtml %}
-        <p class="govuk-body">
-          Give candidates more information about the schools they’ll be teaching in. Tell them:
-        </p>
+      <p class="govuk-body">
+        Give candidates more information about the schools they’ll be teaching in. Tell them:
+      </p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>how many placements a candidate will have</li>
-          <li>how much time they’ll spend in each school</li>
-          <li>if mentors are available within the schools</li>
-        </ul>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>how many placements a candidate will have</li>
+        <li>how much time they’ll spend in each school</li>
+        <li>if mentors are available within the schools</li>
+      </ul>
 
-        <p class="govuk-body">You could also mention:</p>
+      <p class="govuk-body">You could also mention:</p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>the average distance candidates have to travel</li>
-          <li>how many schools you partner with in total</li>
-          <li>how placement schools are selected</li>
-        </ul>
-      {% endset %}
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the average distance candidates have to travel</li>
+        <li>how many schools you partner with in total</li>
+        <li>how placement schools are selected</li>
+      </ul>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {# {% if query.version == 2 %} #}
-
-          {{ headingHtml | safe }}
-
-          {{ helpTextHtml | safe }}
-
-          {{ govukCharacterCount({
-            id: "school-placements",
-            name: "course[howSchoolPlacementsWork]",
-            rows: 20,
-            maxwords: wordCount,
-            label: {
-              text: title,
-              classes: "govuk-label--s"
-            },
-            errorMessage: errors | getErrorMessage("school-placements"),
-            value: course.howSchoolPlacementsWork
-          }) }}
-
-        {# {% else %}
-
-          {{ govukCharacterCount({
-            id: "school-placements",
-            name: "course[howSchoolPlacementsWork]",
-            rows: 20,
-            maxwords: wordCount,
-            label: {
-              html: headingHtml
-            },
-            errorMessage: errors | getErrorMessage("school-placements"),
-            value: course.howSchoolPlacementsWork
-          }) }}
-
-          {{ govukDetails({
-            summaryText: "Help with how school placements work",
-            html: helpTextHtml
-          }) }}
-
-        {% endif %} #}
-
-
+        {{ govukCharacterCount({
+          id: "school-placements",
+          name: "course[howSchoolPlacementsWork]",
+          rows: 20,
+          maxwords: wordCount,
+          label: {
+            text: title,
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("school-placements"),
+          value: course.howSchoolPlacementsWork
+        }) }}
 
         {{ govukButton({
           text: "Update how school placements work"

@@ -1383,9 +1383,11 @@ exports.edit_financial_support_post = (req, res) => {
 
 exports.edit_salary_details_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const wordCount = 250
 
   res.render('../views/courses/salary-details', {
     course,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
@@ -1396,11 +1398,24 @@ exports.edit_salary_details_get = (req, res) => {
 
 exports.edit_salary_details_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course.salaryDetails = req.session.data.course.salaryDetails
+
+  const wordCount = 250
+
   const errors = []
+
+  if (req.session.data.course.salaryDetails?.split(' ').length > wordCount) {
+    const error = {}
+    error.fieldName = "salary-details"
+    error.href = "#salary-details"
+    error.text = `Salary details must be ${wordCount} words or fewer`
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/salary-details', {
       course,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
