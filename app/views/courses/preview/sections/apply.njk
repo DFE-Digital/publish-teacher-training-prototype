@@ -4,8 +4,8 @@
     {% if course.hasVacancies %}
       {{ govukButton({
         text: "Apply for this course",
-        href: "#",
-        isStartButton: true
+        isStartButton: true,
+        disabled: true
       }) }}
     {% else %}
       {{ govukWarningText({
