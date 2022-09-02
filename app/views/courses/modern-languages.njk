@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "Pick all the languages for this course" %}
+{% set title = "Languages" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -42,13 +42,16 @@
               html: headingHtml
             }
           },
+          hint: {
+            text: "Select all that apply"
+          },
           errorMessage: errors | getErrorMessage("child-subjects"),
           items: subjectOptions
         }) }}
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update languages"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({
