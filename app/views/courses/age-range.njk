@@ -98,7 +98,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update age range"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

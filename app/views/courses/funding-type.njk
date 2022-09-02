@@ -48,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update funding type"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

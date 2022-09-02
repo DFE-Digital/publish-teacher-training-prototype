@@ -48,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update accredited body"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

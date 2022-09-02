@@ -51,7 +51,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update location"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

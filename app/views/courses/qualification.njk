@@ -48,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update qualification"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({
