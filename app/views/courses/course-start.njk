@@ -48,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update course start date"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

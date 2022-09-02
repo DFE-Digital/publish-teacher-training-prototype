@@ -48,7 +48,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update full time or part time"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({

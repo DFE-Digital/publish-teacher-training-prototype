@@ -99,7 +99,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update applications open date"
+            text: "Update " + (title | lower)
           }) }}
         {% else %}
           {{ govukButton({
