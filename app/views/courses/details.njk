@@ -239,7 +239,7 @@
           } if not organisation.isAccreditedBody,
           {
             key: {
-              text: "Student visa"
+              text: "Student visas"
             },
             value: {
               text: course.canSponsorStudentVisa | getStudentVisaLabel + (" - can sponsor" if course.canSponsorStudentVisa == "yes" else " - cannot sponsor")
@@ -256,7 +256,7 @@
           } if course.fundingType == "fee",
           {
             key: {
-              text: "Skilled Worker visa"
+              text: "Skilled Worker visas"
             },
             value: {
               text: course.canSponsorSkilledWorkerVisa | getSkilledWorkerVisaLabel + (" - can sponsor" if course.canSponsorSkilledWorkerVisa == "yes" else " - cannot sponsor")
