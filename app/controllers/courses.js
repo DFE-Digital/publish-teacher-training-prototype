@@ -1582,9 +1582,9 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
 
     let visa = 'visa sponsorship'
     if (fundingType === 'fee') {
-      visa = 'Student visa'
+      visa = 'Student visas'
     } else {
-      visa = 'Skilled Worker visa'
+      visa = 'Skilled Worker visas'
     }
 
     if (req.query.referrer === 'funding-type') {
