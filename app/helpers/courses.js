@@ -558,7 +558,7 @@ exports.getCourseStatusClasses = (code, openDate = null) => {
   return classes
 }
 
-exports.createCourseName = (subjects) => {
+exports.createCourseName = (subjects, campaign = null) => {
   let courseName = ''
   if (subjects) {
     const names = []
@@ -581,11 +581,15 @@ exports.createCourseName = (subjects) => {
       )
       courseName += ')'
     } else {
-      courseName = utils.arrayToList(
-        array = names,
-        join = ' with ',
-        final = ' and '
-      )
+      if (campaign && campaign === 'engineersTeachPhysics') {
+        courseName = 'Engineers teach physics'
+      } else {
+        courseName = utils.arrayToList(
+          array = names,
+          join = ' with ',
+          final = ' and '
+        )
+      }
     }
   }
 
