@@ -282,7 +282,7 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.course.subjects[0] === 'F3') {
+    if (course.subjects[0].code === 'F3') {
       if (params.course.campaign) {
         course.campaign = params.course.campaign
       }
