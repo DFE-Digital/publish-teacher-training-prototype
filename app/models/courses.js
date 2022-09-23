@@ -282,8 +282,12 @@ exports.updateOne = (params) => {
       }
     }
 
-    if (params.course.campaign) {
-      course.campaign = params.course.campaign
+    if (params.course.subjects[0] === 'F3') {
+      if (params.course.campaign) {
+        course.campaign = params.course.campaign
+      }
+    } else {
+      delete course.campaign
     }
 
     if (params.course.ageRange) {
