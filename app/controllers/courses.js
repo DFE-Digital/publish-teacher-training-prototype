@@ -416,16 +416,20 @@ exports.edit_course_subject_post = (req, res) => {
     if (selectedSubject.includes('ML')) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
     } else {
-      req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+      if (req.session.data.course.subjects[0] !== 'F3') {
+        req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
 
-      courseModel.updateOne({
-        organisationId: req.params.organisationId,
-        courseId: req.params.courseId,
-        course: req.session.data.course
-      })
+        courseModel.updateOne({
+          organisationId: req.params.organisationId,
+          courseId: req.params.courseId,
+          course: req.session.data.course
+        })
 
-      req.flash('success', 'Subject updated')
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+        req.flash('success', 'Subject updated')
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign?referrer=subject`)
+      }
     }
   }
 }
@@ -497,6 +501,85 @@ exports.edit_course_modern_language_post = (req, res) => {
     })
 
     req.flash('success', 'Subject updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+  }
+}
+
+exports.edit_course_campaign_get = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let selectedCampaign
+  if (course && course.campaign) {
+    selectedCampaign = course.campaign
+  }
+
+  const campaignOptions = courseHelper.getCampaignOptions(selectedCampaign)
+
+  res.render('../views/courses/campaign', {
+    course,
+    campaignOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign?referrer=${req.query.referrer}`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+    }
+  })
+}
+
+exports.edit_course_campaign_post = (req, res) => {
+  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  const errors = []
+
+  let selectedCampaign
+  if (req.session.data.course && req.session.data.course.campaign) {
+    selectedCampaign = req.session.data.course.campaign
+  }
+
+  const campaignOptions = courseHelper.getCampaignOptions(selectedCampaign)
+
+  if (!req.session.data.course.campaign) {
+    const error = {}
+    error.fieldName = 'campaign'
+    error.href = '#campaign'
+    error.text = 'ERROR MESSAGE'
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render('../views/courses/campaign', {
+      course,
+      campaignOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
+      },
+      errors
+    })
+  } else {
+    // get the subject codes in an array and pass into the name generator
+    const subjectCodes = course.subjects.map(subject => {
+      return subject.code
+    })
+
+    let courseName = courseHelper.createCourseName(subjectCodes, req.session.data.course.campaign)
+    if (req.query.referrer === 'subject') {
+      courseName = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+    }
+    req.session.data.course.name = courseName
+
+    courseModel.updateOne({
+      organisationId: req.params.organisationId,
+      courseId: req.params.courseId,
+      course: req.session.data.course
+    })
+
+    if (req.query.referrer === 'subject') {
+      req.flash('success', 'Subject and Engineers teach physics updated')
+    } else {
+      req.flash('success', 'Engineers teach physics updated')
+    }
+
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -2798,7 +2881,7 @@ exports.new_course_check_answers_post = (req, res) => {
   if (req.session.data.course.subjectLevel === 'further_education') {
     req.session.data.course.name = 'Further education'
   } else {
-    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
   }
 
   // create a random course 4-digit alphanumeric code for the course
