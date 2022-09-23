@@ -631,3 +631,31 @@ exports.hasVacancies = (locations) => {
 
   return hasVacancies
 }
+
+exports.getCampaignOptions = (selectedItem) => {
+  const items = []
+
+  // from funding-types.json
+  const options = [{
+    id: '2f4b3e42-e1b8-4617-956c-5710faa196b0',
+    code: 'yes',
+    name: 'Yes'
+  }, {
+    id: '88918c1d-0c87-475b-8802-161cb2a7da54',
+    code: 'no',
+    name: 'No'
+  }]
+
+  options.forEach((options, i) => {
+    const item = {}
+
+    item.text = options.name
+    item.value = options.code
+    item.id = options.id
+    item.checked = (selectedItem && selectedItem.includes(options.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  return items
+}
