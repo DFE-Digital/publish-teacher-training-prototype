@@ -108,6 +108,23 @@
             } if course.subjectLevel != "further_education",
             {
               key: {
+                text: "Engineers teach physics"
+              },
+              value: {
+                text: "Yes" if course.campaign == "engineersTeachPhysics" else "No"
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/campaign?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "subject"
+                  }
+                ]
+              }
+            } if course.subjects[0] == "F3",
+            {
+              key: {
                 text: "Age range"
               },
               value: {
