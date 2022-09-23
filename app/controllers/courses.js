@@ -1784,10 +1784,26 @@ exports.new_course_subject_post = (req, res) => {
       errors
     })
   } else {
-    if (selectedSubject.includes('ML')) {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`)
+    let query = ''
+    if (req.query.referrer === 'check') {
+      query = '?referrer=check'
+    }
+
+    if (selectedSubject[0] !== 'F3') {
+      delete req.session.data.course.campaign
+    }
+
+    if (selectedSubject.includes('ML') || selectedSecondSubject?.includes('ML')) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language${query}`)
+    } else if (selectedSubject[0] === 'F3') {
+      // if first selected subject is physics send to campaign page
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign${query}`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+      if (req.query.referrer === 'check') {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+      }
     }
   }
 }
@@ -1855,7 +1871,82 @@ exports.new_course_modern_language_post = (req, res) => {
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+    }
+  }
+}
+
+exports.new_course_campaign_get = (req, res) => {
+  let selectedCampaign
+  if (req.session.data.course && req.session.data.course.campaign) {
+    selectedCampaign = req.session.data.course.campaign
+  }
+
+  const campaignOptions = courseHelper.getCampaignOptions(selectedCampaign)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  res.render('../views/courses/campaign', {
+    course: req.session.data.course,
+    campaignOptions,
+    actions: {
+      save,
+      back,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+    }
+  })
+}
+
+exports.new_course_campaign_post = (req, res) => {
+  const errors = []
+
+  let selectedCampaign
+  if (req.session.data.course && req.session.data.course.campaign) {
+    selectedCampaign = req.session.data.course.campaign
+  }
+
+  const campaignOptions = courseHelper.getCampaignOptions(selectedCampaign)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/subject`
+  if (req.query.referrer === 'check') {
+    save += '?referrer=check'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.campaign) {
+    const error = {}
+    error.fieldName = 'campaign'
+    error.href = '#campaign'
+    error.text = 'ERROR MESSAGE'
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render('../views/courses/campaign', {
+      course: req.session.data.course,
+      campaignOptions,
+      actions: {
+        save,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
+      },
+      errors
+    })
+  } else {
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/age-range`)
+    }
   }
 }
 
@@ -1875,6 +1966,8 @@ exports.new_course_age_range_get = (req, res) => {
   } else {
     if (req.session.data.course.childSubjects && req.session.data.course.childSubjects.length) {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+    } else if (req.session.data.course.subjects[0] === 'F3') {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign`
     }
   }
 
@@ -1907,6 +2000,8 @@ exports.new_course_age_range_post = (req, res) => {
   } else {
     if (req.session.data.course.childSubjects && req.session.data.course.childSubjects.length) {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/modern-language`
+    } else if (req.session.data.course.subjects[0] === 'F3') {
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign`
     }
   }
 
