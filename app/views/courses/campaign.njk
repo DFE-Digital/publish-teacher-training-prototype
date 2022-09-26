@@ -30,9 +30,9 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      <p class="govuk-body">Engineers teach physics is a new campaign to help engineers become physics teachers.</p>
+      <p class="govuk-body">{{ title }} is a new campaign to help engineers become physics teachers.</p>
 
-      <p class="govuk-body">For more information, email <a href="mailto:itt.engagement@education.gov.uk?subject=Engineers%20teach%20physics">itt.engagement@education.gov.uk</a>.</p>
+      <p class="govuk-body">For more information, email <a href="mailto:itt.engagement@education.gov.uk?subject={{ title | urlencode }}">itt.engagement@education.gov.uk</a>.</p>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -51,7 +51,7 @@
 
         {% if course.id %}
           {{ govukButton({
-            text: "Update " + (title | lower)
+            text: "Update " + title
           }) }}
         {% else %}
           {{ govukButton({
