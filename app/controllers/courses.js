@@ -416,6 +416,8 @@ exports.edit_course_subject_post = (req, res) => {
     if (selectedSubject.includes('ML')) {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
     } else {
+      // TODO: if the new subject code is the same as the old, do nothing and return to course details
+
       if (req.session.data.course.subjects[0] !== 'F3') {
         req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
 
