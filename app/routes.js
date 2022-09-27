@@ -115,6 +115,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/subject'
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/modern-language', checkIsAuthenticated, courseController.new_course_modern_language_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/modern-language', checkIsAuthenticated, courseController.new_course_modern_language_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/campaign', checkIsAuthenticated, courseController.new_course_campaign_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/campaign', checkIsAuthenticated, courseController.new_course_campaign_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courseController.new_course_age_range_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/age-range', checkIsAuthenticated, courseController.new_course_age_range_post)
 
@@ -170,6 +173,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/su
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/modern-language', checkIsAuthenticated, courseController.edit_course_modern_language_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/modern-language', checkIsAuthenticated, courseController.edit_course_modern_language_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/campaign', checkIsAuthenticated, courseController.edit_course_campaign_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/campaign', checkIsAuthenticated, courseController.edit_course_campaign_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/age-range', checkIsAuthenticated, courseController.edit_course_age_range_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/age-range', checkIsAuthenticated, courseController.edit_course_age_range_post)

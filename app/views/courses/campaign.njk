@@ -1,0 +1,71 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "courses" %}
+
+{% set title = "Engineers teach physics" %}
+
+{% if course.id %}
+  {% set caption = course.name + " (" + course.code + ")" %}
+{% else %}
+  {% set caption = "Add course" %}
+{% endif %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <p class="govuk-body">{{ title }} is a new campaign to help engineers become physics teachers.</p>
+
+      <p class="govuk-body">For more information, email <a href="mailto:itt.engagement@education.gov.uk?subject={{ title | urlencode }}">itt.engagement@education.gov.uk</a>.</p>
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukRadios({
+          idPrefix: "campaign",
+          name: "course[campaign]",
+          fieldset: {
+            legend: {
+              text: "Is this course part of the ‘" + title + "’ programme?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          errorMessage: errors | getErrorMessage("campaign"),
+          items: campaignOptions
+        }) }}
+
+        {% if course.id %}
+          {{ govukButton({
+            text: "Update " + title
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        {% endif %}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

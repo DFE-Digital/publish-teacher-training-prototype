@@ -558,7 +558,7 @@ exports.getCourseStatusClasses = (code, openDate = null) => {
   return classes
 }
 
-exports.createCourseName = (subjects) => {
+exports.createCourseName = (subjects, campaign = null) => {
   let courseName = ''
   if (subjects) {
     const names = []
@@ -581,11 +581,15 @@ exports.createCourseName = (subjects) => {
       )
       courseName += ')'
     } else {
-      courseName = utils.arrayToList(
-        array = names,
-        join = ' with ',
-        final = ' and '
-      )
+      if (campaign && campaign === 'engineersTeachPhysics') {
+        courseName = 'Engineers teach physics'
+      } else {
+        courseName = utils.arrayToList(
+          array = names,
+          join = ' with ',
+          final = ' and '
+        )
+      }
     }
   }
 
@@ -630,4 +634,32 @@ exports.hasVacancies = (locations) => {
   })
 
   return hasVacancies
+}
+
+exports.getCampaignOptions = (selectedItem) => {
+  const items = []
+
+  const options = [{
+    id: '2f4b3e42-e1b8-4617-956c-5710faa196b0',
+    code: 'engineersTeachPhysics',
+    name: 'Yes',
+    subjects: ['F3']
+  }, {
+    id: '88918c1d-0c87-475b-8802-161cb2a7da54',
+    code: 'no',
+    name: 'No'
+  }]
+
+  options.forEach((options, i) => {
+    const item = {}
+
+    item.text = options.name
+    item.value = options.code
+    item.id = options.id
+    item.checked = (selectedItem && selectedItem.includes(options.code)) ? 'checked' : ''
+
+    items.push(item)
+  })
+
+  return items
 }

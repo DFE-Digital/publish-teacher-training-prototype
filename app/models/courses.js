@@ -99,6 +99,10 @@ exports.insertOne = (params) => {
       course.subjects = subjects
     }
 
+    if (params.course.campaign) {
+      course.campaign = params.course.campaign
+    }
+
     if (params.course.ageRange) {
       course.ageRange = params.course.ageRange
 
@@ -276,6 +280,14 @@ exports.updateOne = (params) => {
       if (params.course.name) {
         course.name = params.course.name
       }
+    }
+
+    if (course.subjects[0].code === 'F3') {
+      if (params.course.campaign) {
+        course.campaign = params.course.campaign
+      }
+    } else {
+      delete course.campaign
     }
 
     if (params.course.ageRange) {
