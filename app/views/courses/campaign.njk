@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "Engineers teach physics" %}
+{% set title = "Engineers Teach Physics" %}
 
 {% if course.id %}
   {% set caption = course.name + " (" + course.code + ")" %}
@@ -41,7 +41,7 @@
           name: "course[campaign]",
           fieldset: {
             legend: {
-              text: "Is this course part of the ‘" + title + "’ programme?",
+              text: "Is this course part of the " + title + " programme?",
               classes: "govuk-fieldset__legend--m"
             }
           },
