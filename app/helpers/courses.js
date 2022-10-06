@@ -582,7 +582,7 @@ exports.createCourseName = (subjects, campaign = null) => {
       courseName += ')'
     } else {
       if (campaign && campaign === 'engineersTeachPhysics') {
-        courseName = 'Engineers teach physics'
+        courseName = 'Engineers Teach Physics'
       } else {
         courseName = utils.arrayToList(
           array = names,

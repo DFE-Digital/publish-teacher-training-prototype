@@ -577,9 +577,9 @@ exports.edit_course_campaign_post = (req, res) => {
     })
 
     if (req.query.referrer === 'subject') {
-      req.flash('success', 'Subject and Engineers teach physics updated')
+      req.flash('success', 'Subject and Engineers Teach Physics updated')
     } else {
-      req.flash('success', 'Engineers teach physics updated')
+      req.flash('success', 'Engineers Teach Physics updated')
     }
 
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
