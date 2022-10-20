@@ -49,22 +49,15 @@
             items: subjectOptions
           }) }}
 
-          {% set secondSubjectHtml %}
-            {{ govukSelect({
-              idPrefix: "second-subject",
-              name: "course.secondSubject",
-              label: {
-                text: "Second subject (optional)",
-                classes: "govuk-label--s"
-              },
-              errorMessage: errors | getErrorMessage("second-subject"),
-              items: secondSubjectOptions
-            }) }}
-          {% endset %}
-
-          {{ govukDetails({
-            summaryText: "Add a second subject (optional)",
-            html: secondSubjectHtml
+          {{ govukSelect({
+            idPrefix: "second-subject",
+            name: "course.secondSubject",
+            label: {
+              text: "Second subject (optional)",
+              classes: "govuk-label--s"
+            },
+            errorMessage: errors | getErrorMessage("second-subject"),
+            items: secondSubjectOptions
           }) }}
 
         {% else %}
