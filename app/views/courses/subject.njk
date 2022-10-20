@@ -30,7 +30,8 @@
 
       {% if course.subjectLevel == "secondary" %}
         {% include "_includes/page-heading.njk" %}
-        <p class="govuk-body">Your first subject is the main one. It will appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
+        <p class="govuk-body">For some subjects, candidates may be able to get a scholarship or bursary. If the course content is made up of at least 50% of an eligible subject, add this as the first subject so we can show the correct financial information to candidates.</p>
+        <p class="govuk-body"><a class="govuk-link" href="https://getintoteaching.education.gov.uk/funding-and-support/scholarships-and-bursaries">Learn more about the scholarships and bursaries available to candidates</a></p>
       {% else %}
         {% set headingHtml %}
           {% include "_includes/page-heading.njk" %}
