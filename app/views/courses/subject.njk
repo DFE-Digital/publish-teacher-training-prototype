@@ -28,9 +28,11 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
-      {% endset %}
+      {% include "_includes/page-heading.njk" %}
+
+      {% if course.subjectLevel == "secondary" %}
+        <p class="govuk-body">Your first subject is the main one. It will appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -40,20 +42,19 @@
             idPrefix: "subject",
             name: "course[subjects][]",
             label: {
-              html: headingHtml
+              text: "First subject",
+              classes: "govuk-label--s"
             },
             errorMessage: errors | getErrorMessage("subject"),
             items: subjectOptions
           }) }}
 
           {% set secondSubjectHtml %}
-            <p class="govuk-body">Your first subject is the main one. It will appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
-
             {{ govukSelect({
               idPrefix: "second-subject",
               name: "course.secondSubject",
               label: {
-                text: "Subject",
+                text: "Second subject (optional)",
                 classes: "govuk-label--s"
               },
               errorMessage: errors | getErrorMessage("second-subject"),
