@@ -35,6 +35,11 @@
                 {% endfor %}
               {% endif %}
             {% endfor %}
+            {% for subject in course.secondSubject %}
+              <li>
+                {{ subject | getSubjectLabel }}
+              </li>
+            {% endfor %}
           </ul>
         {% endset %}
 
