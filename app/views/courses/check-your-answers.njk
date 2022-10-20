@@ -23,23 +23,23 @@
 
         {% set subjectHtml %}
           <ul class="govuk-list">
-            {% for subject in course.subjects %}
+            {% for subject in course.subjectArray %}
               <li>
                 {{ subject | getSubjectLabel }}
               </li>
-              {% if subject == "ML" %}
+              {# {% if subject == "ML" %}
                 {% for subject in course.childSubjects %}
                   <li>
                     {{ subject | getSubjectLabel }}
                   </li>
                 {% endfor %}
-              {% endif %}
+              {% endif %} #}
             {% endfor %}
-            {% for subject in course.secondSubject %}
+            {# {% for subject in course.secondSubject %}
               <li>
                 {{ subject | getSubjectLabel }}
               </li>
-            {% endfor %}
+            {% endfor %} #}
           </ul>
         {% endset %}
 
@@ -65,7 +65,7 @@
                 text: "Course name"
               },
               value: {
-                text: course.subjects | getCourseName(false)
+                text: course.subjectArray | getCourseName(false)
               }
             },
             {
