@@ -2852,7 +2852,67 @@ exports.new_course_start_date_post = (req, res) => {
 exports.new_course_check_answers_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
+  const course = req.session.data.course
 
+  let subjectArray = course.subjects
+
+  if (course.subjects[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...course.childSubjects
+      ])
+    )
+    // course.subjects = course.subjects.concat(course.childSubjects).reduce(
+    //   (accumulator, currentValue) => {
+    //       if(!accumulator.includes(currentValue)) {
+    //         accumulator.push(currentValue);
+    //       }
+    //
+    //       return accumulator;
+    //   }, []
+    // )
+  }
+
+  if (course.secondSubject.length && course.secondSubject[0] !== '') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...course.secondSubject
+      ])
+    )
+    // course.subjects = course.subjects.concat(course.secondSubject).reduce(
+    //   (accumulator, currentValue) => {
+    //       if(!accumulator.includes(currentValue)) {
+    //         accumulator.push(currentValue);
+    //       }
+    //
+    //       return accumulator;
+    //   }, []
+    // )
+  }
+
+  if (course.secondSubject[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...course.childSubjects
+      ])
+    )
+    // course.subjects = course.subjects.concat(course.childSubjects).reduce(
+    //   (accumulator, currentValue) => {
+    //       if(!accumulator.includes(currentValue)) {
+    //         accumulator.push(currentValue);
+    //       }
+    //
+    //       return accumulator;
+    //   }, []
+    // )
+  }
+
+  course.subjectArray = subjectArray
+
+  console.log(course);
   // remove temporary data as no longer needed
   delete req.session.data.course.tempFundingType
   delete req.session.data.course.tempAccreditedBody
@@ -2860,7 +2920,7 @@ exports.new_course_check_answers_get = (req, res) => {
   res.render('../views/courses/check-your-answers', {
     organisation,
     locations,
-    course: req.session.data.course,
+    course,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
