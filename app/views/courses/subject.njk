@@ -28,9 +28,16 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
+      {% if course.subjectLevel == "secondary" %}
         {% include "_includes/page-heading.njk" %}
-      {% endset %}
+        <p class="govuk-body">For some subjects, candidates may be able to get a bursaries or scholarships.</p>
+        <p class="govuk-body">If the course content is made up of at least 50% of an eligible subject, add this as the first subject so we can show the correct financial information to candidates.</p>
+        <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/government/publications/funding-initial-teacher-training-itt/funding-initial-teacher-training-itt-academic-year-2023-to-2024#postgraduate-bursaries-and-scholarships">Learn more about the bursaries and scholarships</a></p>
+      {% else %}
+        {% set headingHtml %}
+          {% include "_includes/page-heading.njk" %}
+        {% endset %}
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -40,30 +47,22 @@
             idPrefix: "subject",
             name: "course[subjects][]",
             label: {
-              html: headingHtml
+              text: "First subject",
+              classes: "govuk-label--s"
             },
             errorMessage: errors | getErrorMessage("subject"),
             items: subjectOptions
           }) }}
 
-          {% set secondSubjectHtml %}
-            <p class="govuk-body">Your first subject is the main one. It will appear first in the course title. It represents the bursary or scholarship available if applicable.</p>
-
-            {{ govukSelect({
-              idPrefix: "second-subject",
-              name: "course.secondSubject",
-              label: {
-                text: "Subject",
-                classes: "govuk-label--s"
-              },
-              errorMessage: errors | getErrorMessage("second-subject"),
-              items: secondSubjectOptions
-            }) }}
-          {% endset %}
-
-          {{ govukDetails({
-            summaryText: "Add a second subject (optional)",
-            html: secondSubjectHtml
+          {{ govukSelect({
+            idPrefix: "second-subject",
+            name: "course[secondSubject][]",
+            label: {
+              text: "Second subject (optional)",
+              classes: "govuk-label--s"
+            },
+            errorMessage: errors | getErrorMessage("second-subject"),
+            items: secondSubjectOptions
           }) }}
 
         {% else %}
