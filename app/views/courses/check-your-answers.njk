@@ -65,7 +65,7 @@
                 text: "Course name"
               },
               value: {
-                text: course.subjectArray | getCourseName(false)
+                text: (course.subjectArray | getCourseName('engineersTeachPhysics')) if course.campaign == "engineersTeachPhysics" else (course.subjectArray | getCourseName())
               }
             },
             {
