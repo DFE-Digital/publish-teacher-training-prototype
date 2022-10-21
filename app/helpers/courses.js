@@ -610,7 +610,7 @@ exports.getCourseName = (subjects, campaign = null) => {
   const ancientLanguages = ['A0','A1','A2']
 
   // English, English as a second or other language
-  const englishSubjects = ['Q8','16']
+  const englishSubjects = ['Q3','16']
 
   if (subjects) {
     const subjectCount = subjects.length
