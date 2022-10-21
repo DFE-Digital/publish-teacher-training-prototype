@@ -606,7 +606,11 @@ exports.getCourseName = (subjects, campaign = null) => {
       return subject.code
     })
 
-  modernLanguages.push('ML')
+  // Latin, Ancient Greek, Ancient Hebrew
+  const ancientLanguages = ['A0','A1','A2']
+
+  // English, English as a second or other language
+  const englishSubjects = ['Q8','16']
 
   if (subjects) {
     const subjectCount = subjects.length
@@ -629,7 +633,7 @@ exports.getCourseName = (subjects, campaign = null) => {
 
       })
 
-      courseName += arrayToList(
+      courseName += utils.arrayToList(
         array = languages,
         join = ', ',
         final = ' and '
@@ -639,7 +643,11 @@ exports.getCourseName = (subjects, campaign = null) => {
 
       if (!modernLanguages.includes(subjects[subjectCount-1])) {
         courseName += ' with '
-        courseName += subjectHelper.getSubjectLabel(subjects[subjectCount-1]).toLowerCase()
+        if (ancientLanguages.includes(subjects[subjectCount-1]) || englishSubjects.includes(subjects[subjectCount-1])) {
+          courseName += subjectHelper.getSubjectLabel(subjects[subjectCount-1])
+        } else {
+          courseName += subjectHelper.getSubjectLabel(subjects[subjectCount-1]).toLowerCase()
+        }
       }
 
     } else {
@@ -668,7 +676,7 @@ exports.getCourseName = (subjects, campaign = null) => {
 
         })
 
-        courseName += arrayToList(
+        courseName += utils.arrayToList(
           array = languages,
           join = ', ',
           final = ' and '
@@ -676,9 +684,13 @@ exports.getCourseName = (subjects, campaign = null) => {
 
       } else {
 
-        if (!modernLanguages.includes(subjects[1])) {
+        if (!(modernLanguages.includes(subjects[1]) || subjects[1] === 'ML')) {
           courseName += ' with '
-          courseName += subjectHelper.getSubjectLabel(subjects[1]).toLowerCase()
+          if (ancientLanguages.includes(subjects[1]) || englishSubjects.includes(subjects[1])) {
+            courseName += subjectHelper.getSubjectLabel(subjects[1])
+          } else {
+            courseName += subjectHelper.getSubjectLabel(subjects[1]).toLowerCase()
+          }
         } else {
 
           if (subjects[0] !== 'ML') {
@@ -695,7 +707,7 @@ exports.getCourseName = (subjects, campaign = null) => {
 
             })
 
-            courseName += arrayToList(
+            courseName += utils.arrayToList(
               array = languages,
               join = ', ',
               final = ' and '
