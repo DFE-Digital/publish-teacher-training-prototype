@@ -513,7 +513,7 @@ module.exports = (env) => {
   @example [A, B, C] => A, B and C
   ------------------------------------------------------------------  */
   filters.getCourseName = (subjects, campaign = null) => {
-    return courseHelper.createCourseName(subjects, campaign)
+    return courseHelper.getCourseName(subjects, campaign)
   }
 
   /* ------------------------------------------------------------------
