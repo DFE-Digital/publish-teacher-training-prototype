@@ -419,7 +419,7 @@ exports.edit_course_subject_post = (req, res) => {
       // TODO: if the new subject code is the same as the old, do nothing and return to course details
 
       if (req.session.data.course.subjects[0] !== 'F3') {
-        req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+        req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects)
 
         courseModel.updateOne({
           organisationId: req.params.organisationId,
@@ -494,7 +494,7 @@ exports.edit_course_modern_language_post = (req, res) => {
     // delete the child subjects as no longer needed
     delete req.session.data.course.childSubjects
 
-    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+    req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects)
 
     courseModel.updateOne({
       organisationId: req.params.organisationId,
@@ -564,9 +564,9 @@ exports.edit_course_campaign_post = (req, res) => {
       return subject.code
     })
 
-    let courseName = courseHelper.createCourseName(subjectCodes, req.session.data.course.campaign)
+    let courseName = courseHelper.getCourseName(subjectCodes, req.session.data.course.campaign)
     if (req.query.referrer === 'subject') {
-      courseName = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+      courseName = courseHelper.getCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
     }
     req.session.data.course.name = courseName
 
@@ -2943,7 +2943,7 @@ exports.new_course_check_answers_post = (req, res) => {
   if (req.session.data.course.subjectLevel === 'further_education') {
     req.session.data.course.name = 'Further education'
   } else {
-    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+    req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
   }
 
   // create a random course 4-digit alphanumeric code for the course
