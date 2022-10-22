@@ -361,10 +361,10 @@ exports.edit_course_subject_get = (req, res) => {
   let selectedSubject
   if (course && course.subjects) {
     selectedSubject = []
-
-    course.subjects.forEach((subject, i) => {
-      selectedSubject.push(subject.code)
-    })
+    selectedSubject.push(course.subjects[0].code)
+    // course.subjects.forEach((subject, i) => {
+    //   selectedSubject.push(subject.code)
+    // })
   }
 
   let subjectOptions
@@ -374,9 +374,27 @@ exports.edit_course_subject_get = (req, res) => {
     subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
   }
 
+  let selectedSecondSubject
+  if (course && course.subjects) {
+    selectedSecondSubject = []
+    if (course.subjects.length > 1) {
+      selectedSecondSubject.push(course.subjects[course.subjects.length-1].code)
+    }
+  }
+
+  let secondSubjectOptions
+  if (course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
+  }
+
+  console.log(course.subjects);
+
   res.render('../views/courses/subject', {
     course,
     subjectOptions,
+    secondSubjectOptions,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -401,10 +419,23 @@ exports.edit_course_subject_post = (req, res) => {
     subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
   }
 
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
       course,
       subjectOptions,
+      secondSubjectOptions,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -419,6 +450,23 @@ exports.edit_course_subject_post = (req, res) => {
       // TODO: if the new subject code is the same as the old, do nothing and return to course details
 
       if (req.session.data.course.subjects[0] !== 'F3') {
+
+        let subjectArray = req.session.data.course.subjects
+
+        if (req.session.data.course.secondSubject.length && req.session.data.course.secondSubject[0] !== '') {
+          subjectArray = Array.from(
+            new Set([
+              ...subjectArray,
+              ...req.session.data.course.secondSubject
+            ])
+          )
+        }
+
+        req.session.data.course.subjects = subjectArray
+
+        // delete the second subject as no longer needed
+        delete req.session.data.course.secondSubject
+
         req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects)
 
         courseModel.updateOne({
@@ -2863,15 +2911,6 @@ exports.new_course_check_answers_get = (req, res) => {
         ...course.childSubjects
       ])
     )
-    // course.subjects = course.subjects.concat(course.childSubjects).reduce(
-    //   (accumulator, currentValue) => {
-    //       if(!accumulator.includes(currentValue)) {
-    //         accumulator.push(currentValue);
-    //       }
-    //
-    //       return accumulator;
-    //   }, []
-    // )
   }
 
   if (course.secondSubject.length && course.secondSubject[0] !== '') {
@@ -2881,15 +2920,6 @@ exports.new_course_check_answers_get = (req, res) => {
         ...course.secondSubject
       ])
     )
-    // course.subjects = course.subjects.concat(course.secondSubject).reduce(
-    //   (accumulator, currentValue) => {
-    //       if(!accumulator.includes(currentValue)) {
-    //         accumulator.push(currentValue);
-    //       }
-    //
-    //       return accumulator;
-    //   }, []
-    // )
   }
 
   if (course.secondSubject[0] === 'ML') {
@@ -2899,20 +2929,10 @@ exports.new_course_check_answers_get = (req, res) => {
         ...course.childSubjects
       ])
     )
-    // course.subjects = course.subjects.concat(course.childSubjects).reduce(
-    //   (accumulator, currentValue) => {
-    //       if(!accumulator.includes(currentValue)) {
-    //         accumulator.push(currentValue);
-    //       }
-    //
-    //       return accumulator;
-    //   }, []
-    // )
   }
 
   course.subjectArray = subjectArray
 
-  console.log(course);
   // remove temporary data as no longer needed
   delete req.session.data.course.tempFundingType
   delete req.session.data.course.tempAccreditedBody
@@ -2931,13 +2951,48 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
-  // combine parent and child subjects
-  if (req.session.data.course.childSubjects) {
-    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+  let subjectArray = req.session.data.course.subjects
 
-    // delete the child subjects as no longer needed
-    delete req.session.data.course.childSubjects
+  if (req.session.data.course.subjects[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...req.session.data.course.childSubjects
+      ])
+    )
   }
+
+  if (req.session.data.course.secondSubject.length && req.session.data.course.secondSubject[0] !== '') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...req.session.data.course.secondSubject
+      ])
+    )
+  }
+
+  if (req.session.data.course.secondSubject[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...req.session.data.course.childSubjects
+      ])
+    )
+  }
+
+  req.session.data.course.subjects = subjectArray
+
+  // delete the child subjects as no longer needed
+  delete req.session.data.course.childSubjects
+  delete req.session.data.course.secondSubject
+
+  // combine parent and child subjects
+  // if (req.session.data.course.childSubjects) {
+  //   req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+  //
+  //   // delete the child subjects as no longer needed
+  //   delete req.session.data.course.childSubjects
+  // }
 
   // create the course name based on the subjects chosen
   if (req.session.data.course.subjectLevel === 'further_education') {
