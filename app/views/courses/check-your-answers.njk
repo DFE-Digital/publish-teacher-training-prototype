@@ -27,19 +27,7 @@
               <li>
                 {{ subject | getSubjectLabel }}
               </li>
-              {# {% if subject == "ML" %}
-                {% for subject in course.childSubjects %}
-                  <li>
-                    {{ subject | getSubjectLabel }}
-                  </li>
-                {% endfor %}
-              {% endif %} #}
             {% endfor %}
-            {# {% for subject in course.secondSubject %}
-              <li>
-                {{ subject | getSubjectLabel }}
-              </li>
-            {% endfor %} #}
           </ul>
         {% endset %}
 
