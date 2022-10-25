@@ -596,6 +596,132 @@ exports.createCourseName = (subjects, campaign = null) => {
   return courseName
 }
 
+exports.getCourseName = (subjects, campaign = null) => {
+  let courseName = ''
+  const _subjects = require('../data/subjects')
+
+  const modernLanguages = _subjects
+    .filter(subject => subject.parentCode === 'ML')
+    .map(subject => {
+      return subject.code
+    })
+
+  // Latin, Ancient Greek, Ancient Hebrew
+  const ancientLanguages = ['A0','A1','A2']
+
+  // English, English as a second or other language
+  const englishSubjects = ['Q3','16']
+
+  if (subjects) {
+    const subjectCount = subjects.length
+
+    // if the first subject is modern languages
+    // modern languages (language 1 and language 2) with second subject
+    if (subjects[0] === 'ML') {
+      const languages = []
+
+      courseName = 'Modern languages'
+      courseName += ' ('
+
+      subjects.forEach((subject, i) => {
+
+        if (modernLanguages.includes(subject)) {
+          languages.push(
+            subjectHelper.getSubjectLabel(subject)
+          )
+        }
+
+      })
+
+      courseName += utils.arrayToList(
+        array = languages,
+        join = ', ',
+        final = ' and '
+      )
+
+      courseName += ')'
+
+      if (!modernLanguages.includes(subjects[subjectCount-1])) {
+        courseName += ' with '
+        if (ancientLanguages.includes(subjects[subjectCount-1]) || englishSubjects.includes(subjects[subjectCount-1])) {
+          courseName += subjectHelper.getSubjectLabel(subjects[subjectCount-1])
+        } else {
+          courseName += subjectHelper.getSubjectLabel(subjects[subjectCount-1]).toLowerCase()
+        }
+      }
+
+    } else {
+      if (campaign && campaign === 'engineersTeachPhysics') {
+        courseName = 'Engineers teach physics'
+      } else {
+        courseName = subjectHelper.getSubjectLabel(subjects[0])
+      }
+    }
+
+    if (subjects[1]) {
+      // if the second subject is modern languages
+      // first subject with language 1 and language 2
+      if (subjects[1] === 'ML') {
+        const languages = []
+
+        courseName += ' with '
+
+        subjects.forEach((subject, i) => {
+
+          if (modernLanguages.includes(subject)) {
+            languages.push(
+              subjectHelper.getSubjectLabel(subject)
+            )
+          }
+
+        })
+
+        courseName += utils.arrayToList(
+          array = languages,
+          join = ', ',
+          final = ' and '
+        )
+
+      } else {
+
+        if (!(modernLanguages.includes(subjects[1]) || subjects[1] === 'ML')) {
+          courseName += ' with '
+          if (ancientLanguages.includes(subjects[1]) || englishSubjects.includes(subjects[1])) {
+            courseName += subjectHelper.getSubjectLabel(subjects[1])
+          } else {
+            courseName += subjectHelper.getSubjectLabel(subjects[1]).toLowerCase()
+          }
+        } else {
+
+          if (subjects[0] !== 'ML') {
+            const languages = []
+            courseName += ' with '
+
+            subjects.forEach((subject, i) => {
+
+              if (modernLanguages.includes(subject)) {
+                languages.push(
+                  subjectHelper.getSubjectLabel(subject)
+                )
+              }
+
+            })
+
+            courseName += utils.arrayToList(
+              array = languages,
+              join = ', ',
+              final = ' and '
+            )
+
+          }
+        }
+      }
+    }
+  }
+
+  return courseName
+}
+
 // a course code must be 4 characters
 // it must contain a combination of:
 //  - numbers 2 - 9 (i.e. avoid 0 and 1)

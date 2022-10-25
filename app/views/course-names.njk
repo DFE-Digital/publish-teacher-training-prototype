@@ -1,0 +1,106 @@
+{% extends "_layout-auth.njk" %}
+
+{% set title = "Course names" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+{% set courses =
+[
+  {
+    subjects: ['ML','15','22','18']
+  },
+  {
+    subjects: ['ML','15','22','G1']
+  },
+  {
+    subjects: ['G1','ML','15','22']
+  },
+  {
+    subjects: ['G1']
+  },
+  {
+    subjects: ['C1','F1']
+  },
+  {
+    subjects: ['F3']
+  },
+  {
+    subjects: ['F3'],
+    programme: 'engineersTeachPhysics'
+  },
+  {
+    subjects: ['F3','G1']
+  },
+  {
+    subjects: ['F3','G1'],
+    programme: 'engineersTeachPhysics'
+  },
+  {
+    subjects: ['F3','ML','15','22']
+  },
+  {
+    subjects: ['F3','ML','15','22'],
+    programme: 'engineersTeachPhysics'
+  },
+  {
+    subjects: ['A1','A2']
+  },
+  {
+    subjects: ['ML','15','Q3']
+  }
+] %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <h1 class="govuk-heading-l">
+        {{ title }}
+      </h1>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Subjects</th>
+            <th class="govuk-table__header">Programme</th>
+            <th class="govuk-table__header">Course name</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for course in courses %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <ul class="govuk-list">
+                {% for subject in course.subjects %}
+                  <li>{{ subject | getSubjectLabel }}</li>
+                {% endfor %}
+                </ul>
+              </td>
+              <td class="govuk-table__cell">
+                {% if course.programme %}
+                  Engineers teach physics
+                {% else %}
+                  n/a
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                {% if course.programme %}
+                  {{ course.subjects | getCourseName(course.programme) }}
+                {% else %}
+                  {{ course.subjects | getCourseName }}
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+{% endblock %}

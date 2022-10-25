@@ -361,10 +361,7 @@ exports.edit_course_subject_get = (req, res) => {
   let selectedSubject
   if (course && course.subjects) {
     selectedSubject = []
-
-    course.subjects.forEach((subject, i) => {
-      selectedSubject.push(subject.code)
-    })
+    selectedSubject.push(course.subjects[0].code)
   }
 
   let subjectOptions
@@ -374,9 +371,32 @@ exports.edit_course_subject_get = (req, res) => {
     subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
   }
 
+  let selectedSecondSubject
+  if (course && course.subjects) {
+    selectedSecondSubject = []
+    if (course.subjects.length > 1) {
+      // if the first subject is 'ML' then second subject is last item in course subjects
+      if (course.subjects[0].code === 'ML') {
+        selectedSecondSubject.push(course.subjects[course.subjects.length-1].code)
+      }
+      // else second subject is the second item in course subjects
+      else {
+        selectedSecondSubject.push(course.subjects[1].code)
+      }
+    }
+  }
+
+  let secondSubjectOptions
+  if (course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
+  }
+
   res.render('../views/courses/subject', {
     course,
     subjectOptions,
+    secondSubjectOptions,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -401,10 +421,23 @@ exports.edit_course_subject_post = (req, res) => {
     subjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSubject)
   }
 
+  let selectedSecondSubject
+  if (req.session.data.course && req.session.data.course.secondSubject) {
+    selectedSecondSubject = req.session.data.course.secondSubject
+  }
+
+  let secondSubjectOptions
+  if (course.subjectLevel === 'secondary') {
+    secondSubjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSecondSubject)
+  } else {
+    secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
       course,
       subjectOptions,
+      secondSubjectOptions,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
@@ -413,13 +446,42 @@ exports.edit_course_subject_post = (req, res) => {
       errors
     })
   } else {
-    if (selectedSubject.includes('ML')) {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
-    } else {
-      // TODO: if the new subject code is the same as the old, do nothing and return to course details
+    // if subject is Physics redirect to 'Engineers teach physics' question
+    if (selectedSubject.includes('F3')) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign?referrer=subject`)
+    }
 
+    // if subject is 'Modern languages' redirect to languages question
+    else if (selectedSubject.includes('ML')) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
+    }
+
+    // if second subject is 'Modern languages' redirect to languages question
+    else if (selectedSecondSubject.includes('ML')) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`)
+    }
+
+    // else save and return to course details
+    else {
       if (req.session.data.course.subjects[0] !== 'F3') {
-        req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+
+        let subjectArray = req.session.data.course.subjects
+
+        if (req.session.data.course.secondSubject.length && req.session.data.course.secondSubject[0] !== '') {
+          subjectArray = Array.from(
+            new Set([
+              ...subjectArray,
+              ...req.session.data.course.secondSubject
+            ])
+          )
+        }
+
+        req.session.data.course.subjects = subjectArray
+
+        // delete the second subject as no longer needed
+        delete req.session.data.course.secondSubject
+
+        req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects)
 
         courseModel.updateOne({
           organisationId: req.params.organisationId,
@@ -429,8 +491,6 @@ exports.edit_course_subject_post = (req, res) => {
 
         req.flash('success', 'Subject updated')
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
-      } else {
-        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign?referrer=subject`)
       }
     }
   }
@@ -450,12 +510,23 @@ exports.edit_course_modern_language_get = (req, res) => {
 
   const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`
+
+  if (req.query.referrer) {
+    save += `?referrer=${req.query.referrer}`
+  }
+
+  if (req.query?.referrer === 'campaign') {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`
+  }
+
   res.render('../views/courses/modern-languages', {
     course,
     subjectOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
+      save,
+      back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
   })
@@ -466,35 +537,85 @@ exports.edit_course_modern_language_post = (req, res) => {
   const errors = []
 
   let selectedSubject
-  if (req.session.data.course && req.session.data.course.subjects) {
+  if (req.session.data.course && req.session.data.course.childSubjects) {
     selectedSubject = []
 
-    req.session.data.course.subjects.forEach((subject, i) => {
-      selectedSubject.push(subject.code)
+    req.session.data.course.childSubjects.forEach((subjectCode, i) => {
+      selectedSubject.push(subjectCode)
     })
   }
 
   const subjectOptions = subjectHelper.getChildSubjectOptions('ML', selectedSubject)
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`
+
+  if (req.query.referrer) {
+    save += `?referrer=${req.query.referrer}`
+  }
+
+  if (req.query?.referrer === 'campaign') {
+    ack = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`
+  }
 
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
       course,
       subjectOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/subject`,
+        save,
+        back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
-    // combine parent and child subjects
-    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
 
-    // delete the child subjects as no longer needed
+    let subjectArray = req.session.data.course.subjects
+
+    // if modern languages is first
+    if (subjectArray[0] === 'ML') {
+      subjectArray = Array.from(
+        new Set([
+          ...subjectArray,
+          ...req.session.data.course.childSubjects
+        ])
+      )
+
+      if (req.session.data.course.secondSubject.length && req.session.data.course.secondSubject[0] !== '') {
+        subjectArray = Array.from(
+          new Set([
+            ...subjectArray,
+            ...req.session.data.course.secondSubject
+          ])
+        )
+      }
+
+    } else {
+      if (req.session.data.course.secondSubject.length && req.session.data.course.secondSubject[0] !== '') {
+        subjectArray = Array.from(
+          new Set([
+            ...subjectArray,
+            ...req.session.data.course.secondSubject,
+            ...req.session.data.course.childSubjects
+          ])
+        )
+      }
+    }
+
+    req.session.data.course.subjects = subjectArray
+
+    let courseName = courseHelper.getCourseName(req.session.data.course.subjects)
+    // if campaign is 'engineersTeachPhysics' create a ETP course name
+    if (req.session.data.course?.campaign === 'engineersTeachPhysics') {
+      courseName = courseHelper.getCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+    }
+
+    req.session.data.course.name = courseName
+
+    // delete the child and second subjects as no longer needed
     delete req.session.data.course.childSubjects
-
-    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects)
+    delete req.session.data.course.secondSubject
 
     courseModel.updateOne({
       organisationId: req.params.organisationId,
@@ -502,7 +623,12 @@ exports.edit_course_modern_language_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'Subject updated')
+    if (req.query.referrer === 'campaign') {
+      req.flash('success', 'Subject and Engineers Teach Physics updated')
+    } else {
+      req.flash('success', 'Subject updated')
+    }
+
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -543,7 +669,7 @@ exports.edit_course_campaign_post = (req, res) => {
     const error = {}
     error.fieldName = 'campaign'
     error.href = '#campaign'
-    error.text = 'ERROR MESSAGE'
+    error.text = 'Select if this course part of the Engineers Teach Physics programme'
     errors.push(error)
   }
 
@@ -552,37 +678,58 @@ exports.edit_course_campaign_post = (req, res) => {
       course,
       campaignOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign?referrer=${req.query.referrer}`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
       errors
     })
   } else {
-    // get the subject codes in an array and pass into the name generator
-    const subjectCodes = course.subjects.map(subject => {
-      return subject.code
-    })
 
-    let courseName = courseHelper.createCourseName(subjectCodes, req.session.data.course.campaign)
-    if (req.query.referrer === 'subject') {
-      courseName = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
-    }
-    req.session.data.course.name = courseName
-
-    courseModel.updateOne({
-      organisationId: req.params.organisationId,
-      courseId: req.params.courseId,
-      course: req.session.data.course
-    })
-
-    if (req.query.referrer === 'subject') {
-      req.flash('success', 'Subject and Engineers Teach Physics updated')
-    } else {
-      req.flash('success', 'Engineers Teach Physics updated')
+    let selectedSecondSubject = []
+    if (req.session.data.course?.secondSubject) {
+      selectedSecondSubject = req.session.data.course.secondSubject
     }
 
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    // if second subject is ML, redirect to modern languages question
+    if (selectedSecondSubject.includes('ML')) {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/modern-language?referrer=campaign`)
+    }
+
+    // else save and return to course details
+    else {
+      let subjectArray = req.session.data.course.subjects
+
+      if (req.session.data.course.secondSubject && req.session.data.course.secondSubject[0] !== '') {
+        subjectArray = Array.from(
+          new Set([
+            ...subjectArray,
+            ...req.session.data.course.secondSubject
+          ])
+        )
+      }
+
+      req.session.data.course.subjects = subjectArray
+
+      let courseName = courseHelper.getCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+
+      req.session.data.course.name = courseName
+
+      courseModel.updateOne({
+        organisationId: req.params.organisationId,
+        courseId: req.params.courseId,
+        course: req.session.data.course
+      })
+
+      if (req.query.referrer === 'subject') {
+        req.flash('success', 'Subject and Engineers Teach Physics updated')
+      } else {
+        req.flash('success', 'Engineers Teach Physics updated')
+      }
+
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    }
+
   }
 }
 
@@ -2852,6 +2999,40 @@ exports.new_course_start_date_post = (req, res) => {
 exports.new_course_check_answers_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
+  const course = req.session.data.course
+
+  let subjectArray = course.subjects
+
+  if (course.subjects[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...course.childSubjects
+      ])
+    )
+  }
+
+  if (course.secondSubject) {
+    if (course.secondSubject[0] !== '') {
+      subjectArray = Array.from(
+        new Set([
+          ...subjectArray,
+          ...course.secondSubject
+        ])
+      )
+    }
+
+    if (course.secondSubject[0] === 'ML') {
+      subjectArray = Array.from(
+        new Set([
+          ...subjectArray,
+          ...course.childSubjects
+        ])
+      )
+    }
+  }
+
+  course.subjectArray = subjectArray
 
   // remove temporary data as no longer needed
   delete req.session.data.course.tempFundingType
@@ -2860,7 +3041,7 @@ exports.new_course_check_answers_get = (req, res) => {
   res.render('../views/courses/check-your-answers', {
     organisation,
     locations,
-    course: req.session.data.course,
+    course,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/course-start`,
@@ -2871,19 +3052,48 @@ exports.new_course_check_answers_get = (req, res) => {
 }
 
 exports.new_course_check_answers_post = (req, res) => {
-  // combine parent and child subjects
-  if (req.session.data.course.childSubjects) {
-    req.session.data.course.subjects = [...req.session.data.course.subjects, ...req.session.data.course.childSubjects]
+  let subjectArray = req.session.data.course.subjects
 
-    // delete the child subjects as no longer needed
-    delete req.session.data.course.childSubjects
+  if (req.session.data.course.subjects[0] === 'ML') {
+    subjectArray = Array.from(
+      new Set([
+        ...subjectArray,
+        ...req.session.data.course.childSubjects
+      ])
+    )
   }
+
+  if (req.session.data.course.secondSubject) {
+    if (req.session.data.course.secondSubject[0] !== '') {
+      subjectArray = Array.from(
+        new Set([
+          ...subjectArray,
+          ...req.session.data.course.secondSubject
+        ])
+      )
+    }
+
+    if (req.session.data.course.secondSubject[0] === 'ML') {
+      subjectArray = Array.from(
+        new Set([
+          ...subjectArray,
+          ...req.session.data.course.childSubjects
+        ])
+      )
+    }
+  }
+
+  req.session.data.course.subjects = subjectArray
+
+  // delete the child subjects as no longer needed
+  delete req.session.data.course.childSubjects
+  delete req.session.data.course.secondSubject
 
   // create the course name based on the subjects chosen
   if (req.session.data.course.subjectLevel === 'further_education') {
     req.session.data.course.name = 'Further education'
   } else {
-    req.session.data.course.name = courseHelper.createCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
+    req.session.data.course.name = courseHelper.getCourseName(req.session.data.course.subjects, req.session.data.course.campaign)
   }
 
   // create a random course 4-digit alphanumeric code for the course

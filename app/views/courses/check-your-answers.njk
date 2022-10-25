@@ -23,19 +23,7 @@
 
         {% set subjectHtml %}
           <ul class="govuk-list">
-            {% for subject in course.subjects %}
-              <li>
-                {{ subject | getSubjectLabel }}
-              </li>
-              {% if subject == "ML" %}
-                {% for subject in course.childSubjects %}
-                  <li>
-                    {{ subject | getSubjectLabel }}
-                  </li>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-            {% for subject in course.secondSubject %}
+            {% for subject in course.subjectArray %}
               <li>
                 {{ subject | getSubjectLabel }}
               </li>
@@ -62,6 +50,14 @@
           rows: [
             {
               key: {
+                text: "Course title"
+              },
+              value: {
+                text: (course.subjectArray | getCourseName('engineersTeachPhysics')) if course.campaign == "engineersTeachPhysics" else (course.subjectArray | getCourseName())
+              }
+            },
+            {
+              key: {
                 text: "Subject level"
               },
               value: {
@@ -75,7 +71,7 @@
                     visuallyHiddenText: "subject level"
                   }
                 ]
-              }
+              } if 1 == 0
             },
             {
               key: {

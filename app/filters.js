@@ -471,7 +471,6 @@ module.exports = (env) => {
   GOV.UK style dates
   @type {Date} date
   ------------------------------------------------------------------ */
-
   filters.govukDateAtTime = (date) => {
     const govukDate = filters.govukDate(date)
     const time = filters.time(date)
@@ -488,7 +487,6 @@ module.exports = (env) => {
   GOV.UK style times
   @type {Date} date
   ------------------------------------------------------------------ */
-
   filters.time = (date) => {
     let dt = DateTime.fromISO(date)
     if (dt.minute > 0) {
@@ -507,6 +505,15 @@ module.exports = (env) => {
   filters.formatList = (array = []) => {
     const lf = new Intl.ListFormat('en')
     return lf.format(array)
+  }
+
+  /*  ------------------------------------------------------------------
+  Convert subject list to course title
+  @param {Array} array Array to convert
+  @example [A, B, C] => A, B and C
+  ------------------------------------------------------------------  */
+  filters.getCourseName = (subjects, campaign = null) => {
+    return courseHelper.getCourseName(subjects, campaign)
   }
 
   /* ------------------------------------------------------------------
