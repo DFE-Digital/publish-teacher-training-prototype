@@ -412,6 +412,33 @@ router.get('/prototype-admin/clear-data', checkIsAuthenticated, (req, res) => {
 router.get('/seed', dataController.seed)
 
 /// ------------------------------------------------------------------------ ///
+/// ERRORS
+/// ------------------------------------------------------------------------ ///
+
+// page not found - 404
+// https://design-system.service.gov.uk/patterns/page-not-found-pages/
+router.get('/404', (req, res) => {
+  res.render('./404')
+})
+
+// internal server error - 500
+// https://design-system.service.gov.uk/patterns/problem-with-the-service-pages/
+router.get('/500', (req, res) => {
+  res.render('./500')
+})
+
+// service unavailable
+// https://design-system.service.gov.uk/patterns/service-unavailable-pages/
+router.get('/unavailable', (req, res) => {
+  res.render('./unavailable')
+})
+
+// page not found
+router.get('*', (req, res) => {
+  res.render('./404')
+})
+
+/// ------------------------------------------------------------------------ ///
 /// END
 /// ------------------------------------------------------------------------ ///
 module.exports = router
