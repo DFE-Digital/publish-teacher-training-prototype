@@ -418,7 +418,22 @@ router.get('/seed', dataController.seed)
 // page not found - 404
 // https://design-system.service.gov.uk/patterns/page-not-found-pages/
 router.get('/404', (req, res) => {
-  res.render('./404')
+  if (req.session.passport) {
+    // the signed in user
+    res.locals.passport = req.session.passport
+    // the base URL for navigation
+    res.locals.baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+    res.locals.cycleId = req.params.cycleId
+    res.render('./404', {
+      baseUrl: res.locals.baseUrl
+    })
+  } else {
+    res.render('./404', {
+      hideAccountNavigation: true,
+      hideOrganisationSwitcher: true,
+      hidePrimaryNavigation: true
+    })
+  }
 })
 
 // internal server error - 500
@@ -429,14 +444,28 @@ router.get('/500', (req, res) => {
 
 // service unavailable
 // https://design-system.service.gov.uk/patterns/service-unavailable-pages/
-router.get('/unavailable', (req, res) => {
-  res.render('./unavailable')
+router.get('/503', (req, res) => {
+  res.render('./503')
 })
 
 // page not found
-router.get('*', (req, res) => {
-  res.render('./404')
-})
+// router.get('*', (req, res) => {
+//   const baseUrl = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
+//   if (req.session.passport) {
+//     // the signed in user
+//     res.locals.passport = req.session.passport
+//     res.render('./404', {
+//       baseUrl
+//     })
+//   } else {
+//     res.render('./404', {
+//       baseUrl,
+//       hideAccountNavigation: true,
+//       hideOrganisationSwitcher: true,
+//       hidePrimaryNavigation: true
+//     })
+//   }
+// })
 
 /// ------------------------------------------------------------------------ ///
 /// END

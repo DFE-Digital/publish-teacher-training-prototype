@@ -31,7 +31,7 @@
 {% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
 
-{% from "_components/footer/macro.njk"                 import appFooter %}
+{% from "_components/footer/macro.njk"                   import appFooter %}
 
 {% block head %}
   {% include "_includes/head.njk" %}
@@ -84,5 +84,4 @@
     {% include "_includes/scripts.njk" %}
     {% block pageScripts %}{% endblock %}
   {% endblock %}
-  <!-- GOV.UK Prototype Kit {{ releaseVersion }} -->
 {% endblock %}
