@@ -3,6 +3,8 @@
 
 {% extends "govuk/template.njk" %}
 
+{% from "_components/footer/macro.njk" import appFooter %}
+
 {% block head %}
   {% include "_includes/head.njk" %}
 {% endblock %}
@@ -38,7 +40,7 @@
 </div>
 {% endset %}
 
-{{ govukFooter({
+{{ appFooter({
   meta: {
     html: footerHtml
   }
