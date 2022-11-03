@@ -151,12 +151,9 @@
       ]
     }) }}
   {% endif %}
-
 {% endblock %}
 
 {% block beforeContent %}
-
-
   {% block pageNavigation %}
     {{ govukBackLink({
       text: backLinkText or "Back",
@@ -182,5 +179,4 @@
     {% include "_includes/scripts.njk" %}
     {% block pageScripts %}{% endblock %}
   {% endblock %}
-  <!-- GOV.UK Prototype Kit {{ releaseVersion }} -->
 {% endblock %}
