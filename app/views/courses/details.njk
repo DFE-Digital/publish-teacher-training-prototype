@@ -120,7 +120,7 @@
           } if course.subjectLevel != "further_education",
           {
             key: {
-              text: "Engineers Teach Physics"
+              text: "Engineers teach physics"
             },
             value: {
               text: "Yes" if course.campaign == "engineersTeachPhysics" else "No"
@@ -130,7 +130,7 @@
                 {
                   href: actions.change + "/campaign?referrer=details",
                   text: "Change",
-                  visuallyHiddenText: "Engineers Teach Physics"
+                  visuallyHiddenText: "Engineers teach physics"
                 }
               ]
             } if course.status != 3

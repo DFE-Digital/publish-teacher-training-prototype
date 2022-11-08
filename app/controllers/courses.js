@@ -624,7 +624,7 @@ exports.edit_course_modern_language_post = (req, res) => {
     })
 
     if (req.query.referrer === 'campaign') {
-      req.flash('success', 'Subject and Engineers Teach Physics updated')
+      req.flash('success', 'Subject and Engineers teach physics updated')
     } else {
       req.flash('success', 'Subject updated')
     }
@@ -669,7 +669,7 @@ exports.edit_course_campaign_post = (req, res) => {
     const error = {}
     error.fieldName = 'campaign'
     error.href = '#campaign'
-    error.text = 'Select if this course part of the Engineers Teach Physics programme'
+    error.text = 'Select if this course part of the Engineers teach physics programme'
     errors.push(error)
   }
 
@@ -722,9 +722,9 @@ exports.edit_course_campaign_post = (req, res) => {
       })
 
       if (req.query.referrer === 'subject') {
-        req.flash('success', 'Subject and Engineers Teach Physics updated')
+        req.flash('success', 'Subject and Engineers teach physics updated')
       } else {
-        req.flash('success', 'Engineers Teach Physics updated')
+        req.flash('success', 'Engineers teach physics updated')
       }
 
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
