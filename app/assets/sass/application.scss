@@ -80,3 +80,11 @@ abbr[title] {
   text-decoration: underline;
   text-decoration-style: dotted;
 }
+
+.govuk-table__body:has(.govuk-table__row:nth-child(10)) .govuk-table__row:nth-child(odd) {
+  background-color: govuk-colour("light-grey");
+}
+
+.govuk-table__body:has(.govuk-table__row:nth-child(10)) .govuk-table__row .govuk-table__cell {
+  padding-left: govuk-spacing(1);
+}
