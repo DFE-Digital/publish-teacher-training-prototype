@@ -23,6 +23,14 @@
         {% include "_includes/page-heading.njk" %}
       {% endset %}
 
+      {% set hintText %}
+        {% if course.campaign == "engineersTeachPhysics" %}
+          Candidates will be advised that their degree subject should match or be closely related to materials science or engineering.
+        {% else %}
+          Candidates will be advised that their degree subject should match or be closely related to {{ course.name }}
+        {% endif %}
+      {% endset %}
+
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {% set subjectRequirementsHtml %}
@@ -47,7 +55,7 @@
             }
           },
           hint: {
-            text: "Candidates will be advised that their degree subject should match or be closely related to " + course.name + "."
+            text: hintText
           },
           errorMessage: errors | getErrorMessage("degree-subject-requirements"),
           items: [
