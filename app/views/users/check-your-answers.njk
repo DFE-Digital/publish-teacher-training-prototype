@@ -3,7 +3,12 @@
 {% set primaryNavId = "users" %}
 
 {% set title = "Check your answers" %}
-{% set caption = "Add user" %}
+
+{% if referrer == "change" %}
+  {% set caption = currentUser.firstName + " " + currentUser.lastName %}
+{% else %}
+  {% set caption = "Add user" %}
+{% endif %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -39,7 +44,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "?referrer=check",
+                    href: actions.change,
                     text: "Change",
                     visuallyHiddenText: "first name"
                   }
@@ -56,7 +61,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "?referrer=check",
+                    href: actions.change,
                     text: "Change",
                     visuallyHiddenText: "last name"
                   }
@@ -73,7 +78,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "?referrer=check",
+                    href: actions.change,
                     text: "Change",
                     visuallyHiddenText: "email address"
                   }
@@ -89,7 +94,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Add user"
+          text: "Update user" if referrer == "change" else "Add user"
         }) }}
 
       </form>
