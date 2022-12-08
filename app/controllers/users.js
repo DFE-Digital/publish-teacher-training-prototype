@@ -42,6 +42,7 @@ exports.user_details = (req, res) => {
     user,
     signedInUser,
     actions: {
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit?referrer=change`,
       delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/delete`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
@@ -134,7 +135,7 @@ exports.new_user_check_get = (req, res) => {
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new/check`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/new?referrer=check`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users`
     }
   })
@@ -157,12 +158,19 @@ exports.new_user_check_post = (req, res) => {
 /// ------------------------------------------------------------------------ ///
 
 exports.edit_user_get = (req, res) => {
-  const user = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
+  const currentUser = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
+
+  if (req.session.data.user) {
+    user = req.session.data.user
+  } else {
+    user = currentUser
+  }
 
   res.render('../views/users/edit', {
+    currentUser,
     user,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
     }
@@ -200,22 +208,51 @@ exports.edit_user_post = (req, res) => {
     res.render('../views/users/edit', {
       user: req.session.data.user,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
       },
       errors
     })
   } else {
-    userModel.saveOne({
-      organisationId: req.params.organisationId,
-      userId: req.params.userId,
-      user: req.session.data.user
-    })
-
-    req.flash('success', 'User updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`)
+    // userModel.saveOne({
+    //   organisationId: req.params.organisationId,
+    //   userId: req.params.userId,
+    //   user: req.session.data.user
+    // })
+    //
+    // req.flash('success', 'User updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit/check`)
   }
+}
+
+exports.edit_user_check_get = (req, res) => {
+  const currentUser = userModel.findOne({ organisationId: req.params.organisationId, userId: req.params.userId })
+
+  res.render('../views/users/check-your-answers', {
+    currentUser,
+    user: req.session.data.user,
+    referrer: 'change',
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit/check`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}/edit?referrer=change`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`
+    }
+  })
+}
+
+exports.edit_user_check_post = (req, res) => {
+  userModel.saveOne({
+    organisationId: req.params.organisationId,
+    userId: req.params.userId,
+    user: req.session.data.user
+  })
+
+  delete req.session.data.user
+
+  req.flash('success', 'User updated')
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/users/${req.params.userId}`)
 }
 
 /// ------------------------------------------------------------------------ ///
