@@ -141,17 +141,17 @@ exports.updateOne = (params) => {
   }
 
   if (user) {
-    // if (params.user.firstName) {
-    //   user.firstName = params.user.firstName
-    // }
-    //
-    // if (params.user.lastName) {
-    //   user.lastName = params.user.lastName
-    // }
-    //
-    // if (params.user.email) {
-    //   user.email = params.user.email
-    // }
+    if (params.user.firstName) {
+      user.firstName = params.user.firstName
+    }
+
+    if (params.user.lastName) {
+      user.lastName = params.user.lastName
+    }
+
+    if (params.user.email) {
+      user.email = params.user.email
+    }
 
     const organisationExists = user.organisations.find(
       organisation => organisation.id === params.organisationId
