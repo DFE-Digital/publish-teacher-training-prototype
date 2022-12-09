@@ -3,7 +3,12 @@
 {% set primaryNavId = "users" %}
 
 {% set title = "Personal details" %}
-{% set caption = "Add user" %}
+
+{% if referrer == "change" %}
+  {% set caption = currentUser.firstName + " " + currentUser.lastName %}
+{% else %}
+  {% set caption = "Add user" %}
+{% endif %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -23,9 +28,17 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {% call govukFieldset({
+          legend: {
+            html: headingHtml
+          }
+        }) %}
 
         {{ govukInput({
           id: "firstName",
@@ -65,6 +78,8 @@
         {{ govukButton({
           text: "Continue"
         }) }}
+
+        {% endcall %}
 
       </form>
 

@@ -308,6 +308,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/users/new/check', ch
 router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit', checkIsAuthenticated, userController.edit_user_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit/check', checkIsAuthenticated, userController.edit_user_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/edit/check', checkIsAuthenticated, userController.edit_user_check_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/users/:userId/delete', checkIsAuthenticated, userController.delete_user_post)
 
