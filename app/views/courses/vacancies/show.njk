@@ -23,7 +23,7 @@
 
       {% include "../_actions.njk" %}
 
-      {% if isCurrentCycle and isRollover and rolledOverCourse %}
+      {% if isCurrentCycle == 'true' and isRollover == 'true' and rolledOverCourse %}
         {% include "../_rolled-over-course.njk" %}
       {% endif %}
 
