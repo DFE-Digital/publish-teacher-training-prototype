@@ -1,3 +1,4 @@
+const del = require('del')
 const fs = require('fs')
 const path = require('path')
 
@@ -42,13 +43,8 @@ const remove = (destination) => {
     const stat = fs.statSync(destinationFile)
     if (stat && stat.isDirectory()) {
       if (!destinationFile.includes('/app/data/seed')) {
-        try {
-          console.log('Removing directory: ' + destinationFile)
-          fs.rmdirSync(destinationFile)
-        } catch (e) {
-          console.log('Directory doesn’t exist: ' + destinationFile)
-        }
-        remove(destinationFile)
+        console.log('Removing directory: ' + destinationFile)
+        del(destinationFile)
       }
     } else {
       if (!destinationFile.includes('session-data-defaults.js')) {
