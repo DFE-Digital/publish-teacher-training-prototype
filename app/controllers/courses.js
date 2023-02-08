@@ -1197,6 +1197,23 @@ exports.edit_course_applications_open_date_post = (req, res) => {
 
   const errors = []
 
+  if (!req.session.data.course.applicationsOpenDate) {
+    const error = {}
+    error.fieldName = 'applications-open-date'
+    error.href = '#applications-open-date'
+    error.text = 'Select an applications open date'
+    errors.push(error)
+  } else {
+    if (req.session.data.course.applicationsOpenDate === 'other' &&
+      !req.session.data.course.applicationsOpenDateOther) {
+        const error = {}
+        error.fieldName = 'applications-open-date-other'
+        error.href = '#applications-open-date-other'
+        error.text = 'Enter when applications will open'
+        errors.push(error)
+    }
+  }
+
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
       course,
@@ -2991,6 +3008,23 @@ exports.new_course_applications_open_date_post = (req, res) => {
   }
 
   const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
+
+  if (!req.session.data.course.applicationsOpenDate) {
+    const error = {}
+    error.fieldName = 'applications-open-date'
+    error.href = '#applications-open-date'
+    error.text = 'Select an applications open date'
+    errors.push(error)
+  } else {
+    if (req.session.data.course.applicationsOpenDate === 'other' &&
+      !req.session.data.course.applicationsOpenDateOther) {
+        const error = {}
+        error.fieldName = 'applications-open-date-other'
+        error.href = '#applications-open-date-other'
+        error.text = 'Enter when applications will open'
+        errors.push(error)
+    }
+  }
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
