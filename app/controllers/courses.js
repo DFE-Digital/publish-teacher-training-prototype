@@ -765,6 +765,14 @@ exports.edit_course_age_range_post = (req, res) => {
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(course.subjectLevel, selectedAgeRange)
 
+  if (!req.session.data.course.ageRange) {
+    const error = {}
+    error.fieldName = 'ageRange'
+    error.href = '#ageRange'
+    error.text = 'Select an age range'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/age-range', {
       course,
@@ -2235,6 +2243,14 @@ exports.new_course_age_range_post = (req, res) => {
     } else if (req.session.data.course.subjects[0] === 'F3') {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/campaign`
     }
+  }
+
+  if (!req.session.data.course.ageRange) {
+    const error = {}
+    error.fieldName = 'ageRange'
+    error.href = '#ageRange'
+    error.text = 'Select an age range'
+    errors.push(error)
   }
 
   if (errors.length) {
