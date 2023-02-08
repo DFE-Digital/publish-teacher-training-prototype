@@ -1330,6 +1330,14 @@ exports.edit_course_start_date_post = (req, res) => {
 
   const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
 
+  if (!req.session.data.course.startDate) {
+    const error = {}
+    error.fieldName = 'start-date'
+    error.href = '#start-date'
+    error.text = 'Select a start date'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/course-start', {
       course,
@@ -3208,6 +3216,14 @@ exports.new_course_start_date_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.startDate) {
+    const error = {}
+    error.fieldName = 'start-date'
+    error.href = '#start-date'
+    error.text = 'Select a start date'
+    errors.push(error)
   }
 
   if (errors.length) {
