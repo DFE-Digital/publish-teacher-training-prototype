@@ -2158,7 +2158,7 @@ exports.new_course_campaign_post = (req, res) => {
     const error = {}
     error.fieldName = 'campaign'
     error.href = '#campaign'
-    error.text = 'ERROR MESSAGE'
+    error.text = 'Select if this course is part of the Engineers teach physics programme'
     errors.push(error)
   }
 
