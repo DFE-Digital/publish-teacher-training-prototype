@@ -441,6 +441,30 @@ exports.edit_course_subject_post = (req, res) => {
     secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
   }
 
+  if (req.session.data.course.subjectLevel === 'primary') {
+    if (!req.session.data.course.subjects) {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    }
+  } else if (req.session.data.course.subjectLevel === 'secondary') {
+    if (req.session.data.course.subjects[0] === '') {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    } else if (req.session.data.course.subjects[0] === req.session.data.course.secondSubject[0]) {
+      const error = {}
+      error.fieldName = 'second-subject'
+      error.href = '#second-subject'
+      error.text = 'First subject and second subject cannot be the same'
+      errors.push(error)
+    }
+  }
+
   if (errors.length) {
     res.render('../views/courses/subject', {
       course,
@@ -1948,7 +1972,7 @@ exports.new_course_subject_level_get = (req, res) => {
 
 exports.new_course_subject_level_post = (req, res) => {
   const errors = []
-console.log(req.session.data.course);
+
   if (!req.session.data.course) {
     req.session.data.course = {}
   }
@@ -2088,12 +2112,28 @@ exports.new_course_subject_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
-  if (req.session.data.course.subjects[0] === '') {
-    const error = {}
-    error.fieldName = 'subject'
-    error.href = '#subject'
-    error.text = 'Select a subject'
-    errors.push(error)
+  if (req.session.data.course.subjectLevel === 'primary') {
+    if (!req.session.data.course.subjects) {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    }
+  } else if (req.session.data.course.subjectLevel === 'secondary') {
+    if (req.session.data.course.subjects[0] === '') {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    } else if (req.session.data.course.subjects[0] === req.session.data.course.secondSubject[0]) {
+      const error = {}
+      error.fieldName = 'second-subject'
+      error.href = '#second-subject'
+      error.text = 'First subject and second subject cannot be the same'
+      errors.push(error)
+    }
   }
 
   if (errors.length) {
