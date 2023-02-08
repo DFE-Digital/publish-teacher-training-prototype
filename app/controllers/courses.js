@@ -332,6 +332,14 @@ exports.edit_course_send_post = (req, res) => {
 
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
+  if (!req.session.data.course.isSend) {
+    const error = {}
+    error.fieldName = 'send'
+    error.href = '#send'
+    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/special-educational-needs-disability', {
       course,
@@ -1940,6 +1948,10 @@ exports.new_course_subject_level_get = (req, res) => {
 
 exports.new_course_subject_level_post = (req, res) => {
   const errors = []
+console.log(req.session.data.course);
+  if (!req.session.data.course) {
+    req.session.data.course = {}
+  }
 
   let selectedSubjectLevel
   if (req.session.data.course && req.session.data.course.subjectLevel) {
@@ -1959,6 +1971,22 @@ exports.new_course_subject_level_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back += '/new/check'
+  }
+
+  if (!req.session.data.course.subjectLevel) {
+    const error = {}
+    error.fieldName = 'subject-level'
+    error.href = '#subject-level'
+    error.text = 'Select a subject level'
+    errors.push(error)
+  }
+
+  if (!req.session.data.course.isSend) {
+    const error = {}
+    error.fieldName = 'send'
+    error.href = '#send'
+    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    errors.push(error)
   }
 
   if (errors.length) {
