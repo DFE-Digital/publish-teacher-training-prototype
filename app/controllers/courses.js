@@ -828,6 +828,14 @@ exports.edit_course_qualification_post = (req, res) => {
 
   const qualificationOptions = courseHelper.getQualificationOptions(course.subjectLevel, selectedQualification)
 
+  if (!req.session.data.course.qualification) {
+    const error = {}
+    error.fieldName = 'qualification'
+    error.href = '#qualification'
+    error.text = 'Select a qualification'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/qualification', {
       course,
@@ -2315,6 +2323,14 @@ exports.new_course_qualification_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.qualification) {
+    const error = {}
+    error.fieldName = 'qualification'
+    error.href = '#qualification'
+    error.text = 'Select a qualification'
+    errors.push(error)
   }
 
   if (errors.length) {
