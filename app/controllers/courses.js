@@ -960,6 +960,14 @@ exports.edit_course_apprenticeship_post = (req, res) => {
 
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select if this is an apprenticeship'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
       course,
@@ -2525,6 +2533,14 @@ exports.new_course_apprenticeship_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select if this is an apprenticeship'
+    errors.push(error)
   }
 
   if (errors.length) {
