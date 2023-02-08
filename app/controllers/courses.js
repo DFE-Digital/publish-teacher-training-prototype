@@ -1020,6 +1020,14 @@ exports.edit_course_study_mode_post = (req, res) => {
 
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
 
+  if (!req.session.data.course.studyMode) {
+    const error = {}
+    error.fieldName = 'study-mode'
+    error.href = '#study-mode'
+    error.text = 'Select full time or part time'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/study-mode', {
       course,
@@ -2573,6 +2581,14 @@ exports.new_course_study_mode_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.studyMode) {
+    const error = {}
+    error.fieldName = 'study-mode'
+    error.href = '#study-mode'
+    error.text = 'Select full time or part time'
+    errors.push(error)
   }
 
   if (errors.length) {
