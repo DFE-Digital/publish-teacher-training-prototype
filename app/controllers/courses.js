@@ -891,6 +891,14 @@ exports.edit_course_funding_type_post = (req, res) => {
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
 
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select a funding type'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/funding-type', {
       course,
@@ -2404,6 +2412,14 @@ exports.new_course_funding_type_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select a funding type'
+    errors.push(error)
   }
 
   if (errors.length) {
