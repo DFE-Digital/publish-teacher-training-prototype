@@ -590,6 +590,14 @@ exports.edit_course_modern_language_post = (req, res) => {
     ack = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`
   }
 
+  if (!req.session.data.course.childSubjects.length) {
+    const error = {}
+    error.fieldName = 'child-subjects'
+    error.href = '#child-subjects'
+    error.text = 'Select a language'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
       course,
@@ -2230,6 +2238,14 @@ exports.new_course_modern_language_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.childSubjects.length) {
+    const error = {}
+    error.fieldName = 'child-subjects'
+    error.href = '#child-subjects'
+    error.text = 'Select a language'
+    errors.push(error)
   }
 
   if (errors.length) {
