@@ -767,8 +767,8 @@ exports.edit_course_age_range_post = (req, res) => {
 
   if (!req.session.data.course.ageRange) {
     const error = {}
-    error.fieldName = 'ageRange'
-    error.href = '#ageRange'
+    error.fieldName = 'age-range'
+    error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
   }
@@ -2263,8 +2263,8 @@ exports.new_course_age_range_post = (req, res) => {
 
   if (!req.session.data.course.ageRange) {
     const error = {}
-    error.fieldName = 'ageRange'
-    error.href = '#ageRange'
+    error.fieldName = 'age-range'
+    error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
   }
