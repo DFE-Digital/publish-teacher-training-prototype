@@ -1140,6 +1140,14 @@ exports.edit_course_accredited_body_post = (req, res) => {
 
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
+  if (!req.session.data.course.accreditedBody) {
+    const error = {}
+    error.fieldName = 'accredited-body'
+    error.href = '#accredited-body'
+    error.text = 'Select an accredited body'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
       course,
@@ -2758,6 +2766,14 @@ exports.new_course_accredited_body_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.accreditedBody) {
+    const error = {}
+    error.fieldName = 'accredited-body'
+    error.href = '#accredited-body'
+    error.text = 'Select an accredited body'
+    errors.push(error)
   }
 
   if (errors.length) {
