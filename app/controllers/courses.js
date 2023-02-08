@@ -1125,6 +1125,14 @@ exports.edit_course_location_post = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
+  if (!req.session.data.course.locations.length) {
+    const error = {}
+    error.fieldName = 'locations'
+    error.href = '#locations'
+    error.text = 'Select a location'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/location', {
       course,
@@ -2776,6 +2784,14 @@ exports.new_course_location_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.locations.length) {
+    const error = {}
+    error.fieldName = 'locations'
+    error.href = '#locations'
+    error.text = 'Select a location'
+    errors.push(error)
   }
 
   if (errors.length) {
