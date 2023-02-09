@@ -1894,16 +1894,18 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
     }
   }
 
-  if (!req.session.data.course) {
-    if (course.fundingType === 'fee') {
+  if (course.fundingType === 'fee') {
+    if (!req.session.data.course.canSponsorStudentVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
       error.text = 'Select if candidates can get a sponsored Student visa'
       errors.push(error)
     }
+  }
 
-    if (course.fundingType === 'salary') {
+  if (['salary','apprenticeship'].includes(course.fundingType)) {
+    if (!req.session.data.course.canSponsorSkilledWorkerVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
@@ -3057,7 +3059,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
   }
 
   if (req.session.data.course.fundingType === 'fee') {
-    if (req.session.data.course.canSponsorStudentVisa === undefined) {
+    if (!req.session.data.course.canSponsorStudentVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
@@ -3066,8 +3068,8 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
     }
   }
 
-  if (req.session.data.course.fundingType === 'salary') {
-    if (req.session.data.course.canSponsorSkilledWorkerVisa === undefined) {
+  if (['salary','apprenticeship'].includes(req.session.data.course.fundingType)) {
+    if (!req.session.data.course.canSponsorSkilledWorkerVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
