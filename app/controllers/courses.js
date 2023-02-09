@@ -336,7 +336,7 @@ exports.edit_course_send_post = (req, res) => {
     const error = {}
     error.fieldName = 'send'
     error.href = '#send'
-    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    error.text = 'Select if this is a special educational needs and disability (SEND) course'
     errors.push(error)
   }
 
@@ -2035,7 +2035,7 @@ exports.new_course_subject_level_post = (req, res) => {
     const error = {}
     error.fieldName = 'send'
     error.href = '#send'
-    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    error.text = 'Select if this is a special educational needs and disability (SEND) course'
     errors.push(error)
   }
 
