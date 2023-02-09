@@ -332,6 +332,14 @@ exports.edit_course_send_post = (req, res) => {
 
   const sendOptions = courseHelper.getSendOptions(selectedSend)
 
+  if (!req.session.data.course.isSend) {
+    const error = {}
+    error.fieldName = 'send'
+    error.href = '#send'
+    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/special-educational-needs-disability', {
       course,
@@ -431,6 +439,30 @@ exports.edit_course_subject_post = (req, res) => {
     secondSubjectOptions = subjectHelper.getSubjectSelectOptions(course.subjectLevel, selectedSecondSubject)
   } else {
     secondSubjectOptions = subjectHelper.getSubjectOptions(course.subjectLevel, selectedSecondSubject)
+  }
+
+  if (req.session.data.course.subjectLevel === 'primary') {
+    if (!req.session.data.course.subjects) {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    }
+  } else if (req.session.data.course.subjectLevel === 'secondary') {
+    if (req.session.data.course.subjects[0] === '') {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    } else if (req.session.data.course.subjects[0] === req.session.data.course.secondSubject[0]) {
+      const error = {}
+      error.fieldName = 'second-subject'
+      error.href = '#second-subject'
+      error.text = 'First subject and second subject cannot be the same'
+      errors.push(error)
+    }
   }
 
   if (errors.length) {
@@ -556,6 +588,14 @@ exports.edit_course_modern_language_post = (req, res) => {
 
   if (req.query?.referrer === 'campaign') {
     ack = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/campaign`
+  }
+
+  if (!req.session.data.course.childSubjects.length) {
+    const error = {}
+    error.fieldName = 'child-subjects'
+    error.href = '#child-subjects'
+    error.text = 'Select a language'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -765,6 +805,14 @@ exports.edit_course_age_range_post = (req, res) => {
 
   const ageRangeOptions = courseHelper.getAgeRangeOptions(course.subjectLevel, selectedAgeRange)
 
+  if (!req.session.data.course.ageRange) {
+    const error = {}
+    error.fieldName = 'age-range'
+    error.href = '#age-range'
+    error.text = 'Select an age range'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/age-range', {
       course,
@@ -820,6 +868,14 @@ exports.edit_course_qualification_post = (req, res) => {
 
   const qualificationOptions = courseHelper.getQualificationOptions(course.subjectLevel, selectedQualification)
 
+  if (!req.session.data.course.qualification) {
+    const error = {}
+    error.fieldName = 'qualification'
+    error.href = '#qualification'
+    error.text = 'Select a qualification'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/qualification', {
       course,
@@ -874,6 +930,14 @@ exports.edit_course_funding_type_post = (req, res) => {
   }
 
   const fundingTypeOptions = courseHelper.getFundingTypeOptions(selectedFundingType)
+
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select a funding type'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/funding-type', {
@@ -936,6 +1000,14 @@ exports.edit_course_apprenticeship_post = (req, res) => {
 
   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
 
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select if this is an apprenticeship'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/apprenticeship', {
       course,
@@ -996,6 +1068,14 @@ exports.edit_course_study_mode_post = (req, res) => {
 
   const studyModeOptions = courseHelper.getStudyModeOptions(selectedStudyMode)
 
+  if (!req.session.data.course.studyMode) {
+    const error = {}
+    error.fieldName = 'study-mode'
+    error.href = '#study-mode'
+    error.text = 'Select full time or part time'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/study-mode', {
       course,
@@ -1053,6 +1133,14 @@ exports.edit_course_location_post = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
+  if (!req.session.data.course.locations.length) {
+    const error = {}
+    error.fieldName = 'locations'
+    error.href = '#locations'
+    error.text = 'Select a location'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/location', {
       course,
@@ -1108,6 +1196,14 @@ exports.edit_course_accredited_body_post = (req, res) => {
 
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
+  if (!req.session.data.course.accreditedBody) {
+    const error = {}
+    error.fieldName = 'accredited-body'
+    error.href = '#accredited-body'
+    error.text = 'Select an accredited body'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/accredited-body', {
       course,
@@ -1156,6 +1252,23 @@ exports.edit_course_applications_open_date_post = (req, res) => {
   const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
 
   const errors = []
+
+  if (!req.session.data.course.applicationsOpenDate) {
+    const error = {}
+    error.fieldName = 'applications-open-date'
+    error.href = '#applications-open-date'
+    error.text = 'Select an applications open date'
+    errors.push(error)
+  } else {
+    if (req.session.data.course.applicationsOpenDate === 'other' &&
+      !req.session.data.course.applicationsOpenDateOther) {
+        const error = {}
+        error.fieldName = 'applications-open-date-other'
+        error.href = '#applications-open-date-other'
+        error.text = 'Enter when applications will open'
+        errors.push(error)
+    }
+  }
 
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
@@ -1216,6 +1329,14 @@ exports.edit_course_start_date_post = (req, res) => {
   }
 
   const courseStartOptions = courseHelper.getCourseStartRadioOptions(selectedCourseStartDate)
+
+  if (!req.session.data.course.startDate) {
+    const error = {}
+    error.fieldName = 'start-date'
+    error.href = '#start-date'
+    error.text = 'Select a start date'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/course-start', {
@@ -1876,6 +1997,10 @@ exports.new_course_subject_level_get = (req, res) => {
 exports.new_course_subject_level_post = (req, res) => {
   const errors = []
 
+  if (!req.session.data.course) {
+    req.session.data.course = {}
+  }
+
   let selectedSubjectLevel
   if (req.session.data.course && req.session.data.course.subjectLevel) {
     selectedSubjectLevel = req.session.data.course.subjectLevel
@@ -1894,6 +2019,22 @@ exports.new_course_subject_level_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back += '/new/check'
+  }
+
+  if (!req.session.data.course.subjectLevel) {
+    const error = {}
+    error.fieldName = 'subject-level'
+    error.href = '#subject-level'
+    error.text = 'Select a subject level'
+    errors.push(error)
+  }
+
+  if (!req.session.data.course.isSend) {
+    const error = {}
+    error.fieldName = 'send'
+    error.href = '#send'
+    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -1995,12 +2136,28 @@ exports.new_course_subject_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
-  if (req.session.data.course.subjects[0] === '') {
-    const error = {}
-    error.fieldName = 'subject'
-    error.href = '#subject'
-    error.text = 'Select a subject'
-    errors.push(error)
+  if (req.session.data.course.subjectLevel === 'primary') {
+    if (!req.session.data.course.subjects) {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    }
+  } else if (req.session.data.course.subjectLevel === 'secondary') {
+    if (req.session.data.course.subjects[0] === '') {
+      const error = {}
+      error.fieldName = 'subject'
+      error.href = '#subject'
+      error.text = 'Select a subject'
+      errors.push(error)
+    } else if (req.session.data.course.subjects[0] === req.session.data.course.secondSubject[0]) {
+      const error = {}
+      error.fieldName = 'second-subject'
+      error.href = '#second-subject'
+      error.text = 'First subject and second subject cannot be the same'
+      errors.push(error)
+    }
   }
 
   if (errors.length) {
@@ -2091,6 +2248,14 @@ exports.new_course_modern_language_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (!req.session.data.course.childSubjects.length) {
+    const error = {}
+    error.fieldName = 'child-subjects'
+    error.href = '#child-subjects'
+    error.text = 'Select a language'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/modern-languages', {
       course: req.session.data.course,
@@ -2158,7 +2323,7 @@ exports.new_course_campaign_post = (req, res) => {
     const error = {}
     error.fieldName = 'campaign'
     error.href = '#campaign'
-    error.text = 'ERROR MESSAGE'
+    error.text = 'Select if this course is part of the Engineers teach physics programme'
     errors.push(error)
   }
 
@@ -2237,6 +2402,14 @@ exports.new_course_age_range_post = (req, res) => {
     }
   }
 
+  if (!req.session.data.course.ageRange) {
+    const error = {}
+    error.fieldName = 'age-range'
+    error.href = '#age-range'
+    error.text = 'Select an age range'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/age-range', {
       course: req.session.data.course,
@@ -2299,6 +2472,14 @@ exports.new_course_qualification_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.qualification) {
+    const error = {}
+    error.fieldName = 'qualification'
+    error.href = '#qualification'
+    error.text = 'Select a qualification'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -2374,6 +2555,14 @@ exports.new_course_funding_type_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select a funding type'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/funding-type', {
       course: req.session.data.course,
@@ -2444,6 +2633,14 @@ exports.new_course_apprenticeship_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.fundingType) {
+    const error = {}
+    error.fieldName = 'funding-type'
+    error.href = '#funding-type'
+    error.text = 'Select if this is an apprenticeship'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -2527,6 +2724,14 @@ exports.new_course_study_mode_post = (req, res) => {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
 
+  if (!req.session.data.course.studyMode) {
+    const error = {}
+    error.fieldName = 'study-mode'
+    error.href = '#study-mode'
+    error.text = 'Select full time or part time'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/courses/study-mode', {
       course: req.session.data.course,
@@ -2603,6 +2808,14 @@ exports.new_course_location_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.locations.length) {
+    const error = {}
+    error.fieldName = 'locations'
+    error.href = '#locations'
+    error.text = 'Select a location'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -2694,6 +2907,14 @@ exports.new_course_accredited_body_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.accreditedBody) {
+    const error = {}
+    error.fieldName = 'accredited-body'
+    error.href = '#accredited-body'
+    error.text = 'Select an accredited body'
+    errors.push(error)
   }
 
   if (errors.length) {
@@ -2912,6 +3133,23 @@ exports.new_course_applications_open_date_post = (req, res) => {
 
   const applicationsOpenDate = cycleHelper.CYCLES[req.params.cycleId].applyOpens
 
+  if (!req.session.data.course.applicationsOpenDate) {
+    const error = {}
+    error.fieldName = 'applications-open-date'
+    error.href = '#applications-open-date'
+    error.text = 'Select an applications open date'
+    errors.push(error)
+  } else {
+    if (req.session.data.course.applicationsOpenDate === 'other' &&
+      !req.session.data.course.applicationsOpenDateOther) {
+        const error = {}
+        error.fieldName = 'applications-open-date-other'
+        error.href = '#applications-open-date-other'
+        error.text = 'Enter when applications will open'
+        errors.push(error)
+    }
+  }
+
   if (errors.length) {
     res.render('../views/courses/applications-open-date', {
       course: req.session.data.course,
@@ -2978,6 +3216,14 @@ exports.new_course_start_date_post = (req, res) => {
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
+  }
+
+  if (!req.session.data.course.startDate) {
+    const error = {}
+    error.fieldName = 'start-date'
+    error.href = '#start-date'
+    error.text = 'Select a start date'
+    errors.push(error)
   }
 
   if (errors.length) {

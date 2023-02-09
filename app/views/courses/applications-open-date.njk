@@ -49,23 +49,23 @@
             hint: {
               text: "For example, 30 9 2022"
             },
-            errorMessage: errors | getErrorMessage("application-open-date-other"),
+            errorMessage: errors | getErrorMessage("applications-open-date-other"),
             items: [
-            {
-              name: "day",
-              value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-2"
-            },
-            {
-              name: "month",
-              value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-2"
-            },
-            {
-              name: "year",
-              value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-4"
-            }
+              {
+                name: "day",
+                value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              },
+              {
+                name: "month",
+                value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              },
+              {
+                name: "year",
+                value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-4" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              }
             ]
           }) }}
 
@@ -79,7 +79,7 @@
               html: headingHtml
             }
           },
-          errorMessage: errors | getErrorMessage("application-open-date"),
+          errorMessage: errors | getErrorMessage("applications-open-date"),
           items: [
             {
               value: applicationsOpenDate | date,
