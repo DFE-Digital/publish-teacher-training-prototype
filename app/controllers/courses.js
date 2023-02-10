@@ -811,6 +811,23 @@ exports.edit_course_age_range_post = (req, res) => {
     error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
+  } else {
+    if (req.session.data.course.ageRange === 'other') {
+      if (!req.session.data.course.ageRangeOther.from.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-from'
+        error.href = '#age-range-other-from'
+        error.text = 'Enter from age'
+        errors.push(error)
+      }
+      if (!req.session.data.course.ageRangeOther.to.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-to'
+        error.href = '#age-range-other-to'
+        error.text = 'Enter to age'
+        errors.push(error)
+      }
+    }
   }
 
   if (errors.length) {
@@ -2410,6 +2427,23 @@ exports.new_course_age_range_post = (req, res) => {
     error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
+  } else {
+    if (req.session.data.course.ageRange === 'other') {
+      if (!req.session.data.course.ageRangeOther.from.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-from'
+        error.href = '#age-range-other-from'
+        error.text = 'Enter from age'
+        errors.push(error)
+      }
+      if (!req.session.data.course.ageRangeOther.to.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-to'
+        error.href = '#age-range-other-to'
+        error.text = 'Enter to age'
+        errors.push(error)
+      }
+    }
   }
 
   if (errors.length) {
