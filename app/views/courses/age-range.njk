@@ -34,7 +34,7 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors }}">
+        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors | getErrorMessage('age-range') }}">
 
           {% call govukFieldset({
             legend: {
@@ -42,7 +42,7 @@
             }
           }) %}
 
-          {% if errors %}
+          {% if errors | getErrorMessage("age-range") %}
             <span id="age-range-error" class="govuk-error-message">
               <div><span class="govuk-visually-hidden">Error:</span> Select an age range</div>
             </span>
@@ -73,7 +73,7 @@
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-from"),
                       value: course.ageRangeOther.from,
-                      classes: "govuk-input--width-2"
+                      classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("age-range-other-from"))
                     }) }}
 
                     {{ govukInput({
@@ -84,7 +84,7 @@
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-to"),
                       value: course.ageRangeOther.to,
-                      classes: "govuk-input--width-2"
+                      classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("age-range-other-to"))
                     }) }}
                   </div>
                 {% endif %}

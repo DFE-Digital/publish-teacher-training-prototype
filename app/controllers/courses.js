@@ -336,7 +336,7 @@ exports.edit_course_send_post = (req, res) => {
     const error = {}
     error.fieldName = 'send'
     error.href = '#send'
-    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    error.text = 'Select if this is a special educational needs and disability (SEND) course'
     errors.push(error)
   }
 
@@ -811,6 +811,23 @@ exports.edit_course_age_range_post = (req, res) => {
     error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
+  } else {
+    if (req.session.data.course.ageRange === 'other') {
+      if (!req.session.data.course.ageRangeOther.from.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-from'
+        error.href = '#age-range-other-from'
+        error.text = 'Enter from age'
+        errors.push(error)
+      }
+      if (!req.session.data.course.ageRangeOther.to.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-to'
+        error.href = '#age-range-other-to'
+        error.text = 'Enter to age'
+        errors.push(error)
+      }
+    }
   }
 
   if (errors.length) {
@@ -1004,7 +1021,7 @@ exports.edit_course_apprenticeship_post = (req, res) => {
     const error = {}
     error.fieldName = 'funding-type'
     error.href = '#funding-type'
-    error.text = 'Select if this is an apprenticeship'
+    error.text = 'Select if this is a teaching apprenticeship'
     errors.push(error)
   }
 
@@ -1265,7 +1282,7 @@ exports.edit_course_applications_open_date_post = (req, res) => {
         const error = {}
         error.fieldName = 'applications-open-date-other'
         error.href = '#applications-open-date-other'
-        error.text = 'Enter when applications will open'
+        error.text = 'Enter a date when applications will open'
         errors.push(error)
     }
   }
@@ -2035,7 +2052,7 @@ exports.new_course_subject_level_post = (req, res) => {
     const error = {}
     error.fieldName = 'send'
     error.href = '#send'
-    error.text = 'Select if this is a special education needs and disability (SEND) course'
+    error.text = 'Select if this is a special educational needs and disability (SEND) course'
     errors.push(error)
   }
 
@@ -2410,6 +2427,23 @@ exports.new_course_age_range_post = (req, res) => {
     error.href = '#age-range'
     error.text = 'Select an age range'
     errors.push(error)
+  } else {
+    if (req.session.data.course.ageRange === 'other') {
+      if (!req.session.data.course.ageRangeOther.from.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-from'
+        error.href = '#age-range-other-from'
+        error.text = 'Enter from age'
+        errors.push(error)
+      }
+      if (!req.session.data.course.ageRangeOther.to.length) {
+        const error = {}
+        error.fieldName = 'age-range-other-to'
+        error.href = '#age-range-other-to'
+        error.text = 'Enter to age'
+        errors.push(error)
+      }
+    }
   }
 
   if (errors.length) {
@@ -2641,7 +2675,7 @@ exports.new_course_apprenticeship_post = (req, res) => {
     const error = {}
     error.fieldName = 'funding-type'
     error.href = '#funding-type'
-    error.text = 'Select if this is an apprenticeship'
+    error.text = 'Select if this is a teaching apprenticeship'
     errors.push(error)
   }
 
@@ -3147,7 +3181,7 @@ exports.new_course_applications_open_date_post = (req, res) => {
         const error = {}
         error.fieldName = 'applications-open-date-other'
         error.href = '#applications-open-date-other'
-        error.text = 'Enter when applications will open'
+        error.text = 'Enter a date when applications will open'
         errors.push(error)
     }
   }
