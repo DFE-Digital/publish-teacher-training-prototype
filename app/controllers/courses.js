@@ -1282,7 +1282,7 @@ exports.edit_course_applications_open_date_post = (req, res) => {
         const error = {}
         error.fieldName = 'applications-open-date-other'
         error.href = '#applications-open-date-other'
-        error.text = 'Enter when applications will open'
+        error.text = 'Enter a date when applications will open'
         errors.push(error)
     }
   }
@@ -3181,7 +3181,7 @@ exports.new_course_applications_open_date_post = (req, res) => {
         const error = {}
         error.fieldName = 'applications-open-date-other'
         error.href = '#applications-open-date-other'
-        error.text = 'Enter when applications will open'
+        error.text = 'Enter a date when applications will open'
         errors.push(error)
     }
   }
