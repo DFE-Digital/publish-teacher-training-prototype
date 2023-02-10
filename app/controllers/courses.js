@@ -1021,7 +1021,7 @@ exports.edit_course_apprenticeship_post = (req, res) => {
     const error = {}
     error.fieldName = 'funding-type'
     error.href = '#funding-type'
-    error.text = 'Select if this is an apprenticeship'
+    error.text = 'Select if this is a teaching apprenticeship'
     errors.push(error)
   }
 
@@ -2675,7 +2675,7 @@ exports.new_course_apprenticeship_post = (req, res) => {
     const error = {}
     error.fieldName = 'funding-type'
     error.href = '#funding-type'
-    error.text = 'Select if this is an apprenticeship'
+    error.text = 'Select if this is a teaching apprenticeship'
     errors.push(error)
   }
 
