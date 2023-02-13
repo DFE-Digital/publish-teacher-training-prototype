@@ -1351,7 +1351,7 @@ exports.edit_course_start_date_post = (req, res) => {
     const error = {}
     error.fieldName = 'start-date'
     error.href = '#start-date'
-    error.text = 'Select a start date'
+    error.text = 'Select a course start date'
     errors.push(error)
   }
 
@@ -3258,7 +3258,7 @@ exports.new_course_start_date_post = (req, res) => {
     const error = {}
     error.fieldName = 'start-date'
     error.href = '#start-date'
-    error.text = 'Select a start date'
+    error.text = 'Select a course start date'
     errors.push(error)
   }
 
