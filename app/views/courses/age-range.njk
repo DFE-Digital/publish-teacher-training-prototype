@@ -62,7 +62,7 @@
                 {% if option.conditional %}
                   <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
                     <p class="govuk-hint">
-                      Enter an age range in years, for example 5 to 11. The course must cover 4 or more school years.
+                      Enter an age range in years, for example {{ "5 to 11" if course.subjectLevel == "primary" else "11 to 18" }}. The course must cover 4 or more school years.
                     </p>
 
                     {{ govukInput({
