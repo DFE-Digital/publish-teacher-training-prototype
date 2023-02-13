@@ -62,14 +62,15 @@
                 {% if option.conditional %}
                   <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
                     <p class="govuk-hint">
-                      Enter an age range in years, for example 5 to 11. The course must cover 4 or more school years.
+                      Enter an age range in years, for example {{ "5 to 11" if course.subjectLevel == "primary" else "11 to 18" }}. The course must cover 4 or more school years.
                     </p>
 
                     {{ govukInput({
                       id: option.id + "-from",
                       name: "course[ageRangeOther][from]",
                       label: {
-                        text: "From"
+                        text: "Start age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-from"),
                       value: course.ageRangeOther.from,
@@ -80,7 +81,8 @@
                       id: option.id + "-to",
                       name: "course[ageRangeOther][to]",
                       label: {
-                        text: "To"
+                        text: "End age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-to"),
                       value: course.ageRangeOther.to,

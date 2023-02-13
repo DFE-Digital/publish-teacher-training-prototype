@@ -817,18 +817,88 @@ exports.edit_course_age_range_post = (req, res) => {
         const error = {}
         error.fieldName = 'age-range-other-from'
         error.href = '#age-range-other-from'
-        error.text = 'Enter from age'
+        error.text = 'Enter start age'
         errors.push(error)
+      } else {
+        if (course.subjectLevel === 'primary') {
+          if (req.session.data.course.ageRangeOther.from < 3
+            || req.session.data.course.ageRangeOther.from > 11) {
+            const error = {}
+            error.fieldName = 'age-range-other-from'
+            error.href = '#age-range-other-from'
+            error.text = 'Enter an age between 3 and 11'
+            errors.push(error)
+          }
+        } else {
+          if (req.session.data.course.ageRangeOther.from < 11
+            || req.session.data.course.ageRangeOther.from > 19) {
+            const error = {}
+            error.fieldName = 'age-range-other-from'
+            error.href = '#age-range-other-from'
+            error.text = 'Enter an age between 11 and 19'
+            errors.push(error)
+          }
+        }
       }
+
       if (!req.session.data.course.ageRangeOther.to.length) {
         const error = {}
         error.fieldName = 'age-range-other-to'
         error.href = '#age-range-other-to'
-        error.text = 'Enter to age'
+        error.text = 'Enter end age'
         errors.push(error)
+      } else {
+        if (course.subjectLevel === 'primary') {
+          if (req.session.data.course.ageRangeOther.to < 3
+            || req.session.data.course.ageRangeOther.to > 11) {
+            const error = {}
+            error.fieldName = 'age-range-other-to'
+            error.href = '#age-range-other-to'
+            error.text = 'Enter an age between 3 and 11'
+            errors.push(error)
+          }
+        } else {
+          if (req.session.data.course.ageRangeOther.to < 11
+            || req.session.data.course.ageRangeOther.to > 19) {
+            const error = {}
+            error.fieldName = 'age-range-other-to'
+            error.href = '#age-range-other-to'
+            error.text = 'Enter an age between 11 and 19'
+            errors.push(error)
+          }
+        }
+      }
+
+      if (req.session.data.course.ageRangeOther.from.length
+        && req.session.data.course.ageRangeOther.to.length) {
+
+        const startAge = parseInt(req.session.data.course.ageRangeOther.from)
+        const endAge = parseInt(req.session.data.course.ageRangeOther.to)
+
+        const ageDiff = endAge - startAge
+
+        console.log(startAge);
+        console.log(endAge);
+        console.log(ageDiff);
+
+        if (startAge > endAge) {
+          const error = {}
+          error.fieldName = 'age-range-other-from'
+          error.href = '#age-range-other-from'
+          error.text = 'Start age must be less than end age'
+          errors.push(error)
+        } else if (ageDiff < 4) {
+          const error = {}
+          error.fieldName = 'age-range-other-to'
+          error.href = '#age-range-other-to'
+          error.text = 'End age must be at least four years after start age'
+          errors.push(error)
+        }
+
       }
     }
   }
+
 
   if (errors.length) {
     res.render('../views/courses/age-range', {
@@ -1351,7 +1421,7 @@ exports.edit_course_start_date_post = (req, res) => {
     const error = {}
     error.fieldName = 'start-date'
     error.href = '#start-date'
-    error.text = 'Select a start date'
+    error.text = 'Select a course start date'
     errors.push(error)
   }
 
@@ -2433,15 +2503,84 @@ exports.new_course_age_range_post = (req, res) => {
         const error = {}
         error.fieldName = 'age-range-other-from'
         error.href = '#age-range-other-from'
-        error.text = 'Enter from age'
+        error.text = 'Enter start age'
         errors.push(error)
+      } else {
+        if (req.session.data.course.subjectLevel === 'primary') {
+          if (req.session.data.course.ageRangeOther.from < 3
+            || req.session.data.course.ageRangeOther.from > 11) {
+            const error = {}
+            error.fieldName = 'age-range-other-from'
+            error.href = '#age-range-other-from'
+            error.text = 'Enter an age between 3 and 11'
+            errors.push(error)
+          }
+        } else {
+          if (req.session.data.course.ageRangeOther.from < 11
+            || req.session.data.course.ageRangeOther.from > 19) {
+            const error = {}
+            error.fieldName = 'age-range-other-from'
+            error.href = '#age-range-other-from'
+            error.text = 'Enter an age between 11 and 19'
+            errors.push(error)
+          }
+        }
       }
+
       if (!req.session.data.course.ageRangeOther.to.length) {
         const error = {}
         error.fieldName = 'age-range-other-to'
         error.href = '#age-range-other-to'
-        error.text = 'Enter to age'
+        error.text = 'Enter end age'
         errors.push(error)
+      } else {
+        if (req.session.data.course.subjectLevel === 'primary') {
+          if (req.session.data.course.ageRangeOther.to < 3
+            || req.session.data.course.ageRangeOther.to > 11) {
+            const error = {}
+            error.fieldName = 'age-range-other-to'
+            error.href = '#age-range-other-to'
+            error.text = 'Enter an age between 3 and 11'
+            errors.push(error)
+          }
+        } else {
+          if (req.session.data.course.ageRangeOther.to < 11
+            || req.session.data.course.ageRangeOther.to > 19) {
+            const error = {}
+            error.fieldName = 'age-range-other-to'
+            error.href = '#age-range-other-to'
+            error.text = 'Enter an age between 11 and 19'
+            errors.push(error)
+          }
+        }
+      }
+
+      if (req.session.data.course.ageRangeOther.from.length
+        && req.session.data.course.ageRangeOther.to.length) {
+
+        const startAge = parseInt(req.session.data.course.ageRangeOther.from)
+        const endAge = parseInt(req.session.data.course.ageRangeOther.to)
+
+        const ageDiff = endAge - startAge
+
+        console.log(startAge);
+        console.log(endAge);
+        console.log(ageDiff);
+
+        if (startAge > endAge) {
+          const error = {}
+          error.fieldName = 'age-range-other-from'
+          error.href = '#age-range-other-from'
+          error.text = 'Start age must be less than end age'
+          errors.push(error)
+        } else if (ageDiff < 4) {
+          const error = {}
+          error.fieldName = 'age-range-other-to'
+          error.href = '#age-range-other-to'
+          error.text = 'End age must be at least four years after start age'
+          errors.push(error)
+        }
+
       }
     }
   }
@@ -3258,7 +3397,7 @@ exports.new_course_start_date_post = (req, res) => {
     const error = {}
     error.fieldName = 'start-date'
     error.href = '#start-date'
-    error.text = 'Select a start date'
+    error.text = 'Select a course start date'
     errors.push(error)
   }
 
