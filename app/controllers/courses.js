@@ -877,10 +877,6 @@ exports.edit_course_age_range_post = (req, res) => {
 
         const ageDiff = endAge - startAge
 
-        console.log(startAge);
-        console.log(endAge);
-        console.log(ageDiff);
-
         if (startAge > endAge) {
           const error = {}
           error.fieldName = 'age-range-other-from'
@@ -2562,10 +2558,6 @@ exports.new_course_age_range_post = (req, res) => {
         const endAge = parseInt(req.session.data.course.ageRangeOther.to)
 
         const ageDiff = endAge - startAge
-
-        console.log(startAge);
-        console.log(endAge);
-        console.log(ageDiff);
 
         if (startAge > endAge) {
           const error = {}
