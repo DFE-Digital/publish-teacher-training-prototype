@@ -69,7 +69,8 @@
                       id: option.id + "-from",
                       name: "course[ageRangeOther][from]",
                       label: {
-                        text: "From"
+                        text: "Start age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-from"),
                       value: course.ageRangeOther.from,
@@ -80,7 +81,8 @@
                       id: option.id + "-to",
                       name: "course[ageRangeOther][to]",
                       label: {
-                        text: "To"
+                        text: "End age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-to"),
                       value: course.ageRangeOther.to,
