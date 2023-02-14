@@ -319,7 +319,7 @@ router.get('/organisations/:organisationId/cycles/:cycleId/users/:userId', check
 router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthenticated, userController.user_list)
 
 /// ------------------------------------------------------------------------ ///
-/// ACCREDITED BODY ORGANISATION ROUTES
+/// ACCREDITED PROVIDER ORGANISATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new', checkIsAuthenticated, accreditedBodyController.new_accredited_body_get)
