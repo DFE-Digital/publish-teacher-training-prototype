@@ -402,6 +402,13 @@ router.get('/how-to-use-this-service/:fileName', guidanceController.guidance)
 
 router.get('/how-to-use-this-service', guidanceController.guidance)
 
+
+/// ------------------------------------------------------------------------ ///
+/// AUTOCOMPLETE ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/school-suggestions', locationController.school_suggestions_json)
+
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
 /// ------------------------------------------------------------------------ ///
