@@ -386,7 +386,7 @@ exports.delete_location_post = (req, res) => {
 }
 
 /// ------------------------------------------------------------------------ ///
-///
+/// SCHOOL SUGGESTIONS FOR AUTOCOMPLETE
 /// ------------------------------------------------------------------------ ///
 
 exports.school_suggestions_json = (req, res) => {
