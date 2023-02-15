@@ -29,7 +29,7 @@
         {% elif locations.length and (not organisation.accreditedBodies.length) %}
 
           {{ govukInsetText({
-            text: "Add an accredited body before adding courses"
+            text: "Add an accredited provider before adding courses"
           }) }}
 
         {% elif (not locations.length) and organisation.accreditedBodies.length %}
@@ -41,7 +41,7 @@
         {% else %}
 
           {{ govukInsetText({
-            text: "Add an accredited body and a location before adding courses"
+            text: "Add an accredited provider and a location before adding courses"
           }) }}
 
         {% endif %}
@@ -76,7 +76,7 @@
         {% if provider.name %}
           <h2 class="govuk-heading-m">
             <span class="govuk-caption-m">
-              Accredited body
+              Accredited provider
             </span>
             {{ provider.name }}
           </h2>

@@ -2,8 +2,8 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Accredited body" %}
-{% set caption = "Add accredited body" %}
+{% set title = "Accredited provider" %}
+{% set caption = "Add accredited provider" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -36,7 +36,7 @@
             html: headingHtml
           },
           hint: {
-            text: "Search for the accredited body"
+            text: "Search for the accredited provider"
           },
           classes: "govuk-!-width-two-thirds",
           items: accreditedBodyOptions,

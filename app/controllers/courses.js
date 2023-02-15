@@ -1283,7 +1283,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-body'
     error.href = '#accredited-body'
-    error.text = 'Select an accredited body'
+    error.text = 'Select an accredited provider'
     errors.push(error)
   }
 
@@ -1306,7 +1306,7 @@ exports.edit_course_accredited_body_post = (req, res) => {
         course: req.session.data.course
       })
 
-      req.flash('success', 'Accredited body updated')
+      req.flash('success', 'Accredited provider updated')
 
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
     } else {
@@ -2030,7 +2030,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
     } else if (req.query.referrer === 'apprenticeship') {
       req.flash('success', `Teaching apprenticeship and ${visa} updated`)
     } else if (req.query.referrer === 'accredited-body') {
-      req.flash('success', `Accredited body and ${visa} updated`)
+      req.flash('success', `Accredited provider and ${visa} updated`)
     } else {
       req.flash('success', `${visa} updated`)
     }
@@ -2664,7 +2664,7 @@ exports.new_course_qualification_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      // if organisation is an accredited body (SCITT or HEI), else they're a lead school
+      // if organisation is an accredited provider (SCITT or HEI), else they're a lead school
       if (organisation.isAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
       } else {
@@ -3018,7 +3018,7 @@ exports.new_course_accredited_body_get = (req, res) => {
   }
 
   if (req.query.referrer === 'check') {
-    // hold accredited body so we can determine if it has changed
+    // hold accredited provider so we can determine if it has changed
     req.session.data.course.tempAccreditedBody = selectedAccreditedBody
   }
 
@@ -3035,7 +3035,7 @@ exports.new_course_accredited_body_get = (req, res) => {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
   }
-  // if there's only one accredited body, auto-select and move on
+  // if there's only one accredited provider, auto-select and move on
   if (accreditedBodyOptions.length === 1) {
     req.session.data.course.accreditedBody = accreditedBodyOptions[0].value
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship`)
@@ -3080,7 +3080,7 @@ exports.new_course_accredited_body_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-body'
     error.href = '#accredited-body'
-    error.text = 'Select an accredited body'
+    error.text = 'Select an accredited provider'
     errors.push(error)
   }
 
@@ -3101,7 +3101,7 @@ exports.new_course_accredited_body_post = (req, res) => {
       if (req.session.data.course.accreditedBody === req.session.data.course.tempAccreditedBody) {
         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
       } else {
-        // TODO: delete the student visa choice so it defaults to the accredited body's answer?
+        // TODO: delete the student visa choice so it defaults to the accredited provider's answer?
         // delete req.session.data.course.canSponsorStudentVisa
         // do we need to delete the Skilled Worker visa?
         // delete req.session.data.course.canSponsorSkilledWorkerVisa

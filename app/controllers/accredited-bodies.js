@@ -22,7 +22,7 @@ exports.accredited_bodies_list = (req, res) => {
 }
 
 /// ------------------------------------------------------------------------ ///
-/// EDIT ACCREDITED BODY
+/// EDIT ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ //
 
 exports.edit_accredited_body_description_get = (req, res) => {
@@ -65,7 +65,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
       accreditedBody
     })
 
-    req.flash('success', 'Accredited body description updated')
+    req.flash('success', 'Accredited provider description updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
   }
 }
@@ -126,13 +126,13 @@ exports.edit_accredited_body_permissions_post = (req, res) => {
       accreditedBody
     })
 
-    req.flash('success', 'Accredited body permissions updated')
+    req.flash('success', 'Accredited provider permissions updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
   }
 }
 
 /// ------------------------------------------------------------------------ ///
-/// NEW ACCREDITED BODY
+/// NEW ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ //
 
 exports.new_accredited_body_get = (req, res) => {
@@ -183,7 +183,7 @@ exports.new_accredited_body_post = (req, res) => {
   //   const error = {}
   //   error.fieldName = 'accredited-body'
   //   error.href = '#accredited-body'
-  //   error.text = 'Enter an accredited body'
+  //   error.text = 'Enter an accredited provider'
   //   errors.push(error)
   // }
 
@@ -331,12 +331,12 @@ exports.new_accredited_body_check_post = (req, res) => {
     accreditedBody: req.session.data.accreditedBody
   })
 
-  req.flash('success', 'Accredited body added')
+  req.flash('success', 'Accredited provider added')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
 }
 
 /// ------------------------------------------------------------------------ ///
-/// DELETE ACCREDITED BODY
+/// DELETE ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ ///
 
 exports.delete_accredited_body_get = (req, res) => {
@@ -367,6 +367,6 @@ exports.delete_accredited_body_post = (req, res) => {
     accreditedBodyId: req.params.accreditedBodyId
   })
 
-  req.flash('success', 'Accredited body deleted')
+  req.flash('success', 'Accredited provider deleted')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
 }
