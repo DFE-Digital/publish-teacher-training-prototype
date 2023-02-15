@@ -1,5 +1,6 @@
 const courseModel = require("../models/courses");
 const locationModel = require("../models/locations");
+const schoolModel = require("../models/schools");
 const organisationModel = require("../models/organisations");
 const validationHelper = require("../helpers/validators");
 
@@ -383,3 +384,16 @@ exports.delete_location_post = (req, res) => {
     `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
   );
 };
+
+/// ------------------------------------------------------------------------ ///
+///
+/// ------------------------------------------------------------------------ ///
+
+exports.school_suggestions_json = (req, res) => {
+  req.headers['Access-Control-Allow-Origin'] = true
+
+  let schools
+  schools = schoolModel.findMany(req.query.school)
+
+  res.json(schools)
+}
