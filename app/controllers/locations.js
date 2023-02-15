@@ -395,5 +395,9 @@ exports.school_suggestions_json = (req, res) => {
   let schools
   schools = schoolModel.findMany(req.query)
 
+  schools.sort((a, b) => {
+    return a.name.localeCompare(b.name)
+  })
+
   res.json(schools)
 }
