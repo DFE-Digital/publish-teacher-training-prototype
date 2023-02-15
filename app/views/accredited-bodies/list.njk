@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Accredited bodies" %}
+{% set title = "Accredited providers" %}
 
 {% block beforeContent %}
 
@@ -22,7 +22,7 @@
     <div class="govuk-grid-column-full">
 
       {{ govukButton({
-        text: "Add accredited body",
+        text: "Add accredited provider",
         href: actions.new + "/accredited-bodies/new"
       }) }}
 
@@ -59,7 +59,7 @@
                     {
                       href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/description?referrer=change",
                       text: "Change",
-                      visuallyHiddenText: "accredited body description"
+                      visuallyHiddenText: "accredited provider description"
                     }
                   ]
                 }
@@ -76,7 +76,7 @@
                     {
                       href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/permissions?referrer=change",
                       text: "Change",
-                      visuallyHiddenText: "accredited body permission"
+                      visuallyHiddenText: "accredited provider permission"
                     }
                   ]
                 }

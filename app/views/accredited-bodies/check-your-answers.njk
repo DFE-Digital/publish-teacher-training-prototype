@@ -3,7 +3,7 @@
 {% set primaryNavId = "accreditedBodies" %}
 
 {% set title = "Check your answers" %}
-{% set caption = "Add accredited body" %}
+{% set caption = "Add accredited provider" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -45,7 +45,7 @@
           rows: [
             {
               key: {
-                text: "Accredited body"
+                text: "Accredited provider"
               },
               value: {
                 text: accreditedBody.id | getOrganisationLabel
@@ -55,7 +55,7 @@
                   {
                     href: actions.change + "?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "accredited body"
+                    visuallyHiddenText: "accredited provider"
                   }
                 ]
               }
@@ -104,7 +104,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Add accredited body"
+          text: "Add accredited provider"
         }) }}
 
       </form>
