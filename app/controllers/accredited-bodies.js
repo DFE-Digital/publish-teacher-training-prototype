@@ -132,7 +132,7 @@ exports.edit_accredited_body_permissions_post = (req, res) => {
 }
 
 /// ------------------------------------------------------------------------ ///
-/// NEW ACCREDITED PROVIDE
+/// NEW ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ //
 
 exports.new_accredited_body_get = (req, res) => {
