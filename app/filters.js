@@ -508,7 +508,7 @@ module.exports = (env) => {
   }
 
   /*  ------------------------------------------------------------------
-  Convert subject list to course title
+  Convert subject list to course name
   @param {Array} array Array to convert
   @example [A, B, C] => A, B and C
   ------------------------------------------------------------------  */

@@ -29,7 +29,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
+        {% include "_includes/page-heading-legend.njk" %}
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -39,7 +39,9 @@
           name: "course[qualification]",
           fieldset: {
             legend: {
-              html: headingHtml
+              html: headingHtml,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           },
           errorMessage: errors | getErrorMessage("qualification"),
