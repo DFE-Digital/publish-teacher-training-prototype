@@ -393,7 +393,7 @@ exports.school_suggestions_json = (req, res) => {
   req.headers['Access-Control-Allow-Origin'] = true
 
   let schools
-  schools = schoolModel.findMany(req.query.school)
+  schools = schoolModel.findMany(req.query)
 
   res.json(schools)
 }

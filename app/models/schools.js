@@ -1,7 +1,7 @@
 const schools = require('../data/schools')
 
 exports.findMany = (params) => {
-  return schools.filter(school => school.name.includes(params.query))
+  return schools.filter(school => school.name.toLowerCase().includes(params.query.toLowerCase()))
 }
 
 exports.findOne = (params) => {
