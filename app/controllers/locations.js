@@ -306,82 +306,82 @@ exports.edit_location_post = (req, res) => {
   }
 }
 
-exports.edit_location_address_get = (req, res) => {
-  const location = locationModel.findOne({
-    organisationId: req.params.organisationId,
-    locationId: req.params.locationId,
-  })
+// exports.edit_location_address_get = (req, res) => {
+//   const location = locationModel.findOne({
+//     organisationId: req.params.organisationId,
+//     locationId: req.params.locationId,
+//   })
 
-  res.render("../views/locations/address", {
-    location,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-    },
-  })
-}
+//   res.render("../views/locations/address", {
+//     location,
+//     actions: {
+//       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
+//       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+//       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+//     },
+//   })
+// }
 
-exports.edit_location_address_post = (req, res) => {
-  const errors = []
+// exports.edit_location_address_post = (req, res) => {
+//   const errors = []
 
-  if (!req.session.data.location.address.addressLine1.length) {
-    const error = {}
-    error.fieldName = "address-line-1"
-    error.href = "#address-line-1"
-    error.text = "Enter building and street"
-    errors.push(error)
-  }
+//   if (!req.session.data.location.address.addressLine1.length) {
+//     const error = {}
+//     error.fieldName = "address-line-1"
+//     error.href = "#address-line-1"
+//     error.text = "Enter building and street"
+//     errors.push(error)
+//   }
 
-  if (!req.session.data.location.address.town.length) {
-    const error = {}
-    error.fieldName = "address-town"
-    error.href = "#address-town"
-    error.text = "Enter town or city"
-    errors.push(error)
-  }
+//   if (!req.session.data.location.address.town.length) {
+//     const error = {}
+//     error.fieldName = "address-town"
+//     error.href = "#address-town"
+//     error.text = "Enter town or city"
+//     errors.push(error)
+//   }
 
-  if (!req.session.data.location.address.postcode.length) {
-    const error = {}
-    error.fieldName = "address-postcode"
-    error.href = "#address-postcode"
-    error.text = "Enter postcode"
-    errors.push(error)
-  } else if (
-    !validationHelper.isValidPostcode(
-      req.session.data.location.address.postcode
-    )
-  ) {
-    const error = {}
-    error.fieldName = "address-postcode"
-    error.href = "#address-postcode"
-    error.text = "Enter a real postcode"
-    errors.push(error)
-  }
+//   if (!req.session.data.location.address.postcode.length) {
+//     const error = {}
+//     error.fieldName = "address-postcode"
+//     error.href = "#address-postcode"
+//     error.text = "Enter postcode"
+//     errors.push(error)
+//   } else if (
+//     !validationHelper.isValidPostcode(
+//       req.session.data.location.address.postcode
+//     )
+//   ) {
+//     const error = {}
+//     error.fieldName = "address-postcode"
+//     error.href = "#address-postcode"
+//     error.text = "Enter a real postcode"
+//     errors.push(error)
+//   }
 
-  if (errors.length) {
-    res.render("../views/locations/address", {
-      location: req.session.data.location,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      },
-      errors,
-    })
-  } else {
-    locationModel.updateOne({
-      organisationId: req.params.organisationId,
-      locationId: req.params.locationId,
-      location: req.session.data.location,
-    })
+//   if (errors.length) {
+//     res.render("../views/locations/address", {
+//       location: req.session.data.location,
+//       actions: {
+//         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
+//         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+//         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+//       },
+//       errors,
+//     })
+//   } else {
+//     locationModel.updateOne({
+//       organisationId: req.params.organisationId,
+//       locationId: req.params.locationId,
+//       location: req.session.data.location,
+//     })
 
-    req.flash("success", "Location address updated")
-    res.redirect(
-      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`
-    )
-  }
-}
+//     req.flash("success", "Location address updated")
+//     res.redirect(
+//       `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`
+//     )
+//   }
+// }
 
 /// ------------------------------------------------------------------------ ///
 /// DELETE LOCATION

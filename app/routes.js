@@ -288,8 +288,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/check'
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_post)
+// router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_get)
+// router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_post)
