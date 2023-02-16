@@ -1982,7 +1982,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
-      error.text = 'Select if candidates can get a sponsored Student visa'
+      error.text = 'Select if your organisation can sponsor Student visas for this course'
       errors.push(error)
     }
   }
@@ -1992,7 +1992,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
-      error.text = 'Select if candidates can get a sponsored Skilled Worker visa'
+      error.text = 'Select if your organisation can sponsor Skilled Worker visas for this course'
       errors.push(error)
     }
   }
@@ -3228,7 +3228,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
-      error.text = 'Select if candidates can get a sponsored Student visa'
+      error.text = 'Select if your organisation can sponsor Student visas for this course'
       errors.push(error)
     }
   }
@@ -3238,7 +3238,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
       const error = {}
       error.fieldName = 'visa-sponsorship'
       error.href = '#visa-sponsorship'
-      error.text = 'Select if candidates can get a sponsored Skilled Worker visa'
+      error.text = 'Select if your organisation can sponsor Skilled Worker visas for this course'
       errors.push(error)
     }
   }
