@@ -11,7 +11,7 @@ exports.location_list = (req, res) => {
     organisationId: req.params.organisationId,
   })
 
-  res.render("../views/locations/list", {
+  res.render("../views/locations/index", {
     locations: locations,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
@@ -55,7 +55,7 @@ exports.new_location_get = (req, res) => {
     save += "?referrer=check"
   }
 
-  res.render("../views/locations/edit", {
+  res.render("../views/locations/new", {
     location: req.session.data.location,
     actions: {
       save,
@@ -85,7 +85,7 @@ exports.new_location_post = (req, res) => {
   }
 
   if (errors.length) {
-    res.render("../views/locations/edit", {
+    res.render("../views/locations/new", {
       location: req.session.data.location,
       actions: {
         save,
@@ -100,21 +100,22 @@ exports.new_location_post = (req, res) => {
         `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
       )
     } else {
-      res.redirect(
-        `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`
-      )
+      if (true) {
+        res.redirect(
+          `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`
+        )
+      } else {
+        res.redirect(
+          `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`
+        )
+      }
     }
   }
 }
 
-exports.new_location_address_get = (req, res) => {
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
+exports.new_location_find_get = (req, res) => {
 
-  if (req.query.referrer === "check") {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
-  }
-
-  res.render("../views/locations/address", {
+  res.render("../views/locations/find", {
     location: req.session.data.location,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
@@ -124,11 +125,53 @@ exports.new_location_address_get = (req, res) => {
   })
 }
 
-exports.new_location_address_post = (req, res) => {
+exports.new_location_find_post = (req, res) => {
+
+  if (errors.length) {
+    res.render("../views/locations/find", {
+      location: req.session.data.location,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`,
+        back,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      },
+      errors,
+    })
+  } else {
+    res.redirect(
+      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`
+    )
+  }
+}
+
+exports.new_location_edit_get = (req, res) => {
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
+
+  if (true) {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`
+  }
+
   if (req.query.referrer === "check") {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
   }
+
+  res.render("../views/locations/edit", {
+    location: req.session.data.location,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
+      back,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+    },
+  })
+}
+
+exports.new_location_edit_post = (req, res) => {
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
+
+  if (req.query.referrer === "check") {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
+  }
+
   const errors = []
 
   if (!req.session.data.location.address.addressLine1.length) {
@@ -166,7 +209,7 @@ exports.new_location_address_post = (req, res) => {
   }
 
   if (errors.length) {
-    res.render("../views/locations/address", {
+    res.render("../views/locations/edit", {
       location: req.session.data.location,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
