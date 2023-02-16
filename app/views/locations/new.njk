@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "locations" %}
 
-{% set title = "TITLE" %}
+{% set title = "What location would you like to add?" %}
 {% set caption = "Add location" %}
 
 {% block pageTitle %}
@@ -34,7 +34,9 @@
           name: "location[type]",
           fieldset: {
             legend: {
-              html: headingHtml
+              html: headingHtml,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           },
           errorMessage: errors | getErrorMessage("location-type"),
