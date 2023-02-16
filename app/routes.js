@@ -276,8 +276,11 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/va
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/find', checkIsAuthenticated, locationController.new_location_find_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/find', checkIsAuthenticated, locationController.new_location_find_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/edit', checkIsAuthenticated, locationController.new_location_edit_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/edit', checkIsAuthenticated, locationController.new_location_edit_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_post)
