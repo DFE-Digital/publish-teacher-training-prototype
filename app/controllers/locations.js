@@ -54,7 +54,7 @@ exports.new_location_find_get = (req, res) => {
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
       edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
     },
   })
@@ -77,7 +77,7 @@ exports.new_location_find_post = (req, res) => {
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
         edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
       },
       errors,
@@ -199,7 +199,7 @@ exports.new_location_check_post = (req, res) => {
   delete req.session.data.location
   delete req.session.data.school
 
-  req.flash("success", "Location added")
+  req.flash("success", "School added")
   res.redirect(
     `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
   )
@@ -253,7 +253,7 @@ exports.edit_location_post = (req, res) => {
       location: req.session.data.location,
     })
 
-    req.flash("success", "Location updated")
+    req.flash("success", "School updated")
     res.redirect(
       `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`
     )
@@ -301,7 +301,7 @@ exports.delete_location_post = (req, res) => {
     locationId: req.params.locationId,
   })
 
-  req.flash("success", "Location removed")
+  req.flash("success", "School removed")
   res.redirect(
     `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
   )
