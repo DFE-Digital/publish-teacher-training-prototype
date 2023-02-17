@@ -99,6 +99,7 @@ exports.new_location_find_get = (req, res) => {
     location: req.session.data.location,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`,
+      edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
     },
@@ -121,6 +122,7 @@ exports.new_location_find_post = (req, res) => {
       location: req.session.data.location,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`,
+        edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
       },
