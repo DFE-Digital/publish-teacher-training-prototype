@@ -6,6 +6,7 @@ const validationHelper = require("../helpers/validators")
 
 exports.location_list = (req, res) => {
   delete req.session.data.location
+  delete req.session.data.school
 
   const locations = locationModel.findMany({
     organisationId: req.params.organisationId,
@@ -96,7 +97,7 @@ exports.new_location_post = (req, res) => {
 exports.new_location_find_get = (req, res) => {
 
   res.render("../views/locations/find", {
-    location: req.session.data.location,
+    school: req.session.data.school,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`,
       edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`,
@@ -119,7 +120,7 @@ exports.new_location_find_post = (req, res) => {
 
   if (errors.length) {
     res.render("../views/locations/find", {
-      location: req.session.data.location,
+      school: req.session.data.school,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/find`,
         edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/edit`,
@@ -246,6 +247,7 @@ exports.new_location_check_post = (req, res) => {
   })
 
   delete req.session.data.location
+  delete req.session.data.school
 
   req.flash("success", "Location added")
   res.redirect(

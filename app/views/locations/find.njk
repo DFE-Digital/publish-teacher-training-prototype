@@ -23,9 +23,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {# {% set headingHtml %} #}
-        {% include "_includes/page-heading.njk" %}
-      {# {% endset %} #}
+      {% include "_includes/page-heading.njk" %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -34,10 +32,10 @@
             id: "school",
             name: "school",
             label: {
-              text: "School or college name or URN",
+              text: "School or college name, URN or postcode",
               classes: "govuk-label--s"
             },
-            value: data.school.name,
+            value: school,
             autocomplete: "off",
             formGroup: {
               classes: "govuk-!-margin-bottom-0"
