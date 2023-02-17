@@ -273,11 +273,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/va
 /// LOCATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_post)
-
-router.get('/organisations/:organisationId/cycles/:cycleId/schools/new/find', checkIsAuthenticated, locationController.new_location_find_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/schools/new/find', checkIsAuthenticated, locationController.new_location_find_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_find_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_find_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/schools/new/edit', checkIsAuthenticated, locationController.new_location_edit_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/schools/new/edit', checkIsAuthenticated, locationController.new_location_edit_post)

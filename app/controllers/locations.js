@@ -47,59 +47,12 @@ exports.location_details = (req, res) => {
 /// NEW LOCATION
 /// ------------------------------------------------------------------------ ///
 
-exports.new_location_get = (req, res) => {
-  delete req.session.data.location
-
-  res.render("../views/locations/new", {
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
-    },
-  })
-}
-
-exports.new_location_post = (req, res) => {
-  const errors = []
-
-  if (!req.session.data.location?.type) {
-    const error = {}
-    error.fieldName = 'location-type'
-    error.href = '#location-type'
-    error.text = 'Select what type of location you want to add'
-    errors.push(error)
-  }
-
-  if (errors.length) {
-    res.render("../views/locations/new", {
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
-      },
-      errors,
-    })
-  } else {
-
-    if (req.session.data.location.type === 'school') {
-      res.redirect(
-        `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/find`
-      )
-    } else {
-      res.redirect(
-        `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`
-      )
-    }
-
-  }
-}
-
 exports.new_location_find_get = (req, res) => {
 
   res.render("../views/locations/find", {
     school: req.session.data.school,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/find`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
       edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
@@ -122,7 +75,7 @@ exports.new_location_find_post = (req, res) => {
     res.render("../views/locations/find", {
       school: req.session.data.school,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/find`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
         edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
@@ -137,13 +90,14 @@ exports.new_location_find_post = (req, res) => {
 }
 
 exports.new_location_edit_get = (req, res) => {
-  const location = schoolModel.findOne({ name: req.session.data.school })
+  let location = {}
+  if (req.session.data.location) {
+    location = req.session.data.location
+  } else {
+   location = schoolModel.findOne({ name: req.session.data.school })
+  }
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
-
-  if (req.session.data.type === 'school') {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/find`
-  }
 
   if (req.query.referrer === "check") {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
@@ -165,10 +119,6 @@ exports.new_location_edit_post = (req, res) => {
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
-
-  if (req.session.data.type === 'school') {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/find`
-  }
 
   if (req.query.referrer === "check") {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
