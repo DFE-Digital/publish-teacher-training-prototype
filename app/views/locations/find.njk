@@ -30,22 +30,26 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('school'))}}">
-            {{ govukInput({
-              id: "school",
-              name: "school",
-              label: {
-                text: "School name",
-                classes: "govuk-label--s"
-              },
-              value: data.school.name,
-              autocomplete: "off",
-              formGroup: {
-                classes: "govuk-!-margin-bottom-0"
-              },
-              errorMessage: errors | getErrorMessage("school")
-            }) }}
-            <div id="school-autocomplete" class="govuk-body"></div>
-          </div>
+          {{ govukInput({
+            id: "school",
+            name: "school",
+            label: {
+              text: "School or college name or URN",
+              classes: "govuk-label--s"
+            },
+            value: data.school.name,
+            autocomplete: "off",
+            formGroup: {
+              classes: "govuk-!-margin-bottom-0"
+            },
+            errorMessage: errors | getErrorMessage("school")
+          }) }}
+          <div id="school-autocomplete" class="govuk-body"></div>
+        </div>
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.edit }}">I can’t find the school, enter manually</a>
+        </p>
 
         {{ govukButton({
           text: "Continue"
