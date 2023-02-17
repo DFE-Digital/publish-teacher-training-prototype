@@ -1,8 +1,8 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
-{% set title = "Locations" %}
+{% set title = "Schools" %}
 
 {% block beforeContent %}
 
@@ -18,7 +18,7 @@
       {% include "_includes/page-heading.njk" %}
 
       {{ govukButton({
-        text: "Add location",
+        text: "Add school",
         href: actions.new
       }) }}
 
@@ -56,7 +56,7 @@
 
         </table>
       {% else %}
-        <p class="govuk-body">There are no locations for {{ provider.name if provider.name else "your organisation" }}.</p>
+        <p class="govuk-body">There are no schools for {{ provider.name if provider.name else "your organisation" }}.</p>
       {% endif %}
 
     </div>

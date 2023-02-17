@@ -1,9 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
-{% set title = "Find a school" %}
-{% set caption = "Add location" %}
+{% set title = "Enter a school, university, college, URN or postcode" %}
+{% set caption = "Add school" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -23,7 +23,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% include "_includes/page-heading.njk" %}
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -32,8 +34,7 @@
             id: "school",
             name: "school",
             label: {
-              text: "School or college name, URN or postcode",
-              classes: "govuk-label--s"
+              html: headingHtml
             },
             value: school,
             autocomplete: "off",
@@ -45,8 +46,8 @@
           <div id="school-autocomplete" class="govuk-body"></div>
         </div>
 
-        <p class="govuk-body">
-          <a class="govuk-link" href="{{ actions.edit }}">I can’t find the school, enter manually</a>
+        <p class="govuk-body govuk-!-margin-bottom-7">
+          <a class="govuk-link" href="{{ actions.edit }}">I cannot find the school - enter manually</a>
         </p>
 
         {{ govukButton({

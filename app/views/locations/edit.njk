@@ -1,12 +1,12 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% if referrer == "change" %}
   {% set title = location.name %}
 {% else %}
   {% set title = "Edit school details" %}
-  {% set caption = "Add location" %}
+  {% set caption = "Add school" %}
 {% endif %}
 
 {% block pageTitle %}
@@ -140,7 +140,7 @@
         {% endcall %}
 
         {{ govukButton({
-          text: "Update location" if referrer == "change" else "Continue"
+          text: "Update school" if referrer == "change" else "Continue"
         }) }}
 
       </form>
