@@ -44,7 +44,7 @@ const initAutocomplete = ({ element, input, path, selectNameAndCode }) => {
     typeof result === "string" ? result : result && `${result.name} (${result.address.town}, ${result.address.postcode})`;
 
   try {
-    if($input) {
+    if ($input) {
       accessibleAutocomplete({
         element: $el,
         id: $input.id,
@@ -63,7 +63,7 @@ const initAutocomplete = ({ element, input, path, selectNameAndCode }) => {
 
       $input.parentNode.removeChild($input);
     }
-  } catch(err) {
+  } catch (err) {
     console.error(`Failed to initialise ${input} autocomplete:`, err);
   }
 };
