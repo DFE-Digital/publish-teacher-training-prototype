@@ -67,7 +67,7 @@ exports.new_location_find_post = (req, res) => {
     const error = {}
     error.fieldName = 'school'
     error.href = '#school'
-    error.text = 'Enter a school name'
+    error.text = 'Enter a school, university, college, URN or postcode'
     errors.push(error)
   }
 
@@ -131,7 +131,7 @@ exports.new_location_edit_post = (req, res) => {
     const error = {}
     error.fieldName = "address-line-1"
     error.href = "#address-line-1"
-    error.text = "Enter building and street"
+    error.text = "Enter address line 1"
     errors.push(error)
   }
 
