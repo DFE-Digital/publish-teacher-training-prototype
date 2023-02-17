@@ -2,7 +2,12 @@ const schools = require('../data/schools')
 
 exports.findMany = (params) => {
   if (params.query?.length) {
-    return schools.filter(school => school.name.toLowerCase().includes(params.query.toLowerCase()))
+    const query = params.query.toLowerCase()
+    return schools.filter(school =>
+      school.name.toLowerCase().includes(query)
+      || school.urn.toString().includes(query)
+      || school.address.postcode.toLowerCase().includes(query)
+     )
   } else {
     return []
   }
