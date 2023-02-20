@@ -1198,7 +1198,7 @@ exports.edit_course_location_get = (req, res) => {
     course,
     locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/location`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -1220,16 +1220,16 @@ exports.edit_course_location_post = (req, res) => {
     const error = {}
     error.fieldName = 'locations'
     error.href = '#locations'
-    error.text = 'Select a location'
+    error.text = 'Select a school placement'
     errors.push(error)
   }
 
   if (errors.length) {
-    res.render('../views/courses/location', {
+    res.render('../views/courses/school-placement', {
       course,
       locationOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/location`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -1242,7 +1242,7 @@ exports.edit_course_location_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'Location updated')
+    req.flash('success', 'School placement updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -2914,7 +2914,7 @@ exports.new_course_study_mode_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`)
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`)
     }
   }
 }
@@ -2929,7 +2929,7 @@ exports.new_course_location_get = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
@@ -2970,7 +2970,7 @@ exports.new_course_location_post = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
@@ -2981,7 +2981,7 @@ exports.new_course_location_post = (req, res) => {
     const error = {}
     error.fieldName = 'locations'
     error.href = '#locations'
-    error.text = 'Select a location'
+    error.text = 'Select a school placement'
     errors.push(error)
   }
 
@@ -3025,7 +3025,7 @@ exports.new_course_accredited_body_get = (req, res) => {
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
 
   if (locations.length === 1) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
@@ -3065,7 +3065,7 @@ exports.new_course_accredited_body_post = (req, res) => {
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
 
   if (locations.length === 1) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
@@ -3150,7 +3150,7 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
 
   if (organisation.isAccreditedBody) {
     if (locations.length > 1) {
-      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
     } else {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
     }
@@ -3212,7 +3212,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
 
   if (organisation.isAccreditedBody) {
     if (locations.length > 1) {
-      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/location`
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
     } else {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
     }

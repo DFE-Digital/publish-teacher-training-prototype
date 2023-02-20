@@ -133,8 +133,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/apprenti
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courseController.new_course_study_mode_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courseController.new_course_study_mode_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/location', checkIsAuthenticated, courseController.new_course_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/location', checkIsAuthenticated, courseController.new_course_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placement', checkIsAuthenticated, courseController.new_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placement', checkIsAuthenticated, courseController.new_course_location_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_post)
@@ -192,8 +192,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ap
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/location', checkIsAuthenticated, courseController.edit_course_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/location', checkIsAuthenticated, courseController.edit_course_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement', checkIsAuthenticated, courseController.edit_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement', checkIsAuthenticated, courseController.edit_course_location_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_post)
@@ -263,8 +263,8 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vac
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/edit', checkIsAuthenticated, vacancyController.edit_vacancies_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/locations', checkIsAuthenticated, vacancyController.edit_vacancies_locations_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/locations', checkIsAuthenticated, vacancyController.edit_vacancies_locations_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/school-placements', checkIsAuthenticated, vacancyController.edit_vacancies_locations_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/school-placements', checkIsAuthenticated, vacancyController.edit_vacancies_locations_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/check', checkIsAuthenticated, vacancyController.edit_vacancies_check_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/check', checkIsAuthenticated, vacancyController.edit_vacancies_check_post)
