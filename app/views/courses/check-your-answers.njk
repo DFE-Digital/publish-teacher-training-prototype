@@ -211,7 +211,7 @@
             },
             {
               key: {
-                text: "Location" + ("s" if course.locations.length > 1)
+                text: "School placement" + ("s" if course.locations.length > 1)
               },
               value: {
                 html: locationHtml
@@ -219,7 +219,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/location?referrer=check",
+                    href: actions.change + "/school-placement?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "location"
                   }
