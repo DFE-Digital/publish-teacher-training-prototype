@@ -1,11 +1,14 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% set title = location.name %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -101,7 +104,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/address?referrer=change",
+                  href: actions.change + "/edit?referrer=change",
                   text: "Change",
                   visuallyHiddenText: "address"
                 }
@@ -112,7 +115,7 @@
       }) }}
 
       <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove location</a>
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove school</a>
       </p>
 
     </div>

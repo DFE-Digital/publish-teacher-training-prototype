@@ -273,27 +273,24 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/va
 /// LOCATION ROUTES
 /// ------------------------------------------------------------------------ ///
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/new', checkIsAuthenticated, locationController.new_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_find_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_find_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/address', checkIsAuthenticated, locationController.new_location_address_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/new/edit', checkIsAuthenticated, locationController.new_location_edit_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/new/edit', checkIsAuthenticated, locationController.new_location_edit_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/new/check', checkIsAuthenticated, locationController.new_location_check_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/new/check', checkIsAuthenticated, locationController.new_location_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/new/check', checkIsAuthenticated, locationController.new_location_check_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/edit', checkIsAuthenticated, locationController.edit_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/:locationId/edit', checkIsAuthenticated, locationController.edit_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/:locationId/edit', checkIsAuthenticated, locationController.edit_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/address', checkIsAuthenticated, locationController.edit_location_address_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/:locationId/delete', checkIsAuthenticated, locationController.delete_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/schools/:locationId/delete', checkIsAuthenticated, locationController.delete_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/locations/:locationId/delete', checkIsAuthenticated, locationController.delete_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools/:locationId', checkIsAuthenticated, locationController.location_details)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/locations/:locationId', checkIsAuthenticated, locationController.location_details)
-
-router.get('/organisations/:organisationId/cycles/:cycleId/locations', checkIsAuthenticated, locationController.location_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/schools', checkIsAuthenticated, locationController.location_list)
 
 /// ------------------------------------------------------------------------ ///
 /// USER ROUTES

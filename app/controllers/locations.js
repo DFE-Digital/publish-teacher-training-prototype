@@ -6,16 +6,17 @@ const validationHelper = require("../helpers/validators")
 
 exports.location_list = (req, res) => {
   delete req.session.data.location
+  delete req.session.data.school
 
   const locations = locationModel.findMany({
     organisationId: req.params.organisationId,
   })
 
-  res.render("../views/locations/list", {
+  res.render("../views/locations/index", {
     locations: locations,
     actions: {
-      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
-      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
+      view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
       back: "/",
     },
   })
@@ -34,10 +35,10 @@ exports.location_details = (req, res) => {
   res.render("../views/locations/show", {
     location,
     actions: {
-      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/delete`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      delete: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}/delete`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
     },
   })
 }
@@ -46,96 +47,91 @@ exports.location_details = (req, res) => {
 /// NEW LOCATION
 /// ------------------------------------------------------------------------ ///
 
-exports.new_location_get = (req, res) => {
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
+exports.new_location_find_get = (req, res) => {
 
-  if (req.query.referrer === "check") {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
-    save += "?referrer=check"
-  }
-
-  res.render("../views/locations/edit", {
-    location: req.session.data.location,
+  res.render("../views/locations/find", {
+    school: req.session.data.school,
     actions: {
-      save,
-      back,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
+      edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
     },
   })
 }
 
-exports.new_location_post = (req, res) => {
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
-
-  if (req.query.referrer === "check") {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
-    save += "?referrer=check"
-  }
-
+exports.new_location_find_post = (req, res) => {
   const errors = []
 
-  if (!req.session.data.location.name.length) {
+  if (!req.session.data.school.length) {
     const error = {}
-    error.fieldName = "location-name"
-    error.href = "#location-name"
-    error.text = "Enter a name"
+    error.fieldName = 'school'
+    error.href = '#school'
+    error.text = 'Enter a school, university, college, URN or postcode'
     errors.push(error)
   }
 
   if (errors.length) {
-    res.render("../views/locations/edit", {
-      location: req.session.data.location,
+    res.render("../views/locations/find", {
+      school: req.session.data.school,
       actions: {
-        save,
-        back,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`,
+        edit: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
       },
       errors,
     })
   } else {
-    if (req.query.referrer && req.query.referrer === "check") {
-      res.redirect(
-        `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
-      )
-    } else {
-      res.redirect(
-        `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`
-      )
-    }
+    res.redirect(
+      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`
+    )
   }
 }
 
-exports.new_location_address_get = (req, res) => {
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
-
-  if (req.query.referrer === "check") {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
+exports.new_location_edit_get = (req, res) => {
+  let location = {}
+  if (req.session.data.location) {
+    location = req.session.data.location
+  } else {
+   location = schoolModel.findOne({ name: req.session.data.school })
   }
 
-  res.render("../views/locations/address", {
-    location: req.session.data.location,
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
+
+  if (req.query.referrer === "check") {
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
+  }
+
+  res.render("../views/locations/edit", {
+    location,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
       back,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
     },
   })
 }
 
-exports.new_location_address_post = (req, res) => {
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`
+exports.new_location_edit_post = (req, res) => {
+  const location = req.session.data.location
+
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
+
   if (req.query.referrer === "check") {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
+    save += '?referrer=check'
   }
+
   const errors = []
 
   if (!req.session.data.location.address.addressLine1.length) {
     const error = {}
     error.fieldName = "address-line-1"
     error.href = "#address-line-1"
-    error.text = "Enter building and street"
+    error.text = "Enter address line 1"
     errors.push(error)
   }
 
@@ -166,18 +162,18 @@ exports.new_location_address_post = (req, res) => {
   }
 
   if (errors.length) {
-    res.render("../views/locations/address", {
-      location: req.session.data.location,
+    res.render("../views/locations/edit", {
+      location,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
+        save,
         back,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
       },
       errors,
     })
   } else {
     res.redirect(
-      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`
+      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
     )
   }
 }
@@ -186,10 +182,10 @@ exports.new_location_check_get = (req, res) => {
   res.render("../views/locations/check-your-answers", {
     location: req.session.data.location,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/check`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new/address`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/new`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
+      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`,
     },
   })
 }
@@ -200,9 +196,12 @@ exports.new_location_check_post = (req, res) => {
     location: req.session.data.location,
   })
 
-  req.flash("success", "Location added")
+  delete req.session.data.location
+  delete req.session.data.school
+
+  req.flash("success", "School added")
   res.redirect(
-    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
+    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
   )
 }
 
@@ -219,9 +218,9 @@ exports.edit_location_get = (req, res) => {
   res.render("../views/locations/edit", {
     location,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/edit`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}/edit`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
     },
   })
 }
@@ -241,9 +240,9 @@ exports.edit_location_post = (req, res) => {
     res.render("../views/locations/edit", {
       location: req.session.data.location,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/edit`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}/edit`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
       },
       errors,
     })
@@ -254,86 +253,9 @@ exports.edit_location_post = (req, res) => {
       location: req.session.data.location,
     })
 
-    req.flash("success", "Location updated")
+    req.flash("success", "School updated")
     res.redirect(
-      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`
-    )
-  }
-}
-
-exports.edit_location_address_get = (req, res) => {
-  const location = locationModel.findOne({
-    organisationId: req.params.organisationId,
-    locationId: req.params.locationId,
-  })
-
-  res.render("../views/locations/address", {
-    location,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-    },
-  })
-}
-
-exports.edit_location_address_post = (req, res) => {
-  const errors = []
-
-  if (!req.session.data.location.address.addressLine1.length) {
-    const error = {}
-    error.fieldName = "address-line-1"
-    error.href = "#address-line-1"
-    error.text = "Enter building and street"
-    errors.push(error)
-  }
-
-  if (!req.session.data.location.address.town.length) {
-    const error = {}
-    error.fieldName = "address-town"
-    error.href = "#address-town"
-    error.text = "Enter town or city"
-    errors.push(error)
-  }
-
-  if (!req.session.data.location.address.postcode.length) {
-    const error = {}
-    error.fieldName = "address-postcode"
-    error.href = "#address-postcode"
-    error.text = "Enter postcode"
-    errors.push(error)
-  } else if (
-    !validationHelper.isValidPostcode(
-      req.session.data.location.address.postcode
-    )
-  ) {
-    const error = {}
-    error.fieldName = "address-postcode"
-    error.href = "#address-postcode"
-    error.text = "Enter a real postcode"
-    errors.push(error)
-  }
-
-  if (errors.length) {
-    res.render("../views/locations/address", {
-      location: req.session.data.location,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/address`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      },
-      errors,
-    })
-  } else {
-    locationModel.updateOne({
-      organisationId: req.params.organisationId,
-      locationId: req.params.locationId,
-      location: req.session.data.location,
-    })
-
-    req.flash("success", "Location address updated")
-    res.redirect(
-      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`
+      `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`
     )
   }
 }
@@ -366,9 +288,9 @@ exports.delete_location_get = (req, res) => {
     location,
     hasCourses,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}/delete`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations/${req.params.locationId}`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}/delete`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/${req.params.locationId}`,
     },
   })
 }
@@ -379,9 +301,9 @@ exports.delete_location_post = (req, res) => {
     locationId: req.params.locationId,
   })
 
-  req.flash("success", "Location removed")
+  req.flash("success", "School removed")
   res.redirect(
-    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/locations`
+    `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools`
   )
 }
 

@@ -1,9 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% set title = "Check your answers" %}
-{% set caption = "Add location" %}
+{% set caption = "Add school" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -88,7 +88,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/address?referrer=check",
+                    href: actions.change + "?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "address"
                   }
