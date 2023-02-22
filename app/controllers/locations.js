@@ -118,7 +118,7 @@ exports.new_location_edit_post = (req, res) => {
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`
 
   if (req.query.referrer === "check") {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
