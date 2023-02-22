@@ -127,6 +127,14 @@ exports.new_location_edit_post = (req, res) => {
 
   const errors = []
 
+  if (!req.session.data.location.name.length) {
+    const error = {}
+    error.fieldName = "location-name"
+    error.href = "#location-name"
+    error.text = "Enter a name"
+    errors.push(error)
+  }
+
   if (!req.session.data.location.address.addressLine1.length) {
     const error = {}
     error.fieldName = "address-line-1"
@@ -268,6 +276,7 @@ exports.delete_location_get = (req, res) => {
   const organisation = organisationModel.findOne({
     organisationId: req.params.organisationId,
   })
+
   const location = locationModel.findOne({
     organisationId: req.params.organisationId,
     locationId: req.params.locationId,
