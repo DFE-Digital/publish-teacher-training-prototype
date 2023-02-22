@@ -118,7 +118,7 @@ exports.new_location_edit_post = (req, res) => {
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new`
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/edit`
 
   if (req.query.referrer === "check") {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/schools/new/check`
@@ -126,6 +126,14 @@ exports.new_location_edit_post = (req, res) => {
   }
 
   const errors = []
+
+  if (!req.session.data.location.name.length) {
+    const error = {}
+    error.fieldName = "location-name"
+    error.href = "#location-name"
+    error.text = "Enter a name"
+    errors.push(error)
+  }
 
   if (!req.session.data.location.address.addressLine1.length) {
     const error = {}
@@ -268,6 +276,7 @@ exports.delete_location_get = (req, res) => {
   const organisation = organisationModel.findOne({
     organisationId: req.params.organisationId,
   })
+
   const location = locationModel.findOne({
     organisationId: req.params.organisationId,
     locationId: req.params.locationId,
