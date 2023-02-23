@@ -133,8 +133,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/apprenti
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courseController.new_course_study_mode_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mode', checkIsAuthenticated, courseController.new_course_study_mode_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placement', checkIsAuthenticated, courseController.new_course_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placement', checkIsAuthenticated, courseController.new_course_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_body_post)
@@ -192,8 +192,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ap
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-mode', checkIsAuthenticated, courseController.edit_course_study_mode_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement', checkIsAuthenticated, courseController.edit_course_location_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement', checkIsAuthenticated, courseController.edit_course_location_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_body_post)
@@ -210,8 +210,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/ab
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/interview-process', checkIsAuthenticated, courseController.edit_interview_process_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_school_placements_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement-details', checkIsAuthenticated, courseController.edit_school_placements_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placement-details', checkIsAuthenticated, courseController.edit_school_placements_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/personal-qualities', checkIsAuthenticated, courseController.edit_personal_qualities_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/personal-qualities', checkIsAuthenticated, courseController.edit_personal_qualities_post)
