@@ -137,7 +137,7 @@ exports.edit_vacancies_post = (req, res) => {
     })
   } else {
     if (course.hasVacancies === 'yes') {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`)
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/school-placements`)
     } else {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/check`)
     }
@@ -162,7 +162,7 @@ exports.edit_vacancies_locations_get = (req, res) => {
 
   const locationOptions = vacancyHelper.getLocationOptions(req.params.organisationId, req.params.courseId, selectedLocation)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/school-placements`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
 
   if (req.query.referrer === 'check') {
@@ -189,7 +189,7 @@ exports.edit_vacancies_locations_post = (req, res) => {
     req.params.courseId,
     req.session.data.locations.vacancies)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/school-placements`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
 
   if (req.query.referrer === 'check') {
@@ -203,7 +203,7 @@ exports.edit_vacancies_locations_post = (req, res) => {
     const error = {}
       error.fieldName = "locations-vacancies"
       error.href = "#locations-vacancies"
-      error.text = "Select all locations with vacancies"
+      error.text = "Select all school placements with vacancies"
       errors.push(error)
   }
 
@@ -232,7 +232,7 @@ exports.edit_vacancies_check_get = (req, res) => {
     course.hasVacancies = req.session.data.course.hasVacancies
   }
 
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/locations`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/school-placements`
   if (course.hasVacancies === 'no') {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/vacancies/edit`
   }
