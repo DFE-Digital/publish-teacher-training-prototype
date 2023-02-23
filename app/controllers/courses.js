@@ -1225,7 +1225,7 @@ exports.edit_course_location_post = (req, res) => {
   }
 
   if (errors.length) {
-    res.render('../views/courses/school-placement', {
+    res.render('../views/courses/location', {
       course,
       locationOptions,
       actions: {
@@ -1242,7 +1242,7 @@ exports.edit_course_location_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'School placement updated')
+    req.flash('success', 'School placements updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
