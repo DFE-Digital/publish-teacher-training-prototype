@@ -1198,7 +1198,7 @@ exports.edit_course_location_get = (req, res) => {
     course,
     locationOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
     }
@@ -1225,11 +1225,11 @@ exports.edit_course_location_post = (req, res) => {
   }
 
   if (errors.length) {
-    res.render('../views/courses/school-placement', {
+    res.render('../views/courses/location', {
       course,
       locationOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
       },
@@ -1242,7 +1242,7 @@ exports.edit_course_location_post = (req, res) => {
       course: req.session.data.course
     })
 
-    req.flash('success', 'School placement updated')
+    req.flash('success', 'School placements updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
   }
 }
@@ -1560,7 +1560,7 @@ exports.edit_school_placements_get = (req, res) => {
     course,
     wordCount,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement-details`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
     }
@@ -1588,7 +1588,7 @@ exports.edit_school_placements_post = (req, res) => {
       course,
       wordCount,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placements`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/school-placement-details`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
       },
@@ -2914,7 +2914,7 @@ exports.new_course_study_mode_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`)
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`)
     }
   }
 }
@@ -2929,7 +2929,7 @@ exports.new_course_location_get = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
@@ -2970,7 +2970,7 @@ exports.new_course_location_post = (req, res) => {
 
   const locationOptions = locationHelper.getLocationOptions(req.params.organisationId, selectedLocation)
 
-  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
@@ -3025,7 +3025,7 @@ exports.new_course_accredited_body_get = (req, res) => {
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
 
   if (locations.length === 1) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
@@ -3065,7 +3065,7 @@ exports.new_course_accredited_body_post = (req, res) => {
   const accreditedBodyOptions = organisationHelper.getAccreditedBodyOptions(req.params.organisationId, selectedAccreditedBody)
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/accredited-body`
-  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
 
   if (locations.length === 1) {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
@@ -3150,7 +3150,7 @@ exports.new_course_visa_sponsorship_get = (req, res) => {
 
   if (organisation.isAccreditedBody) {
     if (locations.length > 1) {
-      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
     } else {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
     }
@@ -3212,7 +3212,7 @@ exports.new_course_visa_sponsorship_post = (req, res) => {
 
   if (organisation.isAccreditedBody) {
     if (locations.length > 1) {
-      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placement`
+      back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/school-placements`
     } else {
       back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
     }
