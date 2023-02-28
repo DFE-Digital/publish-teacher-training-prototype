@@ -594,7 +594,7 @@ exports.edit_course_modern_language_post = (req, res) => {
     const error = {}
     error.fieldName = 'child-subjects'
     error.href = '#child-subjects'
-    error.text = 'Select a language'
+    error.text = 'Select at least one language'
     errors.push(error)
   }
 
@@ -2337,7 +2337,7 @@ exports.new_course_modern_language_post = (req, res) => {
     const error = {}
     error.fieldName = 'child-subjects'
     error.href = '#child-subjects'
-    error.text = 'Select a language'
+    error.text = 'Select at least one language'
     errors.push(error)
   }
 

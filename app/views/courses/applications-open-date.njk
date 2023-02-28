@@ -89,6 +89,9 @@
               checked: true if (course.applicationsOpenDate | date) == (applicationsOpenDate | date)
             },
             {
+              divider: "or"
+            },
+            {
               value: "other",
               text: "Another date",
               checked: true if course.applicationsOpenDate == "other",
