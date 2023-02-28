@@ -1220,7 +1220,7 @@ exports.edit_course_location_post = (req, res) => {
     const error = {}
     error.fieldName = 'locations'
     error.href = '#locations'
-    error.text = 'Select a school placement'
+    error.text = 'Select at least one school placement'
     errors.push(error)
   }
 
@@ -2981,7 +2981,7 @@ exports.new_course_location_post = (req, res) => {
     const error = {}
     error.fieldName = 'locations'
     error.href = '#locations'
-    error.text = 'Select a school placement'
+    error.text = 'Select at least one school placement'
     errors.push(error)
   }
 
