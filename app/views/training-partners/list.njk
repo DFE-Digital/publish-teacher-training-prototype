@@ -14,7 +14,8 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      <ul class="govuk-list govuk-list--spaced">
+      {% if partners.length %}
+        <ul class="govuk-list govuk-list--spaced">
         {% for partner in partners %}
           <li>
             <a class="govuk-link" href="/organisations/{{ organisation.id }}/cycles/{{ cycleId }}/training-partners/{{ partner.id }}/courses">
@@ -23,6 +24,9 @@
           </li>
         {% endfor %}
       </ul>
+      {% else %}
+        <p class="govuk-body">There are no training partners for {{ provider.name if provider.name else "your organisation" }}.</p>
+      {% endif %}
 
     </div>
   </div>

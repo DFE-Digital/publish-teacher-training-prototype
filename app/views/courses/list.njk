@@ -29,19 +29,19 @@
         {% elif locations.length and (not organisation.accreditedBodies.length) %}
 
           {{ govukInsetText({
-            text: "Add an accredited provider before adding courses"
+            html: '<a href="#">Add an accredited provider</a> before adding courses'
           }) }}
 
         {% elif (not locations.length) and organisation.accreditedBodies.length %}
 
           {{ govukInsetText({
-            text: "Add a location before adding courses"
+            html: '<a href="#">Add a school</a> before adding courses'
           }) }}
 
         {% else %}
 
           {{ govukInsetText({
-            text: "Add an accredited provider and a location before adding courses"
+            html: '<a href="#">Add an accredited provider</a> and <a href="#">add a school</a> before adding courses'
           }) }}
 
         {% endif %}
@@ -58,7 +58,7 @@
         {% else %}
 
           {{ govukInsetText({
-            text: "Add a location before adding courses"
+            html: '<a href="#">Add a school</a> before adding courses'
           }) }}
 
         {% endif %}
@@ -68,19 +68,23 @@
     </div>
   </div>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+  {% for provider in courses %}
 
-      {% for provider in courses %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          {% if provider.name %}
+            <h2 class="govuk-heading-m">
+              <span class="govuk-caption-m">
+                Accredited provider
+              </span>
+              {{ provider.name }}
+            </h2>
+          {% endif %}
+      </div>
+    </div>
 
-        {% if provider.name %}
-          <h2 class="govuk-heading-m">
-            <span class="govuk-caption-m">
-              Accredited provider
-            </span>
-            {{ provider.name }}
-          </h2>
-        {% endif %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
 
         {% if provider.courses.length %}
 
@@ -164,9 +168,9 @@
           <p class="govuk-body">There are no courses for {{ provider.name if provider.name else "your organisation" }}.</p>
         {% endif %}
 
-      {% endfor %}
-
+      </div>
     </div>
-  </div>
+
+  {% endfor %}
 
 {% endblock %}
