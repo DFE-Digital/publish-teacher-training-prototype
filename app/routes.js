@@ -11,6 +11,7 @@ const courseController = require('./controllers/courses')
 const cycleController = require('./controllers/cycles')
 const dataController = require('./controllers/data')
 const degreeController = require('./controllers/degrees')
+const examplesController = require('./controllers/examples')
 const gcseController = require('./controllers/gcses')
 const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
@@ -405,6 +406,23 @@ router.get('/how-to-use-this-service', guidanceController.guidance)
 /// ------------------------------------------------------------------------ ///
 
 router.get('/school-suggestions', locationController.school_suggestions_json)
+
+/// ------------------------------------------------------------------------ ///
+/// EXAMPLES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/examples/schools', (req, res) => {
+  res.redirect('/examples/schools/find')
+})
+
+router.get('/examples/schools/find', examplesController.find_school_get)
+router.post('/examples/schools/find', examplesController.find_school_post)
+
+router.get('/examples/schools/choose', examplesController.choose_school_get)
+router.post('/examples/schools/choose', examplesController.choose_school_post)
+
+router.get('/examples/schools/edit', examplesController.edit_school_get)
+router.post('/examples/schools/edit', examplesController.edit_school_post)
 
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
