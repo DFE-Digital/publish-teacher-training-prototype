@@ -1,4 +1,11 @@
-.js-enabled .app-js-hidden {
+// Display for js only
+body:not(.js-enabled) .app-js-only {
+  display: none;
+}
+
+// Display for no-js only
+.js-enabled .app-js-hidden,
+.js-enabled .app-no-js-only {
   display: none;
 }
 
