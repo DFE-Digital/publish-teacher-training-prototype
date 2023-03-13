@@ -1,6 +1,7 @@
 const schoolModel = require("../models/schools")
 
 exports.find_school_get = (req, res) => {
+  delete req.session.data.school
 
   res.render("../views/examples/schools/find", {
 

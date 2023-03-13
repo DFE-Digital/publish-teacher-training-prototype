@@ -2,12 +2,8 @@
 
 {% set primaryNavId = "schools" %}
 
-{% if referrer == "change" %}
-  {% set title = location.name %}
-{% else %}
-  {% set title = "Select a school" %}
-  {% set caption = "Add school" %}
-{% endif %}
+{% set title = (schoolCount | numeral("0,0")) + " results found for ‘" + searchTerm + "’" %}
+{% set caption = "Add school" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -27,9 +23,19 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
-        {% include "_includes/page-heading-legend.njk" %}
-      {% endset %}
+      {# {% set headingHtml %} #}
+        {% include "_includes/page-heading.njk" %}
+      {# {% endset %} #}
+
+      {% if schoolCount > 15 %}
+        <p class="govuk-body">
+          Showing the first 15 results below. <a class="govuk-link" href="{{ actions.back }}">Try narrowing down your search</a> if the school you’re looking for is not listed.
+        </p>
+      {% else %}
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.back }}">Try changing your search</a> if the school you’re looking for is not listed.
+        </p>
+      {% endif %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -38,30 +44,30 @@
           name: "school",
           fieldset: {
             legend: {
-              html: headingHtml,
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--l"
+              text: "School",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
             }
           },
           hint: {
             text: "Results for ‘" + searchTerm + "’"
-          },
+          } if 1 == 0,
           errorMessage: errors | getErrorMessage("school"),
           items: schoolItems
         }) }}
 
-        {% if schoolCount > 15 %}
+        {# {% if schoolCount > 15 %}
           {% set insetMessage  %}
             {{ schoolCount | numeral("0,0") }} more schools match your search for ‘{{ searchTerm }}’. Try narrowing down your search if the school you’re looking for is not listed.
           {% endset %}
           {{ govukInsetText({
             text: insetMessage
           }) }}
-        {% endif %}
+        {% endif %} #}
 
-        <p class="govuk-body govuk-!-margin-bottom-7">
+        {# <p class="govuk-body govuk-!-margin-bottom-7">
           <a class="govuk-link" href="{{ actions.back }}">The school is not listed - search again</a>
-        </p>
+        </p> #}
 
         {{ govukButton({
           text: "Continue"
