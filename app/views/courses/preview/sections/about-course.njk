@@ -4,7 +4,7 @@
     {{ course.aboutCourse | markdownToHtml | safe }}
   {% else %}
     {% set insetHtml %}
-      <a class="govuk-link" href="{{ actions.change }}/about-course">Enter course summary</a>
+      <a class="govuk-link" href="{{ actions.change }}/about-course?referrer=preview">Enter course summary</a>
     {% endset %}
     {{ govukInsetText({
       html: insetHtml
