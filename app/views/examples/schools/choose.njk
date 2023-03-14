@@ -2,7 +2,14 @@
 
 {% set primaryNavId = "schools" %}
 
-{% set title = (schoolCount | numeral("0,0")) + " results found for ‘" + searchTerm + "’" %}
+{% if schoolCount == 0 %}
+  {% set title = "No results found for ‘" + searchTerm + "’" %}
+{% elif schoolCount == 1 %}
+  {% set title = "1 result found for ‘" + searchTerm + "’" %}
+{% else %}
+  {% set title = (schoolCount | numeral("0,0")) + " results found for ‘" + searchTerm + "’" %}
+{% endif %}
+
 {% set caption = "Add school" %}
 
 {% block pageTitle %}
@@ -27,7 +34,11 @@
         {% include "_includes/page-heading.njk" %}
       {# {% endset %} #}
 
-      {% if schoolCount > 15 %}
+      {% if schoolCount == 0 %}
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.back }}">Try changing your search</a>.
+        </p>
+      {% elif schoolCount > 15 %}
         <p class="govuk-body">
           Showing the first 15 results below. <a class="govuk-link" href="{{ actions.back }}">Try narrowing down your search</a> if the school you’re looking for is not listed.
         </p>
@@ -37,47 +48,51 @@
         </p>
       {% endif %}
 
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+      {% if schoolCount %}
 
-        {{ govukRadios({
-          idPrefix: "school",
-          name: "school",
-          fieldset: {
-            legend: {
-              text: "School",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          hint: {
-            text: "Results for ‘" + searchTerm + "’"
-          } if 1 == 0,
-          errorMessage: errors | getErrorMessage("school"),
-          items: schoolItems
-        }) }}
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {# {% if schoolCount > 15 %}
-          {% set insetMessage  %}
-            {{ schoolCount | numeral("0,0") }} more schools match your search for ‘{{ searchTerm }}’. Try narrowing down your search if the school you’re looking for is not listed.
-          {% endset %}
-          {{ govukInsetText({
-            text: insetMessage
+          {{ govukRadios({
+            idPrefix: "school",
+            name: "school",
+            fieldset: {
+              legend: {
+                text: "School",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            hint: {
+              text: "Results for ‘" + searchTerm + "’"
+            } if 1 == 0,
+            errorMessage: errors | getErrorMessage("school"),
+            items: schoolItems
           }) }}
-        {% endif %} #}
 
-        {# <p class="govuk-body govuk-!-margin-bottom-7">
-          <a class="govuk-link" href="{{ actions.back }}">The school is not listed - search again</a>
-        </p> #}
+          {# {% if schoolCount > 15 %}
+            {% set insetMessage  %}
+              {{ schoolCount | numeral("0,0") }} more schools match your search for ‘{{ searchTerm }}’. Try narrowing down your search if the school you’re looking for is not listed.
+            {% endset %}
+            {{ govukInsetText({
+              text: insetMessage
+            }) }}
+          {% endif %} #}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+          {# <p class="govuk-body govuk-!-margin-bottom-7">
+            <a class="govuk-link" href="{{ actions.back }}">The school is not listed - search again</a>
+          </p> #}
 
-      </form>
+          {{ govukButton({
+            text: "Continue"
+          }) }}
 
-      <p class="govuk-body">
-        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
-      </p>
+        </form>
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+        </p>
+
+      {% endif %}
 
     </div>
   </div>
