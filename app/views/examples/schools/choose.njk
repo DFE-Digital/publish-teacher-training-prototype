@@ -30,9 +30,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {# {% set headingHtml %} #}
-        {% include "_includes/page-heading.njk" %}
-      {# {% endset %} #}
+      {% include "_includes/page-heading.njk" %}
 
       {% if schoolCount == 0 %}
         <p class="govuk-body">
@@ -68,19 +66,6 @@
             errorMessage: errors | getErrorMessage("school"),
             items: schoolItems
           }) }}
-
-          {# {% if schoolCount > 15 %}
-            {% set insetMessage  %}
-              {{ schoolCount | numeral("0,0") }} more schools match your search for ‘{{ searchTerm }}’. Try narrowing down your search if the school you’re looking for is not listed.
-            {% endset %}
-            {{ govukInsetText({
-              text: insetMessage
-            }) }}
-          {% endif %} #}
-
-          {# <p class="govuk-body govuk-!-margin-bottom-7">
-            <a class="govuk-link" href="{{ actions.back }}">The school is not listed - search again</a>
-          </p> #}
 
           {{ govukButton({
             text: "Continue"
