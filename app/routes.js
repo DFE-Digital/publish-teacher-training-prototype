@@ -415,14 +415,14 @@ router.get('/examples/schools', (req, res) => {
   res.redirect('/examples/schools/find')
 })
 
-router.get('/examples/schools/find', examplesController.find_school_get)
-router.post('/examples/schools/find', examplesController.find_school_post)
+router.get('/examples/schools/find', checkIsAuthenticated, examplesController.find_school_get)
+router.post('/examples/schools/find', checkIsAuthenticated, examplesController.find_school_post)
 
-router.get('/examples/schools/choose', examplesController.choose_school_get)
-router.post('/examples/schools/choose', examplesController.choose_school_post)
+router.get('/examples/schools/choose', checkIsAuthenticated, examplesController.choose_school_get)
+router.post('/examples/schools/choose', checkIsAuthenticated, examplesController.choose_school_post)
 
-router.get('/examples/schools/edit', examplesController.edit_school_get)
-router.post('/examples/schools/edit', examplesController.edit_school_post)
+router.get('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_get)
+router.post('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_post)
 
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
