@@ -150,9 +150,10 @@ exports.course_preview = (req, res) => {
 
   const trainingProvider = organisationModel.findOne({ organisationId: course.trainingProvider.id })
 
-  const accreditedBody = trainingProvider.accreditedBodies.find(accreditedBody => accreditedBody.id === course.accreditedBody.id)
-
-  course.aboutAccreditingBody = accreditedBody.description
+  if (trainingProvider.accreditedBodies) {
+    const accreditedBody = trainingProvider.accreditedBodies.find(accreditedBody => accreditedBody.id === course.accreditedBody.id)
+    course.aboutAccreditingBody = accreditedBody.description
+  }
 
   res.render('../views/courses/preview/index', {
     course,
