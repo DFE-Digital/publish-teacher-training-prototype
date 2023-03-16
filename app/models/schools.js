@@ -17,7 +17,7 @@ exports.findOne = (params) => {
   let school
 
   if (params.urn) {
-    school = schools.find(school => school.urn === params.urn)
+    school = schools.find(school => school.urn === parseInt(params.urn))
   } else if (params.name) {
     school = schools.find(school => school.name === params.name)
   }
