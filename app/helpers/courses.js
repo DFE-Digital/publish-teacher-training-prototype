@@ -8,6 +8,14 @@ const subjectHelper = require('./subjects')
 const utils = require('./utils')
 
 exports.decorate = (course) => {
+  course.subjectCodes = course.subjects.map(subject => subject.code)
+
+  // Subject knowledge enhancements
+  course.hasSke = subjectHelper.hasSke(course.subjectCodes)
+
+  // International relocation payments
+  course.hasIrp = subjectHelper.hasIrp(course.subjectCodes)
+
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
 
@@ -72,6 +80,12 @@ exports.decorate = (course) => {
         case 'F3':
           course.scholarshipBody = 'Institute of Physics'
           course.scholarshipUrl = 'https://www.iop.org/about/support-grants/iop-teacher-training-scholarships'
+          break
+        case '15': // French
+        case '17': // German
+        case '22': // Spanish
+          course.scholarshipBody = 'British Council'
+          course.scholarshipUrl = 'https://study-uk.britishcouncil.org/scholarships-funding'
           break
       }
     }
