@@ -81,6 +81,12 @@ exports.decorate = (course) => {
           course.scholarshipBody = 'Institute of Physics'
           course.scholarshipUrl = 'https://www.iop.org/about/support-grants/iop-teacher-training-scholarships'
           break
+        case '15': // French
+        case '17': // German
+        case '22': // Spanish
+          course.scholarship_body = 'British Council'
+          course.scholarship_url = 'https://www.britishcouncil.org/'
+          break
       }
     }
   }
