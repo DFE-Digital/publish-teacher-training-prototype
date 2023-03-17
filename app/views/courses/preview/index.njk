@@ -14,6 +14,11 @@
 {% endblock %}
 
 {% block content %}
+
+  {{ govukNotificationBanner({
+    text: "This is a preview of how your course appears on Find."
+  }) }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
