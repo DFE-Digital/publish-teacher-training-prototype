@@ -47,6 +47,11 @@
   {% if course.acceptPendingGcse %}
 
     {% if course.subjectLevel == "primary" %}
+      {% if course.hasSke and "03" in course.subjectCodes %}
+        <p class="govuk-body">
+          If you need to improve your primary mathematics knowledge, you may be asked to complete a <a class="govuk-link" href="https://getintoteaching.education.gov.uk/train-to-be-a-teacher/subject-knowledge-enhancement">subject knowledge enhancement (SKE) course</a>.
+        </p>
+      {% endif %}
       <p class="govuk-body">
         Grade {{ course.gcseGradeRequired }} (C) or above in English, maths and science, or equivalent qualification.
       </p>
