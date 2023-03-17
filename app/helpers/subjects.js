@@ -144,3 +144,27 @@ exports.getChildSubjectOptions = (parentSubjectCode, selectedItem) => {
 
   return items
 }
+
+// Subject knowledge enhancements
+exports.hasSke = (subjectCodes) => {
+  const subjects = require('../data/subjects')
+  const subjectCodesWithSke = subjects
+    .filter(subject => subject.hasSke === true)
+    .map(subject => subject.code)
+
+  const hasSke = subjectCodesWithSke.some(code => subjectCodes.includes(code))
+
+  return hasSke
+}
+
+// International relocation payments
+exports.hasIrp = (subjectCodes) => {
+  const subjects = require('../data/subjects')
+  const subjectCodesWithIrp = subjects
+    .filter(subject => subject.hasIrp === true)
+    .map(subject => subject.code)
+
+  const hasIrp = subjectCodesWithIrp.some(code => subjectCodes.includes(code))
+
+  return hasIrp
+}

@@ -8,6 +8,14 @@ const subjectHelper = require('./subjects')
 const utils = require('./utils')
 
 exports.decorate = (course) => {
+  const subjectCodes = course.subjects.map(subject => subject.code)
+
+  // Subject knowledge enhancements
+  course.hasSke = subjectHelper.hasSke(subjectCodes)
+
+  // International relocation payments
+  course.hasIrp = subjectHelper.hasIrp(subjectCodes)
+
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
 
