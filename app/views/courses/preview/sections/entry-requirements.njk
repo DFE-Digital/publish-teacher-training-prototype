@@ -17,7 +17,9 @@
     </p>
 
     {% if course.additionalDegreeSubjectRequirements %}
-      {{ course.additionalDegreeSubjectRequirements | markdownToHtml | safe }}
+      {% if course.campaignName != "engineers_teach_physics" %}
+        {{ course.additionalDegreeSubjectRequirements | markdownToHtml | safe }}
+      {% endif %}
     {% endif %}
 
     {% if course.subjectLevel == "secondary" %}
