@@ -1,12 +1,28 @@
-{% if trainingProvider.trainWithUs or course.aboutAccreditingBody %}
-  <div class="govuk-!-margin-bottom-8">
-    {% if trainingProvider.trainWithUs %}
-      <h2 id="about-training-provider" class="govuk-heading-l">About the training provider</h2>
-      {{ trainingProvider.trainWithUs | markdownToHtml | safe }}
-    {% endif %}
-    {% if course.aboutAccreditingBody %}
-      <h3 class="govuk-heading-m">About the accredited provider</h3>
-      {{ course.aboutAccreditingBody | markdownToHtml | safe }}
-    {% endif %}
-  </div>
-{% endif %}
+<div class="govuk-!-margin-bottom-8">
+  <h2 id="about-training-provider" class="govuk-heading-l">About the training provider</h2>
+  {% if trainingProvider.trainWithUs %}
+    {{ trainingProvider.trainWithUs | markdownToHtml | safe }}
+  {% else %}
+    {% set insetHtml %}
+      <a class="govuk-link" href="#?referrer=preview">Enter details about the training provider</a>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: insetHtml
+    }) }}
+  {% endif %}
+
+  {% if course.aboutAccreditingBody %}
+    <h3 class="govuk-heading-m">About the accredited provider</h3>
+    {{ course.aboutAccreditingBody | markdownToHtml | safe }}
+  {% else %}
+    <h3 class="govuk-heading-m">About the accredited provider</h3>
+    {% set insetHtml %}
+      <a class="govuk-link" href="#?referrer=preview">Enter details about the accredited provider</a>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: insetHtml
+    }) }}
+  {% endif %}
+</div>
