@@ -1,4 +1,14 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 id="training-with-disabilities" class="govuk-heading-l">Training with disabilities and other needs</h2>
-  {{ trainingProvider.trainWithDisability | markdownToHtml | safe }}
+  {% if trainingProvider.trainWithDisability.length %}
+    {{ trainingProvider.trainWithDisability | markdownToHtml | safe }}
+  {% else %}
+    {% set insetHtml %}
+      <a class="govuk-link" href="#?referrer=preview">Enter details about training with disabilities and other needs</a>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: insetHtml
+    }) }}
+  {% endif %}
 </div>
