@@ -12,17 +12,18 @@
     }) }}
   {% endif %}
 
-  {% if course.aboutAccreditingBody %}
+  {% if not trainingProvider.isAccreditedBody %}
     <h3 class="govuk-heading-m">About the accredited provider</h3>
-    {{ course.aboutAccreditingBody | markdownToHtml | safe }}
-  {% else %}
-    <h3 class="govuk-heading-m">About the accredited provider</h3>
-    {% set insetHtml %}
-      <a class="govuk-link" href="#?referrer=preview">Enter details about the accredited provider</a>
-    {% endset %}
+    {% if course.aboutAccreditingBody %}
+      {{ course.aboutAccreditingBody | markdownToHtml | safe }}
+    {% else %}
+      {% set insetHtml %}
+        <a class="govuk-link" href="#?referrer=preview">Enter details about the accredited provider</a>
+      {% endset %}
 
-    {{ govukInsetText({
-      html: insetHtml
-    }) }}
+      {{ govukInsetText({
+        html: insetHtml
+      }) }}
+    {% endif %}
   {% endif %}
 </div>
