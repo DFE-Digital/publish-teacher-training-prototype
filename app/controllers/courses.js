@@ -1917,15 +1917,26 @@ exports.edit_financial_support_post = (req, res) => {
 
 exports.edit_salary_details_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
   const wordCount = 250
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
 
   res.render('../views/courses/salary-details', {
     course,
     wordCount,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      save,
+      back,
+      cancel
     }
   })
 }
@@ -1935,6 +1946,16 @@ exports.edit_salary_details_post = (req, res) => {
   course.salaryDetails = req.session.data.course.salaryDetails
 
   const wordCount = 250
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
 
   const errors = []
 
@@ -1951,9 +1972,9 @@ exports.edit_salary_details_post = (req, res) => {
       course,
       wordCount,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/salary-details`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+        save,
+        back,
+        cancel
       },
       errors
     })
@@ -1965,7 +1986,11 @@ exports.edit_salary_details_post = (req, res) => {
     })
 
     req.flash('success', 'Salary details updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    if (req.query.referrer === 'preview') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    }
   }
 }
 
