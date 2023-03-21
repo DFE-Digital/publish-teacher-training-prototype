@@ -85,7 +85,7 @@ exports.decorate = (course) => {
         case '17': // German
         case '22': // Spanish
           course.scholarshipBody = 'British Council'
-          course.scholarshipUrl = 'https://study-uk.britishcouncil.org/scholarships-funding'
+          course.scholarshipUrl = 'https://www.britishcouncil.org/education/he-science/opportunities/ltts'
           break
       }
     }
