@@ -82,7 +82,13 @@ exports.edit_degree_minimum_classification_post = (req, res) => {
 
     // if no additional requirements save degreeGrade as 9, otherwise move on to next step
     if (req.session.data.degree && req.session.data.degree.minimum === 'yes') {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`)
+      let next = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+
+      if (req.query.referrer === 'preview') {
+        next += '?referrer=preview'
+      }
+
+      res.redirect(next)
     } else {
       degreeModel.updateOne({
         organisationId: req.params.organisationId,
