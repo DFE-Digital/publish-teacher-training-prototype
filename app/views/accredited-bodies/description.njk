@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Description" %}
+{% set title = "About the accredited provider" %}
 
 {% if referrer == "change" %}
   {% set caption = accreditedProvider.name %}
@@ -43,7 +43,7 @@
             html: headingHtml
           },
           hint: {
-            text: "Tell candidates about your accredited provider. You could mention their academic specialities and achievements."
+            text: "Tell candidates about the accredited provider. You could mention their academic specialities and achievements."
           },
           errorMessage: errors | getErrorMessage("accredited-provider-description"),
           value: accreditedProvider.description
