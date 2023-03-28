@@ -370,3 +370,23 @@ exports.delete_accredited_body_post = (req, res) => {
   req.flash('success', 'Accredited provider deleted')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
 }
+
+/// ------------------------------------------------------------------------ ///
+/// ACCREDITED PROVIDER SUGGESTIONS FOR AUTOCOMPLETE
+/// ------------------------------------------------------------------------ ///
+
+exports.accredited_provider_suggestions_json = (req, res) => {
+  req.headers['Access-Control-Allow-Origin'] = true
+
+  let providers
+  providers = organisationModel.findMany({
+    isAccreditedBody: true,
+    query: req.query
+  })
+
+  providers.sort((a, b) => {
+    return a.name.localeCompare(b.name)
+  })
+
+  res.json(providers)
+}
