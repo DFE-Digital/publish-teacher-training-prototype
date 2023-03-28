@@ -35,7 +35,7 @@ exports.edit_accredited_body_description_get = (req, res) => {
     organisation,
     accreditedProvider,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description`,
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description?referrer=change`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
     }
@@ -53,7 +53,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
-    error.text = 'Enter a description'
+    error.text = 'Enter details about the accredited provider'
     errors.push(error)
   }
 
@@ -62,7 +62,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
       organisation,
       accreditedProvider,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description`,
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description?referrer=change`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
       },
@@ -254,7 +254,7 @@ exports.new_accredited_body_description_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
-    error.text = 'Enter a description'
+    error.text = 'Enter details about the accredited provider'
     errors.push(error)
   }
 
