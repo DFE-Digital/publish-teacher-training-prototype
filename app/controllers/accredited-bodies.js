@@ -179,13 +179,13 @@ exports.new_accredited_body_post = (req, res) => {
 
   const errors = []
 
-  // if (!selectedAccreditedBody) {
-  //   const error = {}
-  //   error.fieldName = 'accredited-body'
-  //   error.href = '#accredited-body'
-  //   error.text = 'Enter an accredited provider'
-  //   errors.push(error)
-  // }
+  if (!req.session.data.provider.length) {
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = 'Enter a provider name, UKPRN or postcode'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/accredited-bodies/new', {

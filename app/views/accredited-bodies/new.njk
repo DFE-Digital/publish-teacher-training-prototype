@@ -29,10 +29,10 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('school'))}}">
+        <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('accredited-provider'))}}">
           {{ govukInput({
             id: "accredited-provider",
-            name: "accredited-provider",
+            name: "provider",
             label: {
               html: headingHtml
             },
@@ -41,7 +41,7 @@
             formGroup: {
               classes: "govuk-!-margin-bottom-0"
             },
-            errorMessage: errors | getErrorMessage("school")
+            errorMessage: errors | getErrorMessage("accredited-provider")
           }) }}
           <div id="accredited-provider-autocomplete" class="govuk-body"></div>
         </div>
