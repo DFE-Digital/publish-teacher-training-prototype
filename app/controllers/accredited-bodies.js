@@ -4,6 +4,8 @@ const accreditedBodyModel = require('../models/accredited-bodies')
 const organisationHelper = require('../helpers/organisations')
 const permissionsHelper = require('../helpers/permissions')
 
+const validationHelper = require("../helpers/validators")
+
 exports.accredited_bodies_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
@@ -31,9 +33,12 @@ exports.edit_accredited_body_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
+  const wordCount = 100
+
   res.render('../views/accredited-bodies/description', {
     organisation,
     accreditedProvider,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description?referrer=change`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
@@ -47,13 +52,23 @@ exports.edit_accredited_body_description_post = (req, res) => {
   const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
   accreditedProvider.description = req.session.data.accreditedProvider.description
 
+  const wordCount = 100
+
   const errors = []
 
-  if (!req.session.data.accreditedProvider.description.length) {
+  if (!accreditedProvider.description.length) {
     const error = {}
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
     error.text = 'Enter details about the accredited provider'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidWordCount(accreditedProvider.description, wordCount)
+  ) {
+    const error = {}
+    error.fieldName = 'accredited-provider-description'
+    error.href = '#accredited-provider-description'
+    error.text = `Details about the accredited provider must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
@@ -61,6 +76,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
     res.render('../views/accredited-bodies/description', {
       organisation,
       accreditedProvider,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description?referrer=change`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
@@ -255,6 +271,14 @@ exports.new_accredited_body_description_post = (req, res) => {
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
     error.text = 'Enter details about the accredited provider'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidWordCount(req.session.data.accreditedProvider.description, wordCount)
+  ) {
+    const error = {}
+    error.fieldName = 'accredited-provider-description'
+    error.href = '#accredited-provider-description'
+    error.text = `Details about the accredited provider must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
