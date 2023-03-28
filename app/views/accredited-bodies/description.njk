@@ -5,7 +5,7 @@
 {% set title = "Description" %}
 
 {% if referrer == "change" %}
-  {% set caption = accreditedBody.name %}
+  {% set caption = accreditedProvider.name %}
 {% else %}
   {% set caption = "Add accredited provider" %}
 {% endif %}
@@ -41,6 +41,9 @@
           maxwords: 100,
           label: {
             html: headingHtml
+          },
+          hint: {
+            text: "Tell candidates about your accredited provider. You could mention their academic specialities and achievements."
           },
           errorMessage: errors | getErrorMessage("accredited-provider-description"),
           value: accreditedProvider.description
