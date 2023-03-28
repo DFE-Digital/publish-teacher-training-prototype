@@ -381,7 +381,7 @@ exports.accredited_provider_suggestions_json = (req, res) => {
   let providers
   providers = organisationModel.findMany({
     isAccreditedBody: true,
-    query: req.query
+    query: req.query.query
   })
 
   providers.sort((a, b) => {
