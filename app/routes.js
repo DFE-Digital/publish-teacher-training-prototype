@@ -405,6 +405,8 @@ router.get('/how-to-use-this-service', guidanceController.guidance)
 /// AUTOCOMPLETE ROUTES
 /// ------------------------------------------------------------------------ ///
 
+router.get('/accredited-provider-suggestions', accreditedBodyController.accredited_provider_suggestions_json)
+
 router.get('/school-suggestions', locationController.school_suggestions_json)
 
 /// ------------------------------------------------------------------------ ///
