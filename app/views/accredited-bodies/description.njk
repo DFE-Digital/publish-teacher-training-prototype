@@ -49,15 +49,9 @@
           value: accreditedProvider.description
         }) }}
 
-        {% if referrer == "change" %}
-          {{ govukButton({
-            text: "Update description"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Update details" if referrer == "change" else "Continue"
+        }) }}
 
       </form>
 
