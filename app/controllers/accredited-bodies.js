@@ -6,14 +6,16 @@ const permissionsHelper = require('../helpers/permissions')
 
 exports.accredited_bodies_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  // const accreditedBodies = accreditedBodyModel.findMany({ organisationId: req.params.organisationId })
+
+  organisation.accreditedBodies.sort((a,b)=> {
+    return a.name.localeCompare(b.name)
+  })
 
   // clear out the session
-  delete req.session.data.accreditedBody
+  delete req.session.data.accreditedProvider
 
   res.render('../views/accredited-bodies/list', {
     organisation,
-    // accreditedBodies,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
       change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
@@ -137,25 +139,20 @@ exports.edit_accredited_body_permissions_post = (req, res) => {
 
 exports.new_accredited_body_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const accreditedProvider = req.session.data.accreditedProvider
 
-  // let selectedAccreditedBody
-  // if (req.session.data.accreditedBody && req.session.data.accreditedBody.id) {
-  //   selectedAccreditedBody = req.session.data.accreditedBody.id
-  // }
-
-  // const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions(selectedAccreditedBody)
-
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
   if (req.query.referrer === 'check') {
+    save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`
   }
 
   res.render('../views/accredited-bodies/new', {
     organisation,
-    // accreditedBodyOptions,
-    // selectedAccreditedBody,
+    accreditedProvider,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`,
+      save,
       back,
       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
     }
@@ -164,22 +161,18 @@ exports.new_accredited_body_get = (req, res) => {
 
 exports.new_accredited_body_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const accreditedProvider = req.session.data.accreditedProvider
 
-  // let selectedAccreditedBody
-  // if (req.session.data.accreditedBody && req.session.data.accreditedBody.id) {
-  //   selectedAccreditedBody = req.session.data.accreditedBody.id
-  // }
-
-  // const accreditedBodyOptions = organisationHelper.getAccreditedBodyAutocompleteOptions(selectedAccreditedBody)
-
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
   if (req.query.referrer === 'check') {
+    save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`
   }
 
   const errors = []
 
-  if (!req.session.data.provider.length) {
+  if (!req.session.data.accreditedProvider.name.length) {
     const error = {}
     error.fieldName = 'accredited-provider'
     error.href = '#accredited-provider'
@@ -190,22 +183,37 @@ exports.new_accredited_body_post = (req, res) => {
   if (errors.length) {
     res.render('../views/accredited-bodies/new', {
       organisation,
-      // accreditedBodyOptions,
-      // selectedAccreditedBody,
+      accreditedProvider,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`,
+        save,
         back,
         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
       },
       errors
     })
   } else {
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`)
+
+    // find the accredited provider details
+    const accreditedProvider = organisationModel.findMany({
+      isAccreditedBody: true,
+      query: req.session.data.accreditedProvider.name
+    })
+
+    req.session.data.accreditedProvider.id = accreditedProvider[0].id
+    req.session.data.accreditedProvider.code = accreditedProvider[0].code
+    req.session.data.accreditedProvider.name = accreditedProvider[0].name
+
+    if (req.query.referrer === 'check') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`)
+    }
   }
 }
 
 exports.new_accredited_body_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const accreditedProvider = req.session.data.accreditedProvider
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
@@ -214,7 +222,7 @@ exports.new_accredited_body_description_get = (req, res) => {
 
   res.render('../views/accredited-bodies/description', {
     organisation,
-    accreditedBody: req.session.data.accreditedBody,
+    accreditedProvider,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`,
       back,
@@ -225,6 +233,7 @@ exports.new_accredited_body_description_get = (req, res) => {
 
 exports.new_accredited_body_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const accreditedProvider = req.session.data.accreditedProvider
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
@@ -233,10 +242,18 @@ exports.new_accredited_body_description_post = (req, res) => {
 
   const errors = []
 
+  if (!req.session.data.accreditedProvider.description.length) {
+    const error = {}
+    error.fieldName = 'accredited-provider-description'
+    error.href = '#accredited-provider-description'
+    error.text = 'Enter a description'
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render('../views/accredited-bodies/description', {
       organisation,
-      accreditedBody: req.session.data.accreditedBody,
+      accreditedProvider,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`,
         back,
@@ -315,7 +332,7 @@ exports.new_accredited_body_check_get = (req, res) => {
 
   res.render('../views/accredited-bodies/check-your-answers', {
     organisation,
-    accreditedBody: req.session.data.accreditedBody,
+    accreditedProvider: req.session.data.accreditedProvider,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`,
@@ -328,7 +345,7 @@ exports.new_accredited_body_check_get = (req, res) => {
 exports.new_accredited_body_check_post = (req, res) => {
   accreditedBodyModel.insertOne({
     organisationId: req.params.organisationId,
-    accreditedBody: req.session.data.accreditedBody
+    accreditedBody: req.session.data.accreditedProvider
   })
 
   req.flash('success', 'Accredited provider added')
