@@ -72,66 +72,66 @@ exports.edit_accredited_body_description_post = (req, res) => {
   }
 }
 
-exports.edit_accredited_body_permissions_get = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+// exports.edit_accredited_body_permissions_get = (req, res) => {
+//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+//   const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
-  let selectedPermissions
-  if (accreditedBody && accreditedBody.permissions) {
-    selectedPermissions = accreditedBody.permissions
-  }
+//   let selectedPermissions
+//   if (accreditedBody && accreditedBody.permissions) {
+//     selectedPermissions = accreditedBody.permissions
+//   }
 
-  const permissionsOptions = permissionsHelper.getPermissionsOptions(selectedPermissions)
+//   const permissionsOptions = permissionsHelper.getPermissionsOptions(selectedPermissions)
 
-  res.render('../views/accredited-bodies/permissions', {
-    organisation,
-    accreditedBody,
-    permissionsOptions,
-    actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/permissions`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
-    }
-  })
-}
+//   res.render('../views/accredited-bodies/permissions', {
+//     organisation,
+//     accreditedBody,
+//     permissionsOptions,
+//     actions: {
+//       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/permissions`,
+//       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
+//       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
+//     }
+//   })
+// }
 
-exports.edit_accredited_body_permissions_post = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
-  accreditedBody.permissions = req.session.data.accreditedBody.permissions
+// exports.edit_accredited_body_permissions_post = (req, res) => {
+//   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+//   const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+//   accreditedBody.permissions = req.session.data.accreditedBody.permissions
 
-  let selectedPermissions
-  if (accreditedBody && accreditedBody.permissions) {
-    selectedPermissions = accreditedBody.permissions
-  }
+//   let selectedPermissions
+//   if (accreditedBody && accreditedBody.permissions) {
+//     selectedPermissions = accreditedBody.permissions
+//   }
 
-  const permissionsOptions = permissionsHelper.getPermissionsOptions(selectedPermissions)
+//   const permissionsOptions = permissionsHelper.getPermissionsOptions(selectedPermissions)
 
-  const errors = []
+//   const errors = []
 
-  if (errors.length) {
-    res.render('../views/accredited-bodies/permissions', {
-      organisation,
-      accreditedBody,
-      permissionsOptions,
-      actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/permissions`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
-      },
-      errors
-    })
-  } else {
-    accreditedBodyModel.updateOne({
-      organisationId: req.params.organisationId,
-      accreditedBodyId: req.params.accreditedBodyId,
-      accreditedBody
-    })
+//   if (errors.length) {
+//     res.render('../views/accredited-bodies/permissions', {
+//       organisation,
+//       accreditedBody,
+//       permissionsOptions,
+//       actions: {
+//         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/permissions`,
+//         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
+//         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`
+//       },
+//       errors
+//     })
+//   } else {
+//     accreditedBodyModel.updateOne({
+//       organisationId: req.params.organisationId,
+//       accreditedBodyId: req.params.accreditedBodyId,
+//       accreditedBody
+//     })
 
-    req.flash('success', 'Accredited provider permissions updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
-  }
-}
+//     req.flash('success', 'Accredited provider permissions updated')
+//     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`)
+//   }
+// }
 
 /// ------------------------------------------------------------------------ ///
 /// NEW ACCREDITED PROVIDER
