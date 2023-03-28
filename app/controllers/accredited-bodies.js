@@ -202,6 +202,17 @@ exports.new_accredited_body_post = (req, res) => {
     error.href = '#accredited-provider'
     error.text = 'Enter a provider name, UKPRN or postcode'
     errors.push(error)
+  } else if (
+    organisationHelper.hasAccreditedProvider(
+      req.params.organisationId,
+      req.session.data.accreditedProvider.name
+    )
+  ) {
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = `${req.session.data.accreditedProvider.name} has already been added`
+    errors.push(error)
   }
 
   if (errors.length) {
