@@ -29,11 +29,11 @@ exports.accredited_bodies_list = (req, res) => {
 
 exports.edit_accredited_body_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+  const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
   res.render('../views/accredited-bodies/description', {
     organisation,
-    accreditedBody,
+    accreditedProvider,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
@@ -44,15 +44,23 @@ exports.edit_accredited_body_description_get = (req, res) => {
 
 exports.edit_accredited_body_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-  const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
-  accreditedBody.description = req.session.data.accreditedBody.description
+  const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
+  accreditedProvider.description = req.session.data.accreditedProvider.description
 
   const errors = []
+
+  if (!req.session.data.accreditedProvider.description.length) {
+    const error = {}
+    error.fieldName = 'accredited-provider-description'
+    error.href = '#accredited-provider-description'
+    error.text = 'Enter a description'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/accredited-bodies/description', {
       organisation,
-      accreditedBody,
+      accreditedProvider,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/${req.params.accreditedBodyId}/description`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies`,
@@ -64,7 +72,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
     accreditedBodyModel.updateOne({
       organisationId: req.params.organisationId,
       accreditedBodyId: req.params.accreditedBodyId,
-      accreditedBody
+      accreditedBody: accreditedProvider
     })
 
     req.flash('success', 'Accredited provider description updated')
