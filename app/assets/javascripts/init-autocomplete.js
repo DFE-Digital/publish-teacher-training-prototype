@@ -34,14 +34,24 @@ const request = endpoint => {
   };
 };
 
-const initAutocomplete = ({ element, input, path, selectNameAndCode }) => {
+const initAutocomplete = ({ element, input, path, selectNameAndCode, type = null }) => {
   const $input = document.getElementById(input);
   const $el = document.getElementById(element);
   if (!$el) return;
 
+  const getTemplate = (type, result) => {
+    let template = `${result.name}`
+    if (type === "provider") {
+      template = `${result.name} (${result.code})`
+    } else if (type === "school") {
+      template = `${result.name} (${result.address.town}, ${result.address.postcode})`
+    }
+    return template
+  }
+
   const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
   const suggestionTemplate = result =>
-    typeof result === "string" ? result : result && `${result.name} (${result.address.town}, ${result.address.postcode})`;
+    typeof result === "string" ? result : result && getTemplate(type, result);
 
   try {
     if ($input) {
