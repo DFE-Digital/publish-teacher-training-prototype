@@ -32,16 +32,16 @@
         <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('accredited-provider'))}}">
           {{ govukInput({
             id: "accredited-provider",
-            name: "provider",
+            name: "accreditedProvider[name]",
             label: {
               html: headingHtml
             },
-            value: accreditedProvider,
-            autocomplete: "off",
             formGroup: {
               classes: "govuk-!-margin-bottom-0"
             },
-            errorMessage: errors | getErrorMessage("accredited-provider")
+            errorMessage: errors | getErrorMessage("accredited-provider"),
+            value: accreditedProvider.name,
+            autocomplete: "off"
           }) }}
           <div id="accredited-provider-autocomplete" class="govuk-body"></div>
         </div>
