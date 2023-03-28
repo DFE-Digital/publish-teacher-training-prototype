@@ -2,11 +2,10 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Description (optional)" %}
+{% set title = "Description" %}
 
 {% if referrer == "change" %}
   {% set caption = accreditedBody.name %}
-  <!-- + " (" + accreditedBody.code + ")" -->
 {% else %}
   {% set caption = "Add accredited provider" %}
 {% endif %}
@@ -36,15 +35,15 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukCharacterCount({
-          id: "accreditied-body-description",
-          name: "accreditedBody[description]",
+          id: "accredited-provider-description",
+          name: "accreditedProvider[description]",
           rows: 10,
           maxwords: 100,
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("accredited-body-description"),
-          value: accreditedBody.description
+          errorMessage: errors | getErrorMessage("accredited-provider-description"),
+          value: accreditedProvider.description
         }) }}
 
         {% if referrer == "change" %}
