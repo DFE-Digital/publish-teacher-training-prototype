@@ -27,10 +27,9 @@ exports.isValidPostcode = (postcode) => {
 
 
 exports.isValidWordCount = (text, wordCount) => {
-  const string = text
-          .replace(/(^\s*)|(\s*$)/gi,'') //exclude start and end white-space
-          .replace(/[ ]{2,}/gi,' ') //2 or more space to 1
-          .replace(/\n /,'\n') //exclude newline with a start spacing
+  // 1. Remove start/end whitespace and new lines, and replace with a space
+  // 2. Replace two or more spaces with a single space
+  const string = text.replace(/^\s+|\s+$|\n/g, ' ').replace(/\s{2,}/g, ' ')
 
   let valid = true
 
