@@ -250,6 +250,8 @@ exports.new_accredited_body_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
 
+  const wordCount = 100
+
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/check`
@@ -258,6 +260,7 @@ exports.new_accredited_body_description_get = (req, res) => {
   res.render('../views/accredited-bodies/description', {
     organisation,
     accreditedProvider,
+    wordCount,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`,
       back,
@@ -269,6 +272,8 @@ exports.new_accredited_body_description_get = (req, res) => {
 exports.new_accredited_body_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
+
+  const wordCount = 100
 
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new`
   if (req.query.referrer === 'check') {
@@ -297,6 +302,7 @@ exports.new_accredited_body_description_post = (req, res) => {
     res.render('../views/accredited-bodies/description', {
       organisation,
       accreditedProvider,
+      wordCount,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-bodies/new/description`,
         back,
