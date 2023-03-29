@@ -30,8 +30,9 @@
 
         {% if hasCourses %}
 
-          <p class="govuk-body">{{ accreditedBody.name }} is an accredited provider for courses run by {{ organisation.name }}.</p>
-          <p class="govuk-body">To delete {{ accreditedBody.name }}, you must first change the accredited provider for those courses.</p>
+          <p class="govuk-body">{{ accreditedBody.name }} is an accredited provider for courses run by {{ organisation.name }}. At least one of these courses is currently published on Find.</p>
+
+          <p class="govuk-body">If you need to change an accredited provider for a course which is published, please contact us at <a href="mailto:becomingateacher@digital.education.gov.uk" class="govuk-link">becomingateacher@digital.education.gov.uk</a>.</p>
 
         {% else %}
 
