@@ -1,6 +1,8 @@
 const organisationModel = require("../models/organisations")
 const schoolModel = require("../models/schools")
 
+const organisationHelper = require('../helpers/organisations')
+
 /// ------------------------------------------------------------------------ ///
 /// SCHOOLS
 /// ------------------------------------------------------------------------ ///
@@ -279,12 +281,18 @@ exports.choose_accredited_provider_post = (req, res) => {
   // store total number of results
   const providerCount = providers.length
 
+  let selectedItem
+  if (req.session.data.accreditedProvider?.id) {
+    selectedItem = req.session.data.accreditedProvider.id
+  }
+
   // parse the school results for use in macro
   let providerItems = []
   providers.forEach(provider => {
     const item = {}
     item.text = `${provider.name} (${provider.code})`
     item.value = provider.id
+    item.checked = selectedItem?.includes(provider.id) ? 'checked' : ''
     providerItems.push(item)
   })
 
@@ -298,11 +306,26 @@ exports.choose_accredited_provider_post = (req, res) => {
 
   const errors = []
 
-  if (!req.session.data.school) {
+  if (!selectedItem) {
     const error = {}
-    error.fieldName = 'school'
-    error.href = '#school'
-    error.text = 'Select a school'
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = 'Select an accredited provider'
+    errors.push(error)
+  } else if (
+    organisationHelper.hasAccreditedProvider(
+      '96d90282-3ce7-4fc7-aa60-e03d7bf8a0f1',
+      req.session.data.accreditedProvider.id
+    )
+  ) {
+    const accreditedProviderName = organisationHelper.getOrganisationLabel(
+      req.session.data.accreditedProvider.id
+    )
+
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = `${accreditedProviderName} has already been added`
     errors.push(error)
   }
 
@@ -319,6 +342,6 @@ exports.choose_accredited_provider_post = (req, res) => {
       errors,
     })
   } else {
-
+    res.send('NOT IMPLEMENTED')
   }
 }
