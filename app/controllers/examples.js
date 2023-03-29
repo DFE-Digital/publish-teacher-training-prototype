@@ -1,4 +1,11 @@
+const organisationModel = require("../models/organisations")
 const schoolModel = require("../models/schools")
+
+const organisationHelper = require('../helpers/organisations')
+
+/// ------------------------------------------------------------------------ ///
+/// SCHOOLS
+/// ------------------------------------------------------------------------ ///
 
 exports.find_school_get = (req, res) => {
   delete req.session.data.school
@@ -181,5 +188,160 @@ exports.edit_school_post = (req, res) => {
     })
   } else {
 
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
+/// ACCREDITED PROVIDERS
+/// ------------------------------------------------------------------------ ///
+
+exports.find_accredited_provider_get = (req, res) => {
+  delete req.session.data.school
+
+  res.render("../views/examples/accredited-providers/find", {
+
+    actions: {
+      save: `/examples/accredited-providers/find`,
+      back: `/examples/accredited-providers`,
+      cancel: `/examples/accredited-providers`
+    },
+  })
+}
+
+exports.find_accredited_provider_post = (req, res) => {
+  const errors = []
+
+  if (!req.session.data.accreditedProvider.name.length) {
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = 'Enter a provider name, UKPRN or postcode'
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render("../views/examples/accredited-providers/find", {
+
+      actions: {
+        save: `/examples/accredited-providers/find`,
+        back: `/examples/accredited-providers`,
+        cancel: `/examples/accredited-providers`
+      },
+      errors,
+    })
+  } else {
+    res.redirect(`/examples/accredited-providers/choose`)
+  }
+}
+
+exports.choose_accredited_provider_get = (req, res) => {
+  const providers = organisationModel.findMany({
+    isAccreditedBody: true,
+    query: req.session.data.accreditedProvider.name
+  })
+
+  // store total number of results
+  const providerCount = providers.length
+
+  // parse the school results for use in macro
+  let providerItems = []
+  providers.forEach(provider => {
+    const item = {}
+    item.text = `${provider.name} (${provider.code})`
+    item.value = provider.id
+    providerItems.push(item)
+  })
+
+  // sort items alphabetically
+  providerItems.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  // only get the first 15 items
+  providerItems = providerItems.slice(0,15)
+
+  res.render("../views/examples/accredited-providers/choose", {
+    providerItems,
+    providerCount,
+    searchTerm: req.session.data.accreditedProvider.name,
+    actions: {
+      save: `/examples/accredited-providers/choose`,
+      back: `/examples/accredited-providers/find`,
+      cancel: `/examples/accredited-providers`,
+    },
+  })
+}
+
+exports.choose_accredited_provider_post = (req, res) => {
+  const providers = organisationModel.findMany({
+    isAccreditedBody: true,
+    query: req.session.data.accreditedProvider.name
+  })
+
+  // store total number of results
+  const providerCount = providers.length
+
+  let selectedItem
+  if (req.session.data.accreditedProvider?.id) {
+    selectedItem = req.session.data.accreditedProvider.id
+  }
+
+  // parse the school results for use in macro
+  let providerItems = []
+  providers.forEach(provider => {
+    const item = {}
+    item.text = `${provider.name} (${provider.code})`
+    item.value = provider.id
+    item.checked = selectedItem?.includes(provider.id) ? 'checked' : ''
+    providerItems.push(item)
+  })
+
+  // sort items alphabetically
+  providerItems.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  // only get the first 15 items
+  providerItems = providerItems.slice(0,15)
+
+  const errors = []
+
+  if (!selectedItem) {
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = 'Select an accredited provider'
+    errors.push(error)
+  } else if (
+    organisationHelper.hasAccreditedProvider(
+      '96d90282-3ce7-4fc7-aa60-e03d7bf8a0f1',
+      req.session.data.accreditedProvider.id
+    )
+  ) {
+    const accreditedProviderName = organisationHelper.getOrganisationLabel(
+      req.session.data.accreditedProvider.id
+    )
+
+    const error = {}
+    error.fieldName = 'accredited-provider'
+    error.href = '#accredited-provider'
+    error.text = `${accreditedProviderName} has already been added`
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render("../views/examples/accredited-providers/choose", {
+      providerItems,
+      providerCount,
+      searchTerm: req.session.data.accreditedProvider.name,
+      actions: {
+        save: `/examples/accredited-providers/choose`,
+        back: `/examples/accredited-providers/find`,
+        cancel: `/examples/accredited-providers`,
+      },
+      errors,
+    })
+  } else {
+    res.send('NOT IMPLEMENTED')
   }
 }

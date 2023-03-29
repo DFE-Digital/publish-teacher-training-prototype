@@ -426,6 +426,20 @@ router.post('/examples/schools/choose', checkIsAuthenticated, examplesController
 router.get('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_get)
 router.post('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_post)
 
+router.get('/examples/accredited-providers', (req, res) => {
+  res.redirect('/examples/accredited-providers/find')
+})
+
+router.get('/examples/accredited-providers', (req, res) => {
+  res.redirect('/examples/accredited-providers/find')
+})
+
+router.get('/examples/accredited-providers/find', checkIsAuthenticated, examplesController.find_accredited_provider_get)
+router.post('/examples/accredited-providers/find', checkIsAuthenticated, examplesController.find_accredited_provider_post)
+
+router.get('/examples/accredited-providers/choose', checkIsAuthenticated, examplesController.choose_accredited_provider_get)
+router.post('/examples/accredited-providers/choose', checkIsAuthenticated, examplesController.choose_accredited_provider_post)
+
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
 /// ------------------------------------------------------------------------ ///
