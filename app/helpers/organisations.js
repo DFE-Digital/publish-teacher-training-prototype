@@ -81,10 +81,12 @@ exports.getOrganisationLabel = (organisationId) => {
 }
 
 
-exports.hasAccreditedProvider = (organisationId, accreditedProviderName) => {
+exports.hasAccreditedProvider = (organisationId, providerNameOrId) => {
   const organisation = organisationModel.findOne({ organisationId: organisationId })
+
   const accreditedProvider = organisation.accreditedBodies?.find(
-    accreditedProvider => accreditedProvider.name === accreditedProviderName
+    accreditedProvider => accreditedProvider.name === providerNameOrId
+      || accreditedProvider.id == providerNameOrId
   )
 
   let hasAccreditedProvider = false
