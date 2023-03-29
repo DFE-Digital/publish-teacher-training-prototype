@@ -2,11 +2,10 @@
 
 {% set primaryNavId = "accreditedBodies" %}
 
-{% set title = "Description (optional)" %}
+{% set title = "About the accredited provider" %}
 
 {% if referrer == "change" %}
-  {% set caption = accreditedBody.name %}
-  <!-- + " (" + accreditedBody.code + ")" -->
+  {% set caption = accreditedProvider.name %}
 {% else %}
   {% set caption = "Add accredited provider" %}
 {% endif %}
@@ -36,26 +35,23 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukCharacterCount({
-          id: "accreditied-body-description",
-          name: "accreditedBody[description]",
+          id: "accredited-provider-description",
+          name: "accreditedProvider[description]",
           rows: 10,
-          maxwords: 100,
+          maxwords: wordCount,
           label: {
             html: headingHtml
           },
-          errorMessage: errors | getErrorMessage("accredited-body-description"),
-          value: accreditedBody.description
+          hint: {
+            text: "Tell candidates about the accredited provider. You could mention their academic specialities and achievements."
+          },
+          errorMessage: errors | getErrorMessage("accredited-provider-description"),
+          value: accreditedProvider.description
         }) }}
 
-        {% if referrer == "change" %}
-          {{ govukButton({
-            text: "Update description"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "Continue"
-          }) }}
-        {% endif %}
+        {{ govukButton({
+          text: "Update description" if referrer == "change" else "Continue"
+        }) }}
 
       </form>
 

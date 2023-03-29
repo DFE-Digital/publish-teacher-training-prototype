@@ -1,9 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "schools" %}
+{% set primaryNavId = "accreditedProviders" %}
 
-{% set title = "Enter a school, university, college, URN or postcode" %}
-{% set caption = "Add school" %}
+{% set title = "Enter a provider name, UKPRN or postcode" %}
+{% set caption = "Add accredited provider" %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -12,7 +12,7 @@
 {% block beforeContent %}
 {{ govukBackLink({
   text: "Back",
-  href: actions.back
+  href: "/examples"
 }) }}
 {% endblock %}
 
@@ -29,26 +29,22 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('school'))}}">
+        <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('accredited-provider'))}}">
           {{ govukInput({
-            id: "school",
-            name: "school",
+            id: "accredited-provider",
+            name: "accreditedProvider[name]",
             label: {
               html: headingHtml
             },
-            value: school,
-            autocomplete: "off",
             formGroup: {
               classes: "govuk-!-margin-bottom-0"
             },
-            errorMessage: errors | getErrorMessage("school")
+            errorMessage: errors | getErrorMessage("accredited-provider"),
+            value: accreditedProvider.name,
+            autocomplete: "off"
           }) }}
-          <div id="school-autocomplete" class="govuk-body"></div>
+          <div id="accredited-provider-autocomplete" class="govuk-body"></div>
         </div>
-
-        <p class="govuk-body govuk-!-margin-bottom-7">
-          <a class="govuk-link" href="{{ actions.edit }}">I cannot find the school - enter manually</a>
-        </p>
 
         {{ govukButton({
           text: "Continue"
@@ -70,12 +66,12 @@
   <script src="/public/javascripts/debounce.js"></script>
   <script src="/public/javascripts/init-autocomplete.js"></script>
 
-  <script type="text/javascript">
+  {# <script type="text/javascript">
   initAutocomplete({
-    element: "school-autocomplete",
-    input: "school",
-    path: "/school-suggestions",
-    type: "school"
+    element: "accredited-provider-autocomplete",
+    input: "accredited-provider",
+    path: "/accredited-provider-suggestions",
+    type: "provider"
   });
-  </script>
+  </script> #}
 {% endblock %}

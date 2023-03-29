@@ -326,8 +326,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/ne
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/description', checkIsAuthenticated, accreditedBodyController.new_accredited_body_description_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_post)
+// router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_get)
+// router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/permissions', checkIsAuthenticated, accreditedBodyController.new_accredited_body_permissions_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/new/check', checkIsAuthenticated, accreditedBodyController.new_accredited_body_check_post)
@@ -335,8 +335,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/ne
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/description', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_description_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_post)
+// router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_get)
+// router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/permissions', checkIsAuthenticated, accreditedBodyController.edit_accredited_body_permissions_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-bodies/:accreditedBodyId/delete', checkIsAuthenticated, accreditedBodyController.delete_accredited_body_post)
@@ -405,6 +405,8 @@ router.get('/how-to-use-this-service', guidanceController.guidance)
 /// AUTOCOMPLETE ROUTES
 /// ------------------------------------------------------------------------ ///
 
+router.get('/accredited-provider-suggestions', accreditedBodyController.accredited_provider_suggestions_json)
+
 router.get('/school-suggestions', locationController.school_suggestions_json)
 
 /// ------------------------------------------------------------------------ ///
@@ -423,6 +425,20 @@ router.post('/examples/schools/choose', checkIsAuthenticated, examplesController
 
 router.get('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_get)
 router.post('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_post)
+
+router.get('/examples/accredited-providers', (req, res) => {
+  res.redirect('/examples/accredited-providers/find')
+})
+
+router.get('/examples/accredited-providers', (req, res) => {
+  res.redirect('/examples/accredited-providers/find')
+})
+
+router.get('/examples/accredited-providers/find', checkIsAuthenticated, examplesController.find_accredited_provider_get)
+router.post('/examples/accredited-providers/find', checkIsAuthenticated, examplesController.find_accredited_provider_post)
+
+router.get('/examples/accredited-providers/choose', checkIsAuthenticated, examplesController.choose_accredited_provider_get)
+router.post('/examples/accredited-providers/choose', checkIsAuthenticated, examplesController.choose_accredited_provider_post)
 
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN

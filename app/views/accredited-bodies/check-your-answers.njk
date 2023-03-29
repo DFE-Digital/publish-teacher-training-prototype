@@ -48,7 +48,7 @@
                 text: "Accredited provider"
               },
               value: {
-                text: accreditedBody.id | getOrganisationLabel
+                text: accreditedProvider.name
               },
               actions: {
                 items: [
@@ -65,8 +65,8 @@
                 text: "Description"
               },
               value: {
-                text: (accreditedBody.description | nl2br | markdownToHtml | safe) if accreditedBody.description.length else "Not entered",
-                classes: "govuk-hint" if not accreditedBody.description.length
+                text: (accreditedProvider.description | nl2br | markdownToHtml | safe) if accreditedProvider.description.length else "Not entered",
+                classes: "govuk-hint" if not accreditedProvider.description.length
               },
               actions: {
                 items: [
@@ -94,12 +94,12 @@
                   }
                 ]
               }
-            }
+            } if 1 == 0
           ]
         }) }}
 
         {{ govukWarningText({
-          text: "All users at " + (accreditedBody.id | getOrganisationLabel) + " will be sent an email to let them know they've been added.",
+          text: "All users at " + accreditedProvider.name + " will be sent an email to let them know they've been added.",
           iconFallbackText: "Warning"
         }) }}
 

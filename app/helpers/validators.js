@@ -24,3 +24,19 @@ exports.isValidPostcode = (postcode) => {
   }
   return valid
 }
+
+
+exports.isValidWordCount = (text, wordCount) => {
+  const string = text
+          .replace(/(^\s*)|(\s*$)/gi,'') //exclude start and end white-space
+          .replace(/[ ]{2,}/gi,' ') //2 or more space to 1
+          .replace(/\n /,'\n') //exclude newline with a start spacing
+
+  let valid = true
+
+  if (string.split(' ').length > wordCount) {
+    valid = false
+  }
+
+  return valid
+}
