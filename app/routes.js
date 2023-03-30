@@ -5,7 +5,7 @@ const passport = require('passport')
 
 // Controller modules
 const accountController = require('./controllers/account')
-const accreditedProviderController = require('./controllers/accredited-bodies')
+const accreditedProviderController = require('./controllers/accredited-providers')
 const authenticationController = require('./controllers/authentication')
 const courseController = require('./controllers/courses')
 const cycleController = require('./controllers/cycles')
