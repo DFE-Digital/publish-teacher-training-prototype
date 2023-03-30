@@ -1,6 +1,6 @@
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
-const accreditedBodyModel = require('../models/accredited-bodies')
+const accreditedBodyModel = require('../models/accredited-providers')
 const organisationHelper = require('../helpers/organisations')
 const permissionsHelper = require('../helpers/permissions')
 
