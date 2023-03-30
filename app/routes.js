@@ -137,8 +137,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mo
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_provider_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-body', checkIsAuthenticated, courseController.new_course_accredited_provider_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-provider', checkIsAuthenticated, courseController.new_course_accredited_provider_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-provider', checkIsAuthenticated, courseController.new_course_accredited_provider_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/visa-sponsorship', checkIsAuthenticated, courseController.new_course_visa_sponsorship_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/visa-sponsorship', checkIsAuthenticated, courseController.new_course_visa_sponsorship_post)
@@ -196,8 +196,8 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/st
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_provider_get)
-router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-body', checkIsAuthenticated, courseController.edit_course_accredited_provider_post)
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-provider', checkIsAuthenticated, courseController.edit_course_accredited_provider_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-provider', checkIsAuthenticated, courseController.edit_course_accredited_provider_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/applications-open-date', checkIsAuthenticated, courseController.edit_course_applications_open_date_post)
