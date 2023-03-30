@@ -131,12 +131,12 @@
           href: baseUrl + "/training-partners",
           text: "Training partners",
           active: primaryNavId == "trainingPartners"
-        } if passport.organisation.type in ["hei","scitt"],
+        } if passport.organisation.isAccreditedBody,
         {
-          href: baseUrl + "/accredited-bodies",
+          href: baseUrl + "/accredited-providers",
           text: "Accredited providers",
-          active: primaryNavId == "accreditedBodies"
-        } if passport.organisation.type == "lead_school",
+          active: primaryNavId == "accreditedProviders"
+        } if not passport.organisation.isAccreditedBody,
         {
           href: baseUrl + "/details",
           text: "Organisation details",
