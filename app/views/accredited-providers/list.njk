@@ -23,7 +23,7 @@
 
       {{ govukButton({
         text: "Add accredited provider",
-        href: actions.new + "/accredited-bodies/new"
+        href: actions.new + "/accredited-providers/new"
       }) }}
 
       {% for accreditedBody in organisation.accreditedBodies %}
@@ -50,7 +50,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/delete",
+                  href: actions.change + "/accredited-providers/" + accreditedBody.id + "/delete",
                   text: "Delete",
                   visuallyHiddenText: accreditedBody.name,
                   classes: "app-link--destructive"
@@ -70,7 +70,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/description?referrer=change",
+                    href: actions.change + "/accredited-providers/" + accreditedBody.id + "/description?referrer=change",
                     text: "Change",
                     visuallyHiddenText: "accredited provider description"
                   }
@@ -87,7 +87,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/accredited-bodies/" + accreditedBody.id + "/permissions?referrer=change",
+                    href: actions.change + "/accredited-providers/" + accreditedBody.id + "/permissions?referrer=change",
                     text: "Change",
                     visuallyHiddenText: "accredited provider permission"
                   }
