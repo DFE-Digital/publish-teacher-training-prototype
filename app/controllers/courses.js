@@ -1248,7 +1248,7 @@ exports.edit_course_location_post = (req, res) => {
   }
 }
 
-exports.edit_course_accredited_body_get = (req, res) => {
+exports.edit_course_accredited_provider_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
   let selectedAccreditedBody
@@ -1269,7 +1269,7 @@ exports.edit_course_accredited_body_get = (req, res) => {
   })
 }
 
-exports.edit_course_accredited_body_post = (req, res) => {
+exports.edit_course_accredited_provider_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   const errors = []
 
@@ -3132,7 +3132,7 @@ exports.new_course_location_post = (req, res) => {
   }
 }
 
-exports.new_course_accredited_body_get = (req, res) => {
+exports.new_course_accredited_provider_get = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   let selectedAccreditedBody
@@ -3175,7 +3175,7 @@ exports.new_course_accredited_body_get = (req, res) => {
   }
 }
 
-exports.new_course_accredited_body_post = (req, res) => {
+exports.new_course_accredited_provider_post = (req, res) => {
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
 
   const errors = []

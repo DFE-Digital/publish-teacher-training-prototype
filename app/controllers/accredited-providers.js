@@ -6,7 +6,7 @@ const permissionsHelper = require('../helpers/permissions')
 
 const validationHelper = require("../helpers/validators")
 
-exports.accredited_bodies_list = (req, res) => {
+exports.accredited_providers_list = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
   organisation.accreditedBodies.sort((a,b)=> {
@@ -29,7 +29,7 @@ exports.accredited_bodies_list = (req, res) => {
 /// EDIT ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ //
 
-exports.edit_accredited_body_description_get = (req, res) => {
+exports.edit_accredited_provider_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
@@ -47,7 +47,7 @@ exports.edit_accredited_body_description_get = (req, res) => {
   })
 }
 
-exports.edit_accredited_body_description_post = (req, res) => {
+exports.edit_accredited_provider_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
   accreditedProvider.description = req.session.data.accreditedProvider.description
@@ -96,7 +96,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
   }
 }
 
-// exports.edit_accredited_body_permissions_get = (req, res) => {
+// exports.edit_accredited_provider_permissions_get = (req, res) => {
 //   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 //   const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
@@ -119,7 +119,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
 //   })
 // }
 
-// exports.edit_accredited_body_permissions_post = (req, res) => {
+// exports.edit_accredited_provider_permissions_post = (req, res) => {
 //   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 //   const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 //   accreditedBody.permissions = req.session.data.accreditedBody.permissions
@@ -161,7 +161,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
 /// NEW ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ //
 
-exports.new_accredited_body_get = (req, res) => {
+exports.new_accredited_provider_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
 
@@ -183,7 +183,7 @@ exports.new_accredited_body_get = (req, res) => {
   })
 }
 
-exports.new_accredited_body_post = (req, res) => {
+exports.new_accredited_provider_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
 
@@ -246,7 +246,7 @@ exports.new_accredited_body_post = (req, res) => {
   }
 }
 
-exports.new_accredited_body_description_get = (req, res) => {
+exports.new_accredited_provider_description_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
 
@@ -269,7 +269,7 @@ exports.new_accredited_body_description_get = (req, res) => {
   })
 }
 
-exports.new_accredited_body_description_post = (req, res) => {
+exports.new_accredited_provider_description_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedProvider = req.session.data.accreditedProvider
 
@@ -315,7 +315,7 @@ exports.new_accredited_body_description_post = (req, res) => {
   }
 }
 
-// exports.new_accredited_body_permissions_get = (req, res) => {
+// exports.new_accredited_provider_permissions_get = (req, res) => {
 //   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
 //   let selectedPermissions
@@ -342,7 +342,7 @@ exports.new_accredited_body_description_post = (req, res) => {
 //   })
 // }
 
-// exports.new_accredited_body_permissions_post = (req, res) => {
+// exports.new_accredited_provider_permissions_post = (req, res) => {
 //   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
 //   let selectedPermissions
@@ -376,7 +376,7 @@ exports.new_accredited_body_description_post = (req, res) => {
 //   }
 // }
 
-exports.new_accredited_body_check_get = (req, res) => {
+exports.new_accredited_provider_check_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
 
   res.render('../views/accredited-bodies/check-your-answers', {
@@ -391,7 +391,7 @@ exports.new_accredited_body_check_get = (req, res) => {
   })
 }
 
-exports.new_accredited_body_check_post = (req, res) => {
+exports.new_accredited_provider_check_post = (req, res) => {
   accreditedProviderModel.insertOne({
     organisationId: req.params.organisationId,
     accreditedBody: req.session.data.accreditedProvider
@@ -405,7 +405,7 @@ exports.new_accredited_body_check_post = (req, res) => {
 /// DELETE ACCREDITED PROVIDER
 /// ------------------------------------------------------------------------ ///
 
-exports.delete_accredited_body_get = (req, res) => {
+exports.delete_accredited_provider_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const accreditedBody = organisation.accreditedBodies.find(accreditedBody => accreditedBody.id === req.params.accreditedBodyId)
 
@@ -427,7 +427,7 @@ exports.delete_accredited_body_get = (req, res) => {
   })
 }
 
-exports.delete_accredited_body_post = (req, res) => {
+exports.delete_accredited_provider_post = (req, res) => {
   accreditedProviderModel.deleteOne({
     organisationId: req.params.organisationId,
     accreditedBodyId: req.params.accreditedBodyId
