@@ -1,6 +1,6 @@
 const courseModel = require('../models/courses')
 const organisationModel = require('../models/organisations')
-const accreditedBodyModel = require('../models/accredited-providers')
+const accreditedProviderModel = require('../models/accredited-providers')
 const organisationHelper = require('../helpers/organisations')
 const permissionsHelper = require('../helpers/permissions')
 
@@ -85,7 +85,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
       errors
     })
   } else {
-    accreditedBodyModel.updateOne({
+    accreditedProviderModel.updateOne({
       organisationId: req.params.organisationId,
       accreditedBodyId: req.params.accreditedBodyId,
       accreditedBody: accreditedProvider
@@ -146,7 +146,7 @@ exports.edit_accredited_body_description_post = (req, res) => {
 //       errors
 //     })
 //   } else {
-//     accreditedBodyModel.updateOne({
+//     accreditedProviderModel.updateOne({
 //       organisationId: req.params.organisationId,
 //       accreditedBodyId: req.params.accreditedBodyId,
 //       accreditedBody
@@ -392,7 +392,7 @@ exports.new_accredited_body_check_get = (req, res) => {
 }
 
 exports.new_accredited_body_check_post = (req, res) => {
-  accreditedBodyModel.insertOne({
+  accreditedProviderModel.insertOne({
     organisationId: req.params.organisationId,
     accreditedBody: req.session.data.accreditedProvider
   })
@@ -428,7 +428,7 @@ exports.delete_accredited_body_get = (req, res) => {
 }
 
 exports.delete_accredited_body_post = (req, res) => {
-  accreditedBodyModel.deleteOne({
+  accreditedProviderModel.deleteOne({
     organisationId: req.params.organisationId,
     accreditedBodyId: req.params.accreditedBodyId
   })
