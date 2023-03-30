@@ -35,7 +35,7 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukRadios({
-          idPrefix: "accredited-body",
+          idPrefix: "accredited-provider",
           name: "course[accreditedBody]",
           fieldset: {
             legend: {
@@ -44,7 +44,7 @@
               classes: "govuk-fieldset__legend--l"
             }
           },
-          errorMessage: errors | getErrorMessage("accredited-body"),
+          errorMessage: errors | getErrorMessage("accredited-provider"),
           items: accreditedBodyOptions
         }) }}
 
