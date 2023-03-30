@@ -341,7 +341,7 @@ router.post('/organisations/:organisationId/cycles/:cycleId/accredited-providers
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-providers/:accreditedBodyId/delete', checkIsAuthenticated, accreditedProviderController.delete_accredited_provider_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-providers/:accreditedBodyId/delete', checkIsAuthenticated, accreditedProviderController.delete_accredited_provider_post)
 
-router.get('/organisations/:organisationId/cycles/:cycleId/accredited-bodies', checkIsAuthenticated, accreditedProviderController.accredited_providers_list)
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-providers', checkIsAuthenticated, accreditedProviderController.accredited_providers_list)
 
 /// ------------------------------------------------------------------------ ///
 /// TRAINING PARTNER ORGANISATION ROUTES
