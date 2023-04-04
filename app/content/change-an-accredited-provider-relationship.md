@@ -16,13 +16,11 @@ Go to the 'Accredited providers' tab in your account to:
 - update descriptions
 - remove accredited providers from your account (unpublished courses only)
 
-
-
-If you need
+You'll be asked to specify which accredited provider you're working with for each course before you can publish it.
 
 ## Changing your accredited provider
 
-If the organisation you were working with is no longer an accredited provider, you'll need to select a new one to be able to publish any new courses.
+If the organisation you were working with is no longer an accredited provider, you'll need to select a different provider before publishing any new courses. You'll be prompted to do this when publishing a course.
 
 You cannot change an accredited provider for a course which has already been published. If you need to change an accredited provider for a published course, contact us at becomingateacher@digital.education.gov.uk.
 
