@@ -24,4 +24,4 @@ There'll be an additional section in Publish where you can manage rolled over co
 - edit courses
 - remove courses
 
-When your course is ready, you can publish it. It will not go live on Find straight away. Instead, the course will be 'Scheduled' until Find opens at the beginning of October. Candidates will then be able to search for your course.
+When your course is ready, you can publish it. It will not go live on [Find postgraduate teacher training (Find)](https://www.find-postgraduate-teacher-training.service.gov.uk/) straight away. Instead, the course will be 'Scheduled' until Find opens at the beginning of October. Candidates will then be able to search for your course.
