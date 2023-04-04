@@ -8,7 +8,7 @@ If you're a training partner (non-accredited provider), we need to know who you 
 
 ## Adding and deleting an accredited provider
 
-You need to select which accredited provider ratifies a course before you can publish it. You'll also need to write a short description about the accredited provider. This can be written by you or in collaboration with the accredited provider.
+You need to select which accredited provider ratifies a course before you can publish it. You'll also need to write a short description about the accredited provider. It’s a good idea to ask the accredited provider to check this content and approve it.
 
 Go to the 'Accredited providers' tab in your account to:
 
@@ -18,7 +18,7 @@ Go to the 'Accredited providers' tab in your account to:
 
 You'll be asked to specify which accredited provider you're working with for each course before you can publish it.
 
-If you want to give people at the accredited provider organisation access to your courses, you can [invite them to become a user](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/add-and-remove-users).
+If you want to give people at the accredited provider organisation access to your courses, you can [add them as a user](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/add-and-remove-users).
 
 ## Changing your accredited provider
 
