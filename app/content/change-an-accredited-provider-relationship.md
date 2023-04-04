@@ -18,11 +18,11 @@ Go to the 'Accredited providers' tab in your account to:
 
 You'll be asked to specify which accredited provider you're working with for each course before you can publish it.
 
-If you want to give people at the accredited provider organisation access to your courses, you can [invite them to become a user](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/add-an-organisation).
+If you want to give people at the accredited provider organisation access to your courses, you can [invite them to become a user](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/add-and-remove-users).
 
 ## Changing your accredited provider
 
-If the organisation you were working with is no longer an accredited provider, you'll need to select a different provider before publishing any new courses. You'll be prompted to do this when publishing a course.
+If the organisation you were working with is no longer an accredited provider, you'll need to select a different provider before publishing any new courses. You'll be prompted to do this when [publishing rolled over courses](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/rolled-over-courses).
 
 If you need to change an accredited provider for a course that has already been published on Find, contact us at becomingateacher@digital.education.gov.uk.
 
