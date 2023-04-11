@@ -1,5 +1,6 @@
 ---
 title: Course summary examples
+section: courses
 contents:
   items:
     - text: Example 1 - secondary art and design course provided by a university
