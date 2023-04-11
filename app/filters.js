@@ -517,6 +517,23 @@ module.exports = (env) => {
   }
 
   /* ------------------------------------------------------------------
+  utility function to get the guidance section label
+  example: {{ "account" | getGuidanceSectionLabel }}
+  outputs: "Your account"
+  ------------------------------------------------------------------ */
+  filters.getGuidanceSectionLabel = (section) => {
+    let label = ''
+
+    if (section === 'account') {
+      label = 'Your account'
+    } else if (section === 'courses') {
+      label = 'Managing courses'
+    }
+
+    return label
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters

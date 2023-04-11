@@ -1,5 +1,6 @@
 ---
 title: Course summary examples
+section: courses
 contents:
   items:
     - text: Example 1 - secondary art and design course provided by a university
@@ -8,7 +9,7 @@ contents:
       href: "#example-2---primary-course-provided-by-a-scitt"
 ---
 
-Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/writing-descriptions-for-publish-teacher-training-courses), here are some ‘Course summary’ examples.
+Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/help-writing-course-descriptions), here are some ‘Course summary’ examples.
 
 The examples are based on real descriptions that are currently live on Find postgraduate teacher training.
 

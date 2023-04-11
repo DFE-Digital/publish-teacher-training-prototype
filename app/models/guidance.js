@@ -18,6 +18,7 @@ exports.findMany = (params) => {
     const file = {}
     file.slug = filename.replace(/.(md)/,'')
     file.title = content.data.title
+    file.section = content.data.section
     files.push(file)
   })
 

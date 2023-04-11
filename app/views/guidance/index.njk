@@ -25,14 +25,34 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      {% if links.length %}
-        <ul class="govuk-list govuk-list--spaced">
-          {% for link in links %}
-            <li>
-              <a href="/how-to-use-this-service/{{ link.slug }}">{{ link.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+      <p class="govuk-body">
+        Publish teacher training courses (Publish) gives initial teacher training providers a way to create courses and publish them to Find postgraduate teacher training (Find).
+      </p>
+
+      <p class="govuk-body">
+        Candidates can then use Find to search for courses and apply to them.
+      </p>
+
+      {% if guidance %}
+
+        {% for section in ["account","courses"] %}
+
+          <h2 class="govuk-heading-m">
+            {{ section | getGuidanceSectionLabel }}
+          </h2>
+
+          {% if guidance[section].length %}
+            <ul class="govuk-list govuk-list--spaced">
+              {% for link in guidance[section] %}
+                <li>
+                  <a href="/how-to-use-this-service/{{ link.slug }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        {% endfor %}
+
       {% endif %}
 
     </div>
