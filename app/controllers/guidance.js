@@ -26,8 +26,11 @@ exports.guidance = (req, res) => {
     // const guidance = _.mapValues(_.groupBy(links, 'section'),
       // list => list.map(link => _.omit(link, 'section')))
 
+    const sections = Object.keys(guidance)
+
     res.render('../views/guidance/index', {
-      guidance
+      guidance,
+      sections
     })
   }
 }
