@@ -1,6 +1,7 @@
 ---
 title: Roll over courses to a new recruitment cycle
 section: courses
+sortOrder: 1
 ---
 
 At the beginning of July each year, we copy your courses over from one recruitment cycle to the next. This means you can update courses from the previous cycle, rather than having to create new ones.

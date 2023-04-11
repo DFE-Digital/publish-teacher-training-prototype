@@ -1,6 +1,7 @@
 ---
 title: Add an organisation
 section: account
+sortOrder: 1
 ---
 
 If you are a new initial teacher training (ITT) provider, we can set up your organisation on Publish teacher training courses (Publish). You’ll then be able to publish courses to [Find postgraduate teacher training courses (Find)](https://www.find-postgraduate-teacher-training.service.gov.uk/).
