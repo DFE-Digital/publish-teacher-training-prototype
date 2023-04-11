@@ -25,14 +25,26 @@
 
       {% include "_includes/page-heading.njk" %}
 
-      {% if links.length %}
-        <ul class="govuk-list govuk-list--spaced">
-          {% for link in links %}
-            <li>
-              <a href="/how-to-use-this-service/{{ link.slug }}">{{ link.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+      {% if guidance %}
+
+        {% for section in ["account","courses"] %}
+
+          <h2 class="govuk-heading-m">
+            {{ section | getGuidanceSectionLabel }}
+          </h2>
+
+          {% if guidance[section].length %}
+            <ul class="govuk-list govuk-list--spaced">
+              {% for link in guidance[section] %}
+                <li>
+                  <a href="/how-to-use-this-service/{{ link.slug }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        {% endfor %}
+
       {% endif %}
 
     </div>
