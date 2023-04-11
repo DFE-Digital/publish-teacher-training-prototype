@@ -1,6 +1,7 @@
 ---
 title: Change an accredited provider relationship
 section: account
+sortOrder: 3
 ---
 
 If you’re a training partner (non-accredited provider), we need to know who you work with to run your courses.

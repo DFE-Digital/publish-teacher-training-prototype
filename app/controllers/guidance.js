@@ -13,7 +13,10 @@ exports.guidance = (req, res) => {
       content: markdown.content
     })
   } else {
-    const links = guidanceModel.findMany({})
+    let links = guidanceModel.findMany({})
+
+    // order links
+    links = _.orderBy(links, ['sortOrder'], ['asc'])
 
     // group guidance by section
     // group an array of objects by key
@@ -23,13 +26,11 @@ exports.guidance = (req, res) => {
     // const guidance = _.mapValues(_.groupBy(links, 'section'),
       // list => list.map(link => _.omit(link, 'section')))
 
-    // sort links alphabetically by title
-    // links.sort((a, b) => {
-    //   return a.section.localeCompare(b.section) || a.title.localeCompare(b.title)
-    // })
+    const sections = Object.keys(guidance)
 
     res.render('../views/guidance/index', {
-      guidance
+      guidance,
+      sections
     })
   }
 }

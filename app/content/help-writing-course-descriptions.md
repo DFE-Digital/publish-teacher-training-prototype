@@ -1,6 +1,7 @@
 ---
 title: Help writing course descriptions
 section: courses
+sortOrder: 2
 ---
 
 There are many things a candidate needs to consider before applying for a teacher training course. For example, how will they finance their training? Are they able to travel to the school or university? Do they have the right qualifications?

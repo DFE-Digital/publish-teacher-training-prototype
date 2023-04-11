@@ -1,6 +1,7 @@
 ---
 title: Add and remove users
 section: account
+sortOrder: 2
 ---
 
 Once an [organisation has been added to Publish](https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/add-an-organisation), any user can add other users. This means that more people can have access to the organisation's courses to view and manage them.
