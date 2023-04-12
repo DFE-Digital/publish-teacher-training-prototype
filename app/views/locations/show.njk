@@ -44,7 +44,7 @@
         rows: [
           {
             key: {
-              text: "Name"
+              text: "School name"
             },
             value: {
               text: location.name
@@ -54,14 +54,14 @@
                 {
                   href: actions.change + "/edit?referrer=change",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "school name"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Location code"
+              text: "School code"
             },
             value: {
               text: "- (dash)" if location.code == "-" else location.code

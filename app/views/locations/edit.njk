@@ -35,12 +35,19 @@
           id: "location-name",
           name: "location[name]",
           label: {
-            text: "Name",
+            text: "School name",
             classes: "govuk-label--s"
           },
           errorMessage: errors | getErrorMessage("location-name"),
           value: location.name
         }) }}
+
+        {% if referrer == "change" %}
+          <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">School code</p>
+          <p class="govuk-body">
+            {{ ("- (dash)" if location.code == "-" else location.code) if location.code else "Not entered" }}
+          </p>
+        {% endif %}
 
         {{ govukInput({
           id: "location-urn",
@@ -48,6 +55,9 @@
           label: {
             text: "Unique reference number (URN) (optional)",
             classes: "govuk-label--s"
+          },
+          formGroup: {
+            classes: "govuk-!-margin-bottom-2"
           },
           classes: "govuk-input--width-10",
           errorMessage: errors | getErrorMessage("location-urn"),
