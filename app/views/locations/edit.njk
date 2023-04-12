@@ -42,6 +42,13 @@
           value: location.name
         }) }}
 
+        {% if referrer == "change" %}
+          <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">School code</p>
+          <p class="govuk-body">
+            {{ ("- (dash)" if location.code == "-" else location.code) if location.code else "Not entered" }}
+          </p>
+        {% endif %}
+
         {{ govukInput({
           id: "location-urn",
           name: "location[urn]",
