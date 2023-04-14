@@ -62,7 +62,7 @@
             },
             {
               key: {
-                text: "Description"
+                text: "About the accredited provider"
               },
               value: {
                 text: (accreditedProvider.description | nl2br | markdownToHtml | safe) if accreditedProvider.description.length else "Not entered",
@@ -73,7 +73,7 @@
                   {
                     href: actions.change + "/description?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "description"
+                    visuallyHiddenText: "about the accredited body"
                   }
                 ]
               }

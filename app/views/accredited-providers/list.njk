@@ -51,7 +51,7 @@
               items: [
                 {
                   href: actions.change + "/accredited-providers/" + accreditedBody.id + "/delete",
-                  text: "Delete",
+                  text: "Remove",
                   visuallyHiddenText: accreditedBody.name,
                   classes: "app-link--destructive"
                 }
@@ -61,7 +61,7 @@
           rows: [
             {
               key: {
-                text: "Description"
+                text: "About the accredited provider"
               },
               value: {
                 text: (accreditedBody.description | nl2br | markdownToHtml | safe) if accreditedBody.description.length else "Not entered",
@@ -72,7 +72,7 @@
                   {
                     href: actions.change + "/accredited-providers/" + accreditedBody.id + "/description?referrer=change",
                     text: "Change",
-                    visuallyHiddenText: "accredited provider description"
+                    visuallyHiddenText: "about the accredited provider"
                   }
                 ]
               }

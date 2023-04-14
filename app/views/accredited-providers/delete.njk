@@ -3,9 +3,9 @@
 {% set primaryNavId = "accreditedProviders" %}
 
 {% if hasCourses %}
-  {% set title = "You cannot delete this accredited provider" %}
+  {% set title = "You cannot remove this accredited provider" %}
 {% else %}
-  {% set title = "Are you sure you want to delete this accredited provider?" %}
+  {% set title = "Are you sure you want to remove this accredited provider?" %}
 {% endif %}
 
 {% set caption = accreditedBody.name %}
@@ -37,7 +37,7 @@
         {% else %}
 
           {{ govukButton({
-            text: "Delete accredited provider",
+            text: "Remove accredited provider",
             classes: "govuk-button--warning"
           }) }}
 
