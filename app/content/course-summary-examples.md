@@ -6,8 +6,8 @@ contents:
   items:
     - text: Example 1 - secondary art and design course provided by a university
       href: "#example-1---secondary-art-and-design-course-provided-by-a-university"
-    - text: Example 2 - primary course provided by a SCITT
-      href: "#example-2---primary-course-provided-by-a-scitt"
+    - text: Example 2 - primary course provided by school centred initial teacher training
+      href: "#example-2---primary-course-provided-by-school-centred-initial-teacher-training"
 ---
 
 Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish teacher training courses](/how-to-use-this-service/help-writing-course-descriptions), here are some ‘Course summary’ examples.
@@ -55,7 +55,7 @@ You’ll also build a portfolio of the educational outcomes you achieved during 
 
 Train with us and you’ll be part of a thriving creative network, with access to world class facilities and beautiful grounds at the Becoming a Teacher (BAT) university.
 
-## Example 2 - primary course provided by a SCITT
+## Example 2 - primary course provided by school centred initial teacher training
 
 In this example, the provider focuses on how the candidate will be supported throughout their course through a school mentor and regular feedback.
 
