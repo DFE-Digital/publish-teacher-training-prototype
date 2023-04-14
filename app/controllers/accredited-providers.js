@@ -91,7 +91,7 @@ exports.edit_accredited_provider_description_post = (req, res) => {
       accreditedBody: accreditedProvider
     })
 
-    req.flash('success', 'Accredited provider description updated')
+    req.flash('success', 'About the accredited provider updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-providers`)
   }
 }
@@ -433,7 +433,7 @@ exports.delete_accredited_provider_post = (req, res) => {
     accreditedBodyId: req.params.accreditedBodyId
   })
 
-  req.flash('success', 'Accredited provider deleted')
+  req.flash('success', 'Accredited provider removed')
   res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/accredited-providers`)
 }
 
