@@ -10,7 +10,7 @@ contents:
       href: "#example-2---primary-course-provided-by-a-scitt"
 ---
 
-Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish](/how-to-use-this-service/help-writing-course-descriptions), here are some ‘Course summary’ examples.
+Based on our research into how candidates read course descriptions and our [guidance on writing descriptions for Publish teacher training courses](/how-to-use-this-service/help-writing-course-descriptions), here are some ‘Course summary’ examples.
 
 The examples are based on real descriptions that are currently live on Find postgraduate teacher training.
 
