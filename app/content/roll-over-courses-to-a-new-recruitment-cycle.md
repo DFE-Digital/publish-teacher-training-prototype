@@ -18,7 +18,7 @@ The year that follows the recruitment cycle in which candidates start their trai
 
 We’ll email you at the beginning of July to let you know when we’ve rolled over your courses.
 
-There’ll be an additional section in Publish called ‘Recruitment cycles’ where you can manage rolled over courses for the new cycle. You’ll be able to:
+There’ll be an additional section in Publish teacher training courses called ‘Recruitment cycles’ where you can manage rolled over courses for the new cycle. You’ll be able to:
 
 - add courses
 - edit courses
