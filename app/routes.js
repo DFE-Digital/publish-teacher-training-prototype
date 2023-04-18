@@ -323,6 +323,9 @@ router.get('/organisations/:organisationId/cycles/:cycleId/users', checkIsAuthen
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new/choose', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_choose_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new/choose', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_choose_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new/description', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_description_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/accredited-providers/new/description', checkIsAuthenticated, accreditedProviderController.new_accredited_provider_description_post)
 
