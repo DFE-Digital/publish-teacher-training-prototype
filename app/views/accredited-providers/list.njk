@@ -26,78 +26,84 @@
         href: actions.new + "/accredited-providers/new"
       }) }}
 
-      {% for accreditedBody in organisation.accreditedBodies %}
+      {% if organisation.accreditedBodies.length %}
 
-        {% set permissionsHtml %}
-          {% if accreditedBody.permissions.length %}
-            <ul class="govuk-list">
-              {% for permission in accreditedBody.permissions %}
-                <li>
-                  {{ permission | getPermissionLabel }}
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="govuk-body">None - view only</p>
-          {% endif %}
-        {% endset %}
+        {% for accreditedBody in organisation.accreditedBodies %}
 
-        {{ govukSummaryList({
-          card: {
-            title: {
-              text: accreditedBody.name
+          {% set permissionsHtml %}
+            {% if accreditedBody.permissions.length %}
+              <ul class="govuk-list">
+                {% for permission in accreditedBody.permissions %}
+                  <li>
+                    {{ permission | getPermissionLabel }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="govuk-body">None - view only</p>
+            {% endif %}
+          {% endset %}
+
+          {{ govukSummaryList({
+            card: {
+              title: {
+                text: accreditedBody.name
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/accredited-providers/" + accreditedBody.id + "/delete",
+                    text: "Remove",
+                    visuallyHiddenText: accreditedBody.name,
+                    classes: "app-link--destructive"
+                  }
+                ]
+              }
             },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/accredited-providers/" + accreditedBody.id + "/delete",
-                  text: "Remove",
-                  visuallyHiddenText: accreditedBody.name,
-                  classes: "app-link--destructive"
+            rows: [
+              {
+                key: {
+                  text: "About the accredited provider"
+                },
+                value: {
+                  text: (accreditedBody.description | nl2br | markdownToHtml | safe) if accreditedBody.description.length else "Not entered",
+                  classes: "govuk-hint" if not accreditedBody.description.length
+                },
+                actions: {
+                  items: [
+                    {
+                      href: actions.change + "/accredited-providers/" + accreditedBody.id + "/description?referrer=change",
+                      text: "Change",
+                      visuallyHiddenText: "about the accredited provider"
+                    }
+                  ]
                 }
-              ]
-            }
-          },
-          rows: [
-            {
-              key: {
-                text: "About the accredited provider"
               },
-              value: {
-                text: (accreditedBody.description | nl2br | markdownToHtml | safe) if accreditedBody.description.length else "Not entered",
-                classes: "govuk-hint" if not accreditedBody.description.length
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/accredited-providers/" + accreditedBody.id + "/description?referrer=change",
-                    text: "Change",
-                    visuallyHiddenText: "about the accredited provider"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Permissions"
-              },
-              value: {
-                html: permissionsHtml
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/accredited-providers/" + accreditedBody.id + "/permissions?referrer=change",
-                    text: "Change",
-                    visuallyHiddenText: "accredited provider permission"
-                  }
-                ]
-              }
-            } if 1 == 0
-          ]
-        }) }}
+              {
+                key: {
+                  text: "Permissions"
+                },
+                value: {
+                  html: permissionsHtml
+                },
+                actions: {
+                  items: [
+                    {
+                      href: actions.change + "/accredited-providers/" + accreditedBody.id + "/permissions?referrer=change",
+                      text: "Change",
+                      visuallyHiddenText: "accredited provider permission"
+                    }
+                  ]
+                }
+              } if 1 == 0
+            ]
+          }) }}
 
-      {% endfor %}
+        {% endfor %}
+
+      {% else %}
+        <p class="govuk-body">There are no accredited providers for {{ organisation.name if organisation.name else "your organisation" }}.</p>
+      {% endif %}
 
     </div>
   </div>
