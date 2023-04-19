@@ -238,6 +238,12 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/gc
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/visa-sponsorship', checkIsAuthenticated, courseController.edit_course_visa_sponsorship_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/open', checkIsAuthenticated, courseController.open_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/open', checkIsAuthenticated, courseController.open_course_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/close', checkIsAuthenticated, courseController.close_course_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/close', checkIsAuthenticated, courseController.close_course_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/withdraw', checkIsAuthenticated, courseController.withdraw_course_post)
 
@@ -246,6 +252,10 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/de
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/rollover', checkIsAuthenticated, courseController.rollover_course_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/rollover', checkIsAuthenticated, courseController.rollover_course_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/details', checkIsAuthenticated, (req, res) => {
+  res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/`)
+})
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/description', checkIsAuthenticated, courseController.course_description)
 
