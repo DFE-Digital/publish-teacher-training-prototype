@@ -147,7 +147,7 @@ exports.new_location_edit_post = (req, res) => {
     const error = {}
     error.fieldName = "address-town"
     error.href = "#address-town"
-    error.text = "Enter town or city"
+    error.text = "Enter a town or city"
     errors.push(error)
   }
 
@@ -155,7 +155,7 @@ exports.new_location_edit_post = (req, res) => {
     const error = {}
     error.fieldName = "address-postcode"
     error.href = "#address-postcode"
-    error.text = "Enter postcode"
+    error.text = "Enter a postcode"
     errors.push(error)
   } else if (
     !validationHelper.isValidPostcode(
