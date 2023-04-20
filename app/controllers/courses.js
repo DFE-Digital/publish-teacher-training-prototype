@@ -210,7 +210,12 @@ exports.open_course_post = (req, res) => {
     })
 
     req.flash('success', 'Course opened')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
+
+    if (req.query.referrer === 'details') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
+    }
   }
 }
 
@@ -255,7 +260,12 @@ exports.close_course_post = (req, res) => {
     })
 
     req.flash('success', 'Course closed')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
+
+    if (req.query.referrer === 'details') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/${req.query.referrer}`)
+    }
   }
 }
 
