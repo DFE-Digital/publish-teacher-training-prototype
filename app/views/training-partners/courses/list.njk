@@ -86,7 +86,8 @@
                 <td class="govuk-table__cell">
                   {% if course.status == 1 %}
                     {% if permissions and "change_course_vacancies" in permissions %}
-                      Yes (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                      Yes
+                      {# (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>) #}
                     {% else %}
                       Yes
                     {% endif %}
@@ -94,7 +95,8 @@
                     No
                   {% elif course.status == 4 %}
                     {% if permissions and "change_course_vacancies" in permissions %}
-                      No (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                      No
+                      {# (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>) #}
                     {% else %}
                       No
                     {% endif %}
