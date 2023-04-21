@@ -34,9 +34,11 @@
           Once you’ve withdrawn a course, you cannot publish it again in this recruitment cycle.
         </p>
 
-        <p class="govuk-body">
-          If you want to stop new candidates from applying but do not want to withdraw any applications currently in progress, you can <a href="{{ actions.close }}">close the course instead</a>.
-        </p>
+        {% if course.status == 1 %}
+          <p class="govuk-body">
+            If you want to stop new candidates from applying but do not want to withdraw any applications currently in progress, you can <a href="{{ actions.close }}">close the course instead</a>.
+          </p>
+        {% endif %}
 
         {{ govukButton({
           text: "Withdraw course",
