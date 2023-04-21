@@ -97,7 +97,7 @@
                 Is it on <abbr class="app-!-text-decoration-underline-dotted" title="Find postgraduate teacher training">Find</abbr>?
                 </th>
                 <th class="govuk-table__header">Applications</th>
-                <th class="govuk-table__header">Vacancies</th>
+                {# <th class="govuk-table__header">Vacancies</th> #}
               </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -147,19 +147,15 @@
                       -
                     {% endif %}
                   </td>
-                  <td class="govuk-table__cell">
+                  {# <td class="govuk-table__cell">
                     {% if course.status == 1 %}
                       Yes
-                      {# (<a class="govuk-link" href="{{ actions.view }}/{{ course.id }}/vacancies?referrer=list">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>) #}
-                    {% elif course.status == 3 %}
+                    {% elif course.status in [3,4] %}
                       No
-                    {% elif course.status == 4 %}
-                      No
-                      {# (<a class="govuk-link" href="{{ actions.view }}/{{ course.id }}/vacancies?referrer=list">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>) #}
                     {% else %}
                       -
                     {% endif %}
-                  </td>
+                  </td> #}
                 </tr>
               {% endfor %}
             </tbody>
