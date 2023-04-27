@@ -14,7 +14,7 @@ Aside from fundamental questions about entry requirements and funding, most of t
 - who they’ll be training with and how they will be supported
 - how they’ll be assessed and what the course outcomes will be
 
-Candidates are looking for what they will get out of the course and how it will benefit them, so keep the focus how the course will help them to grow as a teacher.
+Candidates are looking for what they will get out of the course and how it will benefit them, so keep the focus on how the course will help them to grow as a teacher.
 
 Candidates say they can sometimes feel a little overwhelmed by the amount of content on course pages. There’s a lot to think about, so making the descriptions as clear and concise as possible means they are more likely to apply to a course that’s right for them.
 
