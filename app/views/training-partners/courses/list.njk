@@ -42,7 +42,7 @@
               Is it on <abbr class="app-!-text-decoration-underline-dotted" title="Find postgraduate teacher training">Find</abbr>?
               </th>
               <th class="govuk-table__header">Applications</th>
-              <th class="govuk-table__header">Vacancies</th>
+              {# <th class="govuk-table__header">Vacancies</th> #}
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -83,10 +83,11 @@
                     -
                   {% endif %}
                 </td>
-                <td class="govuk-table__cell">
+                {# <td class="govuk-table__cell">
                   {% if course.status == 1 %}
                     {% if permissions and "change_course_vacancies" in permissions %}
-                      Yes (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                      Yes
+                      (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
                     {% else %}
                       Yes
                     {% endif %}
@@ -94,14 +95,15 @@
                     No
                   {% elif course.status == 4 %}
                     {% if permissions and "change_course_vacancies" in permissions %}
-                      No (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
+                      No
+                      (<a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> vacancies for {{ course.name }} ({{ course.code }})</span></a>)
                     {% else %}
                       No
                     {% endif %}
                   {% else %}
                     -
                   {% endif %}
-                </td>
+                </td> #}
               </tr>
             {% endfor %}
           </tbody>
