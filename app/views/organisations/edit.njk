@@ -27,10 +27,10 @@
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Provider name</p>
-        <p class="govuk-body">{{ organisation.name }}</p>
+        <p class="govuk-body">{{ currentOrganisation.name }}</p>
 
         <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Provider code</p>
-        <p class="govuk-body">{{ organisation.code }}</p>
+        <p class="govuk-body">{{ currentOrganisation.code }}</p>
 
         {{ govukInput({
           id: "organisation-ukprn",
@@ -49,7 +49,7 @@
 
         <p class="govuk-body govuk-!-margin-bottom-5">Find UKPRNs on the <a class="govuk-hint" href="https://www.ukrlp.co.uk/" target="_blank">UK register of learning providers (opens in new tab)</a>.</p>
 
-        {% if organisation.type == "lead_school" %}
+        {% if currentOrganisation.type == "lead_school" %}
           {{ govukInput({
             id: "organisation-urn",
             name: "organisation[urn]",
