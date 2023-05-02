@@ -71,7 +71,8 @@
             id: "address-line-1",
             name: "organisation[address][addressLine1]",
             label: {
-              html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
+              text: "Address line 1",
+              classes: "govuk-label--s"
             },
             autocomplete: "address-line1",
             errorMessage: errors | getErrorMessage("address-line-1"),
@@ -82,18 +83,32 @@
             id: "address-line-2",
             name: "organisation[address][addressLine2]",
             label: {
-              html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
             },
-            autocomplete: "address-line1",
+            autocomplete: "address-line2",
             errorMessage: errors | getErrorMessage("address-line-2"),
             value: organisation.address.addressLine2
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-3",
+            name: "organisation[address][addressLine3]",
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line3",
+            errorMessage: errors | getErrorMessage("address-line-3"),
+            value: organisation.address.addressLine3
           }) }}
 
           {{ govukInput({
             id: "address-town",
             name: "organisation[address][town]",
             label: {
-              text: "Town or city"
+              text: "Town or city",
+              classes: "govuk-label--s"
             },
             classes: "govuk-!-width-two-thirds",
             autocomplete: "address-level2",
@@ -105,7 +120,8 @@
             id: "address-county",
             name: "organisation[address][county]",
             label: {
-              text: "County"
+              text: "County",
+              classes: "govuk-label--s"
             },
             classes: "govuk-!-width-two-thirds",
             errorMessage: errors | getErrorMessage("address-county"),
@@ -116,7 +132,8 @@
             id: "address-postcode",
             name: "organisation[address][postcode]",
             label: {
-              text: "Postcode"
+              text: "Postcode",
+              classes: "govuk-label--s"
             },
             classes: "govuk-input--width-10",
             autocomplete: "postal-code",
