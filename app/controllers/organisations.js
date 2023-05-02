@@ -323,7 +323,7 @@ exports.edit_contact_details_post = (req, res) => {
   } else {
     organisationModel.updateOne({
       organisationId: req.params.organisationId,
-      organisation: req.session.data.organisation
+      organisation
     })
 
     req.flash('success', 'Contact details updated')
