@@ -33,6 +33,10 @@
             text: "Email address",
             classes: "govuk-label--s"
           },
+          type: "email",
+          autocomplete: "email",
+          spellcheck: false,
+          classes: "govuk-!-width-two-thirds",
           errorMessage: errors | getErrorMessage("organisation-email"),
           value: organisation.contact.email
         }) }}
@@ -44,6 +48,9 @@
             text: "Telephone number",
             classes: "govuk-label--s"
           },
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-!-width-two-thirds",
           errorMessage: errors | getErrorMessage("organisation-telephone"),
           value: organisation.contact.telephone
         }) }}
@@ -55,6 +62,10 @@
             text: "Website",
             classes: "govuk-label--s"
           },
+          type: "url",
+          autocomplete: "url",
+          spellcheck: false,
+          classes: "govuk-!-width-two-thirds",
           errorMessage: errors | getErrorMessage("organisation-website"),
           value: organisation.contact.website
         }) }}
