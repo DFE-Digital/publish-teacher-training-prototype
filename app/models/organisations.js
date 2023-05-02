@@ -97,6 +97,10 @@ exports.updateOne = (params) => {
         organisation.address.addressLine2 = params.organisation.address.addressLine2
       }
 
+      if (params.organisation.address.addressLine3 !== undefined) {
+        organisation.address.addressLine3 = params.organisation.address.addressLine3
+      }
+
       if (params.organisation.address.town !== undefined) {
         organisation.address.town = params.organisation.address.town
       }
