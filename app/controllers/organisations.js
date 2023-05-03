@@ -3,6 +3,7 @@ const organisationModel = require('../models/organisations')
 
 const cycleHelper = require('../helpers/cycles')
 const organisationHelper = require('../helpers/organisations')
+const validationHelper = require("../helpers/validators")
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
 exports.organisations_list = (req, res) => {
@@ -216,11 +217,102 @@ exports.edit_contact_details_get = (req, res) => {
 }
 
 exports.edit_contact_details_post = (req, res) => {
+  let organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  organisation = req.session.data.organisation
+
   const errors = []
+
+  if (!organisation.contact.email.length) {
+    const error = {}
+    error.fieldName = 'organisation-email'
+    error.href = '#organisation-email'
+    error.text = 'Enter an email address'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidEmail(
+      organisation.contact.email
+    )
+  ) {
+    const error = {}
+    error.fieldName = 'organisation-email'
+    error.href = '#organisation-email'
+    error.text = 'Enter an email address in the correct format, like name@example.com'
+    errors.push(error)
+  }
+
+  if (!organisation.contact.telephone.length) {
+    const error = {}
+    error.fieldName = 'organisation-telephone'
+    error.href = '#organisation-telephone'
+    error.text = 'Enter a telephone number'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidTelephone(
+      organisation.contact.telephone
+    )
+  ) {
+    const error = {}
+    error.fieldName = 'organisation-telephone'
+    error.href = '#organisation-telephone'
+    error.text = 'Enter a real telephone number'
+    errors.push(error)
+  }
+
+  if (!organisation.contact.website.length) {
+    const error = {}
+    error.fieldName = 'organisation-website'
+    error.href = '#organisation-website'
+    error.text = 'Enter a website address'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidURL(
+      organisation.contact.website
+    )
+  ) {
+    const error = {}
+    error.fieldName = 'organisation-website'
+    error.href = '#organisation-website'
+    error.text = 'Enter a website address in the correct format, like https://www.example.com'
+    errors.push(error)
+  }
+
+  if (!organisation.address.addressLine1.length) {
+    const error = {}
+    error.fieldName = "address-line-1"
+    error.href = "#address-line-1"
+    error.text = "Enter address line 1"
+    errors.push(error)
+  }
+
+  if (!organisation.address.town.length) {
+    const error = {}
+    error.fieldName = "address-town"
+    error.href = "#address-town"
+    error.text = "Enter a town or city"
+    errors.push(error)
+  }
+
+  if (!organisation.address.postcode.length) {
+    const error = {}
+    error.fieldName = "address-postcode"
+    error.href = "#address-postcode"
+    error.text = "Enter a postcode"
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidPostcode(
+      organisation.address.postcode
+    )
+  ) {
+    const error = {}
+    error.fieldName = "address-postcode"
+    error.href = "#address-postcode"
+    error.text = "Enter a real postcode"
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/organisations/contact-details', {
-      organisation: req.session.data.organisation,
+      organisation,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/contact-details`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
@@ -231,7 +323,7 @@ exports.edit_contact_details_post = (req, res) => {
   } else {
     organisationModel.updateOne({
       organisationId: req.params.organisationId,
-      organisation: req.session.data.organisation
+      organisation
     })
 
     req.flash('success', 'Contact details updated')
