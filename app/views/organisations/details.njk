@@ -44,6 +44,24 @@
           },
           {
             key: {
+              text: "Accredited provider ID"
+            },
+            value: {
+              text: organisation.accreditedProviderId if organisation.accreditedProviderId.length else "Not entered",
+              classes: "govuk-hint" if not organisation.accreditedProviderId.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit",
+                  text: "Change",
+                  visuallyHiddenText: "accredited provider ID"
+                }
+              ]
+            } if 1 == 0
+          } if organisation.type != "lead_school",
+          {
+            key: {
               text: "UK provider reference number (UKPRN)"
             },
             value: {

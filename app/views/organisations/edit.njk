@@ -32,6 +32,15 @@
         <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Provider code</p>
         <p class="govuk-body">{{ currentOrganisation.code }}</p>
 
+        <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Accredited provider ID</p>
+
+        {% if currentOrganisation.accreditedProviderId.length %}
+          <p class="govuk-body">{{ currentOrganisation.accreditedProviderId if currentOrganisation.accreditedProviderId.length else "Not entered" }}</p>
+        {% else %}
+          <p class="govuk-hint govuk-!-margin-bottom-4">Not entered</p>
+        {% endif %}
+
+
         {{ govukInput({
           id: "organisation-ukprn",
           name: "organisation[ukprn]",
