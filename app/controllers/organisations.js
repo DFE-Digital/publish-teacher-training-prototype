@@ -64,30 +64,6 @@ exports.organisation_details = (req, res) => {
   })
 }
 
-exports.organisation_description = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  res.render('../views/organisations/description', {
-    organisation,
-    actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
-    }
-  })
-}
-
-exports.organisation_visa_sponsorship = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  res.render('../views/organisations/visa-sponsorship', {
-    organisation,
-    actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
-    }
-  })
-}
-
 /// ------------------------------------------------------------------------ ///
 /// EDIT ORGANISATION
 /// ------------------------------------------------------------------------ ///

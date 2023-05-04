@@ -4,7 +4,6 @@
 {% set subNavId = "details" %}
 
 {% set title = "Organisation details" %}
-{#% set title = organisation.name + " (" + organisation.code + ")" %#}
 
 {% block beforeContent %}
 
@@ -22,7 +21,6 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
 
       {{ govukSummaryList({
         rows: [
