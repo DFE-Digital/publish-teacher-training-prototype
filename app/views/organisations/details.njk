@@ -4,7 +4,6 @@
 {% set subNavId = "details" %}
 
 {% set title = "Organisation details" %}
-{#% set title = organisation.name + " (" + organisation.code + ")" %#}
 
 {% block beforeContent %}
 
@@ -22,13 +21,12 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <h2 class="govuk-heading-m">Organisation details</h2> -->
 
       {{ govukSummaryList({
         rows: [
           {
             key: {
-              text: "Name"
+              text: "Provider name"
             },
             value: {
               text: organisation.name
@@ -36,12 +34,30 @@
           },
           {
             key: {
-              text: "Code"
+              text: "Provider code"
             },
             value: {
               text: organisation.code
             }
           },
+          {
+            key: {
+              text: "Accredited provider ID"
+            },
+            value: {
+              text: organisation.accreditedProviderId if organisation.accreditedProviderId.length else "Not entered",
+              classes: "govuk-hint" if not organisation.accreditedProviderId.length
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit",
+                  text: "Change",
+                  visuallyHiddenText: "accredited provider ID"
+                }
+              ]
+            } if 1 == 0
+          } if organisation.type != "lead_school",
           {
             key: {
               text: "UK provider reference number (UKPRN)"
@@ -77,7 +93,7 @@
                 }
               ]
             }
-          }
+          } if organisation.type == "lead_school"
         ]
       }) }}
     </div>
@@ -85,7 +101,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">Training with your organisation</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">About your organisation</h2>
 
       {{ govukSummaryList({
         rows: [

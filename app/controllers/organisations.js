@@ -64,39 +64,17 @@ exports.organisation_details = (req, res) => {
   })
 }
 
-exports.organisation_description = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  res.render('../views/organisations/description', {
-    organisation,
-    actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
-    }
-  })
-}
-
-exports.organisation_visa_sponsorship = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
-  res.render('../views/organisations/visa-sponsorship', {
-    organisation,
-    actions: {
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
-      change: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`
-    }
-  })
-}
-
 /// ------------------------------------------------------------------------ ///
 /// EDIT ORGANISATION
 /// ------------------------------------------------------------------------ ///
 
 exports.edit_organisation_details_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const currentOrganisation = organisation
 
   res.render('../views/organisations/edit', {
     organisation,
+    currentOrganisation,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/edit`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
@@ -106,11 +84,55 @@ exports.edit_organisation_details_get = (req, res) => {
 }
 
 exports.edit_organisation_details_post = (req, res) => {
+  let organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  organisation = req.session.data.organisation
+
+  const currentOrganisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
   const errors = []
+
+  if (!organisation.ukprn.length) {
+    const error = {}
+    error.fieldName = 'organisation-ukprn'
+    error.href = '#organisation-ukprn'
+    error.text = 'Enter a UK provider reference number (UKPRN)'
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidUKPRN(
+      organisation.ukprn
+    )
+  ) {
+    const error = {}
+    error.fieldName = 'organisation-ukprn'
+    error.href = '#organisation-ukprn'
+    error.text = 'Enter a valid UK provider reference number (UKPRN) - it must be 8 digits starting with a 1, like 12345678'
+    errors.push(error)
+  }
+
+  if (currentOrganisation.type === 'lead_school') {
+    if (!organisation.urn.length) {
+      const error = {}
+      error.fieldName = 'organisation-urn'
+      error.href = '#organisation-urn'
+      error.text = 'Enter a unique reference number (URN)'
+      errors.push(error)
+    } else if (
+      !validationHelper.isValidURN(
+        organisation.urn
+      )
+    ) {
+      const error = {}
+      error.fieldName = 'organisation-urn'
+      error.href = '#organisation-urn'
+      error.text = 'Enter a valid unique reference number (URN) - it must be 5 or 6 digits long'
+      errors.push(error)
+    }
+  }
 
   if (errors.length) {
     res.render('../views/organisations/edit', {
-      organisation: req.session.data.organisation,
+      organisation,
+      currentOrganisation,
       actions: {
         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/edit`,
         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
@@ -121,7 +143,7 @@ exports.edit_organisation_details_post = (req, res) => {
   } else {
     organisationModel.updateOne({
       organisationId: req.params.organisationId,
-      organisation: req.session.data.organisation
+      organisation
     })
 
     req.flash('success', 'Organisation details updated')
