@@ -2860,7 +2860,6 @@ exports.new_course_qualification_get = (req, res) => {
 }
 
 exports.new_course_qualification_post = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const errors = []
 
   let selectedQualification
@@ -2900,12 +2899,7 @@ exports.new_course_qualification_post = (req, res) => {
     if (req.query.referrer === 'check') {
       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
     } else {
-      // if organisation is an accredited provider (SCITT or HEI), else they're a lead school
-      if (organisation.isAccreditedBody) {
-        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`)
-      } else {
-        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
-      }
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`)
     }
   }
 }
@@ -3083,10 +3077,6 @@ exports.new_course_study_mode_get = (req, res) => {
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
 
-  if (organisation.isAccreditedBody) {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-  }
-
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
@@ -3117,10 +3107,6 @@ exports.new_course_study_mode_post = (req, res) => {
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/funding-type`
-
-  if (organisation.isAccreditedBody) {
-    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-  }
 
   if (req.query.referrer === 'check') {
     save += '?referrer=check'
