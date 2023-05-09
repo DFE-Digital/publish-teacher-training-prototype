@@ -160,23 +160,6 @@
             },
             {
               key: {
-                text: "Teaching apprenticeship"
-              },
-              value: {
-                text: course.fundingType | getApprenticeshipLabel
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/apprenticeship?referrer=check",
-                    text: "Change",
-                    visuallyHiddenText: "apprenticeship"
-                  }
-                ]
-              }
-            } if organisation.isAccreditedBody,
-            {
-              key: {
                 text: "Funding type"
               },
               value: {
@@ -191,7 +174,7 @@
                   }
                 ]
               }
-            } if not organisation.isAccreditedBody,
+            },
             {
               key: {
                 text: "Full time or part time"
