@@ -2213,7 +2213,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
     }
   }
 
-  if (course.fundingType === 'fee') {
+  if (fundingType === 'fee') {
     if (!req.session.data.course.canSponsorStudentVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
@@ -2221,9 +2221,7 @@ exports.edit_course_visa_sponsorship_post = (req, res) => {
       error.text = 'Select if your organisation can sponsor Student visas for this course'
       errors.push(error)
     }
-  }
-
-  if (['salary','apprenticeship'].includes(course.fundingType)) {
+  } else if (['salary','apprenticeship'].includes(course.fundingType)) {
     if (!req.session.data.course.canSponsorSkilledWorkerVisa) {
       const error = {}
       error.fieldName = 'visa-sponsorship'
