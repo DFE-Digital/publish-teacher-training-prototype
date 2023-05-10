@@ -1009,7 +1009,6 @@ exports.edit_course_age_range_post = (req, res) => {
     }
   }
 
-
   if (errors.length) {
     res.render('../views/courses/age-range', {
       course,
@@ -1163,75 +1162,6 @@ exports.edit_course_funding_type_post = (req, res) => {
     }
   }
 }
-
-// exports.edit_course_apprenticeship_get = (req, res) => {
-//   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-
-//   let selectedApprenticeshipOption
-//   if (course && course.fundingType) {
-//     selectedApprenticeshipOption = course.fundingType
-//   }
-
-//   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
-
-//   res.render('../views/courses/apprenticeship', {
-//     course,
-//     apprenticeshipOptions,
-//     actions: {
-//       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/apprenticeship`,
-//       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-//       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
-//     }
-//   })
-// }
-
-// exports.edit_course_apprenticeship_post = (req, res) => {
-//   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
-
-//   const errors = []
-
-//   let selectedApprenticeshipOption
-//   if (req.session.data.course && req.session.data.course.fundingType) {
-//     selectedApprenticeshipOption = req.session.data.course.fundingType
-//   }
-
-//   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
-
-//   if (!req.session.data.course.fundingType) {
-//     const error = {}
-//     error.fieldName = 'funding-type'
-//     error.href = '#funding-type'
-//     error.text = 'Select if this is a teaching apprenticeship'
-//     errors.push(error)
-//   }
-
-//   if (errors.length) {
-//     res.render('../views/courses/apprenticeship', {
-//       course,
-//       apprenticeshipOptions,
-//       actions: {
-//         save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/apprenticeship`,
-//         back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-//         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`
-//       },
-//       errors
-//     })
-//   } else {
-//     if (course.fundingType === req.session.data.course.fundingType) {
-//       courseModel.updateOne({
-//         organisationId: req.params.organisationId,
-//         courseId: req.params.courseId,
-//         course: req.session.data.course
-//       })
-
-//       req.flash('success', 'Teaching apprenticeship updated')
-
-//       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`)
-//     } else {
-//       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/visa-sponsorship?referrer=apprenticeship`)
-//     }
-//   }
-// }
 
 exports.edit_course_study_mode_get = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
@@ -2982,89 +2912,8 @@ exports.new_course_funding_type_post = (req, res) => {
   }
 }
 
-// exports.new_course_apprenticeship_get = (req, res) => {
-//   let selectedApprenticeshipOption
-//   if (req.session.data.course && req.session.data.course.fundingType) {
-//     selectedApprenticeshipOption = req.session.data.course.fundingType
-//   }
-
-//   if (req.query.referrer === 'check') {
-//     // hold funding so we can determine if it has changed
-//     req.session.data.course.tempFundingType = selectedApprenticeshipOption
-//   }
-
-//   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
-
-//   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-//   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
-//   if (req.query.referrer === 'check') {
-//     save += '?referrer=check'
-//     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
-//   }
-
-//   res.render('../views/courses/apprenticeship', {
-//     course: req.session.data.course,
-//     apprenticeshipOptions,
-//     actions: {
-//       save,
-//       back,
-//       cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
-//     }
-//   })
-// }
-
-// exports.new_course_apprenticeship_post = (req, res) => {
-//   const errors = []
-
-//   let selectedApprenticeshipOption
-//   if (req.session.data.course && req.session.data.course.fundingType) {
-//     selectedApprenticeshipOption = req.session.data.course.fundingType
-//   }
-
-//   const apprenticeshipOptions = courseHelper.getApprenticeshipOptions(selectedApprenticeshipOption)
-
-//   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/apprenticeship`
-//   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/qualification`
-//   if (req.query.referrer === 'check') {
-//     save += '?referrer=check'
-//     back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`
-//   }
-
-//   if (!req.session.data.course.fundingType) {
-//     const error = {}
-//     error.fieldName = 'funding-type'
-//     error.href = '#funding-type'
-//     error.text = 'Select if this is a teaching apprenticeship'
-//     errors.push(error)
-//   }
-
-//   if (errors.length) {
-//     res.render('../views/courses/apprenticeship', {
-//       course: req.session.data.course,
-//       apprenticeshipOptions,
-//       actions: {
-//         save,
-//         back,
-//         cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`
-//       },
-//       errors
-//     })
-//   } else {
-//     if (req.query.referrer === 'check') {
-//       if (req.session.data.course.fundingType === req.session.data.course.tempFundingType) {
-//         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/check`)
-//       } else {
-//         res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/visa-sponsorship?referrer=check`)
-//       }
-//     } else {
-//       res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new/study-mode`)
-//     }
-//   }
-// }
 
 exports.new_course_study_mode_get = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
   let selectedStudyMode
   if (req.session.data.course && req.session.data.course.studyMode) {
     selectedStudyMode = req.session.data.course.studyMode
@@ -3092,8 +2941,6 @@ exports.new_course_study_mode_get = (req, res) => {
 }
 
 exports.new_course_study_mode_post = (req, res) => {
-  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
-
   const errors = []
 
   let selectedStudyMode
