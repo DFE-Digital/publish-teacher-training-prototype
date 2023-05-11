@@ -1,0 +1,110 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "studySites" %}
+
+{% set title = studySite.name %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      {% set addressHtml %}
+        <p class="govuk-body">
+          {% if studySite.address.addressLine1.length %}
+            {{ studySite.address.addressLine1 }}<br>
+          {% endif %}
+          {% if studySite.address.addressLine2.length %}
+            {{ studySite.address.addressLine2 }}<br>
+          {% endif %}
+          {% if studySite.address.addressLine3.length %}
+            {{ studySite.address.addressLine3 }}<br>
+          {% endif %}
+          {% if studySite.address.town.length %}
+            {{ studySite.address.town }}<br>
+          {% endif %}
+          {% if studySite.address.county.length %}
+            {{ studySite.address.county }}<br>
+          {% endif %}
+          {% if studySite.address.postcode.length %}
+            {{ studySite.address.postcode | upper }}<br>
+          {% endif %}
+        </p>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Study site name"
+            },
+            value: {
+              text: studySite.name
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit?referrer=change",
+                  text: "Change",
+                  visuallyHiddenText: "study site name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Unique reference number (URN)"
+            },
+            value: {
+              text: studySite.urn if studySite.urn else "Not entered",
+              classes: "govuk-hint" if not studySite.urn
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit?referrer=change",
+                  text: "Change",
+                  visuallyHiddenText: "unique reference number (URN)"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: addressHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/edit?referrer=change",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <p class="govuk-body">
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove study site</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

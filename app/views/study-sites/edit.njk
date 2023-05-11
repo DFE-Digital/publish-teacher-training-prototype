@@ -1,0 +1,159 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "studySites" %}
+
+{% if referrer == "change" %}
+  {% set title = studySite.name %}
+{% else %}
+  {% set title = "Study site details" %}
+  {% set caption = "Add study site" %}
+{% endif %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukInput({
+          id: "studySite-name",
+          name: "studySite[name]",
+          label: {
+            text: "Study site name",
+            classes: "govuk-label--s"
+          },
+          errorMessage: errors | getErrorMessage("study-site-name"),
+          value: studySite.name
+        }) }}
+
+        {{ govukInput({
+          id: "studySite-urn",
+          name: "studySite[urn]",
+          label: {
+            text: "Unique reference number (URN) (optional)",
+            classes: "govuk-label--s"
+          },
+          formGroup: {
+            classes: "govuk-!-margin-bottom-2"
+          },
+          classes: "govuk-input--width-10",
+          errorMessage: errors | getErrorMessage("study-site-urn"),
+          value: studySite.urn
+        }) }}
+
+        <p class="govuk-body govuk-!-margin-bottom-7">Find URNs on <a class="govuk-hint" href="https://www.get-information-schools.service.gov.uk/" target="_blank">Get Information about schools (opens in new tab)</a></p>
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m",
+            isPageHeading: false
+          }
+        }) %}
+
+          {{ govukInput({
+            id: "address-line-1",
+            name: "studySite[address][addressLine1]",
+            label: {
+              text: "Address line 1",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-1"),
+            value: studySite.address.addressLine1 if studySite.address.addressLine1 else studySite.addressLine1
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-2",
+            name: "studySite[address][addressLine2]",
+            label: {
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-2"),
+            value: studySite.address.addressLine2 if studySite.address.addressLine2 else studySite.addressLine2
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-3",
+            name: "studySite[address][addressLine3]",
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-3"),
+            value: studySite.address.addressLine3 if studySite.address.addressLine3 else studySite.addressLine3
+          }) }}
+
+          {{ govukInput({
+            id: "address-town",
+            name: "studySite[address][town]",
+            label: {
+              text: "Town or city",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "address-level2",
+            errorMessage: errors | getErrorMessage("address-town"),
+            value: studySite.address.town if studySite.address.town else studySite.town
+          }) }}
+
+          {{ govukInput({
+            id: "address-county",
+            name: "studySite[address][county]",
+            label: {
+              text: "County (optional)",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-!-width-two-thirds",
+            errorMessage: errors | getErrorMessage("address-county"),
+            value: studySite.address.county if studySite.address.county else studySite.county
+          }) }}
+
+          {{ govukInput({
+            id: "address-postcode",
+            name: "studySite[address][postcode]",
+            label: {
+              text: "Postcode",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10",
+            autocomplete: "postal-code",
+            errorMessage: errors | getErrorMessage("address-postcode"),
+            value: (studySite.address.postcode if studySite.address.postcode else studySite.postcode) | upper
+          }) }}
+
+        {% endcall %}
+
+        {{ govukButton({
+          text: "Update study site" if referrer == "change" else "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
