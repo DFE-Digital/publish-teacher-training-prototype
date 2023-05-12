@@ -131,7 +131,7 @@ exports.new_study_site_edit_post = (req, res) => {
     const error = {}
     error.fieldName = "study-site-name"
     error.href = "#study-site-name"
-    error.text = "Enter a school name"
+    error.text = "Enter a study site name"
     errors.push(error)
   }
 
