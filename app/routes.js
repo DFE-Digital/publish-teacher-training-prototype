@@ -465,6 +465,19 @@ router.post('/examples/schools/choose', checkIsAuthenticated, examplesController
 router.get('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_get)
 router.post('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_post)
 
+router.get('/examples/study-sites', (req, res) => {
+  res.redirect('/examples/study-sites/find')
+})
+
+router.get('/examples/study-sites/find', checkIsAuthenticated, examplesController.find_study_site_get)
+router.post('/examples/study-sites/find', checkIsAuthenticated, examplesController.find_study_site_post)
+
+router.get('/examples/study-sites/choose', checkIsAuthenticated, examplesController.choose_study_site_get)
+router.post('/examples/study-sites/choose', checkIsAuthenticated, examplesController.choose_study_site_post)
+
+router.get('/examples/study-sites/edit', checkIsAuthenticated, examplesController.edit_study_site_get)
+router.post('/examples/study-sites/edit', checkIsAuthenticated, examplesController.edit_study_site_post)
+
 router.get('/examples/accredited-providers', (req, res) => {
   res.redirect('/examples/accredited-providers/find')
 })
