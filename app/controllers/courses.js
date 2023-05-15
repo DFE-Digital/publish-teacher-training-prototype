@@ -18,6 +18,7 @@ exports.course_list = (req, res) => {
 
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const locations = locationModel.findMany({ organisationId: req.params.organisationId })
+  const studySites = studySiteModel.findMany({ organisationId: req.params.organisationId })
 
   const courses = courseModel.findMany({ organisationId: req.params.organisationId, cycleId: req.params.cycleId })
 
@@ -52,6 +53,7 @@ exports.course_list = (req, res) => {
   res.render('../views/courses/list', {
     organisation,
     locations,
+    studySites,
     courses: groupedCourses,
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
