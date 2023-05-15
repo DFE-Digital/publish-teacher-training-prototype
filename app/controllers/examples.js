@@ -192,6 +192,194 @@ exports.edit_school_post = (req, res) => {
 }
 
 /// ------------------------------------------------------------------------ ///
+/// STUDY SITES
+/// ------------------------------------------------------------------------ ///
+
+exports.find_study_site_get = (req, res) => {
+  delete req.session.data.school
+
+  res.render("../views/examples/study-sites/find", {
+
+    actions: {
+      save: `/examples/study-sites/find`,
+      back: `/examples/study-sites`,
+      cancel: `/examples/study-sites`,
+      edit: `/examples/study-sites/edit`
+    },
+  })
+}
+
+exports.find_study_site_post = (req, res) => {
+  const errors = []
+
+  if (!req.session.data.query.length) {
+    const error = {}
+    error.fieldName = 'query'
+    error.href = '#query'
+    error.text = 'Enter a school, university, college, URN or postcode'
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render("../views/examples/study-sites/find", {
+
+      actions: {
+        save: `/examples/study-sites/find`,
+        back: `/examples/study-sites`,
+        cancel: `/examples/study-sites`,
+        edit: `/examples/study-sites/edit`
+      },
+      errors,
+    })
+  } else {
+
+    // if (true) {
+    //   res.redirect(
+    //     `/examples/study-sites/edit`
+    //   )
+    // } else {
+      res.redirect(
+        `/examples/study-sites/choose`
+      )
+    // }
+
+  }
+}
+
+exports.choose_study_site_get = (req, res) => {
+  const schools = schoolModel.findMany({
+    query: req.session.data.query
+  })
+
+  // store total number of results
+  const schoolCount = schools.length
+
+  // parse the school results for use in macro
+  let schoolItems = []
+  schools.forEach(school => {
+    const item = {}
+    item.text = school.name
+    item.value = school.urn
+    item.hint = {
+      text: `${school.address.town}, ${school.address.postcode}`
+    }
+    schoolItems.push(item)
+  })
+
+  // sort items alphabetically
+  schoolItems.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  // only get the first 15 items
+  schoolItems = schoolItems.slice(0,15)
+
+  res.render("../views/examples/study-sites/choose", {
+    schoolItems,
+    schoolCount,
+    searchTerm: req.session.data.query,
+    actions: {
+      save: `/examples/study-sites/choose`,
+      back: `/examples/study-sites/find`,
+      cancel: `/examples/study-sites`,
+    },
+  })
+}
+
+exports.choose_study_site_post = (req, res) => {
+  const schools = schoolModel.findMany({
+    query: req.session.data.query
+  })
+
+  // store total number of results
+  const schoolCount = schools.length
+
+  // parse the school results for use in macro
+  let schoolItems = []
+  schools.forEach(school => {
+    const item = {}
+    item.text = school.name
+    item.value = school.urn
+    item.hint = {
+      text: `${school.address.town}, ${school.address.postcode}`
+    }
+    schoolItems.push(item)
+  })
+
+  // sort items alphabetically
+  schoolItems.sort((a,b) => {
+    return a.text.localeCompare(b.text)
+  })
+
+  // only get the first 15 items
+  schoolItems = schoolItems.slice(0,15)
+
+  const errors = []
+
+  if (!req.session.data.school) {
+    const error = {}
+    error.fieldName = 'school'
+    error.href = '#school'
+    error.text = 'Select a study site'
+    errors.push(error)
+  }
+
+  if (errors.length) {
+    res.render("../views/examples/study-sites/choose", {
+      schoolItems,
+      schoolCount,
+      searchTerm: req.session.data.query,
+      actions: {
+        save: `/examples/study-sites/choose`,
+        back: `/examples/study-sites/find`,
+        cancel: `/examples/study-sites`,
+      },
+      errors,
+    })
+  } else {
+    res.redirect(
+      `/examples/study-sites/edit`
+    )
+  }
+}
+
+exports.edit_study_site_get = (req, res) => {
+  let location = {}
+  if (req.session.data.location) {
+    location = req.session.data.location
+  } else {
+   location = schoolModel.findOne({ urn: req.session.data.school })
+  }
+
+  res.render("../views/examples/study-sites/edit", {
+    location,
+    actions: {
+      save: `/examples/study-sites/edit`,
+      back: `/examples/study-sites`,
+      cancel: `/examples/study-sites`,
+    },
+  })
+}
+
+exports.edit_study_site_post = (req, res) => {
+  const errors = []
+
+  if (errors.length) {
+    res.render("../views/examples/study-sites/edit", {
+
+      actions: {
+        save: `/examples/study-sites/edit`,
+        back: `/examples/study-sites`,
+        cancel: `/examples/study-sites`,
+      },
+      errors,
+    })
+  } else {
+
+  }
+}
+
+/// ------------------------------------------------------------------------ ///
 /// ACCREDITED PROVIDERS
 /// ------------------------------------------------------------------------ ///
 

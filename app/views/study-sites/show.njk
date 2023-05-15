@@ -1,8 +1,8 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "schools" %}
+{% set primaryNavId = "studySites" %}
 
-{% set title = location.name %}
+{% set title = studySite.name %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -22,23 +22,23 @@
 
       {% set addressHtml %}
         <p class="govuk-body">
-          {% if location.address.addressLine1.length %}
-            {{ location.address.addressLine1 }}<br>
+          {% if studySite.address.addressLine1.length %}
+            {{ studySite.address.addressLine1 }}<br>
           {% endif %}
-          {% if location.address.addressLine2.length %}
-            {{ location.address.addressLine2 }}<br>
+          {% if studySite.address.addressLine2.length %}
+            {{ studySite.address.addressLine2 }}<br>
           {% endif %}
-          {% if location.address.addressLine3.length %}
-            {{ location.address.addressLine3 }}<br>
+          {% if studySite.address.addressLine3.length %}
+            {{ studySite.address.addressLine3 }}<br>
           {% endif %}
-          {% if location.address.town.length %}
-            {{ location.address.town }}<br>
+          {% if studySite.address.town.length %}
+            {{ studySite.address.town }}<br>
           {% endif %}
-          {% if location.address.county.length %}
-            {{ location.address.county }}<br>
+          {% if studySite.address.county.length %}
+            {{ studySite.address.county }}<br>
           {% endif %}
-          {% if location.address.postcode.length %}
-            {{ location.address.postcode | upper }}<br>
+          {% if studySite.address.postcode.length %}
+            {{ studySite.address.postcode | upper }}<br>
           {% endif %}
         </p>
       {% endset %}
@@ -47,45 +47,28 @@
         rows: [
           {
             key: {
-              text: "School name"
+              text: "Study site name"
             },
             value: {
-              text: location.name
+              text: studySite.name
             },
             actions: {
               items: [
                 {
                   href: actions.change + "/edit?referrer=change",
                   text: "Change",
-                  visuallyHiddenText: "school name"
+                  visuallyHiddenText: "study site name"
                 }
               ]
             }
           },
           {
             key: {
-              text: "School code"
-            },
-            value: {
-              text: "- (dash)" if location.code == "-" else location.code
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/edit?referrer=change",
-                  text: "Change",
-                  visuallyHiddenText: "location code"
-                }
-              ]
-            } if 1 == 0
-          },
-          {
-            key: {
               text: "Unique reference number (URN)"
             },
             value: {
-              text: location.urn if location.urn else "Not entered",
-              classes: "govuk-hint" if not location.urn
+              text: studySite.urn if studySite.urn else "Not entered",
+              classes: "govuk-hint" if not studySite.urn
             },
             actions: {
               items: [
@@ -118,7 +101,7 @@
       }) }}
 
       <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove school</a>
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove study site</a>
       </p>
 
     </div>

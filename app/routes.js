@@ -16,6 +16,7 @@ const gcseController = require('./controllers/gcses')
 const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
+const studySiteController = require('./controllers/study-sites')
 const trainingPartnerController = require('./controllers/training-partners')
 const userController = require('./controllers/users')
 const vacancyController = require('./controllers/vacancies')
@@ -281,7 +282,7 @@ router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vac
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/vacancies/check', checkIsAuthenticated, vacancyController.edit_vacancies_check_post)
 
 /// ------------------------------------------------------------------------ ///
-/// LOCATION ROUTES
+/// SCHOOL ROUTES
 /// ------------------------------------------------------------------------ ///
 
 router.get('/organisations/:organisationId/cycles/:cycleId/schools/new', checkIsAuthenticated, locationController.new_location_find_get)
@@ -302,6 +303,29 @@ router.post('/organisations/:organisationId/cycles/:cycleId/schools/:locationId/
 router.get('/organisations/:organisationId/cycles/:cycleId/schools/:locationId', checkIsAuthenticated, locationController.location_details)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/schools', checkIsAuthenticated, locationController.location_list)
+
+/// ------------------------------------------------------------------------ ///
+/// STUDY SITE ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/new', checkIsAuthenticated, studySiteController.new_study_site_find_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/study-sites/new', checkIsAuthenticated, studySiteController.new_study_site_find_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/new/edit', checkIsAuthenticated, studySiteController.new_study_site_edit_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/study-sites/new/edit', checkIsAuthenticated, studySiteController.new_study_site_edit_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/new/check', checkIsAuthenticated, studySiteController.new_study_site_check_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/study-sites/new/check', checkIsAuthenticated, studySiteController.new_study_site_check_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/:studySiteId/edit', checkIsAuthenticated, studySiteController.edit_study_site_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/study-sites/:studySiteId/edit', checkIsAuthenticated, studySiteController.edit_study_site_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/:studySiteId/delete', checkIsAuthenticated, studySiteController.delete_study_site_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/study-sites/:studySiteId/delete', checkIsAuthenticated, studySiteController.delete_study_site_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites/:studySiteId', checkIsAuthenticated, studySiteController.study_site_details)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/study-sites', checkIsAuthenticated, studySiteController.study_site_list)
 
 /// ------------------------------------------------------------------------ ///
 /// USER ROUTES
@@ -422,6 +446,8 @@ router.get('/accredited-provider-suggestions', accreditedProviderController.accr
 
 router.get('/school-suggestions', locationController.school_suggestions_json)
 
+router.get('/study-site-suggestions', studySiteController.study_site_suggestions_json)
+
 /// ------------------------------------------------------------------------ ///
 /// EXAMPLES
 /// ------------------------------------------------------------------------ ///
@@ -438,6 +464,19 @@ router.post('/examples/schools/choose', checkIsAuthenticated, examplesController
 
 router.get('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_get)
 router.post('/examples/schools/edit', checkIsAuthenticated, examplesController.edit_school_post)
+
+router.get('/examples/study-sites', (req, res) => {
+  res.redirect('/examples/study-sites/find')
+})
+
+router.get('/examples/study-sites/find', checkIsAuthenticated, examplesController.find_study_site_get)
+router.post('/examples/study-sites/find', checkIsAuthenticated, examplesController.find_study_site_post)
+
+router.get('/examples/study-sites/choose', checkIsAuthenticated, examplesController.choose_study_site_get)
+router.post('/examples/study-sites/choose', checkIsAuthenticated, examplesController.choose_study_site_post)
+
+router.get('/examples/study-sites/edit', checkIsAuthenticated, examplesController.edit_study_site_get)
+router.post('/examples/study-sites/edit', checkIsAuthenticated, examplesController.edit_study_site_post)
 
 router.get('/examples/accredited-providers', (req, res) => {
   res.redirect('/examples/accredited-providers/find')
