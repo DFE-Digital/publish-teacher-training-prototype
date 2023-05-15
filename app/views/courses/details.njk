@@ -51,6 +51,20 @@
         </ul>
       {% endset %}
 
+      {% set studySiteHtml %}
+        {% if course.studySites %}
+          <ul class="govuk-list">
+            {% for studySite in course.studySites %}
+              <li>
+                {{ studySite.id | getStudySiteLabel(organisation.id) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="govuk-hint govuk-!-margin-bottom-0">Not entered</p>
+        {% endif %}
+      {% endset %}
+
       {% set subjectHtml %}
         <ul class="govuk-list">
           {% for subject in course.subjects %}
@@ -232,10 +246,27 @@
                 {
                   href: actions.change + "/school-placements?referrer=details",
                   text: "Change",
-                  visuallyHiddenText: "location"
+                  visuallyHiddenText: "school placements"
                 }
               ]
             } if locations.length > 1 and course.status != 3
+          },
+          {
+            key: {
+              text: "Study site" + ("s" if course.studySites.length > 1)
+            },
+            value: {
+              html: studySiteHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/study-sites?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "study sites"
+                }
+              ]
+            } if not course.studySites or studySites.length > 1 and course.status != 3
           },
           {
             key: {
