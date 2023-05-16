@@ -282,20 +282,22 @@ exports.delete_study_site_get = (req, res) => {
     studySiteId: req.params.studySiteId,
   })
 
-  // const courses = courseModel
-  //   .findMany({ organisationId: req.params.organisationId })
-  //   .filter((course) => {
-  //     return course.studySites.find(
-  //       (studySite) => studySite.id === req.params.studySiteId
-  //     )
-  //   })
+  const courses = courseModel
+    .findMany({ organisationId: req.params.organisationId })
+    .filter((course) => {
+      if (course.studySites) {
+        return course.studySites.find(
+          (studySite) => studySite.id === req.params.studySiteId
+        )
+      }
+    })
 
-  // const hasCourses = !!courses.length
+  const hasCourses = !!courses.length
 
   res.render("../views/study-sites/delete", {
     organisation,
     studySite,
-    // hasCourses,
+    hasCourses,
     actions: {
       save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/study-sites/${req.params.studySiteId}/delete`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/study-sites/${req.params.studySiteId}`,
