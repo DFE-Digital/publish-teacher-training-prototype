@@ -285,9 +285,11 @@ exports.delete_location_get = (req, res) => {
   const courses = courseModel
     .findMany({ organisationId: req.params.organisationId })
     .filter((course) => {
-      return course.locations.find(
-        (location) => location.id === req.params.locationId
-      )
+      if (course.locations) {
+        return course.locations.find(
+          (location) => location.id === req.params.locationId
+        )
+      }
     })
 
   const hasCourses = !!courses.length
