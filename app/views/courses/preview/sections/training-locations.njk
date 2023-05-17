@@ -3,10 +3,6 @@
 
   {% if course.howSchoolPlacementsWork %}
 
-    <p class="govuk-body">
-      You’ll spend most of your time in school placements with some time dedicated to theoretical learning at a study site.
-    </p>
-
     {% set whereYouWillTrainHtml %}
       {% if course.programType == 'HE' and course.trainingProvider.code != 'B31' %}
         {% include "./school-placements/where-you-will-train-hei.md" %}
