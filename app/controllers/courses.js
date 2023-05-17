@@ -58,6 +58,7 @@ exports.course_list = (req, res) => {
     actions: {
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
+      add: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/`,
       back: '/'
     }
   })
