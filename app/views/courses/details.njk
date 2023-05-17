@@ -61,16 +61,20 @@
             {% endfor %}
           </ul>
         {% else %}
-          {% set missingStudySiteHtml -%}
-            <a href="{{ actions.change }}/study-sites?referrer=details" class="govuk-link">
-              Enter a study site
-            </a>
-          {%- endset %}
+          {% if course.status == 3 %}
+            <p class="govuk-hint">Not entered</p>
+          {% else %}
+            {% set missingStudySiteHtml -%}
+              <a href="{{ actions.change }}/study-sites?referrer=details" class="govuk-link">
+                Enter a study site
+              </a>
+            {%- endset %}
 
-          {{ govukInsetText({
-            html: missingStudySiteHtml,
-            classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
-          }) }}
+            {{ govukInsetText({
+              html: missingStudySiteHtml,
+              classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+            }) }}
+          {% endif %}
         {% endif %}
       {% endset %}
 
@@ -275,7 +279,7 @@
                   visuallyHiddenText: "study sites"
                 }
               ]
-            } if studySites.length > 1 and course.status != 3
+            } if course.studySites and studySites.length > 1 and course.status != 3
           },
           {
             key: {
