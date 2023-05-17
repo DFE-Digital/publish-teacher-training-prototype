@@ -120,12 +120,12 @@ exports.decorate = (course) => {
   }
 
   if (course.studySites?.length) {
-    const studyLocations = locationHelper.getStudySites(course.trainingProvider.id)
+    const studySites = locationHelper.getStudySites(course.trainingProvider.id)
 
-    course.studySites.forEach((location, i) => {
-      const studyLocation = studyLocations.find(studyLocation => studyLocation.id === location.id)
-      location.address = utils.arrayToList(
-        array = Object.values(studyLocation.address),
+    course.studySites.forEach((site, i) => {
+      const studySite = studySites.find(studySite => studySite.id === site.id)
+      site.address = utils.arrayToList(
+        array = Object.values(studySite.address),
         join = ', ',
         final = ', '
       )
