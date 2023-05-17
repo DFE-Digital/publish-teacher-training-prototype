@@ -65,9 +65,15 @@
             <p class="govuk-hint">Not entered</p>
           {% else %}
             {% set missingStudySiteHtml -%}
-              <a href="{{ actions.change }}/study-sites?referrer=details" class="govuk-link">
-                Enter a study site
-              </a>
+              {% if studySites.length %}
+                <a href="{{ actions.change }}/study-sites?referrer=details" class="govuk-link">
+                  Select a study site
+                </a>
+              {% else %}
+                <a href="{{ actions.base }}/study-sites?referrer=details" class="govuk-link">
+                  Add a study site
+                </a>
+              {% endif %}
             {%- endset %}
 
             {{ govukInsetText({

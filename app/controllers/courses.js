@@ -56,9 +56,9 @@ exports.course_list = (req, res) => {
     studySites,
     courses: groupedCourses,
     actions: {
+      base: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/`,
       new: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/new`,
       view: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
-      add: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/`,
       back: '/'
     }
   })
@@ -97,6 +97,7 @@ exports.course_details = (req, res) => {
     isCurrentCycle,
     rolledOverCourse,
     actions: {
+      base: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}`,
       back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses`,
       details: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
       description: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`,
