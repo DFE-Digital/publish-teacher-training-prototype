@@ -1,5 +1,5 @@
 <div class="govuk-!-margin-bottom-8">
-  <h2 id="where-you-will-train" class="govuk-heading-l">Where you will train</h2>
+  <h2 id="training-locations" class="govuk-heading-l">Training locations</h2>
 
   {% if course.howSchoolPlacementsWork %}
 
@@ -61,7 +61,9 @@
   {% else %}
 
     {% set insetHtml %}
-      <a class="govuk-link" href="{{ actions.change }}/school-placement-details?referrer=preview">Enter details about where candidates will train</a>
+      <a class="govuk-link" href="{{ actions.change }}/training-locations?referrer=preview">
+        Enter details about training locations
+      </a>
     {% endset %}
 
     {{ govukInsetText({
