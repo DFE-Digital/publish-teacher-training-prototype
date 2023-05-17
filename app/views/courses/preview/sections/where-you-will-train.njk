@@ -1,11 +1,11 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 id="where-you-will-train" class="govuk-heading-l">Where you will train</h2>
 
-  <p class="govuk-body">
-    You’ll spend most of your time in school placements with some time dedicated to theoretical learning at a study site.
-  </p>
-
   {% if course.howSchoolPlacementsWork %}
+
+    <p class="govuk-body">
+      You’ll spend most of your time in school placements with some time dedicated to theoretical learning at a study site.
+    </p>
 
     {% set whereYouWillTrainHtml %}
       {% if course.programType == 'HE' and course.trainingProvider.code != 'B31' %}
