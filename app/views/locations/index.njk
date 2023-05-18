@@ -56,7 +56,19 @@
 
         </table>
       {% else %}
-        <p class="govuk-body">There are no schools for {{ organisation.name if organisation.name else "your organisation" }}.</p>
+        <p class="govuk-body">
+          Add all placement schools your organisation works with. You can then link specific placement schools to any of your courses from the ‘Basic details’ tab on the course page.
+        </p>
+
+        <p class="govuk-body">
+          Candidates will see a list of the selected schools in the ‘Training locations’ section on the course page.
+        </p>
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link">Find out more about adding training locations to a course</a>.
+        </p>
+
+        {# <p class="govuk-body">There are no schools for {{ organisation.name if organisation.name else "your organisation" }}.</p> #}
       {% endif %}
 
     </div>
