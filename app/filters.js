@@ -229,6 +229,22 @@ module.exports = (env) => {
     return label
   }
 
+  /* ------------------------------------------------------------------
+  utility function to get the study site label
+  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2'
+              | getStudySiteLabel(d8370001-6f2b-4624-b30c-27ddc5beebfc) }}
+  outputs: "My favourite study site"
+  ------------------------------------------------------------------ */
+  filters.getStudySiteLabel = (studySite, organisation) => {
+    let label = studySite
+
+    if (studySite && organisation) {
+      label = locationHelper.getStudySiteLabel(studySite, organisation)
+    }
+
+    return label
+  }
+
   // TODO: location description
 
   /* ------------------------------------------------------------------

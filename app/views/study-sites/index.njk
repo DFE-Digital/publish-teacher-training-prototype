@@ -52,7 +52,19 @@
 
         </table>
       {% else %}
-        <p class="govuk-body">There are no study sites for {{ organisation.name if organisation.name else "your organisation" }}.</p>
+        <p class="govuk-body">
+          A study site is where trainees do their theoretical training, such as a university campus. Add study sites for your organisation and then link one or more of them to a course from the ‘Basic details’ tab in the course page.
+        </p>
+
+        <p class="govuk-body">
+          Candidates will see a list of the selected study sites in the ‘Training locations’ section on the course page on Find.
+        </p>
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link">Find out more about adding training locations to a course</a>.
+        </p>
+
+        {# <p class="govuk-body">There are no study sites for {{ organisation.name if organisation.name else "your organisation" }}.</p> #}
       {% endif %}
 
     </div>

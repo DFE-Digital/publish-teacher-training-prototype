@@ -119,6 +119,19 @@ exports.decorate = (course) => {
     })
   }
 
+  if (course.studySites?.length) {
+    const studySites = locationHelper.getStudySites(course.trainingProvider.id)
+
+    course.studySites.forEach((site, i) => {
+      const studySite = studySites.find(studySite => studySite.id === site.id)
+      site.address = utils.arrayToList(
+        array = Object.values(studySite.address),
+        join = ', ',
+        final = ', '
+      )
+    })
+  }
+
   return course
 }
 

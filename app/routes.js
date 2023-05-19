@@ -138,6 +138,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-mo
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/school-placements', checkIsAuthenticated, courseController.new_course_location_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/study-sites', checkIsAuthenticated, courseController.new_course_study_site_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/study-sites', checkIsAuthenticated, courseController.new_course_study_site_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-provider', checkIsAuthenticated, courseController.new_course_accredited_provider_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/new/accredited-provider', checkIsAuthenticated, courseController.new_course_accredited_provider_post)
 
@@ -196,6 +199,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/st
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/school-placements', checkIsAuthenticated, courseController.edit_course_location_post)
+
+router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-sites', checkIsAuthenticated, courseController.edit_course_study_site_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/study-sites', checkIsAuthenticated, courseController.edit_course_study_site_post)
 
 router.get('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-provider', checkIsAuthenticated, courseController.edit_course_accredited_provider_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/courses/:courseId/accredited-provider', checkIsAuthenticated, courseController.edit_course_accredited_provider_post)
