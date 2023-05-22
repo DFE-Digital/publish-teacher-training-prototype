@@ -4,6 +4,7 @@ const { v4: uuid } = require('uuid')
 
 const organisationModel = require('./organisations')
 const locationModel = require('./locations')
+const studySiteModel = require('./study-sites')
 const subjectModel = require('./subjects')
 
 const courseHelper = require('../helpers/courses')
@@ -169,6 +170,23 @@ exports.insertOne = (params) => {
       course.locations = locations
 
       course.hasVacancies = 'yes'
+    }
+
+    if (params.course.studySites) {
+      const studySites = []
+
+      params.course.studySites.forEach((courseStudySite, i) => {
+        const studySite = {}
+
+        const css = studySiteModel.findOne({ organisationId: params.organisationId, studySiteId: courseStudySite })
+
+        studySite.id = css.id
+        studySite.name = css.name
+
+        studySites.push(studySite)
+      })
+
+      course.studySites = studySites
     }
 
     if (params.organisationId) {
@@ -342,7 +360,6 @@ exports.updateOne = (params) => {
 
     if (params.course.locations) {
       const locations = []
-      const courseLocations = course.locations
 
       params.course.locations.forEach((courseLocation, i) => {
         const location = {}
@@ -366,6 +383,23 @@ exports.updateOne = (params) => {
       })
 
       course.locations = locations
+    }
+
+    if (params.course.studySites) {
+      const studySites = []
+
+      params.course.studySites.forEach((courseStudySite, i) => {
+        const studySite = {}
+
+        const css = studySiteModel.findOne({ organisationId: params.organisationId, studySiteId: courseStudySite })
+
+        studySite.id = css.id
+        studySite.name = css.name
+
+        studySites.push(studySite)
+      })
+
+      course.studySites = studySites
     }
 
     if (params.course.accreditedBody) {

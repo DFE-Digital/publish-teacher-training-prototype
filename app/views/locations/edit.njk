@@ -1,12 +1,17 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% if referrer == "change" %}
   {% set title = location.name %}
 {% else %}
-  {% set title = "Add location" %}
+  {% set title = "School details" %}
+  {% set caption = "Add school" %}
 {% endif %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -30,12 +35,19 @@
           id: "location-name",
           name: "location[name]",
           label: {
-            text: "Name",
+            text: "School name",
             classes: "govuk-label--s"
           },
           errorMessage: errors | getErrorMessage("location-name"),
           value: location.name
         }) }}
+
+        {% if referrer == "change" %}
+          <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">School code</p>
+          <p class="govuk-body">
+            {{ ("- (dash)" if location.code == "-" else location.code) if location.code else "Not entered" }}
+          </p>
+        {% endif %}
 
         {{ govukInput({
           id: "location-urn",
@@ -44,14 +56,102 @@
             text: "Unique reference number (URN) (optional)",
             classes: "govuk-label--s"
           },
+          formGroup: {
+            classes: "govuk-!-margin-bottom-2"
+          },
+          classes: "govuk-input--width-10",
           errorMessage: errors | getErrorMessage("location-urn"),
           value: location.urn
         }) }}
 
-        <p class="govuk-body govuk-!-margin-bottom-7">Find URNs on <a class="govuk-hint" href="https://www.get-information-schools.service.gov.uk/" target="_blank">Get information about schools (opens in new tab)</a></p>
+        <p class="govuk-body govuk-!-margin-bottom-7">Find URNs on <a class="govuk-hint" href="https://www.get-information-schools.service.gov.uk/" target="_blank">Get Information about Schools (opens in new tab)</a></p>
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m",
+            isPageHeading: false
+          }
+        }) %}
+
+          {{ govukInput({
+            id: "address-line-1",
+            name: "location[address][addressLine1]",
+            label: {
+              text: "Address line 1",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-1"),
+            value: location.address.addressLine1 if location.address.addressLine1 else location.addressLine1
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-2",
+            name: "location[address][addressLine2]",
+            label: {
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-2"),
+            value: location.address.addressLine2 if location.address.addressLine2 else location.addressLine2
+          }) }}
+
+          {{ govukInput({
+            id: "address-line-3",
+            name: "location[address][addressLine3]",
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            autocomplete: "address-line1",
+            errorMessage: errors | getErrorMessage("address-line-3"),
+            value: location.address.addressLine3 if location.address.addressLine3 else location.addressLine3
+          }) }}
+
+          {{ govukInput({
+            id: "address-town",
+            name: "location[address][town]",
+            label: {
+              text: "Town or city",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "address-level2",
+            errorMessage: errors | getErrorMessage("address-town"),
+            value: location.address.town if location.address.town else location.town
+          }) }}
+
+          {{ govukInput({
+            id: "address-county",
+            name: "location[address][county]",
+            label: {
+              text: "County (optional)",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-!-width-two-thirds",
+            errorMessage: errors | getErrorMessage("address-county"),
+            value: location.address.county if location.address.county else location.county
+          }) }}
+
+          {{ govukInput({
+            id: "address-postcode",
+            name: "location[address][postcode]",
+            label: {
+              text: "Postcode",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10",
+            autocomplete: "postal-code",
+            errorMessage: errors | getErrorMessage("address-postcode"),
+            value: (location.address.postcode if location.address.postcode else location.postcode) | upper
+          }) }}
+
+        {% endcall %}
 
         {{ govukButton({
-          text: "Update location" if referrer == "change" else "Continue"
+          text: "Update school" if referrer == "change" else "Continue"
         }) }}
 
       </form>

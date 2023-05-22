@@ -1,0 +1,108 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "schools" %}
+
+{% set title = "Enter a school, university, college, URN or postcode" %}
+{% set caption = "Add school" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "/examples"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {# <div class="app-no-js-only">
+          {{ govukInput({
+            id: "schoolSearch",
+            name: "_schoolSearch",
+            label: {
+              text: label
+            },
+            value: data._schoolSearch,
+            classes: 'app-!-max-width-two-thirds'
+          }) }}
+        </div>
+
+        <div class="app-js-only">
+          {{ appAutocompleteFromInput({
+            id: "school",
+            name: "school",
+            label: {
+              html: headingHtml
+            },
+            value: degreeTemp.grade if storedGradeOther,
+            autocompleteOptions: {
+              minLength: 2,
+              autoselect: false,
+              showSuggestionsBanner: true,
+              values: degreeGradesAutocomplete
+            }
+          }) }}
+        </div> #}
+
+        <div class="govuk-form-group {{- ' govuk-form-group--error' if (errors | getErrorMessage('school'))}}">
+          {{ govukInput({
+            id: "query",
+            name: "query",
+            label: {
+              html: headingHtml
+            },
+            autocomplete: "off",
+            formGroup: {
+              classes: "govuk-!-margin-bottom-0"
+            },
+            errorMessage: errors | getErrorMessage("query")
+          }) }}
+          <div id="school-autocomplete" class="govuk-body"></div>
+        </div>
+
+        <p class="govuk-body govuk-!-margin-bottom-7">
+          <a class="govuk-link" href="{{ actions.edit }}">I cannot find the school - enter manually</a>
+        </p>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+  <script src="/public/javascripts/debounce.js"></script>
+  <script src="/public/javascripts/init-autocomplete.js"></script>
+
+  {# <script type="text/javascript">
+  initAutocomplete({
+    element: "school-autocomplete",
+    input: "school",
+    path: "/school-suggestions",
+  });
+  </script> #}
+{% endblock %}

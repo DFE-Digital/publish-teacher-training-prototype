@@ -8,6 +8,14 @@ const subjectHelper = require('./subjects')
 const utils = require('./utils')
 
 exports.decorate = (course) => {
+  course.subjectCodes = course.subjects.map(subject => subject.code)
+
+  // Subject knowledge enhancements
+  course.hasSke = subjectHelper.hasSke(course.subjectCodes)
+
+  // International relocation payments
+  course.hasIrp = subjectHelper.hasIrp(course.subjectCodes)
+
   course.hasFees = course.fundingType === 'fee'
   course.hasSalary = course.fundingType === 'salary' || course.fundingType === 'apprenticeship'
 
@@ -73,6 +81,12 @@ exports.decorate = (course) => {
           course.scholarshipBody = 'Institute of Physics'
           course.scholarshipUrl = 'https://www.iop.org/about/support-grants/iop-teacher-training-scholarships'
           break
+        case '15': // French
+        case '17': // German
+        case '22': // Spanish
+          course.scholarshipBody = 'British Council'
+          course.scholarshipUrl = 'https://www.britishcouncil.org/education/he-science/opportunities/ltts'
+          break
       }
     }
   }
@@ -99,6 +113,19 @@ exports.decorate = (course) => {
       const trainingLocation = trainingLocations.find(trainingLocation => trainingLocation.id === location.id)
       location.address = utils.arrayToList(
         array = Object.values(trainingLocation.address),
+        join = ', ',
+        final = ', '
+      )
+    })
+  }
+
+  if (course.studySites?.length) {
+    const studySites = locationHelper.getStudySites(course.trainingProvider.id)
+
+    course.studySites.forEach((site, i) => {
+      const studySite = studySites.find(studySite => studySite.id === site.id)
+      site.address = utils.arrayToList(
+        array = Object.values(studySite.address),
         join = ', ',
         final = ', '
       )

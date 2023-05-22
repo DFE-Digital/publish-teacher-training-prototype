@@ -30,12 +30,12 @@
 
       {% if course.subjectLevel == "secondary" %}
         {% include "_includes/page-heading.njk" %}
-        <p class="govuk-body">For some subjects, candidates may be able to get a bursaries or scholarships.</p>
+        <p class="govuk-body">For some subjects, candidates may be able to get a bursary or scholarship.</p>
         <p class="govuk-body">If the course content is made up of at least 50% of an eligible subject, add this as the first subject so we can show the correct financial information to candidates.</p>
         <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/government/publications/funding-initial-teacher-training-itt/funding-initial-teacher-training-itt-academic-year-2023-to-2024#postgraduate-bursaries-and-scholarships">Learn more about the bursaries and scholarships</a></p>
       {% else %}
         {% set headingHtml %}
-          {% include "_includes/page-heading.njk" %}
+          {% include "_includes/page-heading-legend.njk" %}
         {% endset %}
       {% endif %}
 
@@ -72,7 +72,9 @@
             name: "course[subjects][]",
             fieldset: {
               legend: {
-                html: headingHtml
+                html: headingHtml,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
               }
             },
             errorMessage: errors | getErrorMessage("subject"),

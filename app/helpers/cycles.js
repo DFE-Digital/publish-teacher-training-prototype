@@ -41,8 +41,8 @@ const CYCLES = {
     findCloses: DateTime.fromISO('2021-10-04T23:59:59').toJSDate(),
     ageCalculationDate: DateTime.fromISO('2021-08-31T23:59:59').toJSDate()
   },
-  2022: {
-    code: '2022',
+  2023: {
+    code: '2023',
     shortDesc: '2021 to 2022',
     longDesc: '2021 to 2022 (starts 2022)',
     findOpens: DateTime.fromISO('2021-10-05T09:00:00').toJSDate(),
@@ -66,6 +66,19 @@ const CYCLES = {
     rejectByDefault: DateTime.fromISO('2023-09-29T23:59:59').toJSDate(),
     findCloses: DateTime.fromISO('2023-10-04T23:59:59').toJSDate(),
     ageCalculationDate: DateTime.fromISO('2023-08-31T23:59:59').toJSDate()
+  },
+  2024: {
+    code: '2024',
+    shortDesc: '2023 to 2024',
+    longDesc: '2023 to 2024 (starts 2024)',
+    findOpens: DateTime.fromISO('2023-10-05T09:00:00').toJSDate(),
+    applyOpens: DateTime.fromISO('2023-10-12T09:00:00').toJSDate(),
+    showDeadlineBanner: DateTime.fromISO('2024-08-01T09:00:00').toJSDate(),
+    apply1Deadline: DateTime.fromISO('2024-09-07T18:00:00').toJSDate(),
+    apply2Deadline: DateTime.fromISO('2024-09-21T18:00:00').toJSDate(),
+    rejectByDefault: DateTime.fromISO('2024-09-29T23:59:59').toJSDate(),
+    findCloses: DateTime.fromISO('2024-10-04T23:59:59').toJSDate(),
+    ageCalculationDate: DateTime.fromISO('2024-08-31T23:59:59').toJSDate()
   }
 }
 

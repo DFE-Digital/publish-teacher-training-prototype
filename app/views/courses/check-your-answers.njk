@@ -41,6 +41,16 @@
           </ul>
         {% endset %}
 
+        {% set studySiteHtml %}
+          <ul class="govuk-list">
+            {% for studySite in course.studySites %}
+              <li>
+                {{ studySite | getStudySiteLabel(organisation.id) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endset %}
+
         {% set courseStartHtml %}
           <p class="govuk-body">{{ course.startDate | date("MMMM yyyy") }}</p>
           <p class="govuk-hint">{{ course.startDate | getAcademicYearLabel }}</p>
@@ -50,7 +60,7 @@
           rows: [
             {
               key: {
-                text: "Course title"
+                text: "Course name"
               },
               value: {
                 text: (course.subjectArray | getCourseName('engineersTeachPhysics')) if course.campaign == "engineersTeachPhysics" else (course.subjectArray | getCourseName())
@@ -92,7 +102,7 @@
             },
             {
               key: {
-                text: "Subject"
+                text: "Subject" + ("s" if course.subjectArray.length > 1)
               },
               value: {
                 html: subjectHtml
@@ -160,24 +170,7 @@
             },
             {
               key: {
-                text: "Teaching apprenticeship"
-              },
-              value: {
-                text: course.fundingType | getApprenticeshipLabel
-              },
-              actions: {
-                items: [
-                  {
-                    href: actions.change + "/apprenticeship?referrer=check",
-                    text: "Change",
-                    visuallyHiddenText: "apprenticeship"
-                  }
-                ]
-              }
-            } if organisation.isAccreditedBody,
-            {
-              key: {
-                text: "Funding type"
+                text: "Fee or salary"
               },
               value: {
                 text: course.fundingType | getFundingTypeLabel
@@ -191,7 +184,7 @@
                   }
                 ]
               }
-            } if not organisation.isAccreditedBody,
+            },
             {
               key: {
                 text: "Full time or part time"
@@ -211,7 +204,7 @@
             },
             {
               key: {
-                text: "Location" + ("s" if course.locations.length > 1)
+                text: "School placement" + ("s" if course.locations.length > 1)
               },
               value: {
                 html: locationHtml
@@ -219,16 +212,33 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/location?referrer=check",
+                    href: actions.change + "/school-placements?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "location"
+                    visuallyHiddenText: "school placements"
                   }
                 ]
               } if locations.length > 1
             },
             {
               key: {
-                text: "Accredited body"
+                text: "Study site" + ("s" if course.studySites.length > 1)
+              },
+              value: {
+                html: studySiteHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: actions.change + "/study-sites?referrer=check",
+                    text: "Change",
+                    visuallyHiddenText: "study sites"
+                  }
+                ]
+              } if studySites.length > 1
+            },
+            {
+              key: {
+                text: "Accredited provider"
               },
               value: {
                 text: course.accreditedBody | getOrganisationLabel
@@ -236,9 +246,9 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/accredited-body?referrer=check",
+                    href: actions.change + "/accredited-provider?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "accredited body"
+                    visuallyHiddenText: "accredited provider"
                   }
                 ]
               }

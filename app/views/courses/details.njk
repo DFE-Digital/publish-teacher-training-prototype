@@ -51,6 +51,39 @@
         </ul>
       {% endset %}
 
+      {% set studySiteHtml %}
+        {% if course.studySites %}
+          <ul class="govuk-list">
+            {% for studySite in course.studySites %}
+              <li>
+                {{ studySite.id | getStudySiteLabel(organisation.id) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {% if course.status == 3 %}
+            <p class="govuk-hint">Not entered</p>
+          {% else %}
+            {% set missingStudySiteHtml -%}
+              {% if studySites.length %}
+                <a href="{{ actions.change }}/study-sites?referrer=details" class="govuk-link">
+                  Select a study site
+                </a>
+              {% else %}
+                <a href="{{ actions.base }}/study-sites?referrer=details" class="govuk-link">
+                  Add a study site
+                </a>
+              {% endif %}
+            {%- endset %}
+
+            {{ govukInsetText({
+              html: missingStudySiteHtml,
+              classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0"
+            }) }}
+          {% endif %}
+        {% endif %}
+      {% endset %}
+
       {% set subjectHtml %}
         <ul class="govuk-list">
           {% for subject in course.subjects %}
@@ -103,7 +136,7 @@
           },
           {
             key: {
-              text: "Subject"
+              text: "Subject" + ("s" if course.subjects.length > 1)
             },
             value: {
               html: subjectHtml
@@ -171,24 +204,7 @@
           },
           {
             key: {
-              text: "Teaching apprenticeship"
-            },
-            value: {
-              text: course.fundingType | getApprenticeshipLabel
-            },
-            actions: {
-              items: [
-                {
-                  href: actions.change + "/apprenticeship?referrer=details",
-                  text: "Change",
-                  visuallyHiddenText: "apprenticeship"
-                }
-              ]
-            } if course.status in [0,2]
-          } if organisation.isAccreditedBody,
-          {
-            key: {
-              text: "Funding type"
+              text: "Fee or salary"
             },
             value: {
               text: course.fundingType | getFundingTypeLabel
@@ -202,7 +218,7 @@
                 }
               ]
             } if course.status in [0,2]
-          } if not organisation.isAccreditedBody,
+          },
           {
             key: {
               text: "Full time or part time"
@@ -222,7 +238,7 @@
           },
           {
             key: {
-              text: "Location" + ("s" if course.locations.length > 1)
+              text: "School placement" + ("s" if course.locations.length > 1)
             },
             value: {
               html: locationHtml
@@ -230,16 +246,33 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/location?referrer=details",
+                  href: actions.change + "/school-placements?referrer=details",
                   text: "Change",
-                  visuallyHiddenText: "location"
+                  visuallyHiddenText: "school placements"
                 }
               ]
             } if locations.length > 1 and course.status != 3
           },
           {
             key: {
-              text: "Accredited body"
+              text: "Study site" + ("s" if course.studySites.length > 1)
+            },
+            value: {
+              html: studySiteHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/study-sites?referrer=details",
+                  text: "Change",
+                  visuallyHiddenText: "study sites"
+                }
+              ]
+            } if course.studySites and studySites.length > 1 and course.status != 3
+          },
+          {
+            key: {
+              text: "Accredited provider"
             },
             value: {
               text: course.accreditedBody.id | getOrganisationLabel
@@ -247,9 +280,9 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/accredited-body?referrer=details",
+                  href: actions.change + "/accredited-provider?referrer=details",
                   text: "Change",
-                  visuallyHiddenText: "accredited body"
+                  visuallyHiddenText: "accredited provider"
                 }
               ]
             } if course.status in [0,2]

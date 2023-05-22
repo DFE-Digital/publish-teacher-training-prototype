@@ -1,0 +1,85 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "studySites" %}
+
+{% if schoolCount == 0 %}
+  {% set title = "No results found for ‘" + searchTerm + "’" %}
+{% elif schoolCount == 1 %}
+  {% set title = "1 result found for ‘" + searchTerm + "’" %}
+{% else %}
+  {% set title = (schoolCount | numeral("0,0")) + " results found for ‘" + searchTerm + "’" %}
+{% endif %}
+
+{% set caption = "Add study site" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      {% if schoolCount == 0 %}
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.back }}">Change your search</a>.
+        </p>
+      {% elif schoolCount > 15 %}
+        <p class="govuk-body">
+          Showing the first 15 results. <a class="govuk-link" href="{{ actions.back }}">Try narrowing down your search</a> if the study site you’re looking for is not listed.
+        </p>
+      {% else %}
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.back }}">Change your search</a> if the study site you’re looking for is not listed.
+        </p>
+      {% endif %}
+
+      {% if schoolCount %}
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+          {{ govukRadios({
+            idPrefix: "school",
+            name: "school",
+            fieldset: {
+              legend: {
+                text: "Study site",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            hint: {
+              text: "Results for ‘" + searchTerm + "’"
+            } if 1 == 0,
+            errorMessage: errors | getErrorMessage("school"),
+            items: schoolItems
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+
+        </form>
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+        </p>
+
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

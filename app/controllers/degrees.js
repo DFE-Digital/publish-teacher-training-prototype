@@ -8,6 +8,16 @@ exports.edit_degree_minimum_classification_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
+
   let selectedMinimumDegreeGrade
   if (req.session.data.degree && req.session.data.degree.minimum) {
     selectedMinimumDegreeGrade = req.session.data.degree.minimum
@@ -26,9 +36,9 @@ exports.edit_degree_minimum_classification_get = (req, res) => {
     course,
     minimumDegreeGradeOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      save,
+      back,
+      cancel
     }
   })
 }
@@ -36,6 +46,16 @@ exports.edit_degree_minimum_classification_get = (req, res) => {
 exports.edit_degree_minimum_classification_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
 
   let selectedMinimumDegreeGrade
   if (req.session.data.degree && req.session.data.degree.minimum) {
@@ -52,9 +72,9 @@ exports.edit_degree_minimum_classification_post = (req, res) => {
       course,
       minimumDegreeGradeOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+        save,
+        back,
+        cancel
       },
       errors
     })
@@ -62,7 +82,13 @@ exports.edit_degree_minimum_classification_post = (req, res) => {
 
     // if no additional requirements save degreeGrade as 9, otherwise move on to next step
     if (req.session.data.degree && req.session.data.degree.minimum === 'yes') {
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`)
+      let next = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+
+      if (req.query.referrer === 'preview') {
+        next += '?referrer=preview'
+      }
+
+      res.redirect(next)
     } else {
       degreeModel.updateOne({
         organisationId: req.params.organisationId,
@@ -75,7 +101,11 @@ exports.edit_degree_minimum_classification_post = (req, res) => {
       delete req.session.data.degree
 
       req.flash('success', 'Degree updated')
-      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+      if (req.query.referrer === 'preview') {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`)
+      } else {
+        res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+      }
     }
   }
 }
@@ -83,6 +113,16 @@ exports.edit_degree_minimum_classification_post = (req, res) => {
 exports.edit_degree_classification_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back += '?referrer=preview'
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
 
   let selectedDegreeGrade
   if (req.session.data.degree && req.session.data.degree.grade) {
@@ -98,9 +138,9 @@ exports.edit_degree_classification_get = (req, res) => {
     course,
     degreeGradeOptions,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      save,
+      back,
+      cancel
     }
   })
 }
@@ -108,6 +148,16 @@ exports.edit_degree_classification_get = (req, res) => {
 exports.edit_degree_classification_post = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back += '?referrer=preview'
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
 
   let selectedDegreeGrade
   if (req.session.data.degree && req.session.data.degree.grade) {
@@ -126,15 +176,20 @@ exports.edit_degree_classification_post = (req, res) => {
       course,
       degreeGradeOptions,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+        save,
+        back,
+        cancel
       },
       errors
     })
   } else {
+    let next = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`
 
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`)
+    if (req.query.referrer === 'preview') {
+      next += '?referrer=preview'
+    }
+
+    res.redirect(next)
   }
 
 }
@@ -143,13 +198,23 @@ exports.edit_degree_subject_requirements_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back += '?referrer=preview'
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
+
   res.render('../views/courses/degree/requirements', {
     organisation,
     course,
     actions: {
-      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`,
-      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`,
-      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+      save,
+      back,
+      cancel
     }
   })
 }
@@ -159,6 +224,16 @@ exports.edit_degree_subject_requirements_post = (req, res) => {
   const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
   course.additionalDegreeSubjectRequirements = req.session.data.degree.requirements
 
+  let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`
+  let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`
+  let cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+
+  if (req.query.referrer === 'preview') {
+    save += '?referrer=preview'
+    back += '?referrer=preview'
+    cancel = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`
+  }
+
   const errors = []
 
   if (errors.length) {
@@ -166,9 +241,9 @@ exports.edit_degree_subject_requirements_post = (req, res) => {
       organisation,
       course,
       actions: {
-        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/subject-requirements`,
-        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/degree/classification`,
-        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
+        save,
+        back,
+        cancel
       },
       errors
     })
@@ -182,7 +257,11 @@ exports.edit_degree_subject_requirements_post = (req, res) => {
     delete req.session.data.degree
 
     req.flash('success', 'Degree updated')
-    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    if (req.query.referrer === 'preview') {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/preview`)
+    } else {
+      res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`)
+    }
   }
 
 }

@@ -1,10 +1,10 @@
 <div class="govuk-!-margin-bottom-8">
-  <h2 id="about-course" class="govuk-heading-l">About the course</h2>
+  <h2 id="course-summary" class="govuk-heading-l">Course summary</h2>
   {% if course.aboutCourse.length %}
     {{ course.aboutCourse | markdownToHtml | safe }}
   {% else %}
     {% set insetHtml %}
-      <a class="govuk-link" href="{{ actions.change }}/about-course">Enter course summary</a>
+      <a class="govuk-link" href="{{ actions.change }}/about-course?referrer=preview">Enter course summary</a>
     {% endset %}
     {{ govukInsetText({
       html: insetHtml

@@ -31,7 +31,7 @@
     "express-writer": "0.0.4",
     "faker": "^5.5.3",
     "fancy-log": "^2.0.0",
-    "govuk-frontend": "^4.4.1",
+    "govuk-frontend": "^4.6.0",
     "gray-matter": "^4.0.3",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
@@ -40,7 +40,7 @@
     "inquirer": "^8.2.4",
     "lodash": "^4.17.21",
     "luxon": "^3.2.1",
-    "marked": "^4.2.5",
+    "marked": "^5.0.0",
     "notifications-node-client": "^7.0.0",
     "numeral": "^2.0.6",
     "nunjucks": "^3.2.3",
@@ -63,5 +63,17 @@
   },
   "jest": {
     "testRunner": "jest-jasmine2"
+  },
+  "standard": {
+    "ignore": [
+      "app/assets/javascripts/accessible-autocomplete.js",
+      "app/assets/javascripts/application.js",
+      "app/assets/javascripts/jquery-1.11.3.js",
+      "app/models/data.js",
+      "app/views/_components/filter-toggle-button/filter-toggle-button.js",
+      "app/views/_components/button-menu/button-menu.js",
+      "server.js",
+      "listen-on-port.js"
+    ]
   }
 }

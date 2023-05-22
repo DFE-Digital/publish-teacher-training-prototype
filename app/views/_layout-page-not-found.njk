@@ -118,9 +118,9 @@
           active: primaryNavId == "courses"
         },
         {
-          href: baseUrl + "/locations",
-          text: "Locations",
-          active: primaryNavId == "locations"
+          href: baseUrl + "/schools",
+          text: "Schools",
+          active: primaryNavId == "schools"
         },
         {
           href: baseUrl + "/users",
@@ -131,12 +131,12 @@
           href: baseUrl + "/training-partners",
           text: "Training partners",
           active: primaryNavId == "trainingPartners"
-        } if passport.organisation.type in ["hei","scitt"],
+        } if passport.organisation.isAccreditedBody,
         {
-          href: baseUrl + "/accredited-bodies",
-          text: "Accredited bodies",
-          active: primaryNavId == "accreditedBodies"
-        } if passport.organisation.type == "lead_school",
+          href: baseUrl + "/accredited-providers",
+          text: "Accredited providers",
+          active: primaryNavId == "accreditedProviders"
+        } if not passport.organisation.isAccreditedBody,
         {
           href: baseUrl + "/details",
           text: "Organisation details",

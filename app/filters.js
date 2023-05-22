@@ -229,6 +229,22 @@ module.exports = (env) => {
     return label
   }
 
+  /* ------------------------------------------------------------------
+  utility function to get the study site label
+  example: {{ '92a06b2e-638e-4dc8-b43f-bbbbf046eca2'
+              | getStudySiteLabel(d8370001-6f2b-4624-b30c-27ddc5beebfc) }}
+  outputs: "My favourite study site"
+  ------------------------------------------------------------------ */
+  filters.getStudySiteLabel = (studySite, organisation) => {
+    let label = studySite
+
+    if (studySite && organisation) {
+      label = locationHelper.getStudySiteLabel(studySite, organisation)
+    }
+
+    return label
+  }
+
   // TODO: location description
 
   /* ------------------------------------------------------------------
@@ -508,12 +524,29 @@ module.exports = (env) => {
   }
 
   /*  ------------------------------------------------------------------
-  Convert subject list to course title
+  Convert subject list to course name
   @param {Array} array Array to convert
   @example [A, B, C] => A, B and C
   ------------------------------------------------------------------  */
   filters.getCourseName = (subjects, campaign = null) => {
     return courseHelper.getCourseName(subjects, campaign)
+  }
+
+  /* ------------------------------------------------------------------
+  utility function to get the guidance section label
+  example: {{ "account" | getGuidanceSectionLabel }}
+  outputs: "Your account"
+  ------------------------------------------------------------------ */
+  filters.getGuidanceSectionLabel = (section) => {
+    let label = ''
+
+    if (section === 'account') {
+      label = 'Your account'
+    } else if (section === 'courses') {
+      label = 'Managing courses'
+    }
+
+    return label
   }
 
   /* ------------------------------------------------------------------

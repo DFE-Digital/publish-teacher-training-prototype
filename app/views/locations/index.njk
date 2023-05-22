@@ -1,0 +1,77 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "schools" %}
+
+{% set title = "Schools" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      {{ govukButton({
+        text: "Add school",
+        href: actions.new
+      }) }}
+
+      {% if locations.length %}
+        <table class="govuk-table app-table--vertical-align-middle">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header">School name</th>
+              <th class="govuk-table__header">School code</th>
+              <th class="govuk-table__header">
+                <abbr class="app-!-text-decoration-underline-dotted" title="Unique reference number">
+                  URN
+                </abbr>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+
+            {% for location in locations %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell app-table--courses__course-name">
+                  <a class="govuk-link govuk-heading-s govuk-!-margin-bottom-0" href="{{ actions.view }}/{{ location.id }}">
+                    {{ location.name }}
+                  </a>
+                </td>
+                <td class="govuk-table__cell {{- ' govuk-hint' if not location.code }}">
+                  {{ ("- (dash)" if location.code == "-" else location.code) if location.code else "Not entered" }}
+                </td>
+                <td class="govuk-table__cell {{- ' govuk-hint' if not location.urn }}">
+                  {{ location.urn if location.urn else "Not entered" }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      {% else %}
+        <p class="govuk-body">
+          Add all placement schools your organisation works with. You can then link specific placement schools to any of your courses from the ‘Basic details’ tab on the course page.
+        </p>
+
+        <p class="govuk-body">
+          Candidates will see a list of the selected schools in the ‘Training locations’ section on the course page on Find.
+        </p>
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link">Find out more about adding training locations to a course</a>.
+        </p>
+
+        {# <p class="govuk-body">There are no schools for {{ organisation.name if organisation.name else "your organisation" }}.</p> #}
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -26,6 +26,16 @@ exports.findMany = (params) => {
     organisations = organisations.filter(organisation => organisation.isAccreditedBody === params.isAccreditedBody)
   }
 
+  if (params.query?.length) {
+    const query = params.query.toLowerCase()
+    return organisations.filter(organisation =>
+      organisation.name.toLowerCase().includes(query)
+      || organisation.code.toLowerCase().includes(query)
+      || organisation.ukprn?.toString().includes(query)
+      || organisation.address?.postcode?.toLowerCase().includes(query)
+     )
+  }
+
   return organisations
 }
 
@@ -85,6 +95,10 @@ exports.updateOne = (params) => {
 
       if (params.organisation.address.addressLine2 !== undefined) {
         organisation.address.addressLine2 = params.organisation.address.addressLine2
+      }
+
+      if (params.organisation.address.addressLine3 !== undefined) {
+        organisation.address.addressLine3 = params.organisation.address.addressLine3
       }
 
       if (params.organisation.address.town !== undefined) {

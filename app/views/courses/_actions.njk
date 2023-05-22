@@ -1,5 +1,20 @@
 {% if course.status in [1,4] %}
   <div class="govuk-button-group">
+
+    {% if course.status == 1 %}
+      {{ govukButton({
+        text: "Close course",
+        href: actions.close,
+        classes: "govuk-!-margin-right-2"
+      }) }}
+    {% elif course.status == 4 %}
+      {{ govukButton({
+        text: "Open course",
+        href: actions.open,
+        classes: "govuk-!-margin-right-2"
+      }) }}
+    {% endif %}
+
     <a class="govuk-link govuk-!-margin-right-2" href="#">View on Find</a>
     <a class="govuk-link app-link--destructive" href="{{ actions.withdraw }}">Withdraw course</a>
   </div>

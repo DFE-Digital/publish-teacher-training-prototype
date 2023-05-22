@@ -18,13 +18,10 @@ exports.findMany = (params) => {
     const file = {}
     file.slug = filename.replace(/.(md)/,'')
     file.title = content.data.title
+    file.section = content.data.section
+    file.sortOrder = content.data.sortOrder
     files.push(file)
   })
-
-  // sort files alphabetically by title
-  // files = files.sort((a, b) => {
-  //   return a.title.localeCompare(b.title)
-  // })
 
   return files
 }

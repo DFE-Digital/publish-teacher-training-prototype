@@ -1,0 +1,65 @@
+{% extends "_layout.njk" %}
+
+{% set primaryNavId = "accreditedProviders" %}
+
+{% set title = "About the accredited provider" %}
+
+{% if referrer == "change" %}
+  {% set caption = accreditedProvider.name %}
+{% else %}
+  {% set caption = "Add accredited provider" %}
+{% endif %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set headingHtml %}
+        {% include "_includes/page-heading.njk" %}
+      {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukCharacterCount({
+          id: "accredited-provider-description",
+          name: "accreditedProvider[description]",
+          rows: 10,
+          maxwords: wordCount,
+          label: {
+            html: headingHtml
+          },
+          hint: {
+            text: "Tell candidates about the accredited provider. You could mention their academic specialities and achievements."
+          },
+          errorMessage: errors | getErrorMessage("accredited-provider-description"),
+          value: accreditedProvider.description
+        }) }}
+
+        {{ govukButton({
+          text: "Update description" if referrer == "change" else "Continue"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

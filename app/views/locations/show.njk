@@ -1,11 +1,14 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% set title = location.name %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -25,6 +28,9 @@
           {% if location.address.addressLine2.length %}
             {{ location.address.addressLine2 }}<br>
           {% endif %}
+          {% if location.address.addressLine3.length %}
+            {{ location.address.addressLine3 }}<br>
+          {% endif %}
           {% if location.address.town.length %}
             {{ location.address.town }}<br>
           {% endif %}
@@ -41,7 +47,7 @@
         rows: [
           {
             key: {
-              text: "Name"
+              text: "School name"
             },
             value: {
               text: location.name
@@ -51,14 +57,14 @@
                 {
                   href: actions.change + "/edit?referrer=change",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "school name"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Location code"
+              text: "School code"
             },
             value: {
               text: "- (dash)" if location.code == "-" else location.code
@@ -101,7 +107,7 @@
             actions: {
               items: [
                 {
-                  href: actions.change + "/address?referrer=change",
+                  href: actions.change + "/edit?referrer=change",
                   text: "Change",
                   visuallyHiddenText: "address"
                 }
@@ -112,7 +118,7 @@
       }) }}
 
       <p class="govuk-body">
-        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove location</a>
+        <a class="govuk-link app-link--destructive" href="{{ actions.delete }}">Remove school</a>
       </p>
 
     </div>

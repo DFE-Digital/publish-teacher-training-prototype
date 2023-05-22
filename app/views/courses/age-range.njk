@@ -29,22 +29,24 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
+        {% include "_includes/page-heading-legend.njk" %}
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors }}">
+        <div class="govuk-form-group {{ 'govuk-form-group--error' if errors | getErrorMessage('age-range') }}">
 
           {% call govukFieldset({
             legend: {
-              html: headingHtml
+              html: headingHtml,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           }) %}
 
-          {% if errors %}
+          {% if errors | getErrorMessage("age-range") %}
             <span id="age-range-error" class="govuk-error-message">
-              <div><span class="govuk-visually-hidden">Error:</span> Enter an age range</div>
+              <div><span class="govuk-visually-hidden">Error:</span> Select an age range</div>
             </span>
           {% endif %}
 
@@ -62,29 +64,31 @@
                 {% if option.conditional %}
                   <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-{{ option.id }}">
                     <p class="govuk-hint">
-                      Enter an age range in years, for example 5 to 11. The course must cover 4 or more school years.
+                      Enter an age range in years, for example {{ "5 to 11" if course.subjectLevel == "primary" else "11 to 18" }}. The course must cover 4 or more school years.
                     </p>
 
                     {{ govukInput({
                       id: option.id + "-from",
                       name: "course[ageRangeOther][from]",
                       label: {
-                        text: "From"
+                        text: "Start age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-from"),
                       value: course.ageRangeOther.from,
-                      classes: "govuk-input--width-2"
+                      classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("age-range-other-from"))
                     }) }}
 
                     {{ govukInput({
                       id: option.id + "-to",
                       name: "course[ageRangeOther][to]",
                       label: {
-                        text: "To"
+                        text: "End age",
+                        classes: "govuk-label--s"
                       },
                       errorMessage: errors | getErrorMessage("age-range-other-to"),
                       value: course.ageRangeOther.to,
-                      classes: "govuk-input--width-2"
+                      classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("age-range-other-to"))
                     }) }}
                   </div>
                 {% endif %}

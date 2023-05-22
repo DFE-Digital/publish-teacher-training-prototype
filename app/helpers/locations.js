@@ -1,6 +1,7 @@
 const utils = require('./utils')
 
 const locationModel = require('../models/locations')
+const studySiteModel = require('../models/study-sites')
 
 // const STATUSES = {
 //   discontinued: "Discontinued", // "D" in the live service
@@ -63,6 +64,66 @@ exports.getLocationLabel = (locationId, organisationId) => {
 
     if (location) {
       label = location.name
+    }
+  }
+
+  return label
+}
+
+exports.getStudySites = (organisationId) => {
+  const studySites = studySiteModel.findMany({
+    organisationId: organisationId
+  })
+
+  return studySites
+}
+
+exports.getStudySiteOptions = (organisationId, selectedItem) => {
+  const items = []
+
+  const studySites = studySiteModel.findMany({
+    organisationId: organisationId
+  })
+
+  studySites.forEach((studySite, i) => {
+    const item = {}
+
+    item.text = studySite.name
+    item.value = studySite.id
+    item.id = studySite.id
+    item.checked = (selectedItem && selectedItem.includes(studySite.id)) ? 'checked' : ''
+
+    item.hint = {}
+    item.hint.text = utils.arrayToList(
+      array = Object.values(studySite.address),
+      join = ', ',
+      final = ', '
+    )
+
+    items.push(item)
+  })
+
+  return items
+}
+
+exports.getStudySiteLabel = (studySiteId, organisationId) => {
+  let studySites = []
+  let studySite
+  let label = ""
+
+  if (organisationId) {
+    studySites = studySiteModel.findMany({
+      organisationId: organisationId
+    })
+  }
+
+  if (studySiteId) {
+    studySite = studySites.find(studySite => studySite.id === studySiteId)
+
+    label = studySiteId
+
+    if (studySite) {
+      label = studySite.name
     }
   }
 

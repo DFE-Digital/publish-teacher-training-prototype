@@ -29,7 +29,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
+        {% include "_includes/page-heading-legend.njk" %}
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -49,23 +49,23 @@
             hint: {
               text: "For example, 30 9 2022"
             },
-            errorMessage: errors | getErrorMessage("application-open-date-other"),
+            errorMessage: errors | getErrorMessage("applications-open-date-other"),
             items: [
-            {
-              name: "day",
-              value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-2"
-            },
-            {
-              name: "month",
-              value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-2"
-            },
-            {
-              name: "year",
-              value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
-              classes: "govuk-input--width-4"
-            }
+              {
+                name: "day",
+                value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              },
+              {
+                name: "month",
+                value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              },
+              {
+                name: "year",
+                value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
+                classes: "govuk-input--width-4" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+              }
             ]
           }) }}
 
@@ -76,15 +76,20 @@
           name: "course[applicationsOpenDate]",
           fieldset: {
             legend: {
-              html: headingHtml
+              html: headingHtml,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           },
-          errorMessage: errors | getErrorMessage("application-open-date"),
+          errorMessage: errors | getErrorMessage("applications-open-date"),
           items: [
             {
               value: applicationsOpenDate | date,
               text: "As soon as the course is on Find - recommended",
               checked: true if (course.applicationsOpenDate | date) == (applicationsOpenDate | date)
+            },
+            {
+              divider: "or"
             },
             {
               value: "other",

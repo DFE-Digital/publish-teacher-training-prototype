@@ -1,0 +1,70 @@
+<div class="govuk-!-margin-bottom-8">
+  <h2 id="training-locations" class="govuk-heading-l">Training locations</h2>
+
+  {% if course.howSchoolPlacementsWork %}
+
+    {% set whereYouWillTrainHtml %}
+      {% if course.programType == 'HE' and course.trainingProvider.code != 'B31' %}
+        {% include "./school-placements/where-you-will-train-hei.md" %}
+      {% elif course.programType == 'SC' and course.trainingProvider.code != 'E65' %}
+        {% include "./school-placements/where-you-will-train-scitt.md" %}
+      {% endif %}
+    {% endset %}
+
+    {% if course.programType in ['HE','SC'] and whereYouWillTrainHtml.length %}
+      {{ appAdvice({
+        title: "Where you will train",
+        html: whereYouWillTrainHtml | trim | markdownToHtml
+      }) }}
+    {% endif %}
+
+    {% if course.howSchoolPlacementsWork %}
+      {{ course.howSchoolPlacementsWork | markdownToHtml | safe }}
+    {% endif %}
+
+    {% if course.studySites.length %}
+      <h3 class="govuk-heading-m">Study sites</h3>
+
+      <p class="govuk-body">The theoretical learning part of your course will be at the following locations.</p>
+
+      <ul class="govuk-list govuk-list--spaced">
+        {% for site in course.studySites %}
+          <li>
+            <strong>{{ site.name }}</strong>
+            <br>
+            {{ site.address }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if course.locations.length %}
+      <h3 class="govuk-heading-m">School placements</h3>
+
+      <p class="govuk-body">We work with the following schools to provide your school placements.</p>
+
+      <ul class="govuk-list govuk-list--spaced">
+        {% for school in course.locations %}
+          <li>
+            <strong>{{ school.name }}</strong>
+            <br>
+            {{ school.address }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+  {% else %}
+
+    {% set insetHtml %}
+      <a class="govuk-link" href="{{ actions.change }}/training-locations?referrer=preview">
+        Enter details about training locations
+      </a>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: insetHtml
+    }) }}
+
+  {% endif %}
+</div>

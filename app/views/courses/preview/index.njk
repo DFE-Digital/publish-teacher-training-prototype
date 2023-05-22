@@ -14,6 +14,11 @@
 {% endblock %}
 
 {% block content %}
+
+  {{ govukNotificationBanner({
+    text: "This is a preview of how your course will appear on Find."
+  }) }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -44,7 +49,7 @@
 
       {% include "./sections/about-course.njk" %}
 
-      {% include "./sections/school-placements.njk" %}
+      {% include "./sections/training-locations.njk" %}
 
       {% include "./sections/entry-requirements.njk" %}
 
@@ -54,25 +59,19 @@
 
       {% include "./sections/fees-and-financial-support.njk" %}
 
-      {% if trainingProvider.trainWithUs %}
-        {% include "./sections/about-training-provider.njk" %}
-      {% endif %}
+      {% include "./sections/about-training-provider.njk" %}
 
-      {% if course.interviewProcess %}
-        {% include "./sections/interview-process.njk" %}
-      {% endif %}
+      {% include "./sections/interview-process.njk" %}
 
       {% include "./sections/international-candidates.njk" %}
 
-      {% if trainingProvider.trainWithDisability %}
-        {% include "./sections/training-with-disabilities.njk" %}
-      {% endif %}
+      {% include "./sections/training-with-disabilities.njk" %}
 
       {% include "./sections/contact-training-provider.njk" %}
 
       {% include "./sections/support-and-advice.njk" %}
 
-      {% include "./sections/apply.njk" %}
+      {# {% include "./sections/apply.njk" %} #}
 
     </div>
   </div>

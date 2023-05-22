@@ -1,6 +1,6 @@
 <dl class="app-description-list govuk-!-margin-bottom-8">
   {% if course.accreditedBody and (course.accreditedBody.code != course.trainingProvider.code) %}
-    <dt class="app-description-list__label">Accredited body</dt>
+    <dt class="app-description-list__label">Accredited provider</dt>
     <dd>{{ course.accreditedBody.name }}</dd>
   {% endif %}
   {% if course.fundingOption %}

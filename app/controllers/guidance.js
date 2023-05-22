@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const guidanceModel = require('../models/guidance')
 
 exports.guidance = (req, res) => {
@@ -12,10 +13,24 @@ exports.guidance = (req, res) => {
       content: markdown.content
     })
   } else {
-    const links = guidanceModel.findMany({})
+    let links = guidanceModel.findMany({})
+
+    // order links
+    links = _.orderBy(links, ['sortOrder'], ['asc'])
+
+    // group guidance by section
+    // group an array of objects by key
+    const guidance = _.groupBy(links, 'section')
+
+    // group an array of objects by key and remove key from object
+    // const guidance = _.mapValues(_.groupBy(links, 'section'),
+      // list => list.map(link => _.omit(link, 'section')))
+
+    const sections = Object.keys(guidance)
 
     res.render('../views/guidance/index', {
-      links
+      guidance,
+      sections
     })
   }
 }

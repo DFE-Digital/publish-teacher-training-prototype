@@ -3,7 +3,7 @@
 {% set primaryNavId = "courses" %}
 
 {% set caption = "Vacancies - " + course.name + " (" + course.code + ")" %}
-{% set title = "Locations with vacancies"  %}
+{% set title = "School placements with vacancies"  %}
 
 {% block pageTitle %}
   {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
@@ -17,6 +17,8 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "_includes/error-summary.njk" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -36,7 +38,7 @@
             }
           },
           hint: {
-            text: "Select all locations with vacancies"
+            text: "Select all school placements with vacancies"
           },
           errorMessage: errors | getErrorMessage("locations-vacancies"),
           items: locationOptions

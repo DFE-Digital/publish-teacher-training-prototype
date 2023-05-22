@@ -1,9 +1,9 @@
 {% extends "_layout.njk" %}
 
-{% set primaryNavId = "locations" %}
+{% set primaryNavId = "schools" %}
 
 {% set title = "Check your answers" %}
-{% set caption = "Add location" %}
+{% set caption = "Add school" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -29,6 +29,9 @@
             {% if location.address.addressLine2.length %}
               {{ location.address.addressLine2 }}<br>
             {% endif %}
+            {% if location.address.addressLine3.length %}
+              {{ location.address.addressLine3 }}<br>
+            {% endif %}
             {% if location.address.town.length %}
               {{ location.address.town }}<br>
             {% endif %}
@@ -45,7 +48,7 @@
           rows: [
             {
               key: {
-                text: "Name"
+                text: "School name"
               },
               value: {
                 text: location.name
@@ -55,7 +58,7 @@
                   {
                     href: actions.change + "?referrer=check",
                     text: "Change",
-                    visuallyHiddenText: "name"
+                    visuallyHiddenText: "school name"
                   }
                 ]
               }
@@ -88,7 +91,7 @@
               actions: {
                 items: [
                   {
-                    href: actions.change + "/address?referrer=check",
+                    href: actions.change + "?referrer=check",
                     text: "Change",
                     visuallyHiddenText: "address"
                   }
@@ -99,7 +102,7 @@
         }) }}
 
         {{ govukButton({
-          text: "Add location"
+          text: "Add school"
         }) }}
 
       </form>
