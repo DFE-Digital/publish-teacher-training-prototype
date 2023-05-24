@@ -244,6 +244,40 @@ exports.edit_study_site_post = (req, res) => {
     errors.push(error)
   }
 
+  if (!req.session.data.studySite.address.addressLine1.length) {
+    const error = {}
+    error.fieldName = "address-line-1"
+    error.href = "#address-line-1"
+    error.text = "Enter address line 1"
+    errors.push(error)
+  }
+
+  if (!req.session.data.studySite.address.town.length) {
+    const error = {}
+    error.fieldName = "address-town"
+    error.href = "#address-town"
+    error.text = "Enter a town or city"
+    errors.push(error)
+  }
+
+  if (!req.session.data.studySite.address.postcode.length) {
+    const error = {}
+    error.fieldName = "address-postcode"
+    error.href = "#address-postcode"
+    error.text = "Enter a postcode"
+    errors.push(error)
+  } else if (
+    !validationHelper.isValidPostcode(
+      req.session.data.studySite.address.postcode
+    )
+  ) {
+    const error = {}
+    error.fieldName = "address-postcode"
+    error.href = "#address-postcode"
+    error.text = "Enter a real postcode"
+    errors.push(error)
+  }
+
   if (errors.length) {
     res.render("../views/study-sites/edit", {
       studySite: req.session.data.studySite,
