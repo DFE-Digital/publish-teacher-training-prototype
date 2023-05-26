@@ -37,7 +37,7 @@
           prefix: {
             text: "£"
           },
-          errorMessage: errors | getErrorMessage("fee-uk"),
+          errorMessage: errors | getErrorMessage("fees-uk"),
           value: course.feesUK,
           classes: "govuk-input--width-5",
           spellcheck: false
@@ -47,7 +47,7 @@
           id: "fees-international",
           name: "course[feesInternational]",
           label: {
-            text: "Fees for international students (optional)",
+            text: "Fees for international students" + (" (optional)" if course.canSponsorStudentVisas == 'no'),
             classes: "govuk-label--s"
           },
           prefix: {
