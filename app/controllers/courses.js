@@ -1951,7 +1951,8 @@ exports.edit_course_fees_get = (req, res) => {
 }
 
 exports.edit_course_fees_post = (req, res) => {
-  const course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  let course = courseModel.findOne({ organisationId: req.params.organisationId, courseId: req.params.courseId })
+  course = {...course, ...req.session.data.course}
 
   let save = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/course-fees`
   let back = `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/courses/${req.params.courseId}/description`
@@ -1964,6 +1965,22 @@ exports.edit_course_fees_post = (req, res) => {
   }
 
   const errors = []
+
+  if (!req.session.data.course.feesUK.length) {
+    const error = {}
+    error.fieldName = 'fees-uk'
+    error.href = '#fees-uk'
+    error.text = 'Enter fees for UK students'
+    errors.push(error)
+  }
+
+  if (!req.session.data.course.feesInternational.length && course.canSponsorStudentVisa === 'yes') {
+    const error = {}
+    error.fieldName = 'fees-international'
+    error.href = '#fees-international'
+    error.text = 'Enter fees for international students'
+    errors.push(error)
+  }
 
   if (errors.length) {
     res.render('../views/courses/course-fees', {
