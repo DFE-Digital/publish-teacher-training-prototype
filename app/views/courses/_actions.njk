@@ -26,7 +26,8 @@
       classes: "govuk-!-margin-right-2"
     }) }}
 
-    {% if isRollover and isCurrentCycle and not rolledOverCourse %}
+    {# This is annoying: isRollover is a boolean, but the environment variable parses as a string #}
+    {% if isRollover == "true" and isCurrentCycle and not rolledOverCourse %}
       {{ govukButton({
         text: "Roll over course",
         href: actions.rollover,
