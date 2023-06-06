@@ -68,7 +68,7 @@ exports.edit_accredited_provider_description_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
-    error.text = `Description about the accredited provider must be ${wordCount} words or fewer`
+    error.text = `Details about the accredited provider must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
@@ -419,7 +419,7 @@ exports.new_accredited_provider_description_post = (req, res) => {
     const error = {}
     error.fieldName = 'accredited-provider-description'
     error.href = '#accredited-provider-description'
-    error.text = `Description about the accredited provider must be ${wordCount} words or fewer`
+    error.text = `Details about the accredited provider must be ${wordCount} words or fewer`
     errors.push(error)
   }
 
