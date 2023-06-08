@@ -1,5 +1,6 @@
 ---
 title: Roll over courses to a new recruitment cycle
+type: guidance
 section: courses
 sortOrder: 1
 ---

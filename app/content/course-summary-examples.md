@@ -1,5 +1,6 @@
 ---
 title: Course summary examples
+type: guidance
 section: courses
 sortOrder: 3
 contents:

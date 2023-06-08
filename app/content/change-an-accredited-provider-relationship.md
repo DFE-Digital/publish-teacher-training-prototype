@@ -1,5 +1,6 @@
 ---
 title: Change an accredited provider relationship
+type: guidance
 section: account
 sortOrder: 3
 ---
