@@ -15,9 +15,9 @@ exports.findMany = (params) => {
   documents.forEach((filename, i) => {
     const doc = fs.readFileSync(directoryPath + '/' + filename)
     const content = matter(doc)
-    const file = {}
 
     if (content.data?.type === 'guidance') {
+      const file = {}
       file.slug = filename.replace(/.(md)/,'')
       file.title = content.data.title
       file.section = content.data.section
