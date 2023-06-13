@@ -111,7 +111,7 @@
     <div class="govuk-grid-column-full">
 
       <h2 class="govuk-heading-m">
-        Course length and {{ "salary details" if course.fundingType == "salary" else "fees" }}
+        Course length and {{ "salary details" if course.fundingType in ["salary","apprenticeship"] else "fees" }}
       </h2>
 
       {% set courseLengthText %}
@@ -252,7 +252,7 @@
                 }
               ]
             } if course.status != 3
-          } if course.fundingType == "salary"
+          } if course.fundingType in ["salary","apprenticeship"]
         ]
       }) }}
 
