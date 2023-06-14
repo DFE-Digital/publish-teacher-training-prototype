@@ -7,6 +7,7 @@ const passport = require('passport')
 const accountController = require('./controllers/account')
 const accreditedProviderController = require('./controllers/accredited-providers')
 const authenticationController = require('./controllers/authentication')
+const contentController = require('./controllers/content')
 const courseController = require('./controllers/courses')
 const cycleController = require('./controllers/cycles')
 const dataController = require('./controllers/data')
@@ -443,6 +444,18 @@ router.get('/how-to-use-this-service/:fileName', guidanceController.guidance)
 
 router.get('/how-to-use-this-service', guidanceController.guidance)
 
+
+/// ------------------------------------------------------------------------ ///
+/// GENERAL ROUTES
+/// ------------------------------------------------------------------------ ///
+
+router.get('/accessibility', contentController.accessibility)
+
+router.get('/cookies', contentController.cookies)
+
+router.get('/privacy', contentController.privacy)
+
+router.get('/terms', contentController.terms)
 
 /// ------------------------------------------------------------------------ ///
 /// AUTOCOMPLETE ROUTES

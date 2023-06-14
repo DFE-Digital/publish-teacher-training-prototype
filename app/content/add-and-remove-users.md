@@ -1,5 +1,6 @@
 ---
 title: Add and remove users
+type: guidance
 section: account
 sortOrder: 2
 ---

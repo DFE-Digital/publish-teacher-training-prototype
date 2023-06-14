@@ -1,5 +1,6 @@
 ---
 title: Add an organisation
+type: guidance
 section: account
 sortOrder: 1
 ---

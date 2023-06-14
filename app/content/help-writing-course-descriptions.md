@@ -1,5 +1,6 @@
 ---
 title: Help writing course descriptions
+type: guidance
 section: courses
 sortOrder: 2
 ---
