@@ -1,20 +1,18 @@
 ---
-
 title: Add schools and study sites
 type: guidance
 section: courses
 sortOrder: 1
 contents:
 items:
-- text: Adding a school
-href: "#adding-a-school"
-- text: Adding a study site
-href: "#adding-a-study-site"
-- text: Attaching schools and study sites to a course
-href: "#attaching-schools-and-study-sites-to-a-course"
-- text: Detaching schools and study sites from a course
-href: "#detaching-schools-and-study-sites-from-a-course"
-
+  - text: Adding a school
+    href: "#adding-a-school"
+  - text: Adding a study site
+    href: "#adding-a-study-site"
+  - text: Attaching schools and study sites to a course
+    href: "#attaching-schools-and-study-sites-to-a-course"
+  - text: Detaching schools and study sites from a course
+    href: "#detaching-schools-and-study-sites-from-a-course"
 ---
 
 We know from our research with candidates that understanding where their initial teacher training (ITT) will take place is one of the most important factors when choosing a course.
@@ -84,4 +82,3 @@ If you want to detach a school or study site from a course, you can select the c
 If there are no places left at a school or the study site is no longer available, you can detach it from a course. If a place becomes available, you can simply attach it again.
 
 If you need to remove a school or a study site from your account entirely, you’ll need to go to the ‘Schools’ or Study sites’ tab to do this.
-
