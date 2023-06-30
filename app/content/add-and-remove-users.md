@@ -1,7 +1,7 @@
 ---
 title: Add and remove users
 type: guidance
-section: account
+section: courses
 sortOrder: 2
 ---
 
