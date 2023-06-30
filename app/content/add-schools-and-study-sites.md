@@ -4,15 +4,15 @@ type: guidance
 section: courses
 sortOrder: 1
 contents:
-items:
-  - text: Adding a school
-    href: "#adding-a-school"
-  - text: Adding a study site
-    href: "#adding-a-study-site"
-  - text: Attaching schools and study sites to a course
-    href: "#attaching-schools-and-study-sites-to-a-course"
-  - text: Detaching schools and study sites from a course
-    href: "#detaching-schools-and-study-sites-from-a-course"
+  items:
+    - text: Adding a school
+      href: "#adding-a-school"
+    - text: Adding a study site
+      href: "#adding-a-study-site"
+    - text: Attaching schools and study sites to a course
+      href: "#attaching-schools-and-study-sites-to-a-course"
+    - text: Detaching schools and study sites from a course
+      href: "#detaching-schools-and-study-sites-from-a-course"
 ---
 
 We know from our research with candidates that understanding where their initial teacher training (ITT) will take place is one of the most important factors when choosing a course.
