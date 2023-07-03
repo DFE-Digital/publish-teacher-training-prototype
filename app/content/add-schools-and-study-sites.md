@@ -29,7 +29,7 @@ You can add all potential schools and study sites to your account in Publish tea
 
 
 
-Once you’ve entered the details, check they are correct and select ‘Add school’.
+Once you’ve entered the details, check they are correct and select ‘Add school’. If you cannot find the school, you can enter it manually.
 
 You’ll see a list of all schools you’ve added, and you’ll be able to select the name of the school to edit or remove it.
 
@@ -41,7 +41,7 @@ If you are concerned about the time taken to add this information, especially if
 
 ## Adding a study site
 
- A study site is the location where the trainee will do the theoretical part of their training, for example, a university campus.
+ A study site is the location where the trainee will do the theoretical part of their training, for example, a university campus. If you cannot find the study site, you can enter it manually.
 
 You’ll need at least one study site attached to a course to be able to publish it, but you can add as many as you like.
 
