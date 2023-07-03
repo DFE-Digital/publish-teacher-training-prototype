@@ -27,9 +27,9 @@ You can add all potential schools and study sites to your account in Publish tea
 
  To add details about a school, go to the ‘Schools’ tab.
 
+![Adding a school](add-school.png)
 
-
-Once you’ve entered the details, check they are correct and select ‘Add school’.
+Once you’ve entered the details, check they are correct and select ‘Add school’. If you cannot find the school, you can enter it manually.
 
 You’ll see a list of all schools you’ve added, and you’ll be able to select the name of the school to edit or remove it.
 
@@ -41,13 +41,13 @@ If you are concerned about the time taken to add this information, especially if
 
 ## Adding a study site
 
- A study site is the location where the trainee will do the theoretical part of their training, for example, a university campus.
+ A study site is the location where the trainee will do the theoretical part of their training, for example, a university campus. If you cannot find the study site, you can enter it manually.
 
 You’ll need at least one study site attached to a course to be able to publish it, but you can add as many as you like.
 
 To add study sites, go to the study site tab.
 
-
+![Adding a study site](add-study-site.png)
 
 Once you’ve entered the details, check they are correct and select ‘Add study site’.
 
@@ -62,16 +62,14 @@ Once you’ve added schools and study sites to your account, you can attach them
 When you add a new course, you’ll be asked to select all the school placements and study sites that apply.
 
 
-
-
-
+![Selecting school placements when adding a course](school-placements.png)
 
 
 ### When editing an existing course
 
 Go to the ‘Basic details’ tab and select the ‘Change’ link next to ‘School placements’ or ‘Study sites’.
 
-
+![Changing schools or study sites from the 'Basic details' tab](course-basic-details.png)
 
 On the next page, you can then tick the check box next to the school or study site you want to attach to the course.
 
