@@ -24,6 +24,15 @@
 
       {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
+<p class="govuk-body">Tell applicants why they should train with you. You could mention:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>your key values</li>
+            <li>your specialisms</li>
+            <li>your past achievements (for example, student successes and Ofsted ratings)</li></ul>
+
+   <p class="govuk-body">Be specific and support your claims with evidence. For example, rather than saying, “Our students are some of the happiest in the country”, you could say, “The Times Educational Supplement ranked our students as 4th happiest in the country”.</p>
+
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -40,34 +49,6 @@
           value: organisation.trainWithUs
         }) }}
 
-        {% set helpTextHtml %}
-          <p class="govuk-body">Tell applicants why they should choose to train with you. Say:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>who you are</li>
-            <li>who you work with</li>
-          </ul>
-
-          <p class="govuk-body">You could mention:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>your key values</li>
-            <li>your specialisms</li>
-            <li>your past achievements (eg student successes, Ofsted ratings)</li>
-          </ul>
-
-          <p class="govuk-body">Be specific with any claims you make, and support them with evidence. For example:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>don’t say “our students are some of the happiest in the country”</li>
-            <li>do say “the Times Educational Supplement ranked our students as 4th happiest in the country”</li>
-          </ul>
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "Help with describing training with your organisation",
-          html: helpTextHtml
-        }) }}
 
         {{ govukButton({
           text: "Update training with your organisation"
