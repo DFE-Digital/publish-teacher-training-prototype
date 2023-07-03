@@ -15,7 +15,7 @@ To do this:
 
 Once your organisation has been added, you’ll be able to add other users and create courses.
 
-We'll also add your organisation to [Manage teacher training applications (Manage)](https://www.apply-for-teacher-training.service.gov.uk/provider) at the same time.
+We’ll also add your organisation to [Manage teacher training applications (Manage)](https://www.apply-for-teacher-training.service.gov.uk/provider) at the same time.
 
 If you need to remove an organisation from Publish or Manage, contact us at becomingateacher@digital.education.gov.uk.
 
