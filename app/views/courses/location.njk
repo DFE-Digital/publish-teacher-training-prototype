@@ -23,16 +23,21 @@
 
 {% block content %}
 
+
   {% include "_includes/error-summary.njk" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+
       {% set headingHtml %}
         {% include "_includes/page-heading-legend.njk" %}
-      {% endset %}
 
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+    <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+      <p class="govuk-body">Candidates will see a list of the selected placements on the course page to give them an idea of where they might be placed.</p>
+
+      {% endset %}
 
         {{ govukCheckboxes({
           idPrefix: "locations",
@@ -43,13 +48,17 @@
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
+
           },
           hint: {
             text: "Select all that apply"
           },
+
+
           errorMessage: errors | getErrorMessage("locations"),
           items: locationOptions
         }) }}
+
 
         {% if course.id %}
           {{ govukButton({
