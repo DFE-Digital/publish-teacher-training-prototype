@@ -31,6 +31,8 @@
       {% set headingHtml %}
         {% include "_includes/page-heading-legend.njk" %}
 
+    <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
 
         <p class="govuk-body">We recommend that you open the course for applications as soon as the course is on Find to get as many applications as possible.</p>
 
@@ -40,7 +42,6 @@
 
       {% endset %}
 
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
 
 
