@@ -25,13 +25,13 @@
 
       {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
-      {% endset %}
+
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        {% set hintTextHtml %}
-        <p class="govuk-hint">If applicable, say more about the financial support you offer for this course. For example, any bursaries available.</p>
-        <p class="govuk-hint">You do not need to add details of any DfE bursaries and subject scholarships here. These will be published automatically to your course page</p>
+
+        <p class="govuk-body">Tell candidates about any financial support you offer for this course.</p>
+        <p class="govuk-body">You do not need to add information about scholarships and bursaries as we will automatically publish that information on your course page, depending on the course subject.</p>
         {% endset %}
 
         {{ govukCharacterCount({
