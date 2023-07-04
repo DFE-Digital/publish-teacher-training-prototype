@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "courses" %}
 
-{% set title = "Financial support" %}
+{% set title = "Financial support (optional)" %}
 {% set caption = course.name + " (" + course.code + ")" %}
 
 {% block pageTitle %}
@@ -23,16 +23,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
 
-
-      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
 
         <p class="govuk-body">Tell candidates about any financial support you offer for this course.</p>
         <p class="govuk-body">You do not need to add information about scholarships and bursaries as we will automatically publish that information on your course page, depending on the course subject.</p>
-        {% endset %}
 
         {{ govukCharacterCount({
           id: "financial-support",
@@ -40,10 +37,8 @@
           rows: 10,
           maxwords: 250,
           label: {
-            html: headingHtml
-          },
-          hint: {
-            html: hintTextHtml
+         text: title,
+            classes: "govuk-label--s"
           },
           errorMessage: errors | getErrorMessage("financial-support"),
           value: course.financialSupport
