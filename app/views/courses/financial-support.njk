@@ -25,11 +25,12 @@
 
         {% include "_includes/page-heading.njk" %}
 
+         <p class="govuk-body">Tell candidates about any financial support you offer for this course.</p>
+
+        <p class="govuk-body">You do not need to add information about scholarships and bursaries as we will automatically publish that information on your course page, depending on the course subject.</p>
+
         <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-
-        <p class="govuk-body">Tell candidates about any financial support you offer for this course.</p>
-        <p class="govuk-body">You do not need to add information about scholarships and bursaries as we will automatically publish that information on your course page, depending on the course subject.</p>
 
         {{ govukCharacterCount({
           id: "financial-support",
