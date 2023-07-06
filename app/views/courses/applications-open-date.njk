@@ -29,13 +29,12 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-        {% include "_includes/page-heading-legend.njk" %}
+  {% include "_includes/page-heading-legend.njk" %}
 
-    <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-    <p class="govuk-body">We recommend that you open the course for applications as soon as the course is on Find to get as many applications as possible.</p>
+    <p class="govuk-body govuk-!-margin-top-5">We recommend that you open the course for applications as soon as the course is on Find to get as many applications as possible.</p>
 
-    <p class="govuk-body">Find out more about <a class="govuk-link" href="https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/roll-over-courses-to-a-new-recruitment-cycle">publishing courses during recruitment cycles</a>.</p>
+    <p class="govuk-body">Find out more about <a class="govuk-link" href="https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/roll-over-courses-to-a-new-recruitment-cycle" target="_blank">publishing courses during recruitment cycles (opens in a new tab)</a>.</p>
 
       {% endset %}
 
@@ -75,6 +74,8 @@
           }) }}
 
         {% endset %}
+
+       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukRadios({
           idPrefix: "applications-open-date",
