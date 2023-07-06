@@ -29,53 +29,52 @@
     <div class="govuk-grid-column-two-thirds">
 
       {% set headingHtml %}
-  {% include "_includes/page-heading-legend.njk" %}
+        {% include "_includes/page-heading-legend.njk" %}
 
+        <p class="govuk-body govuk-!-margin-top-5">We recommend that you open the course for applications as soon as the course is on Find to get as many applications as possible.</p>
 
-    <p class="govuk-body govuk-!-margin-top-5">We recommend that you open the course for applications as soon as the course is on Find to get as many applications as possible.</p>
-
-    <p class="govuk-body">Find out more about <a class="govuk-link" href="https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/roll-over-courses-to-a-new-recruitment-cycle" target="_blank">publishing courses during recruitment cycles (opens in a new tab)</a>.</p>
+        <p class="govuk-body">Find out more about <a class="govuk-link" href="https://www.publish-teacher-training-courses.service.gov.uk/how-to-use-this-service/roll-over-courses-to-a-new-recruitment-cycle" target="_blank">publishing courses during recruitment cycles (opens in a new tab)</a>.</p>
 
       {% endset %}
 
-        {% set otherHtml %}
+      {% set otherHtml %}
 
-          {{ govukDateInput({
-            id: "application-open-date-other",
-            namePrefix: "course[applicationsOpenDateOther]",
-            fieldset: {
-              legend: {
-                text: "When will applications open?",
-                isPageHeading: false,
-                classes: "govuk-fieldset__legend--s"
-              }
+        {{ govukDateInput({
+          id: "application-open-date-other",
+          namePrefix: "course[applicationsOpenDateOther]",
+          fieldset: {
+            legend: {
+              text: "When will applications open?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "For example, 30 9 2022"
+          },
+          errorMessage: errors | getErrorMessage("applications-open-date-other"),
+          items: [
+            {
+              name: "day",
+              value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
+              classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
             },
-            hint: {
-              text: "For example, 30 9 2022"
+            {
+              name: "month",
+              value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
+              classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
             },
-            errorMessage: errors | getErrorMessage("applications-open-date-other"),
-            items: [
-              {
-                name: "day",
-                value: course.applicationsOpenDateOther | date("d") if course.applicationsOpenDateOther,
-                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
-              },
-              {
-                name: "month",
-                value: course.applicationsOpenDateOther | date("L") if course.applicationsOpenDateOther,
-                classes: "govuk-input--width-2" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
-              },
-              {
-                name: "year",
-                value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
-                classes: "govuk-input--width-4" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
-              }
-            ]
-          }) }}
+            {
+              name: "year",
+              value: course.applicationsOpenDateOther | date("yyyy") if course.applicationsOpenDateOther,
+              classes: "govuk-input--width-4" + (" govuk-input--error" if errors | getErrorMessage("applications-open-date-other"))
+            }
+          ]
+        }) }}
 
-        {% endset %}
+      {% endset %}
 
-       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukRadios({
           idPrefix: "applications-open-date",
