@@ -25,15 +25,15 @@
       {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
 
-<p class="govuk-body">Describe how you support candidates with disabilities and other needs. This could include candidates with:</p>
+        <p class="govuk-body">Describe how you support candidates with disabilities and other needs. This could include candidates with:</p>
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>dyslexia</li>
-            <li>physical, hearing and visual impairments</li>
-            <li>mental health conditions</li></ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>dyslexia</li>
+          <li>physical, hearing and visual impairments</li>
+          <li>mental health conditions</li>
+        </ul>
 
-   <p class="govuk-body">If accessibility varies between study sites, give details. It’s also useful for applicants to know how you’ve accommodated others with specific needs in the past.</p>
-
+        <p class="govuk-body">If accessibility varies between study sites, give details. It’s also useful for applicants to know how you’ve accommodated others with specific needs in the past.</p>
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -49,8 +49,6 @@
           errorMessage: errors | getErrorMessage("train-with-disability"),
           value: organisation.trainWithDisability
         }) }}
-
-
 
         {{ govukButton({
           text: "Update training with disabilities"

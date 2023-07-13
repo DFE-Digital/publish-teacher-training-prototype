@@ -23,19 +23,16 @@
 
 {% block content %}
 
-
   {% include "_includes/error-summary.njk" %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-
       {% set headingHtml %}
         {% include "_includes/page-heading-legend.njk" %}
-
-    <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
-
       {% endset %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
         {{ govukCheckboxes({
           idPrefix: "locations",
@@ -46,17 +43,13 @@
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
-
           },
           hint: {
             text: "Select all that apply"
           },
-
-
           errorMessage: errors | getErrorMessage("locations"),
           items: locationOptions
         }) }}
-
 
         {% if course.id %}
           {{ govukButton({

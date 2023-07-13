@@ -24,15 +24,16 @@
 
       {% set headingHtml %}
         {% include "_includes/page-heading.njk" %}
-<p class="govuk-body">Tell applicants why they should train with you. You could mention:</p>
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>your values</li>
-            <li>your specialisms</li>
-            <li>your past achievements (for example, student successes and Ofsted ratings)</li></ul>
+        <p class="govuk-body">Tell applicants why they should train with you. You could mention:</p>
 
-   <p class="govuk-body">Be specific and support your claims with evidence. For example, rather than saying, “Our students are some of the happiest in the country”, you could say, “The Times Educational Supplement ranked our students as 4th happiest in the country”.</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>your values</li>
+          <li>your specialisms</li>
+          <li>your past achievements (for example, student successes and Ofsted ratings)</li>
+        </ul>
 
+        <p class="govuk-body">Be specific and support your claims with evidence. For example, rather than saying, “Our students are some of the happiest in the country”, you could say, “The Times Educational Supplement ranked our students as 4th happiest in the country”.</p>
       {% endset %}
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
@@ -48,7 +49,6 @@
           errorMessage: errors | getErrorMessage("train-with-us"),
           value: organisation.trainWithUs
         }) }}
-
 
         {{ govukButton({
           text: "Update training with your organisation"
