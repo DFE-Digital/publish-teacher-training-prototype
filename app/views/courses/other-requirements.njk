@@ -23,9 +23,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set headingHtml %}
-        {% include "_includes/page-heading.njk" %}
-      {% endset %}
+      {% include "_includes/page-heading.njk" %}
+
+      <p class="govuk-body">Use this section to describe any other requirements candidates need to know about, such as non-academic qualifications, criminal record checks or work experience.</p>
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
@@ -35,17 +35,15 @@
           rows: 10,
           maxwords: 100,
           label: {
-            html: headingHtml
-          },
-          hint: {
-            text: "If applicants need any non-academic qualifications or documents, list them here (such as criminal record checks or relevant work experience)"
+            text: title + " (optional)",
+            classes: "govuk-label--s"
           },
           errorMessage: errors | getErrorMessage("other-requirements"),
           value: course.otherRequirements
         }) }}
 
         {{ govukButton({
-          text: "Update other requirements"
+          text: "Update " + title | lower
         }) }}
 
       </form>

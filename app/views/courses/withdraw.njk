@@ -23,15 +23,15 @@
 
       <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-        <p class="govuk-body">Withdrawing this course will:</p>
+        <p class="govuk-body">Withdrawing this course will close any applications in progress. If any candidates have already applied:</p>
 
         <ul class="govuk-list govuk-list--bullet">
-          <li>immediately remove the course from Find</li>
-          <li>close any applications in progress</li>
+          <li>contact them immediately to let them know the course is being withdrawn</li>
+          <li>offer the candidate a place on an alternative course if you can</li>
         </ul>
 
         <p class="govuk-body">
-          Once you’ve withdrawn a course, you cannot publish it again in this recruitment cycle.
+          Once you’ve withdrawn the course, it will be removed from Find and you will not be able to publish it again this recruitment cycle.
         </p>
 
         {% if course.status == 1 %}
