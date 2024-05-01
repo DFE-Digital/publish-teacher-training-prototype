@@ -79,6 +79,19 @@ const CYCLES = {
     rejectByDefault: DateTime.fromISO('2024-09-29T23:59:59').toJSDate(),
     findCloses: DateTime.fromISO('2024-10-04T23:59:59').toJSDate(),
     ageCalculationDate: DateTime.fromISO('2024-08-31T23:59:59').toJSDate()
+  },
+  2025: {
+    code: '2025',
+    shortDesc: '2024 to 2025',
+    longDesc: '2024 to 2025 (starts 2025)',
+    findOpens: DateTime.fromISO('2024-10-05T09:00:00').toJSDate(),
+    applyOpens: DateTime.fromISO('2024-10-12T09:00:00').toJSDate(),
+    showDeadlineBanner: DateTime.fromISO('2025-08-01T09:00:00').toJSDate(),
+    apply1Deadline: DateTime.fromISO('2025-09-07T18:00:00').toJSDate(),
+    apply2Deadline: DateTime.fromISO('2025-09-21T18:00:00').toJSDate(),
+    rejectByDefault: DateTime.fromISO('2025-09-29T23:59:59').toJSDate(),
+    findCloses: DateTime.fromISO('2025-10-04T23:59:59').toJSDate(),
+    ageCalculationDate: DateTime.fromISO('2025-08-31T23:59:59').toJSDate()
   }
 }
 
