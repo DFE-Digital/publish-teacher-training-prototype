@@ -1,4 +1,4 @@
-const permissions = require('../data/permission-types')
+const permissions = require('../data/dist/permission-types')
 
 exports.getPermissionsOptions = (selectedItem) => {
   const items = []

@@ -1,4 +1,4 @@
-const degreeGrades = require('../data/degree-grades')
+const degreeGrades = require('../data/dist/degree-grades')
 
 exports.getDegreeGradeOptions = (selectedItem) => {
   const items = []

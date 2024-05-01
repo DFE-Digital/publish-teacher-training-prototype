@@ -1,6 +1,6 @@
 const numeral = require('numeral')
 
-const financialIncentives = require('../data/financial-incentives')
+const financialIncentives = require('../data/dist/financial-incentives')
 
 exports.getFinancialIncentives = (subjectCode, academicYear) => {
   const incentives = financialIncentives.filter(incentive =>
