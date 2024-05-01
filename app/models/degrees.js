@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const courseModel = require('./courses')
 
-const directoryPath = path.join(__dirname, '../data/courses')
+const directoryPath = path.join(__dirname, '../data/dist/courses')
 
 exports.updateOne = (params) => {
   let course

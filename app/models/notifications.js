@@ -15,7 +15,7 @@ exports.updateOne = (params) => {
 
     user.updatedAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/users/')
+    const directoryPath = path.join(__dirname, '../data/dist/users')
 
     const filePath = directoryPath + '/' + user.id + '.json'
 

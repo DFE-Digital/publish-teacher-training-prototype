@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const organisationModel = require('./organisations')
 
-const directoryPath = path.join(__dirname, '../data/organisations/')
+const directoryPath = path.join(__dirname, '../data/dist/organisations')
 
 exports.insertOne = (params) => {
   let organisation
