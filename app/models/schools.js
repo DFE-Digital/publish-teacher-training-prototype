@@ -1,4 +1,4 @@
-const schools = require('../data/schools')
+const schools = require('../data/dist/schools')
 
 exports.findMany = (params) => {
   if (params.query?.length) {

@@ -1,5 +1,5 @@
 exports.findOne = (params) => {
-  const subjects = require('../data/subjects')
+  const subjects = require('../data/dist/subjects')
 
   let subject
   if (params.subjectId) {

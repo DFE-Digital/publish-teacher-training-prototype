@@ -14,7 +14,7 @@ exports.findMany = (params) => {
   let courses = []
 
   if (params.organisationId) {
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     // to prevent errors when an organisation doesn't have any courses
     // create an empty course directory for the organisation
@@ -49,7 +49,7 @@ exports.findOne = (params) => {
   let course = {}
 
   if (params.organisationId && params.courseId) {
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.courseId + '.json'
 
@@ -243,7 +243,7 @@ exports.insertOne = (params) => {
 
     course.createdAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     const filePath = directoryPath + '/' + course.id + '.json'
 
@@ -509,7 +509,7 @@ exports.updateOne = (params) => {
 
     course.updatedAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.courseId + '.json'
 
@@ -523,7 +523,7 @@ exports.updateOne = (params) => {
 
 exports.deleteOne = (params) => {
   if (params.organisationId && params.courseId) {
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.courseId + '.json'
     fs.unlinkSync(filePath)
@@ -561,7 +561,7 @@ exports.rollOverOne = (params) => {
 
     delete course.updatedAt
 
-    const directoryPath = path.join(__dirname, '../data/courses/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/courses/' + params.organisationId)
 
     const filePath = directoryPath + '/' + course.id + '.json'
 
