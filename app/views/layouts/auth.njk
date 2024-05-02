@@ -1,0 +1,89 @@
+{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
+{# {%- set assetPath = "/govuk/assets" -%}
+
+{% extends "govuk/template.njk" %} #}
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% from "govuk/components/accordion/macro.njk"           import govukAccordion %}
+{% from "govuk/components/back-link/macro.njk"           import govukBackLink %}
+{% from "govuk/components/breadcrumbs/macro.njk"         import govukBreadcrumbs %}
+{% from "govuk/components/button/macro.njk"              import govukButton %}
+{% from "govuk/components/character-count/macro.njk"     import govukCharacterCount %}
+{% from "govuk/components/checkboxes/macro.njk"          import govukCheckboxes %}
+{% from "govuk/components/cookie-banner/macro.njk"       import govukCookieBanner %}
+{% from "govuk/components/date-input/macro.njk"          import govukDateInput %}
+{% from "govuk/components/details/macro.njk"             import govukDetails %}
+{% from "govuk/components/error-message/macro.njk"       import govukErrorMessage %}
+{% from "govuk/components/error-summary/macro.njk"       import govukErrorSummary %}
+{% from "govuk/components/fieldset/macro.njk"            import govukFieldset %}
+{% from "govuk/components/file-upload/macro.njk"         import govukFileUpload %}
+{% from "govuk/components/input/macro.njk"               import govukInput %}
+{% from "govuk/components/inset-text/macro.njk"          import govukInsetText %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+{% from "govuk/components/panel/macro.njk"               import govukPanel %}
+{% from "govuk/components/phase-banner/macro.njk"        import govukPhaseBanner %}
+{% from "govuk/components/radios/macro.njk"              import govukRadios %}
+{% from "govuk/components/select/macro.njk"              import govukSelect %}
+{% from "govuk/components/skip-link/macro.njk"           import govukSkipLink %}
+{% from "govuk/components/summary-list/macro.njk"        import govukSummaryList %}
+{% from "govuk/components/table/macro.njk"               import govukTable %}
+{% from "govuk/components/tabs/macro.njk"                import govukTabs %}
+{% from "govuk/components/tag/macro.njk"                 import govukTag %}
+{% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
+{% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
+
+{% from "_components/footer/macro.njk"                   import appFooter %}
+
+{% block head %}
+  {% include "_includes/head.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+  {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/",
+    productName: serviceName,
+    containerClasses: "govuk-width-container"
+  }) }}
+
+  {{ govukPhaseBanner({
+    tag: {
+      text: phaseTagText,
+      classes: "app-tag--prototype" if environment != 'production'
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.',
+    classes: "govuk-width-container"
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% block pageNavigation %}
+    {{ govukBackLink({
+      text: backLinkText or "Back",
+      href: backLink
+    }) if backLink }}
+  {% endblock %}
+{% endblock %}
+
+{% if useAutoStoreData %}
+  {% block footer %}
+    {% include "_includes/footer.njk" %}
+  {% endblock %}
+{% endif %}
+
+{% block bodyStart %}
+  <div data-module="edge">
+{% endblock %}
+
+{% block bodyEnd %}
+  </div>
+  {% block scripts %}
+    {{ data | log }}
+    {% include "_includes/scripts.njk" %}
+    {% block pageScripts %}{% endblock %}
+  {% endblock %}
+{% endblock %}
