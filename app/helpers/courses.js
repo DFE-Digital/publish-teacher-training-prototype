@@ -219,7 +219,7 @@ exports.getSendLabel = (code) => {
 exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
   const items = []
 
-  let ageRanges = require('../data/age-ranges')
+  let ageRanges = require('../data/dist/age-ranges')
   if (subjectLevel) {
     ageRanges = ageRanges.filter(range => range.level === subjectLevel)
   }
@@ -254,7 +254,7 @@ exports.getAgeRangeOptions = (subjectLevel = 'secondary', selectedItem) => {
 }
 
 exports.getAgeRangeLabel = (code) => {
-  const ageRanges = require('../data/age-ranges')
+  const ageRanges = require('../data/dist/age-ranges')
   const ageRange = ageRanges.find(ageRange => ageRange.code === code)
 
   let label = code
@@ -273,7 +273,7 @@ exports.getAgeRangeLabel = (code) => {
 exports.getQualificationOptions = (subjectLevel, selectedItem) => {
   const items = []
 
-  let qualifications = require('../data/qualifications')
+  let qualifications = require('../data/dist/qualifications')
   qualifications = qualifications.filter(qualification => qualification.levels.includes(subjectLevel))
 
   qualifications.forEach((qualification, i) => {
@@ -294,7 +294,7 @@ exports.getQualificationOptions = (subjectLevel, selectedItem) => {
 }
 
 exports.getQualificationLabel = (code) => {
-  const qualifications = require('../data/qualifications')
+  const qualifications = require('../data/dist/qualifications')
   const qualification = qualifications.find(qualification => qualification.code === code)
 
   let label = code
@@ -314,7 +314,7 @@ exports.getQualificationLabel = (code) => {
 // pg_teaching_apprenticeship: "TA"
 exports.getFundingTypeOptions = (selectedItem) => {
   const items = []
-  const fundingTypes = require('../data/funding-types')
+  const fundingTypes = require('../data/dist/funding-types')
 
   fundingTypes.forEach((fundingType, i) => {
     const item = {}
@@ -331,7 +331,7 @@ exports.getFundingTypeOptions = (selectedItem) => {
 }
 
 exports.getFundingTypeLabel = (code) => {
-  const fundingTypes = require('../data/funding-types')
+  const fundingTypes = require('../data/dist/funding-types')
   const fundingType = fundingTypes.find(fundingType => fundingType.code === code)
 
   let label = code
@@ -345,7 +345,7 @@ exports.getFundingTypeLabel = (code) => {
 
 exports.getStudyModeOptions = (selectedItem) => {
   const items = []
-  const studyModes = require('../data/study-modes')
+  const studyModes = require('../data/dist/study-modes')
 
   studyModes.forEach((studyMode, i) => {
     const item = {}
@@ -362,7 +362,7 @@ exports.getStudyModeOptions = (selectedItem) => {
 }
 
 exports.getStudyModeLabel = (code) => {
-  const studyModes = require('../data/study-modes')
+  const studyModes = require('../data/dist/study-modes')
   const studyMode = studyModes.find(studyMode => studyMode.code === code)
 
   let label = code
@@ -497,7 +497,7 @@ exports.getApprenticeshipLabel = (code) => {
 
 exports.getCourseLengthOptions = (selectedItem) => {
   const items = []
-  const courseLengths = require('../data/course-lengths')
+  const courseLengths = require('../data/dist/course-lengths')
 
   courseLengths.forEach((courseLength, i) => {
     const item = {}
@@ -529,7 +529,7 @@ exports.getCourseLengthOptions = (selectedItem) => {
 }
 
 exports.getCourseLengthLabel = (code) => {
-  const courseLengths = require('../data/course-lengths')
+  const courseLengths = require('../data/dist/course-lengths')
   const courseLength = courseLengths.find(courseLength => courseLength.code === code)
 
   let label = code
@@ -542,7 +542,7 @@ exports.getCourseLengthLabel = (code) => {
 }
 
 exports.getCourseStatusLabel = (code, openDate = null) => {
-  const courseStatuses = require('../data/course-statuses')
+  const courseStatuses = require('../data/dist/course-statuses')
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
   const dateOpen = DateTime.fromISO(openDate)
@@ -564,7 +564,7 @@ exports.getCourseStatusLabel = (code, openDate = null) => {
 }
 
 exports.getCourseStatusClasses = (code, openDate = null) => {
-  const courseStatuses = require('../data/course-statuses')
+  const courseStatuses = require('../data/dist/course-statuses')
   const courseStatus = courseStatuses.find(courseStatus => courseStatus.code === code.toString())
 
   const dateOpen = DateTime.fromISO(openDate)
@@ -625,7 +625,7 @@ exports.createCourseName = (subjects, campaign = null) => {
 
 exports.getCourseName = (subjects, campaign = null) => {
   let courseName = ''
-  const _subjects = require('../data/subjects')
+  const _subjects = require('../data/dist/subjects')
 
   const modernLanguages = _subjects
     .filter(subject => subject.parentCode === 'ML')

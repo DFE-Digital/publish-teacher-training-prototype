@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const directoryPath = path.join(__dirname, '../data/users/')
+const directoryPath = path.join(__dirname, '../data/dist/users')
 
 exports.findOne = (params) => {
   const users = []

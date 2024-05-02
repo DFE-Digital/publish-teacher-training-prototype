@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-const directoryPath = path.join(__dirname, '../data/organisations/')
+const directoryPath = path.join(__dirname, '../data/dist/organisations')
 
 exports.findOne = (params) => {
   let organisation = {}

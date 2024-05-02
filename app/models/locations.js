@@ -43,7 +43,7 @@ exports.findMany = (params) => {
   const locations = []
 
   if (params.organisationId) {
-    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/locations/' + params.organisationId)
 
     // to prevent errors when an organisation doesn't have any locations
     // create an empty location directory for the organisation
@@ -74,7 +74,7 @@ exports.findOne = (params) => {
   let location = {}
 
   if (params.organisationId && params.locationId) {
-    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/locations/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.locationId + '.json'
 
@@ -129,7 +129,7 @@ exports.insertOne = (params) => {
 
     location.createdAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/locations/' + params.organisationId)
 
     const filePath = directoryPath + '/' + location.id + '.json'
 
@@ -189,7 +189,7 @@ exports.updateOne = (params) => {
 
     location.updatedAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/locations/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.locationId + '.json'
 
@@ -203,7 +203,7 @@ exports.updateOne = (params) => {
 
 exports.deleteOne = (params) => {
   if (params.organisationId && params.locationId) {
-    const directoryPath = path.join(__dirname, '../data/locations/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/locations/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.locationId + '.json'
     fs.unlinkSync(filePath)

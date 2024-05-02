@@ -6,7 +6,7 @@ exports.findMany = (params) => {
   const studySites = []
 
   if (params.organisationId) {
-    const directoryPath = path.join(__dirname, '../data/study-sites/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/study-sites/' + params.organisationId)
 
     // to prevent errors when an organisation doesn't have any studySites
     // create an empty studySite directory for the organisation
@@ -37,7 +37,7 @@ exports.findOne = (params) => {
   let studySite = {}
 
   if (params.organisationId && params.studySiteId) {
-    const directoryPath = path.join(__dirname, '../data/study-sites/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/study-sites/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.studySiteId + '.json'
 
@@ -88,7 +88,7 @@ exports.insertOne = (params) => {
 
     studySite.createdAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/study-sites/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/study-sites/' + params.organisationId)
 
     const filePath = directoryPath + '/' + studySite.id + '.json'
 
@@ -148,7 +148,7 @@ exports.updateOne = (params) => {
 
     studySite.updatedAt = new Date()
 
-    const directoryPath = path.join(__dirname, '../data/study-sites/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/study-sites/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.studySiteId + '.json'
 
@@ -162,7 +162,7 @@ exports.updateOne = (params) => {
 
 exports.deleteOne = (params) => {
   if (params.organisationId && params.studySiteId) {
-    const directoryPath = path.join(__dirname, '../data/study-sites/' + params.organisationId)
+    const directoryPath = path.join(__dirname, '../data/dist/study-sites/' + params.organisationId)
 
     const filePath = directoryPath + '/' + params.studySiteId + '.json'
     fs.unlinkSync(filePath)

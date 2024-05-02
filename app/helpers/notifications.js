@@ -1,5 +1,5 @@
 exports.getNotificationLabel = (code) => {
-  const notifications = require('../data/notification-types')
+  const notifications = require('../data/dist/notification-types')
   const notification = notifications.find(notification => notification.code === code)
 
   let label = code

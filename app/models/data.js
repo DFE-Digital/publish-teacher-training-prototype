@@ -13,7 +13,7 @@ const organisationModel = require('./organisations')
 
 const findUUIDs = () => {
   const courses = []
-  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
+  const oDirectoryPath = path.join(__dirname, '../data/dist/seed/organisations/')
 
   const salaryDetails = require('../data/temp/salary-details')
 
@@ -27,7 +27,7 @@ const findUUIDs = () => {
     const oRaw = fs.readFileSync(oFilePath)
     const organisation = JSON.parse(oRaw)
 
-    const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+    const cDirectoryPath = path.join(__dirname, '../data/dist/seed/courses/' + organisation.id)
 
     // check if document directory exists
     if (!fs.existsSync(cDirectoryPath)) {
@@ -86,7 +86,7 @@ exports.seed = () => {
 }
 
 const seedFundingType = () => {
-  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations/')
+  const oDirectoryPath = path.join(__dirname, '../data/dist/seed/organisations/')
 
   let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
 
@@ -100,7 +100,7 @@ const seedFundingType = () => {
 
     // console.log(oFileName);
 
-    const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+    const cDirectoryPath = path.join(__dirname, '../data/dist/seed/courses/' + organisation.id)
 
     // check if document directory exists
     if (!fs.existsSync(cDirectoryPath)) {
@@ -151,7 +151,7 @@ const seedFundingType = () => {
 }
 
 const seedUsers = () => {
-  const directoryPath = path.join(__dirname, '../data/seed/users/')
+  const directoryPath = path.join(__dirname, '../data/dist/seed/users/')
 
   let documents = fs.readdirSync(directoryPath, 'utf8')
 
@@ -238,7 +238,7 @@ const seedUsers = () => {
 //
 //     if (user && user.id) {
 //       // write course data to file
-//       const directoryPath = path.join(__dirname, '../data/seed/users/')
+//       const directoryPath = path.join(__dirname, '../data/dist/seed/users/')
 //
 //       // check if document directory exists
 //       if (!fs.existsSync(directoryPath)) {
@@ -264,7 +264,7 @@ const seedUsers = () => {
 
 // const seedUsers = () => {
 //   const users = []
-//   const tempDirectoryPath = path.join(__dirname, '../data/temp/users')
+//   const tempDirectoryPath = path.join(__dirname, '../data/dist/temp/users')
 //
 //   const tempUsers = require('../data/temp/users')
 //   const prototypeUsers = require('../data/temp/prototype-users')
@@ -322,7 +322,7 @@ const seedUsers = () => {
 //
 //   // if (users) {
 //   //   // write course data to file
-//   //   const directoryPath = path.join(__dirname, '../data/seed/')
+//   //   const directoryPath = path.join(__dirname, '../data/dist/seed/')
 //   //   const raw = JSON.stringify(users)
 //   //   const fileName = 'users.json'
 //   //   const filePath = directoryPath + '/' + fileName
@@ -334,7 +334,7 @@ const seedUsers = () => {
 
 const seedCourseVisaSponsorship = () => {
   const organisations = []
-  const oDirectoryPath = path.join(__dirname, '../data/seed/organisations')
+  const oDirectoryPath = path.join(__dirname, '../data/dist/seed/organisations')
 
   let oDocuments = fs.readdirSync(oDirectoryPath, 'utf8')
 
@@ -350,7 +350,7 @@ const seedCourseVisaSponsorship = () => {
     console.log('Organisation: ', organisation.id)
 
     if (organisation.id) {
-      const cDirectoryPath = path.join(__dirname, '../data/seed/courses/' + organisation.id)
+      const cDirectoryPath = path.join(__dirname, '../data/dist/seed/courses/' + organisation.id)
 
       // not all organisations have courses, so wrap with try/catch
       try {
@@ -453,7 +453,7 @@ const seedRelationships = () => {
 
   // if (providers) {
   //   // write course data to file
-  //   const directoryPath = path.join(__dirname, '../data/seed/temp/')
+  //   const directoryPath = path.join(__dirname, '../data/dist/seed/temp/')
   //
   //   // check if document directory exists
   //   // if (!fs.existsSync(directoryPath)) {
@@ -548,7 +548,7 @@ const seedOrganisations = () => {
 
     // if (o) {
     //   // write course data to file
-    //   const directoryPath = path.join(__dirname, '../data/seed/organisations/')
+    //   const directoryPath = path.join(__dirname, '../data/dist/seed/organisations/')
     //
     //   // check if document directory exists
     //   if (!fs.existsSync(directoryPath)) {
@@ -629,7 +629,7 @@ const seedLocations = () => {
 
     // if (l) {
     //   // write course data to file
-    //   const directoryPath = path.join(__dirname, '../data/seed/locations/' + o.id)
+    //   const directoryPath = path.join(__dirname, '../data/dist/seed/locations/' + o.id)
     //
     //   // check if document directory exists
     //   if (!fs.existsSync(directoryPath)) {
@@ -857,7 +857,7 @@ const seedCourses = () => {
 
     // if (c.trainingProvider) {
     //   // write course data to file
-    //   const directoryPath = path.join(__dirname, '../data/seed/courses/' + c.trainingProvider.id)
+    //   const directoryPath = path.join(__dirname, '../data/dist/seed/courses/' + c.trainingProvider.id)
     //
     //   // check if document directory exists
     //   if (!fs.existsSync(directoryPath)) {
