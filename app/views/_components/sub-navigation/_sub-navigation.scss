@@ -14,9 +14,9 @@
   }
 
   // IE8 does not support box shadow, so use a standard border.
-  @include govuk-if-ie8 {
-    border-bottom: 1px solid $govuk-border-colour;
-  }
+  // @include govuk-if-ie8 {
+  //   border-bottom: 1px solid $govuk-border-colour;
+  // }
 }
 
 .app-sub-navigation__item {
