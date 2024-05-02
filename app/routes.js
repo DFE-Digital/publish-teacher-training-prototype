@@ -1,7 +1,42 @@
-const express = require('express')
-const router = express.Router()
+const govukPrototypeKit = require('govuk-prototype-kit')
+const router = govukPrototypeKit.requests.setupRouter()
 
+/// ------------------------------------------------------------------------ ///
+/// Flash messaging
+/// ------------------------------------------------------------------------ ///
+const flash = require('connect-flash')
+router.use(flash())
+
+/// ------------------------------------------------------------------------ ///
+/// User authentication
+/// ------------------------------------------------------------------------ ///
 const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const authenticationModel = require('./models/authentication')
+
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
+// Authentication
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+    const user = authenticationModel.findOne({
+      username: username,
+      password: password,
+      active: true
+    })
+    if (user) { return done(null, user) }
+    return done(null, false)
+  }
+))
+
+router.use(passport.initialize())
+router.use(passport.session())
 
 // Controller modules
 const accountController = require('./controllers/account')
