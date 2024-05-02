@@ -552,7 +552,7 @@ filters.getGuidanceSectionLabel = (section) => {
   return label
 }
 
-
-for (let filterName of filters){
+console.log(Object.keys(filters));
+for (let filterName of Object.keys(filters)){
   addFilter(filterName, filters[filterName])
 }
