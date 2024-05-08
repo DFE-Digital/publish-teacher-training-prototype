@@ -48,3 +48,15 @@ const remove = (destination) => {
 remove(destinationDirectory)
 
 copy(sourceDirectory, destinationDirectory)
+
+/// ------------------------------------------------------------------------ ///
+/// Environment variables
+/// ------------------------------------------------------------------------ ///
+
+// Create template .env file if it doesn't exist
+const envExists = fs.existsSync(path.join(__dirname, '../.env'))
+
+if (!envExists) {
+  fs.createReadStream(path.join(__dirname, '../lib/template.env'))
+    .pipe(fs.createWriteStream(path.join(__dirname, '../.env')))
+}

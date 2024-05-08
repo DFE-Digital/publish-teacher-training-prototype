@@ -42,7 +42,7 @@ exports.notification_details = (req, res) => {
     organisation.type = organisationModel.findOne({ organisationId: organisation.id }).type
   })
 
-  const notificationOptions = require('../data/notification-types')
+  const notificationOptions = require('../data/dist/notification-types')
 
   res.render('../views/account/notifications/details', {
     user,
@@ -61,7 +61,7 @@ exports.edit_notifications_get = (req, res) => {
   const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
   const user = userModel.findOne({ userId: req.session.passport.user.id })
 
-  let notificationOptions = require('../data/notification-types')
+  let notificationOptions = require('../data/dist/notification-types')
   notificationOptions = notificationOptions.filter(option => option.providerTypes.includes(organisation.type))
 
   const notifications = user.organisations.find(
