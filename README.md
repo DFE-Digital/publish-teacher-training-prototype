@@ -1,6 +1,11 @@
-# Publish teacher training courses (prototype)
+# Publish teacher training courses prototype
 
-This prototype is based on the [GOV.UK prototype kit](https://github.com/alphagov/govuk-prototype-kit)
+A service for training providers to publish and manage their courses.
+
+This prototype is based on the:
+
+- [GOV.UK Design System](https://design-system.service.gov.uk/)
+- [GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk/docs/)
 
 ## Requirements
 
@@ -16,13 +21,13 @@ This prototype is based on the [GOV.UK prototype kit](https://github.com/alphago
 ## Working locally
 
 - In Terminal, change the path to the repository
-- Type `npm start`  and start the application
+- Type `npm run dev`  and start the application
 
 ## Generating data
 
 The prototype uses JSON files to store data and includes a set of seed data.
 
-The seed data is copied to the working data directory when you run `npm install`.
+The seed data is copied to the working data directory (`app/data/dist`) when you run `npm install`.
 
 You can also regenerate the data:
 
@@ -31,12 +36,21 @@ You can also regenerate the data:
 
 ## Environment variables
 
-The prototype includes a number of environment variables:
+The prototype uses environment variables to help configure the application:
 
-- NODE_ENV - Values: `development`, `staging` and `production`
-- USE_HTTPS - force HTTP to redirect to HTTPS on production. Values: `true` or `false`
-- USE_AUTH - enable or disable password protection on production. Values: `true` or `false`
-- USE_LOGIN - use to turn on/off username and password login. If set to `false`, the login screen displays a list of test personas. Values: `true` or `false`
-- USE_LOGIN_FALLBACK - not implemented. Use to show email magic link flow. Values: `true` or `false`
-- PHASE_TAG_TEXT - use to change what text is displayed in the phase tag. Defaults to 'beta'
-- IS_ROLLOVER - use to turn on/off roll over functionality. Values: `true` or `false`. Defaults to `false`.
+| Variable | Type | Description |
+| --- | --- | --- |
+| `USE_LOGIN` | boolean | Use to turn on/off username and password login. If set to `false`, the login screen displays a list of test personas. Values: `true` or `false` |
+| `PHASE_TAG_TEXT` | string | Use to change what text is displayed in the phase tag. Defaults to 'beta' |
+| `IS_ROLLOVER` | boolean | Use to turn on/off rollover functionality. Values: `true` or `false` |
+
+## Tools
+
+If you’re using [Visual Studio (VS) Code](https://code.visualstudio.com/) for prototyping, we recommend you install the following extensions:
+
+- [GOV.UK Design System snippets](https://marketplace.visualstudio.com/items?itemName=simonwhatley.govuk-design-system-snippets)
+- [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Nunjucks for VS Code](https://marketplace.visualstudio.com/items?itemName=ronnidc.nunjucks)
+- [Nunjucks snippets](https://marketplace.visualstudio.com/items?itemName=luwenjiechn.nunjucks-vscode-snippets)
+
+We also recommend you update your VS Code settings to make sure you’re trimming whitespace: `Files: Trim Trailing Whitespace`.
