@@ -3,7 +3,10 @@
 {% set title = "Course names" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: "/examples"
+}) }}
 {% endblock %}
 
 {% block content %}
