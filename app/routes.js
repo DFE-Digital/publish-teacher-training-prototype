@@ -80,6 +80,7 @@ router.all('*', (req, res, next) => {
   res.locals.referrer = req.query.referrer
   res.locals.query = req.query
   res.locals.flash = req.flash('success') // pass through 'success' messages only
+  res.locals.isRollover = process.env.IS_ROLLOVER || 'false'
   next()
 })
 
