@@ -3,54 +3,135 @@
 {% set title = "Course names" %}
 
 {% block beforeContent %}
-
+{{ govukBackLink({
+  text: "Back",
+  href: "/examples"
+}) }}
 {% endblock %}
 
 {% block content %}
 
-{% set courses =
+{% set secondaryCourses =
 [
   {
-    subjects: ['ML','15','18','22']
+    subjects: ['ML','15','18','22'],
+    hasSend: false
   },
   {
-    subjects: ['ML','15','22','G1']
+    subjects: ['ML','15','18','22'],
+    hasSend: true
   },
   {
-    subjects: ['G1','ML','15','22']
+    subjects: ['ML','15','22','G1'],
+    hasSend: false
   },
   {
-    subjects: ['G1']
+    subjects: ['ML','15','22','G1'],
+    hasSend: true
   },
   {
-    subjects: ['C1','F1']
+    subjects: ['G1','ML','15','22'],
+    hasSend: false
   },
   {
-    subjects: ['F3']
+    subjects: ['G1'],
+    hasSend: false
+  },
+  {
+    subjects: ['C1','F1'],
+    hasSend: false
   },
   {
     subjects: ['F3'],
+    hasSend: false
+  },
+  {
+    subjects: ['F3'],
+    hasSend: true
+  },
+  {
+    subjects: ['F3'],
+    hasSend: false,
     programme: 'engineersTeachPhysics'
   },
   {
-    subjects: ['F3','G1']
+    subjects: ['F3'],
+    hasSend: true,
+    programme: 'engineersTeachPhysics'
   },
   {
     subjects: ['F3','G1'],
-    programme: 'engineersTeachPhysics'
+    hasSend: false
   },
   {
-    subjects: ['F3','ML','15','22']
+    subjects: ['F3','G1'],
+    hasSend: true
+  },
+  {
+    subjects: ['F3','G1'],
+    hasSend: false,
+    programme: 'engineersTeachPhysics'
   },
   {
     subjects: ['F3','ML','15','22'],
+    hasSend: false
+  },
+  {
+    subjects: ['F3','ML','15','22'],
+    hasSend: true
+  },
+  {
+    subjects: ['F3','ML','15','22'],
+    hasSend: false,
     programme: 'engineersTeachPhysics'
   },
   {
-    subjects: ['A1','A2']
+    subjects: ['A1','A2'],
+    hasSend: false
   },
   {
-    subjects: ['ML','15','Q3']
+    subjects: ['ML','15','Q3'],
+    hasSend: false
+  }
+] %}
+
+{% set primaryCourses =
+[
+  {
+    subjects: ['00'],
+    hasSend: false
+  },
+  {
+    subjects: ['00'],
+    hasSend: true
+  },
+  {
+    subjects: ['01'],
+    hasSend: false
+  },
+  {
+    subjects: ['01'],
+    hasSend: true
+  },
+  {
+    subjects: ['02'],
+    hasSend: false
+  },
+  {
+    subjects: ['03'],
+    hasSend: false
+  },
+  {
+    subjects: ['04'],
+    hasSend: false
+  },
+  {
+    subjects: ['06'],
+    hasSend: false
+  },
+  {
+    subjects: ['07'],
+    hasSend: false
   }
 ] %}
 
@@ -61,16 +142,61 @@
         {{ title }}
       </h1>
 
+      <h2 class="govuk-heading-m">
+        Primary subject specialisms
+      </h2>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Subjects</th>
+            <th class="govuk-table__header">Special educational needs and disabilities (SEND)</th>
+            <th class="govuk-table__header">Course name</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for course in primaryCourses %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <ul class="govuk-list">
+                {% for subject in course.subjects %}
+                  <li>{{ subject | getSubjectLabel }}</li>
+                {% endfor %}
+                </ul>
+              </td>
+              <td class="govuk-table__cell">
+                {% if course.hasSend %}
+                  Yes
+                {% else %}
+                  No
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                {{ course.subjects | getCourseName -}}
+                {%- if course.hasSend %} (SEND){% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">
+        Secondary subjects
+      </h2>
+
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header">Subjects</th>
             <th class="govuk-table__header">Programme</th>
+            <th class="govuk-table__header">Special educational needs and disabilities (SEND)</th>
             <th class="govuk-table__header">Course name</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-          {% for course in courses %}
+          {% for course in secondaryCourses %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
                 <ul class="govuk-list">
@@ -87,11 +213,19 @@
                 {% endif %}
               </td>
               <td class="govuk-table__cell">
-                {% if course.programme %}
-                  {{ course.subjects | getCourseName(course.programme) }}
+                {% if course.hasSend %}
+                  Yes
                 {% else %}
-                  {{ course.subjects | getCourseName }}
+                  No
                 {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                {% if course.programme %}
+                  {{ course.subjects | getCourseName(course.programme) -}}
+                {% else %}
+                  {{ course.subjects | getCourseName -}}
+                {% endif -%}
+                {%- if course.hasSend %} (SEND){% endif %}
               </td>
             </tr>
           {% endfor %}
