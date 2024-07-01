@@ -168,20 +168,18 @@
   {% endblock %}
 {% endblock %}
 
-{% if useAutoStoreData %}
-  {% block footer %}
-    {% include "_includes/footer.njk" %}
-  {% endblock %}
-{% endif %}
+{% block footer %}
+  {% include "_includes/footer.njk" %}
+{% endblock %}
 
 {% block bodyStart %}
-  <div data-module="edge">
+
 {% endblock %}
 
 {% block bodyEnd %}
-  </div>
   {% block scripts %}
     {{ data | log }}
+    {{ super() }}
     {% include "_includes/scripts.njk" %}
     {% block pageScripts %}{% endblock %}
   {% endblock %}

@@ -50,12 +50,12 @@
 {% endblock %}
 
 {% block bodyStart %}
-  <div data-module="edge">
+
 {% endblock %}
 
 {% block bodyEnd %}
-  </div>
   {% block scripts %}
+    {{ super() }}
     {% block pageScripts %}{% endblock %}
   {% endblock %}
 {% endblock %}
