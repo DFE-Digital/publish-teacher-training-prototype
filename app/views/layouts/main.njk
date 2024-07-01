@@ -1,8 +1,3 @@
-{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{# {%- set assetPath = "/govuk/assets" -%}
-
-{% extends "govuk/template.njk" %} #}
-
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% from "govuk/components/accordion/macro.njk"           import govukAccordion %}
@@ -50,12 +45,12 @@
 {% from "_components/summary-card/macro.njk"           import appSummaryCard %}
 {% from "_components/timeline/macro.njk"               import appTimeline %}
 
-{% block head %}
-  {% include "_includes/head.njk" %}
-{% endblock %}
-
 {% block pageTitle %}
   {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block head %}
+  {% include "_includes/head.njk" %}
 {% endblock %}
 
 {% block header %}
