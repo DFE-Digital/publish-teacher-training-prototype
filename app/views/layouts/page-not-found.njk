@@ -150,28 +150,6 @@
 
 {% endblock %}
 
-{% block beforeContent %}
-  {% block pageNavigation %}
-    {{ govukBackLink({
-      text: backLinkText or "Back",
-      href: backLink
-    }) if backLink }}
-  {% endblock %}
-{% endblock %}
-
 {% block footer %}
   {% include "_includes/footer.njk" %}
-{% endblock %}
-
-{% block bodyStart %}
-
-{% endblock %}
-
-{% block bodyEnd %}
-  {% block scripts %}
-    {{ data | log }}
-    {{ super() }}
-    {% include "_includes/scripts.njk" %}
-    {% block pageScripts %}{% endblock %}
-  {% endblock %}
 {% endblock %}
