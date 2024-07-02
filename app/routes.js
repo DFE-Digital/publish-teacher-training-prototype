@@ -1,6 +1,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+const settings = require('./data/settings')
+
 /// ------------------------------------------------------------------------ ///
 /// Flash messaging
 /// ------------------------------------------------------------------------ ///
@@ -77,11 +79,20 @@ const checkIsAuthenticated = (req, res, next) => {
 /// ------------------------------------------------------------------------ ///
 
 router.all('*', (req, res, next) => {
+  res.locals.settings = settings
   res.locals.referrer = req.query.referrer
   res.locals.query = req.query
   res.locals.flash = req.flash('success') // pass through 'success' messages only
-  res.locals.isRollover = process.env.IS_ROLLOVER || 'false'
+  res.locals.isRollover = process.env.IS_ROLLOVER || settings.isRollover
   next()
+})
+
+router.get('/', (req, res) => {
+  if (process.env.SHOW_START_PAGE === 'true') {
+    res.render('start')
+  } else {
+    res.redirect('/sign-in')
+  }
 })
 
 /// ------------------------------------------------------------------------ ///

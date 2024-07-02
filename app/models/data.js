@@ -2,8 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
 
-const faker = require('faker')
-faker.locale = 'en_GB'
+const faker = require('@faker-js/faker').faker
 
 const subjects = require('../data/seed/subjects')
 

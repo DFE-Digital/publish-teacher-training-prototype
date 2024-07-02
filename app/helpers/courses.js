@@ -1,6 +1,5 @@
 const { DateTime } = require('luxon')
-const faker = require('faker')
-faker.locale = 'en_GB'
+const faker = require('@faker-js/faker').faker
 
 const financialIncentivesHelper = require('./financial-incentives')
 const locationHelper = require('./locations')
@@ -763,7 +762,7 @@ exports.createCourseCode = (organisationId) => {
   // get a list of current course codes
 
   // generate new code
-  courseCode = faker.random.alphaNumeric(4).toUpperCase()
+  courseCode = faker.string.alphanumeric({ length: 4, casing: 'upper' })
 
   // compare to current list
   // if not exists, return code, else generate new code and try again
