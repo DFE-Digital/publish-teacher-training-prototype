@@ -1,18 +1,13 @@
-{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{# {%- set assetPath = "/govuk/assets" -%}
-
-{% extends "govuk/template.njk" %} #}
-
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% from "_components/footer/macro.njk" import appFooter %}
 
-{% block head %}
-  {% include "_includes/head.njk" %}
-{% endblock %}
-
 {% block pageTitle %}
   {{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block head %}
+  {% include "_includes/head.njk" %}
 {% endblock %}
 
 {% block header %}
@@ -21,11 +16,6 @@
     productName: serviceName,
     containerClasses: "govuk-width-container"
   }) }}
-{% endblock %}
-
-{% block beforeContent %}
-  {% block pageNavigation %}
-  {% endblock %}
 {% endblock %}
 
 {% block footer %}
@@ -47,15 +37,4 @@
     html: footerHtml
   }
 }) }}
-{% endblock %}
-
-{% block bodyStart %}
-  <div data-module="edge">
-{% endblock %}
-
-{% block bodyEnd %}
-  </div>
-  {% block scripts %}
-    {% block pageScripts %}{% endblock %}
-  {% endblock %}
 {% endblock %}

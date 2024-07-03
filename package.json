@@ -12,8 +12,8 @@
     "start": "govuk-prototype-kit start"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "connect-flash": "^0.1.1",
-    "faker": "^5.5.3",
     "govuk-frontend": "^5.4.0",
     "govuk-prototype-kit": "13.16.2",
     "gray-matter": "^4.0.3",
