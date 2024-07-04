@@ -1,7 +1,12 @@
+//
+// For guidance on how to create routes see:
+// https://prototype-kit.service.gov.uk/docs/create-routes
+//
+
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-const settings = require('./data/settings')
+const settings = require('./data/dist/settings')
 
 /// ------------------------------------------------------------------------ ///
 /// Flash messaging
@@ -54,6 +59,7 @@ const gcseController = require('./controllers/gcses')
 const guidanceController = require('./controllers/guidance')
 const locationController = require('./controllers/locations')
 const organisationController = require('./controllers/organisations')
+const settingController = require('./controllers/settings')
 const studySiteController = require('./controllers/study-sites')
 const trainingPartnerController = require('./controllers/training-partners')
 const userController = require('./controllers/users')
@@ -79,16 +85,19 @@ const checkIsAuthenticated = (req, res, next) => {
 /// ------------------------------------------------------------------------ ///
 
 router.all('*', (req, res, next) => {
-  res.locals.settings = settings
   res.locals.referrer = req.query.referrer
   res.locals.query = req.query
   res.locals.flash = req.flash('success') // pass through 'success' messages only
-  res.locals.isRollover = process.env.IS_ROLLOVER || settings.isRollover
+
+  for (let settingName of Object.keys(settings)) {
+    res.locals[settingName] = settings[settingName]
+  }
+
   next()
 })
 
 router.get('/', (req, res) => {
-  if (process.env.SHOW_START_PAGE === 'true') {
+  if (settings.showStartPage === 'true' || process.env.SHOW_START_PAGE === 'true') {
     res.render('start')
   } else {
     res.redirect('/sign-in')
@@ -561,6 +570,9 @@ router.post('/examples/accredited-providers/choose', checkIsAuthenticated, examp
 /// ------------------------------------------------------------------------ ///
 /// PROTOTYPE ADMIN
 /// ------------------------------------------------------------------------ ///
+
+router.get('/settings', settingController.settings_form_get)
+router.post('/settings', settingController.settings_form_post)
 
 router.get('/prototype-admin/clear-data', checkIsAuthenticated, (req, res) => {
   delete req.session.data
