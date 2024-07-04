@@ -1,0 +1,122 @@
+{% extends "layouts/auth.njk" %}
+
+{% set headerNavId = "settings" %}
+
+{% set hidePrimaryNavigation = true %}
+{% set hideOrganisationSwitcher = true %}
+
+{% set title = "Prototype settings" %}
+
+{% block beforeContent %}
+{{ govukBreadcrumbs({
+  items: [{
+    text: "Home",
+    href: "/"
+  }, {
+    text: title
+  }]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/notification-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukRadios({
+          name: "settings[useLogin]",
+          fieldset: {
+            legend: {
+              text: "Use pseudo DfE Sign-in",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          value: settings.useLogin,
+          items: [
+            {
+              value: "true",
+              text: "Yes"
+            },
+            {
+              value: "false",
+              text: "No"
+            }
+          ],
+          classes: "govuk-radios--inline"
+        }) }}
+
+        {# {{ govukRadios({
+          name: "settings[showStartPage]",
+          fieldset: {
+            legend: {
+              text: "Show start page",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          value: settings.showStartPage,
+          items: [
+            {
+              value: "true",
+              text: "Yes"
+            },
+            {
+              value: "false",
+              text: "No"
+            }
+          ],
+          classes: "govuk-radios--inline"
+        }) }} #}
+
+        {{ govukRadios({
+          name: "settings[isRollover]",
+          fieldset: {
+            legend: {
+              text: "Show rollover functionality",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          value: settings.isRollover,
+          items: [
+            {
+              value: "true",
+              text: "Yes"
+            },
+            {
+              value: "false",
+              text: "No"
+            }
+          ],
+          classes: "govuk-radios--inline"
+        }) }}
+
+        {{ govukInput({
+          id: "settings-pagesize",
+          name: "settings[pageSize]",
+          label: {
+            text: "Number of items per page for pagination",
+            isPageHeading: false,
+            classes: "govuk-label--s"
+          },
+          value: settings.pageSize,
+          classes: "govuk-input--width-2"
+        }) }}
+
+        {{ govukButton({
+          text: "Save settings"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
