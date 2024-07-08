@@ -4,10 +4,10 @@ const cycleHelper = require('../helpers/cycles')
 const validationHelper = require("../helpers/validators")
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
 
-const settings = require('../data/settings')
+const settings = require('../data/dist/settings')
 
 exports.organisations_list = (req, res) => {
-  const isRollover = process.env.IS_ROLLOVER || settings.isRollover
+  const isRollover = settings.isRollover || process.env.IS_ROLLOVER
   const cycleId = req.params.cycleId || cycleHelper.CURRENT_CYCLE.code
 
   if (req.session.passport.user.organisations && req.session.passport.user.organisations.length > 1) {
@@ -26,7 +26,7 @@ exports.organisations_list = (req, res) => {
   } else {
     const organisationId = req.session.passport.user.organisations[0].id
 
-    if (isRollover) {
+    if (isRollover === 'true') {
       res.redirect(`/organisations/${organisationId}/cycles`)
     } else {
       res.redirect(`/organisations/${organisationId}/cycles/${cycleId}`)

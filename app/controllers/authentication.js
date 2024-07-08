@@ -1,4 +1,4 @@
-const settings = require('../data/settings')
+const settings = require('../data/dist/settings')
 
 exports.sign_in_get = (req, res) => {
   if (req.session.passport) {
@@ -6,7 +6,7 @@ exports.sign_in_get = (req, res) => {
   } else {
     const errors = req.flash()
     res.render('../views/auth/index', {
-      useLogin: process.env.USE_LOGIN || settings.useLogin,
+      useLogin: settings.useLogin || process.env.USE_LOGIN,
       actions: {
         save: '/sign-in',
         create: '/register',

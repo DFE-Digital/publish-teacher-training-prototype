@@ -2,10 +2,10 @@ const organisationModel = require('../models/organisations')
 
 const cycleHelper = require('../helpers/cycles')
 
-const settings = require('../data/settings')
+const settings = require('../data/dist/settings')
 
 exports.cycle_list = (req, res) => {
-  const isRollover = process.env.IS_ROLLOVER || settings.isRollover
+  const isRollover = settings.isRollover || process.env.IS_ROLLOVER
 
   if (isRollover === 'true') {
     const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
