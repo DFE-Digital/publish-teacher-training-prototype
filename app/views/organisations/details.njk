@@ -195,6 +195,34 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">School placements</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Show school placement sites"
+            },
+            value: {
+              text: organisation.showSchoolPlacements | getSchoolPlacementLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: actions.change + "/school-placement",
+                  text: "Change",
+                  visuallyHiddenText: "school placements"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-m govuk-!-margin-top-5">Contact details</h2>
 
       {% set addressHtml %}
@@ -225,7 +253,7 @@
               text: "Email address"
             },
             value: {
-              text: (organisation.contact.email | urlize | safe) if organisation.contact.email.length else "Not entered",
+              text: organisation.contact.email | urlize | safe if organisation.contact.email.length else "Not entered",
               classes: "govuk-hint" if not organisation.contact.email.length
             },
             actions: {

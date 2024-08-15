@@ -122,6 +122,11 @@ exports.updateOne = (params) => {
       if (params.organisation.visaSponsorship.canSponsorSkilledWorkerVisa !== undefined) {
         organisation.visaSponsorship.canSponsorSkilledWorkerVisa = params.organisation.visaSponsorship.canSponsorSkilledWorkerVisa
       }
+
+    }
+
+    if (params.organisation.showSchoolPlacements !== undefined) {
+      organisation.showSchoolPlacements = params.organisation.showSchoolPlacements
     }
 
     organisation.updatedAt = new Date()

@@ -19,6 +19,7 @@ const organisationHelper = require('./helpers/organisations')
 const permissionHelper = require('./helpers/permissions')
 const subjectHelper = require('./helpers/subjects')
 const visaSponsorshipHelper = require('./helpers/visa-sponsorship')
+const schoolPlacementHelper = require('./helpers/school-placement')
 
 const individualFiltersFolder = path.join(__dirname, './filters')
 
@@ -320,6 +321,21 @@ filters.getCourseStatusClasses = (status, openDate = null) => {
 
   if (status !== undefined) {
     label = courseHelper.getCourseStatusClasses(status.toString(), openDate)
+  }
+
+  return label
+}
+
+/* ------------------------------------------------------------------
+utility function to get the school placement label
+example: {{ "yes" | getSchoolPlacementLabel }}
+outputs: "Yes"
+------------------------------------------------------------------ */
+filters.getSchoolPlacementLabel = (code) => {
+  let label
+
+  if (code) {
+    label = schoolPlacementHelper.getSchoolPlacementLabel(code)
   }
 
   return label

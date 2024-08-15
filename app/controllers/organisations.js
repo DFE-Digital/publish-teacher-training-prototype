@@ -3,6 +3,7 @@ const organisationModel = require('../models/organisations')
 const cycleHelper = require('../helpers/cycles')
 const validationHelper = require("../helpers/validators")
 const visaSponsorshipHelper = require('../helpers/visa-sponsorship')
+const schoolPlacementHelper = require('../helpers/school-placement')
 
 const settings = require('../data/dist/settings')
 
@@ -457,6 +458,60 @@ exports.edit_skilled_worker_visa_post = (req, res) => {
     })
 
     req.flash('success', 'Visa sponsorship updated')
+    res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
+  }
+}
+
+exports.edit_school_placement_get = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+
+  let selectedSchoolPlacements
+  if (organisation && organisation.showSchoolPlacements) {
+    selectedSchoolPlacements = organisation.showSchoolPlacements
+  }
+
+  const schoolPlacementOptions = schoolPlacementHelper.getSchoolPlacementOptions(selectedSchoolPlacements)
+
+  res.render('../views/organisations/school-placement', {
+    organisation,
+    schoolPlacementOptions,
+    actions: {
+      save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/school-placement`,
+      back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
+      cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
+    }
+  })
+}
+
+exports.edit_school_placement_post = (req, res) => {
+  const organisation = organisationModel.findOne({ organisationId: req.params.organisationId })
+  const errors = []
+
+  let selectedSchoolPlacements
+  if (req.session.data.organisation && req.session.data.organisation.showSchoolPlacements) {
+    selectedSchoolPlacements = req.session.data.organisation.showSchoolPlacements
+  }
+
+  const schoolPlacementOptions = schoolPlacementHelper.getSchoolPlacementOptions(selectedSchoolPlacements)
+
+  if (errors.length) {
+    res.render('../views/organisations/school-placement', {
+      organisation,
+      schoolPlacementOptions,
+      actions: {
+        save: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/school-placement`,
+        back: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`,
+        cancel: `/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`
+      },
+      errors
+    })
+  } else {
+    organisationModel.updateOne({
+      organisationId: req.params.organisationId,
+      organisation: req.session.data.organisation
+    })
+
+    req.flash('success', 'School placement preferences updated')
     res.redirect(`/organisations/${req.params.organisationId}/cycles/${req.params.cycleId}/details`)
   }
 }

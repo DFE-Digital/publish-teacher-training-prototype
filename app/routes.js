@@ -481,6 +481,9 @@ router.post('/organisations/:organisationId/cycles/:cycleId/student-visa', check
 router.get('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_get)
 router.post('/organisations/:organisationId/cycles/:cycleId/skilled-worker-visa', checkIsAuthenticated, organisationController.edit_skilled_worker_visa_post)
 
+router.get('/organisations/:organisationId/cycles/:cycleId/school-placement', checkIsAuthenticated, organisationController.edit_school_placement_get)
+router.post('/organisations/:organisationId/cycles/:cycleId/school-placement', checkIsAuthenticated, organisationController.edit_school_placement_post)
+
 router.get('/organisations/:organisationId/cycles/:cycleId', checkIsAuthenticated, organisationController.organisation)
 
 router.get('/organisations/:organisationId/cycles', checkIsAuthenticated, cycleController.cycle_list)
