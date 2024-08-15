@@ -1,0 +1,58 @@
+{% extends "layouts/main.njk" %}
+
+{% set primaryNavId = "settings" %}
+
+{% set title = "School placements" %}
+
+{% block pageTitle %}
+  {{ "Error: " if errors.length }}{{ title + " - " if title }}{{ caption + " - " if caption }}{{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: actions.back
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/error-summary.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "_includes/page-heading.njk" %}
+
+      <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+        {{ govukRadios({
+          idPrefix: "school-placement",
+          name: "organisation[showSchoolPlacements]",
+          fieldset: {
+            legend: {
+              text: "Show school placement locations",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "List your school placements on the course details page and allow candidates to select a preferred school when they apply."
+          },
+          errorMessage: errors | getErrorMessage("school-placement"),
+          items: schoolPlacementOptions
+        }) }}
+
+        {{ govukButton({
+          text: "Update " + title | lower
+        }) }}
+
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="{{ actions.cancel }}">Cancel</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
