@@ -100,7 +100,6 @@ router.get('/', (req, res) => {
   if (settings.showStartPage === 'true' || process.env.SHOW_START_PAGE === 'true') {
     res.render('start')
   } else {
-    res.redirect('/sign-in')
     res.redirect('/sign-out')
   }
 })
