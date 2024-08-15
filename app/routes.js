@@ -101,6 +101,7 @@ router.get('/', (req, res) => {
     res.render('start')
   } else {
     res.redirect('/sign-in')
+    res.redirect('/sign-out')
   }
 })
 
